@@ -24,7 +24,7 @@ module.exports = {
 
     // Safely locate Babel-Loader in Razzle's webpack internals
     const babelLoader = config.module.rules.findIndex(
-      rule => rule.options && rule.options.babelrc
+      rule => rule.use[1].options && rule.use[1].options.babelrc
     );
 
     // Get the correct `include` option, since that hasn't changed.
@@ -35,14 +35,14 @@ module.exports = {
     const tsLoader = {
       include,
       test: /\.tsx?$/,
-      loader: 'ts-loader',
+      loader: require.resolve('ts-loader'),
     };
 
     const tslintLoader = {
       include,
       enforce: 'pre',
       test: /\.tsx?$/,
-      loader: 'tslint-loader',
+      loader: require.resolve('tslint-loader'),
       options: {
         emitErrors: true,
         configFile: './tslint.json',
