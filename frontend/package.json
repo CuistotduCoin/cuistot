@@ -1,16 +1,28 @@
 {
-  "name": "cuistot",
+  "name": "cuistot-front",
   "version": "0.0.1",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CuistotduCoin/cuistot.git"
+  },
   "scripts": {
     "start": "razzle start",
     "build": "razzle build",
     "test": "razzle test --env=jsdom",
     "start:prod": "NODE_ENV=production node build/server.js",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "deploy": "yarn build && serverless client deploy"
   },
   "dependencies": {
     "@jaredpalmer/after": "^1.2.1",
+    "apollo-cache-inmemory": "^1.1.12",
+    "apollo-client": "^2.2.8",
+    "apollo-client-preset": "^1.0.8",
+    "apollo-link-http": "^1.5.3",
     "express": "^4.16.3",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.8.0",
     "material-ui": "^1.0.0-beta.40",
     "material-ui-icons": "^1.0.0-beta.36",
     "node": "9.10.1",
@@ -43,7 +55,8 @@
     "tslint-config-prettier": "^1.10.0",
     "tslint-loader": "wbuchwalter/tslint-loader",
     "tslint-react": "^3.5.1",
-    "typescript": "^2.8.1"
+    "typescript": "^2.8.1",
+    "serverless-finch": "^1.4.0"
   },
   "jest": {
     "transform": {

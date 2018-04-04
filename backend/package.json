@@ -1,0 +1,36 @@
+{
+  "name": "cuistot-back",
+  "version": "0.0.1",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CuistotduCoin/cuistot.git"
+  },
+  "scripts": {
+    "deploy-prod": "serverless --stage=production deploy",
+    "deploy-appsync": "serverless deploy-appsync",
+    "update-appsync": "serverless update-appsync",
+    "delete-appsync": "serverless delete-appsync"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.220.1",
+    "babel-polyfill": "^6.26.0",
+    "bluebird": "^3.5.1",
+    "node-fetch": "^2.1.2",
+    "serverless-appsync-plugin": "^0.0.7"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "body-parser": "^1.18.2",
+    "cors": "2.8.4",
+    "env-cmd": "^7.0.0",
+    "imports-loader": "^0.8.0",
+    "jest": "^22.4.3",
+    "serverless-offline": "^3.20.0",
+    "serverless-webpack": "^5.1.1",
+    "webpack": "^4.5.0",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
