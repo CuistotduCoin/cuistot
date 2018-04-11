@@ -1,12 +1,12 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
-import { MuiThemeProvider } from 'material-ui/styles';
-import { BrowserRouter } from 'react-router-dom';
+import { MuiThemeProvider } from "material-ui/styles";
+import { BrowserRouter } from "react-router-dom";
 
-import 'typeface-roboto';
-import App from './App';
-import theme from './theme';
+import "typeface-roboto";
+import App from "./App";
+import theme from "./theme";
 
 ReactDOM.hydrate(
   <BrowserRouter>
@@ -14,7 +14,7 @@ ReactDOM.hydrate(
       <App />
     </MuiThemeProvider>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 if (module.hot) {

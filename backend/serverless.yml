@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: nodejs6.10
   stage: dev
-  region: us-east-1
+  region: eu-west-1
 
 plugins:
   - serverless-appsync-plugin
@@ -14,15 +14,15 @@ plugins:
   - serverless-webpack
 
 custom:
-  accountId: 1234xxxxxxxx # replace this with your accountId
+  accountId: 942691749050 # replace this with your accountId
   appSync:
-    # name:  # defaults to api
-    # apiId # only required for update-appsync
+    name: CuistotduCoin
+    apiId: 44r7pblhufhjtlecvyoqd3uyqa
     authenticationType: AMAZON_COGNITO_USER_POOLS # API_KEY is also supported
     userPoolConfig:
-      awsRegion: us-east-1 # required # region
+      awsRegion: eu-west-2 # required # region
       defaultAction: ALLOW
-      userPoolId: us-east-1_xxxxxxxxx # replace this with your Cognito User Pool Id
+      userPoolId: eu-west-2_4zklk0tSU # replace this with your Cognito User Pool Id
     # region: # defaults to provider region
     # mappingTemplatesLocation: # defaults to mapping-templates
     mappingTemplates:
@@ -36,21 +36,6 @@ custom:
         field: meInfo
         request: "meInfo-request-mapping-template.txt"
         response: "meInfo-response-mapping-template.txt"
-      - dataSource: Lambda
-        type: Mutation
-        field: createTweet
-        request: "createTweet-request-mapping-template.txt"
-        response: "createTweet-response-mapping-template.txt"
-      - dataSource: Lambda
-        type: Mutation
-        field: deleteTweet
-        request: "deleteTweet-request-mapping-template.txt"
-        response: "deleteTweet-response-mapping-template.txt"
-      - dataSource: Lambda
-        type: Mutation
-        field: reTweet
-        request: "reTweet-request-mapping-template.txt"
-        response: "reTweet-response-mapping-template.txt"
     # schema: # defaults schema.graphql
     serviceRole: "AppSyncServiceRole"
     dataSources:
@@ -58,7 +43,7 @@ custom:
         name: Lambda
         description: 'Lambda DataSource'
         config:
-          lambdaFunctionArn: "arn:aws:lambda:us-east-1:${self:custom.accountId}:serverless-graphql-appsync-lda-production-graphql"
+          lambdaFunctionArn: "arn:aws:lambda:eu-west-2:${self:custom.accountId}:serverless-graphql-appsync-lda-production-graphql"
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Lambda-${self:custom.appSync.serviceRole}"
   serverless-offline:
     port: 4000
@@ -83,7 +68,7 @@ resources:
                 Service:
                   - "appsync.amazonaws.com"
               Action:
-                - "sts:AssumeRole"
+                  - "sts:AssumeRole"
         Policies:
           -
             PolicyName: "Lambda-AppSyncServiceRole-Policy"
@@ -95,5 +80,5 @@ resources:
                   Action:
                     - "lambda:invokeFunction"
                   Resource:
-                    - "arn:aws:lambda:us-east-1:*:function:serverless-graphql-appsync-lda-production-graphql"
-                    - "arn:aws:lambda:us-east-1:*:function:serverless-graphql-appsync-lda-production-graphql:*"
+                    - "arn:aws:lambda:eu-west-3:*:function:serverless-graphql-appsync-lda-production-graphql"
+                    - "arn:aws:lambda:eu-west-3:*:function:serverless-graphql-appsync-lda-production-graphql:*"

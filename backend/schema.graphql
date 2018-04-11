@@ -11,19 +11,11 @@ type Mutation {
 		Pictures: [String!]!,
 		kitchen_id: String,
 		workshop_date: String!,
-		consumer_key: String!,
-		consumer_secret: String!,
-		access_token_key: String!,
-		access_token_secret: String!
 	): Workshop!
 
 	# Delete User Workshop
 	deleteWorkshop(
 	    workshop_id: String!,
-	    consumer_key: String!,
-        consumer_secret: String!,
-        access_token_key: String!,
-        access_token_secret: String!
     ): Workshop!
 
 	# update functionality is not available in lambda integration
@@ -37,10 +29,6 @@ type Mutation {
 		Pictures: [String!]!,
 		kitchen_id: String,
 		workshop_date: String!,
-		consumer_key: String!,
-		consumer_secret: String!,
-		access_token_key: String!,
-		access_token_secret: String!
 	): Workshop!
 
     # Create Gourmet info is not available in lambda integration
@@ -48,7 +36,7 @@ type Mutation {
 		first_name: String!
 		last_name: String!
 		phone: String
-		birthday: Date
+		birthday: String
 		city: String!
 		cp: Int
 		location: String
@@ -59,8 +47,8 @@ type Mutation {
 }
 
 type Query {
-	meInfo(consumer_key: String!, consumer_secret: String!): User!
-	getUserInfo(handle: String!, consumer_key: String!, consumer_secret: String!): User!
+	meInfo(consumer_key: String!, consumer_secret: String!): Gourmet!
+	
 }
 
 type Workshop {
@@ -86,7 +74,7 @@ type Gourmet {
 	first_name: String!
 	last_name: String!
 	phone: String
-	birthday: Date
+	birthday: String
 	city: String!
 	cp: Int
 	location: String
@@ -130,5 +118,4 @@ type Commentary {
 schema {
 	query: Query
 	mutation: Mutation
-	subscription: Subscription
 }
