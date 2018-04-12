@@ -1,0 +1,61 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-container background-color="#c8c0c2" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-container>
+
+      <!-- Header -->
+      <mj-section>
+        <mj-column>
+          <mj-image width="96" src="http://jeremyboiselet.ovh/images/logocuistot.png" />
+        </mj-column>
+      </mj-section>
+
+      <!-- Body -->
+      <mj-wrapper background-color="white" border-radius="10px">
+        <mj-section>
+          <mj-column>
+            <mj-text align="center" color="#4a8522" font-weight="600">
+              Salut Jeremy !<br>
+              Merci d'avoir rejoint Cuistot du coin.<br>
+              Termine ton inscription en cliquant sur le bouton suivant :)
+            </mj-text>
+            <mj-divider
+              border-color="#aca5a7"
+              border-width="2px" />
+            <mj-button
+              href="http://www.cuistotducoin.com/"
+              background-color="#4a8522">
+              Termine ton inscription
+            </mj-button>
+          </mj-column>
+        </mj-section>
+      </mj-wrapper>
+
+      <!-- Footer -->
+      <mj-section>
+        <mj-column>
+          <mj-social
+            display="facebook twitter instagram cuistotducoin"
+            facebook-href="https://www.facebook.com/cuistotducoin"
+            facebook-icon-color="#ee5e40"
+            twitter-href="https://twitter.com/cuistotducoin"
+            twitter-icon-color="#ee5e40"
+            instagram-href="https://www.instagram.com/cuistotducoin/"
+            instagram-icon-color="#ee5e40"
+            cuistotducoin-content="Cuistot du coin"
+            cuistotducoin-href="http://www.cuistotducoin.com/"
+            cuistotducoin-icon-color="#ee5e40"
+            cuistotducoin-icon="http://jeremyboiselet.ovh/images/logoBlancNoWriting.png" />
+          <mj-text align="center">
+            &copy; Cuistot du coin<br>06 79 59 88 48
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+    </mj-container>
+  </mj-body>
+</mjml>

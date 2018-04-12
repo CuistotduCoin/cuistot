@@ -1,0 +1,13 @@
+{
+	"name": "MJML",
+	"version": "1.0.0",
+	"description": "Creation d'email responsive avec MJML",
+	"main": "index.js",
+	"license": "MIT",
+	"dependencies": {
+		"mjml": "^3.3.3"
+	},
+	"scripts": {
+		"build": "mjml *.mjml"
+	}
+}
