@@ -1,67 +1,34 @@
-# Razzle TypeScript Example
+# [Cuistot du Coin](https://www.cuistotducoin.com) :
 
-## How to use
-Download the example [or clone the whole project](https://github.com/jaredpalmer/razzle.git):
+Marketplace for Cook
+  - Deployed using _Serverless_ | AWS Lambda | AWS S3.  
+  - Backend API = **GraphQL** with AWS SyncApp & AWS Lambda
+  - Client-side API requests are generated from **Apollo Client** wrapped components.
+  - The rest of the app sits on **React.js** & **React Router*(V4)** (with Code splitting)
+  
+## SETUP:
+  - `npm i` || `yarn` to install dependencies
+  - `npm start` for development server
+  - `npm run build` for production server
+ 
+ ## TECHNOLOGIES:
+  1. ### API's
+    * [Algolia](https://www.algolia.com/) | Search.
+    * [MangoPay](https://www.mangopay.com/) | Payment for Marketplace.
+    * [Serverless](http://serverless.com) | Framework covering AWS Lambda.
+    * [AWS SES](https://aws.amazon.com/ses/) | Email Notifications.
+    * [AWS SNS](https://aws.amazon.com/sns/) | Receiving Backend Push Notifications.
+    * [AWS S3](https://aws.amazon.com/s3/) | Static asset hosting.
+    * [AWS Route 53](https://aws.amazon.com/route53/) | DNS routing.
+    * [AWS CloudFront](https://aws.amazon.com/cloudfront/) | Latency reduction via CDN.
+    * [AWS Lambda](https://aws.amazon.com/lambda/) | All Backend Services.
+    * [AWS Api-Gateway](https://aws.amazon.com/api-gateway/) | HTTP endpoints for Lambda services.
+    * [AWS AppSync](https://aws.amazon.com/appsync/) | GraphQL.  
+  2. ### Libraries & Packages
+    * Uses _TypeScript_ for types with Javascript
+    * Uses _Razzle_ with _After_ for universal server-rendereding
+    * Uses _Apollo_ for providing API calls directly to componenents.
+    * Uses _React Router (4)_ for routing.
+    * Uses Jest + Enzyme for testing.
 
-```bash
-curl https://codeload.github.com/jaredpalmer/razzle/tar.gz/master | tar -xz --strip=2 razzle-master/examples/with-typescript
-cd with-typescript
-```
-
-Install it and run:
-
-```bash
-yarn install
-yarn start
-```
-
-## Idea behind the example
-This is an of how to use Razzle with [TypeScript](https://github.com/Microsoft/TypeScript). 
-In `razzle.config.js`, we locate the part of the webpack configuration 
-that is running `babel-loader` and swap it out for `ts-loader`. 
-Additionally, we make sure Razzle knows how to resolve `.ts` and `.tsx` files.
-
-Lastly, we also need to modify our Jest configuration to handle typescript files. 
-Thus we add `ts-jest` and `@types/jest` to our dev dependencies. Then we augment Razzle's default jest setup by adding a field in our `package.json`.
-
-```json
-// package.json
-
-{
-  ...
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js",
-      "^.+\\.css$": "<rootDir>/node_modules/razzle/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/node_modules/razzle/config/jest/fileTransform.js"
-    },
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.(ts|js)?(x)",
-      "<rootDir>/src/**/?(*.)(spec|test).(ts|js)?(x)"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}"
-    ]
-  }
-}
-```
-
-The `tslint.json` and `tsconfig.json` are taken from Microsoft's official 
-[TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter).
-
-Note: You do not techincally _need_ to fully replace `babel-loader` with 
-`ts-loader` to use TypeScript. Both TS and Babel transpile ES6 code,
-so when you run both webpack loaders you are making Razzle do twice the work. From our testing,
-this can make HMR extremely slow on larger apps. Thus, this example overwrites
-`babel-loader` with `ts-loader`. However, if you are incrementally moving to typescript you may want to run both loaders side by side. If you are running both, add this to your `jest.transform` setup in `package.json`:
-
-```
-"^.+\\.(js|jsx)$": "<rootDir>/node_modules/razzle/config/jest/babelTransform.js",
-```
-This will continue to transform .js files through babel.
+    
