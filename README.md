@@ -7,6 +7,8 @@ Marketplace for Cook
   - The rest of the app sits on **React.js** & **React Router*(V4)** (with Code splitting)
   
 ## SETUP:
+  - `npm install -g serverless`
+  - `npm install -g yarn`
   - `npm i` || `yarn` to install dependencies
   - `npm start` for development server
   - `npm run build` for production server
