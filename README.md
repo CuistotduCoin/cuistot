@@ -23,7 +23,8 @@ Marketplace for Cook
     * [AWS CloudFront](https://aws.amazon.com/cloudfront/) | Latency reduction via CDN.
     * [AWS Lambda](https://aws.amazon.com/lambda/) | All Backend Services.
     * [AWS Api-Gateway](https://aws.amazon.com/api-gateway/) | HTTP endpoints for Lambda services.
-    * [AWS AppSync](https://aws.amazon.com/appsync/) | GraphQL.  
+    * [AWS AppSync](https://aws.amazon.com/appsync/) | GraphQL.
+    * [AWS Cognito](https://aws.amazon.com/cognito/) | User Management.
   2. ### Libraries & Packages
     * Uses _TypeScript_ for types with Javascript
     * Uses _Razzle_ with _After_ for universal server-rendereding
