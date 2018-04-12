@@ -30,5 +30,3 @@ Marketplace for Cook
     * Uses _Apollo_ for providing API calls directly to componenents.
     * Uses _React Router (4)_ for routing.
     * Uses Jest + Enzyme for testing.
-
-    
