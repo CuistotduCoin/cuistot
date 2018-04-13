@@ -7,6 +7,9 @@ Marketplace for Cook
   - The rest of the app sits on **React.js** & **React Router*(V4)** (with Code splitting)
   
 ## SETUP:
+  - [install aws-cli](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+  - `npm install -g serverless`
+  - `npm install -g yarn`
   - `npm i` || `yarn` to install dependencies
   - `npm start` for development server
   - `npm run build` for production server
@@ -28,7 +31,8 @@ Marketplace for Cook
   2. ### Libraries & Packages
     * Uses _Admin-on-rest_ with _aor-graphql_ for backend.
     * Uses _TypeScript_ for types with Javascript
+    * Uses _MaterialUI_ for Generic Components
     * Uses _Razzle_ with _After_ for universal server-rendereding
-    * Uses _Apollo_ for providing API calls directly to componenents.
+    * Uses _Apollo_, _aws-amplify_, _aws-appsync_ for providing API calls directly to componenents.
     * Uses _React Router (4)_ for routing.
     * Uses Jest + Enzyme for testing.
