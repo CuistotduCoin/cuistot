@@ -7,6 +7,7 @@ Marketplace for Cook
   - The rest of the app sits on **React.js** & **React Router*(V4)** (with Code splitting)
   
 ## SETUP:
+  - [install aws-cli](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)
   - `npm install -g serverless`
   - `npm install -g yarn`
   - `npm i` || `yarn` to install dependencies
