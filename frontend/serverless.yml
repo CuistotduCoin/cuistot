@@ -13,5 +13,5 @@ plugins:
 
 custom:
   client:
-    bucketName: s3-bucketname-serverless-graphql
+    bucketName: cuistotducoin-front
     distributionFolder: build
