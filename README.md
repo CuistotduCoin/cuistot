@@ -31,6 +31,6 @@ Marketplace for Cook
   2. ### Libraries & Packages
     * Uses _TypeScript_ for types with Javascript
     * Uses _Razzle_ with _After_ for universal server-rendereding
-    * Uses _Apollo_ for providing API calls directly to componenents.
+    * Uses _Apollo_, _aws-amplify_, _aws-appsync_ for providing API calls directly to componenents.
     * Uses _React Router (4)_ for routing.
     * Uses Jest + Enzyme for testing.
