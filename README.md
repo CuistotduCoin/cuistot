@@ -29,7 +29,7 @@ Marketplace for Cook
     * [AWS AppSync](https://aws.amazon.com/appsync/) | GraphQL.
     * [AWS Cognito](https://aws.amazon.com/cognito/) | User Management.
   2. ### Libraries & Packages
-    * Uses _Admin-on-rest_ with _aor-graphql_ for backend.
+    * Uses _react-admin_ with _aor-graphql_ for backend.
     * Uses _TypeScript_ for types with Javascript
     * Uses _MaterialUI_ for Generic Components
     * Uses _Formik_ for form validation
