@@ -1,7 +1,7 @@
 import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import Hero from "../Hero";
+import Hero from "./Hero";
 
 storiesOf("Cuistot/components/Hero", module).add("default", () => (
   <Hero

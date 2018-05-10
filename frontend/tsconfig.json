@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "allowUnreachableCode": false,
+    "baseUrl": ".",
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,

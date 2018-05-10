@@ -2,10 +2,10 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
-import Header from "../Header";
+import Search from "./Search";
 
-storiesOf("Cuistot/components/Header", module)
+storiesOf("Cuistot/pages/Search", module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
-  .add("default", () => <Header />);
+  .add("default", () => <Search />);

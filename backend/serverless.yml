@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: nodejs6.10
   stage: dev
-  region: eu-west-1
+  region: eu-west-3
 
 plugins:
   - serverless-appsync-plugin
@@ -43,7 +43,7 @@ custom:
         name: Lambda
         description: 'Lambda DataSource'
         config:
-          lambdaFunctionArn: "arn:aws:lambda:eu-west-2:${self:custom.accountId}:serverless-graphql-appsync-lda-production-graphql"
+          lambdaFunctionArn: "arn:aws:lambda:eu-west-3:${self:custom.accountId}:serverless-graphql-appsync-lda-production-graphql"
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Lambda-${self:custom.appSync.serviceRole}"
   serverless-offline:
     port: 4000
