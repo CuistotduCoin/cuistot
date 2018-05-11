@@ -1,5 +1,6 @@
-import FavoriteIcon from "material-ui-icons/Favorite";
-import ShareIcon from "material-ui-icons/Share";
+import FaceIcon from "@material-ui/icons/Face";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from "@material-ui/icons/Share";
 import Avatar from "material-ui/Avatar";
 import Button from "material-ui/Button";
 import Card, {
@@ -8,6 +9,7 @@ import Card, {
   CardHeader,
   CardMedia
 } from "material-ui/Card";
+import Chip from "material-ui/Chip";
 import green from "material-ui/colors/green";
 import IconButton from "material-ui/IconButton";
 import { Theme, withStyles } from "material-ui/styles";
@@ -23,50 +25,72 @@ const styles = (theme: Theme) => ({
   card: {
     maxWidth: 400
   },
+  cardHeaderDown: {
+    background: "rgba(0, 0, 0, 0.2)",
+    height: 40,
+    marginTop: -72
+  },
+  cardHeaderUp: {
+    alignItems: "flex-end",
+    flexDirection: "row-reverse",
+    marginBottom: -64
+  },
+  chip: {
+    marginRight: 0
+  },
   media: {
     height: 194
+  },
+  subtitle: {
+    color: "rgba(255, 255, 255, 0.70)"
+  },
+  title: {
+    color: "white"
   }
 });
 
 export interface IWorkshopCardProps {
   classes?: any;
+  price: number;
+  title: string;
+  date: string;
+  image: string;
+  avatar: string;
+  stars: number;
+  availableSeat: number;
 }
 
 export class WorkshopCard extends Component<IWorkshopCardProps, {}> {
+  public static defaultProps = { avatar: <FaceIcon /> };
+
   public render() {
     const { classes } = this.props;
 
     return (
       <Card className={classes.card}>
+        <CardHeader
+          className={classes.cardHeaderUp}
+          avatar={<Chip label={this.props.price + "€"} />}
+          classes={{ avatar: classes.chip }}
+        />
         <CardMedia
           className={classes.media}
-          image="https://picsum.photos/400/194/?random"
-          title="Atelier Takako"
+          image={this.props.image}
+          title={this.props.title}
         />
         <CardHeader
+          className={classes.cardHeaderDown}
           avatar={
-            <Avatar className={classes.avatar} aria-label="Recipe">
-              R
-            </Avatar>
+            <Avatar className={classes.avatar}>{this.props.avatar}</Avatar>
           }
-          title="Atelier Sushis, Makis et Témaris"
-          subheader="Samedi 19 Juin 2018, de 14h à 18h"
+          title={this.props.title}
+          subheader={this.props.date}
+          classes={{
+            subheader: classes.subtitle,
+            title: classes.title
+          }}
         />
-        <CardContent>
-          <Typography component="p">
-            Découvrez la cuisine japonaise et apprennez des recettes
-            authentiques
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton>
-          <Button size="small">Voir le détail</Button>
-        </CardActions>
+        <CardContent>tst</CardContent>
       </Card>
     );
   }

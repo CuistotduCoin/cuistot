@@ -1,5 +1,6 @@
 import Card, { CardContent, CardHeader, CardMedia } from "material-ui/Card";
 import Grid from "material-ui/Grid";
+import GridList, { GridListTile, GridListTileBar } from "material-ui/GridList";
 import { Theme, withStyles } from "material-ui/styles";
 import Typography from "material-ui/Typography";
 import React, { Component } from "react";
@@ -10,35 +11,39 @@ import logo from "./react.svg";
 
 const styles = (theme: Theme) => ({
   card: {
-    maxWidth: 300
+    maxWidth: 240
   },
   cardHeader: {
-    height: 40
+    background: "rgba(0, 0, 0, 0.4)",
+    color: "fff",
+    height: 40,
+    marginTop: -72
   },
   cardLongContent: {
-    height: 90
+    height: 120
   },
   cardShortContent: {
-    height: 40
+    height: 80
   },
   grid: {
     margin: "0px auto",
-    maxWidth: "1080px",
-    padding: "24px"
+    maxWidth: 1080,
+    padding: 24
   },
   image: {
     height: "100%",
-    maxWidth: "300px",
+    maxWidth: 320,
     width: "100%"
   },
   logo: {
     height: "100%",
-    maxWidth: "50px",
+    maxWidth: 50,
     width: "100%"
   },
   media: {
-    height: 194
-  }
+    height: 135
+  },
+  title: { color: "white" }
 });
 
 export interface IBusinessProps {
@@ -49,12 +54,70 @@ export class Business extends React.Component<IBusinessProps, {}> {
   public render() {
     const { classes } = this.props;
 
+    const typeActivity = [
+      {
+        description:
+          "Atelier de deux heures suivi d'une dégustation des produits préparés",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Atelier Afterwork"
+      },
+      {
+        description: "Atelier de quatre heures suivi d'un repas convivial",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Atelier suivi d’un repas"
+      },
+      {
+        description: "Atelier découverte et dégustation",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Atelier dégustation"
+      },
+      {
+        description: "Récompensez vos équipes autour d'un repas d'exception !",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Repas prestige"
+      },
+      {
+        description:
+          "Notre cuistot est aux founeaux pour changer de l'habituel traiteur : rapidité et simplicité",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Repas pratique"
+      }
+    ];
+
+    const typeWorld = [
+      {
+        description:
+          "Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots d'ailleurs.",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Cuisine du monde"
+      },
+      {
+        description:
+          "Initiez-vous aux principes de la cuisine végétarienne, vegan ou encore ayurvédique, où l’équilibre et les saveurs sont au cœur de l’assiette.",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Cuisine Bien-être"
+      },
+      {
+        description:
+          "Attachés à votre territoire et aux produits locaux et de saison, plongez au cœur d’une cuisine bretonne qui éveillera votre curiosité.",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Cuisine Terroir"
+      },
+      {
+        description:
+          "Percez les secrets de nos artisans pâtissiers et boulangers au travers de recettes créatives et gourmandes.",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Boulangerie & Pâtisserie"
+      }
+    ];
+
     return (
       <>
         <Header />
         <Hero
           imageURL="https://picsum.photos/100/50/?random"
           videoURL="http://thenewcode.com/assets/videos/polina.mp4"
+          valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
         />
         <Grid
           container={true}
@@ -68,7 +131,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               <img
                 className={classes.image}
                 alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/300/200"
+                src="https://picsum.photos/320/180"
               />
             </Grid>
           </Grid>
@@ -116,7 +179,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               <img
                 className={classes.image}
                 alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/300/200"
+                src="https://picsum.photos/320/180"
               />
             </Grid>
           </Grid>
@@ -136,108 +199,31 @@ export class Business extends React.Component<IBusinessProps, {}> {
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12} sm={6} md={4}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/400/194/?random"
-                  title="Atelier Afterwork"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Atelier Afterwork"
-                />
-                <CardContent className={classes.cardShortContent}>
-                  <Typography component="p">
-                    Atelier de deux heures suivi d'une dégustation des produits
-                    préparés
-                  </Typography>
-                </CardContent>
-              </Card>
+          {typeActivity.map(activity => (
+            <Grid item={true} xs={12} sm={6} md={3} lg={true}>
+              <Grid container={true} justify="center">
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.media}
+                    image={activity.image}
+                    title={activity.title}
+                  />
+                  <CardHeader
+                    className={classes.cardHeader}
+                    title={activity.title}
+                    classes={{
+                      title: classes.title
+                    }}
+                  />
+                  <CardContent className={classes.cardShortContent}>
+                    <Typography component="p">
+                      {activity.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={6} md={4}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/400/194/?random"
-                  title="Atelier suivi d’un repas convivial"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Atelier suivi d’un repas convivial"
-                />
-                <CardContent className={classes.cardShortContent}>
-                  <Typography component="p">
-                    Atelier de quatre heures suivi d'un repas convivial
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={6} md={4}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/400/194/?random"
-                  title="Atelier dégustation"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Atelier dégustation"
-                />
-                <CardContent className={classes.cardShortContent}>
-                  <Typography component="p">
-                    Atelier découverte et dégustation d'une heure
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={6} md={4}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/400/194/?random"
-                  title="Repas prestige"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Repas prestige"
-                />
-                <CardContent className={classes.cardShortContent}>
-                  <Typography component="p">
-                    Récompensez vos équipes autour d'un repas d'exception !
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={6} md={4}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/400/194/?random"
-                  title="Repas pratique"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Repas pratique"
-                />
-                <CardContent className={classes.cardShortContent}>
-                  <Typography component="p">
-                    Notre cuistot est aux founeaux pour changer de l'habituel
-                    traiteur : rapidité et simplicité
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+          ))}
         </Grid>
         <Typography
           variant="title"
@@ -330,93 +316,29 @@ export class Business extends React.Component<IBusinessProps, {}> {
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12} sm={6}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/400/194/?random"
-                  title="Cuisine du monde"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Cuisine du monde"
-                />
-                <CardContent className={classes.cardLongContent}>
-                  <Typography component="p">
-                    Faîtes voyager vos papilles et ouvrez-vous à de nouvelles
-                    cultures par le biais de la cuisine aux côtés de nos
-                    Cuistots d'ailleurs.
-                  </Typography>
-                </CardContent>
-              </Card>
+          {typeWorld.map(world => (
+            <Grid item={true} xs={12} sm={6} md={3} lg={true}>
+              <Grid container={true} justify="center">
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.media}
+                    image={world.image}
+                    title={world.title}
+                  />
+                  <CardHeader
+                    className={classes.cardHeader}
+                    title={world.title}
+                    classes={{
+                      title: classes.title
+                    }}
+                  />
+                  <CardContent className={classes.cardLongContent}>
+                    <Typography component="p">{world.description}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={6}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/400/194/?random"
-                  title="Cuisine Bien-être"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Cuisine Bien-être"
-                />
-                <CardContent className={classes.cardLongContent}>
-                  <Typography component="p">
-                    Initiez-vous aux principes de la cuisine végétarienne, vegan
-                    ou encore ayurvédique, où l’équilibre et les saveurs sont au
-                    cœur de l’assiette.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={6}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/400/194/?random"
-                  title="Cuisine Terroir"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Cuisine Terroir"
-                />
-                <CardContent className={classes.cardLongContent}>
-                  <Typography component="p">
-                    Attachés à votre territoire et aux produits locaux et de
-                    saison, plongez au cœur d’une cuisine bretonne qui éveillera
-                    votre curiosité.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={6}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/400/194/?random"
-                  title="Boulangerie & Pâtisserie"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Boulangerie & Pâtisserie"
-                />
-                <CardContent className={classes.cardLongContent}>
-                  <Typography component="p">
-                    Percez les secrets de nos artisans pâtissiers et boulangers
-                    au travers de recettes créatives et gourmandes
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+          ))}
         </Grid>
         <Typography variant="title" align="center" component="p">
           Ils ont voyagé aux côtés de nos Cuistots

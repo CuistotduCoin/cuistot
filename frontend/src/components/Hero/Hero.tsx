@@ -46,9 +46,12 @@ interface IHeroProps {
   classes?: any;
   videoURL: string;
   imageURL: string;
+  valueProposition: string;
 }
 
 export class Hero extends Component<IHeroProps, {}> {
+  public static defaultProps = { valueProposition: "Des saveurs à partager" };
+
   private innerStyle = {
     backgroundImage: `url(${this.props.imageURL})`
   };
@@ -73,7 +76,7 @@ export class Hero extends Component<IHeroProps, {}> {
             <Grid container={true} justify="space-around">
               <Grid item={true} xs={12}>
                 <Typography variant="title" align="center" component="h1">
-                  Des saveurs à partager
+                  {this.props.valueProposition}
                 </Typography>
                 <Typography variant="subheading" align="center" component="p">
                   Atelier de Cuisine, Dégustation, Cuisine à domicile

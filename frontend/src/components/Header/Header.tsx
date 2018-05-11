@@ -2,6 +2,7 @@ import AppBar from "material-ui/AppBar";
 import Avatar from "material-ui/Avatar";
 import Button from "material-ui/Button";
 import Grid from "material-ui/Grid";
+import Hidden from "material-ui/Hidden";
 import { Theme, withStyles } from "material-ui/styles";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
@@ -68,20 +69,22 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
                 alt="Logo de Cuistot du coin"
               />
             </Link>
-            <Button
-              className={classes.button}
-              component={myLink}
-              color="primary"
-            >
-              Entreprise
-            </Button>
-            <Button
-              className={classes.button}
-              component={myLink}
-              color="primary"
-            >
-              Particulier
-            </Button>
+            <Hidden smDown={true}>
+              <Button
+                className={classes.button}
+                component={myLink}
+                color="primary"
+              >
+                Entreprise
+              </Button>
+              <Button
+                className={classes.button}
+                component={myLink}
+                color="primary"
+              >
+                Particulier
+              </Button>
+            </Hidden>
           </Grid>
           <Grid container={true} justify="flex-end">
             <Button
