@@ -1,6 +1,10 @@
-import FaceIcon from "@material-ui/icons/Face";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
+import DateRange from "@material-ui/icons/DateRange";
+import Face from "@material-ui/icons/Face";
+import Favorite from "@material-ui/icons/Favorite";
+import PersonPinCircle from "@material-ui/icons/PersonPinCircle";
+import Place from "@material-ui/icons/Place";
+import Share from "@material-ui/icons/Share";
+import Theaters from "@material-ui/icons/Theaters";
 import Avatar from "material-ui/Avatar";
 import Button from "material-ui/Button";
 import Card, {
@@ -11,19 +15,24 @@ import Card, {
 } from "material-ui/Card";
 import Chip from "material-ui/Chip";
 import green from "material-ui/colors/green";
+import Grid from "material-ui/Grid";
 import IconButton from "material-ui/IconButton";
 import { Theme, withStyles } from "material-ui/styles";
 import Typography from "material-ui/Typography";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import StarRating from "../StarRating";
 
-// tslint:disable-next-line:no-shadowed-variable
 const styles = (theme: Theme) => ({
   avatar: {
     backgroundColor: green[500]
   },
   card: {
     maxWidth: 400
+  },
+  cardContent: {
+    "&:last-child": { padding: 0 },
+    padding: 0
   },
   cardHeaderDown: {
     background: "rgba(0, 0, 0, 0.2)",
@@ -56,12 +65,15 @@ export interface IWorkshopCardProps {
   date: string;
   image: string;
   avatar: string;
-  stars: number;
+  rating: number;
   availableSeat: number;
+  spot: string;
+  totalSeat: number;
+  totalDate: number;
 }
 
 export class WorkshopCard extends Component<IWorkshopCardProps, {}> {
-  public static defaultProps = { avatar: <FaceIcon /> };
+  public static defaultProps = { avatar: <Face /> };
 
   public render() {
     const { classes } = this.props;
@@ -90,7 +102,37 @@ export class WorkshopCard extends Component<IWorkshopCardProps, {}> {
             title: classes.title
           }}
         />
-        <CardContent>tst</CardContent>
+        <CardContent className={classes.cardContent}>
+          <Grid container={true}>
+            <Grid item={true} xs={4}>
+              <Grid container={true} justify="flex-start">
+                <Place />
+                <Typography variant="body1">{this.props.spot}</Typography>
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={4}>
+              <Grid container={true} justify="center">
+                <Theaters />
+                <Typography variant="body1">
+                  {this.props.availableSeat} places
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={4}>
+              <Grid container={true} justify="flex-end">
+                <DateRange />
+                <Typography variant="body1">
+                  {this.props.totalDate} dates
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Grid container={true} justify="center">
+                <StarRating rating={this.props.rating} />
+              </Grid>
+            </Grid>
+          </Grid>
+        </CardContent>
       </Card>
     );
   }

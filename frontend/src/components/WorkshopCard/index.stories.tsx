@@ -9,7 +9,10 @@ storiesOf("Cuistot/components/WorkshopCard", module).add("default", () => (
     title="Atelier Sushis, Makis et Témaris"
     date="Samedi 19 Juin 2018, de 14h à 18h"
     image="https://picsum.photos/400/194/?random"
-    stars={5}
+    rating={4.1}
     availableSeat={6}
+    spot="Brest"
+    totalSeat={6}
+    totalDate={3}
   />
 ));
