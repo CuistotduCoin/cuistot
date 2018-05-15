@@ -14,7 +14,10 @@ const styles = (theme: Theme) => ({
     maxWidth: 240
   },
   cardHeader: {
-    height: 40
+    background: "rgba(0, 0, 0, 0.4)",
+    color: "fff",
+    height: 40,
+    marginTop: -72
   },
   cardShortContent: {
     height: 40
@@ -25,7 +28,8 @@ const styles = (theme: Theme) => ({
   },
   media: {
     height: 135
-  }
+  },
+  title: { color: "white" }
 });
 
 export interface IIndividualProps {
@@ -35,6 +39,26 @@ export interface IIndividualProps {
 export class Individual extends React.Component<IIndividualProps, {}> {
   public render() {
     const { classes } = this.props;
+
+    const typeActivity = [
+      {
+        description: "Atelier de cuisine collectif chez nos lieux partenaires",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Atelier de cuisine collectif"
+      },
+      {
+        description:
+          "Atelier de cuisine privatisé chez vous ou chez nos lieux partenaires",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Atelier de cuisine privatisé"
+      },
+      {
+        description:
+          "Notre cuistot est aux fourneaux rien que pour vous et vos invités",
+        image: "https://picsum.photos/240/135/?random",
+        title: "Cuistot à domicile"
+      }
+    ];
 
     return (
       <>
@@ -60,70 +84,32 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12} sm={6} md={4}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/240/135/?random"
-                  title="Atelier de cuisine collectif"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Atelier de cuisine collectif"
-                />
-                <CardContent className={classes.cardShortContent}>
-                  <Typography component="p">
-                    Atelier de cuisine collectif chez nos lieux partenaires
-                  </Typography>
-                </CardContent>
-              </Card>
+          {typeActivity.map(activity => (
+            <Grid item={true} xs={12} sm={6} md={3} lg={true}>
+              <Grid container={true} justify="center">
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.media}
+                    image={activity.image}
+                    title={activity.title}
+                  />
+                  <CardHeader
+                    className={classes.cardHeader}
+                    title={activity.title}
+                    classes={{
+                      title: classes.title
+                    }}
+                  />
+                  <CardContent className={classes.cardShortContent}>
+                    <Typography component="p">
+                      {activity.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={6} md={4}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/240/135/?random"
-                  title="Atelier de cuisine privatisé"
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Atelier de cuisine privatisé"
-                />
-                <CardContent className={classes.cardShortContent}>
-                  <Typography component="p">
-                    Atelier de cuisine privatisé chez vous ou chez nos lieux
-                    partenaires
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={6} md={4}>
-            <Grid container={true} justify="center">
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image="https://picsum.photos/240/135/?random"
-                  title=""
-                />
-                <CardHeader
-                  className={classes.cardHeader}
-                  title="Cuistot à domicile"
-                />
-                <CardContent className={classes.cardShortContent}>
-                  <Typography component="p">
-                    Notre cuistot est aux fourneaux rien que pour vous et vos
-                    invités
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+          ))}
         </Grid>
-        <WorkshopCardList />
         <Footer />
       </>
     );

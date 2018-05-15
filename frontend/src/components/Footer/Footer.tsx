@@ -48,6 +48,9 @@ export class Footer extends Component<IFooterProps, {}> {
                 <Typography color="primary">Notre mission</Typography>
               </Link>
               <Link to="/" className={classes.link}>
+                <Typography color="primary">Nous rejoindre</Typography>
+              </Link>
+              <Link to="/" className={classes.link}>
                 <Typography color="primary">Contact & Presse</Typography>
               </Link>
               <Link to="/" className={classes.link}>
@@ -96,6 +99,27 @@ export class Footer extends Component<IFooterProps, {}> {
             >
               <Typography variant={"headline"} color="primary">
                 Cuistot
+              </Typography>
+              <Link to="/" className={classes.link}>
+                <Typography color="primary">Comment ça marche</Typography>
+              </Link>
+              <Link to="/" className={classes.link}>
+                <Typography color="primary">Temoignages</Typography>
+              </Link>
+              <Link to="/" className={classes.link}>
+                <Typography color="primary">Devenir partenaire</Typography>
+              </Link>
+            </Grid>
+          </Grid>
+          <Grid item={true}>
+            <Grid
+              container={true}
+              justify="space-between"
+              alignItems="flex-start"
+              direction="column"
+            >
+              <Typography variant={"headline"} color="primary">
+                Entreprise
               </Typography>
               <Link to="/" className={classes.link}>
                 <Typography color="primary">Comment ça marche</Typography>

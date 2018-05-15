@@ -1,6 +1,7 @@
 import GridList, { GridListTile, GridListTileBar } from "material-ui/GridList";
 import { Theme, withStyles } from "material-ui/styles";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
@@ -12,6 +13,9 @@ const styles = (theme: Theme) => ({
   },
   image: {
     opacity: "0.5"
+  },
+  link: {
+    textDecoration: "none"
   },
   tileBar: {
     height: "100%",
@@ -44,11 +48,13 @@ export class Home extends React.Component<IHomeProps, {}> {
               alt={"Entreprise"}
               className={classes.image}
             />
-            <GridListTileBar
-              titlePosition="top"
-              title="Vous êtes une entreprise"
-              className={classes.tileBar}
-            />
+            <Link to="/Individual" className={classes.link}>
+              <GridListTileBar
+                titlePosition="top"
+                title="Vous êtes une entreprise"
+                className={classes.tileBar}
+              />
+            </Link>
           </GridListTile>
           <GridListTile className={classes.tileParticulier}>
             <img
@@ -56,11 +62,13 @@ export class Home extends React.Component<IHomeProps, {}> {
               alt={"Particulier"}
               className={classes.image}
             />
-            <GridListTileBar
-              titlePosition="top"
-              title="Vous êtes un particulier"
-              className={classes.tileBar}
-            />
+            <Link to="/Individual" className={classes.link}>
+              <GridListTileBar
+                titlePosition="top"
+                title="Vous êtes un particulier"
+                className={classes.tileBar}
+              />
+            </Link>
           </GridListTile>
         </GridList>
         <Footer />
