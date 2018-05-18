@@ -1,11 +1,11 @@
-import AppBar from "material-ui/AppBar";
-import Avatar from "material-ui/Avatar";
-import Button from "material-ui/Button";
-import Grid from "material-ui/Grid";
-import Hidden from "material-ui/Hidden";
-import { Theme, withStyles } from "material-ui/styles";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
+import AppBar from "@material-ui/core/AppBar";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+import { Theme, withStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 

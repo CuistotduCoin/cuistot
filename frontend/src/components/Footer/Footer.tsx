@@ -1,8 +1,7 @@
-import grey from "material-ui/colors/grey";
-
-import Grid from "material-ui/Grid";
-import { Theme, withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
+import grey from "@material-ui/core/colors/grey";
+import Grid from "@material-ui/core/Grid";
+import { Theme, withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 

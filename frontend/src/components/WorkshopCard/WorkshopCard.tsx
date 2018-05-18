@@ -1,3 +1,16 @@
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import Chip from "@material-ui/core/Chip";
+import green from "@material-ui/core/colors/green";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import { Theme, withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import DateRange from "@material-ui/icons/DateRange";
 import Face from "@material-ui/icons/Face";
 import Favorite from "@material-ui/icons/Favorite";
@@ -5,20 +18,6 @@ import PersonPinCircle from "@material-ui/icons/PersonPinCircle";
 import Place from "@material-ui/icons/Place";
 import Share from "@material-ui/icons/Share";
 import Theaters from "@material-ui/icons/Theaters";
-import Avatar from "material-ui/Avatar";
-import Button from "material-ui/Button";
-import Card, {
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia
-} from "material-ui/Card";
-import Chip from "material-ui/Chip";
-import green from "material-ui/colors/green";
-import Grid from "material-ui/Grid";
-import IconButton from "material-ui/IconButton";
-import { Theme, withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import StarRating from "../StarRating";

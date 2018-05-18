@@ -1,6 +1,6 @@
+import { Theme, withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import { Formik } from "formik";
-import { Theme, withStyles } from "material-ui/styles";
-import TextField from "material-ui/TextField";
 import React, { Component } from "react";
 
 const styles = (theme: Theme) => ({

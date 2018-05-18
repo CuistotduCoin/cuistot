@@ -1,7 +1,10 @@
-import Card, { CardContent, CardHeader, CardMedia } from "material-ui/Card";
-import Grid from "material-ui/Grid";
-import { Theme, withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import Grid from "@material-ui/core/Grid";
+import { Theme, withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import React, { Component } from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";

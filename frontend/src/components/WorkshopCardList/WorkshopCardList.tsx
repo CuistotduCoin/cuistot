@@ -1,5 +1,5 @@
-import Grid from "material-ui/Grid";
-import { Theme, withStyles } from "material-ui/styles";
+import Grid from "@material-ui/core/Grid";
+import { Theme, withStyles } from "@material-ui/core/styles";
 import React, { Component } from "react";
 import WorkshopCard from "../WorkshopCard";
 
