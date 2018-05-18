@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import compose from 'recompose/compose';
-import MenuItem from 'material-ui/MenuItem';
-import SettingsIcon from 'material-ui/svg-icons/action/settings';
-import LabelIcon from 'material-ui/svg-icons/action/label';
-import { translate, DashboardMenuItem } from 'admin-on-rest';
+import SettingsIcon from '@material-ui/icons/Settings';
+import LabelIcon from '@material-ui/icons/Label';
+import {
+    translate,
+    DashboardMenuItem,
+    MenuItemLink,
+    Responsive,
+} from 'react-admin';
+import { withRouter } from 'react-router-dom';
 
 import { VisitorIcon } from './visitors';
 import { CommandIcon } from './commands';
@@ -14,12 +18,12 @@ import { CategoryIcon } from './categories';
 import { ReviewIcon } from './reviews';
 
 const items = [
-    { resource: 'Customer', icon: <VisitorIcon /> },
-    { resource: 'Segment', icon: <LabelIcon /> },
-    { resource: 'Command', icon: <CommandIcon /> },
-    { resource: 'Product', icon: <ProductIcon /> },
-    { resource: 'Category', icon: <CategoryIcon /> },
-    { resource: 'Review', icon: <ReviewIcon /> },
+    { name: 'Customer', icon: <VisitorIcon /> },
+    { name: 'Segment', icon: <LabelIcon /> },
+    { name: 'Command', icon: <CommandIcon /> },
+    { name: 'Product', icon: <ProductIcon /> },
+    { name: 'Category', icon: <CategoryIcon /> },
+    { name: 'Review', icon: <ReviewIcon /> },
 ];
 
 const styles = {
@@ -31,34 +35,40 @@ const styles = {
     },
 };
 
-const Menu = ({ onMenuTap, translate, logout }) => (
+const Menu = ({ onMenuClick, translate, logout }) => (
     <div style={styles.main}>
-        <DashboardMenuItem onTouchTap={onMenuTap} />
+        <DashboardMenuItem onClick={onMenuClick} />
         {items.map(item => (
-            <MenuItem
-                key={item.resource}
-                containerElement={<Link to={`/${item.resource}`} />}
-                primaryText={translate(`resources.${item.resource}.name`, { smart_count: 2 })}
+            <MenuItemLink
+                key={item.name}
+                to={`/${item.name}`}
+                primaryText={translate(`resources.${item.name}.name`, {
+                    smart_count: 2,
+                })}
                 leftIcon={item.icon}
-                onTouchTap={onMenuTap}
+                onClick={onMenuClick}
             />
         ))}
-        <MenuItem
-            containerElement={<Link to="/configuration" />}
+        <MenuItemLink
+            to="/configuration"
             primaryText={translate('pos.configuration')}
             leftIcon={<SettingsIcon />}
-            onTouchTap={onMenuTap}
+            onClick={onMenuClick}
         />
-        {logout}
+        <Responsive xsmall={logout} medium={null} />
     </div>
 );
 
 const enhance = compose(
-    connect(state => ({
-        theme: state.theme,
-        locale: state.locale,
-    })),
-    translate,
+    withRouter,
+    connect(
+        state => ({
+            theme: state.theme,
+            locale: state.i18n.locale,
+        }),
+        {}
+    ),
+    translate
 );
 
 export default enhance(Menu);

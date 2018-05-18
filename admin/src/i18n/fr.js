@@ -1,4 +1,7 @@
+import frenchMessages from 'ra-language-french';
+
 export default {
+    ...frenchMessages,
     pos: {
         search: 'Rechercher',
         configuration: 'Configuration',
@@ -15,13 +18,14 @@ export default {
             new_customers: 'Nouveaux clients',
             pending_orders: 'Commandes à traiter',
             order: {
-                items: 'par %{customer_name}, un poster |||| par %{customer_name}, %{nb_items} posters',
+                items:
+                    'par %{customer_name}, un poster |||| par %{customer_name}, %{nb_items} posters',
             },
             welcome: {
-                title: 'Bienvenue sur la démo d\'admin-on-rest',
-                subtitle: 'Ceci est le back-office d\'un magasin de posters imaginaire. N\'hésitez pas à explorer et à modifier les données. La démo s\'exécute en local dans votre navigateur, et se remet à zéro chaque fois que vous rechargez la page.',
-                aor_button: 'Site web d\'admin-on-rest',
-                aor_graphql_button: 'Dépôt du client GraphQL pour aor',
+                title: 'Bienvenue sur la démo de react-admin',
+                subtitle:
+                    "Ceci est le back-office d'un magasin de posters imaginaire. N'hésitez pas à explorer et à modifier les données. La démo s'exécute en local dans votre navigateur, et se remet à zéro chaque fois que vous rechargez la page.",
+                aor_button: 'Site web de react-admin',
                 demo_button: 'Code source de cette démo',
             },
         },
@@ -34,17 +38,17 @@ export default {
                 birthday: 'Anniversaire',
                 city: 'Ville',
                 commands: 'Commandes',
-                first_name: 'Prénom',
-                first_seen: 'Première visite',
-                segments: 'Segments',
-                has_newsletter: 'Abonné à la newsletter',
-                has_ordered: 'A commandé',
-                last_name: 'Nom',
-                last_seen: 'Vu le',
-                last_seen_gte: 'Vu depuis',
-                latest_purchase: 'Dernier achat',
+                firstName: 'Prénom',
+                firstSeen: 'Première visite',
+                groups: 'Segments',
+                hasNewsletter: 'Abonné à la newsletter',
+                hasOrdered: 'A commandé',
+                lastName: 'Nom',
+                lastSeen: 'Vu le',
+                lastSeen_gte: 'Vu depuis',
+                latestPurchase: 'Dernier achat',
                 name: 'Nom',
-                total_spent: 'Dépenses',
+                totalSpent: 'Dépenses',
                 zipcode: 'Code postal',
             },
             tabs: {
@@ -70,7 +74,7 @@ export default {
                     total: 'Total',
                     unit_price: 'P.U.',
                 },
-                customer_id: 'Client',
+                'customer.id': 'Client',
                 date_gte: 'Passées depuis',
                 date_lte: 'Passées avant',
                 nb_items: 'Nb articles',
@@ -83,7 +87,7 @@ export default {
         Product: {
             name: 'Poster |||| Posters',
             fields: {
-                category_id: 'Catégorie',
+                'category.id': 'Catégorie',
                 height_gte: 'Hauteur mini',
                 height_lte: 'Hauteur maxi',
                 height: 'Hauteur',
@@ -114,9 +118,9 @@ export default {
         Review: {
             name: 'Commentaire |||| Commentaires',
             fields: {
-                customer_id: 'Client',
-                command_id: 'Commande',
-                product_id: 'Produit',
+                'customer.id': 'Client',
+                'command.id': 'Commande',
+                'product.id': 'Produit',
                 date_gte: 'Publié depuis',
                 date_lte: 'Publié avant',
                 date: 'Date',

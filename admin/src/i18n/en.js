@@ -1,4 +1,7 @@
+import englishMessages from 'ra-language-english';
+
 export default {
+    ...englishMessages,
     pos: {
         search: 'Search',
         configuration: 'Configuration',
@@ -15,13 +18,14 @@ export default {
             new_customers: 'New Customers',
             pending_orders: 'Pending Orders',
             order: {
-                items: 'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
+                items:
+                    'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
             },
             welcome: {
-                title: 'Welcome to admin-on-rest demo',
-                subtitle: 'This is the admin of an imaginary poster shop. Fell free to explore and modify the data - it\'s local to your computer, and will reset each time you reload.',
-                aor_button: 'Admin-on-rest website',
-                aor_graphql_button: 'aor GraphQL client repository',
+                title: 'Welcome to react-admin demo',
+                subtitle:
+                    "This is the admin of an imaginary poster shop. Fell free to explore and modify the data - it's local to your computer, and will reset each time you reload.",
+                aor_button: 'react-admin site',
                 demo_button: 'Source for this demo',
             },
         },
@@ -32,8 +36,12 @@ export default {
             fields: {
                 commands: 'Orders',
                 groups: 'Segments',
-                last_seen_gte: 'Visited Since',
+                lastSeen_gte: 'Visited Since',
                 name: 'Name',
+                latestPurchase: 'Latest Purchase',
+                hasOrdered: 'Has Ordered',
+                hasNewsletter: 'Has Newsletter',
+                totalSpent: 'Total spent',
             },
             tabs: {
                 identity: 'Identity',
@@ -45,12 +53,10 @@ export default {
             page: {
                 delete: 'Delete Customer',
             },
-
         },
         Command: {
             name: 'Order |||| Orders',
             fields: {
-                customer: { id: 'Customer' },
                 basket: {
                     delivery: 'Delivery',
                     reference: 'Reference',
@@ -60,22 +66,18 @@ export default {
                     total: 'Total',
                     unit_price: 'Unit Price',
                 },
+                'customer.id': 'Customer',
                 date_gte: 'Passed Since',
                 date_lte: 'Passed Before',
                 total_gte: 'Min amount',
-            },
-        },
-        CommandItem: {
-            name: 'Order |||| Orders',
-            fields: {
-                quantity: 'Quantity',
-                product: { id: 'Product' },
+                status: 'Status',
+                returned: 'Returned',
             },
         },
         Product: {
             name: 'Poster |||| Posters',
             fields: {
-                category: { id: 'Category' },
+                'category.id': 'Category',
                 height_gte: 'Min height',
                 height_lte: 'Max height',
                 height: 'Height',
@@ -101,14 +103,13 @@ export default {
             fields: {
                 products: 'Products',
             },
-
         },
         Review: {
             name: 'Review |||| Reviews',
             fields: {
-                customer: { id: 'Customer' },
-                command: { id: 'Order' },
-                product: { id: 'Product' },
+                'customer.id': 'Customer',
+                'command.id': 'Order',
+                'product.id': 'Product',
                 date_gte: 'Posted since',
                 date_lte: 'Posted before',
                 date: 'Date',

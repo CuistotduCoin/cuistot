@@ -1,10 +1,10 @@
 import React from 'react';
-import { translate, ReferenceArrayField, SingleFieldList } from 'admin-on-rest';
+import { translate, ReferenceArrayField, SingleFieldList } from 'react-admin';
 
-import Chip from 'material-ui/Chip';
+import Chip from '@material-ui/core/Chip';
 
 const NameField = translate(({ translate: t, source, record = {} }) => (
-    <Chip>{t(`resources.Segment.data.${record[source]}`)}</Chip>
+    <Chip label={t(`resources.Segment.data.${record[source]}`)} />
 ));
 
 const SegmentReferenceField = props => (

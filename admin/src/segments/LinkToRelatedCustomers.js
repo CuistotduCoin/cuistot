@@ -1,23 +1,39 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import { Link } from 'react-router-dom';
-import { translate } from 'admin-on-rest';
+import compose from 'recompose/compose';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-admin';
+import { translate } from 'react-admin';
 import { stringify } from 'query-string';
 
 import { VisitorIcon } from '../visitors';
 
-const LinkToRelatedCustomers = ({ record, translate }) => (
-    <FlatButton
-        primary
-        label={translate('resources.Segment.fields.customers')}
-        icon={<VisitorIcon />}
-        containerElement={<Link
-            to={{
-                pathname: '/Customer',
-                search: stringify({ filter: JSON.stringify({ 'groups.id': record.id }) }),
-            }}
-        />}
-    />
+const styles = {
+    icon: { paddingRight: '0.5em' },
+    link: {
+        display: 'inline-flex',
+        alignItems: 'center',
+    },
+};
+
+const LinkToRelatedCustomers = ({ classes, record, translate }) => (
+    <Button
+        color="primary"
+        component={Link}
+        to={{
+            pathname: '/Customer',
+            search: stringify({
+                page: 1,
+                perPage: 25,
+                filter: JSON.stringify({ groups_some: { id: record.id } }),
+            }),
+        }}
+        className={classes.link}
+    >
+        <VisitorIcon className={classes.icon} />
+        {translate('resources.Segment.fields.customers')}
+    </Button>
 );
 
-export default translate(LinkToRelatedCustomers);
+const enhance = compose(withStyles(styles), translate);
+export default enhance(LinkToRelatedCustomers);

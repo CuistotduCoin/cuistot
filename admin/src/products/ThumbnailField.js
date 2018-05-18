@@ -4,7 +4,7 @@ const ThumbnailField = ({ record }) => (
     <img
         src={record.thumbnail}
         style={{ width: 25, maxWidth: 25, maxHeight: 25 }}
-        alt={record.reference}
+        alt=""
     />
 );
 

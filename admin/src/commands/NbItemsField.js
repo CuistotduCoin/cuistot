@@ -1,5 +1,5 @@
 import React from 'react';
-import { FunctionField } from 'admin-on-rest';
+import { FunctionField } from 'react-admin';
 
 const render = record => record.basket.length;
 
@@ -7,8 +7,7 @@ const NbItemsField = props => <FunctionField {...props} render={render} />;
 
 NbItemsField.defaultProps = {
     label: 'Nb Items',
-    style: { textAlign: 'right' },
-    headerStyle: { textAlign: 'right' },
+    textAlign: 'right',
 };
 
 export default NbItemsField;

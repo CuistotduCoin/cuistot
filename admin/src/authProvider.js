@@ -1,4 +1,4 @@
-import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK, AUTH_ERROR } from 'admin-on-rest';
+import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK, AUTH_ERROR } from 'react-admin';
 
 export default (type, params) => {
     if (type === AUTH_LOGIN) {
@@ -15,7 +15,9 @@ export default (type, params) => {
         return Promise.resolve();
     }
     if (type === AUTH_CHECK) {
-        return localStorage.getItem('username') ? Promise.resolve() : Promise.reject();
+        return localStorage.getItem('username')
+            ? Promise.resolve()
+            : Promise.reject();
     }
     return Promise.reject('Unkown method');
 };
