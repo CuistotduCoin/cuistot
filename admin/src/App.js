@@ -13,7 +13,7 @@ import Layout from './Layout';
 import Menu from './Menu';
 import { Dashboard } from './dashboard';
 import customRoutes from './routes';
-import englishMessages from './i18n/en';
+import frenchMessages from './i18n/fr';
 
 import { VisitorList, VisitorEdit, VisitorIcon } from './visitors';
 import { CommandList, CommandEdit, CommandIcon } from './commands';
@@ -28,12 +28,12 @@ import { ReviewList, ReviewEdit, ReviewIcon } from './reviews';
 import { SegmentList, SegmentIcon } from './segments';
 
 const i18nProvider = locale => {
-    if (locale === 'fr') {
-        return import('./i18n/fr').then(messages => messages.default);
+    if (locale === 'en') {
+        return import('./i18n/en').then(messages => messages.default);
     }
 
-    // Always fallback on english
-    return englishMessages;
+    // Always fallback on french
+    return frenchMessages;
 };
 
 class App extends Component {
@@ -63,7 +63,7 @@ class App extends Component {
                 loginPage={Login}
                 appLayout={Layout}
                 menu={Menu}
-                locale="en"
+                locale="fr"
                 i18nProvider={i18nProvider}
             >
                 <Resource

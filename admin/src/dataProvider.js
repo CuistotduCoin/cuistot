@@ -1,4 +1,4 @@
-import buildApolloClient from 'ra-data-graphcool';
+import buildApolloClient from 'ra-data-graphql-simple';
 import gql from 'graphql-tag';
 
 const getOneCommandQuery = gql`
