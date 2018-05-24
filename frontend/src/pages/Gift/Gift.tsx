@@ -6,11 +6,11 @@ import Header from "../../components/Header";
 
 const styles = (theme: Theme) => ({});
 
-interface ISearchProps {
+interface IGiftProps {
   classes?: any;
 }
 
-export class Search extends React.Component<ISearchProps, {}> {
+export class Gift extends React.Component<IGiftProps, {}> {
   public render() {
     const { classes } = this.props;
 
@@ -23,4 +23,4 @@ export class Search extends React.Component<ISearchProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(Search as any) as any;
+export default withStyles(styles as any)(Gift as any) as any;

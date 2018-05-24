@@ -56,11 +56,6 @@ export class Footer extends Component<IFooterProps, {}> {
                 <Typography color="primary">Condition légale</Typography>
               </Link>
               <Link to="/" className={classes.link}>
-                <Typography color="primary">
-                  Politique de confidentialité
-                </Typography>
-              </Link>
-              <Link to="/" className={classes.link}>
                 <Typography color="primary">Blog</Typography>
               </Link>
             </Grid>
@@ -125,6 +120,12 @@ export class Footer extends Component<IFooterProps, {}> {
               </Link>
               <Link to="/" className={classes.link}>
                 <Typography color="primary">Temoignages</Typography>
+              </Link>
+              <Link to="/" className={classes.link}>
+                <Typography color="primary">Parrainage</Typography>
+              </Link>
+              <Link to="/" className={classes.link}>
+                <Typography color="primary">Condition légale</Typography>
               </Link>
             </Grid>
           </Grid>

@@ -6,11 +6,11 @@ import Header from "../../components/Header";
 
 const styles = (theme: Theme) => ({});
 
-interface ISearchProps {
+interface IWorkshopProps {
   classes?: any;
 }
 
-export class Search extends React.Component<ISearchProps, {}> {
+export class Workshop extends React.Component<IWorkshopProps, {}> {
   public render() {
     const { classes } = this.props;
 
@@ -23,4 +23,4 @@ export class Search extends React.Component<ISearchProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(Search as any) as any;
+export default withStyles(styles as any)(Workshop as any) as any;

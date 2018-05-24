@@ -24,7 +24,7 @@ interface IHeaderProps {
   classes?: any;
 }
 interface IHeaderState {
-  buttonText?: string;
+  up?: boolean;
 }
 
 export class Header extends Component<IHeaderProps, IHeaderState> {
@@ -32,7 +32,7 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
     super(props);
 
     this.state = {
-      buttonText: "Se connecter"
+      up: true
     };
 
     this.handleScroll = this.handleScroll.bind(this);
@@ -40,9 +40,9 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
 
   public handleScroll = (evt: any) => {
     if (window.scrollY > 0) {
-      this.setState({ buttonText: "S'inscrire" });
+      this.setState({ up: false });
     } else {
-      this.setState({ buttonText: "Se connecter" });
+      this.setState({ up: true });
     }
   };
 
@@ -56,7 +56,32 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
 
   public render() {
     const { classes } = this.props;
-    const myLink = (props: any) => <Link to="/login" {...props} />;
+    const businessLink = (props: any) => <Link to="/business" {...props} />;
+    const individualLink = (props: any) => <Link to="/individual" {...props} />;
+    const signUp = (props: any) => <Link to="/sign-up" {...props} />;
+    const login = (props: any) => <Link to="/login" {...props} />;
+
+    const button = this.state.up ? (
+      <Button
+        className={classes.button}
+        component={login}
+        variant="raised"
+        color="primary"
+        onScroll={this.handleScroll}
+      >
+        Se connecter
+      </Button>
+    ) : (
+      <Button
+        className={classes.button}
+        component={signUp}
+        variant="raised"
+        color="primary"
+        onScroll={this.handleScroll}
+      >
+        S'inscrire
+      </Button>
+    );
 
     return (
       <AppBar position="sticky" className={classes.appBar}>
@@ -71,14 +96,14 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
             <Hidden smDown={true}>
               <Button
                 className={classes.button}
-                component={myLink}
+                component={businessLink}
                 color="primary"
               >
                 Entreprise
               </Button>
               <Button
                 className={classes.button}
-                component={myLink}
+                component={individualLink}
                 color="primary"
               >
                 Particulier
@@ -86,15 +111,7 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
             </Hidden>
           </Grid>
           <Grid container={true} justify="flex-end">
-            <Button
-              className={classes.button}
-              component={myLink}
-              variant="raised"
-              color="primary"
-              onScroll={this.handleScroll}
-            >
-              {this.state.buttonText}
-            </Button>
+            {button}
           </Grid>
         </Toolbar>
       </AppBar>

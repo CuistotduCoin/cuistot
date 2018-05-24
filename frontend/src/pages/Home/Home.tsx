@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
-import logo from "./react.svg";
 
 const styles = (theme: Theme) => ({
   gridList: {
@@ -50,7 +49,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               alt={"Entreprise"}
               className={classes.image}
             />
-            <Link to="/Individual" className={classes.link}>
+            <Link to="/entreprise" className={classes.link}>
               <GridListTileBar
                 titlePosition="top"
                 title="Vous êtes une entreprise"
@@ -64,7 +63,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               alt={"Particulier"}
               className={classes.image}
             />
-            <Link to="/Individual" className={classes.link}>
+            <Link to="/individual" className={classes.link}>
               <GridListTileBar
                 titlePosition="top"
                 title="Vous êtes un particulier"

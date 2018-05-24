@@ -11,8 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import React, { Component } from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import Hero from "../../components/Hero";
-import logo from "./react.svg";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -119,11 +117,6 @@ export class Business extends React.Component<IBusinessProps, {}> {
     return (
       <>
         <Header />
-        <Hero
-          imageURL="https://picsum.photos/100/50/?random"
-          videoURL="http://thenewcode.com/assets/videos/polina.mp4"
-          valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
-        />
         <Footer />
       </>
     );
