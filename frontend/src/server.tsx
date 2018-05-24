@@ -1,10 +1,12 @@
+import { render } from "@jaredpalmer/after";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import * as express from "express";
+import express from "express";
 import * as React from "react";
+import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom";
-
-import App from "./App";
+import createApolloClient from "./createApolloClient";
+import Document from "./Document";
+import routes from "./routes";
 import theme from "./theme";
 
 let assets: any;
@@ -14,43 +16,40 @@ const syncLoadAssets = () => {
 syncLoadAssets();
 
 const server = express();
-
 server
   .disable("x-powered-by")
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR!))
-  .get("/*", (req: express.Request, res: express.Response) => {
-    const context = {};
-    const markup = renderToString(
-      <StaticRouter context={context} location={req.url}>
-        <MuiThemeProvider theme={theme}>
-          <App />
-        </MuiThemeProvider>
-      </StaticRouter>
-    );
-    res.send(
-      `<!doctype html>
-    <html lang="">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta charSet="utf-8" />
-        <title>Cuistot du Coin</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        ${
-          assets.client.css
-            ? `<link rel="stylesheet" href="${assets.client.css}">`
-            : ""
-        }
-          ${
-            process.env.NODE_ENV === "production"
-              ? `<script src="${assets.client.js}" defer></script>`
-              : `<script src="${assets.client.js}" defer crossorigin></script>`
-          }
-    </head>
-    <body>
-        <div id="root">${markup}</div>
-    </body>
-</html>`
-    );
+  .get("/*", async (req: express.Request, res: express.Response) => {
+    const client = createApolloClient({ ssrMode: true });
+
+    const customRenderer = (node: any) => {
+      const app = (
+        <ApolloProvider client={client}>
+          <MuiThemeProvider theme={theme}>{node}</MuiThemeProvider>
+        </ApolloProvider>
+      );
+      return getDataFromTree(app).then(() => {
+        const initialApolloState = client.extract();
+        const html = renderToString(app);
+        return { html, initialApolloState };
+      });
+    };
+
+    try {
+      const options = {
+        req,
+        res,
+        routes,
+        // tslint:disable-next-line:object-literal-sort-keys
+        assets,
+        customRenderer,
+        document: Document
+      };
+      const html = await render(options);
+      res.send(html);
+    } catch (error) {
+      res.json(error);
+    }
   });
 
 export default server;

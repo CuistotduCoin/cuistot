@@ -40,24 +40,27 @@ export class Footer extends Component<IFooterProps, {}> {
               <Typography variant={"headline"} color="primary">
                 Cuistot du Coin
               </Typography>
-              <Link to="/" className={classes.link}>
+              <Link to="/team" className={classes.link}>
                 <Typography color="primary">L'équipe</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/mission" className={classes.link}>
                 <Typography color="primary">Notre mission</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/join" className={classes.link}>
                 <Typography color="primary">Nous rejoindre</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/presskit" className={classes.link}>
                 <Typography color="primary">Contact & Presse</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/legal" className={classes.link}>
                 <Typography color="primary">Condition légale</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <a
+                className={classes.link}
+                href="http://www.blog.cuistotducoin.com"
+              >
                 <Typography color="primary">Blog</Typography>
-              </Link>
+              </a>
             </Grid>
           </Grid>
           <Grid item={true}>
@@ -70,16 +73,16 @@ export class Footer extends Component<IFooterProps, {}> {
               <Typography variant={"headline"} color="primary">
                 Gourmet
               </Typography>
-              <Link to="/" className={classes.link}>
+              <Link to="/how-it-works" className={classes.link}>
                 <Typography color="primary">Comment ça marche</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/testimony" className={classes.link}>
                 <Typography color="primary">Temoignages</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/gift" className={classes.link}>
                 <Typography color="primary">Offrir</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/invite" className={classes.link}>
                 <Typography color="primary">Parrainage</Typography>
               </Link>
             </Grid>
@@ -94,13 +97,13 @@ export class Footer extends Component<IFooterProps, {}> {
               <Typography variant={"headline"} color="primary">
                 Cuistot
               </Typography>
-              <Link to="/" className={classes.link}>
+              <Link to="/how-it-works" className={classes.link}>
                 <Typography color="primary">Comment ça marche</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/testimony" className={classes.link}>
                 <Typography color="primary">Temoignages</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/organize" className={classes.link}>
                 <Typography color="primary">Devenir partenaire</Typography>
               </Link>
             </Grid>
@@ -115,16 +118,16 @@ export class Footer extends Component<IFooterProps, {}> {
               <Typography variant={"headline"} color="primary">
                 Entreprise
               </Typography>
-              <Link to="/" className={classes.link}>
+              <Link to="/how-it-works" className={classes.link}>
                 <Typography color="primary">Comment ça marche</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/testimony" className={classes.link}>
                 <Typography color="primary">Temoignages</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/invite" className={classes.link}>
                 <Typography color="primary">Parrainage</Typography>
               </Link>
-              <Link to="/" className={classes.link}>
+              <Link to="/legal" className={classes.link}>
                 <Typography color="primary">Condition légale</Typography>
               </Link>
             </Grid>
