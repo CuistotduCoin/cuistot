@@ -4,9 +4,9 @@
 [![CircleCI](https://circleci.com/gh/CuistotduCoin/cuistot.svg?style=shield)](https://circleci.com/gh/CuistotduCoin/cuistot)
 ![Cuistot-status](https://david-dm.org/cuistotducoin/cuistot.svg)
 [![Known Vulnerabilities FrontEnd](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=frontend/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot?targetFile=frontend/package.json)
-[![Known Vulnerabilities BackEnd](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=backend/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=backend/package.json)
-[![Known Vulnerabilities Admin](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=admin/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=admin/package.json)
-[![Known Vulnerabilities Email Templates](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=email-templates/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=email-templates/package.json)
+[![Known Vulnerabilities BackEnd](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=backend/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot?targetFile=backend/package.json)
+[![Known Vulnerabilities Admin](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=admin/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot?targetFile=admin/package.json)
+[![Known Vulnerabilities Email Templates](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=email-templates/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot?targetFile=email-templates/package.json)
 
 Marketplace for Cook
   - Deployed using _Serverless_ | AWS Lambda | AWS S3.  
