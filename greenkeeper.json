@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "admin/package.json",
+        "backend/package.json",
+        "email-templates/package.json",
+        "frontend/package.json"
+      ]
+    }
+  }
+}
