@@ -13,7 +13,7 @@
         "ra-language-french": "^2.0.0",
         "react": "^16.3.2",
         "react-admin": "^2.0.0",
-        "react-dom": "16.3.2",
+        "react-dom": "16.4.0",
         "react-redux": "^5.0.7",
         "react-router-dom": "^4.2.2",
         "react-scripts": "1.1.4",
