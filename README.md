@@ -1,6 +1,12 @@
 # [Cuistot du Coin](https://www.cuistotducoin.com) :
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/CuistotduCoin/cuistot.svg)](https://greenkeeper.io/)
+[![CircleCI](https://circleci.com/gh/CuistotduCoin/cuistot.svg?style=shield)](https://circleci.com/gh/CuistotduCoin/cuistot)
+![Cuistot-status](https://david-dm.org/cuistotducoin/cuistot.svg)
+[![Known Vulnerabilities Front](https://snyk.io/test/github/cuistotducoin/cuistot/front/badge.svg?targetFile=package.json)](https://snyk.io/test/github/cuistotducoin/cuistot/front/badge.svg?targetFile=package.json)
+[![Known Vulnerabilities Back](https://snyk.io/test/github/cuistotducoin/cuistot/back/badge.svg?targetFile=package.json)](https://snyk.io/test/github/cuistotducoin/cuistot/back/badge.svg?targetFile=package.json)
+[![Known Vulnerabilities Admin](https://snyk.io/test/github/cuistotducoin/cuistot/admin/badge.svg?targetFile=package.json)](https://snyk.io/test/github/cuistotducoin/cuistot/admin/badge.svg?targetFile=package.json)
+[![Known Vulnerabilities Email Templates](https://snyk.io/test/github/cuistotducoin/cuistot/email-templates/badge.svg?targetFile=package.json)](https://snyk.io/test/github/cuistotducoin/cuistot/email-templates/badge.svg?targetFile=package.json)
 
 Marketplace for Cook
   - Deployed using _Serverless_ | AWS Lambda | AWS S3.  
