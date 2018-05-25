@@ -5,7 +5,7 @@
 
 | FrontEnd | BackEnd | Admin | Email Template |
 |----------|---------|-------|----------------|
-| ![FrontEnd](https://david-dm.org/cuistotducoin/cuistot.svg?path=frontend) | ![BackEnd](https://david-dm.org/cuistotducoin/cuistot.svg?path=backend) | ![Admin](https://david-dm.org/cuistotducoin/cuistot.svg?path=admin) | ![Email-Template](https://david-dm.org/cuistotducoin/cuistot.svg?path=email-templates) |
+| [![FrontEnd](https://david-dm.org/cuistotducoin/cuistot.svg?path=frontend)](https://david-dm.org/cuistotducoin/cuistot?path=frontend) | [![BackEnd](https://david-dm.org/cuistotducoin/cuistot.svg?path=backend)](https://david-dm.org/cuistotducoin/cuistot?path=backend) | [![Admin](https://david-dm.org/cuistotducoin/cuistot.svg?path=admin)](https://david-dm.org/cuistotducoin/cuistot?path=admin) | [![Email-Template](https://david-dm.org/cuistotducoin/cuistot.svg?path=email-templates)](https://david-dm.org/cuistotducoin/cuistot?path=email-templates) |
 | [![FrontEnd](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=frontend/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot?targetFile=frontend/package.json) | [![BackEnd](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=backend/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot?targetFile=backend/package.json) | [![Admin](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=admin/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot?targetFile=admin/package.json) | [![Email Templates](https://snyk.io/test/github/cuistotducoin/cuistot/badge.svg?targetFile=email-templates/package.json)](https://snyk.io/test/github/cuistotducoin/cuistot?targetFile=email-templates/package.json) |
 
 Marketplace for Cook
