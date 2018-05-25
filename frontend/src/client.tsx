@@ -5,7 +5,6 @@ import { ApolloProvider } from "react-apollo";
 import { hydrate } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "typeface-roboto";
-import App from "./App";
 import createApolloClient from "./createApolloClient";
 import routes from "./routes";
 import theme from "./theme";
