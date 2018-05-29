@@ -14,11 +14,8 @@ Marketplace for Cook
   - Client-side API requests are generated from **Apollo Client** wrapped components.
   - The rest of the app sits on **React.js** & **React Router*(V4)** (with Code splitting)
 
-Getting the secrets
-  - Copy the provided secrets file to the root
-
 ## SETUP:
   - [install aws-cli](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)
   - `npm install -g serverless`
   - `npm install -g yarn`
-  - Then go to on of the directory then follow insctructions
+  - Then go to on of the directory then follow instructions

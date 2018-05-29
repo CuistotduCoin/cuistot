@@ -1,28 +1,29 @@
-service: serverless-graphql-appsync-lda
+service: serverless-graphql-appsync
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   stage: dev
-  region: eu-west-3
+  region: ${env:AWS_REGION}
 
 plugins:
   - serverless-appsync-plugin
+  - serverless-dotenv-plugin
   - serverless-offline
   - serverless-webpack
 
 custom:
-  accountId: 942691749050 # replace this with your accountId
+  accountId: ${env:ACCOUNT_ID} # replace this with your accountId
   appSync:
     name: CuistotduCoin
-    apiId: 44r7pblhufhjtlecvyoqd3uyqa
+    apiId: ${env:AWS_ID}
     authenticationType: AMAZON_COGNITO_USER_POOLS # API_KEY is also supported
     userPoolConfig:
-      awsRegion: eu-west-2 # required # region
+      awsRegion: ${env:AWS_REGION_2} # required # region
       defaultAction: ALLOW
-      userPoolId: eu-west-2_4zklk0tSU # replace this with your Cognito User Pool Id
+      userPoolId: ${env:USERPOOL_ID} # replace this with your Cognito User Pool Id
     # region: # defaults to provider region
     # mappingTemplatesLocation: # defaults to mapping-templates
     mappingTemplates:
@@ -43,7 +44,7 @@ custom:
         name: Lambda
         description: 'Lambda DataSource'
         config:
-          lambdaFunctionArn: "arn:aws:lambda:eu-west-3:${self:custom.accountId}:serverless-graphql-appsync-lda-production-graphql"
+          lambdaFunctionArn: "arn:aws:lambda:eu-west-3:${self:custom.accountId}:serverless-graphql-appsync"
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Lambda-${self:custom.appSync.serviceRole}"
   serverless-offline:
     port: 4000
@@ -80,5 +81,5 @@ resources:
                   Action:
                     - "lambda:invokeFunction"
                   Resource:
-                    - "arn:aws:lambda:eu-west-3:*:function:serverless-graphql-appsync-lda-production-graphql"
-                    - "arn:aws:lambda:eu-west-3:*:function:serverless-graphql-appsync-lda-production-graphql:*"
+                    - "arn:aws:lambda:eu-west-3:*:function:serverless-graphql-appsync"
+                    - "arn:aws:lambda:eu-west-3:*:function:serverless-graphql-appsync:*"

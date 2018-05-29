@@ -1,0 +1,11 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.11
+    steps:
+      - cd frontend
+      - checkout
+      - run: yarn
+      - run: yarn build
+      - run: yarn deploy

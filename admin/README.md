@@ -1,11 +1,8 @@
 # [Cuistot du Coin](https://www.cuistotducoin.com) :
  
 ## SETUP:
-  - Copy the provided secrets file to the root
   - `yarn` to install dependencies
   - `yarn start` for development server
-  - `yarn build` for production server
-  - `yarn deploy` for deploying on AWS
  
  ## TECHNOLOGIES:
   1. ### API's
@@ -23,10 +20,4 @@
     * [AWS Cognito](https://aws.amazon.com/cognito/) | User Management.
 
   2. ### Libraries & Packages
-    * Uses _TypeScript_ for types with Javascript
-    * Uses _MaterialUI_ for Generic Components
-    * Uses _Formik_ for form validation
-    * Uses _Razzle_ with _After_ for universal server-rendereding
-    * Uses _Apollo_, _aws-amplify_, _aws-appsync_ for providing API calls directly to componenents.
-    * Uses _React Router (4)_ for routing.
-    * Uses Jest + Enzyme for testing.
+    * Uses _react-admin_ for backend.

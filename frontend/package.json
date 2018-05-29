@@ -12,7 +12,7 @@
     "test": "razzle test --env=jsdom",
     "start:prod": "NODE_ENV=production node build/server.js",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "deploy": "yarn build && serverless client deploy",
+    "deploy": "serverless deploy",
     "tslint-check": "tslint-config-prettier-check ./tslint.json"
   },
   "dependencies": {
@@ -58,7 +58,7 @@
     "@types/storybook__react": "^3.0.7",
     "@types/webpack-env": "^1.13.6",
     "prettier": "^1.13.0",
-    "serverless-finch": "^2.1.2",
+    "serverless-dotenv-plugin": "^1.1.2",
     "ts-jest": "^22.4.6",
     "ts-loader": "^4.3.0",
     "tsconfig-paths-webpack-plugin": "^3.1.3",
