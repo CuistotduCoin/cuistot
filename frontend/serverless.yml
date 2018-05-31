@@ -13,16 +13,20 @@ provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
-  region: ${env:AWS_REGION}
+  region: ${env:AWS_REGION_PARIS}
+  deploymentBucket: ${env:AWS_S3_BUCKET}
 
 package:
   exclude:
     - ./**
   include:
-    - handler.js
     - build/**
 
 functions:
   ssr:
     timeout: 30
-    handler: handler.ssr
+    handler: build/server.handler
+    events:
+      - http:
+          method: get
+          path: /

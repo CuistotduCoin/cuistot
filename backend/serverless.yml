@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
-  region: ${env:AWS_REGION}
+  region: ${env:AWS_REGION_PARIS}
 
 plugins:
   - serverless-appsync-plugin
@@ -15,15 +15,15 @@ plugins:
   - serverless-webpack
 
 custom:
-  accountId: ${env:ACCOUNT_ID} # replace this with your accountId
+  accountId: ${env:AWS_ACCOUNT_ID} # replace this with your accountId
   appSync:
     name: CuistotduCoin
-    apiId: ${env:AWS_ID}
+    apiId: ${env:AWS_API_ID}
     authenticationType: AMAZON_COGNITO_USER_POOLS # API_KEY is also supported
     userPoolConfig:
-      awsRegion: ${env:AWS_REGION_2} # required # region
+      awsRegion: ${env:AWS_REGION_LONDON} # required # region
       defaultAction: ALLOW
-      userPoolId: ${env:USERPOOL_ID} # replace this with your Cognito User Pool Id
+      userPoolId: ${env:AWS_USERPOOL_ID} # replace this with your Cognito User Pool Id
     # region: # defaults to provider region
     # mappingTemplatesLocation: # defaults to mapping-templates
     mappingTemplates:

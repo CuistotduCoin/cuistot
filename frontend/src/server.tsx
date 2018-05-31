@@ -15,8 +15,7 @@ const syncLoadAssets = () => {
 };
 syncLoadAssets();
 
-const server = express();
-server
+const server = express()
   .disable("x-powered-by")
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR!))
   .get("/*", async (req: express.Request, res: express.Response) => {

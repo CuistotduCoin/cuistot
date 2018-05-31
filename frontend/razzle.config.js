@@ -1,70 +1,14 @@
 'use strict';
 
 module.exports = {
-  modify(baseConfig, { target, dev }, webpack) {
-    const config = Object.assign({}, baseConfig);
 
-    config.resolve.extensions = config.resolve.extensions.concat([
-      '.ts',
-      '.tsx',
-    ]);
- 
-    // Locate eslint-loader and remove it (we're using tslint instead)
-    config.module.rules = config.module.rules.filter(
-      rule =>
-        !(
-          Array.isArray(rule.use) &&
-          rule.use.length > 0 &&
-          rule.use[0].options &&
-          'useEslintrc' in rule.use[0].options
-        )
-    );
+  plugins: ['typescript'],
 
-    // Safely locate Babel-Loader in Razzle's webpack internals
-    const babelLoader = config.module.rules.findIndex(
-      rule => rule.use[1].options && rule.use[1].options.babelrc
-    );
-
-    // Get the correct `include` option, since that hasn't changed.
-    // This tells Razzle which directories to transform.
-    const { include } = config.module.rules[babelLoader];
-
-    // Add tslint-loader
-    config.module.rules.push({
-      include,
-      enforce: 'pre',
-      test: /\.tsx?$/,
-      loader: require.resolve('tslint-loader'),
-      options: {
-        emitErrors: true,
-        configFile: './tslint.json',
-      },
-    });
-
-    // Declare our TypeScript loader configuration
-    const tsLoader = {
-      include,
-      test: /\.tsx?$/,
-      loader: require.resolve('ts-loader'),
-      options: {
-        transpileOnly: true,
-      },
-    };
-    // Add loader
-    config.module.rules.push(tsLoader)
+  modify(config, { target, dev }) {
     
-    // Additional options found at https://github.com/TypeStrong/ts-loader#faster-builds
-    // Add async typechecking errors
-    // config.plugins.push(new require('fork-ts-checker-webpack-plugin')())
- 
-    // If you want to replace Babel with typescript to fully speed up build
-    // then do the following:
-    //
-    // - COMMENT out line 55
-    // - UNCOMMENT line 67
-    //
-    // config.module.rules[babelLoader] = tsLoader;
-
+    if (target === 'node' && !dev) {
+      config.externals = [];
+    }
     return config;
-  },
+  }
 };

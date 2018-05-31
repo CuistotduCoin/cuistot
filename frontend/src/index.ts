@@ -1,24 +1,46 @@
-import * as http from "http";
+import * as awsServerlessExpress from "aws-serverless-express";
+import express from "express";
 import app from "./server";
 
-const server = http.createServer(app as any);
-let currentApp = app;
+let handler;
+if (process.env.EXECUTION_ENV === "lambda") {
+  console.log("Lambda 🚀 started");
+  const binaryMimeTypes = [
+    "application/octet-stream",
+    "font/eot",
+    "font/opentype",
+    "font/otf",
+    "image/jpeg",
+    "image/png",
+    "image/svg+xml"
+  ];
 
-server.listen(process.env.PORT || 3000, (err: any) => {
-  if (err) {
-    console.log(err);
+  const server = awsServerlessExpress.createServer(
+    app,
+    undefined,
+    binaryMimeTypes
+  );
+  handler = (event: any, context: any) =>
+    awsServerlessExpress.proxy(server, event, context);
+} else {
+  if (module.hot) {
+    module.hot.accept("./server", () => {
+      console.log("🔁  HMR Reloading `./server`...");
+    });
+    console.info("✅  Server-side HMR Enabled!");
   }
-  console.log("🚀 started");
-});
 
-if (module.hot) {
-  console.log("✅  Server-side HMR Enabled!");
+  const port = process.env.PORT || 3000;
 
-  module.hot.accept("./server", () => {
-    console.log("🔁  HMR Reloading `./server`...");
-    server.removeListener("request", currentApp);
-    const newApp = require("./server").default;
-    server.on("request", newApp);
-    currentApp = newApp;
-  });
+  handler = express()
+    .use(app)
+    .listen(port, (err: Error) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log(`🚀 Started on port ${port}`);
+    });
 }
+
+export default handler;

@@ -12,7 +12,8 @@
       "es6",
       "es2015",
       "es2017",
-      "dom"
+      "dom",
+      "esnext.asynciterable"
     ],
     "module": "esnext",
     "moduleResolution": "node",
@@ -25,8 +26,9 @@
     "strict": true,
     "pretty": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "es2016"
+    "target": "es2016",
   },
+
   "exclude": [
     "node_modules",
     "build",
