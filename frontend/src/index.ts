@@ -2,7 +2,7 @@ import * as awsServerlessExpress from "aws-serverless-express";
 import express from "express";
 import app from "./server";
 
-let handler;
+let lambdaOrServer;
 if (process.env.EXECUTION_ENV === "lambda") {
   console.log("Lambda 🚀 started");
   const binaryMimeTypes = [
@@ -20,7 +20,7 @@ if (process.env.EXECUTION_ENV === "lambda") {
     undefined,
     binaryMimeTypes
   );
-  handler = (event: any, context: any) =>
+  lambdaOrServer = (event: any, context: any) =>
     awsServerlessExpress.proxy(server, event, context);
 } else {
   if (module.hot) {
@@ -32,7 +32,7 @@ if (process.env.EXECUTION_ENV === "lambda") {
 
   const port = process.env.PORT || 3000;
 
-  handler = express()
+  lambdaOrServer = express()
     .use(app)
     .listen(port, (err: Error) => {
       if (err) {
@@ -43,4 +43,4 @@ if (process.env.EXECUTION_ENV === "lambda") {
     });
 }
 
-export default handler;
+export const handler = lambdaOrServer;
