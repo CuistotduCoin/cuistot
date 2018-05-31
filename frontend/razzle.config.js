@@ -1,14 +1,11 @@
-'use strict';
-
 module.exports = {
-
   plugins: ['typescript'],
 
-  modify(config, { target, dev }) {
-    
+  modify(config, { target, dev }, webpack) {
+    const appConfig = config // stay immutable here
     if (target === 'node' && !dev) {
-      config.externals = [];
+      appConfig.externals = [];
     }
-    return config;
+    return appConfig;
   }
 };

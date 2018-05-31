@@ -25,7 +25,7 @@ package:
 functions:
   ssr:
     timeout: 30
-    handler: build/server.handler
+    handler: build/server
     events:
       - http:
           method: get
