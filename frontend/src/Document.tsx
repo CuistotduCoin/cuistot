@@ -6,6 +6,7 @@ export interface IDocumentProps {
   assets: any;
   data: any;
   initialApolloState: any;
+  css: any;
 }
 
 export default class Document extends Component<IDocumentProps, {}> {
@@ -19,10 +20,11 @@ export default class Document extends Component<IDocumentProps, {}> {
   }
 
   public render() {
-    const { helmet, assets, data, initialApolloState } = this.props;
+    const { helmet, assets, data, initialApolloState, css } = this.props;
     // get attributes from React Helmet
     const htmlAttrs = helmet.htmlAttributes.toComponent();
     const bodyAttrs = helmet.bodyAttributes.toComponent();
+
     return (
       <html {...htmlAttrs}>
         <head>
@@ -36,6 +38,10 @@ export default class Document extends Component<IDocumentProps, {}> {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <meta name="theme-color" content="#000000" />
+          {assets.client.css && (
+            <link rel="stylesheet" href={assets.client.css} />
+          )}
+          <style id="jss-ssr">{css}</style>
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}

@@ -2,12 +2,22 @@ service: serverless-ssr
 
 plugins:
   - serverless-dotenv-plugin
+  - serverless-offline
+  - serverless-apigw-binary
+  - serverless-domain-manager
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
 custom:
   dotenv:
     path: .env
+  apigwBinary:
+    types:
+      - '*/*'
+  customDomain:
+    domainName: www.cuistoducoin.com
+    createRoute53Record: true
+    certificateName: www.cuistoducoin.com
 
 provider:
   name: aws
@@ -15,6 +25,7 @@ provider:
   stage: dev
   region: ${env:AWS_REGION_PARIS}
   deploymentBucket: ${env:AWS_S3_BUCKET}
+  endpointType: regional
 
 package:
   exclude:
@@ -29,4 +40,9 @@ functions:
     events:
       - http:
           method: get
+          cors: true
           path: /
+      - http:
+          method: any
+          cors: true
+          path: /{proxy+}

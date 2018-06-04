@@ -1,9 +1,16 @@
 import { render } from "@jaredpalmer/after";
-import { MuiThemeProvider } from "@material-ui/core/styles";
+import {
+  createGenerateClassName,
+  MuiThemeProvider
+} from "@material-ui/core/styles";
 import express from "express";
 import * as React from "react";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { renderToString } from "react-dom/server";
+// @ts-ignore
+import { SheetsRegistry } from "react-jss/lib/jss";
+// @ts-ignore
+import JssProvider from "react-jss/lib/JssProvider";
 import createApolloClient from "./createApolloClient";
 import Document from "./Document";
 import routes from "./routes";
@@ -20,11 +27,18 @@ const server = express()
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR!))
   .get("/*", async (req: express.Request, res: express.Response) => {
     const client = createApolloClient({ ssrMode: true });
+    const sheetsRegistry = new SheetsRegistry();
+    const generateClassName = createGenerateClassName();
 
     const customRenderer = (node: any) => {
       const app = (
         <ApolloProvider client={client}>
-          <MuiThemeProvider theme={theme}>{node}</MuiThemeProvider>
+          <JssProvider
+            registry={sheetsRegistry}
+            generateClassName={generateClassName}
+          >
+            <MuiThemeProvider theme={theme}>{node}</MuiThemeProvider>
+          </JssProvider>
         </ApolloProvider>
       );
       return getDataFromTree(app).then(() => {
@@ -42,7 +56,8 @@ const server = express()
         // tslint:disable-next-line:object-literal-sort-keys
         assets,
         customRenderer,
-        document: Document
+        document: Document,
+        css: sheetsRegistry.toString()
       };
       const html = await render(options);
       res.send(html);

@@ -20,7 +20,13 @@ ensureReady(routes).then(data =>
         </MuiThemeProvider>
       </BrowserRouter>
     </ApolloProvider>,
-    document.getElementById("root")
+    document.getElementById("root"),
+    () => {
+      const jssStyles = document.getElementById("jss-ssr");
+      if (jssStyles && jssStyles.parentNode) {
+        jssStyles.parentNode.removeChild(jssStyles);
+      }
+    }
   )
 );
 
