@@ -1,171 +1,172 @@
 import { asyncComponent } from "@jaredpalmer/after";
+import Loading from "components/Loading";
 import React from "react";
 
 export default [
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Business/Business")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Business/Business")
     }),
     exact: true,
     path: "/business"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Cook/Cook")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Cook")
     }),
     exact: true,
     path: "/cook/:id"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Gift/Gift")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Gift")
     }),
     exact: true,
     path: "/gift"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/GroupLesson/GroupLesson")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/GroupLesson")
     }),
     exact: true,
     path: "/group-lesson"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Home/Home")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Home")
     }),
     exact: true,
     path: "/"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/HowItWorks/HowItWorks")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/HowItWorks")
     }),
     exact: true,
     path: "/how-it-works"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Individual/Individual")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Individual")
     }),
     exact: true,
     path: "/individual"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Invite/Invite")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Invite")
     }),
     exact: true,
     path: "/invite"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Join/Join")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Join")
     }),
     exact: true,
     path: "/join"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Legal/Legal")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Legal")
     }),
     exact: true,
     path: "/legal"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Login/Login")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Login")
     }),
     exact: true,
     path: "/login"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Mission/Mission")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Mission")
     }),
     exact: true,
     path: "/mission"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Organize/Organize")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Organize")
     }),
     exact: true,
     path: "/organize"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Presskit/Presskit")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Presskit")
     }),
     exact: true,
     path: "/presskit"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Profil/Profil")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Profil")
     }),
     exact: true,
     path: "/profil/:id"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Search/Search")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Search")
     }),
     exact: true,
     path: "/search"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/SignUp/SignUp")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/SignUp")
     }),
     exact: true,
     path: "/signup"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Team/Team")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Team")
     }),
     exact: true,
     path: "/team"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Testimony/Testimony")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Testimony")
     }),
     exact: true,
     path: "/testimony"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/Workshop/Workshop")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/Workshop")
     }),
     exact: true,
     path: "/workshop/:id"
   },
   {
     component: asyncComponent({
-      Placeholder: () => <div>...LOADING...</div>,
-      loader: () => import("./pages/NotFound/NotFound")
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/NotFound")
     })
   }
 ];

@@ -1,8 +1,8 @@
 import { Theme, withStyles } from "@material-ui/core/styles";
+import Footer from "components/Footer";
+import Header from "components/Header";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 
 const styles = (theme: Theme) => ({});
 

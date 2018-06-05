@@ -8,10 +8,12 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import Footer from "components/Footer";
+import Head from "components/Head";
+import Header from "components/Header";
+import Hero from "components/Hero";
 import React, { Component } from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
+import MetaInfo from "shared/metaInfo";
 import logo from "./react.svg";
 
 const styles = (theme: Theme) => ({
@@ -298,14 +300,16 @@ export class Business extends React.Component<IBusinessProps, {}> {
         >
           C’est parti pour le voyage des papilles !
         </Typography>
-        <Typography variant={"body1"} paragraph={true}>
-          Passionnés de cuisine, nos Cuistots ont à cœur de partager leurs
-          savoir-faire et leurs recettes authentiques, mais surtout de vous
-          faire découvrir leurs univers ! Ils vous invitent à vivre une
-          expérience culinaire inédite au sein de votre entreprise ou dans l’un
-          de nos lieux partenaires le temps d’un atelier culinaire ou d’un repas
-          savoureux
-        </Typography>
+        <Grid container={true} className={classes.grid}>
+          <Typography variant={"body1"} paragraph={true}>
+            Passionnés de cuisine, nos Cuistots ont à cœur de partager leurs
+            savoir-faire et leurs recettes authentiques, mais surtout de vous
+            faire découvrir leurs univers ! Ils vous invitent à vivre une
+            expérience culinaire inédite au sein de votre entreprise ou dans
+            l’un de nos lieux partenaires le temps d’un atelier culinaire ou
+            d’un repas savoureux
+          </Typography>
+        </Grid>
         <Typography
           variant="title"
           align="center"

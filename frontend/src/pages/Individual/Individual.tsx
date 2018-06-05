@@ -5,11 +5,11 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import Footer from "components/Footer";
+import Header from "components/Header";
+import Hero from "components/Hero";
+import WorkshopCardList from "components/WorkshopCardList";
 import React, { Component } from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
-import WorkshopCardList from "../../components/WorkshopCardList";
 import logo from "./react.svg";
 
 const styles = (theme: Theme) => ({

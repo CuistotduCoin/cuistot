@@ -2,7 +2,10 @@
   "compilerOptions": {
     "allowJs": true,
     "allowUnreachableCode": false,
-    "baseUrl": ".",
+    "baseUrl": "src",
+    "paths": {
+      "*": ["*", "src/*"]
+    },
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
@@ -26,7 +29,7 @@
     "strict": true,
     "pretty": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "es2016"
+    "target": "es2016",
   },
   "exclude": [
     "node_modules",

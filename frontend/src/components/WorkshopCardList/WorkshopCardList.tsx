@@ -18,7 +18,6 @@ export interface IWorkshopCardListProps {
 export class WorkshopCardList extends Component<IWorkshopCardListProps, {}> {
   public render() {
     const { classes, workshops } = this.props;
-    console.log(this.props);
 
     return (
       <Grid

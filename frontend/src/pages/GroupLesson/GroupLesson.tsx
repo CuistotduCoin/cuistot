@@ -8,9 +8,9 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import Footer from "components/Footer";
+import Header from "components/Header";
 import React, { Component } from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 
 const styles = (theme: Theme) => ({
   card: {
