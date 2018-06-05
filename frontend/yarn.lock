@@ -495,7 +495,7 @@
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.6.2.tgz#12cfaba693ba20f114ed5765467ff25fdf67ddb0"
 
-"@types/jest@^22.0.0":
+"@types/jest@^22.2.3":
   version "22.2.3"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.2.3.tgz#0157c0316dc3722c43a7b71de3fdf3acbccef10d"
 
@@ -529,9 +529,9 @@
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react-router-dom@4.2.6":
-  version "4.2.6"
-  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-4.2.6.tgz#9f7eb3c0e6661a9607d878ff8675cc4ea95cd276"
+"@types/react-router-dom@^4.2.6":
+  version "4.2.7"
+  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-4.2.7.tgz#9d36bfe175f916dd8d7b6b0237feed6cce376b4c"
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
@@ -8372,16 +8372,16 @@ razzle-dev-utils@^2.0.0:
     sockjs-client "1.1.4"
     strip-ansi "3.0.1"
 
-razzle-plugin-typescript@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/razzle-plugin-typescript/-/razzle-plugin-typescript-2.0.2.tgz#496bae0dc0197cd3e5db45788c610b8d5d29966b"
+razzle-plugin-typescript@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/razzle-plugin-typescript/-/razzle-plugin-typescript-2.0.3.tgz#489099d88e5f783115727ac958fbeea82b833ce5"
   dependencies:
     fork-ts-checker-webpack-plugin "^0.4.1"
     ts-loader "^4.2.0"
 
-razzle@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/razzle/-/razzle-2.0.2.tgz#d68c4f41a8ec8cd702c88a46b3b9ceedfa592a94"
+razzle@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/razzle/-/razzle-2.0.3.tgz#a50a28b80cddc47019c6b1200ac9d269d8e98eec"
   dependencies:
     assets-webpack-plugin "3.5.1"
     autoprefixer "7.1.1"
@@ -8413,6 +8413,7 @@ razzle@^2.0.2:
     razzle-dev-utils "^2.0.0"
     react-dev-utils "^4.0.0"
     react-error-overlay "^2.0.0"
+    source-map-support "^0.5.6"
     start-server-webpack-plugin "2.2.5"
     style-loader "0.20.3"
     uglifyjs-webpack-plugin "1.2.4"
@@ -9470,7 +9471,7 @@ source-map-support@^0.4.15:
   dependencies:
     source-map "^0.5.6"
 
-source-map-support@^0.5.0, source-map-support@^0.5.5:
+source-map-support@^0.5.0, source-map-support@^0.5.5, source-map-support@^0.5.6:
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.6.tgz#4435cee46b1aab62b8e8610ce60f788091c51c13"
   dependencies:

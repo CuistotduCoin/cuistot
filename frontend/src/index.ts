@@ -5,15 +5,7 @@ import app from "./server";
 let lambdaOrServer;
 if (process.env.EXECUTION_ENV === "lambda") {
   console.log("Lambda 🚀 started");
-  const binaryMimeTypes = [
-    "application/octet-stream",
-    "font/eot",
-    "font/opentype",
-    "font/otf",
-    "image/jpeg",
-    "image/png",
-    "image/svg+xml"
-  ];
+  const binaryMimeTypes = ["*/*"];
 
   const server = awsServerlessExpress.createServer(
     app,
