@@ -13,6 +13,11 @@ import { Link } from "react-router-dom";
 import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
+  grid: {
+    margin: "0px auto",
+    maxWidth: 1080,
+    padding: 24
+  },
   gridList: {
     transform: "translateZ(0)"
   },
@@ -137,6 +142,134 @@ export class Home extends React.Component<IHomeProps, {}> {
                 Divers formats et univers culinaires sont proposés chez Cuistot
                 du Coin. De quoi satisfaire vos papilles !
               </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Typography
+          variant="title"
+          align="center"
+          component="h2"
+          gutterBottom={true}
+        >
+          Nos partenaires
+        </Typography>
+        <Grid
+          container={true}
+          justify="space-around"
+          spacing={16}
+          className={classes.grid}
+        >
+          <Grid item={true} xs={12}>
+            <Typography variant={"body1"}>
+              Le talent culinaire est partout et Cuistot du Coin souhaite le
+              révéler. Nous nous sommes entourés d’artisans et de commerçants
+              passionnés pour vous offrir des expériences culinaires sur-mesure.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid
+          container={true}
+          justify="space-around"
+          alignItems="center"
+          spacing={16}
+          className={classes.grid}
+        >
+          <Grid item={true} xs={3}>
+            <Grid container={true} justify="center">
+              <img
+                className={classes.logo}
+                alt="Atelier Cuistot du Coin"
+                src="https://picsum.photos/50/50"
+              />
+            </Grid>
+          </Grid>
+          <Grid item={true} xs={3}>
+            <Grid container={true} justify="center">
+              <img
+                className={classes.logo}
+                alt="Atelier Cuistot du Coin"
+                src="https://picsum.photos/50/50"
+              />
+            </Grid>
+          </Grid>
+          <Grid item={true} xs={3}>
+            <Grid container={true} justify="center">
+              <img
+                className={classes.logo}
+                alt="Atelier Cuistot du Coin"
+                src="https://picsum.photos/50/50"
+              />
+            </Grid>
+          </Grid>
+          <Grid item={true} xs={3}>
+            <Grid container={true} justify="center">
+              <img
+                className={classes.logo}
+                alt="Atelier Cuistot du Coin"
+                src="https://picsum.photos/50/50"
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Typography
+          variant="title"
+          align="center"
+          component="h2"
+          gutterBottom={true}
+        >
+          Ils ont participé à l’aventure Cuistot du Coin
+        </Typography>
+        <Grid
+          container={true}
+          justify="space-around"
+          spacing={16}
+          className={classes.grid}
+        >
+          <Grid item={true} xs={12}>
+            <Typography variant={"body1"} />
+          </Grid>
+        </Grid>
+        <Grid
+          container={true}
+          justify="space-around"
+          alignItems="center"
+          spacing={16}
+          className={classes.grid}
+        >
+          <Grid item={true} xs={3}>
+            <Grid container={true} justify="center">
+              <img
+                className={classes.logo}
+                alt="Atelier Cuistot du Coin"
+                src="https://picsum.photos/50/50"
+              />
+            </Grid>
+          </Grid>
+          <Grid item={true} xs={3}>
+            <Grid container={true} justify="center">
+              <img
+                className={classes.logo}
+                alt="Atelier Cuistot du Coin"
+                src="https://picsum.photos/50/50"
+              />
+            </Grid>
+          </Grid>
+          <Grid item={true} xs={3}>
+            <Grid container={true} justify="center">
+              <img
+                className={classes.logo}
+                alt="Atelier Cuistot du Coin"
+                src="https://picsum.photos/50/50"
+              />
+            </Grid>
+          </Grid>
+          <Grid item={true} xs={3}>
+            <Grid container={true} justify="center">
+              <img
+                className={classes.logo}
+                alt="Atelier Cuistot du Coin"
+                src="https://picsum.photos/50/50"
+              />
             </Grid>
           </Grid>
         </Grid>

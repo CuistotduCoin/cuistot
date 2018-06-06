@@ -26,7 +26,13 @@ export default class Document extends Component<IDocumentProps, {}> {
     const bodyAttrs = helmet.bodyAttributes.toComponent();
 
     return (
-      <html {...htmlAttrs}>
+      <html
+        {...htmlAttrs}
+        lang="fr"
+        style={{
+          height: "100%"
+        }}
+      >
         <head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta charSet="utf-8" />
@@ -46,7 +52,12 @@ export default class Document extends Component<IDocumentProps, {}> {
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
         </head>
-        <body {...bodyAttrs}>
+        <body
+          {...bodyAttrs}
+          style={{
+            margin: "0px auto"
+          }}
+        >
           <AfterRoot />
           <AfterData data={data} />
           <script

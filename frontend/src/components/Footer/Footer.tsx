@@ -128,7 +128,7 @@ export class Footer extends Component<IFooterProps, {}> {
                 <Typography color="primary">Parrainage</Typography>
               </Link>
               <Link to="/legal" className={classes.link}>
-                <Typography color="primary">Condition légale</Typography>
+                <Typography color="primary">Conditions légales</Typography>
               </Link>
             </Grid>
           </Grid>
