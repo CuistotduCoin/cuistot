@@ -3,7 +3,6 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import * as React from "react";
 import { ApolloProvider } from "react-apollo";
 import { hydrate } from "react-dom";
-import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import "typeface-roboto";
 import createApolloClient from "./createApolloClient";
@@ -15,13 +14,11 @@ const client = createApolloClient({ ssrMode: false });
 ensureReady(routes).then(data =>
   hydrate(
     <ApolloProvider client={client}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <MuiThemeProvider theme={theme}>
-            <After data={data} routes={routes} />
-          </MuiThemeProvider>
-        </BrowserRouter>
-      </HelmetProvider>
+      <BrowserRouter>
+        <MuiThemeProvider theme={theme}>
+          <After data={data} routes={routes} />
+        </MuiThemeProvider>
+      </BrowserRouter>
     </ApolloProvider>,
     document.getElementById("root"),
     () => {

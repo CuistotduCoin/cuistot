@@ -7,7 +7,6 @@ import express from "express";
 import * as React from "react";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { renderToString } from "react-dom/server";
-import { HelmetProvider } from "react-helmet-async";
 // @ts-ignore
 import { SheetsRegistry } from "react-jss/lib/jss";
 // @ts-ignore
@@ -30,19 +29,16 @@ const server = express()
     const client = createApolloClient({ ssrMode: true });
     const sheetsRegistry = new SheetsRegistry();
     const generateClassName = createGenerateClassName();
-    const helmetContext = {};
 
     const customRenderer = (node: any) => {
       const app = (
         <ApolloProvider client={client}>
-          <HelmetProvider context={helmetContext}>
-            <JssProvider
-              registry={sheetsRegistry}
-              generateClassName={generateClassName}
-            >
-              <MuiThemeProvider theme={theme}>{node}</MuiThemeProvider>
-            </JssProvider>
-          </HelmetProvider>
+          <JssProvider
+            registry={sheetsRegistry}
+            generateClassName={generateClassName}
+          >
+            <MuiThemeProvider theme={theme}>{node}</MuiThemeProvider>
+          </JssProvider>
         </ApolloProvider>
       );
       return getDataFromTree(app).then(() => {
@@ -52,14 +48,12 @@ const server = express()
       });
     };
 
-    const helmet = helmetContext;
     try {
       const options = {
         req,
         res,
         routes,
         // tslint:disable-next-line:object-literal-sort-keys
-        helmet,
         assets,
         customRenderer,
         document: Document,

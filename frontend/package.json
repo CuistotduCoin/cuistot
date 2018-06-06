@@ -39,7 +39,7 @@
     "react": "^16.4.0",
     "react-apollo": "^2.1.4",
     "react-dom": "^16.4.0",
-    "react-helmet-async": "^0.1.0",
+    "react-helmet": "^5.2.0",
     "react-router-dom": "^4.2.2",
     "typeface-roboto": "^0.0.54"
   },
