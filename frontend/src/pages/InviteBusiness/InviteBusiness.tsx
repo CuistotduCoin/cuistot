@@ -1,4 +1,4 @@
-import * as content from "!raw-loader!content/join.md";
+import * as content from "!raw-loader!content/invite.md";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 // @ts-ignore
@@ -7,6 +7,7 @@ import Footer from "components/Footer";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -16,11 +17,11 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface IJoinProps {
+interface IInviteBusinessProps {
   classes?: any;
 }
 
-export class Join extends React.Component<IJoinProps, {}> {
+export class InviteBusiness extends React.Component<IInviteBusinessProps, {}> {
   public render() {
     const { classes } = this.props;
 
@@ -30,7 +31,7 @@ export class Join extends React.Component<IJoinProps, {}> {
         <Hero
           imageURL="https://picsum.photos/100/50/?random"
           videoURL="http://thenewcode.com/assets/videos/polina.mp4"
-          valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
+          valueProposition="Invitez vos proches"
         />
         <Grid
           container={true}
@@ -47,4 +48,4 @@ export class Join extends React.Component<IJoinProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(Join as any) as any;
+export default withStyles(styles as any)(InviteBusiness as any) as any;

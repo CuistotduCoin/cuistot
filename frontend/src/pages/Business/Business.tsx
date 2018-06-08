@@ -2,19 +2,13 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
-import Grid from "@material-ui/core/Grid";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
+import Grid from "@material-ui/core/Grid/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
-import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
-import React, { Component } from "react";
-import MetaInfo from "shared/metaInfo";
-import logo from "./react.svg";
+import React from "react";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -66,27 +60,32 @@ export class Business extends React.Component<IBusinessProps, {}> {
         description:
           "Atelier de deux heures suivi d'une dégustation des produits préparés",
         image: "https://picsum.photos/240/135/?random",
+        key: 0,
         title: "Atelier Afterwork"
       },
       {
         description: "Atelier de quatre heures suivi d'un repas convivial",
         image: "https://picsum.photos/240/135/?random",
+        key: 1,
         title: "Atelier suivi d’un repas"
       },
       {
         description: "Atelier découverte et dégustation",
         image: "https://picsum.photos/240/135/?random",
+        key: 2,
         title: "Atelier dégustation"
       },
       {
         description: "Récompensez vos équipes autour d'un repas d'exception !",
         image: "https://picsum.photos/240/135/?random",
+        key: 3,
         title: "Repas prestige"
       },
       {
         description:
           "Notre cuistot est aux founeaux pour changer de l'habituel traiteur : rapidité et simplicité",
         image: "https://picsum.photos/240/135/?random",
+        key: 4,
         title: "Repas pratique"
       }
     ];
@@ -96,24 +95,28 @@ export class Business extends React.Component<IBusinessProps, {}> {
         description:
           "Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots d'ailleurs.",
         image: "https://picsum.photos/240/135/?random",
+        key: 0,
         title: "Cuisine du monde"
       },
       {
         description:
           "Initiez-vous aux principes de la cuisine végétarienne, vegan ou encore ayurvédique, où l’équilibre et les saveurs sont au cœur de l’assiette.",
         image: "https://picsum.photos/240/135/?random",
+        key: 1,
         title: "Cuisine Bien-être"
       },
       {
         description:
           "Attachés à votre territoire et aux produits locaux et de saison, plongez au cœur d’une cuisine bretonne qui éveillera votre curiosité.",
         image: "https://picsum.photos/240/135/?random",
+        key: 2,
         title: "Cuisine Terroir"
       },
       {
         description:
           "Percez les secrets de nos artisans pâtissiers et boulangers au travers de recettes créatives et gourmandes.",
         image: "https://picsum.photos/240/135/?random",
+        key: 3,
         title: "Boulangerie & Pâtisserie"
       }
     ];
@@ -133,7 +136,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           className={classes.grid}
           spacing={16}
         >
-          <Grid item={true} sm={6} xs={12} justify="space-around">
+          <Grid item={true} sm={6} xs={12}>
             <Grid container={true} justify="center">
               <img
                 className={classes.image}
@@ -181,7 +184,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               plats «fait-maison».
             </Typography>
           </Grid>
-          <Grid item={true} sm={6} xs={12} justify="space-around">
+          <Grid item={true} sm={6} xs={12}>
             <Grid container={true} justify="center">
               <img
                 className={classes.image}
@@ -207,7 +210,14 @@ export class Business extends React.Component<IBusinessProps, {}> {
           className={classes.grid}
         >
           {typeActivity.map(activity => (
-            <Grid item={true} xs={12} sm={6} md={3} lg={true}>
+            <Grid
+              key={activity.key}
+              item={true}
+              xs={12}
+              sm={6}
+              md={3}
+              lg={true}
+            >
               <Grid container={true} justify="center">
                 <Card className={classes.card}>
                   <CardMedia
@@ -326,7 +336,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           className={classes.grid}
         >
           {typeWorld.map(world => (
-            <Grid item={true} xs={12} sm={6} md={3} lg={true}>
+            <Grid key={world.key} item={true} xs={12} sm={6} md={3} lg={true}>
               <Grid container={true} justify="center">
                 <Card className={classes.card}>
                   <CardMedia

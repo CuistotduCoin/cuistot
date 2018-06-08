@@ -124,7 +124,7 @@ export class Footer extends Component<IFooterProps, {}> {
               <Link to="/testimony" className={classes.link}>
                 <Typography color="primary">Temoignages</Typography>
               </Link>
-              <Link to="/invite" className={classes.link}>
+              <Link to="/invite-business" className={classes.link}>
                 <Typography color="primary">Parrainage</Typography>
               </Link>
               <Link to="/legal" className={classes.link}>

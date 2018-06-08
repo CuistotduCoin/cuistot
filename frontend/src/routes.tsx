@@ -70,6 +70,14 @@ export default [
   {
     component: asyncComponent({
       Placeholder: () => <Loading />,
+      loader: () => import("pages/InviteBusiness")
+    }),
+    exact: true,
+    path: "/invite-business"
+  },
+  {
+    component: asyncComponent({
+      Placeholder: () => <Loading />,
       loader: () => import("pages/Join")
     }),
     exact: true,

@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
@@ -22,6 +21,7 @@ const styles = (theme: Theme) => ({
 
 interface IHeaderProps {
   classes?: any;
+  hideSignUpLogin: boolean;
 }
 interface IHeaderState {
   up?: boolean;
@@ -55,7 +55,8 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
   }
 
   public render() {
-    const { classes } = this.props;
+    const { classes, hideSignUpLogin } = this.props;
+
     const businessLink = (props: any) => <Link to="/business" {...props} />;
     const individualLink = (props: any) => <Link to="/individual" {...props} />;
     const signUp = (props: any) => <Link to="/sign-up" {...props} />;
@@ -110,9 +111,11 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
               </Button>
             </Hidden>
           </Grid>
-          <Grid container={true} justify="flex-end">
-            {button}
-          </Grid>
+          {!hideSignUpLogin && (
+            <Grid container={true} justify="flex-end">
+              {button}
+            </Grid>
+          )}
         </Toolbar>
       </AppBar>
     );
