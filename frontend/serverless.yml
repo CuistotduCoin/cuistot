@@ -15,9 +15,9 @@ custom:
     types:
       - '*/*'
   customDomain:
-    domainName: www.cuistoducoin.com
+    domainName: ${env:AWS_DOMAIN}
     createRoute53Record: true
-    certificateName: www.cuistoducoin.com
+    certificateName: ${env:AWS_DOMAIN}
 
 provider:
   name: aws

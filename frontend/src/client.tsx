@@ -8,6 +8,7 @@ import "typeface-roboto";
 import createApolloClient from "./createApolloClient";
 import routes from "./routes";
 import theme from "./theme";
+import awsconfig from "./shared/auth";
 
 const client = createApolloClient({ ssrMode: false });
 

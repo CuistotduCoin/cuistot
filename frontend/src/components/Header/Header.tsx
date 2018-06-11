@@ -59,7 +59,7 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
 
     const businessLink = (props: any) => <Link to="/business" {...props} />;
     const individualLink = (props: any) => <Link to="/individual" {...props} />;
-    const signUp = (props: any) => <Link to="/sign-up" {...props} />;
+    const signUp = (props: any) => <Link to="/signup" {...props} />;
     const login = (props: any) => <Link to="/login" {...props} />;
 
     const button = this.state.up ? (
