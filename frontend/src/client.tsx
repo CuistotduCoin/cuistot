@@ -7,8 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import "typeface-roboto";
 import createApolloClient from "./createApolloClient";
 import routes from "./routes";
-import theme from "./theme";
 import awsconfig from "./shared/auth";
+import theme from "./theme";
 
 const client = createApolloClient({ ssrMode: false });
 

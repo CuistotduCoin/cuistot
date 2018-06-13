@@ -3,7 +3,7 @@ import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, FormikActions } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
 import React, { Component } from "react";
@@ -25,7 +25,7 @@ interface ILoginForm {
 }
 
 interface ILoginFormValues {
-  login: string;
+  email: string;
   password: string;
 }
 
@@ -48,9 +48,9 @@ export class LoginForm extends Component<ILoginForm, {}> {
         .required("Le mot de passe est obligatoire")
     });
 
-    const onSubmit = async (values: ILoginFormValues, actions: any) => {
+    const onSubmit = async (values: ILoginFormValues) => {
       try {
-        await Auth.signIn(values.login, values.password);
+        await Auth.signIn(values.email, values.password);
         alert("Logged in");
       } catch (e) {
         alert(e.message);
@@ -58,7 +58,7 @@ export class LoginForm extends Component<ILoginForm, {}> {
     };
 
     const initialValues = {
-      login: "",
+      email: "",
       password: ""
     };
 

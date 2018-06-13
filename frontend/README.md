@@ -1,5 +1,8 @@
 # [Cuistot du Coin](https://www.cuistotducoin.com) :
- 
+
+## EDITOR SETUP:
+  - Use TSLint
+
 ## SETUP:
   - Copy the provided secrets file to the root
   - `yarn` to install dependencies

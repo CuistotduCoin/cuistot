@@ -2,6 +2,7 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
+import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
@@ -26,7 +27,7 @@ interface ISignUpForm {
 interface ISignUpFormValues {
   firstname: string;
   lastname: string;
-  login: string;
+  email: string;
   password: string;
 }
 
@@ -51,17 +52,18 @@ export class SignUpForm extends Component<ISignUpForm, {}> {
         .required("Le mot de passe est obligatoire")
     });
 
-    const onSubmit = (values: ISignUpFormValues, actions: any) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        actions.setSubmitting(false);
-      }, 1000);
+    const onSubmit = async (values: ISignUpFormValues) => {
+      try {
+        alert("Sign up");
+      } catch (e) {
+        alert(e.message);
+      }
     };
 
     const initialValues = {
+      email: "",
       firstname: "",
       lastname: "",
-      login: "",
       password: ""
     };
 

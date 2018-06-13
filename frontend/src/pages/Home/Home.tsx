@@ -58,7 +58,7 @@ export class Home extends React.Component<IHomeProps, {}> {
         <GridList className={classes.gridList} cols={2} spacing={0}>
           <GridListTile className={classes.tileEntreprise}>
             <img
-              src="https://picsum.photos/300/200/?random"
+              src="img/home/business.jpg"
               alt={"Entreprise"}
               className={classes.image}
             />
@@ -72,7 +72,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           </GridListTile>
           <GridListTile className={classes.tileParticulier}>
             <img
-              src="https://picsum.photos/300/200/?random"
+              src="img/home/individual.jpg"
               alt={"Particulier"}
               className={classes.image}
             />

@@ -90,8 +90,10 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
           <Grid container={true} justify="flex-start" alignItems="center">
             <Link to="/">
               <img
-                src="https://picsum.photos/40/40/?random"
+                src="img/logo.svg"
                 alt="Logo de Cuistot du coin"
+                height={40}
+                width={40}
               />
             </Link>
             <Hidden smDown={true}>
