@@ -34,14 +34,12 @@ export default class Document extends Component<IDocumentProps, {}> {
         }}
       >
         <head>
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta charSet="utf-8" />
-          <title>After with Apollo !</title>
+          <title>Cuistot du Coin : des saveurs à partager</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, viewport-fit=cover"
           />
-          <meta charSet="utf-8" />
           <meta name="theme-color" content="#000000" />
           {assets.client.css && (
             <link rel="stylesheet" href={assets.client.css} />

@@ -4,10 +4,11 @@
   - Use TSLint
 
 ## SETUP:
-  - Copy the provided secrets file to the root
+  - Copy the provided secrets file to the root (look at .env-example)
   - `yarn` to install dependencies
-  - `yarn start` for development server
+  - `yarn start` for development server (careful with env:EXECUTION_ENV, shouldn't be "lambda")
   - `yarn build` for production server
+  - `yarn startLambda` for development serverless (careful with env:EXECUTION_ENV, should be "lambda"; use build before lambda)
   - `yarn deploy` for deploying on AWS
  
  ## TECHNOLOGIES:

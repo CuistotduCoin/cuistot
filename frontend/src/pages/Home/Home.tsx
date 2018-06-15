@@ -8,10 +8,10 @@ import Footer from "components/Footer";
 import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
 import metaInfo from "shared/metaInfo";
-
 const styles = (theme: Theme) => ({
   grid: {
     margin: "0px auto",
@@ -26,6 +26,16 @@ const styles = (theme: Theme) => ({
   },
   link: {
     textDecoration: "none"
+  },
+  slider: {
+    margin: "0px auto",
+    maxWidth: 1080,
+    paddingBottom: 75
+  },
+  sliderImage: {
+    height: 100,
+    margin: "0px auto",
+    width: 100
   },
   tileBar: {
     height: "100%",
@@ -43,6 +53,56 @@ interface IHomeProps {
 export class Home extends React.Component<IHomeProps, {}> {
   public render() {
     const { classes } = this.props;
+    const partners = [
+      {
+        image: "img/home/partners/amaiur.png",
+        name: "amaiur"
+      },
+      {
+        image: "img/home/partners/arthur-bonnet.jpg",
+        name: "Arthur Bonnet"
+      },
+      {
+        image: "img/home/partners/c-chocolat.png",
+        name: "C chocolat"
+      },
+      {
+        image: "img/home/partners/couleurs-cuisines.png",
+        name: "Couleurs Cuisines"
+      },
+      {
+        image: "img/home/partners/cuisinella.png",
+        name: "cuisinella"
+      },
+      {
+        image: "img/home/partners/palais-des-thes.jpg",
+        name: "Palais des thes"
+      },
+      {
+        image: "img/home/partners/roi-de-bretagne.png",
+        name: "Roi de Bretagne"
+      },
+      {
+        image: "img/home/partners/schmidt.jpg",
+        name: "Schmidt"
+      },
+      {
+        image: "img/home/partners/soif-de-vins.jpg",
+        name: "Soif de vins"
+      },
+      {
+        image: "img/home/partners/the-corner.png",
+        name: "The corner"
+      },
+      {
+        image: "img/home/partners/tot-ou-tard.jpg",
+        name: "Tot ou tard"
+      },
+      {
+        image: "img/home/partners/tuk-tuk-bazar.png",
+        name: "Tuk Tuk Bazar"
+      }
+    ];
 
     return (
       <>
@@ -167,50 +227,21 @@ export class Home extends React.Component<IHomeProps, {}> {
             </Typography>
           </Grid>
         </Grid>
-        <Grid
-          container={true}
-          justify="space-around"
-          alignItems="center"
-          spacing={16}
-          className={classes.grid}
-        >
-          <Grid item={true} xs={3}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={3}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={3}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={3}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-        </Grid>
+
+        <div className={classes.slider}>
+          <Slider autoplay={true} slidesToShow={4} slidesToScroll={1}>
+            {partners.map(partner => (
+              <div>
+                <img
+                  src={partner.image}
+                  alt={partner.name}
+                  className={classes.sliderImage}
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
+
         <Typography
           variant="title"
           align="center"

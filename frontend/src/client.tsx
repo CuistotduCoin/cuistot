@@ -4,6 +4,8 @@ import * as React from "react";
 import { ApolloProvider } from "react-apollo";
 import { hydrate } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import "typeface-roboto";
 import createApolloClient from "./createApolloClient";
 import routes from "./routes";
