@@ -136,12 +136,7 @@ export default class Document extends Component<IDocumentProps, {}> {
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
         </head>
-        <body
-          {...bodyAttrs}
-          style={{
-            margin: "0px auto"
-          }}
-        >
+        <body {...bodyAttrs}>
           <AfterRoot />
           <AfterData data={data} />
           <script

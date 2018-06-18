@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "typeface-roboto";
 import createApolloClient from "./createApolloClient";
+import "./main.css";
 import routes from "./routes";
 import awsconfig from "./shared/auth";
 import theme from "./theme";

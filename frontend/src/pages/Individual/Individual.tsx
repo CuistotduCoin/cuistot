@@ -10,7 +10,6 @@ import Header from "components/Header";
 import Hero from "components/Hero";
 import WorkshopCardList from "components/WorkshopCardList";
 import React, { Component } from "react";
-import logo from "./react.svg";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -45,20 +44,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     const typeActivity = [
       {
-        description: "Atelier de cuisine collectif chez nos lieux partenaires",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Atelier de cuisine collectif"
+        description: "Ateliers de cuisine collectif chez nos lieux partenaires",
+        image: "img/individual/ateliers-cuisine-collectif.jpg",
+        title: "Ateliers de cuisine collectif"
       },
       {
         description:
-          "Atelier de cuisine privatisé chez vous ou chez nos lieux partenaires",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Atelier de cuisine privatisé"
+          "Ateliers de cuisine privatisé chez vous ou chez nos lieux partenaires",
+        image: "img/individual/ateliers-cuisine-privatise.jpg",
+        title: "Ateliers de cuisine privatisé"
       },
       {
         description:
           "Notre cuistot est aux fourneaux rien que pour vous et vos invités",
-        image: "https://picsum.photos/240/135/?random",
+        image: "img/individual/cuistot-a-domicile.jpg",
         title: "Cuistot à domicile"
       }
     ];
@@ -87,8 +86,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           spacing={16}
           className={classes.grid}
         >
-          {typeActivity.map(activity => (
-            <Grid item={true} xs={12} sm={6} md={3} lg={true}>
+          {typeActivity.map((activity, index) => (
+            <Grid key={index} item={true} xs={12} sm={6} md={3} lg={true}>
               <Grid container={true} justify="center">
                 <Card className={classes.card}>
                   <CardMedia

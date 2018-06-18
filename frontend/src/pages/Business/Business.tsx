@@ -9,6 +9,7 @@ import Footer from "components/Footer";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import React from "react";
+import Slider from "react-slick";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -44,6 +45,16 @@ const styles = (theme: Theme) => ({
   media: {
     height: 135
   },
+  slider: {
+    margin: "0px auto",
+    maxWidth: 1080,
+    paddingBottom: 75
+  },
+  sliderImage: {
+    height: 100,
+    margin: "0px auto",
+    width: 100
+  },
   title: { color: "white" }
 });
 
@@ -59,34 +70,34 @@ export class Business extends React.Component<IBusinessProps, {}> {
       {
         description:
           "Atelier de deux heures suivi d'une dégustation des produits préparés",
-        image: "https://picsum.photos/240/135/?random",
-        key: 0,
+        image: "img/business/atelier-afterwork.jpg",
         title: "Atelier Afterwork"
       },
       {
-        description: "Atelier de quatre heures suivi d'un repas convivial",
-        image: "https://picsum.photos/240/135/?random",
-        key: 1,
+        description: "Atelier de trois heures suivi d'un repas convivial",
+        image: "img/business/atelier-et-repas.jpg",
         title: "Atelier suivi d’un repas"
       },
       {
         description: "Atelier découverte et dégustation",
-        image: "https://picsum.photos/240/135/?random",
-        key: 2,
+        image: "img/business/degustation.jpg",
         title: "Atelier dégustation"
       },
       {
         description: "Récompensez vos équipes autour d'un repas d'exception !",
-        image: "https://picsum.photos/240/135/?random",
-        key: 3,
+        image: "img/business/repas-prestige.jpg",
         title: "Repas prestige"
       },
       {
         description:
-          "Notre cuistot est aux founeaux pour changer de l'habituel traiteur : rapidité et simplicité",
-        image: "https://picsum.photos/240/135/?random",
-        key: 4,
+          "Notre cuistot est aux fourneaux et vous prépare des mets du monde à se partager en équipe.",
+        image: "img/business/repas-pratique.jpg",
         title: "Repas pratique"
+      },
+      {
+        description: "Une solution clé en main pour un dejeunez rapide",
+        image: "img/business/repas-ultra-pratique.jpg",
+        title: "Repas ultra pratique"
       }
     ];
 
@@ -94,30 +105,53 @@ export class Business extends React.Component<IBusinessProps, {}> {
       {
         description:
           "Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots d'ailleurs.",
-        image: "https://picsum.photos/240/135/?random",
-        key: 0,
+        image: "img/business/cuisine-du-monde.jpg",
         title: "Cuisine du monde"
       },
       {
         description:
           "Initiez-vous aux principes de la cuisine végétarienne, vegan ou encore ayurvédique, où l’équilibre et les saveurs sont au cœur de l’assiette.",
-        image: "https://picsum.photos/240/135/?random",
-        key: 1,
+        image: "img/business/cuisine-bien-etre.jpg",
         title: "Cuisine Bien-être"
       },
       {
         description:
           "Attachés à votre territoire et aux produits locaux et de saison, plongez au cœur d’une cuisine bretonne qui éveillera votre curiosité.",
-        image: "https://picsum.photos/240/135/?random",
-        key: 2,
+        image: "img/business/cuisine-terroir.jpg",
         title: "Cuisine Terroir"
       },
       {
         description:
           "Percez les secrets de nos artisans pâtissiers et boulangers au travers de recettes créatives et gourmandes.",
-        image: "https://picsum.photos/240/135/?random",
-        key: 3,
+        image: "img/business/boulangerie-et-patisserie.jpg",
         title: "Boulangerie & Pâtisserie"
+      }
+    ];
+
+    const participants = [
+      {
+        image: "img/home/participants/arkea.jpg",
+        name: "arkea"
+      },
+      {
+        image: "img/home/participants/brest-metropole.jpg",
+        name: "brest metropole et ville"
+      },
+      {
+        image: "img/home/participants/cadiou.jpg",
+        name: "cadiou"
+      },
+      {
+        image: "img/home/participants/fortuneo.jpg",
+        name: "fortuneo"
+      },
+      {
+        image: "img/home/participants/gl-events.jpg",
+        name: "gl events"
+      },
+      {
+        image: "img/home/participants/hippocampe.jpg",
+        name: "hippocampe"
       }
     ];
 
@@ -141,7 +175,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               <img
                 className={classes.image}
                 alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/320/180"
+                src="img/business/organisez.jpg"
               />
             </Grid>
           </Grid>
@@ -152,10 +186,10 @@ export class Business extends React.Component<IBusinessProps, {}> {
               component="h2"
               gutterBottom={true}
             >
-              Concoctez avec nous des ateliers culinaires pour vos équipes
+              Organisez avec nous des ateliers culinaires pour vos équipes
             </Typography>
             <Typography variant="body1" align="center">
-              Enfiler le tablier et partagez des moments privilégiés et
+              Enfilez le tablier et partagez des moments privilégiés et
               fédérateurs en équipe aux côtés de nos Cuistots passionnés aux
               univers culinaires diversifiés
             </Typography>
@@ -189,7 +223,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               <img
                 className={classes.image}
                 alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/320/180"
+                src="img/business/passez-a-table.jpg"
               />
             </Grid>
           </Grid>
@@ -209,15 +243,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
           spacing={16}
           className={classes.grid}
         >
-          {typeActivity.map(activity => (
-            <Grid
-              key={activity.key}
-              item={true}
-              xs={12}
-              sm={6}
-              md={3}
-              lg={true}
-            >
+          {typeActivity.map((activity, index) => (
+            <Grid key={index} item={true} xs={8} md={4}>
               <Grid container={true} justify="center">
                 <Card className={classes.card}>
                   <CardMedia
@@ -335,8 +362,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
           spacing={16}
           className={classes.grid}
         >
-          {typeWorld.map(world => (
-            <Grid key={world.key} item={true} xs={12} sm={6} md={3} lg={true}>
+          {typeWorld.map((world, index) => (
+            <Grid key={index} item={true} xs={12} sm={6} md={3} lg={true}>
               <Grid container={true} justify="center">
                 <Card className={classes.card}>
                   <CardMedia
@@ -359,44 +386,27 @@ export class Business extends React.Component<IBusinessProps, {}> {
             </Grid>
           ))}
         </Grid>
-        <Typography variant="title" align="center" component="p">
+        <Typography
+          variant="title"
+          align="center"
+          component="p"
+          gutterBottom={true}
+        >
           Ils ont voyagé aux côtés de nos Cuistots
         </Typography>
-        <Grid
-          container={true}
-          justify="space-around"
-          alignItems="center"
-          spacing={16}
-          className={classes.grid}
-        >
-          <Grid item={true} xs={4}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={4}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={4}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-        </Grid>
+        <div className={classes.slider}>
+          <Slider autoplay={true} slidesToShow={4} slidesToScroll={1}>
+            {participants.map((participant, index) => (
+              <div key={index}>
+                <img
+                  src={participant.image}
+                  alt={participant.name}
+                  className={classes.sliderImage}
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
         <Typography
           variant="title"
           align="center"

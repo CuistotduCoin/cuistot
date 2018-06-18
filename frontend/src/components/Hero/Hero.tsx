@@ -79,7 +79,8 @@ export class Hero extends Component<IHeroProps, {}> {
                   {this.props.valueProposition}
                 </Typography>
                 <Typography variant="subheading" align="center" component="p">
-                  Atelier de Cuisine, Dégustation, Cuisine à domicile
+                  Ateliers de Cuisine, Dégustations, Repas authentiques et
+                  conviviaux
                 </Typography>
               </Grid>
             </Grid>

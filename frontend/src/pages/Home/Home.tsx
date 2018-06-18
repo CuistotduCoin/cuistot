@@ -12,6 +12,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import metaInfo from "shared/metaInfo";
+
 const styles = (theme: Theme) => ({
   grid: {
     margin: "0px auto",
@@ -55,7 +56,7 @@ export class Home extends React.Component<IHomeProps, {}> {
     const { classes } = this.props;
     const partners = [
       {
-        image: "img/home/partners/amaiur.png",
+        image: "img/home/partners/amaiur.jpg",
         name: "amaiur"
       },
       {
@@ -63,15 +64,15 @@ export class Home extends React.Component<IHomeProps, {}> {
         name: "Arthur Bonnet"
       },
       {
-        image: "img/home/partners/c-chocolat.png",
+        image: "img/home/partners/c-chocolat.jpg",
         name: "C chocolat"
       },
       {
-        image: "img/home/partners/couleurs-cuisines.png",
+        image: "img/home/partners/couleurs-cuisines.jpg",
         name: "Couleurs Cuisines"
       },
       {
-        image: "img/home/partners/cuisinella.png",
+        image: "img/home/partners/cuisinella.jpg",
         name: "cuisinella"
       },
       {
@@ -79,7 +80,7 @@ export class Home extends React.Component<IHomeProps, {}> {
         name: "Palais des thes"
       },
       {
-        image: "img/home/partners/roi-de-bretagne.png",
+        image: "img/home/partners/roi-de-bretagne.jpg",
         name: "Roi de Bretagne"
       },
       {
@@ -91,7 +92,7 @@ export class Home extends React.Component<IHomeProps, {}> {
         name: "Soif de vins"
       },
       {
-        image: "img/home/partners/the-corner.png",
+        image: "img/home/partners/the-corner.jpg",
         name: "The corner"
       },
       {
@@ -99,8 +100,35 @@ export class Home extends React.Component<IHomeProps, {}> {
         name: "Tot ou tard"
       },
       {
-        image: "img/home/partners/tuk-tuk-bazar.png",
+        image: "img/home/partners/tuk-tuk-bazar.jpg",
         name: "Tuk Tuk Bazar"
+      }
+    ];
+
+    const participants = [
+      {
+        image: "img/home/participants/arkea.jpg",
+        name: "arkea"
+      },
+      {
+        image: "img/home/participants/brest-metropole.jpg",
+        name: "brest metropole et ville"
+      },
+      {
+        image: "img/home/participants/cadiou.jpg",
+        name: "cadiou"
+      },
+      {
+        image: "img/home/participants/fortuneo.jpg",
+        name: "fortuneo"
+      },
+      {
+        image: "img/home/participants/gl-events.jpg",
+        name: "gl events"
+      },
+      {
+        image: "img/home/participants/hippocampe.jpg",
+        name: "hippocampe"
       }
     ];
 
@@ -231,11 +259,12 @@ export class Home extends React.Component<IHomeProps, {}> {
         <div className={classes.slider}>
           <Slider autoplay={true} slidesToShow={4} slidesToScroll={1}>
             {partners.map(partner => (
-              <div>
+              <div key={partner.name}>
                 <img
                   src={partner.image}
                   alt={partner.name}
                   className={classes.sliderImage}
+                  key={partner.name}
                 />
               </div>
             ))}
@@ -250,60 +279,19 @@ export class Home extends React.Component<IHomeProps, {}> {
         >
           Ils ont participé à l’aventure Cuistot du Coin
         </Typography>
-        <Grid
-          container={true}
-          justify="space-around"
-          spacing={16}
-          className={classes.grid}
-        >
-          <Grid item={true} xs={12}>
-            <Typography variant={"body1"} />
-          </Grid>
-        </Grid>
-        <Grid
-          container={true}
-          justify="space-around"
-          alignItems="center"
-          spacing={16}
-          className={classes.grid}
-        >
-          <Grid item={true} xs={3}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={3}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={3}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={3}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.logo}
-                alt="Atelier Cuistot du Coin"
-                src="https://picsum.photos/50/50"
-              />
-            </Grid>
-          </Grid>
-        </Grid>
+        <div className={classes.slider}>
+          <Slider autoplay={true} slidesToShow={4} slidesToScroll={1}>
+            {participants.map((participant, index) => (
+              <div key={index}>
+                <img
+                  src={participant.image}
+                  alt={participant.name}
+                  className={classes.sliderImage}
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
         <Footer />
       </>
     );

@@ -2,9 +2,9 @@ export default {
   metaInfo: {
     business: {
       description:
-        "Atelier de Cuisine, Dégustation, Cuisine à domicile... Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !",
+        "Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux... Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !",
       title:
-        "Atelier de cuisine en entreprise : Partager un moment convivial et authentique avec votre équipe"
+        "Ateliers de cuisine en entreprise : Partager un moment convivial et authentique avec votre équipe"
     },
     gift: {
       description:

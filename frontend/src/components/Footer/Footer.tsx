@@ -53,11 +53,12 @@ export class Footer extends Component<IFooterProps, {}> {
                 <Typography color="primary">Contact & Presse</Typography>
               </Link>
               <Link to="/legal" className={classes.link}>
-                <Typography color="primary">Condition légale</Typography>
+                <Typography color="primary">Conditions légales</Typography>
               </Link>
               <a
                 className={classes.link}
                 href="http://www.blog.cuistotducoin.com"
+                target="_blank"
               >
                 <Typography color="primary">Blog</Typography>
               </a>
@@ -73,7 +74,10 @@ export class Footer extends Component<IFooterProps, {}> {
               <Typography variant={"headline"} color="primary">
                 Gourmet
               </Typography>
-              <Link to="/how-it-works" className={classes.link}>
+              <Link
+                to="/how-it-works#pour-les-gourmets"
+                className={classes.link}
+              >
                 <Typography color="primary">Comment ça marche</Typography>
               </Link>
               <Link to="/testimony" className={classes.link}>
@@ -97,14 +101,17 @@ export class Footer extends Component<IFooterProps, {}> {
               <Typography variant={"headline"} color="primary">
                 Cuistot
               </Typography>
-              <Link to="/how-it-works" className={classes.link}>
+              <Link
+                to="/how-it-works#pour-les-cuistots"
+                className={classes.link}
+              >
                 <Typography color="primary">Comment ça marche</Typography>
               </Link>
               <Link to="/testimony" className={classes.link}>
                 <Typography color="primary">Temoignages</Typography>
               </Link>
               <Link to="/organize" className={classes.link}>
-                <Typography color="primary">Devenir partenaire</Typography>
+                <Typography color="primary">Devenir Cuistot</Typography>
               </Link>
             </Grid>
           </Grid>
@@ -118,7 +125,10 @@ export class Footer extends Component<IFooterProps, {}> {
               <Typography variant={"headline"} color="primary">
                 Entreprise
               </Typography>
-              <Link to="/how-it-works" className={classes.link}>
+              <Link
+                to="/how-it-works#pour-les-entreprises"
+                className={classes.link}
+              >
                 <Typography color="primary">Comment ça marche</Typography>
               </Link>
               <Link to="/testimony" className={classes.link}>
@@ -129,6 +139,30 @@ export class Footer extends Component<IFooterProps, {}> {
               </Link>
               <Link to="/legal" className={classes.link}>
                 <Typography color="primary">Conditions légales</Typography>
+              </Link>
+            </Grid>
+          </Grid>
+          <Grid item={true}>
+            <Grid
+              container={true}
+              justify="space-between"
+              alignItems="flex-start"
+              direction="column"
+            >
+              <Typography variant={"headline"} color="primary">
+                Partenaires
+              </Typography>
+              <Link
+                to="/how-it-works#pour-les-partenaires"
+                className={classes.link}
+              >
+                <Typography color="primary">Comment ça marche</Typography>
+              </Link>
+              <Link to="/testimony" className={classes.link}>
+                <Typography color="primary">Temoignages</Typography>
+              </Link>
+              <Link to="/invite-business" className={classes.link}>
+                <Typography color="primary">Devenir partenaires</Typography>
               </Link>
             </Grid>
           </Grid>
