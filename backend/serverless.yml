@@ -49,7 +49,7 @@ custom:
     # mappingTemplatesLocation: # defaults to mapping-templates
     mappingTemplates:
       - dataSource: Workshop
-        type: Query
+        type: Mutation
         field: createWorkshop
         request: "createWorkshop-request-mapping-template.txt"
         response: "createWorkshop-response-mapping-template.txt"
@@ -59,12 +59,12 @@ custom:
         request: "getWorkshop-request-mapping-template.txt"
         response: "getWorkshop-response-mapping-template.txt"
       - dataSource: Workshop
-        type: Query
+        type: Mutation
         field: updateWorkshop
         request: "updateWorkshop-request-mapping-template.txt"
         response: "updateWorkshop-response-mapping-template.txt"
       - dataSource: Workshop
-        type: Query
+        type: Mutation
         field: deleteWorkshop
         request: "deleteWorkshop-request-mapping-template.txt"
         response: "deleteWorkshop-response-mapping-template.txt"
@@ -123,39 +123,6 @@ resources:
           -
             AttributeName: gourmet_id
             AttributeType: S
-          -
-            AttributeName: first_name
-            AttributeType: S
-          -
-            AttributeName: last_name
-            AttributeType: S
-          -
-            AttributeName: picture
-            AttributeType: S
-          -
-            AttributeName: gender
-            AttributeType: N
-          -
-            AttributeName: birthday
-            AttributeType: S
-          -
-            AttributeName: city
-            AttributeType: S
-          -
-            AttributeName: cp
-            AttributeType: N
-          -
-            AttributeName: location
-            AttributeType: S
-          -
-            AttributeName: description
-            AttributeType: S
-          -
-            AttributeName: createdAt
-            AttributeType: S
-          -
-            AttributeName: updatedAt
-            AttributeType: S
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
@@ -171,30 +138,6 @@ resources:
         AttributeDefinitions:
           -
             AttributeName: cook_id
-            AttributeType: S
-          -
-            AttributeName: is_pro
-            AttributeType: BOOL
-          -
-            AttributeName: description
-            AttributeType: S
-          -
-            AttributeName: business_name
-            AttributeType: S
-          -
-            AttributeName: siren
-            AttributeType: S
-          -
-            AttributeName: email_pro
-            AttributeType: S
-          -
-            AttributeName: first_name_legal
-            AttributeType: S
-          -
-            AttributeName: last_name_legal
-            AttributeType: S
-          -
-            AttributeName: birthday_legal
             AttributeType: S
         ProvisionedThroughput:
           ReadCapacityUnits: 10
@@ -212,18 +155,6 @@ resources:
           -
             AttributeName: kitchen_id
             AttributeType: S
-          -
-            AttributeName: name
-            AttributeType: S
-          -
-            AttributeName: city
-            AttributeType: S
-          -
-            AttributeName: cp
-            AttributeType: N
-          -
-            AttributeName: location
-            AttributeType: S
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
@@ -240,39 +171,6 @@ resources:
           -
             AttributeName: workshop_id
             AttributeType: S
-          -
-            AttributeName: name
-            AttributeType: S
-          -
-            AttributeName: price
-            AttributeType: N
-          -
-            AttributeName: duration
-            AttributeType: N
-          -
-            AttributeName: min_gourmet
-            AttributeType: N
-          -
-            AttributeName: max_gourmet
-            AttributeType: N
-          -
-            AttributeName: description
-            AttributeType: S
-          -
-            AttributeName: pictures
-            AttributeType: S
-          -
-            AttributeName: kitchen_id
-            AttributeType: S
-          -
-            AttributeName: cook_id
-            AttributeType: S
-          -
-            AttributeName: workshop_date
-            AttributeType: S
-          -
-            AttributeName: comments
-            AttributeType: M
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
@@ -283,18 +181,12 @@ resources:
         TableName: "Reservation"
         KeySchema:
           -
-            AttributeName: handle
+            AttributeName: gourmet_id
             KeyType: HASH
         AttributeDefinitions:
           -
             AttributeName: gourmet_id
             AttributeType: S
-          -
-            AttributeName: workshop_id
-            AttributeType: S
-          -
-            AttributeName: amount
-            AttributeType: N
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
