@@ -6,16 +6,17 @@ provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
-  region: ${env:AWS_REGION_PARIS}
+  region: ${env:AWS_IRELAND}
 
 plugins:
   - serverless-appsync-plugin
   - serverless-dotenv-plugin
   - serverless-dynamodb-local
   - serverless-offline
-  - serverless-webpack
 
 custom:
+  dotenv:
+    path: .env
   accountId: ${env:AWS_ACCOUNT_ID} # replace this with your accountId
   dynamodb:
     start:
@@ -26,152 +27,278 @@ custom:
     seed:
       test:
         sources:
-          - table: Users
-            sources: [seed-data/Users.json]
-          - table: Tweets
-            sources: [seed-data/Tweets.json]
+          - table: Gourmet
+            sources: [seed-data/Gourmet.json]
+          - table: Cook
+            sources: [seed-data/Cook.json]
+          - table: Kitchen
+            sources: [seed-data/Kitchen.json]
+          - table: Workshop
+            sources: [seed-data/Workshop.json]
+          - table: Reservation
+            sources: [seed-data/Reservation.json]
   appSync:
     # name:  # defaults to api
     # apiId # only required for update-appsync
     authenticationType: AMAZON_COGNITO_USER_POOLS # API_KEY is also supported
     userPoolConfig:
-      awsRegion: us-east-1 # required # region
+      awsRegion: ${env:AWS_REGION_LONDON} # required # region
       defaultAction: ALLOW
-      userPoolId: us-east-1_xxxxxxxxx # replace this with your Cognito User Pool Id
+      userPoolId: ${env:AWS_USERPOOL_ID} # replace this with your Cognito User Pool Id
     # region: # defaults to provider region
     # mappingTemplatesLocation: # defaults to mapping-templates
     mappingTemplates:
-      - dataSource: Users
+      - dataSource: Workshop
         type: Query
-        field: getUserInfo
-        request: "getUserInfo-request-mapping-template.txt"
-        response: "getUserInfo-response-mapping-template.txt"
-      - dataSource: Users
+        field: createWorkshop
+        request: "createWorkshop-request-mapping-template.txt"
+        response: "createWorkshop-response-mapping-template.txt"
+      - dataSource: Workshop
         type: Query
-        field: meInfo
-        request: "meInfo-request-mapping-template.txt"
-        response: "meInfo-response-mapping-template.txt"
-      - dataSource: Tweets
-        type: User
-        field: topTweet
-        request: "topTweet-request-mapping-template.txt"
-        response: "topTweet-response-mapping-template.txt"
-      - dataSource: Tweets
-        type: User
-        field: tweets
-        request: "tweets-request-mapping-template.txt"
-        response: "tweets-response-mapping-template.txt"
-      - dataSource: Tweets
-        type: Mutation
-        field: createTweet
-        request: "createTweet-request-mapping-template.txt"
-        response: "createTweet-response-mapping-template.txt"
-      - dataSource: Tweets
-        type: Mutation
-        field: deleteTweet
-        request: "deleteTweet-request-mapping-template.txt"
-        response: "deleteTweet-response-mapping-template.txt"
-      - dataSource: Tweets
-        type: Mutation
-        field: reTweet
-        request: "reTweet-request-mapping-template.txt"
-        response: "reTweet-response-mapping-template.txt"
-      - dataSource: Tweets
-        type: Mutation
-        field: updateTweet
-        request: "updateTweet-request-mapping-template.txt"
-        response: "updateTweet-response-mapping-template.txt"
-      - dataSource: Users
-        type: Mutation
-        field: updateUserInfo
-        request: "updateUserInfo-request-mapping-template.txt"
-        response: "updateUserInfo-response-mapping-template.txt"
+        field: getWorkshop
+        request: "getWorkshop-request-mapping-template.txt"
+        response: "getWorkshop-response-mapping-template.txt"
+      - dataSource: Workshop
+        type: Query
+        field: updateWorkshop
+        request: "updateWorkshop-request-mapping-template.txt"
+        response: "updateWorkshop-response-mapping-template.txt"
+      - dataSource: Workshop
+        type: Query
+        field: deleteWorkshop
+        request: "deleteWorkshop-request-mapping-template.txt"
+        response: "deleteWorkshop-response-mapping-template.txt"
     # schema: # defaults schema.graphql
     serviceRole: "AppSyncServiceRole"
     dataSources:
       - type: AMAZON_DYNAMODB
-        name: Users
-        description: 'Users table'
+        name: Gourmet
+        description: 'Gourmet table'
         config:
-          tableName: 'Users'
+          tableName: 'Gourmet'
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
       - type: AMAZON_DYNAMODB
-        name: Tweets
-        description: 'Tweets table'
+        name: Cook
+        description: 'Cook table'
         config:
-          tableName: 'Tweets'
+          tableName: 'Cook'
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+      - type: AMAZON_DYNAMODB
+        name: Kitchen
+        description: 'Kitchen table'
+        config:
+          tableName: 'Kitchen'
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+      - type: AMAZON_DYNAMODB
+        name: Workshop
+        description: 'Workshop table'
+        config:
+          tableName: 'Workshop'
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+      - type: AMAZON_DYNAMODB
+        name: Reservation
+        description: 'Reservation table'
+        config:
+          tableName: 'Reservation'
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+      - type: AMAZON_DYNAMODB
+        name: Comment
+        description: 'Comment table'
+        config:
+          tableName: 'Comment'
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
 
 resources:
   Resources:
-    UserTable:
+    # Gourmet
+    GourmetTable:
       Type: "AWS::DynamoDB::Table"
       Properties:
+        TableName: "Gourmet"
         KeySchema:
           -
-            AttributeName: handle
+            AttributeName: gourmet_id   
             KeyType: HASH
         AttributeDefinitions:
           -
-            AttributeName: handle
-            AttributeType: S
-        ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
-        TableName: "Users"
-    TweetsTable:
-      Type: "AWS::DynamoDB::Table"
-      Properties:
-        KeySchema:
-          -
-            AttributeName: tweet_id
-            KeyType: HASH
-        AttributeDefinitions:
-          -
-            AttributeName: tweet_id
+            AttributeName: gourmet_id
             AttributeType: S
           -
-            AttributeName: handle
+            AttributeName: first_name
             AttributeType: S
           -
-            AttributeName: retweet_count
+            AttributeName: last_name
+            AttributeType: S
+          -
+            AttributeName: picture
+            AttributeType: S
+          -
+            AttributeName: gender
             AttributeType: N
           -
-            AttributeName: created_at
+            AttributeName: birthday
+            AttributeType: S
+          -
+            AttributeName: city
+            AttributeType: S
+          -
+            AttributeName: cp
+            AttributeType: N
+          -
+            AttributeName: location
+            AttributeType: S
+          -
+            AttributeName: description
+            AttributeType: S
+          -
+            AttributeName: createdAt
+            AttributeType: S
+          -
+            AttributeName: updatedAt
             AttributeType: S
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-        TableName: "Tweets"
-        GlobalSecondaryIndexes:
+    # Cook
+    CookTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: "Cook"
+        KeySchema:
           -
-            IndexName: top-index
-            KeySchema:
-              -
-                AttributeName: handle
-                KeyType: HASH
-              -
-                AttributeName: retweet_count
-                KeyType: RANGE
-            Projection:
-              ProjectionType: ALL
-            ProvisionedThroughput:
-              ReadCapacityUnits: 50
-              WriteCapacityUnits: 50
+            AttributeName: cook_id
+            KeyType: HASH
+        AttributeDefinitions:
           -
-            IndexName: tweet-index
-            KeySchema:
-              -
-                AttributeName: handle
-                KeyType: HASH
-              -
-                AttributeName: created_at
-                KeyType: RANGE
-            Projection:
-              ProjectionType: ALL
-            ProvisionedThroughput:
-              ReadCapacityUnits: 50
-              WriteCapacityUnits: 50
+            AttributeName: cook_id
+            AttributeType: S
+          -
+            AttributeName: is_pro
+            AttributeType: BOOL
+          -
+            AttributeName: description
+            AttributeType: S
+          -
+            AttributeName: business_name
+            AttributeType: S
+          -
+            AttributeName: siren
+            AttributeType: S
+          -
+            AttributeName: email_pro
+            AttributeType: S
+          -
+            AttributeName: first_name_legal
+            AttributeType: S
+          -
+            AttributeName: last_name_legal
+            AttributeType: S
+          -
+            AttributeName: birthday_legal
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+    # Kitchen
+    KitchenTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: "Kitchen"
+        KeySchema:
+          -
+            AttributeName: kitchen_id
+            KeyType: HASH
+        AttributeDefinitions:
+          -
+            AttributeName: kitchen_id
+            AttributeType: S
+          -
+            AttributeName: name
+            AttributeType: S
+          -
+            AttributeName: city
+            AttributeType: S
+          -
+            AttributeName: cp
+            AttributeType: N
+          -
+            AttributeName: location
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+    # Workshop
+    WorkshopTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: "Workshop"
+        KeySchema:
+          -
+            AttributeName: workshop_id
+            KeyType: HASH
+        AttributeDefinitions:
+          -
+            AttributeName: workshop_id
+            AttributeType: S
+          -
+            AttributeName: name
+            AttributeType: S
+          -
+            AttributeName: price
+            AttributeType: N
+          -
+            AttributeName: duration
+            AttributeType: N
+          -
+            AttributeName: min_gourmet
+            AttributeType: N
+          -
+            AttributeName: max_gourmet
+            AttributeType: N
+          -
+            AttributeName: description
+            AttributeType: S
+          -
+            AttributeName: pictures
+            AttributeType: S
+          -
+            AttributeName: kitchen_id
+            AttributeType: S
+          -
+            AttributeName: cook_id
+            AttributeType: S
+          -
+            AttributeName: workshop_date
+            AttributeType: S
+          -
+            AttributeName: comments
+            AttributeType: M
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+    # Reservation
+    ReservationTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: "Reservation"
+        KeySchema:
+          -
+            AttributeName: handle
+            KeyType: HASH
+        AttributeDefinitions:
+          -
+            AttributeName: gourmet_id
+            AttributeType: S
+          -
+            AttributeName: workshop_id
+            AttributeType: S
+          -
+            AttributeName: amount
+            AttributeType: N
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+    # End Tables / Start AppSync
     AppSyncServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
@@ -203,7 +330,13 @@ resources:
                     - "dynamodb:Scan"
                     - "dynamodb:UpdateItem"
                   Resource:
-                    - "arn:aws:dynamodb:us-east-1:*:table/Users"
-                    - "arn:aws:dynamodb:us-east-1:*:table/Users/*"
-                    - "arn:aws:dynamodb:us-east-1:*:table/Tweets"
-                    - "arn:aws:dynamodb:us-east-1:*:table/Tweets/*"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Gourmet"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Gourmet/*"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Cook"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Cook/*"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Kitchen"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Kitchen/*"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Workshop"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Workshop/*"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Reservation"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Reservation/*"

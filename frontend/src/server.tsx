@@ -28,7 +28,9 @@ const server = express()
   .get("/*", async (req: express.Request, res: express.Response) => {
     const client = createApolloClient({ ssrMode: true });
     const sheetsRegistry = new SheetsRegistry();
-    const generateClassName = createGenerateClassName();
+    const generateClassName = createGenerateClassName({
+      productionPrefix: "c"
+    });
 
     const customRenderer = (node: any) => {
       const app = (

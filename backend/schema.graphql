@@ -1,6 +1,4 @@
 type Mutation {
-	# Create a workshop for a user
-	# consumer keys and tokens are required for lambda integration
 	createWorkshop(
 		name: String!,
 		price: Int!,
@@ -8,17 +6,15 @@ type Mutation {
 		min_gourmet: Int!,
 		max_gourmet: Int!,
 		description: String!,
-		Pictures: [String!]!,
-		kitchen_id: String,
+		kitchen_id: ID,
 		workshop_date: String!,
+		comments: [CommentInput],
 	): Workshop!
 
-	# Delete User Workshop
 	deleteWorkshop(
-	    workshop_id: String!,
+	    workshop_id: ID!,
     ): Workshop!
 
-	# update functionality is not available in lambda integration
 	updateWorkshop(
 		name: String!,
 		price: Int!,
@@ -26,46 +22,137 @@ type Mutation {
 		min_gourmet: Int!,
 		max_gourmet: Int!,
 		description: String!,
-		Pictures: [String!]!,
-		kitchen_id: String,
+		kitchen_id: ID,
 		workshop_date: String!,
+		comments: [CommentInput],
 	): Workshop!
 
-    # Create Gourmet info is not available in lambda integration
-	updateGourmetInfo(
-		first_name: String!
-		last_name: String!
-		phone: String
-		birthday: String
-		city: String!
-		cp: Int
-		location: String
-		description: String
-		picture: [String!]!
-		gender: Int
+	createGourmet(
+		first_name: String!,
+		last_name: String!,
+		phone: String,
+		birthday: String,
+		city: String!,
+		cp: Int,
+		location: String,
+		description: String,
+		gender: Int,
+	): Workshop!
+
+	deleteGourmet(
+	    gourmet_id: ID!,
+    ): Workshop!
+
+	updateGourmet(
+		first_name: String!,
+		last_name: String!,
+		phone: String,
+		birthday: String,
+		city: String!,
+		cp: Int,
+		location: String,
+		description: String,
+		gender: Int,
 	): Gourmet!
+
+	createCook(
+		is_pro: Boolean,
+		description: String,
+		business_name: String,
+		siren: String,
+		email_pro: String,
+	): Cook!
+
+	deleteCook(
+		cook_id: ID!,
+	): Cook!
+
+	updateCook(
+		is_pro: Boolean,
+		description: String,
+		business_name: String,
+		siren: String,
+		email_pro: String,
+	): Cook!
+	
+	createKitchen(
+		name: String!,
+		city: String,
+		cp: Int,
+		location: String,
+	): Kitchen!
+
+	deleteKitchen(
+		kitchen_id: ID!,
+	): Cook!
+
+	updateKitchen(
+		name: String!,
+		city: String,
+		cp: Int,
+		location: String,
+	): Kitchen!
+
+	createReservation(
+		amount: Int,
+	): Reservation!
+
+	deleteReservation(
+		kitchen_id: ID!,
+	): Reservation!
+
+	updateReservation(
+		amount: Int,
+	): Reservation!
 }
 
 type Query {
-	meInfo(consumer_key: String!, consumer_secret: String!): Gourmet!
-	
+	meInfo(gourmet_id: ID): Gourmet!
+	getWorkshop(workshop_id: ID): Workshop!
+	getGourmet(gourmet_id: ID): Gourmet!
+	getCook(cook_id: ID): Cook!
+	getKitchen(kitchen_id: ID): Kitchen!
+	getReservation(reservation_id: ID): Reservation!
+}
+
+type Subscription {
+	subWorkshop: Workshop
+		@aws_subscribe(mutations: ["createWorkshop"])
+}
+
+input CommentInput {
+	gourmet_id: ID!
+	rating: Int!
+  	comment: String
+}
+
+type Comment {
+	gourmet_id: ID!
+	rating: Int!
+  	comment: String
+}
+
+type CommentList {
+	items: [Comment]
+	nextToken: String
 }
 
 type Workshop {
-	workshop_id: String!
+	workshop_id: ID!
 	name: String!
 	price: Int!
 	duration: Int!
 	min_gourmet: Int!
 	max_gourmet: Int!
 	description: String!
-	Pictures: [String!]!
-	kitchen_id: String
-	cook_id: String!
+	pictures: [S3Object!]!
+	kitchen_id: ID
+	cook_id: ID!
 	workshop_date: String!
+	comments(limit: Int!, nextToken: String): CommentList
 }
 
-type WorkshopConnection {
+type WorkshopList {
 	items: [Workshop!]!
 	nextToken: String
 }
@@ -79,13 +166,13 @@ type Gourmet {
 	cp: Int
 	location: String
 	description: String
-	picture: [String!]!
+	picture: [S3Object!]!
 	gender: Int
 	handle: String!
 }
 
 type Cook {
-	cook_id: String!
+	cook_id: ID!
 	is_pro: Boolean
   	description: String
   	business_name: String
@@ -94,7 +181,7 @@ type Cook {
 }
 
 type Kitchen {
-	kitchen_id: String!
+	kitchen_id: ID!
 	name: String!
   	city: String
 	cp: Int
@@ -102,20 +189,19 @@ type Kitchen {
 }
 
 type Reservation {
-	kitchen_id: String!
-	workshop_id: String!
+	kitchen_id: ID!
+	workshop_id: ID!
   	amount: Int
 }
 
-type Commentary {
-	comment_id: String!
-	rating: Int!
-  	commentary: String
-	cook_id: String
-    workshop_id: String
+type S3Object {
+  	bucket: String!
+  	key: String!
+  	region: String!
 }
 
 schema {
 	query: Query
 	mutation: Mutation
+	subscription: Subscription
 }
