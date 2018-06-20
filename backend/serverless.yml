@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
-  region: ${env:AWS_IRELAND}
+  region: ${env:AWS_REGION_PARIS}
 
 plugins:
   - serverless-appsync-plugin
@@ -100,12 +100,6 @@ custom:
         description: 'Reservation table'
         config:
           tableName: 'Reservation'
-          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
-      - type: AMAZON_DYNAMODB
-        name: Comment
-        description: 'Comment table'
-        config:
-          tableName: 'Comment'
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
 
 resources:
