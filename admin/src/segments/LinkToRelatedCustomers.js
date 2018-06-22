@@ -16,22 +16,22 @@ const styles = {
     },
 };
 
-const LinkToRelatedCustomers = ({ classes, record, translate }) => (
+const LinkToRelatedCustomers = ({ classes, segment, translate }) => (
     <Button
         color="primary"
         component={Link}
         to={{
-            pathname: '/Customer',
+            pathname: '/customers',
             search: stringify({
                 page: 1,
                 perPage: 25,
-                filter: JSON.stringify({ groups_some: { id: record.id } }),
+                filter: JSON.stringify({ groups: segment }),
             }),
         }}
         className={classes.link}
     >
         <VisitorIcon className={classes.icon} />
-        {translate('resources.Segment.fields.customers')}
+        {translate('resources.segments.fields.customers')}
     </Button>
 );
 

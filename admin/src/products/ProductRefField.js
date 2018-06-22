@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProductRefField = ({ record, basePath }) => (
+const ProductRefField = ({ record }) => (
     <Link to={`products/${record.id}`}>{record.reference}</Link>
 );
 

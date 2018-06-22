@@ -12,7 +12,7 @@ const StarRatingField = ({ record }) => (
 );
 
 StarRatingField.defaultProps = {
-    label: 'resources.Review.fields.rating',
+    label: 'resources.reviews.fields.rating',
     source: 'rating',
     addLabel: true,
 };

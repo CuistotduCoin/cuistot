@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { GET_LIST, GET_MANY, Responsive, ViewTitle } from 'react-admin';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
@@ -9,14 +7,14 @@ import NbNewOrders from './NbNewOrders';
 import PendingOrders from './PendingOrders';
 import PendingReviews from './PendingReviews';
 import NewCustomers from './NewCustomers';
-import buildDataProvider from '../dataProvider';
+import dataProviderFactory from '../dataProvider';
 
 const styles = {
-    welcome: { marginBottom: '2em' },
     flex: { display: 'flex' },
+    flexColumn: { display: 'flex', flexDirection: 'column' },
     leftCol: { flex: 1, marginRight: '1em' },
     rightCol: { flex: 1, marginLeft: '1em' },
-    singleCol: { marginTop: '2em' },
+    singleCol: { marginTop: '2em', marginBottom: '2em' },
 };
 
 class Dashboard extends Component {
@@ -25,8 +23,11 @@ class Dashboard extends Component {
     componentDidMount() {
         const aMonthAgo = new Date();
         aMonthAgo.setDate(aMonthAgo.getDate() - 30);
-        buildDataProvider().then(dataProvider => {
-            dataProvider(GET_LIST, 'Command', {
+
+        dataProviderFactory(
+            process.env.REACT_APP_DATA_PROVIDER
+        ).then(dataProvider => {
+            dataProvider(GET_LIST, 'commands', {
                 filter: { date_gte: aMonthAgo.toISOString() },
                 sort: { field: 'date', order: 'DESC' },
                 pagination: { page: 1, perPage: 50 },
@@ -62,12 +63,10 @@ class Dashboard extends Component {
                     return pendingOrders;
                 })
                 .then(pendingOrders =>
-                    pendingOrders
-                        .map(order => order.customer && order.customer.id)
-                        .filter(customer_id => customer_id)
+                    pendingOrders.map(order => order.customer_id)
                 )
                 .then(customerIds =>
-                    dataProvider(GET_MANY, 'Customer', { ids: customerIds })
+                    dataProvider(GET_MANY, 'customers', { ids: customerIds })
                 )
                 .then(response => response.data)
                 .then(customers =>
@@ -80,7 +79,7 @@ class Dashboard extends Component {
                     this.setState({ pendingOrdersCustomers: customers })
                 );
 
-            dataProvider(GET_LIST, 'Review', {
+            dataProvider(GET_LIST, 'reviews', {
                 filter: { status: 'pending' },
                 sort: { field: 'date', order: 'DESC' },
                 pagination: { page: 1, perPage: 100 },
@@ -95,16 +94,9 @@ class Dashboard extends Component {
                     this.setState({ pendingReviews, nbPendingReviews });
                     return pendingReviews;
                 })
-                .then(reviews =>
-                    reviews
-                        .map(
-                            review =>
-                                review.customer ? review.customer.id : null
-                        )
-                        .filter(customer_id => customer_id)
-                )
+                .then(reviews => reviews.map(review => review.customer_id))
                 .then(customerIds =>
-                    dataProvider(GET_MANY, 'Customer', { ids: customerIds })
+                    dataProvider(GET_MANY, 'customers', { ids: customerIds })
                 )
                 .then(response => response.data)
                 .then(customers =>
@@ -117,12 +109,12 @@ class Dashboard extends Component {
                     this.setState({ pendingReviewsCustomers: customers })
                 );
 
-            dataProvider(GET_LIST, 'Customer', {
+            dataProvider(GET_LIST, 'customers', {
                 filter: {
-                    hasOrdered: true,
-                    firstSeen_gte: aMonthAgo.toISOString(),
+                    has_ordered: true,
+                    first_seen_gte: aMonthAgo.toISOString(),
                 },
-                sort: { field: 'firstSeen', order: 'DESC' },
+                sort: { field: 'first_seen', order: 'DESC' },
                 pagination: { page: 1, perPage: 100 },
             })
                 .then(response => response.data)
@@ -150,10 +142,12 @@ class Dashboard extends Component {
         return (
             <Responsive
                 xsmall={
-                    <Card>
+                    <div>
                         <ViewTitle title="Posters Galore Admin" />
-                        <CardContent>
-                            <Welcome style={styles.welcome} />
+                        <div style={styles.flexColumn}>
+                            <div style={{ marginBottom: '2em' }}>
+                                <Welcome />
+                            </div>
                             <div style={styles.flex}>
                                 <MonthlyRevenue value={revenue} />
                                 <NbNewOrders value={nbNewOrders} />
@@ -164,42 +158,57 @@ class Dashboard extends Component {
                                     customers={pendingOrdersCustomers}
                                 />
                             </div>
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </div>
+                }
+                small={
+                    <div style={styles.flexColumn}>
+                        <div style={styles.singleCol}>
+                            <Welcome />
+                        </div>
+                        <div style={styles.flex}>
+                            <MonthlyRevenue value={revenue} />
+                            <NbNewOrders value={nbNewOrders} />
+                        </div>
+                        <div style={styles.singleCol}>
+                            <PendingOrders
+                                orders={pendingOrders}
+                                customers={pendingOrdersCustomers}
+                            />
+                        </div>
+                    </div>
                 }
                 medium={
-                    <Card>
-                        <CardContent>
-                            <Welcome style={styles.welcome} />
+                    <div style={styles.flex}>
+                        <div style={styles.leftCol}>
                             <div style={styles.flex}>
-                                <div style={styles.leftCol}>
-                                    <div style={styles.flex}>
-                                        <MonthlyRevenue value={revenue} />
-                                        <NbNewOrders value={nbNewOrders} />
-                                    </div>
-                                    <div style={styles.singleCol}>
-                                        <PendingOrders
-                                            orders={pendingOrders}
-                                            customers={pendingOrdersCustomers}
-                                        />
-                                    </div>
-                                </div>
-                                <div style={styles.rightCol}>
-                                    <div style={styles.flex}>
-                                        <PendingReviews
-                                            nb={nbPendingReviews}
-                                            reviews={pendingReviews}
-                                            customers={pendingReviewsCustomers}
-                                        />
-                                        <NewCustomers
-                                            nb={nbNewCustomers}
-                                            visitors={newCustomers}
-                                        />
-                                    </div>
-                                </div>
+                                <MonthlyRevenue value={revenue} />
+                                <NbNewOrders value={nbNewOrders} />
                             </div>
-                        </CardContent>
-                    </Card>
+                            <div style={styles.singleCol}>
+                                <Welcome />
+                            </div>
+                            <div style={styles.singleCol}>
+                                <PendingOrders
+                                    orders={pendingOrders}
+                                    customers={pendingOrdersCustomers}
+                                />
+                            </div>
+                        </div>
+                        <div style={styles.rightCol}>
+                            <div style={styles.flex}>
+                                <PendingReviews
+                                    nb={nbPendingReviews}
+                                    reviews={pendingReviews}
+                                    customers={pendingReviewsCustomers}
+                                />
+                                <NewCustomers
+                                    nb={nbNewCustomers}
+                                    visitors={newCustomers}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 }
             />
         );

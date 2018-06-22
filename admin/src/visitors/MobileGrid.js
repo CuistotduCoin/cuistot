@@ -1,12 +1,14 @@
 // in src/comments.js
 import React from 'react';
-import { EditButton, translate, NumberField } from 'react-admin';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import { withStyles } from '@material-ui/core/styles';
+import { DateField, EditButton, translate, NumberField } from 'react-admin';
+
 import AvatarField from './AvatarField';
 import { ColoredNumberField } from './index';
+import SegmentsField from './SegmentsField';
 
 const listStyles = theme => ({
     card: {
@@ -36,8 +38,8 @@ const MobileGrid = withStyles(listStyles)(
                     <CardHeader
                         title={
                             <div className={classes.cardTitleContent}>
-                                <h2>{`${data[id].firstName} ${data[id]
-                                    .lastName}`}</h2>
+                                <h2>{`${data[id].first_name} ${data[id]
+                                    .last_name}`}</h2>
                                 <EditButton
                                     resource="visitors"
                                     basePath={basePath}
@@ -50,26 +52,42 @@ const MobileGrid = withStyles(listStyles)(
                     <CardContent className={classes.cardContent}>
                         <div>
                             {translate(
+                                'resources.customers.fields.last_seen_gte'
+                            )}&nbsp;
+                            <DateField
+                                record={data[id]}
+                                source="last_seen"
+                                type="date"
+                            />
+                        </div>
+                        <div>
+                            {translate(
                                 'resources.commands.name',
-                                parseInt(data[id].nbCommands, 10) || 1
+                                parseInt(data[id].nb_commands, 10) || 1
                             )}&nbsp;:&nbsp;<NumberField
                                 record={data[id]}
-                                source="nbCommands"
+                                source="nb_commands"
                                 label="resources.customers.fields.commands"
                                 className={classes.nb_commands}
                             />
                         </div>
                         <div>
                             {translate(
-                                'resources.customers.fields.totalSpent'
+                                'resources.customers.fields.total_spent'
                             )}&nbsp; :{' '}
                             <ColoredNumberField
                                 record={data[id]}
-                                source="totalSpent"
+                                source="total_spent"
                                 options={{ style: 'currency', currency: 'USD' }}
                             />
                         </div>
                     </CardContent>
+                    {data[id].groups &&
+                        data[id].groups.length > 0 && (
+                            <CardContent className={classes.cardContent}>
+                                <SegmentsField record={data[id]} />
+                            </CardContent>
+                        )}
                 </Card>
             ))}
         </div>

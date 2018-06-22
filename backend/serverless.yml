@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
-  region: ${env:AWS_REGION_PARIS}
+  region: ${env:AWS_REGION_IRELAND}
 
 plugins:
   - serverless-appsync-plugin
@@ -38,15 +38,16 @@ custom:
           - table: Reservation
             sources: [seed-data/Reservation.json]
   appSync:
-    # name:  # defaults to api
-    # apiId # only required for update-appsync
-    authenticationType: AMAZON_COGNITO_USER_POOLS # API_KEY is also supported
+    name:  graphql-cuistotducoin-api
+    authenticationType: API_KEY # API_KEY is also supported
     userPoolConfig:
       awsRegion: ${env:AWS_REGION_LONDON} # required # region
       defaultAction: ALLOW
       userPoolId: ${env:AWS_USERPOOL_ID} # replace this with your Cognito User Pool Id
-    # region: # defaults to provider region
-    # mappingTemplatesLocation: # defaults to mapping-templates
+    region: ${env:AWS_REGION_IRELAND}
+    #logConfig:
+    #  loggingRoleArn: { Fn::GetAtt: [AppSyncLoggingServiceRole, Arn] }
+    #  level: ERROR
     mappingTemplates:
       - dataSource: Workshop
         type: Mutation
@@ -59,6 +60,11 @@ custom:
         request: "getWorkshop-request-mapping-template.txt"
         response: "getWorkshop-response-mapping-template.txt"
       - dataSource: Workshop
+        type: Query
+        field: getWorkshops
+        request: "getWorkshops-request-mapping-template.txt"
+        response: "getWorkshops-response-mapping-template.txt"
+      - dataSource: Workshop
         type: Mutation
         field: updateWorkshop
         request: "updateWorkshop-request-mapping-template.txt"
@@ -68,44 +74,47 @@ custom:
         field: deleteWorkshop
         request: "deleteWorkshop-request-mapping-template.txt"
         response: "deleteWorkshop-response-mapping-template.txt"
-    # schema: # defaults schema.graphql
     serviceRole: "AppSyncServiceRole"
     dataSources:
       - type: AMAZON_DYNAMODB
         name: Gourmet
         description: 'Gourmet table'
         config:
-          tableName: 'Gourmet'
+          tableName: { Ref: Gourmet }
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+          region: ${env:AWS_REGION_IRELAND}
       - type: AMAZON_DYNAMODB
         name: Cook
         description: 'Cook table'
         config:
-          tableName: 'Cook'
+          tableName: { Ref: Cook }
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+          region: ${env:AWS_REGION_IRELAND}
       - type: AMAZON_DYNAMODB
         name: Kitchen
         description: 'Kitchen table'
         config:
-          tableName: 'Kitchen'
+          tableName: { Ref: Kitchen }
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+          region: ${env:AWS_REGION_IRELAND}
       - type: AMAZON_DYNAMODB
         name: Workshop
         description: 'Workshop table'
         config:
-          tableName: 'Workshop'
+          tableName: { Ref: Workshop }
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+          region: ${env:AWS_REGION_IRELAND}
       - type: AMAZON_DYNAMODB
         name: Reservation
         description: 'Reservation table'
         config:
-          tableName: 'Reservation'
+          tableName: { Ref: Reservation }
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+          region: ${env:AWS_REGION_IRELAND}
 
 resources:
   Resources:
-    # Gourmet
-    GourmetTable:
+    Gourmet:
       Type: "AWS::DynamoDB::Table"
       Properties:
         TableName: "Gourmet"
@@ -120,8 +129,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-    # Cook
-    CookTable:
+    Cook:
       Type: "AWS::DynamoDB::Table"
       Properties:
         TableName: "Cook"
@@ -136,8 +144,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-    # Kitchen
-    KitchenTable:
+    Kitchen:
       Type: "AWS::DynamoDB::Table"
       Properties:
         TableName: "Kitchen"
@@ -152,8 +159,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-    # Workshop
-    WorkshopTable:
+    Workshop:
       Type: "AWS::DynamoDB::Table"
       Properties:
         TableName: "Workshop"
@@ -168,8 +174,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-    # Reservation
-    ReservationTable:
+    Reservation:
       Type: "AWS::DynamoDB::Table"
       Properties:
         TableName: "Reservation"
@@ -216,13 +221,41 @@ resources:
                     - "dynamodb:Scan"
                     - "dynamodb:UpdateItem"
                   Resource:
-                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Gourmet"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Gourmet/*"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Cook"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Cook/*"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Kitchen"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Kitchen/*"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Workshop"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Workshop/*"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Reservation"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_PARIS}:*:table/Reservation/*"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Gourmet"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Gourmet/*"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Cook"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Cook/*"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Kitchen"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Kitchen/*"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Workshop"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Workshop/*"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Reservation"
+                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Reservation/*"
+    #AppSyncLoggingServiceRole:
+    #  Type: "AWS::IAM::Role"
+    #  Properties:
+    #    RoleName: "AppSyncLoggingServiceRole"
+    #    AssumeRolePolicyDocument:
+    #      Version: "2012-10-17"
+    #      Statement:
+    #        -
+    #          Effect: "Allow"
+    #          Principal:
+    #            Service:
+    #              - "appsync.amazonaws.com"
+    #          Action:
+    #            - "sts:AssumeRole"
+    #    Policies:
+    #      -
+    #        PolicyName: "AppSyncLoggingServiceRole-Policy"
+    #        PolicyDocument:
+    #          Version: "2012-10-17"
+    #          Statement:
+    #            -
+    #              Effect": "Allow"
+    #              Action:
+    #                - "logs:CreateLogGroup"
+    #                - "logs:CreateLogStream"
+    #                - "logs:PutLogEvents"
+    #              Resource:
+    #                  - "arn:aws:logs:${env:AWS_REGION_IRELAND}:${env:AWS_ACCOUNT_ID}:*"

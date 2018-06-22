@@ -31,24 +31,24 @@ export default {
         },
     },
     resources: {
-        Customer: {
+        customers: {
             name: 'Client |||| Clients',
             fields: {
                 address: 'Rue',
                 birthday: 'Anniversaire',
                 city: 'Ville',
                 commands: 'Commandes',
-                firstName: 'Prénom',
-                firstSeen: 'Première visite',
+                first_name: 'Prénom',
+                first_seen: 'Première visite',
                 groups: 'Segments',
-                hasNewsletter: 'Abonné à la newsletter',
-                hasOrdered: 'A commandé',
-                lastName: 'Nom',
-                lastSeen: 'Vu le',
-                lastSeen_gte: 'Vu depuis',
-                latestPurchase: 'Dernier achat',
+                has_newsletter: 'Abonné à la newsletter',
+                has_ordered: 'A commandé',
+                last_name: 'Nom',
+                last_seen: 'Vu le',
+                last_seen_gte: 'Vu depuis',
+                latest_purchase: 'Dernier achat',
                 name: 'Nom',
-                totalSpent: 'Dépenses',
+                total_spent: 'Dépenses',
                 zipcode: 'Code postal',
             },
             tabs: {
@@ -62,7 +62,7 @@ export default {
                 delete: 'Supprimer le client',
             },
         },
-        Command: {
+        commands: {
             name: 'Commande |||| Commandes',
             fields: {
                 basket: {
@@ -74,7 +74,7 @@ export default {
                     total: 'Total',
                     unit_price: 'P.U.',
                 },
-                'customer.id': 'Client',
+                customer_id: 'Client',
                 date_gte: 'Passées depuis',
                 date_lte: 'Passées avant',
                 nb_items: 'Nb articles',
@@ -84,10 +84,10 @@ export default {
                 total_gte: 'Montant minimum',
             },
         },
-        Product: {
+        products: {
             name: 'Poster |||| Posters',
             fields: {
-                'category.id': 'Catégorie',
+                category_id: 'Catégorie',
                 height_gte: 'Hauteur mini',
                 height_lte: 'Hauteur maxi',
                 height: 'Hauteur',
@@ -108,19 +108,19 @@ export default {
                 reviews: 'Commentaires',
             },
         },
-        Category: {
+        categories: {
             name: 'Catégorie |||| Catégories',
             fields: {
                 name: 'Nom',
                 products: 'Produits',
             },
         },
-        Review: {
+        reviews: {
             name: 'Commentaire |||| Commentaires',
             fields: {
-                'customer.id': 'Client',
-                'command.id': 'Commande',
-                'product.id': 'Produit',
+                customer_id: 'Client',
+                command_id: 'Commande',
+                product_id: 'Produit',
                 date_gte: 'Publié depuis',
                 date_lte: 'Publié avant',
                 date: 'Date',
@@ -139,7 +139,7 @@ export default {
                 rejected_error: 'Erreur: Commentaire non rejeté',
             },
         },
-        Segment: {
+        segments: {
             name: 'Segments',
             fields: {
                 customers: 'Clients',

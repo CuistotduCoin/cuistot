@@ -1,12 +1,7 @@
 {
-    "version" : "2017-02-28",
-    "operation" : "Query",
-    "query" : {
-        "expression": "workshop_id = :workshop_id",
-        "expressionValues" : {
-            ":handle" : {
-                "S" : "${ctx.args.workshop_id}"
-            }
-        }
+    "version": "2017-02-28",
+    "operation": "GetItem",
+    "key": {
+        "workshop_id": $util.dynamodb.toDynamoDBJson($ctx.args.workshop_id),
     }
 }

@@ -31,17 +31,14 @@ export default {
         },
     },
     resources: {
-        Customer: {
+        customers: {
             name: 'Customer |||| Customers',
             fields: {
                 commands: 'Orders',
                 groups: 'Segments',
-                lastSeen_gte: 'Visited Since',
+                last_seen_gte: 'Visited Since',
                 name: 'Name',
-                latestPurchase: 'Latest Purchase',
-                hasOrdered: 'Has Ordered',
-                hasNewsletter: 'Has Newsletter',
-                totalSpent: 'Total spent',
+                total_spent: 'Total spent',
             },
             tabs: {
                 identity: 'Identity',
@@ -54,7 +51,7 @@ export default {
                 delete: 'Delete Customer',
             },
         },
-        Command: {
+        commands: {
             name: 'Order |||| Orders',
             fields: {
                 basket: {
@@ -66,7 +63,7 @@ export default {
                     total: 'Total',
                     unit_price: 'Unit Price',
                 },
-                'customer.id': 'Customer',
+                customer_id: 'Customer',
                 date_gte: 'Passed Since',
                 date_lte: 'Passed Before',
                 total_gte: 'Min amount',
@@ -74,10 +71,10 @@ export default {
                 returned: 'Returned',
             },
         },
-        Product: {
+        products: {
             name: 'Poster |||| Posters',
             fields: {
-                'category.id': 'Category',
+                category_id: 'Category',
                 height_gte: 'Min height',
                 height_lte: 'Max height',
                 height: 'Height',
@@ -88,7 +85,7 @@ export default {
                 stock: 'Stock',
                 thumbnail: 'Thumbnail',
                 width_gte: 'Min width',
-                width_lte: 'mx_width',
+                width_lte: 'Max width',
                 width: 'Width',
             },
             tabs: {
@@ -98,18 +95,18 @@ export default {
                 reviews: 'Reviews',
             },
         },
-        Category: {
+        categories: {
             name: 'Category |||| Categories',
             fields: {
                 products: 'Products',
             },
         },
-        Review: {
+        reviews: {
             name: 'Review |||| Reviews',
             fields: {
-                'customer.id': 'Customer',
-                'command.id': 'Order',
-                'product.id': 'Product',
+                customer_id: 'Customer',
+                command_id: 'Order',
+                product_id: 'Product',
                 date_gte: 'Posted since',
                 date_lte: 'Posted before',
                 date: 'Date',
@@ -127,7 +124,7 @@ export default {
                 rejected_error: 'Error: Review not rejected',
             },
         },
-        Segment: {
+        segments: {
             name: 'Segments',
             fields: {
                 customers: 'Customers',

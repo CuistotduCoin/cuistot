@@ -2,12 +2,13 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
 import { translate, ViewTitle } from 'react-admin';
 
 import LinkToRelatedCustomers from './LinkToRelatedCustomers';
+import segments from './data';
 
 export default translate(({ translate }) => (
     <Card>
@@ -22,7 +23,7 @@ export default translate(({ translate }) => (
                 </TableRow>
             </TableHead>
             <TableBody>
-                {[].map(segment => (
+                {segments.map(segment => (
                     <TableRow key={segment.id}>
                         <TableCell>{translate(segment.name)}</TableCell>
                         <TableCell>

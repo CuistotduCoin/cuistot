@@ -7,9 +7,20 @@ const darkTheme = {
     },
 };
 
+const lightTheme = {
+    palette: {
+        secondary: {
+            light: '#5f5fc4',
+            main: '#283593',
+            dark: '#001064',
+            contrastText: '#fff',
+        },
+    },
+};
+
 export default connect(
     state => ({
-        theme: state.theme === 'dark' ? darkTheme : {},
+        theme: state.theme === 'dark' ? darkTheme : lightTheme,
     }),
-    {} // Avoid connect passing dispatch in props
+    {}
 )(Layout);

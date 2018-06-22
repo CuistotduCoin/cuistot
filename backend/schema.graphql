@@ -16,6 +16,7 @@ type Mutation {
     ): Workshop!
 
 	updateWorkshop(
+		workshop_id: ID!,
 		name: String!,
 		price: Int!,
 		duration: Int!,
@@ -109,6 +110,7 @@ type Mutation {
 type Query {
 	meInfo(gourmet_id: ID): Gourmet!
 	getWorkshop(workshop_id: ID): Workshop!
+	getWorkshops(limit: Int!, nextToken: String): WorkshopList
 	getGourmet(gourmet_id: ID): Gourmet!
 	getCook(cook_id: ID): Cook!
 	getKitchen(kitchen_id: ID): Kitchen!

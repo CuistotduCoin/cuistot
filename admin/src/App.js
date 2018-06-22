@@ -4,7 +4,6 @@ import { Admin, Resource } from 'react-admin';
 
 import './App.css';
 
-import buildDataProvider from './dataProvider';
 import authProvider from './authProvider';
 import sagas from './sagas';
 import themeReducer from './themeReducer';
@@ -13,9 +12,14 @@ import Layout from './Layout';
 import Menu from './Menu';
 import { Dashboard } from './dashboard';
 import customRoutes from './routes';
-import frenchMessages from './i18n/fr';
+import englishMessages from './i18n/en';
 
-import { VisitorList, VisitorEdit, VisitorIcon } from './visitors';
+import {
+    VisitorList,
+    VisitorEdit,
+    VisitorCreate,
+    VisitorIcon,
+} from './visitors';
 import { CommandList, CommandEdit, CommandIcon } from './commands';
 import {
     ProductList,
@@ -25,15 +29,16 @@ import {
 } from './products';
 import { CategoryList, CategoryEdit, CategoryIcon } from './categories';
 import { ReviewList, ReviewEdit, ReviewIcon } from './reviews';
-import { SegmentList, SegmentIcon } from './segments';
+
+import buildDataProvider from './dataProvider';
 
 const i18nProvider = locale => {
-    if (locale === 'en') {
-        return import('./i18n/en').then(messages => messages.default);
+    if (locale === 'fr') {
+        return import('./i18n/fr').then(messages => messages.default);
     }
 
-    // Always fallback on french
-    return frenchMessages;
+    // Always fallback on english
+    return englishMessages;
 };
 
 class App extends Component {
@@ -48,7 +53,11 @@ class App extends Component {
         const { dataProvider } = this.state;
 
         if (!dataProvider) {
-            return <div>Loading</div>;
+            return (
+                <div className="loader-container">
+                    <div className="loader">Loading...</div>
+                </div>
+            );
         }
 
         return (
@@ -67,43 +76,38 @@ class App extends Component {
                 i18nProvider={i18nProvider}
             >
                 <Resource
-                    name="Customer"
+                    name="customers"
                     list={VisitorList}
                     edit={VisitorEdit}
+                    create={VisitorCreate}
                     icon={VisitorIcon}
                 />
                 <Resource
-                    name="Command"
+                    name="commands"
                     list={CommandList}
                     edit={CommandEdit}
                     icon={CommandIcon}
                     options={{ label: 'Orders' }}
                 />
                 <Resource
-                    name="Product"
+                    name="products"
                     list={ProductList}
                     create={ProductCreate}
                     edit={ProductEdit}
                     icon={ProductIcon}
                 />
                 <Resource
-                    name="Category"
+                    name="categories"
                     list={CategoryList}
                     edit={CategoryEdit}
                     icon={CategoryIcon}
                 />
                 <Resource
-                    name="Review"
+                    name="reviews"
                     list={ReviewList}
                     edit={ReviewEdit}
                     icon={ReviewIcon}
                 />
-                <Resource
-                    name="Segment"
-                    list={SegmentList}
-                    icon={SegmentIcon}
-                />
-                <Resource name="CommandItem" />
             </Admin>
         );
     }
