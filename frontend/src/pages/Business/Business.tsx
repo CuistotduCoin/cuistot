@@ -6,10 +6,14 @@ import Grid from "@material-ui/core/Grid/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
+import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import React from "react";
+// @ts-ignore
+import HubspotForm from "react-hubspot-form";
 import Slider from "react-slick";
+import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -154,9 +158,12 @@ export class Business extends React.Component<IBusinessProps, {}> {
         name: "hippocampe"
       }
     ];
-
     return (
       <>
+        <Head
+          title={metaInfo.metaInfo.business.title}
+          description={metaInfo.metaInfo.business.description}
+        />
         <Header />
         <Hero
           imageURL="https://picsum.photos/100/50/?random"
@@ -416,6 +423,18 @@ export class Business extends React.Component<IBusinessProps, {}> {
           Réservez votre billet et embarquez en équipe pour un savoureux voyage
           culinaire !
         </Typography>
+        <Grid
+          container={true}
+          justify="space-around"
+          alignItems="center"
+          spacing={16}
+          className={classes.grid}
+        >
+          <HubspotForm
+            portalId="3826127"
+            formId="2db2fd4a-3e67-4396-a725-e8320947201e"
+          />
+        </Grid>
         <Footer />
       </>
     );
