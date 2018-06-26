@@ -52,28 +52,28 @@ custom:
       - dataSource: Workshop
         type: Mutation
         field: createWorkshop
-        request: "createWorkshop-request-mapping-template.txt"
-        response: "createWorkshop-response-mapping-template.txt"
+        request: "workshop/createWorkshop-request-mapping-template.txt"
+        response: "workshop/createWorkshop-response-mapping-template.txt"
       - dataSource: Workshop
         type: Query
         field: getWorkshop
-        request: "getWorkshop-request-mapping-template.txt"
-        response: "getWorkshop-response-mapping-template.txt"
+        request: "workshop/getWorkshop-request-mapping-template.txt"
+        response: "workshop/getWorkshop-response-mapping-template.txt"
       - dataSource: Workshop
         type: Query
         field: getWorkshops
-        request: "getWorkshops-request-mapping-template.txt"
-        response: "getWorkshops-response-mapping-template.txt"
+        request: "workshop/getWorkshops-request-mapping-template.txt"
+        response: "workshop/getWorkshops-response-mapping-template.txt"
       - dataSource: Workshop
         type: Mutation
         field: updateWorkshop
-        request: "updateWorkshop-request-mapping-template.txt"
-        response: "updateWorkshop-response-mapping-template.txt"
+        request: "workshop/updateWorkshop-request-mapping-template.txt"
+        response: "workshop/updateWorkshop-response-mapping-template.txt"
       - dataSource: Workshop
         type: Mutation
         field: deleteWorkshop
-        request: "deleteWorkshop-request-mapping-template.txt"
-        response: "deleteWorkshop-response-mapping-template.txt"
+        request: "workshop/deleteWorkshop-request-mapping-template.txt"
+        response: "workshop/deleteWorkshop-response-mapping-template.txt"
     serviceRole: "AppSyncServiceRole"
     dataSources:
       - type: AMAZON_DYNAMODB

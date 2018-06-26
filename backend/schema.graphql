@@ -151,7 +151,7 @@ type Workshop {
 	kitchen_id: ID
 	cook_id: ID!
 	workshop_date: String!
-	comments(limit: Int!, nextToken: String): CommentList
+	comments(limit: Int, nextToken: String): CommentList
 }
 
 type WorkshopList {
