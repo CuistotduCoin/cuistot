@@ -2,7 +2,7 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import { Field, Form, Formik, FormikActions } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
@@ -50,7 +50,7 @@ export class LoginForm extends Component<ILoginForm, {}> {
 
     const onSubmit = async (values: ILoginFormValues) => {
       try {
-        await Auth.signIn(values.email, values.password);
+        // await Auth.signIn(values.email, values.password);
         alert("Logged in");
       } catch (e) {
         alert(e.message);

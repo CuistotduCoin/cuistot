@@ -5,7 +5,7 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import MarkdownElement from "@material-ui/docs/MarkdownElement";
 import Footer from "components/Footer";
 import Header from "components/Header";
-import React, { Component } from "react";
+import React from "react";
 
 const styles = (theme: Theme) => ({
   grid: {

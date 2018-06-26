@@ -39,7 +39,9 @@ const server = express()
             registry={sheetsRegistry}
             generateClassName={generateClassName}
           >
-            <MuiThemeProvider theme={theme}>{node}</MuiThemeProvider>
+            <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
+              {node}
+            </MuiThemeProvider>
           </JssProvider>
         </ApolloProvider>
       );

@@ -146,12 +146,18 @@ export default class Document extends Component<IDocumentProps, {}> {
               ).replace(/</g, "\\u003c")};`
             }}
           />
-          <script
-            type="text/javascript"
-            src={assets.client.js}
-            defer={true}
-            crossOrigin="anonymous"
-          />
+
+          {process.env.NODE_ENV === "production" && (
+            <script src={assets.client.js} defer={true} />
+          )}
+
+          {process.env.NODE_ENV !== "production" && (
+            <script
+              src={assets.client.js}
+              defer={true}
+              crossOrigin="anonymous"
+            />
+          )}
         </body>
       </html>
     );

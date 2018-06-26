@@ -2,7 +2,7 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
