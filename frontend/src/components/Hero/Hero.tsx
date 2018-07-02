@@ -6,7 +6,7 @@ import React, { Component } from "react";
 const styles = (theme: Theme) => ({
   content: {
     alignItems: "center",
-    background: "rgba(0, 0, 0, 0.7)",
+    background: "rgba(0, 0, 0, 0.5)",
     display: "flex"
   },
   grid: {
