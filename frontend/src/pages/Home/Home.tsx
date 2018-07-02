@@ -1,7 +1,4 @@
 import Grid from "@material-ui/core/Grid";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
@@ -14,16 +11,24 @@ import Slider from "react-slick";
 import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
+  block: {
+    overflow: "hidden",
+    position: "relative"
+  },
   grid: {
     margin: "0px auto",
     maxWidth: 1080,
     padding: 24
   },
-  gridList: {
-    transform: "translateZ(0)"
+  gridTile: {
+    margin: "0px auto"
   },
   image: {
-    opacity: "0.5"
+    opacity: "0.5",
+    position: "relative",
+    top: "50%",
+    transform: "translateY(-50%)",
+    width: "100%"
   },
   link: {
     textDecoration: "none"
@@ -38,13 +43,51 @@ const styles = (theme: Theme) => ({
     margin: "0px auto",
     width: 100
   },
-  tileBar: {
+  tile: {
+    alignItems: "center",
+    background: "rgba(0, 0, 0, 0.4)",
+    display: "flex",
     height: "100%",
+    left: 0,
+    position: "absolute",
+    right: 0,
     textAlign: "center",
-    transition: "all 0.2s ease"
+    top: 0
   },
-  tileEntreprise: { backgroundColor: "#e84a4c" },
-  tileParticulier: { backgroundColor: "#47b8b2" }
+  tileEntreprise: {
+    "&:hover": {
+      opacity: 0.7
+    },
+    "&:hover $tileSubtitle": {
+      backgroundColor: "black"
+    },
+    backgroundColor: "#e84a4c",
+    height: 180
+  },
+  tileParticulier: {
+    "&:hover": {
+      opacity: 0.7
+    },
+    "&:hover $tileSubtitle": {
+      backgroundColor: "black"
+    },
+    backgroundColor: "#47b8b2",
+    height: 180
+  },
+  tileSubtitle: {
+    color: "#fff",
+    opacity: 0,
+    textAlign: "center",
+    transition: "opacity 0.35s, transform 0.35s"
+  },
+  tileTitle: {
+    color: "#fff",
+    fontSize: 20,
+    textAlign: "center"
+  },
+  typography: {
+    marginTop: 15
+  }
 });
 
 interface IHomeProps {
@@ -141,43 +184,91 @@ export class Home extends React.Component<IHomeProps, {}> {
         <Header />
         <Hero
           imageURL="https://picsum.photos/700/400/?random"
-          videoURL="http://thenewcode.com/assets/videos/polina.mp4"
+          videoURL="video/landing-video.mp4"
+          valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
+          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
         />
-        <GridList className={classes.gridList} cols={2} spacing={0}>
-          <GridListTile className={classes.tileEntreprise}>
-            <img
-              src="img/home/business.jpg"
-              alt={"Entreprise"}
-              className={classes.image}
-            />
-            <Link to="/business" className={classes.link}>
-              <GridListTileBar
-                titlePosition="top"
-                title="Vous êtes une entreprise"
-                className={classes.tileBar}
-              />
-            </Link>
-          </GridListTile>
-          <GridListTile className={classes.tileParticulier}>
-            <img
-              src="img/home/individual.jpg"
-              alt={"Particulier"}
-              className={classes.image}
-            />
-            <Link to="/individual" className={classes.link}>
-              <GridListTileBar
-                titlePosition="top"
-                title="Vous êtes un particulier"
-                className={classes.tileBar}
-              />
-            </Link>
-          </GridListTile>
-        </GridList>
+        <Grid
+          container={true}
+          alignItems="center"
+          spacing={0}
+          className={classes.gridTile}
+        >
+          <Grid item={true} xs={12} sm={6}>
+            <Grid container={true} className={classes.tileEntreprise}>
+              <div className={classes.block}>
+                <img
+                  src="img/home/business.jpg"
+                  alt={"Entreprise"}
+                  className={classes.image}
+                />
+                <Link to="/business" className={classes.link}>
+                  <div className={classes.tile}>
+                    <Grid container={true} direction="column">
+                      <Typography
+                        variant="headline"
+                        align="center"
+                        component="h2"
+                        className={classes.tileTitle}
+                      >
+                        Vous etes une entreprises
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        align="center"
+                        component="p"
+                        className={classes.tileSubtitle}
+                      >
+                        Concoctez avec nous une expérience culinaire authentique
+                        et gourmande pour vos salariés !
+                      </Typography>
+                    </Grid>
+                  </div>
+                </Link>
+              </div>
+            </Grid>
+          </Grid>
+          <Grid item={true} xs={12} sm={6}>
+            <Grid container={true} className={classes.tileParticulier}>
+              <div className={classes.block}>
+                <img
+                  src="img/home/individual.jpg"
+                  alt={"Particulier"}
+                  className={classes.image}
+                />
+                <Link to="/individual" className={classes.link}>
+                  <div className={classes.tile}>
+                    <Grid container={true} direction="column">
+                      <Typography
+                        variant="headline"
+                        align="center"
+                        component="h2"
+                        className={classes.tileTitle}
+                      >
+                        Vous etes un particulier
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        align="center"
+                        component="p"
+                        className={classes.tileSubtitle}
+                      >
+                        Participez à des ateliers de cuisine authentiques et en
+                        toute convivialité !
+                      </Typography>
+                    </Grid>
+                  </div>
+                </Link>
+              </div>
+            </Grid>
+          </Grid>
+        </Grid>
         <Typography
           variant="title"
           align="center"
           component="h2"
           gutterBottom={true}
+          className={classes.typography}
         >
           Ateliers, dégustation ou repas, retrouvez nos ingrédients clés :
         </Typography>

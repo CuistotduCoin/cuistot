@@ -167,8 +167,9 @@ export class Business extends React.Component<IBusinessProps, {}> {
         <Header />
         <Hero
           imageURL="https://picsum.photos/100/50/?random"
-          videoURL="http://thenewcode.com/assets/videos/polina.mp4"
+          videoURL="video/landing-video.mp4"
           valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
+          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
         />
         <Grid
           container={true}

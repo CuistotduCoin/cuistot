@@ -31,7 +31,12 @@ const styles = (theme: Theme) => ({
   media: {
     height: 135
   },
-  title: { color: "white" }
+  title: {
+    color: "white"
+  },
+  typography: {
+    marginTop: 15
+  }
 });
 
 export interface IIndividualProps {
@@ -62,19 +67,57 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       }
     ];
 
+    const workshops = [
+      {
+        availableSeat: 4,
+        date: "samedi 7 juillet, 9h30-12h30",
+        image: "https://picsum.photos/400/194/?random",
+        imageCook: "https://picsum.photos/40/40/?random",
+        name: "Atelier Boulangerie : Pains & Viennoiseries",
+        nameCook: "Fabien",
+        price: 50,
+        spot: "Schmidt, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 1,
+        date: "samedi 7 juillet, 15h30-18h30",
+        image: "https://picsum.photos/400/194/?random",
+        imageCook: "https://picsum.photos/40/40/?random",
+        name: "Christian Patisserie : Kouign Amann",
+        nameCook: "Christian",
+        price: 40,
+        spot: "C Chocolat, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 1,
+        date: "mercredi 11 juillet, 14h-16h",
+        image: "https://picsum.photos/400/194/?random",
+        imageCook: "https://picsum.photos/40/40/?random",
+        name: "Atelier enfant - Cupcake",
+        nameCook: "Audrey",
+        price: 30,
+        spot: "Chez Audrey, Brest",
+        totalSeat: 3
+      }
+    ];
+
     return (
       <>
         <Header />
         <Hero
           imageURL="https://picsum.photos/100/50/?random"
-          videoURL="http://thenewcode.com/assets/videos/polina.mp4"
+          videoURL="video/landing-video.mp4"
           valueProposition="Participez à des ateliers de cuisine authentiques et en toute convivialité !"
+          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
         />
         <Typography
           variant="title"
           align="center"
           component="h2"
           gutterBottom={true}
+          className={classes.typography}
         >
           Plutôt atelier de cuisine collectif ou privatisé, ou encore repas ? Il
           y en a pour tous les goûts !
@@ -112,6 +155,16 @@ export class Individual extends React.Component<IIndividualProps, {}> {
             </Grid>
           ))}
         </Grid>
+        <Typography
+          variant="title"
+          align="center"
+          component="h2"
+          gutterBottom={true}
+          className={classes.typography}
+        >
+          Nos prochains ateliers collectifs
+        </Typography>
+        <WorkshopCardList workshops={workshops} />
         <Footer />
       </>
     );

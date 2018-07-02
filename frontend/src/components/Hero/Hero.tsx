@@ -47,6 +47,7 @@ interface IHeroProps {
   videoURL: string;
   imageURL: string;
   valueProposition: string;
+  description: string;
 }
 
 export class Hero extends Component<IHeroProps, {}> {
@@ -78,10 +79,11 @@ export class Hero extends Component<IHeroProps, {}> {
                 <Typography variant="title" align="center" component="h1">
                   {this.props.valueProposition}
                 </Typography>
-                <Typography variant="subheading" align="center" component="p">
-                  Ateliers de Cuisine, Dégustations, Repas authentiques et
-                  conviviaux
-                </Typography>
+                {this.props.description && (
+                  <Typography variant="subheading" align="center" component="p">
+                    {this.props.description}
+                  </Typography>
+                )}
               </Grid>
             </Grid>
           </div>

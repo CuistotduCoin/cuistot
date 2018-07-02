@@ -30,7 +30,7 @@ export class Legal extends React.Component<ILegalProps, {}> {
         <Header />
         <Hero
           imageURL="https://picsum.photos/100/50/?random"
-          videoURL="http://thenewcode.com/assets/videos/polina.mp4"
+          videoURL="video/landing-video.mp4"
           valueProposition="Conditions légales"
         />
         <Grid

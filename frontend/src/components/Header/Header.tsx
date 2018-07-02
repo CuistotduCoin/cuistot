@@ -113,11 +113,12 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
               </Button>
             </Hidden>
           </Grid>
-          {!hideSignUpLogin && (
-            <Grid container={true} justify="flex-end">
-              {button}
-            </Grid>
-          )}
+          {!hideSignUpLogin && // false is temp
+            false && (
+              <Grid container={true} justify="flex-end">
+                {button}
+              </Grid>
+            )}
         </Toolbar>
       </AppBar>
     );

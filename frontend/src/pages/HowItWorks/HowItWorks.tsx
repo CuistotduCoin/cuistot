@@ -4,9 +4,11 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 // @ts-ignore
 import MarkdownElement from "@material-ui/docs/MarkdownElement";
 import Footer from "components/Footer";
+import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
-import React, { Component } from "react";
+import React from "react";
+import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -26,10 +28,14 @@ export class HowItWorks extends React.Component<IHowItWorksProps, {}> {
 
     return (
       <>
+        <Head
+          title={metaInfo.metaInfo.howitworks.title}
+          description={metaInfo.metaInfo.howitworks.description}
+        />
         <Header />
         <Hero
           imageURL="https://picsum.photos/100/50/?random"
-          videoURL="http://thenewcode.com/assets/videos/polina.mp4"
+          videoURL="video/landing-video.mp4"
           valueProposition="Comment ça marche ?"
         />
         <Grid

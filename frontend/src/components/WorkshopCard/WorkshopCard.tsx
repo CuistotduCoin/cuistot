@@ -1,24 +1,17 @@
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import Chip from "@material-ui/core/Chip";
 import green from "@material-ui/core/colors/green";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import DateRange from "@material-ui/icons/DateRange";
 import Face from "@material-ui/icons/Face";
-import Favorite from "@material-ui/icons/Favorite";
-import PersonPinCircle from "@material-ui/icons/PersonPinCircle";
 import Place from "@material-ui/icons/Place";
-import Share from "@material-ui/icons/Share";
 import Theaters from "@material-ui/icons/Theaters";
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import StarRating from "../StarRating";
 
@@ -34,7 +27,7 @@ const styles = (theme: Theme) => ({
     padding: 0
   },
   cardHeaderDown: {
-    background: "rgba(0, 0, 0, 0.2)",
+    background: "rgba(0, 0, 0, 0.4)",
     height: 40,
     marginTop: -72
   },
@@ -49,8 +42,11 @@ const styles = (theme: Theme) => ({
   media: {
     height: 194
   },
+  name: {
+    color: "white"
+  },
   subtitle: {
-    color: "rgba(255, 255, 255, 0.70)"
+    color: "rgba(255, 255, 255, 0.8)"
   },
   title: {
     color: "white"
@@ -60,22 +56,40 @@ const styles = (theme: Theme) => ({
 export interface IWorkshopCardProps {
   classes?: any;
   price: number;
-  title: string;
+  name: string;
   date: string;
   image: string;
-  avatar: string;
-  rating: number;
+  imageCook: string;
+  nameCook: string;
+  rating?: number;
   availableSeat: number;
   spot: string;
   totalSeat: number;
-  totalDate: number;
+  totalDate?: number;
 }
 
-export class WorkshopCard extends Component<IWorkshopCardProps, {}> {
+export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
   public static defaultProps = { avatar: <Face /> };
 
   public render() {
     const { classes } = this.props;
+
+    let avatar;
+    if (this.props.imageCook) {
+      avatar = (
+        <Avatar
+          className={classes.avatar}
+          alt={this.props.nameCook}
+          src={this.props.imageCook}
+        />
+      );
+    } else {
+      avatar = (
+        <Avatar className={classes.avatar}>
+          {this.props.nameCook.charAt(0)}
+        </Avatar>
+      );
+    }
 
     return (
       <Card className={classes.card}>
@@ -87,14 +101,12 @@ export class WorkshopCard extends Component<IWorkshopCardProps, {}> {
         <CardMedia
           className={classes.media}
           image={this.props.image}
-          title={this.props.title}
+          title={this.props.name}
         />
         <CardHeader
           className={classes.cardHeaderDown}
-          avatar={
-            <Avatar className={classes.avatar}>{this.props.avatar}</Avatar>
-          }
-          title={this.props.title}
+          avatar={avatar}
+          title={this.props.name}
           subheader={this.props.date}
           classes={{
             subheader: classes.subtitle,
@@ -103,33 +115,28 @@ export class WorkshopCard extends Component<IWorkshopCardProps, {}> {
         />
         <CardContent className={classes.cardContent}>
           <Grid container={true}>
-            <Grid item={true} xs={4}>
-              <Grid container={true} justify="flex-start">
+            <Grid item={true} xs={6}>
+              <Grid container={true} justify="center">
                 <Place />
                 <Typography variant="body1">{this.props.spot}</Typography>
               </Grid>
             </Grid>
-            <Grid item={true} xs={4}>
+            <Grid item={true} xs={6}>
               <Grid container={true} justify="center">
                 <Theaters />
                 <Typography variant="body1">
-                  {this.props.availableSeat} places
+                  {this.props.availableSeat} place{this.props.availableSeat >
+                    1 && "s"}
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item={true} xs={4}>
-              <Grid container={true} justify="flex-end">
-                <DateRange />
-                <Typography variant="body1">
-                  {this.props.totalDate} dates
-                </Typography>
+            {this.props.rating && (
+              <Grid item={true} xs={12}>
+                <Grid container={true} justify="center">
+                  <StarRating rating={this.props.rating} />
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true} justify="center">
-                <StarRating rating={this.props.rating} />
-              </Grid>
-            </Grid>
+            )}
           </Grid>
         </CardContent>
       </Card>

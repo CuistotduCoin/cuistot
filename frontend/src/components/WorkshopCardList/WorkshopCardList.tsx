@@ -27,10 +27,10 @@ export class WorkshopCardList extends Component<IWorkshopCardListProps, {}> {
         spacing={16}
         className={classes.grid}
       >
-        {workshops.map((workshop: any, idx: number) => (
-          <Grid item={true} xs={12} md={6} lg={4}>
+        {workshops.map((workshop, index) => (
+          <Grid key={index} item={true} xs={12} md={6} lg={4}>
             <Grid container={true} justify="center">
-              {workshop}
+              <WorkshopCard {...workshop} />
             </Grid>
           </Grid>
         ))}

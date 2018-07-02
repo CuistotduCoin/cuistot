@@ -30,7 +30,7 @@ export class InviteBusiness extends React.Component<IInviteBusinessProps, {}> {
         <Header />
         <Hero
           imageURL="https://picsum.photos/100/50/?random"
-          videoURL="http://thenewcode.com/assets/videos/polina.mp4"
+          videoURL="video/landing-video.mp4"
           valueProposition="Invitez vos proches"
         />
         <Grid

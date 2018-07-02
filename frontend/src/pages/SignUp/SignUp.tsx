@@ -22,7 +22,7 @@ export class SignUp extends React.Component<ISignUpProps, {}> {
         <Header hideSignUpLogin={true} />
         <Hero
           imageURL="https://picsum.photos/100/50/?random"
-          videoURL="http://thenewcode.com/assets/videos/polina.mp4"
+          videoURL="video/landing-video.mp4"
           valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
         />
         <SignUpForm />

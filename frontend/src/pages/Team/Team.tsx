@@ -4,9 +4,11 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 // @ts-ignore
 import MarkdownElement from "@material-ui/docs/MarkdownElement";
 import Footer from "components/Footer";
+import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
-import React, { Component } from "react";
+import React from "react";
+import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -26,11 +28,15 @@ export class Team extends React.Component<ITeamProps, {}> {
 
     return (
       <>
+        <Head
+          title={metaInfo.metaInfo.team.title}
+          description={metaInfo.metaInfo.team.description}
+        />
         <Header />
         <Hero
           imageURL="https://picsum.photos/100/50/?random"
-          videoURL="http://thenewcode.com/assets/videos/polina.mp4"
-          valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
+          videoURL="video/landing-video.mp4"
+          valueProposition="Qui sommes-nous ? l'équipes de Cuistot du Coin"
         />
         <Grid
           container={true}

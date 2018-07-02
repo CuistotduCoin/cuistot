@@ -4,8 +4,11 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 // @ts-ignore
 import MarkdownElement from "@material-ui/docs/MarkdownElement";
 import Footer from "components/Footer";
+import Head from "components/Head";
 import Header from "components/Header";
+import Hero from "components/Hero";
 import React from "react";
+import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -25,7 +28,16 @@ export class Mission extends React.Component<IMissionProps, {}> {
 
     return (
       <>
+        <Head
+          title={metaInfo.metaInfo.mission.title}
+          description={metaInfo.metaInfo.mission.description}
+        />
         <Header />
+        <Hero
+          imageURL="https://picsum.photos/100/50/?random"
+          videoURL="video/landing-video.mp4"
+          valueProposition="Nos mission à Cuistot du Coin"
+        />
         <Grid
           container={true}
           justify="space-around"
