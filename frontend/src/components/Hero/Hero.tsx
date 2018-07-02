@@ -20,7 +20,7 @@ const styles = (theme: Theme) => ({
     position: "relative"
   },
   video: {
-    bottom: "0",
+    bottom: 0,
     left: "50%",
     minHeight: "100%",
     minWidth: "100%",
