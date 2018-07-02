@@ -56,20 +56,20 @@ const styles = (theme: Theme) => ({
   },
   tileEntreprise: {
     "&:hover": {
-      opacity: 0.7
+      opacity: 0.9
     },
     "&:hover $tileSubtitle": {
-      backgroundColor: "black"
+      opacity: 1
     },
     backgroundColor: "#e84a4c",
     height: 180
   },
   tileParticulier: {
     "&:hover": {
-      opacity: 0.7
+      opacity: 0.9
     },
     "&:hover $tileSubtitle": {
-      backgroundColor: "black"
+      opacity: 1
     },
     backgroundColor: "#47b8b2",
     height: 180
