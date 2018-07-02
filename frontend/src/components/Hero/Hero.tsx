@@ -20,14 +20,14 @@ const styles = (theme: Theme) => ({
     position: "relative"
   },
   video: {
-    bottom: 0,
+    bottom: "50%",
     left: "50%",
     minHeight: "100%",
     minWidth: "100%",
     position: "absolute",
     right: 0,
     top: 0,
-    transform: "translateX(-50%)",
+    transform: "translate(-50%, -50%);",
     zIndex: -1
   }
 });
