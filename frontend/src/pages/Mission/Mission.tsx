@@ -34,7 +34,7 @@ export class Mission extends React.Component<IMissionProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="https://picsum.photos/100/50/?random"
+          imageURL="img/home/landing.jpg"
           videoURL="video/landing-video.mp4"
           valueProposition="Nos mission à Cuistot du Coin"
         />

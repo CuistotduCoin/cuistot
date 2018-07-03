@@ -183,17 +183,12 @@ export class Home extends React.Component<IHomeProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="https://picsum.photos/700/400/?random"
+          imageURL="img/home/landing.jpg"
           videoURL="video/landing-video.mp4"
           valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
           description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
         />
-        <Grid
-          container={true}
-          alignItems="center"
-          spacing={0}
-          className={classes.gridTile}
-        >
+        <Grid container={true} alignItems="center" className={classes.gridTile}>
           <Grid item={true} xs={12} sm={6}>
             <Grid container={true} className={classes.tileEntreprise}>
               <div className={classes.block}>

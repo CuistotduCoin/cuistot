@@ -4,6 +4,17 @@ import Typography from "@material-ui/core/Typography";
 import React, { Component } from "react";
 
 const styles = (theme: Theme) => ({
+  backgroundImage: {
+    bottom: 0,
+    left: "50%",
+    minHeight: "100%",
+    minWidth: "100%",
+    position: "absolute",
+    right: 0,
+    top: 0,
+    transform: "translateX(-50%);",
+    zIndex: -1
+  },
   content: {
     alignItems: "center",
     background: "rgba(0, 0, 0, 0.5)",
@@ -43,7 +54,7 @@ interface IHeroProps {
 
 export class Hero extends Component<IHeroProps, {}> {
   public static defaultProps: Partial<IHeroProps> = {
-    height: 500,
+    height: 400,
     valueProposition: "Des saveurs à partager"
   };
 
@@ -84,7 +95,7 @@ export class Hero extends Component<IHeroProps, {}> {
           </Grid>
         </div>
 
-        <div className={classes.video} style={this.innerBackground} />
+        <div className={classes.backgroundImage} style={this.innerBackground} />
         <video
           className={classes.video}
           autoPlay={true}

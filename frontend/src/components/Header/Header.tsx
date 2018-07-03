@@ -1,5 +1,4 @@
 import AppBar from "@material-ui/core/AppBar";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
@@ -8,7 +7,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-// tslint:disable-next-line:no-shadowed-variable
 const styles = (theme: Theme) => ({
   appBar: {
     background:

@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 const styles = (theme: Theme) => ({
   grid: {
     margin: "0px auto",
-    maxWidth: "1080px",
-    padding: "24px"
+    maxWidth: 1080,
+    padding: 24
   },
   link: {
     textDecoration: "none"

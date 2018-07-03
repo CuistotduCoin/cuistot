@@ -34,7 +34,7 @@ export class Gift extends React.Component<IGiftProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="https://picsum.photos/100/50/?random"
+          imageURL="img/home/landing.jpg"
           videoURL="video/landing-video.mp4"
           valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
         />

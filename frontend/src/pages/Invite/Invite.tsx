@@ -7,7 +7,6 @@ import Footer from "components/Footer";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -29,7 +28,7 @@ export class Invite extends React.Component<IInviteProps, {}> {
       <>
         <Header />
         <Hero
-          imageURL="https://picsum.photos/100/50/?random"
+          imageURL="img/home/landing.jpg"
           videoURL="video/landing-video.mp4"
           valueProposition="Invitez vos proches"
         />

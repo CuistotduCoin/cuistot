@@ -7,7 +7,6 @@ import Footer from "components/Footer";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -29,7 +28,7 @@ export class Testimony extends React.Component<ITestimonyProps, {}> {
       <>
         <Header />
         <Hero
-          imageURL="https://picsum.photos/100/50/?random"
+          imageURL="img/home/landing.jpg"
           videoURL="video/landing-video.mp4"
           valueProposition="Ils nous font confiance"
         />

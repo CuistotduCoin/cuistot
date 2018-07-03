@@ -20,7 +20,7 @@ const styles = (theme: Theme) => ({
     backgroundColor: green[500]
   },
   card: {
-    width: 400
+    width: 360
   },
   cardContent: {
     "&:last-child": { padding: 0 },

@@ -30,7 +30,7 @@ export default class Document extends Component<IDocumentProps, {}> {
         {...htmlAttrs}
         lang="fr"
         style={{
-          height: "100%"
+          height: "100vh"
         }}
       >
         <head>
@@ -136,7 +136,13 @@ export default class Document extends Component<IDocumentProps, {}> {
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
         </head>
-        <body {...bodyAttrs}>
+        <body
+          {...bodyAttrs}
+          style={{
+            minHeight: "100vh",
+            overflowX: "hidden"
+          }}
+        >
           <AfterRoot />
           <AfterData data={data} />
           <script

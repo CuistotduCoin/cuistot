@@ -34,7 +34,7 @@ export class Team extends React.Component<ITeamProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="https://picsum.photos/100/50/?random"
+          imageURL="img/home/landing.jpg"
           videoURL="video/landing-video.mp4"
           valueProposition="Qui sommes-nous ? l'équipes de Cuistot du Coin"
         />

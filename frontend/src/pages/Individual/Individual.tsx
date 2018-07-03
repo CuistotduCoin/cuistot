@@ -13,7 +13,7 @@ import React, { Component } from "react";
 
 const styles = (theme: Theme) => ({
   card: {
-    maxWidth: 240
+    maxWidth: 300
   },
   cardHeader: {
     background: "rgba(0, 0, 0, 0.4)",
@@ -26,7 +26,8 @@ const styles = (theme: Theme) => ({
   },
   grid: {
     margin: "0px auto",
-    maxWidth: "1080px"
+    maxWidth: 1080,
+    padding: 24
   },
   media: {
     height: 135
@@ -99,7 +100,29 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Audrey",
         price: 30,
         spot: "Chez Audrey, Brest",
-        totalSeat: 3
+        totalSeat: 6
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 21 juillet, 10h-12h30",
+        image: "https://picsum.photos/400/194/?random",
+        imageCook: "https://picsum.photos/40/40/?random",
+        name: "Tournage de crèpes de blé noir",
+        nameCook: "Nadine",
+        price: 25,
+        spot: "chez Cuisinella, Brest",
+        totalSeat: 8
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 4 aout, 14h30-16h30",
+        image: "https://picsum.photos/400/194/?random",
+        imageCook: "https://picsum.photos/40/40/?random",
+        name: "Tournage de crèpes de froment",
+        nameCook: "Nadine",
+        price: 20,
+        spot: "chez Cuisinella, Brest",
+        totalSeat: 8
       }
     ];
 

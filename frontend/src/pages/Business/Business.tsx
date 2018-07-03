@@ -17,7 +17,7 @@ import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   card: {
-    maxWidth: 240
+    maxWidth: 300
   },
   cardHeader: {
     background: "rgba(0, 0, 0, 0.4)",
@@ -166,7 +166,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="https://picsum.photos/100/50/?random"
+          imageURL="img/home/landing.jpg"
           videoURL="video/landing-video.mp4"
           valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
           description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
@@ -252,7 +252,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           className={classes.grid}
         >
           {typeActivity.map((activity, index) => (
-            <Grid key={index} item={true} xs={8} md={4}>
+            <Grid key={index} item={true} xs={12} sm={6} md={4}>
               <Grid container={true} justify="center">
                 <Card className={classes.card}>
                   <CardMedia
