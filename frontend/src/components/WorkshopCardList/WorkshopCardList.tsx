@@ -4,10 +4,14 @@ import React, { Component } from "react";
 import WorkshopCard from "../WorkshopCard";
 
 const styles = (theme: Theme) => ({
+  card: {
+    padding: 10
+  },
   grid: {
     margin: "0px auto",
-    maxWidth: 1080,
-    padding: 24
+    maxWidth: 1300,
+    paddingBottom: 24,
+    paddingTop: 12
   }
 });
 
@@ -21,16 +25,10 @@ export class WorkshopCardList extends Component<IWorkshopCardListProps, {}> {
     const { classes, workshops } = this.props;
 
     return (
-      <Grid
-        container={true}
-        justify="space-around"
-        alignItems="center"
-        spacing={16}
-        className={classes.grid}
-      >
+      <Grid container={true} justify="space-around" className={classes.grid}>
         {workshops.map((workshop, index) => (
-          <Grid key={index} item={true} xs={12} md={6} lg={4}>
-            <Grid container={true} justify="center">
+          <Grid key={index} item={true} xs={12} sm={6} md={4}>
+            <Grid container={true} justify="center" className={classes.card}>
               <WorkshopCard {...workshop} />
             </Grid>
           </Grid>

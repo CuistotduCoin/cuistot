@@ -13,7 +13,7 @@ import React, { Component } from "react";
 
 const styles = (theme: Theme) => ({
   card: {
-    maxWidth: 300
+    width: 300
   },
   cardHeader: {
     background: "rgba(0, 0, 0, 0.4)",
@@ -70,59 +70,205 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     const workshops = [
       {
-        availableSeat: 4,
-        date: "samedi 7 juillet, 9h30-12h30",
-        image: "https://picsum.photos/400/194/?random",
-        imageCook: "https://picsum.photos/40/40/?random",
-        name: "Atelier Boulangerie : Pains & Viennoiseries",
+        availableSeat: 8,
+        date: "samedi 21 juillet, 10h-12h30",
+        image: "img/workshops/nadine-crepes-ble-noir.jpg",
+        imageCook: "img/cooks/nadine.jpg",
+        name: "Tournage de crèpes de blé noir",
+        nameCook: "Nadine",
+        price: 25,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 4 aout, 14h30-16h30",
+        image: "img/workshops/nadine-crepes-froment.jpg",
+        imageCook: "img/cooks/nadine.jpg",
+        name: "Tournage de crèpes de froment",
+        nameCook: "Nadine",
+        price: 20,
+        spot: "Cuisinella, Brest",
+        totalSeat: 8
+      }
+    ];
+
+    const workshopsPending = [
+      {
+        availableSeat: 8,
+        date: "à denir",
+        image: "img/workshops/fabien-pain-maison.jpg",
+        imageCook: "img/cooks/fabien.jpg",
+        name: "Faire son pain maison",
         nameCook: "Fabien",
+        price: 50,
+        spot: "Schmidt, Brest",
+        totalSeat: 8
+      },
+      {
+        availableSeat: 6,
+        date: "à denir",
+        image: "img/workshops/shyam-indien-generique.jpg",
+        imageCook: "img/cooks/shyam.jpg",
+        name: "Découverte de la cuisine indienne",
+        nameCook: "Shyam",
+        price: 35,
+        spot: "Arthur Bonnet, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/valquiria-coxinhas.jpg",
+        imageCook: "img/cooks/valquiria.jpg",
+        name: "Coxinhas & Caipirinha",
+        nameCook: "Valquiria",
+        price: 35,
+        spot: "Arthur Bonnet, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/audrey-pate-a-sucre.jpg",
+        imageCook: "img/cooks/audrey.jpg",
+        name: "Cake Design : Pâte à sucres",
+        nameCook: "Audrey",
+        price: 45,
+        spot: "Audrey, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/anaelle-sarrasin.jpg",
+        imageCook: "img/cooks/anaelle.jpg",
+        name: "À la découverte du sarrasin",
+        nameCook: "Anaelle",
+        price: 25,
+        spot: "Anaelle, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/takako-sushis.jpg",
+        imageCook: "img/cooks/takako.jpg",
+        name: "Sushis, makis et temaris",
+        nameCook: "Takako",
+        price: 40,
+        spot: "Schmidt, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/ahmed-cacao-cru.jpg",
+        imageCook: "img/cooks/ahmed.jpg",
+        name: "Cacao cru",
+        nameCook: "Ahmed",
+        price: 25,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/anne-pate-a-tartiner-maison.jpg",
+        imageCook: "img/cooks/anne.jpg",
+        name: "pour Enfants : Pâte à tartiner maison",
+        nameCook: "Anne",
+        price: 25,
+        spot: "Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/michel-decouverte-ayurvedique.jpg",
+        imageCook: "img/cooks/michel.jpg",
+        name: "Découverte de la cuisine ayurvédique",
+        nameCook: "Michel",
+        price: 40,
+        spot: "Michel, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/ronan-macarons.jpg",
+        imageCook: "img/cooks/ronan.jpg",
+        name: "Macarons",
+        nameCook: "Ronan",
         price: 50,
         spot: "Schmidt, Brest",
         totalSeat: 6
       },
       {
-        availableSeat: 1,
-        date: "samedi 7 juillet, 15h30-18h30",
-        image: "https://picsum.photos/400/194/?random",
-        imageCook: "https://picsum.photos/40/40/?random",
-        name: "Christian Patisserie : Kouign Amann",
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/mikaelle-cuisine-vegetale.jpg",
+        imageCook: "img/cooks/mikaelle.jpg",
+        name: "Découverte de la cuisine végétale crue",
+        nameCook: "Mikaelle",
+        price: 60,
+        spot: "Ô-Shun, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/ahmed-entre-ici-et-ailleurs.jpg",
+        imageCook: "img/cooks/ahmed.jpg",
+        name: "Entre ici et ailleurs",
+        nameCook: "Ahmed",
+        price: 35,
+        spot: "Schmidt, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image: "img/workshops/ahmed-inspiration-africaine.jpg",
+        imageCook: "img/cooks/ahmed.jpg",
+        name: "Inspiration Africaine",
+        nameCook: "Ahmed",
+        price: 35,
+        spot: "Schmidt, Brest",
+        totalSeat: 6
+      },
+      {
+        availableSeat: 8,
+        date: "à venir",
+        image: "img/workshops/fabien-pains-stop-au-gaspi.jpg",
+        imageCook: "img/cooks/fabien.jpg",
+        name: "Recyclez son pain : stop au gaspi",
+        nameCook: "Fabien",
+        price: 45,
+        spot: "Arthur Bonnet, Brest",
+        totalSeat: 8
+      },
+      {
+        availableSeat: 12,
+        date: "à venir",
+        image: "img/workshops/gaetan-decouverte-vins-naturels.jpg",
+        imageCook: "img/cooks/gaetan.jpg",
+        name: "A la découverte des vins naturels",
+        nameCook: "Gaetan",
+        price: 40,
+        spot: "Soif de Vins, Brest",
+        totalSeat: 12
+      },
+      {
+        availableSeat: 5,
+        date: "à venir",
+        image: "img/workshops/christian-kouign-amann.jpg",
+        imageCook: "img/cooks/christian.jpg",
+        name: "Kouign Amann",
         nameCook: "Christian",
         price: 40,
         spot: "C Chocolat, Brest",
-        totalSeat: 6
-      },
-      {
-        availableSeat: 1,
-        date: "mercredi 11 juillet, 14h-16h",
-        image: "https://picsum.photos/400/194/?random",
-        imageCook: "https://picsum.photos/40/40/?random",
-        name: "Atelier enfant - Cupcake",
-        nameCook: "Audrey",
-        price: 30,
-        spot: "Chez Audrey, Brest",
-        totalSeat: 6
-      },
-      {
-        availableSeat: 8,
-        date: "samedi 21 juillet, 10h-12h30",
-        image: "https://picsum.photos/400/194/?random",
-        imageCook: "https://picsum.photos/40/40/?random",
-        name: "Tournage de crèpes de blé noir",
-        nameCook: "Nadine",
-        price: 25,
-        spot: "chez Cuisinella, Brest",
-        totalSeat: 8
-      },
-      {
-        availableSeat: 8,
-        date: "samedi 4 aout, 14h30-16h30",
-        image: "https://picsum.photos/400/194/?random",
-        imageCook: "https://picsum.photos/40/40/?random",
-        name: "Tournage de crèpes de froment",
-        nameCook: "Nadine",
-        price: 20,
-        spot: "chez Cuisinella, Brest",
-        totalSeat: 8
+        totalSeat: 5
       }
     ];
 
@@ -130,7 +276,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       <>
         <Header />
         <Hero
-          imageURL="https://picsum.photos/100/50/?random"
+          imageURL="img/home/landing.jpg"
           videoURL="video/landing-video.mp4"
           valueProposition="Participez à des ateliers de cuisine authentiques et en toute convivialité !"
           description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
@@ -188,6 +334,16 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           Nos prochains ateliers collectifs
         </Typography>
         <WorkshopCardList workshops={workshops} />
+        <Typography
+          variant="title"
+          align="center"
+          component="h2"
+          gutterBottom={true}
+          className={classes.typography}
+        >
+          Nos ateliers à venir
+        </Typography>
+        <WorkshopCardList workshops={workshopsPending} />
         <Footer />
       </>
     );
