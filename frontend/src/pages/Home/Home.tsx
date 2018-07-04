@@ -35,8 +35,9 @@ const styles = (theme: Theme) => ({
   },
   slider: {
     margin: "0px auto",
-    maxWidth: 1080,
-    paddingBottom: 75
+    maxWidth: 950,
+    paddingBottom: 75,
+    width: "calc(100% - 120px)"
   },
   sliderImage: {
     height: 100,
@@ -97,6 +98,27 @@ interface IHomeProps {
 export class Home extends React.Component<IHomeProps, {}> {
   public render() {
     const { classes } = this.props;
+    const sliderSettings = {
+      autoplay: true,
+      infinite: true,
+      responsive: [
+        {
+          breakpoint: 960,
+          settings: {
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2
+          }
+        }
+      ],
+      slidesToScroll: 1,
+      slidesToShow: 4
+    };
+
     const partners = [
       {
         image: "img/home/partners/amaiur.jpg",
@@ -343,7 +365,7 @@ export class Home extends React.Component<IHomeProps, {}> {
         </Grid>
 
         <div className={classes.slider}>
-          <Slider autoplay={true} slidesToShow={4} slidesToScroll={1}>
+          <Slider {...sliderSettings}>
             {partners.map(partner => (
               <div key={partner.name}>
                 <img
@@ -365,8 +387,23 @@ export class Home extends React.Component<IHomeProps, {}> {
         >
           Ils ont participé à l’aventure Cuistot du Coin
         </Typography>
+        <Grid
+          container={true}
+          justify="space-around"
+          spacing={16}
+          className={classes.grid}
+        >
+          <Grid item={true} xs={12}>
+            <Typography variant={"body1"}>
+              Ils ont participez à nos ateliers, déjeunez aux cotés de nos
+              Cuistots, pour renforcez les liens de leurs salariés, récompensez
+              la réussite d'un projet ou encore pour acceuillir leurs
+              partenaires ou clients.
+            </Typography>
+          </Grid>
+        </Grid>
         <div className={classes.slider}>
-          <Slider autoplay={true} slidesToShow={4} slidesToScroll={1}>
+          <Slider {...sliderSettings}>
             {participants.map((participant, index) => (
               <div key={index}>
                 <img

@@ -17,7 +17,7 @@ import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   card: {
-    maxWidth: 300
+    width: 300
   },
   cardHeader: {
     background: "rgba(0, 0, 0, 0.4)",
@@ -30,6 +30,9 @@ const styles = (theme: Theme) => ({
   },
   cardShortContent: {
     height: 80
+  },
+  cardtypeWorld: {
+    width: 240
   },
   grid: {
     margin: "0px auto",
@@ -52,7 +55,8 @@ const styles = (theme: Theme) => ({
   slider: {
     margin: "0px auto",
     maxWidth: 1080,
-    paddingBottom: 75
+    paddingBottom: 75,
+    width: "calc(100% - 120px)"
   },
   sliderImage: {
     height: 100,
@@ -69,6 +73,26 @@ export interface IBusinessProps {
 export class Business extends React.Component<IBusinessProps, {}> {
   public render() {
     const { classes } = this.props;
+    const sliderSettings = {
+      autoplay: true,
+      infinite: true,
+      responsive: [
+        {
+          breakpoint: 960,
+          settings: {
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2
+          }
+        }
+      ],
+      slidesToScroll: 1,
+      slidesToShow: 4
+    };
 
     const typeActivity = [
       {
@@ -252,8 +276,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
           className={classes.grid}
         >
           {typeActivity.map((activity, index) => (
-            <Grid key={index} item={true} xs={12} sm={6} md={4}>
-              <Grid container={true} justify="center">
+            <Grid key={index} item={true} xs={12} md={4}>
+              <Grid container={true}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.media}
@@ -373,7 +397,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           {typeWorld.map((world, index) => (
             <Grid key={index} item={true} xs={12} sm={6} md={3} lg={true}>
               <Grid container={true} justify="center">
-                <Card className={classes.card}>
+                <Card className={classes.cardtypeWorld}>
                   <CardMedia
                     className={classes.media}
                     image={world.image}
@@ -402,8 +426,23 @@ export class Business extends React.Component<IBusinessProps, {}> {
         >
           Ils ont voyagé aux côtés de nos Cuistots
         </Typography>
+        <Grid
+          container={true}
+          justify="space-around"
+          spacing={16}
+          className={classes.grid}
+        >
+          <Grid item={true} xs={12}>
+            <Typography variant={"body1"}>
+              Ils ont participez à nos ateliers, déjeunez aux cotés de nos
+              Cuistots, pour renforcez les liens de leurs salariés, récompensez
+              la réussite d'un projet ou encore pour acceuillir leurs
+              partenaires ou clients.
+            </Typography>
+          </Grid>
+        </Grid>
         <div className={classes.slider}>
-          <Slider autoplay={true} slidesToShow={4} slidesToScroll={1}>
+          <Slider {...sliderSettings}>
             {participants.map((participant, index) => (
               <div key={index}>
                 <img
