@@ -1,5 +1,5 @@
 import { AfterData, AfterRoot } from "@jaredpalmer/after";
-import React, { Component } from "react";
+import React from "react";
 
 export interface IDocumentProps {
   helmet: any;
@@ -9,7 +9,7 @@ export interface IDocumentProps {
   css: any;
 }
 
-export default class Document extends Component<IDocumentProps, {}> {
+export default class Document extends React.Component<IDocumentProps, {}> {
   public static async getInitialProps({ assets, data, renderPage }: any) {
     const page = await renderPage();
     return {

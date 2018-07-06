@@ -29,7 +29,7 @@ const styles = (theme: Theme) => ({
     height: 120
   },
   cardShortContent: {
-    height: 80
+    height: 60
   },
   cardtypeWorld: {
     width: 240

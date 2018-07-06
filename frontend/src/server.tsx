@@ -3,6 +3,8 @@ import {
   createGenerateClassName,
   MuiThemeProvider
 } from "@material-ui/core/styles";
+import createApolloClient from "createApolloClient";
+import Document from "Document";
 import express from "express";
 import * as React from "react";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
@@ -11,10 +13,8 @@ import { renderToString } from "react-dom/server";
 import { SheetsRegistry } from "react-jss/lib/jss";
 // @ts-ignore
 import JssProvider from "react-jss/lib/JssProvider";
-import createApolloClient from "./createApolloClient";
-import Document from "./Document";
-import routes from "./routes";
-import theme from "./theme";
+import routes from "routes";
+import theme from "theme";
 
 let assets: any;
 const syncLoadAssets = () => {

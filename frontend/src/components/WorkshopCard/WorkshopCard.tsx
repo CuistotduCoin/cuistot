@@ -12,12 +12,13 @@ import Face from "@material-ui/icons/Face";
 import Place from "@material-ui/icons/Place";
 import Theaters from "@material-ui/icons/Theaters";
 import React from "react";
-import { Link } from "react-router-dom";
 import StarRating from "../StarRating";
 
 const styles = (theme: Theme) => ({
   avatar: {
-    backgroundColor: green[500]
+    backgroundColor: green[500],
+    height: 60,
+    width: 60
   },
   card: {
     width: 360
@@ -38,6 +39,12 @@ const styles = (theme: Theme) => ({
   },
   chip: {
     marginRight: 0
+  },
+  icon: {
+    color: green[900]
+  },
+  link: {
+    textDecoration: "none"
   },
   media: {
     height: 194
@@ -66,6 +73,7 @@ export interface IWorkshopCardProps {
   spot: string;
   totalSeat: number;
   totalDate?: number;
+  typeform: string;
 }
 
 export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
@@ -92,54 +100,56 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
     }
 
     return (
-      <Card className={classes.card}>
-        <CardHeader
-          className={classes.cardHeaderUp}
-          avatar={<Chip label={this.props.price + "€"} />}
-          classes={{ avatar: classes.chip }}
-        />
-        <CardMedia
-          className={classes.media}
-          image={this.props.image}
-          title={this.props.name}
-        />
-        <CardHeader
-          className={classes.cardHeaderDown}
-          avatar={avatar}
-          title={this.props.name}
-          subheader={this.props.date}
-          classes={{
-            subheader: classes.subtitle,
-            title: classes.title
-          }}
-        />
-        <CardContent className={classes.cardContent}>
-          <Grid container={true}>
-            <Grid item={true} xs={6}>
-              <Grid container={true} justify="center">
-                <Place />
-                <Typography variant="body1">{this.props.spot}</Typography>
-              </Grid>
-            </Grid>
-            <Grid item={true} xs={6}>
-              <Grid container={true} justify="center">
-                <Theaters />
-                <Typography variant="body1">
-                  {this.props.availableSeat} place{this.props.availableSeat >
-                    1 && "s"}
-                </Typography>
-              </Grid>
-            </Grid>
-            {this.props.rating && (
-              <Grid item={true} xs={12}>
+      <a className={classes.link} href={this.props.typeform} target="_blank">
+        <Card className={classes.card}>
+          <CardHeader
+            className={classes.cardHeaderUp}
+            avatar={<Chip label={this.props.price + "€"} />}
+            classes={{ avatar: classes.chip }}
+          />
+          <CardMedia
+            className={classes.media}
+            image={this.props.image}
+            title={this.props.name}
+          />
+          <CardHeader
+            className={classes.cardHeaderDown}
+            avatar={avatar}
+            title={this.props.name}
+            subheader={this.props.date}
+            classes={{
+              subheader: classes.subtitle,
+              title: classes.title
+            }}
+          />
+          <CardContent className={classes.cardContent}>
+            <Grid container={true}>
+              <Grid item={true} xs={6}>
                 <Grid container={true} justify="center">
-                  <StarRating rating={this.props.rating} />
+                  <Place className={classes.icon} />
+                  <Typography variant="body1">{this.props.spot}</Typography>
                 </Grid>
               </Grid>
-            )}
-          </Grid>
-        </CardContent>
-      </Card>
+              <Grid item={true} xs={6}>
+                <Grid container={true} justify="center">
+                  <Theaters className={classes.icon} />
+                  <Typography variant="body1">
+                    {this.props.availableSeat} place{this.props.availableSeat >
+                      1 && "s"}
+                  </Typography>
+                </Grid>
+              </Grid>
+              {this.props.rating && (
+                <Grid item={true} xs={12}>
+                  <Grid container={true} justify="center">
+                    <StarRating rating={this.props.rating} />
+                  </Grid>
+                </Grid>
+              )}
+            </Grid>
+          </CardContent>
+        </Card>
+      </a>
     );
   }
 }

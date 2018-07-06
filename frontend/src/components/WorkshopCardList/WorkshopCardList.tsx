@@ -1,6 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import React, { Component } from "react";
+import React from "react";
 import WorkshopCard from "../WorkshopCard";
 
 const styles = (theme: Theme) => ({
@@ -20,14 +20,17 @@ export interface IWorkshopCardListProps {
   workshops: any;
 }
 
-export class WorkshopCardList extends Component<IWorkshopCardListProps, {}> {
+export class WorkshopCardList extends React.Component<
+  IWorkshopCardListProps,
+  {}
+> {
   public render() {
     const { classes, workshops } = this.props;
 
     return (
       <Grid container={true} justify="space-around" className={classes.grid}>
         {workshops.map((workshop, index) => (
-          <Grid key={index} item={true} xs={12} sm={6} md={4}>
+          <Grid key={index} item={true} xs={12} md={6} lg={4}>
             <Grid container={true} justify="center" className={classes.card}>
               <WorkshopCard {...workshop} />
             </Grid>

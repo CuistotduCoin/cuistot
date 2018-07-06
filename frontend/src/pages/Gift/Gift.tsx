@@ -7,7 +7,7 @@ import Footer from "components/Footer";
 import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
-import React, { Component } from "react";
+import React from "react";
 import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({

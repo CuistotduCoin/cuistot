@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({
@@ -25,7 +25,7 @@ interface IHeaderState {
   up?: boolean;
 }
 
-export class Header extends Component<IHeaderProps, IHeaderState> {
+export class Header extends React.Component<IHeaderProps, IHeaderState> {
   constructor(props: IHeaderProps) {
     super(props);
 

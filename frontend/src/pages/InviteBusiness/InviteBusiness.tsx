@@ -6,7 +6,7 @@ import MarkdownElement from "@material-ui/docs/MarkdownElement";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import Hero from "components/Hero";
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({

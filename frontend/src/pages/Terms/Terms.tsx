@@ -1,4 +1,4 @@
-import * as content from "!raw-loader!content/legal.md";
+import * as content from "!raw-loader!content/terms.md";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 // @ts-ignore
@@ -6,8 +6,7 @@ import MarkdownElement from "@material-ui/docs/MarkdownElement";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import Hero from "components/Hero";
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -17,11 +16,11 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface ILegalProps {
+interface ITermsProps {
   classes?: any;
 }
 
-export class Legal extends React.Component<ILegalProps, {}> {
+export class Terms extends React.Component<ITermsProps, {}> {
   public render() {
     const { classes } = this.props;
 
@@ -48,4 +47,4 @@ export class Legal extends React.Component<ILegalProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(Legal as any) as any;
+export default withStyles(styles as any)(Terms as any) as any;

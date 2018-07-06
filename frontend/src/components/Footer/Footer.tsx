@@ -2,7 +2,7 @@ import grey from "@material-ui/core/colors/grey";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({
@@ -23,7 +23,7 @@ export interface IFooterProps {
   classes?: any;
 }
 
-export class Footer extends Component<IFooterProps, {}> {
+export class Footer extends React.Component<IFooterProps, {}> {
   public render() {
     const { classes } = this.props;
 
@@ -37,7 +37,7 @@ export class Footer extends Component<IFooterProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"headline"} color="primary">
+              <Typography component="p" variant={"headline"} color="primary">
                 Cuistot du Coin
               </Typography>
               <Link to="/team" className={classes.link}>
@@ -52,7 +52,7 @@ export class Footer extends Component<IFooterProps, {}> {
               <Link to="/presskit" className={classes.link}>
                 <Typography color="primary">Contact & Presse</Typography>
               </Link>
-              <Link to="/legal" className={classes.link}>
+              <Link to="/terms" className={classes.link}>
                 <Typography color="primary">Conditions légales</Typography>
               </Link>
               <a
@@ -71,7 +71,7 @@ export class Footer extends Component<IFooterProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"headline"} color="primary">
+              <Typography component="p" variant={"headline"} color="primary">
                 Gourmet
               </Typography>
               <Link
@@ -98,7 +98,7 @@ export class Footer extends Component<IFooterProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"headline"} color="primary">
+              <Typography component="p" variant={"headline"} color="primary">
                 Cuistot
               </Typography>
               <Link
@@ -122,7 +122,7 @@ export class Footer extends Component<IFooterProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"headline"} color="primary">
+              <Typography component="p" variant={"headline"} color="primary">
                 Entreprise
               </Typography>
               <Link
@@ -137,7 +137,7 @@ export class Footer extends Component<IFooterProps, {}> {
               <Link to="/invite-business" className={classes.link}>
                 <Typography color="primary">Parrainage</Typography>
               </Link>
-              <Link to="/legal" className={classes.link}>
+              <Link to="/terms-pro" className={classes.link}>
                 <Typography color="primary">Conditions légales</Typography>
               </Link>
             </Grid>
@@ -149,7 +149,7 @@ export class Footer extends Component<IFooterProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"headline"} color="primary">
+              <Typography component="p" variant={"headline"} color="primary">
                 Partenaires
               </Typography>
               <Link

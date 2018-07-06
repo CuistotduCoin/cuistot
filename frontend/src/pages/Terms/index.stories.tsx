@@ -2,10 +2,10 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
-import Legal from "./Legal";
+import Terms from "./Terms";
 
-storiesOf("Cuistot/pages/Legal", module)
+storiesOf("Cuistot/pages/Terms", module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
-  .add("default", () => <Legal />);
+  .add("default", () => <Terms />);

@@ -2,7 +2,7 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import Star from "@material-ui/icons/Star";
 import StarBorder from "@material-ui/icons/StarBorder";
 import StarHalf from "@material-ui/icons/StarHalf";
-import React, { Component } from "react";
+import React from "react";
 
 const styles = (theme: Theme) => ({});
 
@@ -10,7 +10,7 @@ export interface IStarRating {
   rating: any;
 }
 
-export class StarRating extends Component<IStarRating, {}> {
+export class StarRating extends React.Component<IStarRating, {}> {
   public render() {
     const maxRating = Array(5).fill(null);
 

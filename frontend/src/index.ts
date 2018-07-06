@@ -1,6 +1,6 @@
 import * as awsServerlessExpress from "aws-serverless-express";
 import express from "express";
-import app from "./server";
+import app from "server";
 
 let lambdaOrServer;
 if (process.env.EXECUTION_ENV === "lambda") {

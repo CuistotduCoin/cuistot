@@ -1,4 +1,4 @@
-import * as content from "!raw-loader!content/testimony.md";
+import * as content from "!raw-loader!content/terms-pro.md";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 // @ts-ignore
@@ -16,11 +16,11 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface ITestimonyProps {
+interface ITermsProProps {
   classes?: any;
 }
 
-export class Testimony extends React.Component<ITestimonyProps, {}> {
+export class TermsPro extends React.Component<ITermsProProps, {}> {
   public render() {
     const { classes } = this.props;
 
@@ -30,7 +30,7 @@ export class Testimony extends React.Component<ITestimonyProps, {}> {
         <Hero
           imageURL="img/home/landing.jpg"
           videoURL="video/landing-video.mp4"
-          valueProposition="Ils nous font confiance"
+          valueProposition="Conditions légales"
         />
         <Grid
           container={true}
@@ -47,4 +47,4 @@ export class Testimony extends React.Component<ITestimonyProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(Testimony as any) as any;
+export default withStyles(styles as any)(TermsPro as any) as any;

@@ -9,7 +9,7 @@ import Footer from "components/Footer";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import WorkshopCardList from "components/WorkshopCardList";
-import React, { Component } from "react";
+import React from "react";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -78,7 +78,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Nadine",
         price: 25,
         spot: "Cuisinella, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: ""
       },
       {
         availableSeat: 8,
@@ -89,32 +90,35 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Nadine",
         price: 20,
         spot: "Cuisinella, Brest",
-        totalSeat: 8
+        totalSeat: 8,
+        typeform: ""
       }
     ];
 
     const workshopsPending = [
       {
         availableSeat: 8,
-        date: "à denir",
+        date: "à venir",
         image: "img/workshops/fabien-pain-maison.jpg",
         imageCook: "img/cooks/fabien.jpg",
         name: "Faire son pain maison",
         nameCook: "Fabien",
         price: 50,
         spot: "Schmidt, Brest",
-        totalSeat: 8
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/RpiaBS"
       },
       {
         availableSeat: 6,
-        date: "à denir",
+        date: "à venir",
         image: "img/workshops/shyam-indien-generique.jpg",
         imageCook: "img/cooks/shyam.jpg",
         name: "Découverte de la cuisine indienne",
         nameCook: "Shyam",
         price: 35,
         spot: "Arthur Bonnet, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/qgukpu"
       },
       {
         availableSeat: 6,
@@ -125,7 +129,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Valquiria",
         price: 35,
         spot: "Arthur Bonnet, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/fivZ7h"
       },
       {
         availableSeat: 6,
@@ -136,7 +141,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Audrey",
         price: 45,
         spot: "Audrey, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/RjVIV7"
       },
       {
         availableSeat: 6,
@@ -147,7 +153,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Anaelle",
         price: 25,
         spot: "Anaelle, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/U3mOaj"
       },
       {
         availableSeat: 6,
@@ -158,7 +165,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Takako",
         price: 40,
         spot: "Schmidt, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/ywYxcY"
       },
       {
         availableSeat: 6,
@@ -169,7 +177,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Ahmed",
         price: 25,
         spot: "Cuisinella, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/EWUT4t"
       },
       {
         availableSeat: 6,
@@ -180,7 +189,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Anne",
         price: 25,
         spot: "Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/O0N0S8"
       },
       {
         availableSeat: 6,
@@ -191,7 +201,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Michel",
         price: 40,
         spot: "Michel, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/wDNHki"
       },
       {
         availableSeat: 6,
@@ -202,7 +213,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Ronan",
         price: 50,
         spot: "Schmidt, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/h1OXxP"
       },
       {
         availableSeat: 6,
@@ -213,7 +225,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Mikaelle",
         price: 60,
         spot: "Ô-Shun, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: ""
       },
       {
         availableSeat: 6,
@@ -224,7 +237,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Ahmed",
         price: 35,
         spot: "Schmidt, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: ""
       },
       {
         availableSeat: 6,
@@ -235,7 +249,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Ahmed",
         price: 35,
         spot: "Schmidt, Brest",
-        totalSeat: 6
+        totalSeat: 6,
+        typeform: ""
       },
       {
         availableSeat: 8,
@@ -246,7 +261,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Fabien",
         price: 45,
         spot: "Arthur Bonnet, Brest",
-        totalSeat: 8
+        totalSeat: 8,
+        typeform: ""
       },
       {
         availableSeat: 12,
@@ -257,7 +273,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Gaetan",
         price: 40,
         spot: "Soif de Vins, Brest",
-        totalSeat: 12
+        totalSeat: 12,
+        typeform: ""
       },
       {
         availableSeat: 5,
@@ -268,7 +285,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Christian",
         price: 40,
         spot: "C Chocolat, Brest",
-        totalSeat: 5
+        totalSeat: 5,
+        typeform: ""
       }
     ];
 
@@ -342,6 +360,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           className={classes.typography}
         >
           Nos ateliers à venir
+        </Typography>
+        <Typography variant="body1" align="center">
+          Soyez prévenu des prochaines dates d'ateliers !
         </Typography>
         <WorkshopCardList workshops={workshopsPending} />
         <Footer />

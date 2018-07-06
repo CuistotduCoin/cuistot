@@ -86,10 +86,18 @@ export default [
   {
     component: asyncComponent({
       Placeholder: () => <Loading />,
-      loader: () => import("pages/Legal")
+      loader: () => import("pages/Terms")
     }),
     exact: true,
-    path: "/legal"
+    path: "/terms"
+  },
+  {
+    component: asyncComponent({
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/TermsPro")
+    }),
+    exact: true,
+    path: "/terms-pro"
   },
   {
     component: asyncComponent({

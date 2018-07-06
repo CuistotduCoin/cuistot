@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Helmet from "react-helmet";
 
 export interface IHeadProps {
@@ -8,7 +8,7 @@ export interface IHeadProps {
   children?: any;
 }
 
-export class Head extends Component<IHeadProps, {}> {
+export class Head extends React.Component<IHeadProps, {}> {
   public render() {
     const { title, description, image, children } = this.props;
 

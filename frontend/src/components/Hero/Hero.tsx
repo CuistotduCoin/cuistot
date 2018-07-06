@@ -1,7 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import React, { Component } from "react";
+import React from "react";
 
 const styles = (theme: Theme) => ({
   backgroundImage: {
@@ -52,7 +52,7 @@ interface IHeroProps {
   description: string;
 }
 
-export class Hero extends Component<IHeroProps, {}> {
+export class Hero extends React.Component<IHeroProps, {}> {
   public static defaultProps: Partial<IHeroProps> = {
     height: 400,
     valueProposition: "Des saveurs à partager"

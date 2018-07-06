@@ -6,7 +6,7 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
-import React, { Component } from "react";
+import React from "react";
 import * as Yup from "yup";
 
 const styles = (theme: Theme) => ({
@@ -31,7 +31,7 @@ interface ISignUpFormValues {
   password: string;
 }
 
-export class SignUpForm extends Component<ISignUpForm, {}> {
+export class SignUpForm extends React.Component<ISignUpForm, {}> {
   public render() {
     const { classes } = this.props;
 
