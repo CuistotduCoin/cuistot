@@ -1,5 +1,6 @@
 import { AfterData, AfterRoot } from "@jaredpalmer/after";
 import React from "react";
+import Helmet from "react-helmet";
 
 export interface IDocumentProps {
   helmet: any;
@@ -135,6 +136,26 @@ export default class Document extends React.Component<IDocumentProps, {}> {
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject=g,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.defer=1,c.src="https://www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script",0,"ga"),ga("create","UA-85934313-1","auto"),ga("send","pageview"),ga('set', 'anonymizeIp', true)`
+            }}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(a,l,b,c,r,s){_nQc=c,r=a.createElement(l),s=a.getElementsByTagName(l)[0];r.async=1;r.src=l.src=("https:"==a.location.protocol?"https://":"http://")+b;s.parentNode.insertBefore(r,s);})(document,"script","serve.albacross.com/track.js","89196477");`
+            }}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="9be7ee4d-531c-4885-90c7-2a190c06a0cc";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`
+            }}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1669074413375602');fbq('track', 'PageView');`
+            }}
+          />
         </head>
         <body
           {...bodyAttrs}
