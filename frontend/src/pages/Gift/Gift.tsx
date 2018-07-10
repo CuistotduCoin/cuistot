@@ -34,8 +34,8 @@ export class Gift extends React.Component<IGiftProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="img/home/landing.jpg"
-          videoURL="video/landing-video.mp4"
+          imageURL="http://static.cuistotducoin.com/img/home/landing.jpg"
+          videoURL="http://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
         />
         <Grid

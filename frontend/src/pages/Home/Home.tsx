@@ -122,78 +122,94 @@ export class Home extends React.Component<IHomeProps, {}> {
 
     const partners = [
       {
-        image: "img/home/partners/amaiur.jpg",
+        image: "http://static.cuistotducoin.com/img/home/partners/amaiur.jpg",
         name: "amaiur"
       },
       {
-        image: "img/home/partners/arthur-bonnet.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/partners/arthur-bonnet.jpg",
         name: "Arthur Bonnet"
       },
       {
-        image: "img/home/partners/c-chocolat.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/partners/c-chocolat.jpg",
         name: "C chocolat"
       },
       {
-        image: "img/home/partners/couleurs-cuisines.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/partners/couleurs-cuisines.jpg",
         name: "Couleurs Cuisines"
       },
       {
-        image: "img/home/partners/cuisinella.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/partners/cuisinella.jpg",
         name: "cuisinella"
       },
       {
-        image: "img/home/partners/palais-des-thes.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/partners/palais-des-thes.jpg",
         name: "Palais des thes"
       },
       {
-        image: "img/home/partners/roi-de-bretagne.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/partners/roi-de-bretagne.jpg",
         name: "Roi de Bretagne"
       },
       {
-        image: "img/home/partners/schmidt.jpg",
+        image: "http://static.cuistotducoin.com/img/home/partners/schmidt.jpg",
         name: "Schmidt"
       },
       {
-        image: "img/home/partners/soif-de-vins.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/partners/soif-de-vins.jpg",
         name: "Soif de vins"
       },
       {
-        image: "img/home/partners/the-corner.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/partners/the-corner.jpg",
         name: "The corner"
       },
       {
-        image: "img/home/partners/tot-ou-tard.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/partners/tot-ou-tard.jpg",
         name: "Tot ou tard"
       },
       {
-        image: "img/home/partners/tuk-tuk-bazar.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/partners/tuk-tuk-bazar.jpg",
         name: "Tuk Tuk Bazar"
       }
     ];
 
     const participants = [
       {
-        image: "img/home/participants/arkea.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/participants/arkea.jpg",
         name: "arkea"
       },
       {
-        image: "img/home/participants/brest-metropole.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/participants/brest-metropole.jpg",
         name: "brest metropole et ville"
       },
       {
-        image: "img/home/participants/cadiou.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/participants/cadiou.jpg",
         name: "cadiou"
       },
       {
-        image: "img/home/participants/fortuneo.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/participants/fortuneo.jpg",
         name: "fortuneo"
       },
       {
-        image: "img/home/participants/gl-events.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/participants/gl-events.jpg",
         name: "gl events"
       },
       {
-        image: "img/home/participants/hippocampe.jpg",
+        image:
+          "http://static.cuistotducoin.com/img/home/participants/hippocampe.jpg",
         name: "hippocampe"
       }
     ];
@@ -206,8 +222,8 @@ export class Home extends React.Component<IHomeProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="img/home/landing.jpg"
-          videoURL="video/landing-video.mp4"
+          imageURL="http://static.cuistotducoin.com/img/home/landing.jpg"
+          videoURL="http://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
           description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
         />
@@ -216,7 +232,7 @@ export class Home extends React.Component<IHomeProps, {}> {
             <Grid container={true} className={classes.tileEntreprise}>
               <div className={classes.block}>
                 <img
-                  src="img/home/business.jpg"
+                  src="http://static.cuistotducoin.com/img/home/business.jpg"
                   alt={"Entreprise"}
                   className={classes.image}
                 />
@@ -250,7 +266,7 @@ export class Home extends React.Component<IHomeProps, {}> {
             <Grid container={true} className={classes.tileParticulier}>
               <div className={classes.block}>
                 <img
-                  src="img/home/individual.jpg"
+                  src="http://static.cuistotducoin.com/img/home/individual.jpg"
                   alt={"Particulier"}
                   className={classes.image}
                 />

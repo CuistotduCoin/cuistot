@@ -28,8 +28,8 @@ export class Testimony extends React.Component<ITestimonyProps, {}> {
       <>
         <Header />
         <Hero
-          imageURL="img/home/landing.jpg"
-          videoURL="video/landing-video.mp4"
+          imageURL="http://static.cuistotducoin.com/img/home/landing.jpg"
+          videoURL="http://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Ils nous font confiance"
         />
         <Grid

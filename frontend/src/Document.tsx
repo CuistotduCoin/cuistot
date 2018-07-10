@@ -1,6 +1,5 @@
 import { AfterData, AfterRoot } from "@jaredpalmer/after";
 import React from "react";
-import Helmet from "react-helmet";
 
 export interface IDocumentProps {
   helmet: any;
@@ -48,89 +47,89 @@ export default class Document extends React.Component<IDocumentProps, {}> {
           <style id="jss-ssr">{css}</style>
           <link
             rel="shortcut icon"
-            href="favicon/favicon.ico"
+            href="http://static.cuistotducoin.com/favicon/favicon.ico"
             type="image/x-icon"
           />
           <link rel="icon" href="favicon/favicon.png" type="image/png" />
           <link
             rel="icon"
             sizes="32x32"
-            href="favicon/favicon-32.png"
+            href="http://static.cuistotducoin.com/favicon/favicon-32.png"
             type="image/png"
           />
           <link
             rel="icon"
             sizes="64x64"
-            href="favicon/favicon-64.png"
+            href="http://static.cuistotducoin.com/favicon/favicon-64.png"
             type="image/png"
           />
           <link
             rel="icon"
             sizes="96x96"
-            href="favicon/favicon-96.png"
+            href="http://static.cuistotducoin.com/favicon/favicon-96.png"
             type="image/png"
           />
           <link
             rel="icon"
             sizes="96x96"
-            href="favicon/favicon-144.png"
+            href="http://static.cuistotducoin.com/favicon/favicon-144.png"
             type="image/png"
           />
           <link
             rel="icon"
             sizes="96x96"
-            href="favicon/favicon-196.png"
+            href="http://static.cuistotducoin.com/favicon/favicon-196.png"
             type="image/png"
           />
           <link
             rel="shortcut icon"
-            href="favicon/favicon.ico"
+            href="http://static.cuistotducoin.com/favicon/favicon.ico"
             type="image/x-icon"
           />
           <link
             rel="apple-touch-icon"
             sizes="152x152"
-            href="favicon/apple-touch-icon.png"
+            href="http://static.cuistotducoin.com/favicon/apple-touch-icon.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="60x60"
-            href="favicon/apple-touch-icon-60x60.png"
+            href="http://static.cuistotducoin.com/favicon/apple-touch-icon-60x60.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="76x76"
-            href="favicon/apple-touch-icon-76x76.png"
+            href="http://static.cuistotducoin.com/favicon/apple-touch-icon-76x76.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="114x114"
-            href="favicon/apple-touch-icon-114x114.png"
+            href="http://static.cuistotducoin.com/favicon/apple-touch-icon-114x114.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="120x120"
-            href="favicon/apple-touch-icon-120x120.png"
+            href="http://static.cuistotducoin.com/favicon/apple-touch-icon-120x120.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="144x144"
-            href="favicon/apple-touch-icon-144x144.png"
+            href="http://static.cuistotducoin.com/favicon/apple-touch-icon-144x144.png"
           />
           <link
             rel="icon"
             sizes="196x196"
-            href="favicon/favicon-196.png"
+            href="http://static.cuistotducoin.com/favicon/favicon-196.png"
             type="image/png"
           />
           <meta
             name="msapplication-TileImage"
-            content="favicon/favicon-144.png"
+            content="http://static.cuistotducoin.com/favicon/favicon-144.png"
           />
           <meta name="msapplication-TileColor" content="#FFFFFF" />
           <link
             rel="icon"
-            href="favicon/animated_favicon.gif"
+            href="http://static.cuistotducoin.com/favicon/animated_favicon.gif"
             type="image/gif"
           />
           {helmet.title.toComponent()}
