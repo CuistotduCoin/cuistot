@@ -6172,9 +6172,9 @@ ra-data-simple-rest@~2.0.0:
     query-string "~5.1.1"
     react-admin "^2.0.3"
 
-ra-input-rich-text@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/ra-input-rich-text/-/ra-input-rich-text-2.0.2.tgz#d2453c8e54385ceb98147f143e1f66384f2aebf4"
+ra-input-rich-text@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ra-input-rich-text/-/ra-input-rich-text-2.1.0.tgz#dae04ca2c58fdf64d16bd9629acb0db60de1a7c0"
   dependencies:
     lodash "~4.17.5"
     prop-types "~15.6.1"
