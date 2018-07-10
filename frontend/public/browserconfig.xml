@@ -2,9 +2,9 @@
 <browserconfig>
   <msapplication>
     <tile>
-      <square70x70logo src="favicon/smalltile.png"/>
-      <square150x150logo src="favicon/mediumtile.png"/>
-	  <square310x310logo src="favicon/largetile.png"/>
+      <square70x70logo src="http://static.cuistotducoin.com/favicon/smalltile.png"/>
+      <square150x150logo src="http://static.cuistotducoin.com/favicon/mediumtile.png"/>
+	  <square310x310logo src="http://static.cuistotducoin.com/favicon/largetile.png"/>
       <TileColor>#FFFFFF</TileColor>
     </tile>
   </msapplication>
