@@ -158,27 +158,27 @@ export class Business extends React.Component<IBusinessProps, {}> {
 
     const participants = [
       {
-        image: "img/home/participants/arkea.jpg",
+        image: "img/business/participants/arkea.jpg",
         name: "arkea"
       },
       {
-        image: "img/home/participants/brest-metropole.jpg",
+        image: "img/business/participants/brest-metropole.jpg",
         name: "brest metropole et ville"
       },
       {
-        image: "img/home/participants/cadiou.jpg",
+        image: "img/business/participants/cadiou.jpg",
         name: "cadiou"
       },
       {
-        image: "img/home/participants/fortuneo.jpg",
+        image: "img/business/participants/fortuneo.jpg",
         name: "fortuneo"
       },
       {
-        image: "img/home/participants/gl-events.jpg",
+        image: "img/business/participants/gl-events.jpg",
         name: "gl events"
       },
       {
-        image: "img/home/participants/hippocampe.jpg",
+        image: "img/business/participants/hippocampe.jpg",
         name: "hippocampe"
       }
     ];

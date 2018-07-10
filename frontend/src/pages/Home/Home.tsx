@@ -12,6 +12,7 @@ import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   block: {
+    height: "100%",
     overflow: "hidden",
     position: "relative"
   },
@@ -281,7 +282,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           </Grid>
         </Grid>
         <Typography
-          variant="title"
+          variant="headline"
           align="center"
           component="h2"
           gutterBottom={true}
@@ -302,7 +303,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"subheading"}>
+              <Typography variant={"title"} component="h3" gutterBottom={true}>
                 Authenticité et Convivialité
               </Typography>
               <Typography variant={"body1"}>
@@ -319,7 +320,9 @@ export class Home extends React.Component<IHomeProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"subheading"}>Partage</Typography>
+              <Typography variant={"title"} component="h3" gutterBottom={true}>
+                Partage
+              </Typography>
               <Typography variant={"body1"}>
                 Au-delà de la cuisine, plongez dans les univers de nos Cuistots
                 et découvrez de nouveaux horizons.
@@ -333,7 +336,9 @@ export class Home extends React.Component<IHomeProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"subheading"}>Diversité</Typography>
+              <Typography variant={"title"} component="h3" gutterBottom={true}>
+                Diversité
+              </Typography>
               <Typography variant={"body1"}>
                 Divers formats et univers culinaires sont proposés chez Cuistot
                 du Coin. De quoi satisfaire vos papilles !
@@ -373,43 +378,6 @@ export class Home extends React.Component<IHomeProps, {}> {
                   alt={partner.name}
                   className={classes.sliderImage}
                   key={partner.name}
-                />
-              </div>
-            ))}
-          </Slider>
-        </div>
-
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom={true}
-        >
-          Ils ont participé à l’aventure Cuistot du Coin
-        </Typography>
-        <Grid
-          container={true}
-          justify="space-around"
-          spacing={16}
-          className={classes.grid}
-        >
-          <Grid item={true} xs={12}>
-            <Typography variant={"body1"}>
-              Ils ont participez à nos ateliers, déjeunez aux cotés de nos
-              Cuistots, pour renforcez les liens de leurs salariés, récompensez
-              la réussite d'un projet ou encore pour acceuillir leurs
-              partenaires ou clients.
-            </Typography>
-          </Grid>
-        </Grid>
-        <div className={classes.slider}>
-          <Slider {...sliderSettings}>
-            {participants.map((participant, index) => (
-              <div key={index}>
-                <img
-                  src={participant.image}
-                  alt={participant.name}
-                  className={classes.sliderImage}
                 />
               </div>
             ))}
