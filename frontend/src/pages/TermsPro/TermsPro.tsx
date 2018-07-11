@@ -28,8 +28,8 @@ export class TermsPro extends React.Component<ITermsProProps, {}> {
       <>
         <Header />
         <Hero
-          imageURL="img/home/landing.jpg"
-          videoURL="video/landing-video.mp4"
+          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
+          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Conditions légales"
         />
         <Grid

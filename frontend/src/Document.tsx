@@ -1,6 +1,5 @@
 import { AfterData, AfterRoot } from "@jaredpalmer/after";
 import React from "react";
-import Helmet from "react-helmet";
 
 export interface IDocumentProps {
   helmet: any;
@@ -36,7 +35,6 @@ export default class Document extends React.Component<IDocumentProps, {}> {
       >
         <head>
           <meta charSet="utf-8" />
-          <title>Cuistot du Coin : des saveurs à partager</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, viewport-fit=cover"

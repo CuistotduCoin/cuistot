@@ -1,0 +1,18 @@
+service: static
+
+frameworkVersion: ">=1.21.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: ${env:AWS_REGION_PARIS}
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-finch
+
+custom:
+  client: 
+    bucketName: ${env:AWS_STATIC_DOMAIN}
+    distributionFolder: static

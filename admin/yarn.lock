@@ -6211,18 +6211,18 @@ ra-data-fakerest@^2.0.0:
   dependencies:
     fakerest "~2.1.0"
 
-ra-data-graphql-simple@^2.0.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.0.3.tgz#b6326252c894dd6004127b5b5c37a49b97e98288"
+ra-data-graphql-simple@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.1.1.tgz#07f47c18e2b5337a9bd54b51b5ed1b6a79183f55"
   dependencies:
     graphql-tag "^2.6.1"
     lodash "~4.17.5"
     pluralize "~7.0.0"
-    ra-data-graphql "^2.0.3"
+    ra-data-graphql "^2.1.1"
 
-ra-data-graphql@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.0.3.tgz#65c8f3c2a61688fdd8cdfb06ce3fbc28af03363e"
+ra-data-graphql@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.1.1.tgz#422e64314fb9ff7ef7120adfe609fe24a4cef356"
   dependencies:
     apollo-client "^2.2.8"
     apollo-client-preset "^1.0.6"
@@ -6237,9 +6237,9 @@ ra-data-simple-rest@~2.0.4:
     query-string "~5.1.1"
     react-admin "^2.0.4"
 
-ra-input-rich-text@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/ra-input-rich-text/-/ra-input-rich-text-2.0.2.tgz#d2453c8e54385ceb98147f143e1f66384f2aebf4"
+ra-input-rich-text@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ra-input-rich-text/-/ra-input-rich-text-2.1.0.tgz#dae04ca2c58fdf64d16bd9629acb0db60de1a7c0"
   dependencies:
     lodash "~4.17.5"
     prop-types "~15.6.1"

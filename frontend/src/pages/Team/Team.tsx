@@ -34,8 +34,8 @@ export class Team extends React.Component<ITeamProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="img/home/landing.jpg"
-          videoURL="video/landing-video.mp4"
+          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
+          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Qui sommes-nous ? l'équipes de Cuistot du Coin"
         />
         <Grid

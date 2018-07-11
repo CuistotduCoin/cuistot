@@ -88,7 +88,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
           <Grid container={true} justify="flex-start" alignItems="center">
             <Link to="/">
               <img
-                src="img/logo.svg"
+                src="https://static.cuistotducoin.com/img/logo.svg"
                 alt="Logo de Cuistot du coin"
                 height={40}
                 width={40}

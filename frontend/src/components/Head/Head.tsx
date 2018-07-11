@@ -22,11 +22,11 @@ export class Head extends React.Component<IHeadProps, {}> {
         <meta name="twitter:description" content={description} />
         <meta
           name="twitter:image"
-          content={image ? image : "img/favicon/apple-touch-icon-114x114.png"}
+          content={image ? image : "favicon/apple-touch-icon-114x114.png"}
         />
         <meta
           name="og:image"
-          content={image ? image : "img/favicon/apple-touch-icon-114x114.png"}
+          content={image ? image : "favicon/apple-touch-icon-114x114.png"}
         />
         {children}
       </Helmet>

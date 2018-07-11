@@ -98,33 +98,38 @@ export class Business extends React.Component<IBusinessProps, {}> {
       {
         description:
           "Atelier de deux heures suivi d'une dégustation des produits préparés",
-        image: "img/business/atelier-afterwork.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/atelier-afterwork.jpg",
         title: "Atelier Afterwork"
       },
       {
         description: "Atelier de trois heures suivi d'un repas convivial",
-        image: "img/business/atelier-et-repas.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/atelier-et-repas.jpg",
         title: "Atelier suivi d’un repas"
       },
       {
         description: "Atelier découverte et dégustation",
-        image: "img/business/degustation.jpg",
+        image: "https://static.cuistotducoin.com/img/business/degustation.jpg",
         title: "Atelier dégustation"
       },
       {
         description: "Récompensez vos équipes autour d'un repas d'exception !",
-        image: "img/business/repas-prestige.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/repas-prestige.jpg",
         title: "Repas prestige"
       },
       {
         description:
           "Notre cuistot est aux fourneaux et vous prépare des mets du monde à se partager en équipe.",
-        image: "img/business/repas-pratique.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/repas-pratique.jpg",
         title: "Repas pratique"
       },
       {
         description: "Une solution clé en main pour un dejeunez rapide",
-        image: "img/business/repas-ultra-pratique.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/repas-ultra-pratique.jpg",
         title: "Repas ultra pratique"
       }
     ];
@@ -133,52 +138,62 @@ export class Business extends React.Component<IBusinessProps, {}> {
       {
         description:
           "Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots d'ailleurs.",
-        image: "img/business/cuisine-du-monde.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/cuisine-du-monde.jpg",
         title: "Cuisine du monde"
       },
       {
         description:
           "Initiez-vous aux principes de la cuisine végétarienne, vegan ou encore ayurvédique, où l’équilibre et les saveurs sont au cœur de l’assiette.",
-        image: "img/business/cuisine-bien-etre.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/cuisine-bien-etre.jpg",
         title: "Cuisine Bien-être"
       },
       {
         description:
           "Attachés à votre territoire et aux produits locaux et de saison, plongez au cœur d’une cuisine bretonne qui éveillera votre curiosité.",
-        image: "img/business/cuisine-terroir.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/cuisine-terroir.jpg",
         title: "Cuisine Terroir"
       },
       {
         description:
           "Percez les secrets de nos artisans pâtissiers et boulangers au travers de recettes créatives et gourmandes.",
-        image: "img/business/boulangerie-et-patisserie.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/boulangerie-et-patisserie.jpg",
         title: "Boulangerie & Pâtisserie"
       }
     ];
 
     const participants = [
       {
-        image: "img/business/participants/arkea.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/participants/arkea.jpg",
         name: "arkea"
       },
       {
-        image: "img/business/participants/brest-metropole.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/participants/brest-metropole.jpg",
         name: "brest metropole et ville"
       },
       {
-        image: "img/business/participants/cadiou.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/participants/cadiou.jpg",
         name: "cadiou"
       },
       {
-        image: "img/business/participants/fortuneo.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/participants/fortuneo.jpg",
         name: "fortuneo"
       },
       {
-        image: "img/business/participants/gl-events.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/participants/gl-events.jpg",
         name: "gl events"
       },
       {
-        image: "img/business/participants/hippocampe.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/business/participants/hippocampe.jpg",
         name: "hippocampe"
       }
     ];
@@ -190,8 +205,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="img/home/landing.jpg"
-          videoURL="video/landing-video.mp4"
+          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
+          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
           description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
         />
@@ -207,7 +222,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               <img
                 className={classes.image}
                 alt="Atelier Cuistot du Coin"
-                src="img/business/organisez.jpg"
+                src="https://static.cuistotducoin.com/img/business/organisez.jpg"
               />
             </Grid>
           </Grid>
@@ -255,7 +270,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               <img
                 className={classes.image}
                 alt="Atelier Cuistot du Coin"
-                src="img/business/passez-a-table.jpg"
+                src="https://static.cuistotducoin.com/img/business/passez-a-table.jpg"
               />
             </Grid>
           </Grid>

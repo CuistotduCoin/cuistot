@@ -51,19 +51,22 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const typeActivity = [
       {
         description: "Ateliers de cuisine collectif chez nos lieux partenaires",
-        image: "img/individual/ateliers-cuisine-collectif.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/individual/ateliers-cuisine-collectif.jpg",
         title: "Ateliers de cuisine collectif"
       },
       {
         description:
           "Ateliers de cuisine privatisé chez vous ou chez nos lieux partenaires",
-        image: "img/individual/ateliers-cuisine-privatise.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/individual/ateliers-cuisine-privatise.jpg",
         title: "Ateliers de cuisine privatisé"
       },
       {
         description:
           "Notre cuistot est aux fourneaux rien que pour vous et vos invités",
-        image: "img/individual/cuistot-a-domicile.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/individual/cuistot-a-domicile.jpg",
         title: "Cuistot à domicile"
       }
     ];
@@ -72,8 +75,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 8,
         date: "samedi 21 juillet, 10h-12h30",
-        image: "img/workshops/nadine-crepes-ble-noir.jpg",
-        imageCook: "img/cooks/nadine.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-ble-noir.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
         name: "Tournage de crèpes de blé noir",
         nameCook: "Nadine",
         price: 25,
@@ -84,8 +88,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 8,
         date: "samedi 4 aout, 14h30-16h30",
-        image: "img/workshops/nadine-crepes-froment.jpg",
-        imageCook: "img/cooks/nadine.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
         name: "Tournage de crèpes de froment",
         nameCook: "Nadine",
         price: 20,
@@ -99,8 +104,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 8,
         date: "à venir",
-        image: "img/workshops/fabien-pain-maison.jpg",
-        imageCook: "img/cooks/fabien.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/fabien-pain-maison.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
         name: "Faire son pain maison",
         nameCook: "Fabien",
         price: 50,
@@ -111,8 +117,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/shyam-indien-generique.jpg",
-        imageCook: "img/cooks/shyam.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/shyam-indien-generique.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/shyam.jpg",
         name: "Découverte de la cuisine indienne",
         nameCook: "Shyam",
         price: 35,
@@ -123,8 +130,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/valquiria-coxinhas.jpg",
-        imageCook: "img/cooks/valquiria.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/valquiria-coxinhas.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/valquiria.jpg",
         name: "Coxinhas & Caipirinha",
         nameCook: "Valquiria",
         price: 35,
@@ -135,8 +143,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/audrey-pate-a-sucre.jpg",
-        imageCook: "img/cooks/audrey.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-pate-a-sucre.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
         name: "Cake Design : Pâte à sucres",
         nameCook: "Audrey",
         price: 45,
@@ -147,8 +156,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/anaelle-sarrasin.jpg",
-        imageCook: "img/cooks/anaelle.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/anaelle-sarrasin.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/anaelle.jpg",
         name: "À la découverte du sarrasin",
         nameCook: "Anaelle",
         price: 25,
@@ -159,8 +169,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/takako-sushis.jpg",
-        imageCook: "img/cooks/takako.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
         name: "Sushis, makis et temaris",
         nameCook: "Takako",
         price: 40,
@@ -171,8 +182,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/ahmed-cacao-cru.jpg",
-        imageCook: "img/cooks/ahmed.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ahmed-cacao-cru.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
         name: "Cacao cru",
         nameCook: "Ahmed",
         price: 25,
@@ -183,8 +195,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/anne-pate-a-tartiner-maison.jpg",
-        imageCook: "img/cooks/anne.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/anne-pate-a-tartiner-maison.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
         name: "pour Enfants : Pâte à tartiner maison",
         nameCook: "Anne",
         price: 25,
@@ -195,8 +208,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/michel-decouverte-ayurvedique.jpg",
-        imageCook: "img/cooks/michel.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/michel-decouverte-ayurvedique.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/michel.jpg",
         name: "Découverte de la cuisine ayurvédique",
         nameCook: "Michel",
         price: 40,
@@ -207,8 +221,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/ronan-macarons.jpg",
-        imageCook: "img/cooks/ronan.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ronan-macarons.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
         name: "Macarons",
         nameCook: "Ronan",
         price: 50,
@@ -219,8 +234,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/mikaelle-cuisine-vegetale.jpg",
-        imageCook: "img/cooks/mikaelle.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/mikaelle-cuisine-vegetale.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/mikaelle.jpg",
         name: "Découverte de la cuisine végétale crue",
         nameCook: "Mikaelle",
         price: 60,
@@ -231,8 +247,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/ahmed-entre-ici-et-ailleurs.jpg",
-        imageCook: "img/cooks/ahmed.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ahmed-entre-ici-et-ailleurs.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
         name: "Entre ici et ailleurs",
         nameCook: "Ahmed",
         price: 35,
@@ -243,8 +260,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image: "img/workshops/ahmed-inspiration-africaine.jpg",
-        imageCook: "img/cooks/ahmed.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ahmed-inspiration-africaine.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
         name: "Inspiration Africaine",
         nameCook: "Ahmed",
         price: 35,
@@ -255,8 +273,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 8,
         date: "à venir",
-        image: "img/workshops/fabien-pains-stop-au-gaspi.jpg",
-        imageCook: "img/cooks/fabien.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/fabien-pains-stop-au-gaspi.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
         name: "Recyclez son pain : stop au gaspi",
         nameCook: "Fabien",
         price: 45,
@@ -267,8 +286,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 12,
         date: "à venir",
-        image: "img/workshops/gaetan-decouverte-vins-naturels.jpg",
-        imageCook: "img/cooks/gaetan.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/gaetan-decouverte-vins-naturels.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/gaetan.jpg",
         name: "A la découverte des vins naturels",
         nameCook: "Gaetan",
         price: 40,
@@ -279,8 +299,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 5,
         date: "à venir",
-        image: "img/workshops/christian-kouign-amann.jpg",
-        imageCook: "img/cooks/christian.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/christian-kouign-amann.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/christian.jpg",
         name: "Kouign Amann",
         nameCook: "Christian",
         price: 40,
@@ -294,8 +315,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       <>
         <Header />
         <Hero
-          imageURL="img/home/landing.jpg"
-          videoURL="video/landing-video.mp4"
+          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
+          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Participez à des ateliers de cuisine authentiques et en toute convivialité !"
           description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
         />

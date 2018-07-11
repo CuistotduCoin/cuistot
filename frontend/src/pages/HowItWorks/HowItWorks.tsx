@@ -34,8 +34,8 @@ export class HowItWorks extends React.Component<IHowItWorksProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="img/home/landing.jpg"
-          videoURL="video/landing-video.mp4"
+          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
+          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Comment ça marche ?"
         />
         <Grid
