@@ -21,8 +21,8 @@ export class SignUp extends React.Component<ISignUpProps, {}> {
       <>
         <Header hideSignUpLogin={true} />
         <Hero
-          imageURL="http://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="http://static.cuistotducoin.com/video/landing-video.mp4"
+          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
+          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
         />
         <SignUpForm />

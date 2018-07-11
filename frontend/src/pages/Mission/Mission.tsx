@@ -34,8 +34,8 @@ export class Mission extends React.Component<IMissionProps, {}> {
         />
         <Header />
         <Hero
-          imageURL="http://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="http://static.cuistotducoin.com/video/landing-video.mp4"
+          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
+          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Nos mission à Cuistot du Coin"
         />
         <Grid

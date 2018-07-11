@@ -35,7 +35,6 @@ export default class Document extends React.Component<IDocumentProps, {}> {
       >
         <head>
           <meta charSet="utf-8" />
-          <title>Cuistot du Coin : des saveurs à partager</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, viewport-fit=cover"
@@ -47,89 +46,89 @@ export default class Document extends React.Component<IDocumentProps, {}> {
           <style id="jss-ssr">{css}</style>
           <link
             rel="shortcut icon"
-            href="http://static.cuistotducoin.com/favicon/favicon.ico"
+            href="favicon/favicon.ico"
             type="image/x-icon"
           />
           <link rel="icon" href="favicon/favicon.png" type="image/png" />
           <link
             rel="icon"
             sizes="32x32"
-            href="http://static.cuistotducoin.com/favicon/favicon-32.png"
+            href="favicon/favicon-32.png"
             type="image/png"
           />
           <link
             rel="icon"
             sizes="64x64"
-            href="http://static.cuistotducoin.com/favicon/favicon-64.png"
+            href="favicon/favicon-64.png"
             type="image/png"
           />
           <link
             rel="icon"
             sizes="96x96"
-            href="http://static.cuistotducoin.com/favicon/favicon-96.png"
+            href="favicon/favicon-96.png"
             type="image/png"
           />
           <link
             rel="icon"
             sizes="96x96"
-            href="http://static.cuistotducoin.com/favicon/favicon-144.png"
+            href="favicon/favicon-144.png"
             type="image/png"
           />
           <link
             rel="icon"
             sizes="96x96"
-            href="http://static.cuistotducoin.com/favicon/favicon-196.png"
+            href="favicon/favicon-196.png"
             type="image/png"
           />
           <link
             rel="shortcut icon"
-            href="http://static.cuistotducoin.com/favicon/favicon.ico"
+            href="favicon/favicon.ico"
             type="image/x-icon"
           />
           <link
             rel="apple-touch-icon"
             sizes="152x152"
-            href="http://static.cuistotducoin.com/favicon/apple-touch-icon.png"
+            href="favicon/apple-touch-icon.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="60x60"
-            href="http://static.cuistotducoin.com/favicon/apple-touch-icon-60x60.png"
+            href="favicon/apple-touch-icon-60x60.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="76x76"
-            href="http://static.cuistotducoin.com/favicon/apple-touch-icon-76x76.png"
+            href="favicon/apple-touch-icon-76x76.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="114x114"
-            href="http://static.cuistotducoin.com/favicon/apple-touch-icon-114x114.png"
+            href="favicon/apple-touch-icon-114x114.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="120x120"
-            href="http://static.cuistotducoin.com/favicon/apple-touch-icon-120x120.png"
+            href="favicon/apple-touch-icon-120x120.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="144x144"
-            href="http://static.cuistotducoin.com/favicon/apple-touch-icon-144x144.png"
+            href="favicon/apple-touch-icon-144x144.png"
           />
           <link
             rel="icon"
             sizes="196x196"
-            href="http://static.cuistotducoin.com/favicon/favicon-196.png"
+            href="favicon/favicon-196.png"
             type="image/png"
           />
           <meta
             name="msapplication-TileImage"
-            content="http://static.cuistotducoin.com/favicon/favicon-144.png"
+            content="favicon/favicon-144.png"
           />
           <meta name="msapplication-TileColor" content="#FFFFFF" />
           <link
             rel="icon"
-            href="http://static.cuistotducoin.com/favicon/animated_favicon.gif"
+            href="favicon/animated_favicon.gif"
             type="image/gif"
           />
           {helmet.title.toComponent()}
