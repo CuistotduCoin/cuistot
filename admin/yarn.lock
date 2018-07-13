@@ -9,6 +9,38 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.11.1"
 
+"@material-ui/core@^1.0.0":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-1.3.1.tgz#8b4e6db9ed4536e8ccbea0eeff3da0d524e6af2c"
+  dependencies:
+    "@babel/runtime" "^7.0.0-beta.42"
+    "@types/jss" "^9.5.3"
+    "@types/react-transition-group" "^2.0.8"
+    brcast "^3.0.1"
+    classnames "^2.2.5"
+    csstype "^2.5.2"
+    debounce "^1.1.0"
+    deepmerge "^2.0.1"
+    dom-helpers "^3.2.1"
+    hoist-non-react-statics "^2.5.0"
+    jss "^9.3.3"
+    jss-camel-case "^6.0.0"
+    jss-default-unit "^8.0.2"
+    jss-global "^3.0.0"
+    jss-nested "^6.0.1"
+    jss-props-sort "^6.0.0"
+    jss-vendor-prefixer "^7.0.0"
+    keycode "^2.1.9"
+    normalize-scroll-left "^0.1.2"
+    prop-types "^15.6.0"
+    react-event-listener "^0.6.0"
+    react-jss "^8.1.0"
+    react-popper "^0.10.0"
+    react-transition-group "^2.2.1"
+    recompose "^0.27.0"
+    scroll "^2.0.3"
+    warning "^4.0.1"
+
 "@material-ui/core@~1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-1.0.0.tgz#857b871038bb300f2d25594ce0cd250be944e71b"
@@ -40,6 +72,12 @@
     recompose "^0.26.0 || ^0.27.0"
     scroll "^2.0.3"
     warning "^3.0.0"
+
+"@material-ui/icons@^1.0.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-1.1.0.tgz#4d025df7b0ba6ace8d6710079ed76013a4d26595"
+  dependencies:
+    recompose "^0.26.0 || ^0.27.0"
 
 "@material-ui/icons@~1.0.0":
   version "1.0.0"
@@ -2060,7 +2098,7 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   dependencies:
     cssom "0.3.x"
 
-csstype@^2.0.0, csstype@^2.2.0:
+csstype@^2.0.0, csstype@^2.2.0, csstype@^2.5.2:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.5.tgz#4125484a3d42189a863943f23b9e4b80fedfa106"
 
@@ -2095,6 +2133,10 @@ data-generator@^1.0.0:
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
+
+debounce@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.1.0.tgz#6a1a4ee2a9dc4b7c24bb012558dbcdb05b37f408"
 
 debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
@@ -6117,9 +6159,9 @@ quill@~1.3.6:
     parchment "^1.1.4"
     quill-delta "^3.6.2"
 
-ra-core@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-2.0.3.tgz#3f27924deed50e9d5a70c8749796468f1df16b30"
+ra-core@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-2.1.0.tgz#b81d9a98727c8fc28f6165178f299a018e76f08b"
   dependencies:
     babel-runtime "~6.26.0"
     classnames "~2.2.5"
@@ -6146,18 +6188,18 @@ ra-data-fakerest@^2.0.0:
   dependencies:
     fakerest "~2.1.0"
 
-ra-data-graphql-simple@^2.0.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.0.3.tgz#b6326252c894dd6004127b5b5c37a49b97e98288"
+ra-data-graphql-simple@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.1.1.tgz#07f47c18e2b5337a9bd54b51b5ed1b6a79183f55"
   dependencies:
     graphql-tag "^2.6.1"
     lodash "~4.17.5"
     pluralize "~7.0.0"
-    ra-data-graphql "^2.0.3"
+    ra-data-graphql "^2.1.1"
 
-ra-data-graphql@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.0.3.tgz#65c8f3c2a61688fdd8cdfb06ce3fbc28af03363e"
+ra-data-graphql@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.1.1.tgz#422e64314fb9ff7ef7120adfe609fe24a4cef356"
   dependencies:
     apollo-client "^2.2.8"
     apollo-client-preset "^1.0.6"
@@ -6166,15 +6208,15 @@ ra-data-graphql@^2.0.3:
     pluralize "~7.0.0"
 
 ra-data-simple-rest@~2.0.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/ra-data-simple-rest/-/ra-data-simple-rest-2.0.3.tgz#c1865fc77e4aee0f6c8cf34c9c7647fbb3bc4345"
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/ra-data-simple-rest/-/ra-data-simple-rest-2.0.4.tgz#f6e842c55a9cf94d8ce3923ee7734f75e81ab145"
   dependencies:
     query-string "~5.1.1"
-    react-admin "^2.0.3"
+    react-admin "^2.0.4"
 
-ra-input-rich-text@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/ra-input-rich-text/-/ra-input-rich-text-2.0.2.tgz#d2453c8e54385ceb98147f143e1f66384f2aebf4"
+ra-input-rich-text@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ra-input-rich-text/-/ra-input-rich-text-2.1.0.tgz#dae04ca2c58fdf64d16bd9629acb0db60de1a7c0"
   dependencies:
     lodash "~4.17.5"
     prop-types "~15.6.1"
@@ -6188,18 +6230,18 @@ ra-language-french@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-2.0.2.tgz#1ec51d5a3fb6fd4e12fa9df77b89d4a0cbf91338"
 
-ra-ui-materialui@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-2.0.3.tgz#497db6a103ae8334e62e8a605d0a7197da48b047"
+ra-ui-materialui@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-2.1.1.tgz#28e2a03223fa4ae903b4e55870c6186ded19f3d9"
   dependencies:
-    "@material-ui/core" "~1.0.0"
-    "@material-ui/icons" "~1.0.0"
+    "@material-ui/core" "^1.0.0"
+    "@material-ui/icons" "^1.0.0"
     autosuggest-highlight "^3.1.1"
     classnames "~2.2.5"
     inflection "~1.12.0"
     lodash "~4.17.5"
     prop-types "~15.6.1"
-    ra-core "^2.0.3"
+    ra-core "^2.1.0"
     react-autosuggest "^9.3.2"
     react-dropzone "~4.0.1"
     react-redux "~5.0.7"
@@ -6273,13 +6315,13 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-admin@^2.0.0, react-admin@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.0.3.tgz#e28915785e6fd08c24ebec3eba15ebb9f4120dbb"
+react-admin@^2.0.4, react-admin@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.1.1.tgz#e0f45c41f9322ce6b44ce48c5b17c84e66d5bf48"
   dependencies:
-    ra-core "^2.0.3"
+    ra-core "^2.1.0"
     ra-language-english "^2.0.2"
-    ra-ui-materialui "^2.0.3"
+    ra-ui-materialui "^2.1.1"
 
 react-autosuggest@^9.3.2:
   version "9.3.4"
@@ -6348,6 +6390,14 @@ react-event-listener@^0.5.1:
     fbjs "^0.8.16"
     prop-types "^15.6.0"
     warning "^3.0.0"
+
+react-event-listener@^0.6.0:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.6.1.tgz#41c7a80a66b398c27dd511e22712b02f3d4eccca"
+  dependencies:
+    "@babel/runtime" "^7.0.0-beta.42"
+    prop-types "^15.6.0"
+    warning "^4.0.1"
 
 react-jss@^8.1.0:
   version "8.5.1"
@@ -6561,7 +6611,7 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-"recompose@^0.26.0 || ^0.27.0":
+"recompose@^0.26.0 || ^0.27.0", recompose@^0.27.0:
   version "0.27.1"
   resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.27.1.tgz#1a49e931f183634516633bbb4f4edbfd3f38a7ba"
   dependencies:
