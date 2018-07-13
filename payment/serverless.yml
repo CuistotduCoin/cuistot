@@ -1,0 +1,26 @@
+service: cuistot-stripe-backend
+
+plugins:
+  - serverless-dotenv-plugin
+
+frameworkVersion: ">=1.21.0 <2.0.0"
+
+custom:
+  dotenv:
+    path: .env
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: ${env:AWS_REGION_PARIS}
+  endpointType: regional
+
+functions:
+  createCharge:
+    handler: src/createCharge.handler
+    events:
+      - http:
+          path: charges
+          method: post
+          cors: true

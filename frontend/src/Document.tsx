@@ -1,5 +1,7 @@
 import { AfterData, AfterRoot } from "@jaredpalmer/after";
 import React from "react";
+import serialize from "serialize-javascript";
+import { runtimeConfig } from "./config";
 
 export interface IDocumentProps {
   helmet: any;
@@ -162,8 +164,11 @@ export default class Document extends React.Component<IDocumentProps, {}> {
             overflowX: "hidden"
           }}
         >
-          <AfterRoot />
-          <AfterData data={data} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.env=${serialize(runtimeConfig)};`
+            }}
+          />
           <script
             dangerouslySetInnerHTML={{
               __html: `window.__APOLLO_STATE__=${JSON.stringify(
@@ -171,6 +176,8 @@ export default class Document extends React.Component<IDocumentProps, {}> {
               ).replace(/</g, "\\u003c")};`
             }}
           />
+          <AfterRoot />
+          <AfterData data={data} />
 
           {process.env.NODE_ENV === "production" && (
             <script src={assets.client.js} defer={true} />

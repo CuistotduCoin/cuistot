@@ -126,6 +126,14 @@ export default [
   {
     component: asyncComponent({
       Placeholder: () => <Loading />,
+      loader: () => import("pages/Payment")
+    }),
+    exact: true,
+    path: "/payment"
+  },
+  {
+    component: asyncComponent({
+      Placeholder: () => <Loading />,
       loader: () => import("pages/Presskit")
     }),
     exact: true,
