@@ -291,7 +291,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           className={classes.grid}
         >
           {typeActivity.map((activity, index) => (
-            <Grid key={index} item={true} xs={12} md={4}>
+            <Grid key={index} item={true} xs={12} sm={6} md={4}>
               <Grid container={true}>
                 <Card className={classes.card}>
                   <CardMedia

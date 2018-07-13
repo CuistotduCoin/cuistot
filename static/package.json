@@ -7,7 +7,7 @@
     "url": "git@github.com:CuistotduCoin/cuistot.git"
   },
   "scripts": {
-    "deploy": "env-cmd .env serverless client deploy --no-confirm"
+    "deploy": "env-cmd .env serverless client deploy --no-delete-contents --no-confirm"
   },
   "devDependencies": {    
     "env-cmd": "^8.0.2",

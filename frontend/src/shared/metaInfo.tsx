@@ -34,8 +34,12 @@ export default {
       title: "Cuistot du coin : Nos missions"
     },
     organize: {
-      description: "Rejoignez nos Cuistots ",
+      description: "Rejoignez nos Cuistots",
       title: "Cuistot du coin : Nos missions"
+    },
+    payment: {
+      description: "Paiement",
+      title: "Cuistot du coin : Paiement"
     },
     presskit: {
       description:

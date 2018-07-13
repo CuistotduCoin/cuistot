@@ -19,6 +19,7 @@ const styles = (theme: Theme) => ({
 
 interface IHeaderProps {
   classes?: any;
+  static?: boolean;
   hideSignUpLogin: boolean;
 }
 interface IHeaderState {
@@ -83,7 +84,10 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
     );
 
     return (
-      <AppBar position="sticky" className={classes.appBar}>
+      <AppBar
+        position={this.props.static ? "static" : "sticky"}
+        className={classes.appBar}
+      >
         <Toolbar>
           <Grid container={true} justify="flex-start" alignItems="center">
             <Link to="/">

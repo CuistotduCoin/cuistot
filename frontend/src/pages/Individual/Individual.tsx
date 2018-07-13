@@ -83,7 +83,59 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         price: 25,
         spot: "Cuisinella, Brest",
         totalSeat: 6,
-        typeform: ""
+        typeform: "https://cuistotducoin.typeform.com/to/Y6djnp"
+      },
+      {
+        availableSeat: 6,
+        date: "jeudi 26 juillet, 11h-13h",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/mikaelle_rouleaux_arcenciel.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/mikaelle.jpg",
+        name: "Rouleaux arc-en-ciel",
+        nameCook: "Mikaëlle",
+        price: 37,
+        spot: "Loft O'Shun, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/tkZHof"
+      },
+      {
+        availableSeat: 6,
+        date: "jeudi 26 juillet, 14h30-16h30",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/mikaelle_douceurs_crues.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/mikaelle.jpg",
+        name: "Douceurs crues",
+        nameCook: "Mikaëlle",
+        price: 37,
+        spot: "Loft O'Shun, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/Y5M80O"
+      },
+      {
+        availableSeat: 6,
+        date: "jeudi 26 juillet, 17h30-19h30",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/mikaelle_apero_mer.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/mikaelle.jpg",
+        name: "ApérÔ de la mer",
+        nameCook: "Mikaëlle",
+        price: 37,
+        spot: "Loft O'Shun, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/BsVGg5"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 28 juillet, 10h-14h",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/mikaelle_voyage_italie.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/mikaelle.jpg",
+        name: "Voyage en Italie",
+        nameCook: "Mikaëlle",
+        price: 60,
+        spot: "Loft O'Shun, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/qGNKwc"
       },
       {
         availableSeat: 8,
@@ -96,7 +148,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         price: 20,
         spot: "Cuisinella, Brest",
         totalSeat: 8,
-        typeform: ""
+        typeform: "https://cuistotducoin.typeform.com/to/WKmt7V"
       }
     ];
 
@@ -198,7 +250,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/workshops/anne-pate-a-tartiner-maison.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
-        name: "pour Enfants : Pâte à tartiner maison",
+        name: "Pour enfants : Pâte à tartiner maison",
         nameCook: "Anne",
         price: 25,
         spot: "Brest",
@@ -235,19 +287,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         availableSeat: 6,
         date: "à venir",
         image:
-          "https://static.cuistotducoin.com/img/workshops/mikaelle-cuisine-vegetale.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/mikaelle.jpg",
-        name: "Découverte de la cuisine végétale crue",
-        nameCook: "Mikaelle",
-        price: 60,
-        spot: "Ô-Shun, Brest",
-        totalSeat: 6,
-        typeform: ""
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        image:
           "https://static.cuistotducoin.com/img/workshops/ahmed-entre-ici-et-ailleurs.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
         name: "Entre ici et ailleurs",
@@ -255,7 +294,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         price: 35,
         spot: "Schmidt, Brest",
         totalSeat: 6,
-        typeform: ""
+        typeform: "https://cuistotducoin.typeform.com/to/sETMyV"
       },
       {
         availableSeat: 6,
@@ -268,7 +307,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         price: 35,
         spot: "Schmidt, Brest",
         totalSeat: 6,
-        typeform: ""
+        typeform: "https://cuistotducoin.typeform.com/to/qieHUn"
       },
       {
         availableSeat: 8,
@@ -281,7 +320,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         price: 45,
         spot: "Arthur Bonnet, Brest",
         totalSeat: 8,
-        typeform: ""
+        typeform: "https://cuistotducoin.typeform.com/to/Voq2Qo"
       },
       {
         availableSeat: 12,
@@ -294,7 +333,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         price: 40,
         spot: "Soif de Vins, Brest",
         totalSeat: 12,
-        typeform: ""
+        typeform: "https://cuistotducoin.typeform.com/to/UmTqhi"
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-cupcakes-enfants.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Pour enfants : Cupcakes",
+        nameCook: "Audrey",
+        price: 30,
+        spot: "Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/chrUsc"
       },
       {
         availableSeat: 5,
@@ -307,7 +359,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         price: 40,
         spot: "C Chocolat, Brest",
         totalSeat: 5,
-        typeform: ""
+        typeform: "https://cuistotducoin.typeform.com/to/SFGtYO"
+      },
+      {
+        availableSeat: 5,
+        date: "à venir",
+        image:
+          "https://static.cuistotducoin.com/img/workshops/philippe-degustation-the.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/philippe.jpg",
+        name: "Dégustation de thés",
+        nameCook: "Philippe",
+        price: 25,
+        spot: "Palais des Thés, Brest",
+        totalSeat: 5,
+        typeform: "https://cuistotducoin.typeform.com/to/HHelGm"
       }
     ];
 
