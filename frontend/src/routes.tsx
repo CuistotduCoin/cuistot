@@ -129,7 +129,7 @@ export default [
       loader: () => import("pages/Payment")
     }),
     exact: true,
-    path: "/payment"
+    path: "/payment/:id"
   },
   {
     component: asyncComponent({

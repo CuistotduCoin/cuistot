@@ -1,5 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
 import Head from "components/Head";
 import Header from "components/Header";
@@ -18,28 +19,23 @@ const styles = (theme: Theme) => ({
 
 interface IPaymentProps {
   classes?: any;
-  amount: number;
-  description: string;
-  receipt_email: string;
-  metadata: string[];
 }
 
 interface IWindow extends Window {
-  STRIPE_API: any;
-  STRIPE_API_KEY: any;
+  env: any;
 }
 
 declare var window: IWindow;
 
 export class Payment extends React.Component<IPaymentProps, {}> {
   public async onToken(token) {
-    const res = await fetch(window.STRIPE_API, {
+    const res = await fetch(window.env.STRIPE_API, {
       body: JSON.stringify({
         token,
         // tslint:disable-next-line:object-literal-sort-keys
         charge: {
-          amount: this.props.amount,
-          currency: "eur"
+          amount: 40,
+          currency: "EUR"
         }
       }),
       method: "POST"
@@ -69,20 +65,34 @@ export class Payment extends React.Component<IPaymentProps, {}> {
           spacing={16}
           className={classes.grid}
         >
-          <StripeCheckout
-            name={this.props.description}
-            label="Paiement de l'atelier"
-            token={this.onToken}
-            amount={this.props.amount}
-            currency="eur"
-            stripeKey={window.STRIPE_API_KEY}
-            allowRememberMe={false}
-          />
+          <Grid item={true}>
+            <Typography
+              variant="headline"
+              align="center"
+              component="h2"
+              className={classes.tileTitle}
+            >
+              Paiement de l'atelier
+            </Typography>
+          </Grid>
+          <Grid item={true} />
         </Grid>
         <Footer />
       </>
     );
   }
 }
+
+/*
+            <StripeCheckout
+              name="test"
+              label="Paiement de l'atelier"
+              token={this.onToken}
+              amount={40}
+              currency="EUR"
+              stripeKey={window.env.STRIPE_API_KEY}
+              allowRememberMe={false}
+            />
+*/
 
 export default withStyles(styles as any)(Payment as any) as any;

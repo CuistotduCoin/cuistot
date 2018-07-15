@@ -1,18 +1,21 @@
 {
     "name": "cuistot-stripe-backend",
     "version": "0.0.1",
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "git@github.com:CuistotduCoin/cuistot.git"
     },
     "scripts": {
+        "create_domain": "env-cmd .env serverless create_domain",
         "deploy": "env-cmd .env serverless deploy"
     },
     "dependencies": {
-        "stripe": "^4.23.0"
+        "stripe": "^6.2.1"
     },
     "devDependencies": {
         "env-cmd": "^8.0.2",
+        "serverless-domain-manager": "^2.6.0",
         "serverless-dotenv-plugin": "^1.1.3"
     }
-  }
+}

@@ -2,12 +2,18 @@ service: cuistot-stripe-backend
 
 plugins:
   - serverless-dotenv-plugin
+  - serverless-domain-manager
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
 custom:
   dotenv:
     path: .env
+  customDomain:
+    basePath: charges
+    domainName: ${env:AWS_DOMAIN}
+    createRoute53Record: true
+    certificateName: ${env:AWS_DOMAIN_CERT}
 
 provider:
   name: aws
@@ -15,6 +21,7 @@ provider:
   stage: dev
   region: ${env:AWS_REGION_PARIS}
   endpointType: regional
+  deploymentBucket: ${env:AWS_S3_BUCKET}
 
 functions:
   createCharge:
