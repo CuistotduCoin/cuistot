@@ -6188,18 +6188,18 @@ ra-data-fakerest@^2.0.0:
   dependencies:
     fakerest "~2.1.0"
 
-ra-data-graphql-simple@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.1.1.tgz#07f47c18e2b5337a9bd54b51b5ed1b6a79183f55"
+ra-data-graphql-simple@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.1.2.tgz#c188163852788e3e22792bc9f08de4f9a4d767a6"
   dependencies:
     graphql-tag "^2.6.1"
     lodash "~4.17.5"
     pluralize "~7.0.0"
-    ra-data-graphql "^2.1.1"
+    ra-data-graphql "^2.1.2"
 
-ra-data-graphql@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.1.1.tgz#422e64314fb9ff7ef7120adfe609fe24a4cef356"
+ra-data-graphql@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.1.2.tgz#b2412e4a1e197e31026bb913b53439a3e12de684"
   dependencies:
     apollo-client "^2.2.8"
     apollo-client-preset "^1.0.6"
