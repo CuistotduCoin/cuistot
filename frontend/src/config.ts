@@ -1,8 +1,3 @@
-interface IWindow extends Window {
-  env: any;
-}
-declare var window: IWindow;
-
 export const runtimeConfig =
   typeof window !== "undefined"
     ? {

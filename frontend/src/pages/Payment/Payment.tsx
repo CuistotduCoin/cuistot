@@ -6,8 +6,11 @@ import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import React from "react";
-import StripeCheckout from "react-stripe-checkout";
+// @ts-ignore
+import { Elements, StripeProvider } from "react-stripe-elements";
+import scriptjs from "scriptjs";
 import metaInfo from "shared/metaInfo";
+import PaymentForm from "./PaymentForm";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -19,28 +22,58 @@ const styles = (theme: Theme) => ({
 
 interface IPaymentProps {
   classes?: any;
+  match: any;
 }
 
-interface IWindow extends Window {
-  env: any;
+interface IPaymentState {
+  atelier: string;
+  cuistot: string;
+  date: string;
+  lieu: string;
+  montant: number;
+  decode: boolean;
+  stripe: any;
 }
 
-declare var window: IWindow;
+export class Payment extends React.Component<IPaymentProps, IPaymentState> {
+  constructor(props) {
+    super(props);
 
-export class Payment extends React.Component<IPaymentProps, {}> {
-  public async onToken(token) {
-    const res = await fetch(window.env.STRIPE_API, {
-      body: JSON.stringify({
-        token,
-        // tslint:disable-next-line:object-literal-sort-keys
-        charge: {
-          amount: 40,
-          currency: "EUR"
-        }
-      }),
-      method: "POST"
+    let atelier = "";
+    let cuistot = "";
+    let date = "";
+    let decode = false;
+    let lieu = "";
+    let montant = -1;
+
+    if (this.isBase64(props.match.params.id)) {
+      const aToB = window.atob(props.match.params.id);
+      const arrayWorkshop = aToB.split("-");
+      if (arrayWorkshop.length === 5) {
+        atelier = arrayWorkshop[0];
+        cuistot = arrayWorkshop[1];
+        date = arrayWorkshop[2];
+        lieu = arrayWorkshop[3];
+        montant = parseInt(arrayWorkshop[4], 10);
+        decode = true;
+      }
+    }
+
+    this.state = {
+      atelier,
+      cuistot,
+      date,
+      decode,
+      lieu,
+      montant,
+      stripe: null
+    };
+  }
+
+  public componentDidMount() {
+    scriptjs("https://js.stripe.com/v3/", () => {
+      this.setState({ stripe: window.Stripe(window.env.STRIPE_API_KEY) });
     });
-    const data = await res.json();
   }
 
   public render() {
@@ -58,41 +91,65 @@ export class Payment extends React.Component<IPaymentProps, {}> {
           videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Cuistot du Coin : Paiement"
         />
-        <Grid
-          container={true}
-          justify="space-around"
-          alignItems="center"
-          spacing={16}
-          className={classes.grid}
-        >
-          <Grid item={true}>
-            <Typography
-              variant="headline"
-              align="center"
-              component="h2"
-              className={classes.tileTitle}
-            >
-              Paiement de l'atelier
-            </Typography>
+        {this.state.decode ? (
+          <Grid
+            container={true}
+            justify="space-around"
+            alignItems="center"
+            direction="column"
+            spacing={16}
+            className={classes.grid}
+          >
+            <Grid item={true}>
+              <Typography variant="headline" align="center" component="h2">
+                Paiement de l'atelier de {this.state.cuistot}, le{" "}
+                {this.state.date}, pour l'atelier {this.state.atelier}, à{" "}
+                {this.state.lieu}, pour un total de {this.state.montant}€
+              </Typography>
+            </Grid>
+            <Grid item={true}>
+              <StripeProvider stripe={this.state.stripe}>
+                <Elements>
+                  <PaymentForm />
+                </Elements>
+              </StripeProvider>
+            </Grid>
           </Grid>
-          <Grid item={true} />
-        </Grid>
+        ) : (
+          <Grid
+            container={true}
+            justify="space-around"
+            alignItems="center"
+            direction="column"
+            spacing={16}
+            className={classes.grid}
+          >
+            <Grid item={true}>
+              <Typography variant="headline" align="center" component="h2">
+                Erreur dans le lien de paiement
+              </Typography>
+            </Grid>
+          </Grid>
+        )}
         <Footer />
       </>
     );
   }
-}
 
-/*
-            <StripeCheckout
-              name="test"
-              label="Paiement de l'atelier"
-              token={this.onToken}
-              amount={40}
-              currency="EUR"
-              stripeKey={window.env.STRIPE_API_KEY}
-              allowRememberMe={false}
-            />
-*/
+  private isBase64(str) {
+    const notBase64 = /[^A-Z0-9+\/=]/i;
+
+    const len = str.length;
+    if (!len || len % 4 !== 0 || notBase64.test(str)) {
+      return false;
+    }
+    const firstPaddingChar = str.indexOf("=");
+    return (
+      firstPaddingChar === -1 ||
+      firstPaddingChar === len - 1 ||
+      (firstPaddingChar === len - 2 && str[len - 1] === "=")
+    );
+  }
+}
 
 export default withStyles(styles as any)(Payment as any) as any;

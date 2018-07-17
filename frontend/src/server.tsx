@@ -9,9 +9,7 @@ import express from "express";
 import * as React from "react";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { renderToString } from "react-dom/server";
-// @ts-ignore
 import { SheetsRegistry } from "react-jss/lib/jss";
-// @ts-ignore
 import JssProvider from "react-jss/lib/JssProvider";
 import routes from "routes";
 import theme from "theme";
