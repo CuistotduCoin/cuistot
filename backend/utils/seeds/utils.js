@@ -7,13 +7,13 @@ const NUM_RECORDS_TO_CREATE = {
 };
 
 exports.seedData = (tableName, createRecordCallback) =>
-	(knex, Promise) =>
+  (knex, Promise) =>
     knex(tableName).del().then(() => {
       console.log(`seeding ${tableName}...`);
       const records = [];
       const numToCreate = NUM_RECORDS_TO_CREATE[tableName] || 10;
       for (let i = 0; i < numToCreate; i++) {
-      	records.push(createRecordCallback(knex, i));
+        records.push(createRecordCallback(knex, i));
       }
       return Promise.all(records);
     });
