@@ -16,8 +16,8 @@ const createCook = (knex, i) => {
       newCook.business_name = faker.company.companyName();
       newCook.siren = faker.finance.currencyCode();
       newCook.pro_email = faker.internet.email();
-      newCook.legal_firstname = faker.name.firstName();
-      newCook.legal_lastname = faker.name.lastName();
+      newCook.legal_first_name = faker.name.firstName();
+      newCook.legal_last_name = faker.name.lastName();
       newCook.legal_birthdate = faker.date.past(); 
     }
 

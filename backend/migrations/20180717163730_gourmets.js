@@ -3,8 +3,8 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('gourmets', table => {
       table.increments('id');
       table.string('email', 255).notNullable();
-      table.string('firstname', 100).notNullable();
-      table.string('lastname', 100).notNullable();
+      table.string('first_name', 100).notNullable();
+      table.string('last_name', 100).notNullable();
       table.json('picture');
       table.specificType('gender', 'CHAR(1)');
       table.date('birthdate');
@@ -19,6 +19,6 @@ exports.up = function(knex, Promise) {
   ]);
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return knex.schema.dropTable('gourmets');
 };

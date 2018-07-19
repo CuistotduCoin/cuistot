@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return knex.schema.createTable('bookings', table => {
     table.increments('id');
     table.integer('gourmet_id').notNullable().references('id').inTable('gourmets').onDelete('CASCADE');
@@ -9,6 +9,6 @@ exports.up = function(knex, Promise) {
   });
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return knex.schema.dropTable('bookings');
 };

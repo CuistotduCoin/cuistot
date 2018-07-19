@@ -6,8 +6,8 @@ faker.seed(1000);
 const createGourmet = (knex) => (
   knex('gourmets').insert({
     email: faker.internet.exampleEmail(),
-    firstname: faker.name.firstName(),
-    lastname: faker.name.lastName(),
+    first_name: faker.name.firstName(),
+    last_name: faker.name.lastName(),
     gender: 'M',
     birthdate: faker.date.past(),
     address: faker.address.streetAddress(),
