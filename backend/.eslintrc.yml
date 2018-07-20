@@ -1,0 +1,9 @@
+extends: airbnb-base
+overrides:
+  - files: ["*.js"]
+    rules:
+      no-plusplus: "off"
+      newline-per-chained-call:
+        - error
+        - ignoreChainWithDepth: 3
+      import/prefer-default-export: "off"

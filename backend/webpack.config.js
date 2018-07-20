@@ -1,5 +1,5 @@
 // webpack.config.js
-const slsw = require('serverless-webpack');
+const slsw = require('serverless-webpack'); // eslint-disable-line
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {

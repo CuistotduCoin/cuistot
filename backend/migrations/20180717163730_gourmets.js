@@ -1,6 +1,6 @@
-exports.up = function(knex, Promise) {
-  return Promise.all([
-    knex.schema.createTable('gourmets', table => {
+exports.up = (knex, Promise) => (
+  Promise.all([
+    knex.schema.createTable('gourmets', (table) => {
       table.increments('id');
       table.string('email', 255).notNullable();
       table.string('first_name', 100).notNullable();
@@ -16,9 +16,7 @@ exports.up = function(knex, Promise) {
       table.timestamps(true, true);
     }),
     knex.schema.raw("ALTER TABLE gourmets ADD CONSTRAINT gender_constraint CHECK(gender='F' OR gender='M' OR gender='U');"),
-  ]);
-};
+  ])
+);
 
-exports.down = function(knex) {
-  return knex.schema.dropTable('gourmets');
-};
+exports.down = knex => knex.schema.dropTable('gourmets');

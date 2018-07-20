@@ -1,4 +1,4 @@
-const faker = require('faker');
+const faker = require('faker'); // eslint-disable-line
 const { seedData } = require('../utils/seeds/utils');
 
 faker.seed(1000);
