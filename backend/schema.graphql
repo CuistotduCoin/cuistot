@@ -1,209 +1,232 @@
-type Mutation {
-	createWorkshop(
-		name: String!,
-		price: Int!,
-		duration: Int!,
-		min_gourmet: Int!,
-		max_gourmet: Int!,
-		description: String!,
-		kitchen_id: ID,
-		workshop_date: String!,
-		comments: [CommentInput],
-	): Workshop!
-
-	deleteWorkshop(
-	    workshop_id: ID!,
-    ): Workshop!
-
-	updateWorkshop(
-		workshop_id: ID!,
-		name: String!,
-		price: Int!,
-		duration: Int!,
-		min_gourmet: Int!,
-		max_gourmet: Int!,
-		description: String!,
-		kitchen_id: ID,
-		workshop_date: String!,
-		comments: [CommentInput],
-	): Workshop!
-
-	createGourmet(
-		first_name: String!,
-		last_name: String!,
-		phone: String,
-		birthday: String,
-		city: String!,
-		cp: Int,
-		location: String,
-		description: String,
-		gender: Int,
-	): Workshop!
-
-	deleteGourmet(
-	    gourmet_id: ID!,
-    ): Workshop!
-
-	updateGourmet(
-		first_name: String!,
-		last_name: String!,
-		phone: String,
-		birthday: String,
-		city: String!,
-		cp: Int,
-		location: String,
-		description: String,
-		gender: Int,
-	): Gourmet!
-
-	createCook(
-		is_pro: Boolean,
-		description: String,
-		business_name: String,
-		siren: String,
-		email_pro: String,
-	): Cook!
-
-	deleteCook(
-		cook_id: ID!,
-	): Cook!
-
-	updateCook(
-		is_pro: Boolean,
-		description: String,
-		business_name: String,
-		siren: String,
-		email_pro: String,
-	): Cook!
-	
-	createKitchen(
-		name: String!,
-		city: String,
-		cp: Int,
-		location: String,
-	): Kitchen!
-
-	deleteKitchen(
-		kitchen_id: ID!,
-	): Cook!
-
-	updateKitchen(
-		name: String!,
-		city: String,
-		cp: Int,
-		location: String,
-	): Kitchen!
-
-	createReservation(
-		amount: Int,
-	): Reservation!
-
-	deleteReservation(
-		kitchen_id: ID!,
-	): Reservation!
-
-	updateReservation(
-		amount: Int,
-	): Reservation!
+interface Timestamps {
+  created_at: String!
+  updated_at: String!
 }
 
-type Query {
-	meInfo(gourmet_id: ID): Gourmet!
-	getWorkshop(workshop_id: ID): Workshop!
-	getWorkshops(limit: Int!, nextToken: String): WorkshopList
-	getGourmet(gourmet_id: ID): Gourmet!
-	getCook(cook_id: ID): Cook!
-	getKitchen(kitchen_id: ID): Kitchen!
-	getReservation(reservation_id: ID): Reservation!
+enum Gender {
+  F
+  M
+  U
 }
 
-type Subscription {
-	subWorkshop: Workshop
-		@aws_subscribe(mutations: ["createWorkshop"])
+type Workshop implements Timestamps {
+  id: ID!
+  created_at: String!
+  updated_at: String!
+  name: String!
+  price: Int!
+  duration: Int!
+  min_gourmet: Int!
+  max_gourmet: Int!
+  description: String
+  pictures: [S3Object!]!
+  date: String!
+  kitchen_id: ID!
+  cook_id: ID!
+  evaluations(limit: Int = 10, nextToken: String): EvaluationList
 }
 
-input CommentInput {
-	gourmet_id: ID!
-	rating: Int!
-  	comment: String
+type Evaluation implements Timestamps {
+  created_at: String!
+  updated_at: String!
+  booking: Booking!
+  rating: Float!
+  comment: String!
 }
 
-type Comment {
-	gourmet_id: ID!
-	rating: Int!
-  	comment: String
+type Booking implements Timestamps {
+  id: ID!
+  created_at: String!
+  updated_at: String!
+  gourmet: Gourmet!
+  workshop: Workshop!
+  amount: Int!
 }
 
-type CommentList {
-	items: [Comment]
-	nextToken: String
+type Gourmet implements Timestamps {
+  id: ID!
+  created_at: String!
+  updated_at: String!
+  email: String!
+  first_name: String!
+  last_name: String!
+  picture: S3Object
+  gender: Gender
+  birthdate: String
+  address: String
+  city: String
+  zip_code: String
+  location: String
+  description: String
 }
 
-type Workshop {
-	workshop_id: ID!
-	name: String!
-	price: Int!
-	duration: Int!
-	min_gourmet: Int!
-	max_gourmet: Int!
-	description: String!
-	pictures: [S3Object!]!
-	kitchen_id: ID
-	cook_id: ID!
-	workshop_date: String!
-	comments(limit: Int, nextToken: String): CommentList
+type Cook implements Timestamps {
+  id: ID!
+  created_at: String!
+  updated_at: String!
+  is_pro: Boolean!
+  business_name: String
+  siren: String
+  pro_email: String
+  legal_first_name: String
+  legal_last_name: String
+  legal_birthdate: String
 }
 
-type WorkshopList {
-	items: [Workshop!]!
-	nextToken: String
-}
-
-type Gourmet {
-	first_name: String!
-	last_name: String!
-	phone: String
-	birthday: String
-	city: String!
-	cp: Int
-	location: String
-	description: String
-	picture: [S3Object!]!
-	gender: Int
-	handle: String!
-}
-
-type Cook {
-	cook_id: ID!
-	is_pro: Boolean
-  	description: String
-  	business_name: String
-  	siren: String
-  	email_pro: String
-}
-
-type Kitchen {
-	kitchen_id: ID!
-	name: String!
-  	city: String
-	cp: Int
-	location: String
-}
-
-type Reservation {
-	kitchen_id: ID!
-	workshop_id: ID!
-  	amount: Int
+type Kitchen implements Timestamps {
+  id: ID!
+  created_at: String!
+  updated_at: String!
+  name: String!
+  address: String!
+  city: String!
+  zip_code: String!
+  location: String!
 }
 
 type S3Object {
-  	bucket: String!
-  	key: String!
-  	region: String!
+  bucket: String!
+  key: String!
+  region: String!
+}
+
+type EvaluationList {
+  items: [Evaluation!]!
+  nextToken: String
+}
+
+type WorkshopList {
+  items: [Workshop!]!
+  nextToken: String
+}
+
+type Mutation {
+  createWorkshop(
+    name: String!,
+    price: Int!,
+    duration: Int!,
+    min_gourmet: Int!,
+    max_gourmet: Int!,
+    description: String,
+    date: String!,
+    kitchen_id: ID!,
+    cook_id: ID!,
+  ): Workshop!
+
+  deleteWorkshop(
+    workshop_id: ID!,
+  ): Workshop!
+
+  updateWorkshop(
+    id: ID!,
+    name: String!,
+    price: Int!,
+    duration: Int!,
+    min_gourmet: Int!,
+    max_gourmet: Int!,
+    description: String!,
+    date: String!,
+  ): Workshop!
+
+  createGourmet(
+    first_name: String!,
+    last_name: String!,
+    phone: String,
+    birthday: String,
+    city: String!,
+    cp: Int,
+    location: String,
+    description: String,
+    gender: Int,
+  ): Workshop!
+
+  deleteGourmet(
+      gourmet_id: ID!,
+    ): Workshop!
+
+  updateGourmet(
+    first_name: String!,
+    last_name: String!,
+    phone: String,
+    birthday: String,
+    city: String!,
+    cp: Int,
+    location: String,
+    description: String,
+    gender: Int,
+  ): Gourmet!
+
+  createCook(
+    is_pro: Boolean,
+    description: String,
+    business_name: String,
+    siren: String,
+    email_pro: String,
+  ): Cook!
+
+  deleteCook(
+    cook_id: ID!,
+  ): Cook!
+
+  updateCook(
+    is_pro: Boolean,
+    description: String,
+    business_name: String,
+    siren: String,
+    email_pro: String,
+  ): Cook!
+
+  createKitchen(
+    name: String!,
+    city: String,
+    cp: Int,
+    location: String,
+  ): Kitchen!
+
+  deleteKitchen(
+    kitchen_id: ID!,
+  ): Cook!
+
+  updateKitchen(
+    name: String!,
+    city: String,
+    cp: Int,
+    location: String,
+  ): Kitchen!
+
+  createBooking(
+    gourmet_id: ID!,
+    workshop_id: ID!,
+    amount: Int,
+  ): Booking!
+
+  deleteBooking(
+    booking_id: ID!,
+  ): Booking!
+
+  updateBooking(
+    amount: Int,
+  ): Booking!
+}
+
+type Query {
+  meInfo(gourmet_id: ID): Gourmet!
+  getWorkshop(workshop_id: ID!): Workshop!
+  getWorkshops(limit: Int = 10, nextToken: String): WorkshopList!
+  getGourmet(gourmet_id: ID!): Gourmet!
+  getCook(cook_id: ID!): Cook!
+  getKitchen(kitchen_id: ID!): Kitchen!
+  getBooking(booking_id: ID!): Booking!
+  getEvaluation(booking_id: ID!): Evaluation!
+}
+
+type Subscription {
+  addWorkshop: Workshop
+    @aws_subscribe(mutations: ["createWorkshop"])
 }
 
 schema {
-	query: Query
-	mutation: Mutation
-	subscription: Subscription
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
 }

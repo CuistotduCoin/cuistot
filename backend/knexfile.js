@@ -20,7 +20,7 @@ const baseConfig = {
 
 module.exports = {
   development: {
-    ...baseConfig,   
+    ...baseConfig,
   },
   staging: {
     ...baseConfig,
