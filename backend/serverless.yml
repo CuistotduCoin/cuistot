@@ -49,8 +49,8 @@ custom:
         field: deleteWorkshop
         request: "workshop/deleteWorkshop-request-mapping-template.txt"
         response: "workshop/deleteWorkshop-response-mapping-template.txt"
-      - dataSource: Lambda
       # Query mapping templates
+      - dataSource: Lambda
         type: Query
         field: getWorkshop
         request: "workshop/getWorkshop-request-mapping-template.txt"
@@ -60,6 +60,36 @@ custom:
         field: getWorkshops
         request: "workshop/getWorkshops-request-mapping-template.txt"
         response: "workshop/getWorkshops-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getGourmet
+        request: "gourmet/getGourmet-request-mapping-template.txt"
+        response: "gourmet/getGourmet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getCook
+        request: "cook/getCook-request-mapping-template.txt"
+        response: "cook/getCook-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getKitchen
+        request: "kitchen/getKitchen-request-mapping-template.txt"
+        response: "kitchen/getKitchen-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getBooking
+        request: "booking/getBooking-request-mapping-template.txt"
+        response: "booking/getBooking-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getEvaluation
+        request: "evaluation/getEvaluation-request-mapping-template.txt"
+        response: "evaluation/getEvaluation-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getCurrentGourmet
+        request: "getCurrentGourmet-request-mapping-template.txt"
+        response: "getCurrentGourmet-response-mapping-template.txt"
     serviceRole: "AppSyncServiceRole"
     dataSources:
       - type: AWS_LAMBDA

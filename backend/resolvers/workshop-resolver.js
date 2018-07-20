@@ -1,17 +1,8 @@
-const connection = require('../knexfile');
-
-const knex = require('knex')(connection[process.env.NODE_ENV]);
+import { getSingleRow } from './utils';
 
 async function getWorkshop(args) {
-  try {
-    const getWorkshopQuery = knex('workshops')
-      .where('id', args.workshop_id)
-      .first();
-    const result = await getWorkshopQuery;
-    return result
-  } catch (err) {
-    console.log(err);
-  }
+  const result = await getSingleRow('workshops', args.workshop_id);
+  return result;
 }
 
-module.exports.getWorkshop = getWorkshop;
+export { getWorkshop };

@@ -210,14 +210,14 @@ type Mutation {
 }
 
 type Query {
-  meInfo(gourmet_id: ID): Gourmet!
   getWorkshop(workshop_id: ID!): Workshop!
-  getWorkshops(limit: Int = 10, nextToken: String): WorkshopList!
   getGourmet(gourmet_id: ID!): Gourmet!
   getCook(cook_id: ID!): Cook!
-  getKitchen(kitchen_id: ID!): Kitchen!
   getBooking(booking_id: ID!): Booking!
+  getKitchen(kitchen_id: ID!): Kitchen!
   getEvaluation(booking_id: ID!): Evaluation!
+  getCurrentGourmet: Gourmet!
+  getWorkshops(limit: Int = 10, nextToken: String): WorkshopList!
 }
 
 type Subscription {
