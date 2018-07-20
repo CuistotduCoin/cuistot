@@ -703,10 +703,6 @@
   dependencies:
     csstype "^2.2.0"
 
-"@types/scriptjs@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@types/scriptjs/-/scriptjs-0.0.2.tgz#09a2287221a7a341fc6b95b005e4bfb2a5403538"
-
 "@types/serve-static@*":
   version "1.13.2"
   resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.13.2.tgz#f5ac4d7a6420a99a6a45af4719f4dcd8cd907a48"
@@ -1586,14 +1582,14 @@ autoprefixer@^8.6.0:
     postcss "^6.0.23"
     postcss-value-parser "^3.2.3"
 
-aws-appsync-react@^1.0.21:
+aws-appsync-react@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/aws-appsync-react/-/aws-appsync-react-1.1.0.tgz#8a80a1500427367637f6eebaa36da0f122c382e6"
   dependencies:
     aws-appsync "^1.3.0"
     prop-types "^15.6.0"
 
-aws-appsync@^1.2.1, aws-appsync@^1.3.0:
+aws-appsync@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/aws-appsync/-/aws-appsync-1.3.0.tgz#fa033befa517ab8793654269155c4332886c6895"
   dependencies:
@@ -1611,9 +1607,23 @@ aws-appsync@^1.2.1, aws-appsync@^1.3.0:
     url "^0.11.0"
     uuid "3.x"
 
-aws-sdk@^2.139.0, aws-sdk@^2.177.0, aws-sdk@^2.275.1:
+aws-sdk@^2.139.0, aws-sdk@^2.177.0:
   version "2.275.1"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.275.1.tgz#a5dce9695a705d66a3fa822f4c23d810be90569a"
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.1.0"
+    xml2js "0.4.19"
+
+aws-sdk@^2.276.1:
+  version "2.276.1"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.276.1.tgz#4f5cd52f4d1a13a412c8a8d75b276c556ad13947"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -9160,12 +9170,6 @@ react-sticky@^6.0.3:
     prop-types "^15.5.8"
     raf "^3.3.0"
 
-react-stripe-elements@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-stripe-elements/-/react-stripe-elements-2.0.1.tgz#197db4762c57bf73a07d852564ebdbac52954094"
-  dependencies:
-    prop-types "^15.5.10"
-
 react-style-proptype@^3.0.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/react-style-proptype/-/react-style-proptype-3.2.1.tgz#7cfeb9b87ec7ab9dcbde9715170ed10c11fb86aa"
@@ -9701,10 +9705,6 @@ schema-utils@^0.4.0, schema-utils@^0.4.3, schema-utils@^0.4.4, schema-utils@^0.4
   dependencies:
     ajv "^6.1.0"
     ajv-keywords "^3.1.0"
-
-scriptjs@^2.5.8:
-  version "2.5.8"
-  resolved "https://registry.yarnpkg.com/scriptjs/-/scriptjs-2.5.8.tgz#d0c43955c2e6bad33b6e4edf7b53b8965aa7ca5f"
 
 scroll@^2.0.3:
   version "2.0.3"
