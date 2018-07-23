@@ -1,4 +1,4 @@
-const faker = require('faker');
+const faker = require('faker'); // eslint-disable-line
 const { seedData } = require('../utils/seeds/utils');
 
 faker.seed(1000);
@@ -16,13 +16,13 @@ const createCook = (knex, i) => {
       newCook.business_name = faker.company.companyName();
       newCook.siren = faker.finance.currencyCode();
       newCook.pro_email = faker.internet.email();
-      newCook.legal_firstname = faker.name.firstName();
-      newCook.legal_lastname = faker.name.lastName();
-      newCook.legal_birthdate = faker.date.past(); 
+      newCook.legal_first_name = faker.name.firstName();
+      newCook.legal_last_name = faker.name.lastName();
+      newCook.legal_birthdate = faker.date.past();
     }
 
     return knex('cooks').insert(newCook);
   });
-}
+};
 
 exports.seed = seedData('cooks', createCook);

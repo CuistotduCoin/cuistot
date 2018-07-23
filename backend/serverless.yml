@@ -1,199 +1,115 @@
-service: serverless-graphql-appsync
+service: cuistot-service
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: dev
+  stage: ${env:NODE_ENV}
   region: ${env:AWS_REGION_IRELAND}
+  profile: default
 
 plugins:
   - serverless-appsync-plugin
   - serverless-dotenv-plugin
-  - serverless-dynamodb-local
   - serverless-offline
+  - serverless-webpack
 
 custom:
+  webpack:
+    includeModules:
+      forceInclude:
+        - pg
+    packager: 'yarn' # Packager that will be used to package your external modules
   dotenv:
     path: .env
-  accountId: ${env:AWS_ACCOUNT_ID} # replace this with your accountId
-  dynamodb:
-    start:
-      port: 8000
-      inMemory: true
-      migrate: true
-      seed: true
-    seed:
-      test:
-        sources:
-          - table: Gourmet
-            sources: [seed-data/Gourmet.json]
-          - table: Cook
-            sources: [seed-data/Cook.json]
-          - table: Kitchen
-            sources: [seed-data/Kitchen.json]
-          - table: Workshop
-            sources: [seed-data/Workshop.json]
-          - table: Reservation
-            sources: [seed-data/Reservation.json]
+  accountId: ${env:AWS_ACCOUNT_ID}
   appSync:
-    name:  graphql-cuistotducoin-api
-    authenticationType: API_KEY # API_KEY is also supported
+    name: cuistot-appsync-${self:provider.stage}
+    authenticationType: API_KEY
     userPoolConfig:
-      awsRegion: ${env:AWS_REGION_LONDON} # required # region
+      awsRegion: ${env:AWS_REGION_LONDON}
       defaultAction: ALLOW
-      userPoolId: ${env:AWS_USERPOOL_ID} # replace this with your Cognito User Pool Id
+      userPoolId: ${env:AWS_USERPOOL_ID}
     region: ${env:AWS_REGION_IRELAND}
-    #logConfig:
-    #  loggingRoleArn: { Fn::GetAtt: [AppSyncLoggingServiceRole, Arn] }
-    #  level: ERROR
     mappingTemplates:
-      - dataSource: Workshop
+      # Mutation mapping templates
+      - dataSource: Lambda
         type: Mutation
         field: createWorkshop
         request: "workshop/createWorkshop-request-mapping-template.txt"
         response: "workshop/createWorkshop-response-mapping-template.txt"
-      - dataSource: Workshop
-        type: Query
-        field: getWorkshop
-        request: "workshop/getWorkshop-request-mapping-template.txt"
-        response: "workshop/getWorkshop-response-mapping-template.txt"
-      - dataSource: Workshop
-        type: Query
-        field: getWorkshops
-        request: "workshop/getWorkshops-request-mapping-template.txt"
-        response: "workshop/getWorkshops-response-mapping-template.txt"
-      - dataSource: Workshop
+      - dataSource: Lambda
         type: Mutation
         field: updateWorkshop
         request: "workshop/updateWorkshop-request-mapping-template.txt"
         response: "workshop/updateWorkshop-response-mapping-template.txt"
-      - dataSource: Workshop
+      - dataSource: Lambda
         type: Mutation
         field: deleteWorkshop
         request: "workshop/deleteWorkshop-request-mapping-template.txt"
         response: "workshop/deleteWorkshop-response-mapping-template.txt"
+      # Query mapping templates
+      - dataSource: Lambda
+        type: Query
+        field: getWorkshop
+        request: "workshop/getWorkshop-request-mapping-template.txt"
+        response: "workshop/getWorkshop-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getWorkshops
+        request: "workshop/getWorkshops-request-mapping-template.txt"
+        response: "workshop/getWorkshops-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getGourmet
+        request: "gourmet/getGourmet-request-mapping-template.txt"
+        response: "gourmet/getGourmet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getCook
+        request: "cook/getCook-request-mapping-template.txt"
+        response: "cook/getCook-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getKitchen
+        request: "kitchen/getKitchen-request-mapping-template.txt"
+        response: "kitchen/getKitchen-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getBooking
+        request: "booking/getBooking-request-mapping-template.txt"
+        response: "booking/getBooking-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getEvaluation
+        request: "evaluation/getEvaluation-request-mapping-template.txt"
+        response: "evaluation/getEvaluation-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getCurrentGourmet
+        request: "getCurrentGourmet-request-mapping-template.txt"
+        response: "getCurrentGourmet-response-mapping-template.txt"
     serviceRole: "AppSyncServiceRole"
     dataSources:
-      - type: AMAZON_DYNAMODB
-        name: Gourmet
-        description: 'Gourmet table'
+      - type: AWS_LAMBDA
+        name: Lambda
+        description: 'Lambda DataSource'
         config:
-          tableName: { Ref: Gourmet }
-          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
-          region: ${env:AWS_REGION_IRELAND}
-      - type: AMAZON_DYNAMODB
-        name: Cook
-        description: 'Cook table'
-        config:
-          tableName: { Ref: Cook }
-          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
-          region: ${env:AWS_REGION_IRELAND}
-      - type: AMAZON_DYNAMODB
-        name: Kitchen
-        description: 'Kitchen table'
-        config:
-          tableName: { Ref: Kitchen }
-          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
-          region: ${env:AWS_REGION_IRELAND}
-      - type: AMAZON_DYNAMODB
-        name: Workshop
-        description: 'Workshop table'
-        config:
-          tableName: { Ref: Workshop }
-          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
-          region: ${env:AWS_REGION_IRELAND}
-      - type: AMAZON_DYNAMODB
-        name: Reservation
-        description: 'Reservation table'
-        config:
-          tableName: { Ref: Reservation }
-          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
-          region: ${env:AWS_REGION_IRELAND}
+          lambdaFunctionArn: "arn:aws:lambda:${self:custom.appSync.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-graphql"
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Lambda-${self:custom.appSync.serviceRole}-${self:provider.stage}"
+
+functions:
+  graphql:
+    handler: handler.graphqlHandler
 
 resources:
   Resources:
-    Gourmet:
-      Type: "AWS::DynamoDB::Table"
-      Properties:
-        TableName: "Gourmet"
-        KeySchema:
-          -
-            AttributeName: gourmet_id   
-            KeyType: HASH
-        AttributeDefinitions:
-          -
-            AttributeName: gourmet_id
-            AttributeType: S
-        ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
-    Cook:
-      Type: "AWS::DynamoDB::Table"
-      Properties:
-        TableName: "Cook"
-        KeySchema:
-          -
-            AttributeName: cook_id
-            KeyType: HASH
-        AttributeDefinitions:
-          -
-            AttributeName: cook_id
-            AttributeType: S
-        ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
-    Kitchen:
-      Type: "AWS::DynamoDB::Table"
-      Properties:
-        TableName: "Kitchen"
-        KeySchema:
-          -
-            AttributeName: kitchen_id
-            KeyType: HASH
-        AttributeDefinitions:
-          -
-            AttributeName: kitchen_id
-            AttributeType: S
-        ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
-    Workshop:
-      Type: "AWS::DynamoDB::Table"
-      Properties:
-        TableName: "Workshop"
-        KeySchema:
-          -
-            AttributeName: workshop_id
-            KeyType: HASH
-        AttributeDefinitions:
-          -
-            AttributeName: workshop_id
-            AttributeType: S
-        ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
-    Reservation:
-      Type: "AWS::DynamoDB::Table"
-      Properties:
-        TableName: "Reservation"
-        KeySchema:
-          -
-            AttributeName: gourmet_id
-            KeyType: HASH
-        AttributeDefinitions:
-          -
-            AttributeName: gourmet_id
-            AttributeType: S
-        ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
-    # End Tables / Start AppSync
     AppSyncServiceRole:
       Type: "AWS::IAM::Role"
+      DeletionPolicy : "Delete"
       Properties:
-        RoleName: "Dynamo-AppSyncServiceRole"
+        RoleName: "Lambda-${self:custom.appSync.serviceRole}-${self:provider.stage}"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -206,56 +122,14 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "Dynamo-AppSyncServiceRole-Policy"
+            PolicyName: "Lambda-${self:custom.appSync.serviceRole}-${self:provider.stage}-Policy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
                 -
                   Effect: "Allow"
                   Action:
-                    - "dynamodb:Query"
-                    - "dynamodb:BatchWriteItem"
-                    - "dynamodb:GetItem"
-                    - "dynamodb:DeleteItem"
-                    - "dynamodb:PutItem"
-                    - "dynamodb:Scan"
-                    - "dynamodb:UpdateItem"
+                    - "lambda:invokeFunction"
                   Resource:
-                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Gourmet"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Gourmet/*"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Cook"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Cook/*"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Kitchen"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Kitchen/*"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Workshop"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Workshop/*"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Reservation"
-                    - "arn:aws:dynamodb:${env:AWS_REGION_IRELAND}:*:table/Reservation/*"
-    #AppSyncLoggingServiceRole:
-    #  Type: "AWS::IAM::Role"
-    #  Properties:
-    #    RoleName: "AppSyncLoggingServiceRole"
-    #    AssumeRolePolicyDocument:
-    #      Version: "2012-10-17"
-    #      Statement:
-    #        -
-    #          Effect: "Allow"
-    #          Principal:
-    #            Service:
-    #              - "appsync.amazonaws.com"
-    #          Action:
-    #            - "sts:AssumeRole"
-    #    Policies:
-    #      -
-    #        PolicyName: "AppSyncLoggingServiceRole-Policy"
-    #        PolicyDocument:
-    #          Version: "2012-10-17"
-    #          Statement:
-    #            -
-    #              Effect": "Allow"
-    #              Action:
-    #                - "logs:CreateLogGroup"
-    #                - "logs:CreateLogStream"
-    #                - "logs:PutLogEvents"
-    #              Resource:
-    #                  - "arn:aws:logs:${env:AWS_REGION_IRELAND}:${env:AWS_ACCOUNT_ID}:*"
+                    - "arn:aws:lambda:${self:custom.appSync.region}:*:function:${self:service}-${self:provider.stage}-graphql"
+                    - "arn:aws:lambda:${self:custom.appSync.region}:*:function:${self:service}-${self:provider.stage}-graphql:*"

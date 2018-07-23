@@ -1,19 +1,19 @@
-const faker = require('faker');
+const faker = require('faker'); // eslint-disable-line
 const { seedData } = require('../utils/seeds/utils');
 
 faker.seed(1000);
 
-const createGourmet = (knex) => (
+const createGourmet = knex => (
   knex('gourmets').insert({
     email: faker.internet.exampleEmail(),
-    firstname: faker.name.firstName(),
-    lastname: faker.name.lastName(),
+    first_name: faker.name.firstName(),
+    last_name: faker.name.lastName(),
     gender: 'M',
     birthdate: faker.date.past(),
     address: faker.address.streetAddress(),
     city: faker.address.city(),
     zip_code: faker.address.zipCode(),
-    description: faker.lorem.sentence()
+    description: faker.lorem.sentence(),
   })
 );
 

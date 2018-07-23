@@ -6,8 +6,8 @@ const NUM_RECORDS_TO_CREATE = {
   evaluations: 2,
 };
 
-exports.seedData = (tableName, createRecordCallback) =>
-  (knex, Promise) =>
+exports.seedData = (tableName, createRecordCallback) => (
+  (knex, Promise) => (
     knex(tableName).del().then(() => {
       console.log(`seeding ${tableName}...`);
       const records = [];
@@ -16,4 +16,6 @@ exports.seedData = (tableName, createRecordCallback) =>
         records.push(createRecordCallback(knex, i));
       }
       return Promise.all(records);
-    });
+    })
+  )
+);
