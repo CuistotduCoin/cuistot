@@ -72,7 +72,7 @@ export class Footer extends React.Component<IFooterProps, {}> {
               direction="column"
             >
               <Typography component="p" variant={"headline"} color="primary">
-                Gourmet
+                Gourmets
               </Typography>
               <Link
                 to="/how-it-works#pour-les-gourmets"
@@ -99,7 +99,7 @@ export class Footer extends React.Component<IFooterProps, {}> {
               direction="column"
             >
               <Typography component="p" variant={"headline"} color="primary">
-                Cuistot
+                Cuistots
               </Typography>
               <Link
                 to="/how-it-works#pour-les-cuistots"
@@ -123,7 +123,7 @@ export class Footer extends React.Component<IFooterProps, {}> {
               direction="column"
             >
               <Typography component="p" variant={"headline"} color="primary">
-                Entreprise
+                Entreprises
               </Typography>
               <Link
                 to="/how-it-works#pour-les-entreprises"

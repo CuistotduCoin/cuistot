@@ -67,7 +67,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           "Notre cuistot est aux fourneaux rien que pour vous et vos invités",
         image:
           "https://static.cuistotducoin.com/img/individual/cuistot-a-domicile.jpg",
-        title: "Cuistot à domicile"
+        title: "Repas à domicile"
       }
     ];
 

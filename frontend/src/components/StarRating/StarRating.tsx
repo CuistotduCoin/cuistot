@@ -14,7 +14,7 @@ export class StarRating extends React.Component<IStarRating, {}> {
   public render() {
     const maxRating = Array(5).fill(null);
 
-    return maxRating.map((el, idx) => {
+    const arrayStar = maxRating.map((el, idx) => {
       if (this.props.rating > idx) {
         if (this.props.rating > idx + 0.5) {
           return <Star color="primary" key={idx} />;
@@ -23,6 +23,7 @@ export class StarRating extends React.Component<IStarRating, {}> {
       }
       return <StarBorder color="primary" key={idx} />;
     });
+    return <div>{arrayStar}</div>;
   }
 }
 

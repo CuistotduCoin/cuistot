@@ -7690,9 +7690,9 @@ node-pre-gyp@^0.10.0:
     semver "^5.3.0"
     tar "^4"
 
-node@^10.6.0:
-  version "10.6.0"
-  resolved "https://registry.yarnpkg.com/node/-/node-10.6.0.tgz#ce84fc4759808520ba6616fd1b9bbb2447b21613"
+node@^10.7.0:
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-10.7.0.tgz#6d3cf612232c901b3c0605c1ce755117203f08e7"
   dependencies:
     node-bin-setup "^1.0.0"
 

@@ -245,7 +245,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                         component="h2"
                         className={classes.tileTitle}
                       >
-                        Vous etes une entreprises
+                        Vous êtes une entreprise
                       </Typography>
                       <Typography
                         variant="body2"
@@ -279,7 +279,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                         component="h2"
                         className={classes.tileTitle}
                       >
-                        Vous etes un particulier
+                        Vous êtes un particulier
                       </Typography>
                       <Typography
                         variant="body2"
@@ -304,7 +304,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           gutterBottom={true}
           className={classes.typography}
         >
-          Ateliers, dégustation ou repas, retrouvez nos ingrédients clés :
+          Ateliers, dégustations ou repas, retrouvez nos ingrédients clés :
         </Typography>
         <Grid
           container={true}

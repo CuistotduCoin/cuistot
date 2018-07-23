@@ -114,6 +114,11 @@ export class Business extends React.Component<IBusinessProps, {}> {
         title: "Atelier dégustation"
       },
       {
+        description: "Une solution clé en main pour un dejeunez rapide",
+        image: "https://static.cuistotducoin.com/img/business/buffet.jpg",
+        title: "Buffet"
+      },
+      {
         description: "Récompensez vos équipes autour d'un repas d'exception !",
         image:
           "https://static.cuistotducoin.com/img/business/repas-prestige.jpg",
@@ -125,12 +130,6 @@ export class Business extends React.Component<IBusinessProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/business/repas-pratique.jpg",
         title: "Repas pratique"
-      },
-      {
-        description: "Une solution clé en main pour un dejeunez rapide",
-        image:
-          "https://static.cuistotducoin.com/img/business/repas-ultra-pratique.jpg",
-        title: "Repas ultra pratique"
       }
     ];
 
