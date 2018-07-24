@@ -1,9 +1,10 @@
+import { FormControl } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 // import { Auth } from "aws-amplify";
-import { Field, Form, Formik, FormikActions } from "formik";
+import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
 import React from "react";
@@ -64,53 +65,55 @@ export class LoginForm extends React.Component<ILoginForm, {}> {
 
     const loginFormComponent = () => (
       <Form autoComplete="off">
-        <Grid container={true} className={classes.grid} spacing={16}>
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
-              <Button variant="outlined" color="secondary">
-                Se connecter avec Facebook
-              </Button>
+        <FormControl>
+          <Grid container={true} className={classes.grid} spacing={16}>
+            <Grid item={true} xs={12}>
+              <Grid container={true} justify="center">
+                <Button variant="outlined" color="secondary">
+                  Se connecter avec Facebook
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Divider />
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Grid container={true}>
+                <Field
+                  type="text"
+                  component={TextField}
+                  id="email"
+                  label="Email"
+                  name="email"
+                  placeholder="Votre email"
+                  className={classes.textField}
+                  margin="normal"
+                />
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Grid container={true}>
+                <Field
+                  type="password"
+                  component={TextField}
+                  id="password"
+                  label="Mot de passe"
+                  name="password"
+                  placeholder="Votre mot de passe"
+                  className={classes.textField}
+                  margin="normal"
+                />
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Grid container={true} justify="center">
+                <Button variant="contained" color="secondary">
+                  Se connecter
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12}>
-            <Divider />
-          </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true}>
-              <Field
-                type="text"
-                component={TextField}
-                id="email"
-                label="Email"
-                name="email"
-                placeholder="Votre email"
-                className={classes.textField}
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true}>
-              <Field
-                type="password"
-                component={TextField}
-                id="password"
-                label="Mot de passe"
-                name="password"
-                placeholder="Votre mot de passe"
-                className={classes.textField}
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
-              <Button variant="contained" color="secondary">
-                Se connecter
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
+        </FormControl>
       </Form>
     );
 
