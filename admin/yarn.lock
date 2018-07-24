@@ -6182,9 +6182,9 @@ ra-core@^2.1.0:
     reselect "~3.0.0"
     warning "~3.0.0"
 
-ra-core@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-2.1.2.tgz#88e81ce17a53af7395283b47ccd73f212e1ae829"
+ra-core@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-2.1.3.tgz#602d09e80fb4340fadd41de148d189114b17d19f"
   dependencies:
     babel-runtime "~6.26.0"
     classnames "~2.2.5"
@@ -6193,7 +6193,7 @@ ra-core@^2.1.2:
     node-polyglot "2.2.2"
     prop-types "~15.6.1"
     query-string "~5.1.1"
-    ra-language-english "^2.0.2"
+    ra-language-english "^2.1.3"
     react-redux "~5.0.7"
     react-router "~4.2.0"
     react-router-dom "~4.2.2"
@@ -6249,6 +6249,10 @@ ra-language-english@^2.0.0, ra-language-english@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-2.0.2.tgz#121bd8c358af7f74dc7a8bff4f4860aaec150a3b"
 
+ra-language-english@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-2.1.3.tgz#c34e280f4052b35210e812d41c7c12f223ed7377"
+
 ra-language-french@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-2.0.2.tgz#1ec51d5a3fb6fd4e12fa9df77b89d4a0cbf91338"
@@ -6274,9 +6278,9 @@ ra-ui-materialui@^2.1.1:
     redux "~3.7.2"
     redux-form "~7.3.0"
 
-ra-ui-materialui@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-2.1.2.tgz#d7ed80e8e34c37cb92e7237b0d6f5ab2e8e01baa"
+ra-ui-materialui@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-2.1.3.tgz#256fe0a42472fa7a5d4cb58028725fdc37938728"
   dependencies:
     "@material-ui/core" "^1.0.0"
     "@material-ui/icons" "^1.0.0"
@@ -6285,7 +6289,7 @@ ra-ui-materialui@^2.1.2:
     inflection "~1.12.0"
     lodash "~4.17.5"
     prop-types "~15.6.1"
-    ra-core "^2.1.2"
+    ra-core "^2.1.3"
     react-autosuggest "^9.3.2"
     react-dropzone "~4.0.1"
     react-redux "~5.0.7"
@@ -6367,13 +6371,13 @@ react-admin@^2.0.4:
     ra-language-english "^2.0.2"
     ra-ui-materialui "^2.1.1"
 
-react-admin@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.1.2.tgz#9cde6890baf146d4d3b1b1f8a8c787b2286d2df3"
+react-admin@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.1.3.tgz#ad034506f6a687129080dde1fde727ee632440a0"
   dependencies:
-    ra-core "^2.1.2"
-    ra-language-english "^2.0.2"
-    ra-ui-materialui "^2.1.2"
+    ra-core "^2.1.3"
+    ra-language-english "^2.1.3"
+    ra-ui-materialui "^2.1.3"
 
 react-autosuggest@^9.3.2:
   version "9.3.4"
