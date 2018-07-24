@@ -7,10 +7,13 @@ async function getSingleRow(tableName, id) {
   try {
     const query = knex(tableName).where('id', id).first();
     result = await query;
+    if (!result) {
+      return { userError: 'Resource Not Found' };
+    }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
-  return result;
+  return { data: result };
 }
 
 export { getSingleRow };

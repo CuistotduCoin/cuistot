@@ -8,9 +8,15 @@ import { getWorkshop, getWorkshops } from './resolvers/workshop-resolver';
 export const graphqlHandler = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false; // eslint-disable-line
 
-  const resolve = (resolver) => {
+  const resolve = (resolver, key) => {
     resolver(event.arguments).then((result) => {
-      callback(null, result);
+      const requestResult = { userErrors: [] };
+      if (result.userError) {
+        requestResult.userErrors.push({ message: result.userError });
+      } else {
+        requestResult[key] = result.data;
+      }
+      callback(null, requestResult);
     }).catch((error) => {
       callback(error, null);
     });
@@ -18,31 +24,31 @@ export const graphqlHandler = (event, context, callback) => {
 
   switch (event.field) {
     case 'getBooking': {
-      resolve(getBooking);
+      resolve(getBooking, 'booking');
       break;
     }
     case 'getCook': {
-      resolve(getCook);
+      resolve(getCook, 'cook');
       break;
     }
     case 'getEvaluation': {
-      resolve(getEvaluation);
+      resolve(getEvaluation, 'evaluation');
       break;
     }
     case 'getGourmet': {
-      resolve(getGourmet);
+      resolve(getGourmet, 'gourmet');
       break;
     }
     case 'getKitchen': {
-      resolve(getKitchen);
+      resolve(getKitchen, 'kitchen');
       break;
     }
     case 'getWorkshop': {
-      resolve(getWorkshop);
+      resolve(getWorkshop, 'workshop');
       break;
     }
     case 'getWorkshops': {
-      resolve(getWorkshops);
+      resolve(getWorkshops, 'workshops');
       break;
     }
     default: {

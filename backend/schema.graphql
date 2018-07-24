@@ -103,11 +103,6 @@ type WorkshopList {
   nextToken: String
 }
 
-type UserError {
-  message: String!
-  field: [String!] ## Path to input field which caused the error
-}
-
 input WorkshopInput {
   id: ID!
 }
@@ -150,11 +145,6 @@ input CreateWorkshopInput {
   cook: CookInput!
 }
 
-type CreateWorkshopPayload {
-  userErrors: [UserError!]!
-  workshop: Workshop
-}
-
 input UpdateWorkshopInput {
   id: ID!
   name: String
@@ -168,24 +158,10 @@ input UpdateWorkshopInput {
   cook: CookInput
 }
 
-type UpdateWorkshopPayload {
-  userErrors: [UserError!]!
-  workshop: Workshop
-}
-
-type DeleteWorkshopPayload {
-  userErrors: [UserError!]!
-}
-
 input CreateBookingInput {
   workshop: WorkshopInput!
   gourmet: GourmetInput!
   amount: Int
-}
-
-type CreateBookingPayload {
-  userErrors: [UserError!]!
-  booking: Booking
 }
 
 input UpdateBookingAmountInput {
@@ -193,24 +169,10 @@ input UpdateBookingAmountInput {
   amount: Int
 }
 
-type UpdateBookingAmountPayload {
-  userErrors: [UserError!]!
-  booking: Booking
-}
-
-type DeleteBookingPayload {
-  userErrors: [UserError!]!
-}
-
 input CreateEvaluationInput {
   booking: BookingInput!
   rating: Float!
   comment: String!
-}
-
-type CreateEvaluationPayload {
-  userErrors: [UserError!]!
-  evaluation: Evaluation
 }
 
 input CreateGourmetInput {
@@ -224,11 +186,6 @@ input CreateGourmetInput {
   zip_code: String
   location: String
   description: String
-}
-
-type CreateGourmetPayload {
-  userErrors: [UserError!]!
-  gourmet: Gourmet
 }
 
 input UpdateGourmetInput {
@@ -245,15 +202,6 @@ input UpdateGourmetInput {
   description: String
 }
 
-type UpdateGourmetPayload {
-  userErrors: [UserError!]!
-  gourmet: Gourmet
-}
-
-type DeleteGourmetPayload {
-  userErrors: [UserError!]!
-}
-
 input CreateCookInput {
   gourmet: GourmetInput!
   is_pro: Boolean
@@ -263,11 +211,6 @@ input CreateCookInput {
   legal_first_name: String
   legal_last_name: String
   legal_birthdate: String
-}
-
-type CreateCookPayload {
-  userErrors: [UserError!]!
-  cook: Cook
 }
 
 input UpdateCookInput {
@@ -281,26 +224,12 @@ input UpdateCookInput {
   legal_birthdate: String
 }
 
-type UpdateCookPayload {
-  userErrors: [UserError!]!
-  cook: Cook
-}
-
-type DeleteCookPayload {
-  userErrors: [UserError!]!
-}
-
 input CreateKitchenInput {
   name: String!
   address: String!
   city: String!
   zip_code: String!
   location: String!
-}
-
-type CreateKitchenPayload {
-  userErrors: [UserError!]!
-  kitchen: Kitchen
 }
 
 input UpdateKitchenInput {
@@ -312,65 +241,91 @@ input UpdateKitchenInput {
   location: String
 }
 
-type UpdateKitchenPayload {
+type UserError {
+  message: String!
+  field: [String!] ## Path to input field which caused the error
+}
+
+type UserErrorsPayload {
+  userErrors: [UserError!]!
+}
+
+type WorkshopPayload {
+  userErrors: [UserError!]!
+  workshop: Workshop
+}
+
+type GourmetPayload {
+  userErrors: [UserError!]!
+  gourmet: Gourmet
+}
+
+type CookPayload {
+  userErrors: [UserError!]!
+  cook: Cook
+}
+
+type KitchenPayload {
   userErrors: [UserError!]!
   kitchen: Kitchen
 }
 
-type DeleteKitchenPayload {
+type BookingPayload {
   userErrors: [UserError!]!
+  booking: Booking
 }
 
-type EmptyPayload {
+type EvaluationPayload {
   userErrors: [UserError!]!
+  evaluation: Evaluation
 }
 
 type Mutation {
   ## Workshops
-  createWorkshop(input: CreateWorkshopInput!): CreateWorkshopPayload!
-  updateWorkshop(input: UpdateWorkshopInput!): UpdateWorkshopPayload!
-  deleteWorkshop(workshop_id: ID!): DeleteWorkshopPayload!
+  createWorkshop(input: CreateWorkshopInput!): WorkshopPayload!
+  updateWorkshop(input: UpdateWorkshopInput!): WorkshopPayload!
+  deleteWorkshop(workshop_id: ID!): UserErrorsPayload!
   addWorkshopImage(input: ImageInput!): ImagePayload!
-  removeWorkshopImage(key: String!): EmptyPayload!
+  removeWorkshopImage(key: String!): UserErrorsPayload!
 
   ## Bookings
-  createBooking(input: CreateBookingInput!): CreateBookingPayload!
-  updateBookingAmount(input: UpdateBookingAmountInput!): UpdateBookingAmountPayload!
-  deleteBooking(booking_id: ID!): DeleteBookingPayload!
+  createBooking(input: CreateBookingInput!): BookingPayload!
+  updateBookingAmount(input: UpdateBookingAmountInput!): BookingPayload!
+  deleteBooking(booking_id: ID!): UserErrorsPayload!
 
   ## Evaluations
-  createEvaluation(input: CreateEvaluationInput!): CreateEvaluationPayload!
+  createEvaluation(input: CreateEvaluationInput!): EvaluationPayload!
 
   ## Gourmets
-  createGourmet(input: CreateGourmetInput!): CreateGourmetPayload!
-  updateGourmet(input: UpdateGourmetInput!): UpdateGourmetPayload!
-  deleteGourmet(gourmet_id: ID!): DeleteGourmetPayload!
+  createGourmet(input: CreateGourmetInput!): GourmetPayload!
+  updateGourmet(input: UpdateGourmetInput!): GourmetPayload!
+  deleteGourmet(gourmet_id: ID!): UserErrorsPayload!
   updateGourmetImage(input: ImageInput!): ImagePayload!
 
   ## Cooks
-  createCook(input: CreateCookInput!): CreateCookPayload!
-  updateCook(input: UpdateCookInput!): UpdateCookPayload!
-  deleteCook(cook_id: ID!): DeleteCookPayload!
+  createCook(input: CreateCookInput!): CookPayload!
+  updateCook(input: UpdateCookInput!): CookPayload!
+  deleteCook(cook_id: ID!): UserErrorsPayload!
 
   ## Kitchens
-  createKitchen(input: CreateKitchenInput!): CreateKitchenPayload!
-  updateKitchen(input: UpdateKitchenInput!): UpdateKitchenPayload!
-  deleteKitchen(kitchen_id: ID!): DeleteKitchenPayload!
+  createKitchen(input: CreateKitchenInput!): KitchenPayload!
+  updateKitchen(input: UpdateKitchenInput!): KitchenPayload!
+  deleteKitchen(kitchen_id: ID!): UserErrorsPayload!
 }
 
 type Query {
-  getWorkshop(workshop_id: ID!): Workshop!
+  getWorkshop(workshop_id: ID!): WorkshopPayload!
   getWorkshops(limit: Int = 10, nextToken: String): WorkshopList!
-  getGourmet(gourmet_id: ID!): Gourmet!
-  getCook(cook_id: ID!): Cook!
-  getBooking(booking_id: ID!): Booking!
-  getKitchen(kitchen_id: ID!): Kitchen!
-  getEvaluation(booking_id: ID!): Evaluation!
-  getCurrentGourmet: Gourmet!
+  getGourmet(gourmet_id: ID!): GourmetPayload!
+  getCook(cook_id: ID!): CookPayload!
+  getBooking(booking_id: ID!): BookingPayload!
+  getKitchen(kitchen_id: ID!): KitchenPayload!
+  getEvaluation(booking_id: ID!): EvaluationPayload!
+  getCurrentGourmet: GourmetPayload!
 }
 
 type Subscription {
-  addWorkshop: CreateWorkshopPayload!
+  addWorkshop: WorkshopPayload!
     @aws_subscribe(mutations: ["createWorkshop"])
 }
 
