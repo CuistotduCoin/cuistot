@@ -1,13 +1,4 @@
-mutation m {
-  deleteEvaluation(booking_id: 1) {
-    message
-    errors {
-      message
-    }
-  }
-}
-
-mutation m($input: CreateEvaluationInput!) {
+mutation CreateEvaluation($input: CreateEvaluationInput!) {
   createEvaluation(evaluation: $input) {
     evaluation {
       rating
@@ -28,4 +19,13 @@ mutation m($input: CreateEvaluationInput!) {
     "rating": 5,
     "comment": "c'etait genial"
 	}
+}
+
+mutation DeleteEvaluation {
+  deleteEvaluation(booking_id: 1) {
+    message
+    errors {
+      message
+    }
+  }
 }

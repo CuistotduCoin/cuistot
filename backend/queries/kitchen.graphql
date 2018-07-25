@@ -1,4 +1,4 @@
-mutation m($input: CreateKitchenInput!) {
+mutation CreateKitchen($input: CreateKitchenInput!) {
   createKitchen(kitchen: $input) {
     kitchen {
       id

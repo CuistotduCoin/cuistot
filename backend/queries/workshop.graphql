@@ -1,4 +1,4 @@
-query q {
+query GetWorkshop {
   getWorkshop(workshop_id: 1) {
     workshop{
       id
@@ -28,7 +28,7 @@ query q {
   }
 }
 
-mutation m($input: CreateWorkshopInput!) {
+mutation CreateWorkshop($input: CreateWorkshopInput!) {
   createWorkshop(workshop: $input) {
     workshop {
       id
@@ -76,7 +76,7 @@ mutation m($input: CreateWorkshopInput!) {
 	}
 }
 
-mutation m($input: UpdateWorkshopInput!) {
+mutation UpdateWorkshop($input: UpdateWorkshopInput!) {
   updateWorkshop(workshop: $input) {
     workshop {
       id
@@ -125,7 +125,7 @@ mutation m($input: UpdateWorkshopInput!) {
   }
 }
 
-mutation m {
+mutation DeleteWorkshop {
   deleteWorkshop(workshop_id: 9) {
     message
     errors {

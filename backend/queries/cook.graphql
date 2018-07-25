@@ -1,4 +1,4 @@
-query q {
+query GetCook {
   getCook(cook_id: 1) {
     cook {
       id
@@ -7,6 +7,57 @@ query q {
         id
       }
     }
+    message
+    errors {
+      message
+    }
+  }
+}
+
+mutation CreateCook($input: CreateCookInput!) {
+  createCook(cook: $input) {
+    cook {
+      gourmet {
+        id
+      }
+    }
+    message
+    errors {
+      message
+    }
+  }
+}
+
+{
+  "input": {
+    "gourmet": {
+      "id": 1
+    }
+  }
+}
+
+mutation UpdateCook($input: UpdateCookInput!) {
+  updateCook(cook: $input) {
+    cook {
+      gourmet {
+        id
+      }
+    }
+    message
+    errors {
+      message
+    }
+  }
+}
+
+{
+  "input": {
+    "id": 1
+  }
+}
+
+mutation DeleteCook {
+  deleteCook(cook_id: 1) {
     message
     errors {
       message
