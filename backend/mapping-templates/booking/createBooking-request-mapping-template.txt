@@ -4,9 +4,9 @@
   "payload": {
     "field": "createBooking",
     "arguments": {
-    	"workshop_id": $utils.toJson($context.arguments.booking.workshop.id),
-		  "gourmet_id": $utils.toJson($context.arguments.booking.gourmet.id),
-		  "amount": $utils.toJson($context.arguments.booking.amount)
+      "workshop_id": $utils.toJson($context.arguments.booking.workshop.id),
+      "gourmet_id": $utils.toJson($context.arguments.booking.gourmet.id),
+      "amount": $utils.toJson($context.arguments.booking.amount)
     }
   }
 }

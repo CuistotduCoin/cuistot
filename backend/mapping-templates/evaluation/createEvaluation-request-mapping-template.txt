@@ -4,9 +4,9 @@
   "payload": {
     "field": "createEvaluation",
     "arguments": {
-    	"booking_id": $utils.toJson($context.arguments.evaluation.booking.id),
-		  "rating": $utils.toJson($context.arguments.evaluation.rating),
-		  "comment": $utils.toJson($context.arguments.evaluation.comment)
+      "booking_id": $utils.toJson($context.arguments.evaluation.booking.id),
+      "rating": $utils.toJson($context.arguments.evaluation.rating),
+      "comment": $utils.toJson($context.arguments.evaluation.comment)
     }
   }
 }
