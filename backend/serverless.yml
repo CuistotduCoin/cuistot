@@ -189,6 +189,11 @@ custom:
         request: "cook/cookGourmet-request-mapping-template.txt"
         response: "cook/cookGourmet-response-mapping-template.txt"
       - dataSource: Lambda
+        type: Cook
+        field: workshops
+        request: "cook/cookWorkshops-request-mapping-template.txt"
+        response: "cook/cookWorkshops-response-mapping-template.txt"
+      - dataSource: Lambda
         type: Workshop
         field: kitchen
         request: "workshop/workshopKitchen-request-mapping-template.txt"

@@ -1,5 +1,11 @@
 import { getBooking, createBooking, updateBooking, deleteBooking } from './resolvers/booking-resolver';
-import { getCook, createCook, updateCook, deleteCook } from './resolvers/cook-resolver';
+import {
+  getCook,
+  createCook,
+  updateCook,
+  deleteCook,
+  getCookWorkshops,
+} from './resolvers/cook-resolver';
 import { getEvaluation, createEvaluation, deleteEvaluation } from './resolvers/evaluation-resolver';
 import {
   getGourmet,
@@ -45,6 +51,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'getCook': {
       resolve(getCook, 'cook');
+      break;
+    }
+    case 'getCookWorkshops': {
+      resolve(getCookWorkshops, 'workshops');
       break;
     }
     case 'getEvaluation': {

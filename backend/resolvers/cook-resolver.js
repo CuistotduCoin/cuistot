@@ -1,9 +1,20 @@
-import { findFirstWhere, insertObject, updateObject, deleteObject } from './utils';
+import {
+  findWhere,
+  findFirstWhere,
+  insertObject,
+  updateObject,
+  deleteObject,
+} from './utils';
 
 const TABLE_NAME = 'cooks';
 
 async function getCook(args) {
   const result = await findFirstWhere(TABLE_NAME, args.cook_id);
+  return result;
+}
+
+async function getCookWorkshops(args) {
+  const result = await findWhere('workshops', args.cook_id, 'cook_id');
   return result;
 }
 
@@ -22,4 +33,10 @@ async function deleteCook(args) {
   return result;
 }
 
-export { getCook, createCook, deleteCook, updateCook };
+export {
+  getCook,
+  createCook,
+  deleteCook,
+  updateCook,
+  getCookWorkshops,
+};

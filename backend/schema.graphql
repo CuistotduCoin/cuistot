@@ -81,6 +81,7 @@ type Cook implements Node & Timestamps {
   legal_first_name: String
   legal_last_name: String
   legal_birthdate: String
+  workshops: [Workshop!]!
 }
 
 type Kitchen implements Node & Timestamps {
