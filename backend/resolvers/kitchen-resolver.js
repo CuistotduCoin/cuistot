@@ -1,4 +1,4 @@
-import { getSingleRow, insertObject } from './utils';
+import { getSingleRow, insertObject, deleteObject } from './utils';
 
 const TABLE_NAME = 'kitchens';
 
@@ -12,4 +12,9 @@ async function createKitchen(args) {
   return result;
 }
 
-export { getKitchen, createKitchen };
+async function deleteKitchen(args) {
+  const result = await deleteObject(TABLE_NAME, args.kitchen_id);
+  return result;
+}
+
+export { getKitchen, createKitchen, deleteKitchen };

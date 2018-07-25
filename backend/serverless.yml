@@ -81,6 +81,11 @@ custom:
         field: createEvaluation
         request: "evaluation/createEvaluation-request-mapping-template.txt"
         response: "evaluation/createEvaluation-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: deleteEvaluation
+        request: "evaluation/deleteEvaluation-request-mapping-template.txt"
+        response: "evaluation/deleteEvaluation-response-mapping-template.txt"
 
       - dataSource: Lambda
         type: Mutation

@@ -1,8 +1,8 @@
-import { getBooking, createBooking } from './resolvers/booking-resolver';
-import { getCook, createCook } from './resolvers/cook-resolver';
-import { getEvaluation, createEvaluation } from './resolvers/evaluation-resolver';
-import { getGourmet, createGourmet } from './resolvers/gourmet-resolver';
-import { getKitchen, createKitchen } from './resolvers/kitchen-resolver';
+import { getBooking, createBooking, deleteBooking } from './resolvers/booking-resolver';
+import { getCook, createCook, deleteCook } from './resolvers/cook-resolver';
+import { getEvaluation, createEvaluation, deleteEvaluation } from './resolvers/evaluation-resolver';
+import { getGourmet, createGourmet, deleteGourmet } from './resolvers/gourmet-resolver';
+import { getKitchen, createKitchen, deleteKitchen } from './resolvers/kitchen-resolver';
 import {
   getWorkshop,
   getWorkshops,
@@ -76,20 +76,40 @@ export const graphqlHandler = (event, context, callback) => {
       resolve(createBooking, 'booking');
       break;
     }
+    case 'deleteBooking': {
+      resolve(deleteBooking);
+      break;
+    }
     case 'createEvaluation': {
       resolve(createEvaluation, 'evaluation');
+      break;
+    }
+    case 'deleteEvaluation': {
+      resolve(deleteEvaluation);
       break;
     }
     case 'createGourmet': {
       resolve(createGourmet, 'gourmet');
       break;
     }
+    case 'deleteGourmet': {
+      resolve(deleteGourmet);
+      break;
+    }
     case 'createCook': {
       resolve(createCook, 'cook');
       break;
     }
+    case 'deleteCook': {
+      resolve(deleteCook);
+      break;
+    }
     case 'createKitchen': {
       resolve(createKitchen, 'kitchen');
+      break;
+    }
+    case 'deleteKitchen': {
+      resolve(deleteKitchen);
       break;
     }
     default: {

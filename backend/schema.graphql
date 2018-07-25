@@ -303,6 +303,7 @@ type Mutation {
 
   ## Evaluations
   createEvaluation(evaluation: CreateEvaluationInput!): EvaluationPayload!
+  deleteEvaluation(booking_id: ID!): PlainPayload!
 
   ## Gourmets
   createGourmet(gourmet: CreateGourmetInput!): GourmetPayload!
