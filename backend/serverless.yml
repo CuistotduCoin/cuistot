@@ -233,6 +233,18 @@ functions:
 
 resources:
   Resources:
+    DBInstance:
+      Type: "AWS::RDS::DBInstance"
+      DeletionPolicy: "Retain"
+      Properties:
+        DBInstanceIdentifier: "cuistot-postgres-${self:provider.stage}"
+        DBName: "cuistot_${self:provider.stage}"
+        AllocatedStorage: "20"
+        DBInstanceClass: "db.t2.micro"
+        Engine: "postgres"
+        EngineVersion: "9.6.6"
+        MasterUsername: ${env:DATABASE_USERNAME}
+        MasterUserPassword: ${env:DATABASE_PASSWORD}
     AppSyncServiceRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
