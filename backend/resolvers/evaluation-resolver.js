@@ -1,9 +1,9 @@
-import { getSingleRow, insertObject, deleteObject } from './utils';
+import { findFirstWhere, insertObject, deleteObject } from './utils';
 
 const TABLE_NAME = 'evaluations';
 
 async function getEvaluation(args) {
-  const result = await getSingleRow(TABLE_NAME, args.booking_id, 'booking_id');
+  const result = await findFirstWhere(TABLE_NAME, args.booking_id, 'booking_id');
   return result;
 }
 

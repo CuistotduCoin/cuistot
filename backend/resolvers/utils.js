@@ -3,9 +3,9 @@ import { formatKnexQueryError, cleanKnexQueryArgs, isEmpty } from '../utils/util
 
 const knex = require('knex')(connection[process.env.NODE_ENV]); // eslint-disable-line
 
-async function getSingleRow(tableName, id, idField = 'id') {
+async function findFirstWhere(tableName, value, field = 'id') {
   try {
-    const query = knex(tableName).where(idField, id).first();
+    const query = knex(tableName).where(field, value).first();
     const result = await query;
     if (result) {
       return { data: result };
@@ -66,13 +66,13 @@ async function updateObject(tableName, args, idField = 'id') {
   return { userError: 'failure' };
 }
 
-async function deleteObject(tableName, id, idField = 'id') {
+async function deleteObject(tableName, value, field = 'id') {
   try {
-    let result = await getSingleRow(tableName, id, idField);
+    let result = await findFirstWhere(tableName, value, field);
     if (result.userError) {
       return result;
     }
-    const query = knex(tableName).where(idField, id).del();
+    const query = knex(tableName).where(field, value).del();
     result = await query;
     if (result > 0) {
       return { message: 'success' };

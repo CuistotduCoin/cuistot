@@ -13,19 +13,11 @@ const baseConfig = {
     min: 2,
     max: 10,
   },
-  migrations: {
-    tableName: 'knex_migrations',
-  },
+  migrations: { tableName: 'knex_migrations' },
 };
 
 module.exports = {
-  development: {
-    ...baseConfig,
-  },
-  staging: {
-    ...baseConfig,
-  },
-  production: {
-    ...baseConfig,
-  },
+  development: { ...baseConfig },
+  staging: { ...baseConfig },
+  production: { ...baseConfig },
 };
