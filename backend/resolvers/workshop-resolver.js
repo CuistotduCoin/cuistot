@@ -1,5 +1,5 @@
 import connection from '../knexfile';
-import { getSingleRow, insertObject, deleteObject } from './utils';
+import { getSingleRow, insertObject, deleteObject, updateObject } from './utils';
 
 const knex = require('knex')(connection[process.env.NODE_ENV]); // eslint-disable-line
 
@@ -37,6 +37,11 @@ async function createWorkshop(args) {
   return result;
 }
 
+async function updateWorkshop(args) {
+  const result = await updateObject(TABLE_NAME, args);
+  return result;
+}
+
 async function deleteWorkshop(args) {
   const result = await deleteObject(TABLE_NAME, args.workshop_id);
   return result;
@@ -47,5 +52,6 @@ export {
   getWorkshops,
   getWorkshopBookings,
   createWorkshop,
+  updateWorkshop,
   deleteWorkshop,
 };

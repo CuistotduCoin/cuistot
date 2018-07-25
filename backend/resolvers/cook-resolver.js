@@ -1,4 +1,4 @@
-import { getSingleRow, insertObject, deleteObject } from './utils';
+import { getSingleRow, insertObject, updateObject, deleteObject } from './utils';
 
 const TABLE_NAME = 'cooks';
 
@@ -12,9 +12,14 @@ async function createCook(args) {
   return result;
 }
 
+async function updateCook(args) {
+  const result = await updateObject(TABLE_NAME, args);
+  return result;
+}
+
 async function deleteCook(args) {
   const result = await deleteObject(TABLE_NAME, args.cook_id);
   return result;
 }
 
-export { getCook, createCook, deleteCook };
+export { getCook, createCook, deleteCook, updateCook };

@@ -3,6 +3,17 @@
   "operation": "Invoke",
   "payload": {
     "field": "updateWorkshop",
-    "arguments": $utils.toJson($context.arguments)
+    "arguments": {
+      "id": $utils.toJson($context.arguments.workshop.id),
+      "name": $utils.toJson($context.arguments.workshop.name),
+      "price": $utils.toJson($context.arguments.workshop.price),
+      "duration": $utils.toJson($context.arguments.workshop.duration),
+      "min_gourmet": $utils.toJson($context.arguments.workshop.min_gourmet),
+      "max_gourmet": $utils.toJson($context.arguments.workshop.max_gourmet),
+      "description": $utils.toJson($context.arguments.workshop.description),
+      "date": $utils.toJson($context.arguments.workshop.date),
+      "kitchen_id": $utils.toJson($context.arguments.workshop.kitchen.id),
+      "cook_id": $utils.toJson($context.arguments.workshop.cook.id)
+    }
   }
 }

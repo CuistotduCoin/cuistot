@@ -1,13 +1,14 @@
-import { getBooking, createBooking, deleteBooking } from './resolvers/booking-resolver';
-import { getCook, createCook, deleteCook } from './resolvers/cook-resolver';
+import { getBooking, createBooking, updateBooking, deleteBooking } from './resolvers/booking-resolver';
+import { getCook, createCook, updateCook, deleteCook } from './resolvers/cook-resolver';
 import { getEvaluation, createEvaluation, deleteEvaluation } from './resolvers/evaluation-resolver';
-import { getGourmet, createGourmet, deleteGourmet } from './resolvers/gourmet-resolver';
-import { getKitchen, createKitchen, deleteKitchen } from './resolvers/kitchen-resolver';
+import { getGourmet, createGourmet, updateGourmet, deleteGourmet } from './resolvers/gourmet-resolver';
+import { getKitchen, createKitchen, updateKitchen, deleteKitchen } from './resolvers/kitchen-resolver';
 import {
   getWorkshop,
   getWorkshops,
   getWorkshopBookings,
   createWorkshop,
+  updateWorkshop,
   deleteWorkshop,
 } from './resolvers/workshop-resolver';
 
@@ -68,12 +69,20 @@ export const graphqlHandler = (event, context, callback) => {
       resolve(createWorkshop, 'workshop');
       break;
     }
+    case 'updateWorkshop': {
+      resolve(updateWorkshop, 'workshop');
+      break;
+    }
     case 'deleteWorkshop': {
       resolve(deleteWorkshop);
       break;
     }
     case 'createBooking': {
       resolve(createBooking, 'booking');
+      break;
+    }
+    case 'updateBooking': {
+      resolve(updateBooking, 'booking');
       break;
     }
     case 'deleteBooking': {
@@ -92,6 +101,10 @@ export const graphqlHandler = (event, context, callback) => {
       resolve(createGourmet, 'gourmet');
       break;
     }
+    case 'updateGourmet': {
+      resolve(updateGourmet, 'gourmet');
+      break;
+    }
     case 'deleteGourmet': {
       resolve(deleteGourmet);
       break;
@@ -100,12 +113,20 @@ export const graphqlHandler = (event, context, callback) => {
       resolve(createCook, 'cook');
       break;
     }
+    case 'updateCook': {
+      resolve(updateCook, 'cook');
+      break;
+    }
     case 'deleteCook': {
       resolve(deleteCook);
       break;
     }
     case 'createKitchen': {
       resolve(createKitchen, 'kitchen');
+      break;
+    }
+    case 'updateKitchen': {
+      resolve(updateKitchen, 'kitchen');
       break;
     }
     case 'deleteKitchen': {

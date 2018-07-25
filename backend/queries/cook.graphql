@@ -1,0 +1,15 @@
+query q {
+  getCook(cook_id: 1) {
+    cook {
+      id
+      legal_first_name
+      gourmet {
+        id
+      }
+    }
+    message
+    errors {
+      message
+    }
+  }
+}

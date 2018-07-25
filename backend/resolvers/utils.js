@@ -1,54 +1,71 @@
 import connection from '../knexfile';
+import { formatKnexQueryError } from '../utils/utils';
 
 const knex = require('knex')(connection[process.env.NODE_ENV]); // eslint-disable-line
 
 async function getSingleRow(tableName, id, idField = 'id') {
-  let result;
   try {
     const query = knex(tableName).where(idField, id).first();
-    result = await query;
-    if (!result) {
-      return { userError: 'resource not found' };
+    const result = await query;
+    if (result) {
+      return { data: result };
     }
-    return { data: result };
   } catch (err) {
     console.error(err);
+    return { userError: formatKnexQueryError(err) };
   }
-  return {};
+  return { userError: 'resource not found' };
 }
 
 async function insertObject(tableName, args) {
-  let result;
   try {
     const query = knex(tableName).insert(args).returning('*');
-    result = await query;
-    if (!result.length) {
-      return { userError: 'failure' };
+    const result = await query;
+    if (result.length) {
+      return { data: result[0], message: 'success' };
     }
-    return { data: result[0], message: 'success' };
   } catch (err) {
     console.error(err);
+    return { userError: formatKnexQueryError(err) };
   }
-  return {};
+  return { userError: 'failure' };
+}
+
+async function updateObject(tableName, args, idField = 'id') {
+  try {
+    const updateArgs = Object.assign({}, args);
+    delete updateArgs[idField];
+    const query = knex(tableName)
+      .where(idField, args[idField])
+      .update(updateArgs)
+      .returning('*');
+    const result = await query;
+    if (result.length) {
+      return { data: result[0], message: 'success' };
+    }
+  } catch (err) {
+    console.error(err);
+    return { userError: formatKnexQueryError(err) };
+  }
+  return { userError: 'failure' };
 }
 
 async function deleteObject(tableName, id, idField = 'id') {
-  let result;
   try {
-    result = await getSingleRow(tableName, id, idField);
+    let result = await getSingleRow(tableName, id, idField);
     if (result.userError) {
       return result;
     }
     const query = knex(tableName).where(idField, id).del();
     result = await query;
-    if (result === 0) {
-      return { userError: 'failure' };
+    if (result > 0) {
+      return { message: 'success' };
     }
-    return { message: 'success' };
   } catch (err) {
     console.error(err);
+    return { userError: formatKnexQueryError(err) };
   }
-  return {};
+  return { userError: 'failure' };
 }
 
-export { getSingleRow, insertObject, deleteObject };
+export { getSingleRow, insertObject, deleteObject, updateObject };
