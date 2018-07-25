@@ -17,6 +17,18 @@ async function getSingleRow(tableName, id, idField = 'id') {
   return { userError: 'resource not found' };
 }
 
+async function findWhere(tableName, value, field = 'id') {
+  let result = [];
+  try {
+    const query = knex(tableName).where(field, value);
+    result = await query;
+  } catch (err) {
+    console.error(err);
+    return { userError: formatKnexQueryError(err) };
+  }
+  return { data: result };
+}
+
 async function insertObject(tableName, args) {
   try {
     const createArgs = cleanKnexQueryArgs(args);
@@ -72,4 +84,10 @@ async function deleteObject(tableName, id, idField = 'id') {
   return { userError: 'failure' };
 }
 
-export { getSingleRow, insertObject, deleteObject, updateObject };
+export {
+  findFirstWhere,
+  findWhere,
+  insertObject,
+  deleteObject,
+  updateObject,
+};

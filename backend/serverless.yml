@@ -204,6 +204,11 @@ custom:
         request: "workshop/workshopBookings-request-mapping-template.txt"
         response: "workshop/workshopBookings-response-mapping-template.txt"
       - dataSource: Lambda
+        type: Gourmet
+        field: bookings
+        request: "gourmet/gourmetBookings-request-mapping-template.txt"
+        response: "gourmet/gourmetBookings-response-mapping-template.txt"
+      - dataSource: Lambda
         type: Booking
         field: gourmet
         request: "booking/bookingGourmet-request-mapping-template.txt"

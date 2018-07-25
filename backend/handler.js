@@ -1,7 +1,13 @@
 import { getBooking, createBooking, updateBooking, deleteBooking } from './resolvers/booking-resolver';
 import { getCook, createCook, updateCook, deleteCook } from './resolvers/cook-resolver';
 import { getEvaluation, createEvaluation, deleteEvaluation } from './resolvers/evaluation-resolver';
-import { getGourmet, createGourmet, updateGourmet, deleteGourmet } from './resolvers/gourmet-resolver';
+import {
+  getGourmet,
+  createGourmet,
+  updateGourmet,
+  deleteGourmet,
+  getGourmetBookings,
+} from './resolvers/gourmet-resolver';
 import { getKitchen, createKitchen, updateKitchen, deleteKitchen } from './resolvers/kitchen-resolver';
 import {
   getWorkshop,
@@ -47,6 +53,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'getGourmet': {
       resolve(getGourmet, 'gourmet');
+      break;
+    }
+    case 'getGourmetBookings': {
+      resolve(getGourmetBookings, 'bookings');
       break;
     }
     case 'getKitchen': {

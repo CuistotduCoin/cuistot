@@ -66,6 +66,7 @@ type Gourmet implements Node & Timestamps {
   zip_code: String
   location: String
   description: String
+  bookings: [Booking!]!
 }
 
 type Cook implements Node & Timestamps {
