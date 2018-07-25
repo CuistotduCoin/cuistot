@@ -1,8 +1,15 @@
-import { getSingleRow } from './utils';
+import { getSingleRow, insertObject } from './utils';
+
+const TABLE_NAME = 'evaluations';
 
 async function getEvaluation(args) {
-  const result = await getSingleRow('evaluations', args.booking_id);
+  const result = await getSingleRow(TABLE_NAME, args.booking_id, 'booking_id');
   return result;
 }
 
-export { getEvaluation };
+async function createEvaluation(args) {
+  const result = await insertObject(TABLE_NAME, args);
+  return result;
+}
+
+export { getEvaluation, createEvaluation };

@@ -7,3 +7,4 @@ overrides:
         - error
         - ignoreChainWithDepth: 3
       import/prefer-default-export: "off"
+      no-console: "off"
