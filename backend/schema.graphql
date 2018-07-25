@@ -72,6 +72,7 @@ type Cook implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  gourmet: Gourmet!
   is_pro: Boolean!
   business_name: String
   siren: String
@@ -164,7 +165,7 @@ input CreateBookingInput {
   amount: Int
 }
 
-input UpdateBookingAmountInput {
+input UpdateBookingInput {
   id: ID!
   amount: Int
 }
@@ -246,71 +247,78 @@ type UserError {
   field: [String!] ## Path to input field which caused the error
 }
 
-type UserErrorsPayload {
-  userErrors: [UserError!]!
+type PlainPayload {
+  errors: [UserError!]!
+  message: String
 }
 
 type WorkshopPayload {
-  userErrors: [UserError!]!
+  errors: [UserError!]!
+  message: String
   workshop: Workshop
 }
 
 type GourmetPayload {
-  userErrors: [UserError!]!
+  errors: [UserError!]!
+  message: String
   gourmet: Gourmet
 }
 
 type CookPayload {
-  userErrors: [UserError!]!
+  errors: [UserError!]!
+  message: String
   cook: Cook
 }
 
 type KitchenPayload {
-  userErrors: [UserError!]!
+  errors: [UserError!]!
+  message: String
   kitchen: Kitchen
 }
 
 type BookingPayload {
-  userErrors: [UserError!]!
+  errors: [UserError!]!
+  message: String
   booking: Booking
 }
 
 type EvaluationPayload {
-  userErrors: [UserError!]!
+  errors: [UserError!]!
+  message: String
   evaluation: Evaluation
 }
 
 type Mutation {
   ## Workshops
-  createWorkshop(input: CreateWorkshopInput!): WorkshopPayload!
-  updateWorkshop(input: UpdateWorkshopInput!): WorkshopPayload!
-  deleteWorkshop(workshop_id: ID!): UserErrorsPayload!
-  addWorkshopImage(input: ImageInput!): ImagePayload!
-  removeWorkshopImage(key: String!): UserErrorsPayload!
+  createWorkshop(workshop: CreateWorkshopInput!): WorkshopPayload!
+  updateWorkshop(workshop: UpdateWorkshopInput!): WorkshopPayload!
+  deleteWorkshop(workshop_id: ID!): PlainPayload!
+  addWorkshopImage(image: ImageInput!): ImagePayload!
+  removeWorkshopImage(key: String!): PlainPayload!
 
   ## Bookings
-  createBooking(input: CreateBookingInput!): BookingPayload!
-  updateBookingAmount(input: UpdateBookingAmountInput!): BookingPayload!
-  deleteBooking(booking_id: ID!): UserErrorsPayload!
+  createBooking(booking: CreateBookingInput!): BookingPayload!
+  updateBooking(booking: UpdateBookingInput!): BookingPayload!
+  deleteBooking(booking_id: ID!): PlainPayload!
 
   ## Evaluations
-  createEvaluation(input: CreateEvaluationInput!): EvaluationPayload!
+  createEvaluation(evaluation: CreateEvaluationInput!): EvaluationPayload!
 
   ## Gourmets
-  createGourmet(input: CreateGourmetInput!): GourmetPayload!
-  updateGourmet(input: UpdateGourmetInput!): GourmetPayload!
-  deleteGourmet(gourmet_id: ID!): UserErrorsPayload!
-  updateGourmetImage(input: ImageInput!): ImagePayload!
+  createGourmet(gourmet: CreateGourmetInput!): GourmetPayload!
+  updateGourmet(gourmet: UpdateGourmetInput!): GourmetPayload!
+  deleteGourmet(gourmet_id: ID!): PlainPayload!
+  updateGourmetImage(image: ImageInput!): ImagePayload!
 
   ## Cooks
-  createCook(input: CreateCookInput!): CookPayload!
-  updateCook(input: UpdateCookInput!): CookPayload!
-  deleteCook(cook_id: ID!): UserErrorsPayload!
+  createCook(cook: CreateCookInput!): CookPayload!
+  updateCook(cook: UpdateCookInput!): CookPayload!
+  deleteCook(cook_id: ID!): PlainPayload!
 
   ## Kitchens
-  createKitchen(input: CreateKitchenInput!): KitchenPayload!
-  updateKitchen(input: UpdateKitchenInput!): KitchenPayload!
-  deleteKitchen(kitchen_id: ID!): UserErrorsPayload!
+  createKitchen(kitchen: CreateKitchenInput!): KitchenPayload!
+  updateKitchen(kitchen: UpdateKitchenInput!): KitchenPayload!
+  deleteKitchen(kitchen_id: ID!): PlainPayload!
 }
 
 type Query {

@@ -1,8 +1,15 @@
-import { getSingleRow } from './utils';
+import { getSingleRow, insertObject } from './utils';
+
+const TABLE_NAME = 'bookings';
 
 async function getBooking(args) {
-  const result = await getSingleRow('bookings', args.booking_id);
+  const result = await getSingleRow(TABLE_NAME, args.booking_id);
   return result;
 }
 
-export { getBooking };
+async function createBooking(args) {
+  const result = await insertObject(TABLE_NAME, args);
+  return result;
+}
+
+export { getBooking, createBooking };

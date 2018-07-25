@@ -7,7 +7,7 @@ exports.up = knex => (
     table.integer('min_gourmet').notNullable();
     table.integer('max_gourmet').notNullable();
     table.text('description');
-    table.json('pictures');
+    table.json('images');
     table.dateTime('date').notNullable();
     table.integer('kitchen_id')
       .notNullable()

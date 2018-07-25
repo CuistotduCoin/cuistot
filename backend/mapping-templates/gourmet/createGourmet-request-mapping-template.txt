@@ -1,0 +1,19 @@
+{
+  "version": "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+    "field": "createGourmet",
+    "arguments": {
+    	"email": $utils.toJson($context.arguments.gourmet.email),
+		  "first_name": $utils.toJson($context.arguments.gourmet.first_name),
+		  "last_name": $utils.toJson($context.arguments.gourmet.last_name),
+		  "gender": $utils.toJson($context.arguments.gourmet.gender),
+		  "birthdate": $utils.toJson($context.arguments.gourmet.birthdate),
+		  "address": $utils.toJson($context.arguments.gourmet.address),
+		  "city": $utils.toJson($context.arguments.gourmet.city),
+		  "zip_code": $utils.toJson($context.arguments.gourmet.zip_cde),
+		  "location": $utils.toJson($context.arguments.gourmet.location),
+		  "description": $utils.toJson($context.arguments.gourmet.description)
+    }
+  }
+}

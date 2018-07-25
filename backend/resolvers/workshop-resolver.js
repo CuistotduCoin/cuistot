@@ -1,5 +1,5 @@
 import connection from '../knexfile';
-import { getSingleRow } from './utils';
+import { getSingleRow, insertObject, deleteObject } from './utils';
 
 const knex = require('knex')(connection[process.env.NODE_ENV]); // eslint-disable-line
 
@@ -21,4 +21,31 @@ async function getWorkshops() {
   return { items: result };
 }
 
-export { getWorkshop, getWorkshops };
+async function getWorkshopBookings(args) {
+  let result;
+  try {
+    const query = knex('bookings').where('workshop_id', args.workshop_id);
+    result = await query;
+  } catch (err) {
+    console.log(err);
+  }
+  return { data: result };
+}
+
+async function createWorkshop(args) {
+  const result = await insertObject(TABLE_NAME, args);
+  return result;
+}
+
+async function deleteWorkshop(args) {
+  const result = await deleteObject(TABLE_NAME, args.workshop_id);
+  return result;
+}
+
+export {
+  getWorkshop,
+  getWorkshops,
+  getWorkshopBookings,
+  createWorkshop,
+  deleteWorkshop,
+};

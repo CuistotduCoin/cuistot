@@ -5,7 +5,7 @@ exports.up = (knex, Promise) => (
       table.string('email', 255).notNullable();
       table.string('first_name', 100).notNullable();
       table.string('last_name', 100).notNullable();
-      table.json('picture');
+      table.json('image');
       table.specificType('gender', 'CHAR(1)');
       table.date('birthdate');
       table.string('address', 100);
