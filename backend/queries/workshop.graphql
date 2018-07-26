@@ -1,0 +1,135 @@
+query GetWorkshop {
+  getWorkshop(workshop_id: 1) {
+    workshop{
+      id
+      name
+      price
+      duration
+      min_gourmet
+      max_gourmet
+      description
+      date
+      kitchen {
+        id
+        name
+      }
+      cook {
+        id
+        gourmet {
+          first_name
+          last_name
+        }
+      }
+    }
+    message
+    errors {
+      message
+    }
+  }
+}
+
+mutation CreateWorkshop($input: CreateWorkshopInput!) {
+  createWorkshop(workshop: $input) {
+    workshop {
+      id
+      name
+      price
+      duration
+      min_gourmet
+      max_gourmet
+      description
+      date
+      kitchen {
+        id
+        name
+      }
+      cook {
+        id
+        gourmet {
+          first_name
+          last_name
+        }
+      }
+    }
+    message
+    errors {
+      message
+    }
+  }
+}
+
+{
+  "input": {
+  	"name": "Le premier vrai workshop",
+    "price": 18,
+    "duration": 120,
+    "min_gourmet": 2,
+    "max_gourmet": 4,
+    "description": "Coucou c'est moi",
+    "date": "2018-07-30 15:48:52.536125+00",
+    "kitchen": {
+      "id": 1
+    },
+    "cook": {
+      "id": 1
+    }
+	}
+}
+
+mutation UpdateWorkshop($input: UpdateWorkshopInput!) {
+  updateWorkshop(workshop: $input) {
+    workshop {
+      id
+      name
+      price
+      duration
+      min_gourmet
+      max_gourmet
+      description
+      date
+      kitchen {
+        id
+        name
+      }
+      cook {
+        id
+        gourmet {
+          first_name
+          last_name
+        }
+      }
+    }
+    message
+    errors {
+      message
+    }
+  }
+}
+
+{
+  "input": {
+    "id": 1,
+    "name": "Le premier vrai workshop modifié",
+    "price": 20,
+    "duration": 90,
+    "min_gourmet": 3,
+    "max_gourmet": 5,
+    "description": "Coucou c'est encore moi",
+    "date": "2018-08-02 10:50:52.536125+00",
+    "kitchen": {
+      "id": 2
+    },
+    "cook": {
+      "id": 2
+    }
+  }
+}
+
+mutation DeleteWorkshop {
+  deleteWorkshop(workshop_id: 9) {
+    message
+    errors {
+      message
+    }
+  }
+}

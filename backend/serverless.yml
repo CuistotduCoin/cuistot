@@ -81,6 +81,11 @@ custom:
         field: createEvaluation
         request: "evaluation/createEvaluation-request-mapping-template.txt"
         response: "evaluation/createEvaluation-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: deleteEvaluation
+        request: "evaluation/deleteEvaluation-request-mapping-template.txt"
+        response: "evaluation/deleteEvaluation-response-mapping-template.txt"
 
       - dataSource: Lambda
         type: Mutation
@@ -184,6 +189,11 @@ custom:
         request: "cook/cookGourmet-request-mapping-template.txt"
         response: "cook/cookGourmet-response-mapping-template.txt"
       - dataSource: Lambda
+        type: Cook
+        field: workshops
+        request: "cook/cookWorkshops-request-mapping-template.txt"
+        response: "cook/cookWorkshops-response-mapping-template.txt"
+      - dataSource: Lambda
         type: Workshop
         field: kitchen
         request: "workshop/workshopKitchen-request-mapping-template.txt"
@@ -198,6 +208,11 @@ custom:
         field: bookings
         request: "workshop/workshopBookings-request-mapping-template.txt"
         response: "workshop/workshopBookings-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Gourmet
+        field: bookings
+        request: "gourmet/gourmetBookings-request-mapping-template.txt"
+        response: "gourmet/gourmetBookings-response-mapping-template.txt"
       - dataSource: Lambda
         type: Booking
         field: gourmet

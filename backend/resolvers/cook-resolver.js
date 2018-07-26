@@ -1,9 +1,20 @@
-import { getSingleRow, insertObject } from './utils';
+import {
+  findWhere,
+  findFirstWhere,
+  insertObject,
+  updateObject,
+  deleteObject,
+} from './utils';
 
 const TABLE_NAME = 'cooks';
 
 async function getCook(args) {
-  const result = await getSingleRow(TABLE_NAME, args.cook_id);
+  const result = await findFirstWhere(TABLE_NAME, args.cook_id);
+  return result;
+}
+
+async function getCookWorkshops(args) {
+  const result = await findWhere('workshops', args.cook_id, 'cook_id');
   return result;
 }
 
@@ -12,4 +23,20 @@ async function createCook(args) {
   return result;
 }
 
-export { getCook, createCook };
+async function updateCook(args) {
+  const result = await updateObject(TABLE_NAME, args);
+  return result;
+}
+
+async function deleteCook(args) {
+  const result = await deleteObject(TABLE_NAME, args.cook_id);
+  return result;
+}
+
+export {
+  getCook,
+  createCook,
+  deleteCook,
+  updateCook,
+  getCookWorkshops,
+};

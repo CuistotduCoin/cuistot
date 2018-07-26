@@ -1,9 +1,9 @@
-import { getSingleRow, insertObject } from './utils';
+import { findFirstWhere, insertObject, updateObject, deleteObject } from './utils';
 
 const TABLE_NAME = 'bookings';
 
 async function getBooking(args) {
-  const result = await getSingleRow(TABLE_NAME, args.booking_id);
+  const result = await findFirstWhere(TABLE_NAME, args.booking_id);
   return result;
 }
 
@@ -12,4 +12,14 @@ async function createBooking(args) {
   return result;
 }
 
-export { getBooking, createBooking };
+async function updateBooking(args) {
+  const result = await updateObject(TABLE_NAME, args);
+  return result;
+}
+
+async function deleteBooking(args) {
+  const result = await deleteObject(TABLE_NAME, args.booking_id);
+  return result;
+}
+
+export { getBooking, createBooking, updateBooking, deleteBooking };

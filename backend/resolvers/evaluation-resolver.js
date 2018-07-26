@@ -1,9 +1,9 @@
-import { getSingleRow, insertObject } from './utils';
+import { findFirstWhere, insertObject, deleteObject } from './utils';
 
 const TABLE_NAME = 'evaluations';
 
 async function getEvaluation(args) {
-  const result = await getSingleRow(TABLE_NAME, args.booking_id, 'booking_id');
+  const result = await findFirstWhere(TABLE_NAME, args.booking_id, 'booking_id');
   return result;
 }
 
@@ -12,4 +12,9 @@ async function createEvaluation(args) {
   return result;
 }
 
-export { getEvaluation, createEvaluation };
+async function deleteEvaluation(args) {
+  const result = await deleteObject(TABLE_NAME, args.booking_id, 'booking_id');
+  return result;
+}
+
+export { getEvaluation, createEvaluation, deleteEvaluation };
