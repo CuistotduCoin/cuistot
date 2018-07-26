@@ -1,4 +1,4 @@
-/* import Amplify from "aws-amplify";
+import Amplify from "aws-amplify";
 
 export default Amplify.configure({
   Auth: {
@@ -26,5 +26,4 @@ export default Amplify.configure({
   }
 });
 
-*/
 export default [];

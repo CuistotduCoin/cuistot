@@ -17,6 +17,7 @@ stories.add("default", () => {
       nameCook: "Fabien",
       price: 50,
       rating: 4,
+      ratingNumber: 7,
       spot: "Schmidt, Brest",
       totalSeat: 8,
       typeform: "https://cuistotducoin.typeform.com/to/RpiaBS"
@@ -30,6 +31,7 @@ stories.add("default", () => {
       nameCook: "Shyam",
       price: 35,
       rating: 4.6,
+      ratingNumber: 8,
       spot: "Arthur Bonnet, Brest",
       totalSeat: 6,
       typeform: "https://cuistotducoin.typeform.com/to/qgukpu"

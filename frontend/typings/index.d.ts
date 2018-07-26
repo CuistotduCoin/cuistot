@@ -7,3 +7,9 @@ declare module '!raw-loader!*' {
     const contents: string;
     export = contents;
 }
+
+declare interface Window {
+    __APOLLO_STATE__: any;
+    env: any;
+    Stripe: any;
+  }

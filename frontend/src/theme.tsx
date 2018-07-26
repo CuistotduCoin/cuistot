@@ -7,6 +7,10 @@ const theme = createMuiTheme({
   palette: {
     primary: green,
     secondary: red
+  },
+  typography: {
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    fontSize: 14
   }
 });
 
