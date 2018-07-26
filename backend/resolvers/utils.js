@@ -86,7 +86,7 @@ async function getConnection(tableName, args) {
       const result = await countQuery;
       hasPreviousPage = result.rows[0].count > rows.length;
     } else if ('after' in args) {
-      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE id < ${args.after}`;
+      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE id <= ${args.after}`;
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasPreviousPage = result.rows[0].count > 0;
@@ -98,7 +98,7 @@ async function getConnection(tableName, args) {
       const result = await countQuery;
       hasNextPage = result.rows[0].count > rows.length;
     } else if ('before' in args) {
-      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE id > ${args.before}`;
+      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE id >= ${args.before}`;
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasNextPage = result.rows[0].count > 0;

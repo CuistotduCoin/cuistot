@@ -29,7 +29,7 @@ query GetWorkshop {
 }
 
 query GetWorkshops {
-  getWorkshops(first: 1, last: 2) {
+  getWorkshops(first: 1, after: "1") {
     workshops {
       edges {
         node {
