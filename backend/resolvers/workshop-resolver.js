@@ -5,6 +5,7 @@ import {
   insertObject,
   deleteObject,
   updateObject,
+  getConnection,
 } from './utils';
 
 const knex = require('knex')(connection[process.env.NODE_ENV]); // eslint-disable-line
@@ -16,15 +17,9 @@ async function getWorkshop(args) {
   return result;
 }
 
-async function getWorkshops() {
-  let result;
-  try {
-    const query = knex(TABLE_NAME);
-    result = await query;
-  } catch (err) {
-    console.log(err);
-  }
-  return { items: result };
+async function getWorkshops(args) {
+  const result = await getConnection(TABLE_NAME, args);
+  return result;
 }
 
 async function getWorkshopBookings(args) {

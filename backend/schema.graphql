@@ -16,6 +16,29 @@ enum Gender {
   U
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type PaginatedWorkshops {
+  workshops: WorkshopConnection
+  errors: [UserError!]!
+  message: String
+}
+
+type WorkshopConnection {
+  edges: [WorkshopEdge!]!
+  pageInfo: PageInfo!
+}
+
+type WorkshopEdge {
+  node: Workshop!
+  cursor: String!
+}
+
 type Workshop implements Node & Timestamps {
   id: ID!
   created_at: String!
@@ -326,7 +349,7 @@ type Mutation {
 
 type Query {
   getWorkshop(workshop_id: ID!): WorkshopPayload!
-  getWorkshops(limit: Int = 10, nextToken: String): WorkshopList!
+  getWorkshops(before: String, after: String, first: Int, last: Int): PaginatedWorkshops!
   getGourmet(gourmet_id: ID!): GourmetPayload!
   getCook(cook_id: ID!): CookPayload!
   getBooking(booking_id: ID!): BookingPayload!

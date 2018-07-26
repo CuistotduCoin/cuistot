@@ -1,4 +1,1 @@
-{
-    "items": $util.toJson($context.result.items),
-    "nextToken": $util.toJson($context.result.nextToken)
-}
+$util.toJson($ctx.result)
