@@ -1,6 +1,6 @@
 query GetWorkshop {
   getWorkshop(workshop_id: 1) {
-    workshop{
+    workshop {
       id
       name
       price
@@ -19,6 +19,30 @@ query GetWorkshop {
           first_name
           last_name
         }
+      }
+    }
+    message
+    errors {
+      message
+    }
+  }
+}
+
+query GetWorkshops {
+  getWorkshops(first: 1, after: "1") {
+    workshops {
+      edges {
+        node {
+          id
+          name
+        }
+        cursor
+      }
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
       }
     }
     message

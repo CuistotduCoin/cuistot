@@ -20,3 +20,4 @@ overrides:
             multiline: true
           ObjectPattern:
             multiline: true
+      prefer-destructuring: "off"

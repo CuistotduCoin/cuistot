@@ -1,11 +1,12 @@
 exports.up = knex => (
   knex.schema.createTable('evaluations', (table) => {
-    table.integer('booking_id')
-      .notNullable()
+    table.uuid('booking_id')
       .primary()
       .references('id')
       .inTable('bookings')
-      .onDelete('CASCADE');
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE')
+      .index();
     table.float('rating').notNullable();
     table.text('comment').notNullable();
     table.timestamps(true, true);

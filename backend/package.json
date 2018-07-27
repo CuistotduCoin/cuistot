@@ -10,7 +10,7 @@
     "migrate": "env-cmd .env node_modules/.bin/knex migrate:latest",
     "rollback": "env-cmd .env node_modules/.bin/knex migrate:rollback",
     "seed": "env-cmd .env node_modules/.bin/knex seed:run",
-    "setup": "env-cmd .env ./scripts/setup.sh",
+    "setup-dev-db": "env-cmd .env.development ./scripts/setup.sh",
     "start": "env-cmd .env serverless offline start",
     "deploy": "env-cmd .env serverless deploy"
   },
