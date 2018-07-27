@@ -6211,18 +6211,18 @@ ra-data-fakerest@^2.0.0:
   dependencies:
     fakerest "~2.1.0"
 
-ra-data-graphql-simple@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.1.2.tgz#c188163852788e3e22792bc9f08de4f9a4d767a6"
+ra-data-graphql-simple@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.1.4.tgz#e55fbaf97f65597ad23d572a49509e60449ed3a6"
   dependencies:
     graphql-tag "^2.6.1"
     lodash "~4.17.5"
     pluralize "~7.0.0"
-    ra-data-graphql "^2.1.2"
+    ra-data-graphql "^2.1.4"
 
-ra-data-graphql@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.1.2.tgz#b2412e4a1e197e31026bb913b53439a3e12de684"
+ra-data-graphql@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.1.4.tgz#a636acb47cd824a217788da6b3d12c2d9399907f"
   dependencies:
     apollo-client "^2.2.8"
     apollo-client-preset "^1.0.6"
@@ -6245,7 +6245,7 @@ ra-input-rich-text@^2.1.0:
     prop-types "~15.6.1"
     quill "~1.3.6"
 
-ra-language-english@^2.1.3:
+ra-language-english@^2.0.2, ra-language-english@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-2.1.3.tgz#c34e280f4052b35210e812d41c7c12f223ed7377"
 
