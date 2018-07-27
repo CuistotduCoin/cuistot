@@ -36,27 +36,29 @@ async function findWhere(tableName, value, field = 'id') {
   return { data: result };
 }
 
-const addRangeClause = (query, args) => {
+const cursorCreatedAt = (tableName, cursorId) => `(SELECT created_at FROM ${tableName} WHERE id = '${cursorId}')`;
+
+const addRangeClause = (query, tableName, args) => {
   if ('after' in args && 'before' in args) {
-    return `${query} WHERE id > ${args.after} AND id < ${args.before}`;
+    return `${query} WHERE created_at > ${cursorCreatedAt(tableName, args.after)} AND created_at < ${cursorCreatedAt(tableName, args.before)}`;
   }
   if ('after' in args) {
-    return `${query} WHERE id > ${args.after}`;
+    return `${query} WHERE created_at > ${cursorCreatedAt(tableName, args.after)}`;
   }
   if ('before' in args) {
-    return `${query} WHERE id < ${args.before}`;
+    return `${query} WHERE created_at < ${cursorCreatedAt(tableName, args.before)}`;
   }
   return query;
 };
 
 const addLimitClause = (query, args) => {
   if ('first' in args) {
-    return `${query} ORDER BY id ASC LIMIT ${args.first}`;
+    return `${query} ORDER BY created_at ASC LIMIT ${args.first}`;
   }
   if ('last' in args) {
-    return `${query} ORDER BY id DESC LIMIT ${args.last}`;
+    return `${query} ORDER BY created_at DESC LIMIT ${args.last}`;
   }
-  return `${query} ORDER BY id ASC`;
+  return `${query} ORDER BY created_at ASC`;
 };
 
 async function getConnection(tableName, args) {
@@ -70,7 +72,7 @@ async function getConnection(tableName, args) {
     return { userError: 'last cannot have a negative value' };
   }
 
-  let query = addRangeClause(`SELECT * FROM ${tableName}`, args);
+  let query = addRangeClause(`SELECT * FROM ${tableName}`, tableName, args);
   query = addLimitClause(query, args);
 
   try {
@@ -81,24 +83,24 @@ async function getConnection(tableName, args) {
     let hasPreviousPage = false;
 
     if ('last' in args) {
-      let countQuery = addRangeClause(`SELECT COUNT(*) FROM ${tableName}`, args);
+      let countQuery = addRangeClause(`SELECT COUNT(*) FROM ${tableName}`, tableName, args);
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasPreviousPage = result.rows[0].count > rows.length;
     } else if ('after' in args) {
-      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE id <= ${args.after}`;
+      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE created_at <= ${cursorCreatedAt(tableName, args.after)}`;
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasPreviousPage = result.rows[0].count > 0;
     }
 
     if ('first' in args) {
-      let countQuery = addRangeClause(`SELECT COUNT(*) FROM ${tableName}`, args);
+      let countQuery = addRangeClause(`SELECT COUNT(*) FROM ${tableName}`, tableName, args);
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasNextPage = result.rows[0].count > rows.length;
     } else if ('before' in args) {
-      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE id >= ${args.before}`;
+      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE created_at >= ${cursorCreatedAt(tableName, args.before)}`;
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasNextPage = result.rows[0].count > 0;
@@ -121,7 +123,7 @@ async function getConnection(tableName, args) {
       },
     };
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return { userError: formatKnexQueryError(err) };
   }
 }
