@@ -6245,7 +6245,7 @@ ra-input-rich-text@^2.1.0:
     prop-types "~15.6.1"
     quill "~1.3.6"
 
-ra-language-english@^2.1.3:
+ra-language-english@^2.0.2, ra-language-english@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-2.1.3.tgz#c34e280f4052b35210e812d41c7c12f223ed7377"
 
@@ -6274,9 +6274,9 @@ ra-ui-materialui@^2.1.1:
     redux "~3.7.2"
     redux-form "~7.3.0"
 
-ra-ui-materialui@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-2.1.3.tgz#256fe0a42472fa7a5d4cb58028725fdc37938728"
+ra-ui-materialui@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-2.1.4.tgz#ad6b045379566164f1573c09f64c42d1d3e7ab92"
   dependencies:
     "@material-ui/core" "^1.0.0"
     "@material-ui/icons" "^1.0.0"
@@ -6367,13 +6367,13 @@ react-admin@^2.0.4:
     ra-language-english "^2.0.2"
     ra-ui-materialui "^2.1.1"
 
-react-admin@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.1.3.tgz#ad034506f6a687129080dde1fde727ee632440a0"
+react-admin@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.1.4.tgz#9832da48a88277f85e4ae63ba90ea27fb3b3f089"
   dependencies:
     ra-core "^2.1.3"
     ra-language-english "^2.1.3"
-    ra-ui-materialui "^2.1.3"
+    ra-ui-materialui "^2.1.4"
 
 react-autosuggest@^9.3.2:
   version "9.3.4"
