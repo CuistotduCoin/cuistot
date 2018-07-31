@@ -159,3 +159,17 @@ export const graphqlHandler = (event, context, callback) => {
     }
   }
 };
+
+export const guestSignInHandler = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false; // eslint-disable-line
+
+  console.log('event : ', event);
+  console.log('context : ', context);
+
+  if (event.userName === 'guest') {
+    callback(null, 'success');
+  } else {
+    // Return to Amazon Cognito
+    callback(null, event);
+  }
+};

@@ -26,11 +26,14 @@ custom:
   accountId: ${env:AWS_ACCOUNT_ID}
   appSync:
     name: cuistot-appsync-${self:provider.stage}
-    authenticationType: API_KEY
+    authenticationType: AMAZON_COGNITO_USER_POOLS
     userPoolConfig:
-      awsRegion: ${env:AWS_REGION_LONDON}
+      awsRegion: ${env:AWS_REGION_IRELAND}
       defaultAction: ALLOW
       userPoolId: ${env:AWS_USERPOOL_ID}
+    logConfig:
+      loggingRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Logging-${self:custom.appSync.serviceRole}-${self:provider.stage}"
+      level: ALL
     region: ${env:AWS_REGION_IRELAND}
     mappingTemplates:
       # Mutation mapping templates
@@ -245,10 +248,31 @@ custom:
 functions:
   graphql:
     handler: handler.graphqlHandler
+  guestSignIn:
+    handler: handler.guestSignInHandler
 
 resources:
+  Parameters:
+    PreExistingDBInstance:
+      Type: String
+      Default: true
+    PreExistingUserPool:
+      Type: String
+      Default: true
+  Conditions:
+    NeedsNewDBInstance:
+      Fn::Not:
+        - Fn::Equals:
+          - Ref: "PreExistingDBInstance"
+          - true
+    NeedsNewUserPool:
+      Fn::Not:
+        - Fn::Equals:
+          - Ref: "PreExistingUserPool"
+          - true
   Resources:
     DBInstance:
+      Condition: NeedsNewDBInstance
       Type: "AWS::RDS::DBInstance"
       DeletionPolicy: "Retain"
       Properties:
@@ -260,6 +284,158 @@ resources:
         EngineVersion: "9.6.6"
         MasterUsername: ${env:DATABASE_USERNAME}
         MasterUserPassword: ${env:DATABASE_PASSWORD}
+    UserPool:
+      Condition: NeedsNewUserPool
+      Type: "AWS::Cognito::UserPool"
+      DeletionPolicy: "Retain"
+      Properties:
+        UserPoolName: "cuistot-user-pool-${self:provider.stage}"
+        AutoVerifiedAttributes:
+          - email
+        UsernameAttributes:
+          - email
+        MfaConfiguration: "OFF"
+        EmailVerificationSubject: "Votre code de vérification"
+        EmailVerificationMessage: "Votre code de vérification : {####}"
+        SmsVerificationMessage: "Votre code de vérification : {####}"
+        SmsAuthenticationMessage: "Entrez ce code pour vous authentifier : {####}"
+        LambdaConfig:
+          PreAuthentication: "arn:aws:lambda:${self:custom.appSync.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-guestSignIn"
+        Schema:
+          - Name: name
+            AttributeDataType: String
+            Mutable: true
+            Required: false
+          - Name: email
+            AttributeDataType: String
+            Mutable: true
+            Required: true
+        Policies:
+          PasswordPolicy:
+            RequireLowercase: true
+            RequireSymbols: true
+            RequireNumbers: true
+            MinimumLength: 8
+            RequireUppercase: true
+        AdminCreateUserConfig:
+          InviteMessageTemplate:
+            EmailMessage: "Bienvenue sur Cuistot du coin ! Voici vos identifiants de connexion (email / mot de passe) : {username} / {####}"
+            EmailSubject: "Votre mot de passe temporaire. Pensez bien à le changer :)"
+            SMSMessage: "Bienvenue sur Cuistot du coin ! Voici vos identifiants de connexion : {username} / {####}. Pensez bien à changer votre mot de passe :)"
+          UnusedAccountValidityDays: 30
+          AllowAdminCreateUserOnly: false
+    UserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      DeletionPolicy: "Retain"
+      Properties:
+        ClientName: cuistot-app-client
+        GenerateSecret: true
+        RefreshTokenValidity: 30
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    TestUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      DeletionPolicy: "Retain"
+      Properties:
+        ClientName: cuistot-app-client-test
+        GenerateSecret: false
+        RefreshTokenValidity: 30
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    AdminGroup:
+      Type: AWS::Cognito::UserPoolGroup
+      Properties:
+        Description: "Admin group"
+        GroupName: "Admin"
+        Precedence: 1
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    GourmetGroup:
+      Type: AWS::Cognito::UserPoolGroup
+      Properties:
+        Description: "Gourmets group"
+        GroupName: "Gourmet"
+        Precedence: 3
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    CookGroup:
+      Type: AWS::Cognito::UserPoolGroup
+      Properties:
+        Description: "Cooks group"
+        GroupName: "Cook"
+        Precedence: 2
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    GuestGroup:
+      Type: AWS::Cognito::UserPoolGroup
+      Properties:
+        Description: "Guests group"
+        GroupName: "Guest"
+        Precedence: 4
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    AdminUser:
+      Type: AWS::Cognito::UserPoolUser
+      Properties:
+        UserAttributes:
+          - Name: name
+            Value: Admin
+        Username: romain@cuistotducoin.com
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    GourmetUser:
+      Type: AWS::Cognito::UserPoolUser
+      Properties:
+        UserAttributes:
+          - Name: name
+            Value: Gourmet
+        Username: anaelle@cuistotducoin.com
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    CookUser:
+      Type: AWS::Cognito::UserPoolUser
+      Properties:
+        UserAttributes:
+          - Name: name
+            Value: Cook
+        Username: nolwenn@cuistotducoin.com
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    GuestUser:
+      Type: AWS::Cognito::UserPoolUser
+      Properties:
+        UserAttributes:
+          - Name: name
+            Value: Guest
+        Username: stephane@cuistotducoin.com
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    # AddAdminToAdminGroup:
+    #   DependsOn:
+    #     - AdminUser
+    #     - AdminGroup
+    #   Type: AWS::Cognito::UserPoolUserToGroupAttachment
+    #   Properties:
+    #     GroupName: Admin
+    #     Username: romain@cuistotducoin.com
+    #     UserPoolId: ${env:AWS_USERPOOL_ID}
+    # AddGourmetToGourmetGroup:
+    #   DependsOn:
+    #     - GourmetUser
+    #     - GourmetGroup
+    #   Type: AWS::Cognito::UserPoolUserToGroupAttachment
+    #   Properties:
+    #     GroupName: Gourmet
+    #     Username: anaelle@cuistotducoin.com
+    #     UserPoolId: ${env:AWS_USERPOOL_ID}
+    # AddCookToCookGroup:
+    #   DependsOn:
+    #     - CookUser
+    #     - CookGroup
+    #   Type: AWS::Cognito::UserPoolUserToGroupAttachment
+    #   Properties:
+    #     GroupName: Cook
+    #     Username: nolwenn@cuistotducoin.com
+    #     UserPoolId: ${env:AWS_USERPOOL_ID}
+    # AddGuestToGuestGroup:
+    #   DependsOn:
+    #     - GuestUser
+    #     - GuestGroup
+    #   Type: AWS::Cognito::UserPoolUserToGroupAttachment
+    #   Properties:
+    #     GroupName: Guest
+    #     Username: stephane@cuistotducoin.com
+    #     UserPoolId: ${env:AWS_USERPOOL_ID}
     AppSyncServiceRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
@@ -288,3 +464,40 @@ resources:
                   Resource:
                     - "arn:aws:lambda:${self:custom.appSync.region}:*:function:${self:service}-${self:provider.stage}-graphql"
                     - "arn:aws:lambda:${self:custom.appSync.region}:*:function:${self:service}-${self:provider.stage}-graphql:*"
+    AppSyncLoggingServiceRole:
+      Type: "AWS::IAM::Role"
+      DeletionPolicy : "Delete"
+      Properties:
+        RoleName: "Logging-${self:custom.appSync.serviceRole}-${self:provider.stage}"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "appsync.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "Logging-${self:custom.appSync.serviceRole}-${self:provider.stage}-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action:
+                    - "logs:CreateLogGroup"
+                    - "logs:CreateLogStream"
+                    - "logs:PutLogEvents"
+                  Resource: "*"
+    GuestSignInTriggerInvokePermission:
+      Condition: NeedsNewUserPool
+      DependsOn: UserPool
+      Type: "AWS::Lambda::Permission"
+      Properties:
+        Action: "lambda:InvokeFunction"
+        Principal: "cognito-idp.amazonaws.com"
+        SourceArn: "arn:aws:cognito-idp:${self:custom.appSync.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
+        FunctionName: "arn:aws:lambda:${self:custom.appSync.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-guestSignIn"
