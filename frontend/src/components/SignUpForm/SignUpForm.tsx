@@ -2,7 +2,7 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-// import { Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
@@ -27,6 +27,7 @@ interface ISignUpForm {
 interface ISignUpFormValues {
   firstname: string;
   lastname: string;
+  username: string;
   email: string;
   password: string;
 }
@@ -37,34 +38,39 @@ export class SignUpForm extends React.Component<ISignUpForm, {}> {
 
     const validationSchema = Yup.object().shape({
       email: Yup.string()
-        .email("Veuillez saisir votre adresse email au bon format")
-        .required("L'email est obligatoire"),
-      firstname: Yup.string().required("Le prénom est obligatoire"),
-      lastname: Yup.string().required("Le nom est obligatoire"),
+        .email("Veuillez saisir une adresse email valide")
+        .required("Une adresse email est obligatoire"),
+      firstname: Yup.string().required("Un prénom est obligatoire"),
+      lastname: Yup.string().required("Un nom est obligatoire"),
       password: Yup.string()
-        .min(
-          8,
-          "Votre mot de passe doit contenir 8 charactères avec minuscules, majuscules et chiffres"
-        )
+        .min(8, "Votre mot de passe doit contenir au minimum 8 caractères")
         .matches(/[a-z]/, "Votre mot de passe doit contenir une minuscule")
         .matches(/[A-Z]/, "Votre mot de passe doit contenir une majuscule")
         .matches(/[0-9]/, "Votre mot de passe doit contenir un chiffre")
-        .required("Le mot de passe est obligatoire")
+        .required("Un mot de passe est obligatoire"),
+      username: Yup.string().required("Un nom d'utilisateur est obligatoire")
     });
 
-    const onSubmit = async (values: ISignUpFormValues) => {
-      try {
-        alert("Sign up");
-      } catch (e) {
-        alert(e.message);
-      }
+    const onSubmit = (values: ILoginFormValues) => {
+      Auth.signUp({
+        attributes: {
+          email: values.email,
+          family_name: values.lastname,
+          name: values.firstname
+        },
+        password: values.password,
+        username: values.username
+      })
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
     };
 
     const initialValues = {
       email: "",
       firstname: "",
       lastname: "",
-      password: ""
+      password: "",
+      username: ""
     };
 
     const signUpFormComponent = () => (
@@ -112,6 +118,20 @@ export class SignUpForm extends React.Component<ISignUpForm, {}> {
                 <Field
                   type="text"
                   component={TextField}
+                  id="username"
+                  label="Nom d'utilisateur"
+                  name="username"
+                  placeholder="Votre nom d'utilisateur"
+                  className={classes.textField}
+                  margin="normal"
+                />
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Grid container={true}>
+                <Field
+                  type="text"
+                  component={TextField}
                   id="email"
                   label="Email"
                   name="email"
@@ -124,7 +144,7 @@ export class SignUpForm extends React.Component<ISignUpForm, {}> {
             <Grid item={true} xs={12}>
               <Grid container={true}>
                 <Field
-                  type="text"
+                  type="password"
                   component={TextField}
                   id="password"
                   label="Mot de passe"
@@ -138,7 +158,7 @@ export class SignUpForm extends React.Component<ISignUpForm, {}> {
           </Grid>
           <Grid item={true} xs={12}>
             <Grid container={true} justify="center">
-              <Button variant="contained" color="secondary">
+              <Button type="submit" variant="contained" color="secondary">
                 S'inscrire
               </Button>
             </Grid>

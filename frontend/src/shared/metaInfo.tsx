@@ -67,6 +67,11 @@ export default {
       href: "https://www.cuistotducoin.com/presskit",
       title: "Apprendez en plus sur Cuistot du Coin : Articles de presse"
     },
+    signUp: {
+      description: "Inscription",
+      href: "https://www.cuistotducoin.com/signup",
+      title: "Devenez un gourmet Cuistot du Coin"
+    },
     team: {
       description: "Découvrez qui se cache derrière Cuistot du Coin",
       href: "https://www.cuistotducoin.com/team",
