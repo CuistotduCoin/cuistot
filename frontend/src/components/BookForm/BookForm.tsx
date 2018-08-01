@@ -52,10 +52,10 @@ export class BookForm extends React.Component<IBookForm, {}> {
 
     const bookFormComponent = () => (
       <>
-        <Typography component="p">
+        <Typography component="p" gutterBottom={true}>
           <b>{this.props.price}</b>€ par personne
         </Typography>
-        <Typography component="p">
+        <Typography component="p" gutterBottom={true}>
           Il reste <b>{this.props.availableSeat}</b> places pour cet atelier
         </Typography>
         <Form autoComplete="off">

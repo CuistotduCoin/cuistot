@@ -17,5 +17,6 @@ storiesOf("Cuistot/components/WorkshopCard", module).add("default", () => (
     spot="Arthur Bonnet, Brest"
     totalSeat={6}
     totalDate={3}
+    duration={2}
   />
 ));

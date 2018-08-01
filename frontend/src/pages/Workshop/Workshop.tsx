@@ -7,7 +7,12 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Typography from "@material-ui/core/Typography";
+import AccessTime from "@material-ui/icons/AccessTime";
+import KeyboardArrowUp from "@material-ui/icons/KeyboardArrowUp";
+import Kitchen from "@material-ui/icons/Kitchen";
+import LocalDining from "@material-ui/icons/LocalDining";
 import Lock from "@material-ui/icons/Lock";
+import People from "@material-ui/icons/People";
 import BookForm from "components/BookForm";
 import Cover from "components/Cover";
 import Footer from "components/Footer";
@@ -32,6 +37,9 @@ const styles = (theme: Theme) => ({
   },
   infoReservartion: {
     padding: theme.spacing.unit
+  },
+  innerGrid: {
+    padding: 24
   },
   tabs: {
     minWidth: 0
@@ -125,46 +133,71 @@ export class Workshop extends React.Component<IWorkshopProps, {}> {
                 label="Informations complémentaires"
                 className={classes.tabs}
               />
-              <Tab label="^" className={classes.tabs} />
+              <Tab className={classes.tabs} icon={<KeyboardArrowUp />} />
             </Tabs>
-            <Grid container={true} justify="space-around" alignItems="center">
-              <Grid item={true}>{this.props.eventType}</Grid>
-              <Grid item={true}>{this.props.cuisineType}</Grid>
+            <Grid
+              container={true}
+              justify="space-around"
+              alignItems="center"
+              className={classes.innerGrid}
+            >
               <Grid item={true}>
-                de {this.props.minSeat} à {this.props.maxSeat} invités
+                <Grid container={true}>
+                  <Kitchen />
+                  <Typography>{this.props.eventType}</Typography>
+                </Grid>
               </Grid>
-              <Grid item={true}>{this.props.timeEvent}</Grid>
+              <Grid item={true}>
+                <Grid container={true}>
+                  <LocalDining />
+                  <Typography>{this.props.cuisineType}</Typography>
+                </Grid>
+              </Grid>
+              <Grid item={true}>
+                <Grid container={true}>
+                  <People />
+                  <Typography>
+                    de {this.props.minSeat} à {this.props.maxSeat} invités
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid item={true}>
+                <Grid container={true}>
+                  <AccessTime />
+                  <Typography>{this.props.timeEvent}</Typography>
+                </Grid>
+              </Grid>
             </Grid>
             <Grid>
-              <Typography variant="headline" component="h2">
+              <Typography variant="headline" component="h2" gutterBottom={true}>
                 Au menu
               </Typography>
-              <Typography variant="body1" component="p">
-                Atelier + A emporter : Initiation à la pâte à sucre<br />
-                Découvrez la pâte à sucre et ses techniques très spécifique avec
-                notre nouveau cuistot: Audrey !<br />Venez apprendre à sublimer
-                vos pâtisseries et à confectionner vos gâteaux d’anniversaire.<br />-
+              <Typography variant="body1" component="p" paragraph={true}>
+                Atelier + A emporter : Initiation à la pâte à sucre Découvrez la
+                pâte à sucre et ses techniques très spécifique avec notre
+                nouveau cuistot: Audrey ! Venez apprendre à sublimer vos
+                pâtisseries et à confectionner vos gâteaux d’anniversaire.
                 Préparation de la ganache au chocolat qui garnira et recouvrira
-                le gâteau <br />- Préparation des éléments de décorations et de
-                la pâte à sucre (technique de lissage et de pose)
+                le gâteau- Préparation des éléments de décorations et de la pâte
+                à sucre (technique de lissage et de pose)
               </Typography>
-              <Typography variant="headline" component="h2">
+              <Typography variant="headline" component="h2" gutterBottom={true}>
                 Photos & Videos
               </Typography>
-              <Typography variant="headline" component="h2">
+              <Typography variant="headline" component="h2" gutterBottom={true}>
                 Le Cuistot
               </Typography>
-              <Typography variant="body1" component="p">
+              <Typography variant="body1" component="p" paragraph={true}>
                 Audrey passait son temps dans la cuisine de sa grand-mère quand
                 elle était petite. Et elle a toujours aimé la pâtisserie et
                 tester de nouvelles recettes, de nouvelles techniques. Jusqu'à
                 ce que sa passion et ses proches l'a poussèrent à passer son
                 CAP. Maintenant elle souhaite le faire découvrir aux autres.
               </Typography>
-              <Typography variant="headline" component="h2">
+              <Typography variant="headline" component="h2" gutterBottom={true}>
                 Commentaires
               </Typography>
-              <Typography variant="headline" component="h2">
+              <Typography variant="headline" component="h2" gutterBottom={true}>
                 Informations complémentaires
               </Typography>
             </Grid>
@@ -181,8 +214,9 @@ export class Workshop extends React.Component<IWorkshopProps, {}> {
               />
             </Paper>
             <Grid>
+              <Lock />
               <Typography variant="body1">
-                <Lock />Paiement sécurisé par Mangopay
+                Paiement sécurisé par Mangopay
               </Typography>
               <Typography variant="body1">
                 Vous pouvez payer avec

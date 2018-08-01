@@ -3,10 +3,8 @@ logs
 npm-debug.log*
 .DS_Store
 
-coverage
 node_modules
-build
-public/static
+static
 .serverless
 .env
 .env.local

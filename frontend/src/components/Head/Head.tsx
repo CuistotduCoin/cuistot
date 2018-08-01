@@ -4,17 +4,19 @@ import Helmet from "react-helmet";
 export interface IHeadProps {
   title: string;
   description: string;
+  href: string;
   image?: string;
   children?: any;
 }
 
 export class Head extends React.Component<IHeadProps, {}> {
   public render() {
-    const { title, description, image, children } = this.props;
+    const { title, description, image, children, href } = this.props;
 
     return (
       <Helmet>
         <title>{title}</title>
+        <link rel="canonical" href={href} />
         <meta name="description" content={description} />
         <meta name="og:title" content={title} />
         <meta name="og:description" content={description} />

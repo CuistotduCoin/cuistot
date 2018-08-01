@@ -6,10 +6,12 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
+import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import WorkshopCardList from "components/WorkshopCardList";
 import React from "react";
+import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -48,7 +50,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
   public render() {
     const { classes } = this.props;
 
-    const typeActivity = [
+    const typeActivity: any[] = [
       {
         description: "Ateliers de cuisine collectif chez nos lieux partenaires",
         image:
@@ -74,88 +76,50 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const workshops = [
       {
         availableSeat: 8,
-        date: "samedi 21 juillet, 10h-12h30",
-        image:
-          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-ble-noir.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
-        name: "Tournage de crèpes de blé noir",
-        nameCook: "Nadine",
-        price: 25,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/Y6djnp"
-      },
-      {
-        availableSeat: 6,
-        date: "jeudi 26 juillet, 11h-13h",
-        image:
-          "https://static.cuistotducoin.com/img/workshops/mikaelle_rouleaux_arcenciel.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/mikaelle.jpg",
-        name: "Rouleaux arc-en-ciel",
-        nameCook: "Mikaëlle",
-        price: 37,
-        spot: "Loft O'Shun, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/tkZHof"
-      },
-      {
-        availableSeat: 6,
-        date: "jeudi 26 juillet, 14h30-16h30",
-        image:
-          "https://static.cuistotducoin.com/img/workshops/mikaelle_douceurs_crues.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/mikaelle.jpg",
-        name: "Douceurs crues",
-        nameCook: "Mikaëlle",
-        price: 37,
-        spot: "Loft O'Shun, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/Y5M80O"
-      },
-      {
-        availableSeat: 6,
-        date: "jeudi 26 juillet, 17h30-19h30",
-        image:
-          "https://static.cuistotducoin.com/img/workshops/mikaelle_apero_mer.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/mikaelle.jpg",
-        name: "ApérÔ de la mer",
-        nameCook: "Mikaëlle",
-        price: 37,
-        spot: "Loft O'Shun, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/BsVGg5"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 28 juillet, 10h-14h",
-        image:
-          "https://static.cuistotducoin.com/img/workshops/mikaelle_voyage_italie.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/mikaelle.jpg",
-        name: "Voyage en Italie",
-        nameCook: "Mikaëlle",
-        price: 60,
-        spot: "Loft O'Shun, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/qGNKwc"
-      },
-      {
-        availableSeat: 8,
         date: "samedi 4 aout, 14h30-16h30",
+        duration: 2,
         image:
           "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
         name: "Tournage de crèpes de froment",
         nameCook: "Nadine",
         price: 20,
-        spot: "Cuisinella, Brest",
+        spot: "Schmidt, Brest",
         totalSeat: 8,
         typeform: "https://cuistotducoin.typeform.com/to/WKmt7V"
-      }
-    ];
-
-    const workshopsPending = [
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 1 septembre, 10h-12h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/anaelle-sarrasin.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/anaelle.jpg",
+        name: "À la découverte du sarrasin",
+        nameCook: "Anaelle",
+        price: 25,
+        spot: "Anaelle, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/U3mOaj"
+      },
       {
         availableSeat: 8,
-        date: "à venir",
+        date: "samedi 22 septembre, 14h-18h",
+        duration: 4,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/fabien-viennoiseries.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
+        name: "Viennoiseries : Croissants & Pains au chocolat",
+        nameCook: "Fabien",
+        price: 45,
+        spot: "Arthur Bonnet, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/YDNdtB"
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 22 septembre, 14h-18h",
+        duration: 4,
         image:
           "https://static.cuistotducoin.com/img/workshops/fabien-pain-maison.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
@@ -168,7 +132,67 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
+        date: "samedi 20 octobre, 10h-12h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ahmed-cacao-cru.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
+        name: "Cacao cru",
+        nameCook: "Ahmed",
+        price: 25,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/EWUT4t"
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 27 octobre, 14h-18h",
+        duration: 4,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/fabien-pains-stop-au-gaspi.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
+        name: "Recyclez son pain : stop au gaspi",
+        nameCook: "Fabien",
+        price: 45,
+        spot: "Schmidt, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/Voq2Qo"
+      },
+      /*{
+        availableSeat: 8,
+        date: "samedi 24 novembre, 9h-13h",
+        duration: 4,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/fabien-pain-maison.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
+        name: "Faire son pain maison",
+        nameCook: "Fabien",
+        price: 50,
+        spot: "Schmidt, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/RpiaBS"
+      },*/
+      {
+        availableSeat: 6,
+        date: "samedi 24 novembre, 9h-12h",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ahmed-entre-ici-et-ailleurs.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
+        name: "Entre ici et ailleurs",
+        nameCook: "Ahmed",
+        price: 35,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/sETMyV"
+      }
+    ];
+
+    const workshopsPending = [
+      {
+        availableSeat: 6,
         date: "à venir",
+        duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/shyam-indien-generique.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/shyam.jpg",
@@ -182,6 +206,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
+        duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/valquiria-coxinhas.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/valquiria.jpg",
@@ -195,6 +220,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
+        duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/audrey-pate-a-sucre.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
@@ -208,19 +234,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image:
-          "https://static.cuistotducoin.com/img/workshops/anaelle-sarrasin.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/anaelle.jpg",
-        name: "À la découverte du sarrasin",
-        nameCook: "Anaelle",
-        price: 25,
-        spot: "Anaelle, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/U3mOaj"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
+        duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
@@ -234,19 +248,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ahmed-cacao-cru.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
-        name: "Cacao cru",
-        nameCook: "Ahmed",
-        price: 25,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/EWUT4t"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
+        duration: 2,
         image:
           "https://static.cuistotducoin.com/img/workshops/anne-pate-a-tartiner-maison.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
@@ -260,6 +262,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
+        duration: 4,
         image:
           "https://static.cuistotducoin.com/img/workshops/michel-decouverte-ayurvedique.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/michel.jpg",
@@ -273,6 +276,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
+        duration: 4,
         image:
           "https://static.cuistotducoin.com/img/workshops/ronan-macarons.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
@@ -286,19 +290,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ahmed-entre-ici-et-ailleurs.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
-        name: "Entre ici et ailleurs",
-        nameCook: "Ahmed",
-        price: 35,
-        spot: "Schmidt, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/sETMyV"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
+        duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/ahmed-inspiration-africaine.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
@@ -310,21 +302,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/qieHUn"
       },
       {
-        availableSeat: 8,
-        date: "à venir",
-        image:
-          "https://static.cuistotducoin.com/img/workshops/fabien-pains-stop-au-gaspi.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
-        name: "Recyclez son pain : stop au gaspi",
-        nameCook: "Fabien",
-        price: 45,
-        spot: "Arthur Bonnet, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/Voq2Qo"
-      },
-      {
         availableSeat: 12,
         date: "à venir",
+        duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/gaetan-decouverte-vins-naturels.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/gaetan.jpg",
@@ -338,6 +318,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
+        duration: 2,
         image:
           "https://static.cuistotducoin.com/img/workshops/audrey-cupcakes-enfants.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
@@ -351,6 +332,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 5,
         date: "à venir",
+        duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/christian-kouign-amann.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/christian.jpg",
@@ -364,6 +346,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 5,
         date: "à venir",
+        duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/philippe-degustation-the.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/philippe.jpg",
@@ -378,6 +361,10 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     return (
       <>
+        <Head
+          title={metaInfo.metaInfo.individual.title}
+          description={metaInfo.metaInfo.individual.description}
+        />
         <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"

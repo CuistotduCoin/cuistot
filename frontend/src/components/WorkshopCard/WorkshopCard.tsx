@@ -157,7 +157,9 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
                 <Chip label="Atelier collectif" className={classes.chip} />
               </Grid>
               <Grid item={true} className={classes.bottomContentCardItem}>
-                <Typography variant="title">{this.props.name}</Typography>
+                <Typography align="center" variant="title">
+                  {this.props.name}
+                </Typography>
               </Grid>
               <Grid item={true} className={classes.bottomContentCardItem}>
                 <Typography variant="subheading">{this.props.date}</Typography>
@@ -174,7 +176,9 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
               <Grid item={true} xs={6}>
                 <Grid container={true} justify="center">
                   <HourglassFull className={classes.icon} />
-                  <Typography variant="caption">4h</Typography>
+                  <Typography variant="caption">
+                    {this.props.duration}h
+                  </Typography>
                 </Grid>
               </Grid>
             </Grid>

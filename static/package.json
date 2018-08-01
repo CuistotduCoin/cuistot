@@ -7,11 +7,18 @@
     "url": "git@github.com:CuistotduCoin/cuistot.git"
   },
   "scripts": {
+    "build": "node imagemin.js",
     "deploy": "env-cmd .env serverless client deploy --no-delete-contents --no-confirm"
   },
-  "devDependencies": {    
+  "devDependencies": {
     "env-cmd": "^8.0.2",
-    "serverless-finch": "^2.2.0",
-    "serverless-dotenv-plugin": "^1.1.3"
+    "serverless-dotenv-plugin": "^1.1.3",
+    "serverless-finch": "^2.2.0"
+  },
+  "dependencies": {
+    "image-2-min": "^6.0.2",
+    "imagemin-cli": "^3.0.0",
+    "imagemin-mozjpeg": "^7.0.0",
+    "imagemin-pngquant": "^6.0.0"
   }
 }
