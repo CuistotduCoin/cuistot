@@ -1,13 +1,16 @@
 logs
+build
 *.log
-npm-debug.log*
+
 .DS_Store
 
-node_modules
-static
 .serverless
 .env
 .env.local
 .env.development*
 .env.test*
 .env.production*
+
+node_modules/
+npm-debug.log
+yarn-error.log
