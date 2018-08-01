@@ -292,7 +292,7 @@ resources:
         UserPoolName: "cuistot-user-pool-${self:provider.stage}"
         AutoVerifiedAttributes:
           - email
-        UsernameAttributes:
+        AliasAttributes:
           - email
         MfaConfiguration: "OFF"
         EmailVerificationSubject: "Votre code de vérification"
@@ -374,7 +374,9 @@ resources:
         UserAttributes:
           - Name: name
             Value: Admin
-        Username: romain@cuistotducoin.com
+          - Name: email
+            Value: stephane@cuistotducoin.com
+        Username: admin
         UserPoolId: ${env:AWS_USERPOOL_ID}
     GourmetUser:
       Type: AWS::Cognito::UserPoolUser
@@ -382,7 +384,9 @@ resources:
         UserAttributes:
           - Name: name
             Value: Gourmet
-        Username: anaelle@cuistotducoin.com
+          - Name: email
+            Value: stephane@cuistotducoin.com
+        Username: gourmet
         UserPoolId: ${env:AWS_USERPOOL_ID}
     CookUser:
       Type: AWS::Cognito::UserPoolUser
@@ -390,7 +394,9 @@ resources:
         UserAttributes:
           - Name: name
             Value: Cook
-        Username: nolwenn@cuistotducoin.com
+          - Name: email
+            Value: stephane@cuistotducoin.com
+        Username: cook
         UserPoolId: ${env:AWS_USERPOOL_ID}
     GuestUser:
       Type: AWS::Cognito::UserPoolUser
@@ -398,44 +404,46 @@ resources:
         UserAttributes:
           - Name: name
             Value: Guest
-        Username: stephane@cuistotducoin.com
+          - Name: email
+            Value: stephane@cuistotducoin.com
+        Username: guest
         UserPoolId: ${env:AWS_USERPOOL_ID}
-    # AddAdminToAdminGroup:
-    #   DependsOn:
-    #     - AdminUser
-    #     - AdminGroup
-    #   Type: AWS::Cognito::UserPoolUserToGroupAttachment
-    #   Properties:
-    #     GroupName: Admin
-    #     Username: romain@cuistotducoin.com
-    #     UserPoolId: ${env:AWS_USERPOOL_ID}
-    # AddGourmetToGourmetGroup:
-    #   DependsOn:
-    #     - GourmetUser
-    #     - GourmetGroup
-    #   Type: AWS::Cognito::UserPoolUserToGroupAttachment
-    #   Properties:
-    #     GroupName: Gourmet
-    #     Username: anaelle@cuistotducoin.com
-    #     UserPoolId: ${env:AWS_USERPOOL_ID}
-    # AddCookToCookGroup:
-    #   DependsOn:
-    #     - CookUser
-    #     - CookGroup
-    #   Type: AWS::Cognito::UserPoolUserToGroupAttachment
-    #   Properties:
-    #     GroupName: Cook
-    #     Username: nolwenn@cuistotducoin.com
-    #     UserPoolId: ${env:AWS_USERPOOL_ID}
-    # AddGuestToGuestGroup:
-    #   DependsOn:
-    #     - GuestUser
-    #     - GuestGroup
-    #   Type: AWS::Cognito::UserPoolUserToGroupAttachment
-    #   Properties:
-    #     GroupName: Guest
-    #     Username: stephane@cuistotducoin.com
-    #     UserPoolId: ${env:AWS_USERPOOL_ID}
+    AddAdminToAdminGroup:
+      DependsOn:
+        - AdminUser
+        - AdminGroup
+      Type: AWS::Cognito::UserPoolUserToGroupAttachment
+      Properties:
+        GroupName: Admin
+        Username: admin
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    AddGourmetToGourmetGroup:
+      DependsOn:
+        - GourmetUser
+        - GourmetGroup
+      Type: AWS::Cognito::UserPoolUserToGroupAttachment
+      Properties:
+        GroupName: Gourmet
+        Username: gourmet
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    AddCookToCookGroup:
+      DependsOn:
+        - CookUser
+        - CookGroup
+      Type: AWS::Cognito::UserPoolUserToGroupAttachment
+      Properties:
+        GroupName: Cook
+        Username: cook
+        UserPoolId: ${env:AWS_USERPOOL_ID}
+    AddGuestToGuestGroup:
+      DependsOn:
+        - GuestUser
+        - GuestGroup
+      Type: AWS::Cognito::UserPoolUserToGroupAttachment
+      Properties:
+        GroupName: Guest
+        Username: guest
+        UserPoolId: ${env:AWS_USERPOOL_ID}
     AppSyncServiceRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
@@ -493,8 +501,6 @@ resources:
                     - "logs:PutLogEvents"
                   Resource: "*"
     GuestSignInTriggerInvokePermission:
-      Condition: NeedsNewUserPool
-      DependsOn: UserPool
       Type: "AWS::Lambda::Permission"
       Properties:
         Action: "lambda:InvokeFunction"

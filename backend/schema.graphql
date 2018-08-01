@@ -316,46 +316,70 @@ type EvaluationPayload {
 type Mutation {
   ## Workshops
   createWorkshop(workshop: CreateWorkshopInput!): WorkshopPayload!
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
   updateWorkshop(workshop: UpdateWorkshopInput!): WorkshopPayload!
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteWorkshop(workshop_id: ID!): PlainPayload!
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
   addWorkshopImage(image: ImageInput!): ImagePayload!
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
   removeWorkshopImage(key: String!): PlainPayload!
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
 
   ## Bookings
   createBooking(booking: CreateBookingInput!): BookingPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   updateBooking(booking: UpdateBookingInput!): BookingPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteBooking(booking_id: ID!): PlainPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 
   ## Evaluations
   createEvaluation(evaluation: CreateEvaluationInput!): EvaluationPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteEvaluation(booking_id: ID!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Gourmets
   createGourmet(gourmet: CreateGourmetInput!): GourmetPayload!
   updateGourmet(gourmet: UpdateGourmetInput!): GourmetPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteGourmet(gourmet_id: ID!): PlainPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   updateGourmetImage(image: ImageInput!): ImagePayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 
   ## Cooks
   createCook(cook: CreateCookInput!): CookPayload!
+    @aws_auth(cognito_groups: ["Admin"])
   updateCook(cook: UpdateCookInput!): CookPayload!
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteCook(cook_id: ID!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Kitchens
   createKitchen(kitchen: CreateKitchenInput!): KitchenPayload!
+    @aws_auth(cognito_groups: ["Admin"])
   updateKitchen(kitchen: UpdateKitchenInput!): KitchenPayload!
+    @aws_auth(cognito_groups: ["Admin"])
   deleteKitchen(kitchen_id: ID!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 }
 
 type Query {
   getWorkshop(workshop_id: ID!): WorkshopPayload!
   getWorkshops(before: String, after: String, first: Int, last: Int): PaginatedWorkshops!
   getGourmet(gourmet_id: ID!): GourmetPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
   getCook(cook_id: ID!): CookPayload!
   getBooking(booking_id: ID!): BookingPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
   getKitchen(kitchen_id: ID!): KitchenPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
   getEvaluation(booking_id: ID!): EvaluationPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
   getCurrentGourmet: GourmetPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 }
 
 type Subscription {
