@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-// import { Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
@@ -26,7 +26,7 @@ interface ILoginForm {
 }
 
 interface ILoginFormValues {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -35,32 +35,24 @@ export class LoginForm extends React.Component<ILoginForm, {}> {
     const { classes } = this.props;
 
     const validationSchema = Yup.object().shape({
-      email: Yup.string()
-        .email("Veuillez saisir votre adresse email au bon format")
-        .required("L'email est obligatoire"),
       password: Yup.string()
-        .min(
-          8,
-          "Votre mot de passe contient 8 charactères avec minuscules, majuscules et chiffres"
-        )
-        .matches(/[a-z]/, "Votre mot de passe contient une minuscule")
-        .matches(/[A-Z]/, "Votre mot de passe contient une majuscule")
-        .matches(/[0-9]/, "Votre mot de passe contient un chiffre")
-        .required("Le mot de passe est obligatoire")
+        .min(8, "Votre mot de passe doit contenir au minimum 8 caractères")
+        .matches(/[a-z]/, "Votre mot de passe doit contenir une minuscule")
+        .matches(/[A-Z]/, "Votre mot de passe doit contenir une majuscule")
+        .matches(/[0-9]/, "Votre mot de passe doit contenir un chiffre")
+        .required("Un mot de passe est obligatoire"),
+      username: Yup.string().required("Un nom d'utilisateur est obligatoire")
     });
 
-    const onSubmit = async (values: ILoginFormValues) => {
-      try {
-        // await Auth.signIn(values.email, values.password);
-        alert("Logged in");
-      } catch (e) {
-        alert(e.message);
-      }
+    const onSubmit = (values: ILoginFormValues) => {
+      Auth.signIn(values.username, values.password)
+        .then(user => console.log(user))
+        .catch(err => console.log(err));
     };
 
     const initialValues = {
-      email: "",
-      password: ""
+      password: "",
+      username: ""
     };
 
     const loginFormComponent = () => (
@@ -82,10 +74,10 @@ export class LoginForm extends React.Component<ILoginForm, {}> {
                 <Field
                   type="text"
                   component={TextField}
-                  id="email"
-                  label="Email"
-                  name="email"
-                  placeholder="Votre email"
+                  id="username"
+                  label="Nom d'utilisateur"
+                  name="username"
+                  placeholder="Votre nom d'utilisateur"
                   className={classes.textField}
                   margin="normal"
                 />
@@ -107,7 +99,7 @@ export class LoginForm extends React.Component<ILoginForm, {}> {
             </Grid>
             <Grid item={true} xs={12}>
               <Grid container={true} justify="center">
-                <Button variant="contained" color="secondary">
+                <Button type="submit" variant="contained" color="secondary">
                   Se connecter
                 </Button>
               </Grid>

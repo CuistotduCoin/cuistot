@@ -4,10 +4,15 @@ import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
+import Logo from "components/Logo";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({
+  accountButton: {
+    color: "white",
+    margin: theme.spacing.unit
+  },
   appBar: {
     background:
       "linear-gradient(180deg,hsla(0,0%,100%,.9) 0,hsla(0,0%,100%,.8))"
@@ -63,7 +68,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
 
     const button = this.state.up ? (
       <Button
-        className={classes.button}
+        className={classes.accountButton}
         component={login}
         variant="raised"
         color="primary"
@@ -73,7 +78,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
       </Button>
     ) : (
       <Button
-        className={classes.button}
+        className={classes.accountButton}
         component={signUp}
         variant="raised"
         color="primary"
@@ -90,14 +95,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
       >
         <Toolbar>
           <Grid container={true} justify="flex-start" alignItems="center">
-            <Link to="/">
-              <img
-                src="https://static.cuistotducoin.com/img/logo.svg"
-                alt="Logo de Cuistot du coin"
-                height={40}
-                width={40}
-              />
-            </Link>
+            <Logo />
             <Hidden smDown={true}>
               <Button
                 className={classes.button}
@@ -115,12 +113,11 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
               </Button>
             </Hidden>
           </Grid>
-          {!hideSignUpLogin && // false is temp
-            false && (
-              <Grid container={true} justify="flex-end">
-                {button}
-              </Grid>
-            )}
+          {!hideSignUpLogin && (
+            <Grid container={true} justify="flex-end">
+              {button}
+            </Grid>
+          )}
         </Toolbar>
       </AppBar>
     );

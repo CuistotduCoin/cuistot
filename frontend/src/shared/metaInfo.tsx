@@ -40,6 +40,11 @@ export default {
       title:
         "Cadeau cours cuisine - Offrez un atelier de cuisine Cuistot du coin à vos proches"
     },
+    login: {
+      description: "Connexion",
+      href: "https://www.cuistotducoin.com/login",
+      title: "Connexion"
+    },
     mission: {
       description:
         "Cuistot du coin à trois missions: Des rencontres aussi riches que les saveurs en cuisine; La sauvegarde d’un patrimoine et de savoir-faire; Une véritable Immersion dans des univers culinaires diversifiés",

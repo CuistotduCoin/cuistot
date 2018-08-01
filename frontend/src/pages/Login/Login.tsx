@@ -1,13 +1,23 @@
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
+import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import LoginForm from "components/LoginForm";
+import Logo from "components/Logo";
 import React from "react";
 import { Link } from "react-router-dom";
+import metaInfo from "shared/metaInfo";
 
-const styles = (theme: Theme) => ({});
+const styles = (theme: Theme) => ({
+  container: {
+    "text-align": "center"
+  },
+  logo: {
+    "margin-top": 3 * theme.spacing.unit
+  }
+});
 
 interface ILoginProps {
   classes?: any;
@@ -18,13 +28,12 @@ export class Login extends React.Component<ILoginProps, {}> {
     const { classes } = this.props;
 
     return (
-      <>
-        <Header hideSignUpLogin={true} />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
+      <div className={classes.container}>
+        <Head
+          title={metaInfo.metaInfo.login.title}
+          description={metaInfo.metaInfo.login.description}
         />
+        <Logo height={100} width={100} className={classes.logo} />
         <LoginForm />
         <Typography align="center">
           Pas encore membre ? <Link to="/signup">Inscrivez vous !</Link>
@@ -32,8 +41,7 @@ export class Login extends React.Component<ILoginProps, {}> {
         <Typography align="center" gutterBottom={true}>
           <Link to="/signup">Vous avez oubliez votre mot de passe ?</Link>
         </Typography>
-        <Footer />
-      </>
+      </div>
     );
   }
 }

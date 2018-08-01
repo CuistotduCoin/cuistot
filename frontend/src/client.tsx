@@ -13,7 +13,7 @@ import { SheetsRegistry } from "react-jss/lib/jss";
 import JssProvider from "react-jss/lib/JssProvider";
 import { BrowserRouter } from "react-router-dom";
 import routes from "routes";
-import awsconfig from "shared/auth";
+import "shared/auth";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import theme from "theme";
