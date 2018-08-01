@@ -1,7 +1,8 @@
 {
-    "version" : "2017-02-28",
-    "operation" : "DeleteItem",
-    "key" : {
-        "workshop_id" : { "S" : "${ctx.args.workshop_id}" }
-    }
+  "version": "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+    "field": "deleteKitchen",
+    "arguments": $utils.toJson($context.arguments)
+  }
 }

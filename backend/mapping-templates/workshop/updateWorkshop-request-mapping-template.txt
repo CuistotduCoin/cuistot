@@ -1,29 +1,19 @@
 {
-    "version" : "2017-02-28",
-    "operation" : "UpdateItem",
-    "key" : {
-        "workshop_id" : { "S" : "${ctx.args.workshop_id}" }
-    },
-    "update" : {
-        "expression" : "SET name = :name, price = :price, duration = :duration, min_gourmet = :min_gourmet, max_gourmet = :max_gourmet, description = :description, kitchen_id = :kitchen_id",workshop_date = :workshop_date",comments = :comments",
-        "expressionValues": {
-            #set($commentList = [])
-            #foreach ( $comments in $ctx.args.comments )
-              #set( $element =
-              ${commentList.add(
-              {
-                "M" : $comments
-              })}
-              )
-        	":name" : { "S" : "${ctx.args.name}" },
-            ":price" : { "N" : "${ctx.args.price}" },
-        	":duration" : { "N" : "${ctx.args.duration}" },
-            ":min_gourmet" : { "N" : ${ctx.args.min_gourmet} },
-            ":max_gourmet" : { "N" : ${ctx.args.max_gourmet} },
-            ":description" : { "S" : ${ctx.args.description} },
-            ":kitchen_id" : { "S" : ${ctx.args.kitchen_id} },
-            ":workshop_date" : { "S" : ${ctx.args.workshop_date} },
-            ":comments" : { "M" : $utils.toJson($commentList) },
-        }
+  "version": "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+    "field": "updateWorkshop",
+    "arguments": {
+      "id": $utils.toJson($context.arguments.workshop.id),
+      "name": $utils.toJson($context.arguments.workshop.name),
+      "price": $utils.toJson($context.arguments.workshop.price),
+      "duration": $utils.toJson($context.arguments.workshop.duration),
+      "min_gourmet": $utils.toJson($context.arguments.workshop.min_gourmet),
+      "max_gourmet": $utils.toJson($context.arguments.workshop.max_gourmet),
+      "description": $utils.toJson($context.arguments.workshop.description),
+      "date": $utils.toJson($context.arguments.workshop.date),
+      "kitchen_id": $utils.toJson($context.arguments.workshop.kitchen.id),
+      "cook_id": $utils.toJson($context.arguments.workshop.cook.id)
     }
+  }
 }

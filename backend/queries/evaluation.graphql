@@ -1,0 +1,31 @@
+mutation CreateEvaluation($input: CreateEvaluationInput!) {
+  createEvaluation(evaluation: $input) {
+    evaluation {
+      rating
+      comment
+    }
+    message
+    errors {
+      message
+    }
+  }
+}
+
+{
+  "input": {
+    "booking": {
+      "id": 1
+    },
+    "rating": 5,
+    "comment": "c'etait genial"
+	}
+}
+
+mutation DeleteEvaluation {
+  deleteEvaluation(booking_id: 1) {
+    message
+    errors {
+      message
+    }
+  }
+}

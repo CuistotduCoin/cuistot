@@ -49,6 +49,97 @@ custom:
         field: deleteWorkshop
         request: "workshop/deleteWorkshop-request-mapping-template.txt"
         response: "workshop/deleteWorkshop-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: addWorkshopImage
+        request: "workshop/addWorkshopImage-request-mapping-template.txt"
+        response: "workshop/addWorkshopImage-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: removeWorkshopImage
+        request: "workshop/removeWorkshopImage-request-mapping-template.txt"
+        response: "workshop/removeWorkshopImage-response-mapping-template.txt"
+
+      - dataSource: Lambda
+        type: Mutation
+        field: createBooking
+        request: "booking/createBooking-request-mapping-template.txt"
+        response: "booking/createBooking-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: updateBooking
+        request: "booking/updateBooking-request-mapping-template.txt"
+        response: "booking/updateBooking-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: deleteBooking
+        request: "booking/deleteBooking-request-mapping-template.txt"
+        response: "booking/deleteBooking-response-mapping-template.txt"
+
+      - dataSource: Lambda
+        type: Mutation
+        field: createEvaluation
+        request: "evaluation/createEvaluation-request-mapping-template.txt"
+        response: "evaluation/createEvaluation-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: deleteEvaluation
+        request: "evaluation/deleteEvaluation-request-mapping-template.txt"
+        response: "evaluation/deleteEvaluation-response-mapping-template.txt"
+
+      - dataSource: Lambda
+        type: Mutation
+        field: createGourmet
+        request: "gourmet/createGourmet-request-mapping-template.txt"
+        response: "gourmet/createGourmet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: updateGourmet
+        request: "gourmet/updateGourmet-request-mapping-template.txt"
+        response: "gourmet/updateGourmet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: deleteGourmet
+        request: "gourmet/deleteGourmet-request-mapping-template.txt"
+        response: "gourmet/deleteGourmet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: updateGourmetImage
+        request: "gourmet/updateGourmetImage-request-mapping-template.txt"
+        response: "gourmet/updateGourmetImage-response-mapping-template.txt"
+
+      - dataSource: Lambda
+        type: Mutation
+        field: createCook
+        request: "cook/createCook-request-mapping-template.txt"
+        response: "cook/createCook-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: updateCook
+        request: "cook/updateCook-request-mapping-template.txt"
+        response: "cook/updateCook-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: deleteCook
+        request: "cook/deleteCook-request-mapping-template.txt"
+        response: "cook/deleteCook-response-mapping-template.txt"
+
+      - dataSource: Lambda
+        type: Mutation
+        field: createKitchen
+        request: "kitchen/createKitchen-request-mapping-template.txt"
+        response: "kitchen/createKitchen-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: updateKitchen
+        request: "kitchen/updateKitchen-request-mapping-template.txt"
+        response: "kitchen/updateKitchen-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: deleteKitchen
+        request: "kitchen/deleteKitchen-request-mapping-template.txt"
+        response: "kitchen/deleteKitchen-response-mapping-template.txt"
+
       # Query mapping templates
       - dataSource: Lambda
         type: Query
@@ -90,6 +181,58 @@ custom:
         field: getCurrentGourmet
         request: "getCurrentGourmet-request-mapping-template.txt"
         response: "getCurrentGourmet-response-mapping-template.txt"
+
+      # Nested fields
+      - dataSource: Lambda
+        type: Cook
+        field: gourmet
+        request: "cook/cookGourmet-request-mapping-template.txt"
+        response: "cook/cookGourmet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Cook
+        field: workshops
+        request: "cook/cookWorkshops-request-mapping-template.txt"
+        response: "cook/cookWorkshops-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Workshop
+        field: kitchen
+        request: "workshop/workshopKitchen-request-mapping-template.txt"
+        response: "workshop/workshopKitchen-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Workshop
+        field: cook
+        request: "workshop/workshopCook-request-mapping-template.txt"
+        response: "workshop/workshopCook-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Workshop
+        field: bookings
+        request: "workshop/workshopBookings-request-mapping-template.txt"
+        response: "workshop/workshopBookings-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Gourmet
+        field: bookings
+        request: "gourmet/gourmetBookings-request-mapping-template.txt"
+        response: "gourmet/gourmetBookings-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Booking
+        field: gourmet
+        request: "booking/bookingGourmet-request-mapping-template.txt"
+        response: "booking/bookingGourmet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Booking
+        field: workshop
+        request: "booking/bookingWorkshop-request-mapping-template.txt"
+        response: "booking/bookingWorkshop-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Booking
+        field: evaluation
+        request: "booking/bookingEvaluation-request-mapping-template.txt"
+        response: "booking/bookingEvaluation-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Evaluation
+        field: booking
+        request: "evaluation/evaluationBooking-request-mapping-template.txt"
+        response: "evaluation/evaluationBooking-response-mapping-template.txt"
     serviceRole: "AppSyncServiceRole"
     dataSources:
       - type: AWS_LAMBDA
@@ -105,6 +248,18 @@ functions:
 
 resources:
   Resources:
+    DBInstance:
+      Type: "AWS::RDS::DBInstance"
+      DeletionPolicy: "Retain"
+      Properties:
+        DBInstanceIdentifier: "cuistot-postgres-${self:provider.stage}"
+        DBName: "cuistot_${self:provider.stage}"
+        AllocatedStorage: "20"
+        DBInstanceClass: "db.t2.micro"
+        Engine: "postgres"
+        EngineVersion: "9.6.6"
+        MasterUsername: ${env:DATABASE_USERNAME}
+        MasterUserPassword: ${env:DATABASE_PASSWORD}
     AppSyncServiceRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"

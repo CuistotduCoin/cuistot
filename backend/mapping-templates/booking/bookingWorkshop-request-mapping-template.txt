@@ -1,0 +1,10 @@
+{
+  "version": "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+    "field": "getWorkshop",
+    "arguments":  {
+      "workshop_id": $util.toJson($context.source.workshop_id)
+    }
+  }
+}

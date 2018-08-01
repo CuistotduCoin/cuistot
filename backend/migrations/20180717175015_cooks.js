@@ -1,11 +1,11 @@
 exports.up = knex => (
   knex.schema.createTable('cooks', (table) => {
-    table.integer('id')
-      .notNullable()
+    table.uuid('id')
       .primary()
       .references('id')
       .inTable('gourmets')
       .onDelete('CASCADE')
+      .onUpdate('CASCADE')
       .index();
     table.boolean('is_pro')
       .notNullable()

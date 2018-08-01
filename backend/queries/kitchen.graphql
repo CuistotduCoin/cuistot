@@ -1,0 +1,23 @@
+mutation CreateKitchen($input: CreateKitchenInput!) {
+  createKitchen(kitchen: $input) {
+    kitchen {
+      id
+      name
+      created_at
+      updated_at
+    }
+    userErrors {
+      message
+    }
+  }
+}
+
+{
+  "input": {
+  	"name": "Ma cuisine",
+    "address": "13, avenue de la République",
+    "city": "Brest",
+    "zip_code": "29200",
+    "location": "(48.390394, -4.486076)"
+	}
+}

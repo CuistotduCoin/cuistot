@@ -1,25 +1,29 @@
 exports.up = knex => (
-  knex.schema.createTable('workshops', (table) => {
-    table.increments('id');
+  knex.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";').createTable('workshops', (table) => {
+    table.uuid('id')
+      .defaultTo(knex.raw('uuid_generate_v4()'))
+      .primary()
+      .index();
     table.string('name', 100);
     table.float('price').notNullable();
     table.integer('duration').notNullable(); // minutes
     table.integer('min_gourmet').notNullable();
     table.integer('max_gourmet').notNullable();
     table.text('description');
-    table.json('pictures');
+    table.json('images');
     table.dateTime('date').notNullable();
-    table.integer('kitchen_id')
+    table.uuid('kitchen_id')
       .notNullable()
       .references('id')
       .inTable('kitchens')
       .onDelete('CASCADE')
-      .index();
-    table.integer('cook_id')
+      .onUpdate('CASCADE');
+    table.uuid('cook_id')
       .notNullable()
       .references('id')
       .inTable('cooks')
       .onDelete('CASCADE')
+      .onUpdate('CASCADE')
       .index();
     table.timestamps(true, true);
   }).then(() => {
