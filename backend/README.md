@@ -17,3 +17,29 @@
     * [RDS](https://aws.amazon.com/fr/rds/) | Amazon PostgreSQL database instance
     * [AppSync](https://aws.amazon.com/fr/appsync/)
     * [Serverless-AppSync-Plugin](https://github.com/sid88in/serverless-appsync-plugin)
+
+
+## PROCEDURES:
+
+Delete the stack
+
+- Delete the bucket
+- Delete the cloud formation
+
+Recreate user pool
+
+- Delete the current user pool
+- Set NeedsNewUserPool to true
+- Deploy
+- Set AWS_USERPOOL_ID with the new user pool id in .env
+- Set NeedsNewUserPool to false
+- Deploy again
+
+Recreate Postgres instance
+
+- Delete the current instance
+- Set NeedsNewDBInstance to true
+- Deploy
+- Set NeedsNewDBInstance to false
+
+**Need to work on this to have a cleaner process**
