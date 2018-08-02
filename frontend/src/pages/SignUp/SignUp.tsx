@@ -12,10 +12,10 @@ import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   container: {
-    "text-align": "center"
+    textAlign: "center"
   },
   logo: {
-    "margin-top": 3 * theme.spacing.unit
+    marginTop: 3 * theme.spacing.unit
   }
 });
 

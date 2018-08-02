@@ -3,6 +3,7 @@ import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
+import Snackbar from "components/Snackbar";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
@@ -32,7 +33,29 @@ interface ISignUpFormValues {
   password: string;
 }
 
-export class SignUpForm extends React.Component<ISignUpForm, {}> {
+interface ISignUpState {
+  openSnackbar: boolean;
+  snackbarMessage: string;
+  snackbarVariant: string;
+}
+
+export class SignUpForm extends React.Component<ISignUpForm, ISignUpState> {
+  public state = {
+    openSnackbar: false,
+    snackbarMessage: '',
+    snackbarVariant: ''
+  };
+
+  public constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onSnackbarClose = this.onSnackbarClose.bind(this);
+  }
+
+  public onSnackbarClose = () => {
+    this.setState({ openSnackbar: false });
+  };
+
   public render() {
     const { classes } = this.props;
 
@@ -51,20 +74,6 @@ export class SignUpForm extends React.Component<ISignUpForm, {}> {
       username: Yup.string().required("Un nom d'utilisateur est obligatoire")
     });
 
-    const onSubmit = (values: ILoginFormValues) => {
-      Auth.signUp({
-        attributes: {
-          email: values.email,
-          family_name: values.lastname,
-          name: values.firstname
-        },
-        password: values.password,
-        username: values.username
-      })
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
-    };
-
     const initialValues = {
       email: "",
       firstname: "",
@@ -74,107 +83,154 @@ export class SignUpForm extends React.Component<ISignUpForm, {}> {
     };
 
     const signUpFormComponent = () => (
-      <Form autoComplete="off">
-        <Grid container={true} className={classes.grid} spacing={16}>
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
-              <Button variant="outlined" color="secondary">
-                S'inscrire avec Facebook
-              </Button>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12}>
-            <Divider />
-          </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true} spacing={16}>
-              <Grid item={true} xs={6}>
-                <Field
-                  id="firstname"
-                  name="firstname"
-                  label="Prénom"
-                  placeholder="Votre prénom"
-                  className={classes.textField}
-                  margin="normal"
-                  type="text"
-                  component={TextField}
-                />
-              </Grid>
-              <Grid item={true} xs={6}>
-                <Field
-                  id="lastname"
-                  name="lastname"
-                  label="Nom"
-                  placeholder="Votre nom"
-                  className={classes.textField}
-                  margin="normal"
-                  type="text"
-                  component={TextField}
-                />
+      <>
+        <Snackbar
+          variant={this.state.snackbarVariant}
+          open={this.state.openSnackbar}
+          onClose={this.onSnackbarClose}
+          message={this.state.snackbarMessage}
+          hidable={this.state.snackbarVariant !== "success"}
+        />
+        <Form autoComplete="off">
+          <Grid container={true} className={classes.grid} spacing={16}>
+            <Grid item={true} xs={12}>
+              <Grid container={true} justify="center">
+                <Button variant="outlined" color="secondary">
+                  S'inscrire avec Facebook
+                </Button>
               </Grid>
             </Grid>
             <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="username"
-                  label="Nom d'utilisateur"
-                  name="username"
-                  placeholder="Votre nom d'utilisateur"
-                  className={classes.textField}
-                  margin="normal"
-                />
+              <Divider />
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Grid container={true} spacing={16}>
+                <Grid item={true} xs={6}>
+                  <Field
+                    id="firstname"
+                    name="firstname"
+                    label="Prénom"
+                    placeholder="Votre prénom"
+                    className={classes.textField}
+                    margin="normal"
+                    type="text"
+                    component={TextField}
+                  />
+                </Grid>
+                <Grid item={true} xs={6}>
+                  <Field
+                    id="lastname"
+                    name="lastname"
+                    label="Nom"
+                    placeholder="Votre nom"
+                    className={classes.textField}
+                    margin="normal"
+                    type="text"
+                    component={TextField}
+                  />
+                </Grid>
+              </Grid>
+              <Grid item={true} xs={12}>
+                <Grid container={true}>
+                  <Field
+                    type="text"
+                    component={TextField}
+                    id="username"
+                    label="Nom d'utilisateur"
+                    name="username"
+                    placeholder="Votre nom d'utilisateur"
+                    className={classes.textField}
+                    margin="normal"
+                  />
+                </Grid>
+              </Grid>
+              <Grid item={true} xs={12}>
+                <Grid container={true}>
+                  <Field
+                    type="text"
+                    component={TextField}
+                    id="email"
+                    label="Email"
+                    name="email"
+                    placeholder="Votre email"
+                    className={classes.textField}
+                    margin="normal"
+                  />
+                </Grid>
+              </Grid>
+              <Grid item={true} xs={12}>
+                <Grid container={true}>
+                  <Field
+                    type="password"
+                    component={TextField}
+                    id="password"
+                    label="Mot de passe"
+                    name="password"
+                    placeholder="Votre mot de passe"
+                    className={classes.textField}
+                    margin="normal"
+                  />
+                </Grid>
               </Grid>
             </Grid>
             <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="email"
-                  label="Email"
-                  name="email"
-                  placeholder="Votre email"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
-            </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="password"
-                  component={TextField}
-                  id="password"
-                  label="Mot de passe"
-                  name="password"
-                  placeholder="Votre mot de passe"
-                  className={classes.textField}
-                  margin="normal"
-                />
+              <Grid container={true} justify="center">
+                <Button type="submit" variant="contained" color="secondary">
+                  S'inscrire
+                </Button>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
-              <Button type="submit" variant="contained" color="secondary">
-                S'inscrire
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Form>
+        </Form>
+      </>
     );
 
     return (
       <Formik
         initialValues={initialValues}
         component={signUpFormComponent}
-        onSubmit={onSubmit}
+        onSubmit={this.onSubmit}
         validationSchema={validationSchema}
       />
     );
+  }
+
+  public onSubmit(values: ISignUpFormValues) {
+    Auth.signUp({
+      attributes: {
+        email: values.email,
+        family_name: values.lastname,
+        name: values.firstname
+      },
+      password: values.password,
+      username: values.username
+    })
+      .then(data => {
+        let resultMessage;
+        if (data.userSub) {
+          resultMessage = 'Votre compte a bien été créé. Vous allez recevoir un mail qui vous permettra de le confirmer.'
+        }
+        if (resultMessage) {
+          this.setState({
+            openSnackbar: true,
+            snackbarMessage: resultMessage,
+            snackbarVariant: 'success'
+          });
+        }
+      })
+      .catch(err => {
+        let resultMessage;
+        if (err.code === "UsernameExistsException") {
+          resultMessage = "Ce nom d'utilisateur est déjà associé à un compte existant"
+        }
+        if (resultMessage) {
+          this.setState({
+            openSnackbar: true,
+            snackbarMessage: resultMessage,
+            snackbarVariant: 'warning',
+          });
+        }
+      });
   }
 }
 

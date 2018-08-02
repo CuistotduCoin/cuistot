@@ -9,6 +9,7 @@
   "rules": {
     "prettier": true,
     "import-name": false,
-    "no-console": false
+    "no-console": false,
+    "jsx-boolean-value": false
   }
 }
