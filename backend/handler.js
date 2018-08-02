@@ -1,3 +1,4 @@
+import AWS from 'aws-sdk';
 import { getBooking, createBooking, updateBooking, deleteBooking } from './resolvers/booking-resolver';
 import {
   getCook,
@@ -160,11 +161,22 @@ export const graphqlHandler = (event, context, callback) => {
   }
 };
 
-// Trigger test
-export const guestSignInHandler = (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false; // eslint-disable-line
-  console.log('event : ', event);
-  console.log('context : ', context);
-  // Return to Amazon Cognito
-  callback(null, event);
+// Add the new gourmet to the gourmet group once the user has been confirmed
+export const postConfirmationHandler = (event, context, callback) => {
+  const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
+  const params = {
+    GroupName: 'Gourmet',
+    UserPoolId: event.userPoolId,
+    Username: event.userName,
+  };
+  if (!event.request.userAttributes['cognito:user_status'] === 'CONFIRMED' || !event.request.userAttributes.email_verified === 'true') {
+    const error = new Error('User was not properly confirmed and/or email not verified');
+    callback(error, event);
+  }
+  cognitoIdentityServiceProvider.adminAddUserToGroup(params, (err) => {
+    if (err) {
+      callback(err, event);
+    }
+    callback(null, event);
+  });
 };
