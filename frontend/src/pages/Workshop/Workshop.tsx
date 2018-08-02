@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import green from "@material-ui/core/colors/green";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import Popover from "@material-ui/core/Popover";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
@@ -30,19 +31,52 @@ const styles = (theme: Theme) => ({
   button: {
     margin: theme.spacing.unit
   },
+  cancellation: {
+    padding: theme.spacing.unit * 2
+  },
   grid: {
     margin: "0px auto",
     maxWidth: 1080,
     padding: 24
   },
+  img: {
+    verticalAlign: "middle"
+  },
   infoReservartion: {
-    padding: theme.spacing.unit
+    padding: theme.spacing.unit * 2
   },
   innerGrid: {
-    padding: 24
+    paddingBottom: 24,
+    paddingTop: 24
+  },
+  itemGrid: {
+    padding: theme.spacing.unit
+  },
+  leftGrid: {
+    padding: theme.spacing.unit * 2
+  },
+  popover: {
+    pointerEvents: "none"
   },
   tabs: {
     minWidth: 0
+  },
+  tile: {
+    alignItems: "center",
+    background: "rgba(0, 0, 0, 0.5)",
+    bottom: 0,
+    color: "#fff",
+    display: "flex",
+    justifyContent: "center",
+    left: 0,
+    position: "absolute",
+    right: 0,
+    top: 0
+  },
+  tileContainer: {
+    display: "block",
+    position: "relative",
+    width: "100%"
   }
 });
 
@@ -52,7 +86,8 @@ interface IWorkshopProps {
   name: string;
   date: string;
   duration: number;
-  image: string;
+  mainPhoto: string;
+  photos: any;
   imageCook: string;
   nameCook: string;
   rating?: number;
@@ -68,14 +103,41 @@ interface IWorkshopProps {
   timeEvent: string;
 }
 
-export class Workshop extends React.Component<IWorkshopProps, {}> {
+interface IWorkshopState {
+  popoverAnnulation: any;
+}
+
+export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
+  public state = {
+    popoverAnnulation: null
+  };
+  constructor(props: IWorkshopProps) {
+    super(props);
+
+    this.state = {
+      popoverAnnulation: null
+    };
+
+    this.handlePopoverOpen = this.handlePopoverOpen.bind(this);
+    this.handlePopoverClose = this.handlePopoverClose.bind(this);
+  }
+
+  public handlePopoverOpen = event => {
+    this.setState({ popoverAnnulation: event.target });
+  };
+
+  public handlePopoverClose = () => {
+    this.setState({ popoverAnnulation: null });
+  };
+
   public render() {
     const { classes } = this.props;
+    const open = Boolean(this.state.popoverAnnulation);
 
     return (
       <>
         <Header static={true} />
-        <Cover imageURL={this.props.image} />
+        <Cover imageURL={this.props.mainPhoto} />
         <Grid
           container={true}
           justify="space-around"
@@ -168,7 +230,7 @@ export class Workshop extends React.Component<IWorkshopProps, {}> {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid>
+            <Grid className={classes.leftGrid}>
               <Typography variant="headline" component="h2" gutterBottom={true}>
                 Au menu
               </Typography>
@@ -184,6 +246,40 @@ export class Workshop extends React.Component<IWorkshopProps, {}> {
               <Typography variant="headline" component="h2" gutterBottom={true}>
                 Photos & Videos
               </Typography>
+              <Grid container={true} alignItems="center" justify="space-around">
+                {this.props.photos.slice(0, 3).map((photo, i) => (
+                  <Grid key={photo.id} item={true}>
+                    {i !== 2 ? (
+                      <img
+                        src={photo.image}
+                        alt={photo.name}
+                        key={photo.id}
+                        width={200}
+                      />
+                    ) : (
+                      <div className={classes.tileContainer}>
+                        <img
+                          src={photo.image}
+                          alt={photo.name}
+                          key={photo.id}
+                          className={classes.img}
+                          width={200}
+                        />
+                        <div className={classes.tile}>
+                          <Typography
+                            variant="body1"
+                            component="p"
+                            align="center"
+                            color="inherit"
+                          >
+                            Voir plus de photos
+                          </Typography>
+                        </div>
+                      </div>
+                    )}
+                  </Grid>
+                ))}
+              </Grid>
               <Typography variant="headline" component="h2" gutterBottom={true}>
                 Le Cuistot
               </Typography>
@@ -213,29 +309,83 @@ export class Workshop extends React.Component<IWorkshopProps, {}> {
                 dayEndBook={this.props.dayEndBook}
               />
             </Paper>
-            <Grid>
-              <Lock />
-              <Typography variant="body1">
-                Paiement sécurisé par Mangopay
-              </Typography>
-              <Typography variant="body1">
-                Vous pouvez payer avec
-                <span>
-                  <img
-                    src="https://static.cuistotducoin.com/img/workshop/visa.png"
-                    alt="visa"
-                  />
-                  <img
-                    src="https://static.cuistotducoin.com/img/workshop/masterpass.png"
-                    alt="masterpass"
-                  />
-                  <img
-                    src="https://static.cuistotducoin.com/img/workshop/maestro.png"
-                    alt="maestro"
-                  />
-                </span>
-              </Typography>
-              <Typography variant="body1">Conditions d'annulation</Typography>
+            <Grid
+              container={true}
+              direction="column"
+              justify="space-around"
+              alignItems="center"
+              className={classes.innerGrid}
+            >
+              <Grid item={true} className={classes.itemGrid}>
+                <Grid container={true}>
+                  <Lock />
+                  <Typography variant="body1">
+                    Paiement sécurisé par Mangopay
+                  </Typography>
+                </Grid>
+                <Grid
+                  container={true}
+                  alignItems="center"
+                  justify="space-around"
+                >
+                  <Grid item={true}>
+                    <img
+                      src="https://static.cuistotducoin.com/img/workshop/visa.png"
+                      alt="visa"
+                      height="24"
+                      width="40"
+                    />
+                    <img
+                      src="https://static.cuistotducoin.com/img/workshop/masterpass.png"
+                      alt="masterpass"
+                      height="24"
+                      width="40"
+                    />
+                    <img
+                      src="https://static.cuistotducoin.com/img/workshop/maestro.png"
+                      alt="maestro"
+                      height="24"
+                      width="40"
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item={true} className={classes.itemGrid}>
+                <Grid container={true}>
+                  <Typography
+                    variant="body1"
+                    onMouseEnter={this.handlePopoverOpen}
+                    onMouseLeave={this.handlePopoverClose}
+                  >
+                    Conditions d'annulation
+                  </Typography>
+                  <Popover
+                    className={classes.popover}
+                    open={open}
+                    anchorEl={this.state.popoverAnnulation}
+                    anchorOrigin={{
+                      horizontal: "left",
+                      vertical: "bottom"
+                    }}
+                    transformOrigin={{
+                      horizontal: "left",
+                      vertical: "top"
+                    }}
+                    onClose={this.handlePopoverClose}
+                    disableRestoreFocus={true}
+                  >
+                    <Paper elevation={2} className={classes.cancellation}>
+                      <Typography variant="body1">
+                        Les conditions d'annulation sont les suivantes : Si vous
+                        annulez jusqu'à 3 jours avant la date de l'atelier, vous
+                        recevez un remboursement intégral (minoré des frais de
+                        service). En cas d'annulation dans les 3 jours précédant
+                        l'atelier, la réservation n'est pas remboursable.
+                      </Typography>
+                    </Paper>
+                  </Popover>
+                </Grid>
+              </Grid>
               <Button
                 variant="contained"
                 color="primary"

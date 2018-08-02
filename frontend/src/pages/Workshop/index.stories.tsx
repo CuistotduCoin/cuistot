@@ -14,7 +14,24 @@ storiesOf("Cuistot/pages/Workshop", module)
       name="Atelier Sushis, Makis et Témaris"
       nameCook="Takako"
       date="Samedi 19 Juin 2018, à 14h"
-      image="https://picsum.photos/1000/300/?random"
+      mainPhoto="https://picsum.photos/1000/300/?random"
+      photos={[
+        {
+          id: 1,
+          image: "https://picsum.photos/240/135/?random",
+          name: "photo 1"
+        },
+        {
+          id: 2,
+          image: "https://picsum.photos/240/135/?random",
+          name: "photo 2"
+        },
+        {
+          id: 3,
+          image: "https://picsum.photos/240/135/?random",
+          name: "photo 3"
+        }
+      ]}
       imageCook="https://picsum.photos/40/40/?random"
       rating={4.1}
       ratingNumber={7}
