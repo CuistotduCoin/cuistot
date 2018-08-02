@@ -1,3 +1,4 @@
+import { Divider, RootRef } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import green from "@material-ui/core/colors/green";
@@ -15,12 +16,15 @@ import LocalDining from "@material-ui/icons/LocalDining";
 import Lock from "@material-ui/icons/Lock";
 import People from "@material-ui/icons/People";
 import BookForm from "components/BookForm";
+import CommentBlock from "components/CommentBlock";
 import Cover from "components/Cover";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import StarRating from "components/StarRating";
 import React from "react";
 import { Link } from "react-router-dom";
+import Scroll from "react-scroll";
+import Waypoint from "react-waypoint";
 
 const styles = (theme: Theme) => ({
   avatar: {
@@ -32,6 +36,9 @@ const styles = (theme: Theme) => ({
     margin: theme.spacing.unit
   },
   cancellation: {
+    padding: theme.spacing.unit * 2
+  },
+  commentBlock: {
     padding: theme.spacing.unit * 2
   },
   grid: {
@@ -50,13 +57,23 @@ const styles = (theme: Theme) => ({
     paddingTop: 24
   },
   itemGrid: {
-    padding: theme.spacing.unit
+    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing.unit
   },
   leftGrid: {
     padding: theme.spacing.unit * 2
   },
+  paragraph: {
+    padding: theme.spacing.unit * 2
+  },
   popover: {
     pointerEvents: "none"
+  },
+  sticky: {
+    backgroundColor: "white",
+    position: "sticky",
+    top: 0,
+    zIndex: 10
   },
   tabs: {
     minWidth: 0
@@ -101,26 +118,22 @@ interface IWorkshopProps {
   eventType: string;
   cuisineType: string;
   timeEvent: string;
+  descriptionCook: string;
+  descriptionWorkshop: string;
+  comments: any;
+  furtherInformation: string;
 }
 
 interface IWorkshopState {
   popoverAnnulation: any;
+  tabIndex: number;
 }
 
 export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
   public state = {
-    popoverAnnulation: null
+    popoverAnnulation: null,
+    tabIndex: 0
   };
-  constructor(props: IWorkshopProps) {
-    super(props);
-
-    this.state = {
-      popoverAnnulation: null
-    };
-
-    this.handlePopoverOpen = this.handlePopoverOpen.bind(this);
-    this.handlePopoverClose = this.handlePopoverClose.bind(this);
-  }
 
   public handlePopoverOpen = event => {
     this.setState({ popoverAnnulation: event.target });
@@ -128,6 +141,19 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
 
   public handlePopoverClose = () => {
     this.setState({ popoverAnnulation: null });
+  };
+
+  public handleChangeTabIndex = (e, index) => {
+    this.setState({ tabIndex: index });
+    if (index !== 4) {
+      this.scrolltoElement(index);
+    } else {
+      Scroll.animateScroll.scrollToTop();
+    }
+  };
+
+  public handleWayPoint = index => {
+    this.setState({ tabIndex: index });
   };
 
   public render() {
@@ -142,7 +168,6 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
           container={true}
           justify="space-around"
           alignItems="center"
-          spacing={16}
           className={classes.grid}
         >
           <Grid item={true} xs={2}>
@@ -180,14 +205,15 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
             </Grid>
           </Grid>
         </Grid>
-        <Grid
-          container={true}
-          justify="space-around"
-          alignItems="center"
-          className={classes.grid}
-        >
+        <Grid container={true} justify="space-around" className={classes.grid}>
           <Grid item={true} xs={8}>
-            <Tabs value={0} indicatorColor="primary" textColor="primary">
+            <Tabs
+              value={this.state.tabIndex}
+              indicatorColor="primary"
+              textColor="primary"
+              onChange={this.handleChangeTabIndex}
+              className={classes.sticky}
+            >
               <Tab label="Au menu" className={classes.tabs} />
               <Tab label="Le Cuistot" className={classes.tabs} />
               <Tab label="Commentaires" className={classes.tabs} />
@@ -230,176 +256,298 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid className={classes.leftGrid}>
-              <Typography variant="headline" component="h2" gutterBottom={true}>
-                Au menu
-              </Typography>
-              <Typography variant="body1" component="p" paragraph={true}>
-                Atelier + A emporter : Initiation à la pâte à sucre Découvrez la
-                pâte à sucre et ses techniques très spécifique avec notre
-                nouveau cuistot: Audrey ! Venez apprendre à sublimer vos
-                pâtisseries et à confectionner vos gâteaux d’anniversaire.
-                Préparation de la ganache au chocolat qui garnira et recouvrira
-                le gâteau- Préparation des éléments de décorations et de la pâte
-                à sucre (technique de lissage et de pose)
-              </Typography>
-              <Typography variant="headline" component="h2" gutterBottom={true}>
-                Photos & Videos
-              </Typography>
-              <Grid container={true} alignItems="center" justify="space-around">
-                {this.props.photos.slice(0, 3).map((photo, i) => (
-                  <Grid key={photo.id} item={true}>
-                    {i !== 2 ? (
-                      <img
-                        src={photo.image}
-                        alt={photo.name}
-                        key={photo.id}
-                        width={200}
-                      />
-                    ) : (
-                      <div className={classes.tileContainer}>
-                        <img
-                          src={photo.image}
-                          alt={photo.name}
-                          key={photo.id}
-                          className={classes.img}
-                          width={200}
-                        />
-                        <div className={classes.tile}>
-                          <Typography
-                            variant="body1"
-                            component="p"
-                            align="center"
-                            color="inherit"
-                          >
-                            Voir plus de photos
-                          </Typography>
-                        </div>
-                      </div>
-                    )}
+
+            <Grid
+              container={true}
+              className={classes.leftGrid}
+              direction="column"
+            >
+              <Scroll.Element name="0" />
+              <Waypoint
+                // tslint:disable-next-line:jsx-no-lambda
+                onEnter={() => {
+                  this.handleWayPoint(0);
+                }}
+              >
+                <div>
+                  <Grid item={true} className={classes.itemGrid}>
+                    <Typography
+                      variant="headline"
+                      component="h2"
+                      gutterBottom={true}
+                    >
+                      Au menu
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      component="p"
+                      paragraph={true}
+                      className={classes.paragraph}
+                    >
+                      {this.props.descriptionWorkshop}
+                    </Typography>
                   </Grid>
-                ))}
-              </Grid>
-              <Typography variant="headline" component="h2" gutterBottom={true}>
-                Le Cuistot
-              </Typography>
-              <Typography variant="body1" component="p" paragraph={true}>
-                Audrey passait son temps dans la cuisine de sa grand-mère quand
-                elle était petite. Et elle a toujours aimé la pâtisserie et
-                tester de nouvelles recettes, de nouvelles techniques. Jusqu'à
-                ce que sa passion et ses proches l'a poussèrent à passer son
-                CAP. Maintenant elle souhaite le faire découvrir aux autres.
-              </Typography>
-              <Typography variant="headline" component="h2" gutterBottom={true}>
-                Commentaires
-              </Typography>
-              <Typography variant="headline" component="h2" gutterBottom={true}>
-                Informations complémentaires
-              </Typography>
+                  <Grid item={true} className={classes.itemGrid}>
+                    <Typography
+                      variant="headline"
+                      component="h2"
+                      gutterBottom={true}
+                    >
+                      Photos & Videos
+                    </Typography>
+                    <Grid
+                      container={true}
+                      alignItems="center"
+                      justify="space-around"
+                    >
+                      {this.props.photos !== undefined &&
+                        this.props.photos.slice(0, 3).map((photo, i) => (
+                          <Grid key={photo.id} item={true}>
+                            {i !== 2 ? (
+                              <img
+                                src={photo.image}
+                                alt={photo.name}
+                                width={200}
+                              />
+                            ) : (
+                              <div className={classes.tileContainer}>
+                                <img
+                                  src={photo.image}
+                                  alt={photo.name}
+                                  className={classes.img}
+                                  width={200}
+                                />
+                                <div className={classes.tile}>
+                                  <Typography
+                                    variant="body1"
+                                    component="p"
+                                    align="center"
+                                    color="inherit"
+                                  >
+                                    Voir plus de photos
+                                  </Typography>
+                                </div>
+                              </div>
+                            )}
+                          </Grid>
+                        ))}
+                    </Grid>
+                  </Grid>
+                </div>
+              </Waypoint>
+              <Scroll.Element name="1" />
+              <Waypoint
+                // tslint:disable-next-line:jsx-no-lambda
+                onEnter={() => {
+                  this.handleWayPoint(1);
+                }}
+              >
+                <div>
+                  <Grid item={true} className={classes.itemGrid}>
+                    <Typography
+                      variant="headline"
+                      component="h2"
+                      gutterBottom={true}
+                    >
+                      Le Cuistot
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      component="p"
+                      paragraph={true}
+                      className={classes.paragraph}
+                    >
+                      {this.props.descriptionCook}
+                    </Typography>
+                  </Grid>
+                </div>
+              </Waypoint>
+              <Scroll.Element name="2" />
+              <Waypoint
+                // tslint:disable-next-line:jsx-no-lambda
+                onEnter={() => {
+                  this.handleWayPoint(2);
+                }}
+              >
+                <div>
+                  <Grid item={true} className={classes.itemGrid}>
+                    <Typography
+                      variant="headline"
+                      component="h2"
+                      gutterBottom={true}
+                    >
+                      Commentaires
+                    </Typography>
+                    <Grid container={true}>
+                      {this.props.comments !== undefined &&
+                        this.props.comments.slice(0, 3).map((comment, i) => (
+                          <>
+                            <Grid
+                              key={comment.id}
+                              item={true}
+                              className={classes.commentBlock}
+                            >
+                              <CommentBlock
+                                comment={comment.comment}
+                                date={comment.date}
+                                name={comment.name}
+                                picture={comment.picture}
+                                stars={comment.stars}
+                              />
+                            </Grid>
+                            {i !== 2 && (
+                              <Grid item={true} xs={12}>
+                                <Divider />
+                              </Grid>
+                            )}
+                          </>
+                        ))}
+                    </Grid>
+                  </Grid>
+                </div>
+              </Waypoint>
+              <Scroll.Element name="3" />
+              <Waypoint
+                // tslint:disable-next-line:jsx-no-lambda
+                onEnter={() => {
+                  this.handleWayPoint(3);
+                }}
+              >
+                <div>
+                  <Grid item={true} className={classes.itemGrid}>
+                    <Typography
+                      variant="headline"
+                      component="h2"
+                      gutterBottom={true}
+                    >
+                      Informations complémentaires
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      component="p"
+                      paragraph={true}
+                      className={classes.paragraph}
+                    >
+                      {this.props.furtherInformation}
+                    </Typography>
+                  </Grid>
+                </div>
+              </Waypoint>
             </Grid>
           </Grid>
           <Grid item={true} xs={4}>
             <Typography variant="headline" component="h3">
               Faites votre réservation :
             </Typography>
-            <Paper elevation={1} className={classes.infoReservartion}>
-              <BookForm
-                price={this.props.price}
-                availableSeat={this.props.availableSeat}
-                dayEndBook={this.props.dayEndBook}
-              />
-            </Paper>
-            <Grid
-              container={true}
-              direction="column"
-              justify="space-around"
-              alignItems="center"
-              className={classes.innerGrid}
-            >
-              <Grid item={true} className={classes.itemGrid}>
-                <Grid container={true}>
-                  <Lock />
-                  <Typography variant="body1">
-                    Paiement sécurisé par Mangopay
-                  </Typography>
-                </Grid>
-                <Grid
-                  container={true}
-                  alignItems="center"
-                  justify="space-around"
-                >
-                  <Grid item={true}>
-                    <img
-                      src="https://static.cuistotducoin.com/img/workshop/visa.png"
-                      alt="visa"
-                      height="24"
-                      width="40"
-                    />
-                    <img
-                      src="https://static.cuistotducoin.com/img/workshop/masterpass.png"
-                      alt="masterpass"
-                      height="24"
-                      width="40"
-                    />
-                    <img
-                      src="https://static.cuistotducoin.com/img/workshop/maestro.png"
-                      alt="maestro"
-                      height="24"
-                      width="40"
-                    />
+            <div className={classes.sticky}>
+              <Paper elevation={1} className={classes.infoReservartion}>
+                <BookForm
+                  price={this.props.price}
+                  availableSeat={this.props.availableSeat}
+                  dayEndBook={this.props.dayEndBook}
+                />
+              </Paper>
+              <Grid
+                container={true}
+                direction="column"
+                justify="space-around"
+                alignItems="center"
+                className={classes.innerGrid}
+              >
+                <Grid item={true} className={classes.itemGrid}>
+                  <Grid container={true}>
+                    <Lock />
+                    <Typography variant="body1">
+                      Paiement sécurisé par Mangopay
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    container={true}
+                    alignItems="center"
+                    justify="space-around"
+                  >
+                    <Grid item={true}>
+                      <img
+                        src="https://static.cuistotducoin.com/img/workshop/visa.png"
+                        alt="visa"
+                        height="24"
+                        width="40"
+                      />
+                      <img
+                        src="https://static.cuistotducoin.com/img/workshop/masterpass.png"
+                        alt="masterpass"
+                        height="24"
+                        width="40"
+                      />
+                      <img
+                        src="https://static.cuistotducoin.com/img/workshop/maestro.png"
+                        alt="maestro"
+                        height="24"
+                        width="40"
+                      />
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-              <Grid item={true} className={classes.itemGrid}>
-                <Grid container={true}>
-                  <Typography
-                    variant="body1"
-                    onMouseEnter={this.handlePopoverOpen}
-                    onMouseLeave={this.handlePopoverClose}
-                  >
-                    Conditions d'annulation
-                  </Typography>
-                  <Popover
-                    className={classes.popover}
-                    open={open}
-                    anchorEl={this.state.popoverAnnulation}
-                    anchorOrigin={{
-                      horizontal: "left",
-                      vertical: "bottom"
-                    }}
-                    transformOrigin={{
-                      horizontal: "left",
-                      vertical: "top"
-                    }}
-                    onClose={this.handlePopoverClose}
-                    disableRestoreFocus={true}
-                  >
-                    <Paper elevation={2} className={classes.cancellation}>
-                      <Typography variant="body1">
-                        Les conditions d'annulation sont les suivantes : Si vous
-                        annulez jusqu'à 3 jours avant la date de l'atelier, vous
-                        recevez un remboursement intégral (minoré des frais de
-                        service). En cas d'annulation dans les 3 jours précédant
-                        l'atelier, la réservation n'est pas remboursable.
-                      </Typography>
-                    </Paper>
-                  </Popover>
+                <Grid item={true} className={classes.itemGrid}>
+                  <Grid container={true}>
+                    <Typography
+                      variant="body1"
+                      onMouseEnter={this.handlePopoverOpen}
+                      onMouseLeave={this.handlePopoverClose}
+                    >
+                      Conditions d'annulation
+                    </Typography>
+                    <Popover
+                      className={classes.popover}
+                      open={open}
+                      anchorEl={this.state.popoverAnnulation}
+                      anchorOrigin={{
+                        horizontal: "left",
+                        vertical: "bottom"
+                      }}
+                      transformOrigin={{
+                        horizontal: "left",
+                        vertical: "top"
+                      }}
+                      onClose={this.handlePopoverClose}
+                      disableRestoreFocus={true}
+                    >
+                      <Paper elevation={2} className={classes.cancellation}>
+                        <Typography variant="body1">
+                          Les conditions d'annulation sont les suivantes : Si
+                          vous annulez jusqu'à 3 jours avant la date de
+                          l'atelier, vous recevez un remboursement intégral
+                          (minoré des frais de service). En cas d'annulation
+                          dans les 3 jours précédant l'atelier, la réservation
+                          n'est pas remboursable.
+                        </Typography>
+                      </Paper>
+                    </Popover>
+                  </Grid>
                 </Grid>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  Poser une question au cuistot
+                </Button>
               </Grid>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-              >
-                Poser une question au cuistot
-              </Button>
-            </Grid>
+            </div>
           </Grid>
         </Grid>
         <Footer />
       </>
     );
   }
+
+  private scrolltoElement = element => {
+    Scroll.scroller.scrollTo(element, {
+      delay: 100,
+      duration: 500,
+      smooth: true
+    });
+  };
 }
 
 export default withStyles(styles as any)(Workshop as any) as any;
