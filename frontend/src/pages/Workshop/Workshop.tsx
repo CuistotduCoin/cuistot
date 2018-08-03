@@ -1,4 +1,4 @@
-import { Divider, RootRef } from "@material-ui/core";
+import { Divider, Modal, RootRef } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import green from "@material-ui/core/colors/green";
@@ -24,6 +24,7 @@ import StarRating from "components/StarRating";
 import React from "react";
 import { Link } from "react-router-dom";
 import Scroll from "react-scroll";
+import Slider from "react-slick";
 import Waypoint from "react-waypoint";
 
 const styles = (theme: Theme) => ({
@@ -68,6 +69,16 @@ const styles = (theme: Theme) => ({
   },
   popover: {
     pointerEvents: "none"
+  },
+  slider: {
+    margin: "0px auto",
+    maxWidth: 950,
+    padding: theme.spacing.unit,
+    width: "calc(100% - 120px)"
+  },
+  sliderImage: {
+    margin: "0px auto",
+    width: "100%"
   },
   sticky: {
     backgroundColor: "white",
@@ -127,10 +138,12 @@ interface IWorkshopProps {
 interface IWorkshopState {
   popoverAnnulation: any;
   tabIndex: number;
+  modalOpen: boolean;
 }
 
 export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
   public state = {
+    modalOpen: false,
     popoverAnnulation: null,
     tabIndex: 0
   };
@@ -156,14 +169,52 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
     this.setState({ tabIndex: index });
   };
 
+  public handleModalOpen = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  public handleModalClose = () => {
+    this.setState({ modalOpen: false });
+  };
+
   public render() {
     const { classes } = this.props;
     const open = Boolean(this.state.popoverAnnulation);
+    const sliderSettings = {
+      autoplay: true,
+      dots: true,
+      infinite: true,
+      slidesToScroll: 1,
+      slidesToShow: 1
+    };
 
     return (
       <>
+        <Modal
+          aria-labelledby="carousel"
+          aria-describedby="To"
+          open={this.state.modalOpen}
+          onClose={this.handleModalClose}
+        >
+          <div className={classes.slider}>
+            <Slider {...sliderSettings}>
+              {this.props.photos.map(photo => (
+                <div key={photo.id}>
+                  <img
+                    src={photo.image}
+                    alt={photo.name}
+                    className={classes.sliderImage}
+                    key={photo.name}
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
+        </Modal>
         <Header static={true} />
-        <Cover imageURL={this.props.mainPhoto} />
+        <div onClick={this.handleModalOpen}>
+          <Cover imageURL={this.props.mainPhoto} />
+        </div>
         <Grid
           container={true}
           justify="space-around"
@@ -308,9 +359,13 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                                 src={photo.image}
                                 alt={photo.name}
                                 width={200}
+                                onClick={this.handleModalOpen}
                               />
                             ) : (
-                              <div className={classes.tileContainer}>
+                              <div
+                                className={classes.tileContainer}
+                                onClick={this.handleModalOpen}
+                              >
                                 <img
                                   src={photo.image}
                                   alt={photo.name}

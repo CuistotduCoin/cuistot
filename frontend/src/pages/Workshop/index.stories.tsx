@@ -21,17 +21,17 @@ storiesOf("Cuistot/pages/Workshop", module)
       photos={[
         {
           id: 1,
-          image: "https://picsum.photos/240/135/?random",
+          image: "https://picsum.photos/200/116.5/?random",
           name: "photo 1"
         },
         {
           id: 2,
-          image: "https://picsum.photos/240/135/?random",
+          image: "https://picsum.photos/200/116.5/?random",
           name: "photo 2"
         },
         {
           id: 3,
-          image: "https://picsum.photos/240/135/?random",
+          image: "https://picsum.photos/200/116.5/?random",
           name: "photo 3"
         }
       ]}

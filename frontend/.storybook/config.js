@@ -5,6 +5,9 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { setOptions } from "@storybook/addon-options";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import theme from '../src/theme';
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import "../src/main.css";
 
 const reqComps = require.context("../src/components", true, /.stories.tsx$/);
 const reqPages = require.context("../src/pages", true, /.stories.tsx$/);
