@@ -165,7 +165,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
     }
   };
 
-  public handleWayPoint = index => {
+  public handleWayPoint = index => () => {
     this.setState({ tabIndex: index });
   };
 
@@ -252,6 +252,13 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                 >
                   {this.props.name}
                 </Typography>
+                <Typography
+                  variant="subheading"
+                  component="p"
+                  gutterBottom={true}
+                >
+                  {this.props.date}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -314,12 +321,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
               direction="column"
             >
               <Scroll.Element name="0" />
-              <Waypoint
-                // tslint:disable-next-line:jsx-no-lambda
-                onEnter={() => {
-                  this.handleWayPoint(0);
-                }}
-              >
+              <Waypoint onEnter={this.handleWayPoint(0)}>
                 <div>
                   <Grid item={true} className={classes.itemGrid}>
                     <Typography
@@ -391,12 +393,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                 </div>
               </Waypoint>
               <Scroll.Element name="1" />
-              <Waypoint
-                // tslint:disable-next-line:jsx-no-lambda
-                onEnter={() => {
-                  this.handleWayPoint(1);
-                }}
-              >
+              <Waypoint onEnter={this.handleWayPoint(1)}>
                 <div>
                   <Grid item={true} className={classes.itemGrid}>
                     <Typography
@@ -418,12 +415,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                 </div>
               </Waypoint>
               <Scroll.Element name="2" />
-              <Waypoint
-                // tslint:disable-next-line:jsx-no-lambda
-                onEnter={() => {
-                  this.handleWayPoint(2);
-                }}
-              >
+              <Waypoint onEnter={this.handleWayPoint(2)}>
                 <div>
                   <Grid item={true} className={classes.itemGrid}>
                     <Typography
@@ -462,12 +454,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                 </div>
               </Waypoint>
               <Scroll.Element name="3" />
-              <Waypoint
-                // tslint:disable-next-line:jsx-no-lambda
-                onEnter={() => {
-                  this.handleWayPoint(3);
-                }}
-              >
+              <Waypoint onEnter={this.handleWayPoint(3)}>
                 <div>
                   <Grid item={true} className={classes.itemGrid}>
                     <Typography
@@ -491,9 +478,6 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
             </Grid>
           </Grid>
           <Grid item={true} xs={4}>
-            <Typography variant="headline" component="h3">
-              Faites votre réservation :
-            </Typography>
             <div className={classes.sticky}>
               <Paper elevation={1} className={classes.infoReservartion}>
                 <BookForm

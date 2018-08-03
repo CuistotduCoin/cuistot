@@ -21,6 +21,7 @@ interface IHeaderProps {
   classes?: any;
   static?: boolean;
   hideSignUpLogin: boolean;
+  hideCompanyIndividual: boolean;
 }
 interface IHeaderState {
   up?: boolean;
@@ -54,7 +55,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
   }
 
   public render() {
-    const { classes, hideSignUpLogin } = this.props;
+    const { classes } = this.props;
 
     const businessLink = (props: any) => <Link to="/business" {...props} />;
     const individualLink = (props: any) => <Link to="/individual" {...props} />;
@@ -98,24 +99,26 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
                 width={40}
               />
             </Link>
-            <Hidden smDown={true}>
-              <Button
-                className={classes.button}
-                component={businessLink}
-                color="primary"
-              >
-                Entreprise
-              </Button>
-              <Button
-                className={classes.button}
-                component={individualLink}
-                color="primary"
-              >
-                Particulier
-              </Button>
-            </Hidden>
+            {!this.props.hideCompanyIndividual && (
+              <Hidden smDown={true}>
+                <Button
+                  className={classes.button}
+                  component={businessLink}
+                  color="primary"
+                >
+                  Entreprise
+                </Button>
+                <Button
+                  className={classes.button}
+                  component={individualLink}
+                  color="primary"
+                >
+                  Particulier
+                </Button>
+              </Hidden>
+            )}
           </Grid>
-          {!hideSignUpLogin && // false is temp
+          {!this.props.hideSignUpLogin && // false is temp
             false && (
               <Grid container={true} justify="flex-end">
                 {button}
