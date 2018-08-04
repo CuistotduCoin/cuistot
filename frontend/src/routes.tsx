@@ -158,6 +158,22 @@ export default [
   {
     component: asyncComponent({
       Placeholder: () => <Loading />,
+      loader: () => import("pages/ResetPasswordRequest")
+    }),
+    exact: true,
+    path: "/password/reset/request"
+  },
+  {
+    component: asyncComponent({
+      Placeholder: () => <Loading />,
+      loader: () => import("pages/ResetPassword")
+    }),
+    exact: true,
+    path: "/password/reset"
+  },
+  {
+    component: asyncComponent({
+      Placeholder: () => <Loading />,
       loader: () => import("pages/Team")
     }),
     exact: true,

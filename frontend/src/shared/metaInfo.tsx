@@ -72,6 +72,16 @@ export default {
       href: "https://www.cuistotducoin.com/signup",
       title: "Devenez un gourmet Cuistot du Coin"
     },
+    resetPasswordRequest: {
+      description: "Demande de réinitialisation de votre mot de passe",
+      href: "https://www.cuistotducoin.com/password/reset/request",
+      title: "Mot de passe oublié"
+    },
+    resetPassword: {
+      description: "Réinitialisation de mot de passe",
+      href: "https://www.cuistotducoin.com/password/reset",
+      title: "Réinitialisation de votre mot de passe"
+    },
     team: {
       description: "Découvrez qui se cache derrière Cuistot du Coin",
       href: "https://www.cuistotducoin.com/team",
