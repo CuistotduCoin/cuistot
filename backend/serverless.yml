@@ -296,6 +296,11 @@ resources:
         AliasAttributes:
           - email
         MfaConfiguration: "OFF"
+        EmailVerificationSubject: Votre code de sécurité
+        EmailVerificationMessage:
+          Fn::Sub:
+            <h3>Vous avez oublié votre mot de passe. Pas de panique !</h3>
+            <p>Vous aurez juste besoin du code de vérification qui suit pour le réinitialiser: {####}</p>
         VerificationMessageTemplate:
           DefaultEmailOption: CONFIRM_WITH_LINK
           EmailMessageByLink:
@@ -318,7 +323,7 @@ resources:
         Policies:
           PasswordPolicy:
             RequireLowercase: true
-            RequireSymbols: true
+            RequireSymbols: false
             RequireNumbers: true
             MinimumLength: 8
             RequireUppercase: true
@@ -327,7 +332,7 @@ resources:
             EmailMessage: "Bienvenue sur Cuistot du coin ! Voici vos identifiants de connexion (email / mot de passe) : {username} / {####}"
             EmailSubject: "Votre mot de passe temporaire. Pensez bien à le changer :)"
             SMSMessage: "Bienvenue sur Cuistot du coin ! Voici vos identifiants de connexion : {username} / {####}. Pensez bien à changer votre mot de passe :)"
-          UnusedAccountValidityDays: 30
+          UnusedAccountValidityDays: 7
           AllowAdminCreateUserOnly: false
     UserPoolClient:
       Type: AWS::Cognito::UserPoolClient
