@@ -9,12 +9,20 @@ import CloseIcon from '@material-ui/icons/Close';
 import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
 import WarningIcon from '@material-ui/icons/Warning';
-// @ts-ignore
 import React from "react";
 
 const styles = (theme: Theme) => ({
   error: {
     backgroundColor: theme.palette.error.dark,
+  },
+  info: {
+    backgroundColor: theme.palette.primary.dark,
+  },
+  success: {
+    backgroundColor: green[600],
+  },
+  warning: {
+    backgroundColor: amber[700],
   },
   icon: {
     fontSize: 20,
@@ -24,18 +32,9 @@ const styles = (theme: Theme) => ({
     marginRight: theme.spacing.unit,
     opacity: 0.9,
   },
-  info: {
-    backgroundColor: theme.palette.primary.dark,
-  },
   message: {
     alignItems: 'center',
     display: 'flex',
-  },
-  success: {
-    backgroundColor: green[600],
-  },
-  warning: {
-    backgroundColor: amber[700],
   },
 });
 
@@ -71,7 +70,6 @@ export class SnackbarWrapper extends React.Component<ISnackbarProps, {}> {
 
   public render() {
     const { classes, open, message, onClose, variant, hidable } = this.props;
-    const Icon = variantIcon[variant]; // tslint:disable-line
 
     let action;
     if (hidable) {
@@ -102,7 +100,7 @@ export class SnackbarWrapper extends React.Component<ISnackbarProps, {}> {
           className={classes[variant]}
           message={
             <span className={classes.message}>
-              <Icon className={classes.iconVariant} />
+              {React.createElement(variantIcon[variant], { className: classes.iconVariant })}
               {message}
             </span>
           }

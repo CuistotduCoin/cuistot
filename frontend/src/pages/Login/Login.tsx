@@ -2,8 +2,6 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
 import Head from "components/Head";
-import Header from "components/Header";
-import Hero from "components/Hero";
 import LoginForm from "components/LoginForm";
 import Logo from "components/Logo";
 import React from "react";
@@ -35,11 +33,11 @@ export class Login extends React.Component<ILoginProps, {}> {
         />
         <Logo height={100} width={100} className={classes.logo} />
         <LoginForm />
-        <Typography align="center">
+        <Typography align="center" gutterBottom={true}>
           Pas encore membre ? <Link to="/signup">Inscrivez vous !</Link>
         </Typography>
         <Typography align="center" gutterBottom={true}>
-          <Link to="/signup">Vous avez oubliez votre mot de passe ?</Link>
+          <Link to="/password/reset/request">Vous avez oublié votre mot de passe ?</Link>
         </Typography>
       </div>
     );

@@ -4,11 +4,13 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import Snackbar from "components/Snackbar";
+import { ISnackbarState } from "components/Snackbar/types";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
 import React from "react";
 import * as Yup from "yup";
+import { passwordValidation } from '../../shared/validations';
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -21,7 +23,7 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface ISignUpForm {
+interface ISignUpFormProps {
   classes?: any;
 }
 
@@ -33,17 +35,9 @@ interface ISignUpFormValues {
   password: string;
 }
 
-interface ISignUpState {
-  openSnackbar: boolean;
-  snackbarMessage: string;
-  snackbarVariant: string;
-}
-
-export class SignUpForm extends React.Component<ISignUpForm, ISignUpState> {
+export class SignUpForm extends React.Component<ISignUpFormProps, ISnackbarState> {
   public state = {
     openSnackbar: false,
-    snackbarMessage: '',
-    snackbarVariant: ''
   };
 
   public constructor(props) {
@@ -65,12 +59,7 @@ export class SignUpForm extends React.Component<ISignUpForm, ISignUpState> {
         .required("Une adresse email est obligatoire"),
       firstname: Yup.string().required("Un prénom est obligatoire"),
       lastname: Yup.string().required("Un nom est obligatoire"),
-      password: Yup.string()
-        .min(8, "Votre mot de passe doit contenir au minimum 8 caractères")
-        .matches(/[a-z]/, "Votre mot de passe doit contenir une minuscule")
-        .matches(/[A-Z]/, "Votre mot de passe doit contenir une majuscule")
-        .matches(/[0-9]/, "Votre mot de passe doit contenir un chiffre")
-        .required("Un mot de passe est obligatoire"),
+      password: passwordValidation(),
       username: Yup.string().required("Un nom d'utilisateur est obligatoire")
     });
 
@@ -195,7 +184,7 @@ export class SignUpForm extends React.Component<ISignUpForm, ISignUpState> {
     );
   }
 
-  public onSubmit(values: ISignUpFormValues) {
+  public onSubmit(values: ISignUpFormValues,  { setSubmitting, setErrors, setStatus, resetForm }) {
     Auth.signUp({
       attributes: {
         email: values.email,
@@ -206,30 +195,37 @@ export class SignUpForm extends React.Component<ISignUpForm, ISignUpState> {
       username: values.username
     })
       .then(data => {
-        let resultMessage;
+        let successMessage;
         if (data.userSub) {
-          resultMessage = 'Votre compte a bien été créé. Vous allez recevoir un mail qui vous permettra de le confirmer.'
+          successMessage =
+            "Votre compte a bien été créé. Vous allez recevoir un mail qui vous permettra de le confirmer.";
         }
-        if (resultMessage) {
+        if (successMessage) {
+          setStatus({ success: true });
+          resetForm({});
           this.setState({
             openSnackbar: true,
-            snackbarMessage: resultMessage,
-            snackbarVariant: 'success'
+            snackbarMessage: successMessage,
+            snackbarVariant: "success"
           });
         }
       })
       .catch(err => {
-        let resultMessage;
+        let errorMessage;
         if (err.code === "UsernameExistsException") {
-          resultMessage = "Ce nom d'utilisateur est déjà associé à un compte existant"
+          errorMessage =
+            "Ce nom d'utilisateur est déjà associé à un compte existant";
         }
-        if (resultMessage) {
+        if (errorMessage) {
           this.setState({
             openSnackbar: true,
-            snackbarMessage: resultMessage,
-            snackbarVariant: 'warning',
+            snackbarMessage: errorMessage,
+            snackbarVariant: "warning"
           });
         }
+        setStatus({ success: false });
+        setSubmitting(false);
+        setErrors({ submit: err.message });
       });
   }
 }

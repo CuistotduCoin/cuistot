@@ -10,6 +10,8 @@
     "prettier": true,
     "import-name": false,
     "no-console": false,
-    "jsx-boolean-value": false
+    "jsx-boolean-value": false,
+    "object-literal-sort-keys": false,
+    "object-shorthand-properties-first": false
   }
 }

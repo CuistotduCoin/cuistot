@@ -1,9 +1,6 @@
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Footer from "components/Footer";
 import Head from "components/Head";
-import Header from "components/Header";
-import Hero from "components/Hero";
 import Logo from "components/Logo";
 import SignUpForm from "components/SignUpForm";
 import React from "react";
