@@ -26,7 +26,10 @@ interface IHeaderProps {
   classes?: any;
   static?: boolean;
   hideSignUpLogin: boolean;
+  isLoggedIn: boolean;
+  logOut();
 }
+
 interface IHeaderState {
   up?: boolean;
 }
@@ -59,34 +62,52 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
   }
 
   public render() {
-    const { classes, hideSignUpLogin } = this.props;
+    const { classes, hideSignUpLogin, isLoggedIn, logOut } = this.props;
 
     const businessLink = (props: any) => <Link to="/business" {...props} />;
     const individualLink = (props: any) => <Link to="/individual" {...props} />;
-    const signUp = (props: any) => <Link to="/signup" {...props} />;
-    const login = (props: any) => <Link to="/login" {...props} />;
+    const signUpLink = (props: any) => <Link to="/signup" {...props} />;
+    const loginLink = (props: any) => <Link to="/login" {...props} />;
 
-    const button = this.state.up ? (
-      <Button
-        className={classes.accountButton}
-        component={login}
-        variant="raised"
-        color="primary"
-        onScroll={this.handleScroll}
-      >
-        Se connecter
-      </Button>
-    ) : (
-      <Button
-        className={classes.accountButton}
-        component={signUp}
-        variant="raised"
-        color="primary"
-        onScroll={this.handleScroll}
-      >
-        S'inscrire
-      </Button>
-    );
+    let button;
+
+    if (isLoggedIn) {
+      button = (
+        <Button
+          className={classes.accountButton}
+          onClick={logOut}
+          variant="raised"
+          color="secondary"
+          onScroll={this.handleScroll}
+        >
+          Se déconnecter
+        </Button>
+      );
+    } else if (this.state.up) {
+      button = (
+        <Button
+          className={classes.accountButton}
+          component={loginLink}
+          variant="raised"
+          color="primary"
+          onScroll={this.handleScroll}
+        >
+          Se connecter
+        </Button>
+      );
+    } else {
+      button = (
+        <Button
+          className={classes.accountButton}
+          component={signUpLink}
+          variant="raised"
+          color="primary"
+          onScroll={this.handleScroll}
+        >
+          S'inscrire
+        </Button>
+      );
+    }
 
     return (
       <AppBar

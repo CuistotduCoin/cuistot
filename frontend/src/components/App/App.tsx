@@ -61,15 +61,15 @@ export class App extends React.Component<IAppProps, {}> {
               message={app.state.snackbarMessage}
             />
             <Switch>
-              <Route path="/" exact component={Home} />
+              <Route path="/login" exact component={Login} />
+              <Route path="/signup" exact component={SignUp} />
               <Route
                 path="/password/reset/request"
                 exact
                 component={ResetPasswordRequest}
               />
               <Route path="/password/reset" exact component={ResetPassword} />
-              <Route path="/login" exact component={Login} />
-              <Route path="/signup" exact component={SignUp} />
+              <Route path="/" exact component={Home} />
               <EnsureLoggedIn
                 isLoggedIn={app.state.isLoggedIn}
                 setRedirectUrl={app.setRedirectUrl}
