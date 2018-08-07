@@ -19,12 +19,15 @@ import "slick-carousel/slick/slick.css";
 import theme from "theme";
 import "typeface-roboto";
 import "./main.css";
+// import UNSTATED from "unstated-debug";
 
 const client = createApolloClient({ ssrMode: false });
 const sheetsRegistry = new SheetsRegistry();
 const generateClassName = createGenerateClassName({
   productionPrefix: "c"
 });
+
+// UNSTATED.logStateChanges = true;
 
 ensureReady(routes).then(data =>
   hydrate(

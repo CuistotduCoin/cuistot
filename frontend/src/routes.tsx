@@ -4,6 +4,13 @@ import React from "react";
 
 export default [
   {
+    path: "/",
+    component: asyncComponent({
+      Placeholder: () => <Loading />,
+      loader: () => import("components/App")
+    })
+  },
+  {
     component: asyncComponent({
       Placeholder: () => <Loading />,
       loader: () => import("pages/Business/Business")
@@ -155,30 +162,30 @@ export default [
     exact: true,
     path: "/signup"
   },
-  {
-    component: asyncComponent({
-      Placeholder: () => <Loading />,
-      loader: () => import("pages/ResetPasswordRequest")
-    }),
-    exact: true,
-    path: "/password/reset/request"
-  },
-  {
-    component: asyncComponent({
-      Placeholder: () => <Loading />,
-      loader: () => import("pages/ResetPassword")
-    }),
-    exact: true,
-    path: "/password/reset"
-  },
-  {
-    component: asyncComponent({
-      Placeholder: () => <Loading />,
-      loader: () => import("pages/Team")
-    }),
-    exact: true,
-    path: "/team"
-  },
+  // {
+  //   component: asyncComponent({
+  //     Placeholder: () => <Loading />,
+  //     loader: () => import("pages/ResetPasswordRequest")
+  //   }),
+  //   exact: true,
+  //   path: "/password/reset/request"
+  // },
+  // {
+  //   component: asyncComponent({
+  //     Placeholder: () => <Loading />,
+  //     loader: () => import("pages/ResetPassword")
+  //   }),
+  //   exact: true,
+  //   path: "/password/reset"
+  // },
+  // {
+  //   component: asyncComponent({
+  //     Placeholder: () => <Loading />,
+  //     loader: () => import("pages/Team")
+  //   }),
+  //   exact: true,
+  //   path: "/team"
+  // },
   {
     component: asyncComponent({
       Placeholder: () => <Loading />,

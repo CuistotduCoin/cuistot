@@ -37,7 +37,9 @@ export class Login extends React.Component<ILoginProps, {}> {
           Pas encore membre ? <Link to="/signup">Inscrivez vous !</Link>
         </Typography>
         <Typography align="center" gutterBottom={true}>
-          <Link to="/password/reset/request">Vous avez oublié votre mot de passe ?</Link>
+          <Link to="/password/reset/request">
+            Vous avez oublié votre mot de passe ?
+          </Link>
         </Typography>
       </div>
     );

@@ -20,7 +20,10 @@ interface IResetPasswordRequestProps {
   classes?: any;
 }
 
-export class ResetPasswordRequest extends React.Component<IResetPasswordRequestProps, {}> {
+export class ResetPasswordRequest extends React.Component<
+  IResetPasswordRequestProps,
+  {}
+> {
   public render() {
     const { classes } = this.props;
 
@@ -36,7 +39,9 @@ export class ResetPasswordRequest extends React.Component<IResetPasswordRequestP
         </Typography>
         <ResetPasswordRequestForm />
         <Typography align="center" gutterBottom={true}>
-          <Link to="/login" className={classes.link}>Non c'est bon, je m'en rappelle en fait</Link>
+          <Link to="/login" className={classes.link}>
+            Non c'est bon, je m'en rappelle en fait
+          </Link>
         </Typography>
       </div>
     );

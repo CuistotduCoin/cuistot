@@ -19,17 +19,18 @@ const runtimeConfig =
 
 const awsExports = {
   Auth: {
-    // OPTIONAL - Configuration for cookie storage
-    cookieStorage: {
-      // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-      domain: runtimeConfig.AWS_SHORT_DOMAIN,
-      // OPTIONAL - Cookie expiration in days
-      expires: 365,
-      // OPTIONAL - Cookie path
-      path: "/",
-      // OPTIONAL - Cookie secure flag
-      secure: true
-    },
+    // Cannot set cookieStorage for now - https://github.com/aws-amplify/amplify-js/issues/841
+    // // OPTIONAL - Configuration for cookie storage
+    // cookieStorage: {
+    //   // REQUIRED - Cookie domain (only required if cookieStorage is provided)
+    //   domain: runtimeConfig.AWS_SHORT_DOMAIN,
+    //   // OPTIONAL - Cookie expiration in days
+    //   expires: 365,
+    //   // OPTIONAL - Cookie path
+    //   path: "/",
+    //   // OPTIONAL - Cookie secure flag
+    //   secure: true
+    // },
     // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
     mandatorySignIn: true,
     // REQUIRED - Amazon Cognito Region
