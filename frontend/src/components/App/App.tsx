@@ -16,8 +16,8 @@ import { AppContainer } from ".";
 interface IAppProps {
   redirectUrl: string;
   isLoggedIn: boolean;
-  redirectTo(url: string);
-  openSnackbar(message: string, push: boolean);
+  redirectTo(url: string, push?: boolean);
+  openSnackbar(message: string, variant: string);
   logIn();
 }
 
@@ -52,10 +52,10 @@ export class App extends React.Component<IAppProps, {}> {
   public render() {
     return (
       <Subscribe to={[AppContainer]}>
-        {app => (
+        {(app: any) => (
           <>
             <Snackbar
-              open={app.state.openSnackbar}
+              open={app.state.snackbarOpened}
               variant={app.state.snackbarVariant}
               onClose={app.closeSnackbar}
               message={app.state.snackbarMessage}

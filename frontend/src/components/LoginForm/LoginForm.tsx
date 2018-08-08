@@ -109,7 +109,7 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
 
     return (
       <Subscribe to={[AppContainer]}>
-        {app => (
+        {(app: any) => (
           <Formik
             initialValues={initialValues}
             component={loginFormComponent}

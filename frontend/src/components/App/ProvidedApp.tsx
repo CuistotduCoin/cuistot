@@ -3,6 +3,8 @@ import { Provider, Subscribe } from "unstated";
 import { App, AppContainer } from ".";
 
 export class ProvidedApp extends React.Component {
+  public appContainer: any;
+
   public constructor(props) {
     super(props);
     this.appContainer = new AppContainer();
@@ -12,7 +14,7 @@ export class ProvidedApp extends React.Component {
     return (
       <Provider inject={[this.appContainer]}>
         <Subscribe to={[AppContainer]}>
-          {app => (
+          {(app: any) => (
             <App
               redirectUrl={app.state.redirectUrl}
               openSnackbar={app.openSnackbar}

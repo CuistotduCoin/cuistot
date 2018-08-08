@@ -86,7 +86,7 @@ export class ResetPasswordRequestForm extends React.Component<
 
     return (
       <Subscribe to={[AppContainer]}>
-        {app => (
+        {(app: any) => (
           <Formik
             initialValues={initialValues}
             component={resetPasswordRequestFormComponent}

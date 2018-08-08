@@ -158,7 +158,7 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
 
     return (
       <Subscribe to={[AppContainer]}>
-        {app => (
+        {(app: any) => (
           <Formik
             initialValues={initialValues}
             component={signUpFormComponent}

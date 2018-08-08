@@ -2,15 +2,15 @@ import { Container } from "unstated";
 
 interface IAppState {
   redirectUrl: string;
-  openSnackbar: boolean;
   isLoggedIn: boolean;
+  snackbarOpened: boolean;
   snackbarMessage?: string;
   snackbarVariant?: string;
 }
 
 class AppContainer extends Container<IAppState> {
   public state = {
-    openSnackbar: false,
+    snackbarOpened: false,
     isLoggedIn: false,
     redirectUrl: "/"
   };
@@ -29,7 +29,7 @@ class AppContainer extends Container<IAppState> {
 
   public openSnackbar = (message, variant = "info") => {
     this.setState({
-      openSnackbar: true,
+      snackbarOpened: true,
       snackbarMessage: message,
       snackbarVariant: variant
     });
@@ -37,7 +37,7 @@ class AppContainer extends Container<IAppState> {
 
   public closeSnackbar = () => {
     this.setState({
-      openSnackbar: false
+      snackbarOpened: false
     });
   };
 }

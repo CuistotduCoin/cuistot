@@ -33,4 +33,4 @@ export class EnsureLoggedIn extends React.Component<IEnsureLoggedInProps, {}> {
   }
 }
 
-export default withRedirect(EnsureLoggedIn);
+export default withRedirect(EnsureLoggedIn) as any;

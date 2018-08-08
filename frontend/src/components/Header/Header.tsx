@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({
   accountButton: {
-    color: "white",
-    margin: theme.spacing.unit
+    extend: "button",
+    color: "white"
   },
   appBar: {
     background:
