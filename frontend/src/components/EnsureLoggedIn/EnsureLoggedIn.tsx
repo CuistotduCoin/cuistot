@@ -1,23 +1,36 @@
+import { Auth } from "aws-amplify";
 import withRedirect from "decorators/RedirectDecorator";
 import React from "react";
 
 interface IEnsureLoggedInProps {
   isLoggedIn: boolean;
-  location: object;
+  location: any;
   setRedirectUrl(url: string);
   redirectTo(url: string, push?: boolean);
+  logIn();
 }
 
 export class EnsureLoggedIn extends React.Component<IEnsureLoggedInProps, {}> {
   public componentDidMount() {
-    const { isLoggedIn, setRedirectUrl, location, redirectTo } = this.props;
-
-    console.log("EnsureLoggedIn");
+    const {
+      isLoggedIn,
+      setRedirectUrl,
+      location,
+      redirectTo,
+      logIn
+    } = this.props;
 
     if (!isLoggedIn) {
-      console.log("location : ", location);
       setRedirectUrl(location.pathname);
-      redirectTo("/login");
+      Auth.currentAuthenticatedUser()
+        .then(user => {
+          console.log("registered : ", user);
+          logIn();
+        })
+        .catch(err => {
+          console.log("not registered : ", err);
+          redirectTo("/login");
+        });
     }
   }
 

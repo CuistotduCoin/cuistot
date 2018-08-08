@@ -73,6 +73,7 @@ export class App extends React.Component<IAppProps, {}> {
               <EnsureLoggedIn
                 isLoggedIn={app.state.isLoggedIn}
                 setRedirectUrl={app.setRedirectUrl}
+                logIn={app.logIn}
               >
                 <Switch>
                   <Route path="/team" exact component={Team} />
