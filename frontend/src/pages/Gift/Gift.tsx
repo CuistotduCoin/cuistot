@@ -3,12 +3,8 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 // @ts-ignore
 import MarkdownElement from "@material-ui/docs/MarkdownElement";
-import Footer from "components/Footer";
-import Head from "components/Head";
-import Header from "components/Header";
-import Hero from "components/Hero";
+import Layout from "components/Layout";
 import React from "react";
-import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -27,17 +23,10 @@ export class Gift extends React.Component<IGiftProps, {}> {
     const { classes } = this.props;
 
     return (
-      <>
-        <Head
-          title={metaInfo.metaInfo.gift.title}
-          description={metaInfo.metaInfo.gift.description}
-        />
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
-        />
+      <Layout
+        pageName="gift"
+        valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
+      >
         <Grid
           container={true}
           justify="space-around"
@@ -47,8 +36,7 @@ export class Gift extends React.Component<IGiftProps, {}> {
         >
           <MarkdownElement text={content} />
         </Grid>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

@@ -248,8 +248,9 @@ custom:
 functions:
   graphql:
     handler: handler.graphqlHandler
-  guestSignIn:
-    handler: handler.guestSignInHandler
+  postConfirmation:
+    handler: handler.postConfirmationHandler
+    role: PostConfirmationLambdaRole
 
 resources:
   Parameters:
@@ -295,12 +296,21 @@ resources:
         AliasAttributes:
           - email
         MfaConfiguration: "OFF"
-        EmailVerificationSubject: "Votre code de vérification"
-        EmailVerificationMessage: "Votre code de vérification : {####}"
-        SmsVerificationMessage: "Votre code de vérification : {####}"
-        SmsAuthenticationMessage: "Entrez ce code pour vous authentifier : {####}"
+        EmailVerificationSubject: Votre code de sécurité
+        EmailVerificationMessage:
+          Fn::Sub:
+            <h3>Vous avez oublié votre mot de passe. Pas de panique !</h3>
+            <p>Vous aurez juste besoin du code de vérification qui suit pour le réinitialiser: {####}</p>
+        VerificationMessageTemplate:
+          DefaultEmailOption: CONFIRM_WITH_LINK
+          EmailMessageByLink:
+            Fn::Sub:
+              <h3>Bienvenue chez Cuistot du coin !</h3>
+              <p>Nous avons besoin de confirmer votre compte. Pour cela, veuillez cliquez sur ce lien ci-dessous :</p>
+              <p>{##Je confirme mon compte##}</p>
+          EmailSubjectByLink: Confirmation de votre compte Cuistot du coin
         LambdaConfig:
-          PreAuthentication: "arn:aws:lambda:${self:custom.appSync.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-guestSignIn"
+          PostConfirmation: "arn:aws:lambda:${self:custom.appSync.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-postConfirmation"
         Schema:
           - Name: name
             AttributeDataType: String
@@ -313,7 +323,7 @@ resources:
         Policies:
           PasswordPolicy:
             RequireLowercase: true
-            RequireSymbols: true
+            RequireSymbols: false
             RequireNumbers: true
             MinimumLength: 8
             RequireUppercase: true
@@ -322,15 +332,15 @@ resources:
             EmailMessage: "Bienvenue sur Cuistot du coin ! Voici vos identifiants de connexion (email / mot de passe) : {username} / {####}"
             EmailSubject: "Votre mot de passe temporaire. Pensez bien à le changer :)"
             SMSMessage: "Bienvenue sur Cuistot du coin ! Voici vos identifiants de connexion : {username} / {####}. Pensez bien à changer votre mot de passe :)"
-          UnusedAccountValidityDays: 30
+          UnusedAccountValidityDays: 7
           AllowAdminCreateUserOnly: false
     UserPoolClient:
       Type: AWS::Cognito::UserPoolClient
       DeletionPolicy: "Retain"
       Properties:
         ClientName: cuistot-app-client
-        GenerateSecret: true
-        RefreshTokenValidity: 30
+        GenerateSecret: false
+        RefreshTokenValidity: 7
         UserPoolId: ${env:AWS_USERPOOL_ID}
     TestUserPoolClient:
       Type: AWS::Cognito::UserPoolClient
@@ -338,7 +348,7 @@ resources:
       Properties:
         ClientName: cuistot-app-client-test
         GenerateSecret: false
-        RefreshTokenValidity: 30
+        RefreshTokenValidity: 7
         UserPoolId: ${env:AWS_USERPOOL_ID}
     AdminGroup:
       Type: AWS::Cognito::UserPoolGroup
@@ -500,10 +510,43 @@ resources:
                     - "logs:CreateLogStream"
                     - "logs:PutLogEvents"
                   Resource: "*"
-    GuestSignInTriggerInvokePermission:
+    PostConfirmationLambdaRole:
+      Type: "AWS::IAM::Role"
+      DeletionPolicy : "Delete"
+      Properties:
+        RoleName: "${self:service}-${self:provider.stage}-${self:provider.region}-postConfirmation-lambdaRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "lambda.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "${self:service}-${self:provider.stage}-${self:provider.region}-postConfirmation-lambdaRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action: "logs:CreateLogStream"
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-postConfirmation:*
+                -
+                  Effect: "Allow"
+                  Action: "logs:PutLogEvents"
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-postConfirmation:*:*
+                -
+                  Effect: "Allow"
+                  Action: "cognito-idp:AdminAddUserToGroup"
+                  Resource: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
+    UserPoolTriggerPostConfirmationInvokePermission:
       Type: "AWS::Lambda::Permission"
       Properties:
         Action: "lambda:InvokeFunction"
         Principal: "cognito-idp.amazonaws.com"
-        SourceArn: "arn:aws:cognito-idp:${self:custom.appSync.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
-        FunctionName: "arn:aws:lambda:${self:custom.appSync.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-guestSignIn"
+        SourceArn: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
+        FunctionName: "arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-postConfirmation"

@@ -42,4 +42,9 @@ Recreate Postgres instance
 - Deploy
 - Set NeedsNewDBInstance to false
 
+TO DO:
+
+- Script to create domain linked to the user pool automatically on deployment :
+https://stackoverflow.com/questions/49524493/cloudformation-cognito-how-to-setup-app-client-settings-domain-and-federated?rq=1
+
 **Need to work on this to have a cleaner process**

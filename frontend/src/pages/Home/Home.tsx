@@ -1,14 +1,10 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Footer from "components/Footer";
-import Head from "components/Head";
-import Header from "components/Header";
-import Hero from "components/Hero";
+import Layout from "components/Layout";
 import React from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   block: {
@@ -215,18 +211,11 @@ export class Home extends React.Component<IHomeProps, {}> {
     ];
 
     return (
-      <>
-        <Head
-          title={metaInfo.metaInfo.home.title}
-          description={metaInfo.metaInfo.home.description}
-        />
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
-          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
-        />
+      <Layout
+        pageName="home"
+        valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
+        description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
+      >
         <Grid container={true} alignItems="center" className={classes.gridTile}>
           <Grid item={true} xs={12} sm={6}>
             <Grid container={true} className={classes.tileEntreprise}>
@@ -399,8 +388,7 @@ export class Home extends React.Component<IHomeProps, {}> {
             ))}
           </Slider>
         </div>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

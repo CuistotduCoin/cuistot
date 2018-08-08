@@ -40,6 +40,11 @@ export default {
       title:
         "Cadeau cours cuisine - Offrez un atelier de cuisine Cuistot du coin à vos proches"
     },
+    login: {
+      description: "Connexion",
+      href: "https://www.cuistotducoin.com/login",
+      title: "Connexion"
+    },
     mission: {
       description:
         "Cuistot du coin à trois missions: Des rencontres aussi riches que les saveurs en cuisine; La sauvegarde d’un patrimoine et de savoir-faire; Une véritable Immersion dans des univers culinaires diversifiés",
@@ -61,6 +66,21 @@ export default {
         "Vous vous en savoir plus sur Cuistot du coin ? Voici quelques articles dans la presse",
       href: "https://www.cuistotducoin.com/presskit",
       title: "Apprendez en plus sur Cuistot du Coin : Articles de presse"
+    },
+    signUp: {
+      description: "Inscription",
+      href: "https://www.cuistotducoin.com/signup",
+      title: "Devenez un gourmet Cuistot du Coin"
+    },
+    resetPasswordRequest: {
+      description: "Demande de réinitialisation de votre mot de passe",
+      href: "https://www.cuistotducoin.com/password/reset/request",
+      title: "Mot de passe oublié"
+    },
+    resetPassword: {
+      description: "Réinitialisation de mot de passe",
+      href: "https://www.cuistotducoin.com/password/reset",
+      title: "Réinitialisation de votre mot de passe"
     },
     team: {
       description: "Découvrez qui se cache derrière Cuistot du Coin",
