@@ -26,6 +26,7 @@ interface IHeaderProps {
   classes?: any;
   static?: boolean;
   hideSignUpLogin: boolean;
+  hideCompanyIndividual: boolean;
   isLoggedIn: boolean;
   logOut();
 }
@@ -117,22 +118,24 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
         <Toolbar>
           <Grid container={true} justify="flex-start" alignItems="center">
             <Logo />
-            <Hidden smDown={true}>
-              <Button
-                className={classes.button}
-                component={businessLink}
-                color="primary"
-              >
-                Entreprise
-              </Button>
-              <Button
-                className={classes.button}
-                component={individualLink}
-                color="primary"
-              >
-                Particulier
-              </Button>
-            </Hidden>
+            {!this.props.hideCompanyIndividual && (
+              <Hidden smDown={true}>
+                <Button
+                  className={classes.button}
+                  component={businessLink}
+                  color="primary"
+                >
+                  Entreprise
+                </Button>
+                <Button
+                  className={classes.button}
+                  component={individualLink}
+                  color="primary"
+                >
+                  Particulier
+                </Button>
+              </Hidden>
+            )}
           </Grid>
           {!hideSignUpLogin && (
             <Grid container={true} justify="flex-end">

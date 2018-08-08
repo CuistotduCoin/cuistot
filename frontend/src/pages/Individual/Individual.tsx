@@ -85,8 +85,22 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/WKmt7V"
       },
       {
+        availableSeat: 8,
+        date: "samedi 8 septembre, 14h-18h",
+        duration: 4,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/fabien-viennoiseries.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
+        name: "Viennoiseries : Croissants & Pains au chocolat",
+        nameCook: "Fabien",
+        price: 45,
+        spot: "Arthur Bonnet, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/YDNdtB"
+      },
+      {
         availableSeat: 6,
-        date: "samedi 1 septembre, 10h-12h",
+        date: "samedi 15 septembre, 10h-12h",
         duration: 2,
         image:
           "https://static.cuistotducoin.com/img/workshops/anaelle-sarrasin.jpg",
@@ -100,17 +114,17 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 8,
-        date: "samedi 22 septembre, 14h-18h",
-        duration: 4,
+        date: "samedi 22 septembre, 10h30-12h30",
+        duration: 2,
         image:
-          "https://static.cuistotducoin.com/img/workshops/fabien-viennoiseries.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
-        name: "Viennoiseries : Croissants & Pains au chocolat",
-        nameCook: "Fabien",
-        price: 45,
-        spot: "Arthur Bonnet, Brest",
+          "https://static.cuistotducoin.com/img/workshops/vanessa-amuses-bouches-exotiques.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/vanessa.jpg",
+        name: "Amuses-bouches exotiques et punch maison",
+        nameCook: "Vanessa",
+        price: 25,
+        spot: "Cuisinella, Brest",
         totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/YDNdtB"
+        typeform: "https://cuistotducoin.typeform.com/to/wOBLjm"
       },
       {
         availableSeat: 8,
@@ -125,6 +139,34 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Schmidt, Brest",
         totalSeat: 8,
         typeform: "https://cuistotducoin.typeform.com/to/RpiaBS"
+      },
+      {
+        availableSeat: 12,
+        date: "vendredi 28 septembre, 20h-22h",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/gaetan-decouverte-vins-naturels.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/gaetan.jpg",
+        name: "A la découverte des vins naturels",
+        nameCook: "Gaetan",
+        price: 50,
+        spot: "Soif de Vins, Brest",
+        totalSeat: 12,
+        typeform: "https://cuistotducoin.typeform.com/to/UmTqhi"
+      },
+      {
+        availableSeat: 12,
+        date: "samedi 29 septembre, 10h-13h",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/zhang-jiaozi.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/zhang.jpg",
+        name: "Jiaozi ou raviolis chinois",
+        nameCook: "Zhang",
+        price: 35,
+        spot: "Cuisinella, Brest",
+        totalSeat: 12,
+        typeform: "https://cuistotducoin.typeform.com/to/gudvAa"
       },
       {
         availableSeat: 6,
@@ -296,20 +338,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Schmidt, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/qieHUn"
-      },
-      {
-        availableSeat: 12,
-        date: "à venir",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/gaetan-decouverte-vins-naturels.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/gaetan.jpg",
-        name: "A la découverte des vins naturels",
-        nameCook: "Gaetan",
-        price: 40,
-        spot: "Soif de Vins, Brest",
-        totalSeat: 12,
-        typeform: "https://cuistotducoin.typeform.com/to/UmTqhi"
       },
       {
         availableSeat: 6,

@@ -1,5 +1,3 @@
-import grey from "@material-ui/core/colors/grey";
-import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import React from "react";
 
