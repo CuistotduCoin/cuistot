@@ -35,7 +35,7 @@ import { AppContainer } from ".";
 
 interface IAppProps {
   location: any;
-  referer: string;
+  referer?: string;
   isLoggedIn: boolean;
   redirectTo(url: string, push?: boolean);
   openSnackbar(message: string, variant: string);
@@ -57,7 +57,7 @@ export class App extends React.Component<IAppProps, {}> {
             location.pathname !== "/login" &&
             location.pathname !== "/signup"
           ) {
-            setReferer(null);
+            setReferer(undefined);
           }
           logIn();
         })
@@ -131,7 +131,6 @@ export class App extends React.Component<IAppProps, {}> {
               <EnsureLoggedIn
                 isLoggedIn={app.state.isLoggedIn}
                 setReferer={app.setReferer}
-                logIn={app.logIn}
               >
                 <Switch>
                   <Route path="/team" exact component={Team} />
@@ -146,4 +145,4 @@ export class App extends React.Component<IAppProps, {}> {
   }
 }
 
-export default withRouter(withRedirect(App)) as any;
+export default withRouter(withRedirect(App as any) as any) as any;

@@ -7,12 +7,11 @@ interface IEnsureLoggedInProps {
   location: any;
   setReferer(url: string);
   redirectTo(url: string, push?: boolean);
-  logIn();
 }
 
 export class EnsureLoggedIn extends React.Component<IEnsureLoggedInProps, {}> {
   public componentDidMount() {
-    const { isLoggedIn, setReferer, location, redirectTo, logIn } = this.props;
+    const { isLoggedIn, setReferer, location, redirectTo } = this.props;
 
     if (!isLoggedIn) {
       Auth.currentAuthenticatedUser()
