@@ -5,13 +5,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Footer from "components/Footer";
-import Head from "components/Head";
-import Header from "components/Header";
-import Hero from "components/Hero";
+import Layout from "components/Layout";
 import WorkshopCardList from "components/WorkshopCardList";
 import React from "react";
-import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -360,18 +356,11 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     ];
 
     return (
-      <>
-        <Head
-          title={metaInfo.metaInfo.individual.title}
-          description={metaInfo.metaInfo.individual.description}
-        />
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Participez à des ateliers de cuisine authentiques et en toute convivialité !"
-          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
-        />
+      <Layout
+        pageName="individual"
+        valueProposition="Participez à des ateliers de cuisine authentiques et en toute convivialité !"
+        description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
+      >
         <Typography
           variant="title"
           align="center"
@@ -438,8 +427,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           Soyez prévenu des prochaines dates d'ateliers !
         </Typography>
         <WorkshopCardList workshops={workshopsPending} />
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

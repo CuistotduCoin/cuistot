@@ -8,29 +8,34 @@ import metaInfo from "shared/metaInfo";
 import { Subscribe } from "unstated";
 
 interface ILayoutProps {
-  pageName: string;
+  pageName?: string;
+  valueProposition: string;
+  description?: string;
   children: any;
 }
 
 export class Layout extends React.Component<ILayoutProps, {}> {
   public render() {
-    const { pageName, children } = this.props;
+    const { pageName, valueProposition, description, children } = this.props;
 
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo[pageName].title}
-          description={metaInfo.metaInfo[pageName].description}
-        />
+        {pageName && (
+          <Head
+            title={metaInfo.metaInfo[pageName].title}
+            description={metaInfo.metaInfo[pageName].description}
+          />
+        )}
         <Subscribe to={[AppContainer]}>
-          {app => (
+          {(app: any) => (
             <Header isLoggedIn={app.state.isLoggedIn} logOut={app.logOut} />
           )}
         </Subscribe>
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
           videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Qui sommes-nous ? l'équipes de Cuistot du Coin"
+          valueProposition={valueProposition}
+          description={description}
         />
         {children}
         <Footer />
