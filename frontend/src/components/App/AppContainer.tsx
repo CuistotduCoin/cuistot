@@ -1,7 +1,7 @@
 import { Container } from "unstated";
 
 interface IAppState {
-  redirectUrl: string;
+  redirectUrl?: string;
   isLoggedIn: boolean;
   snackbarOpened: boolean;
   snackbarMessage?: string;

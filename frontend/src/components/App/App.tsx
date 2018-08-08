@@ -2,7 +2,9 @@ import { Auth } from "aws-amplify";
 import EnsureLoggedIn from "components/EnsureLoggedIn";
 import Snackbar from "components/Snackbar";
 import withRedirect from "decorators/RedirectDecorator";
+import Gift from "pages/Gift";
 import Home from "pages/Home";
+import HowItWorks from "pages/HowItWorks";
 import Individual from "pages/Individual";
 import Invite from "pages/Invite";
 import InviteBusiness from "pages/InviteBusiness";
@@ -26,7 +28,7 @@ interface IAppProps {
   redirectTo(url: string, push?: boolean);
   openSnackbar(message: string, variant: string);
   logIn();
-  setRedirectUrl(url: any);
+  setRedirectUrl(url?: string);
 }
 
 export class App extends React.Component<IAppProps, {}> {
@@ -96,6 +98,8 @@ export class App extends React.Component<IAppProps, {}> {
               <Route path="/invite" exact component={Invite} />
               <Route path="/invite-business" exact component={InviteBusiness} />
               <Route path="/individual" exact component={Individual} />
+              <Route path="/gift" exact component={Gift} />
+              <Route path="/how-it-works" exact component={HowItWorks} />
               <EnsureLoggedIn
                 isLoggedIn={app.state.isLoggedIn}
                 setRedirectUrl={app.setRedirectUrl}

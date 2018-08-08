@@ -26,14 +26,14 @@ export default [
     exact: true,
     path: "/cook/:id"
   },
-  {
-    component: asyncComponent({
-      Placeholder: () => <Loading />,
-      loader: () => import("pages/Gift")
-    }),
-    exact: true,
-    path: "/gift"
-  },
+  // {
+  //   component: asyncComponent({
+  //     Placeholder: () => <Loading />,
+  //     loader: () => import("pages/Gift")
+  //   }),
+  //   exact: true,
+  //   path: "/gift"
+  // },
   {
     component: asyncComponent({
       Placeholder: () => <Loading />,
@@ -50,14 +50,14 @@ export default [
   //   exact: true,
   //   path: "/"
   // },
-  {
-    component: asyncComponent({
-      Placeholder: () => <Loading />,
-      loader: () => import("pages/HowItWorks")
-    }),
-    exact: true,
-    path: "/how-it-works"
-  },
+  // {
+  //   component: asyncComponent({
+  //     Placeholder: () => <Loading />,
+  //     loader: () => import("pages/HowItWorks")
+  //   }),
+  //   exact: true,
+  //   path: "/how-it-works"
+  // },
   // {
   //   component: asyncComponent({
   //     Placeholder: () => <Loading />,
