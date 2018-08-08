@@ -20,6 +20,7 @@ export class ProvidedApp extends React.Component {
               openSnackbar={app.openSnackbar}
               isLoggedIn={app.state.isLoggedIn}
               logIn={app.logIn}
+              setRedirectUrl={app.setRedirectUrl}
             />
           )}
         </Subscribe>

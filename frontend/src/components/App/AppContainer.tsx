@@ -24,7 +24,7 @@ class AppContainer extends Container<IAppState> {
   };
 
   public logOut = () => {
-    this.setState({ isLoggedIn: false });
+    this.setState({ isLoggedIn: false, redirectUrl: "/" });
   };
 
   public openSnackbar = (message, variant = "info") => {
