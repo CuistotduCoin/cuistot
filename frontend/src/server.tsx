@@ -64,7 +64,8 @@ const server = express()
       const html = await render(options);
       res.send(html);
     } catch (error) {
-      res.json(error);
+      console.error(error);
+      res.json({ message: error.message, stack: error.stack });
     }
   });
 
