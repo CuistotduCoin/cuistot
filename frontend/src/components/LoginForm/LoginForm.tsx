@@ -128,7 +128,6 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
     ) => {
       Auth.signIn(values.username, values.password)
         .then(user => {
-          console.log(user);
           setStatus({ success: true });
           logIn();
         })
