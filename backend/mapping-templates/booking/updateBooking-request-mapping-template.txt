@@ -1,6 +1,7 @@
 #foreach($group in $ctx.identity.claims.get("cognito:groups"))
   #if($group == "Admin")
     #set($isAdmin = true)
+    #break
   #end
 #end
 {
