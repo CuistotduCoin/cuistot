@@ -71,22 +71,50 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     const workshops = [
       {
-        availableSeat: 8,
-        date: "samedi 4 aout, 14h30-16h30",
-        duration: 2,
+        availableSeat: 6,
+        date: "samedi 25 aout, 14h30-16h30",
+        duration: 3,
         image:
-          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
-        name: "Tournage de crèpes de froment",
-        nameCook: "Nadine",
-        price: 20,
-        spot: "Schmidt, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/WKmt7V"
+          "https://static.cuistotducoin.com/img/workshops/audrey-pate-a-sucre.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Cake Design : Pâte à sucres",
+        nameCook: "Audrey",
+        price: 45,
+        spot: "Audrey, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/RjVIV7"
       },
       {
         availableSeat: 8,
-        date: "samedi 8 septembre, 14h-18h",
+        date: "samedi 1 septembre, 9h30-13h",
+        duration: 4,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ronan-royal-chocolat.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
+        name: "Royal Chocolat",
+        nameCook: "Ronan",
+        price: 50,
+        spot: "Schmidt, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/CPRhUS"
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 8 septembre, 9h30-13h",
+        duration: 4,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ronan-tarte-au-citron.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
+        name: "Tarte au citron meringuée",
+        nameCook: "Ronan",
+        price: 50,
+        spot: "Schmidt, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/Eik9mk"
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 8 septembre, 9h30-13h30",
         duration: 4,
         image:
           "https://static.cuistotducoin.com/img/workshops/fabien-viennoiseries.jpg",
@@ -100,17 +128,45 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
-        date: "samedi 15 septembre, 10h-12h",
-        duration: 2,
+        date: "samedi 15 septembre, 10h-13h",
+        duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/anaelle-sarrasin.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/anaelle.jpg",
         name: "À la découverte du sarrasin",
         nameCook: "Anaelle",
         price: 25,
-        spot: "Anaelle, Brest",
+        spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/U3mOaj"
+      },
+      {
+        availableSeat: 6,
+        date: "vendredi 21 septembre, 17h30-20h30",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/luis-agnolotti.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/luis.jpg",
+        name: "Agnolotti ricotta",
+        nameCook: "Luis",
+        price: 50,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/xM8qKQ"
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 22 septembre, 9h30-13h",
+        duration: 4,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ronan-pate-a-choux-eclairs.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
+        name: "Pâte à choux et éclairs",
+        nameCook: "Ronan",
+        price: 50,
+        spot: "Schmidt, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/eczcFw"
       },
       {
         availableSeat: 8,
@@ -136,8 +192,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         name: "Faire son pain maison",
         nameCook: "Fabien",
         price: 50,
-        spot: "Schmidt, Brest",
-        totalSeat: 8,
+        spot: "Couleurs cuisines, Brest",
+        totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/RpiaBS"
       },
       {
@@ -153,6 +209,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Soif de Vins, Brest",
         totalSeat: 12,
         typeform: "https://cuistotducoin.typeform.com/to/UmTqhi"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 29 septembre, 9h30-13h30",
+        duration: 4,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ronan-macarons.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
+        name: "Macarons",
+        nameCook: "Ronan",
+        price: 50,
+        spot: "Arthur Bonnet, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/jjWrtL"
       },
       {
         availableSeat: 12,
@@ -260,20 +330,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         date: "à venir",
         duration: 3,
         image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-pate-a-sucre.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Cake Design : Pâte à sucres",
-        nameCook: "Audrey",
-        price: 45,
-        spot: "Audrey, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/RjVIV7"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 3,
-        image:
           "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
         name: "Sushis, makis et temaris",
@@ -310,20 +366,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Michel, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/wDNHki"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ronan-macarons.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
-        name: "Macarons",
-        nameCook: "Ronan",
-        price: 50,
-        spot: "Schmidt, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/h1OXxP"
       },
       {
         availableSeat: 6,
