@@ -28,6 +28,8 @@
     "aws-appsync": "^1.3.3",
     "aws-appsync-react": "^1.1.3",
     "aws-sdk": "^2.290.0",
+    "aws-amplify": "^1.0.4",
+    "aws-amplify-react": "^1.0.4",
     "aws-serverless-express": "^3.2.0",
     "axios": "^0.18.0",
     "express": "^4.16.3",
@@ -45,6 +47,7 @@
     "react-helmet": "^5.2.0",
     "react-hubspot-form": "^1.3.3",
     "react-intl": "^2.4.0",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scroll": "^1.7.10",
     "react-slick": "^0.23.1",
@@ -53,7 +56,8 @@
     "serverless-finch": "^2.2.0",
     "slick-carousel": "^1.8.1",
     "typeface-roboto": "^0.0.54",
-    "yup": "^0.26.2"
+    "yup": "^0.26.2",
+    "unstated": "^2.1.1"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^4.0.0-alpha.16",
@@ -99,7 +103,8 @@
     "tslint-loader": "^3.6.0",
     "tslint-plugin-prettier": "^1.3.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "unstated-debug": "^0.2.0"
   },
   "jest": {
     "transform": {

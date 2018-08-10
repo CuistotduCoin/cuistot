@@ -6,15 +6,11 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Footer from "components/Footer";
-import Head from "components/Head";
-import Header from "components/Header";
-import Hero from "components/Hero";
+import Layout from "components/Layout";
 import React from "react";
 // @ts-ignore
 import HubspotForm from "react-hubspot-form";
 import Slider from "react-slick";
-import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -198,18 +194,11 @@ export class Business extends React.Component<IBusinessProps, {}> {
       }
     ];
     return (
-      <>
-        <Head
-          title={metaInfo.metaInfo.business.title}
-          description={metaInfo.metaInfo.business.description}
-        />
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
-          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
-        />
+      <Layout
+        pageName="business"
+        valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
+        description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
+      >
         <Grid
           container={true}
           justify="space-around"
@@ -490,8 +479,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
             formId="2db2fd4a-3e67-4396-a725-e8320947201e"
           />
         </Grid>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

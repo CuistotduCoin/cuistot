@@ -3,9 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 // @ts-ignore
 import MarkdownElement from "@material-ui/docs/MarkdownElement";
-import Footer from "components/Footer";
-import Header from "components/Header";
-import Hero from "components/Hero";
+import Layout from "components/Layout";
 import React from "react";
 
 const styles = (theme: Theme) => ({
@@ -25,13 +23,7 @@ export class Terms extends React.Component<ITermsProps, {}> {
     const { classes } = this.props;
 
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Conditions légales"
-        />
+      <Layout valueProposition="Conditions légales">
         <Grid
           container={true}
           justify="space-around"
@@ -41,8 +33,7 @@ export class Terms extends React.Component<ITermsProps, {}> {
         >
           <MarkdownElement text={content} />
         </Grid>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

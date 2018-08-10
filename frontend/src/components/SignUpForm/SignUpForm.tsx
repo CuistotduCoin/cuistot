@@ -2,12 +2,15 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-// import { Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
+import { AppContainer } from "components/App";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
 import React from "react";
+import { Subscribe } from "unstated";
 import * as Yup from "yup";
+import { passwordValidation } from "../../shared/validations";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -20,52 +23,44 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface ISignUpForm {
+const initialValues = {
+  email: "",
+  firstname: "",
+  lastname: "",
+  password: "",
+  username: ""
+};
+
+interface ISignUpFormProps {
   classes?: any;
 }
 
 interface ISignUpFormValues {
   firstname: string;
   lastname: string;
+  username: string;
   email: string;
   password: string;
 }
 
-export class SignUpForm extends React.Component<ISignUpForm, {}> {
+export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
+  public constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
   public render() {
     const { classes } = this.props;
 
     const validationSchema = Yup.object().shape({
       email: Yup.string()
-        .email("Veuillez saisir votre adresse email au bon format")
-        .required("L'email est obligatoire"),
-      firstname: Yup.string().required("Le prénom est obligatoire"),
-      lastname: Yup.string().required("Le nom est obligatoire"),
-      password: Yup.string()
-        .min(
-          8,
-          "Votre mot de passe doit contenir 8 charactères avec minuscules, majuscules et chiffres"
-        )
-        .matches(/[a-z]/, "Votre mot de passe doit contenir une minuscule")
-        .matches(/[A-Z]/, "Votre mot de passe doit contenir une majuscule")
-        .matches(/[0-9]/, "Votre mot de passe doit contenir un chiffre")
-        .required("Le mot de passe est obligatoire")
+        .email("Veuillez saisir une adresse email valide")
+        .required("Une adresse email est obligatoire"),
+      firstname: Yup.string().required("Un prénom est obligatoire"),
+      lastname: Yup.string().required("Un nom est obligatoire"),
+      password: passwordValidation(),
+      username: Yup.string().required("Un nom d'utilisateur est obligatoire")
     });
-
-    const onSubmit = async (values: ISignUpFormValues) => {
-      try {
-        alert("Sign up");
-      } catch (e) {
-        alert(e.message);
-      }
-    };
-
-    const initialValues = {
-      email: "",
-      firstname: "",
-      lastname: "",
-      password: ""
-    };
 
     const signUpFormComponent = () => (
       <Form autoComplete="off">
@@ -112,6 +107,20 @@ export class SignUpForm extends React.Component<ISignUpForm, {}> {
                 <Field
                   type="text"
                   component={TextField}
+                  id="username"
+                  label="Nom d'utilisateur"
+                  name="username"
+                  placeholder="Votre nom d'utilisateur"
+                  className={classes.textField}
+                  margin="normal"
+                />
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Grid container={true}>
+                <Field
+                  type="text"
+                  component={TextField}
                   id="email"
                   label="Email"
                   name="email"
@@ -124,7 +133,7 @@ export class SignUpForm extends React.Component<ISignUpForm, {}> {
             <Grid item={true} xs={12}>
               <Grid container={true}>
                 <Field
-                  type="text"
+                  type="password"
                   component={TextField}
                   id="password"
                   label="Mot de passe"
@@ -138,7 +147,7 @@ export class SignUpForm extends React.Component<ISignUpForm, {}> {
           </Grid>
           <Grid item={true} xs={12}>
             <Grid container={true} justify="center">
-              <Button variant="contained" color="secondary">
+              <Button type="submit" variant="contained" color="secondary">
                 S'inscrire
               </Button>
             </Grid>
@@ -148,13 +157,59 @@ export class SignUpForm extends React.Component<ISignUpForm, {}> {
     );
 
     return (
-      <Formik
-        initialValues={initialValues}
-        component={signUpFormComponent}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      />
+      <Subscribe to={[AppContainer]}>
+        {(app: any) => (
+          <Formik
+            initialValues={initialValues}
+            component={signUpFormComponent}
+            onSubmit={this.onSubmit(app.openSnackbar)}
+            validationSchema={validationSchema}
+          />
+        )}
+      </Subscribe>
     );
+  }
+
+  public onSubmit(openSnackbar) {
+    return (
+      values: ISignUpFormValues,
+      { setSubmitting, setErrors, setStatus, resetForm }
+    ) => {
+      Auth.signUp({
+        attributes: {
+          email: values.email,
+          family_name: values.lastname,
+          name: values.firstname
+        },
+        password: values.password,
+        username: values.username
+      })
+        .then(data => {
+          let successMessage;
+          if (data.userSub) {
+            successMessage =
+              "Votre compte a bien été créé. Vous allez recevoir un mail qui vous permettra de le confirmer.";
+          }
+          if (successMessage) {
+            setStatus({ success: true });
+            resetForm(initialValues);
+            openSnackbar(successMessage, "success");
+          }
+        })
+        .catch(err => {
+          let errorMessage;
+          if (err.code === "UsernameExistsException") {
+            errorMessage =
+              "Ce nom d'utilisateur est déjà associé à un compte existant";
+          }
+          if (errorMessage) {
+            openSnackbar(errorMessage, "warning");
+          }
+          setStatus({ success: false });
+          setSubmitting(false);
+          setErrors({ submit: err.message });
+        });
+    };
   }
 }
 

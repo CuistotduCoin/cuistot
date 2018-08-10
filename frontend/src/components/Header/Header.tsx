@@ -4,10 +4,15 @@ import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
+import Logo from "components/Logo";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({
+  accountButton: {
+    extend: "button",
+    color: "white"
+  },
   appBar: {
     background:
       "linear-gradient(180deg,hsla(0,0%,100%,.9) 0,hsla(0,0%,100%,.8))"
@@ -22,7 +27,10 @@ interface IHeaderProps {
   static?: boolean;
   hideSignUpLogin: boolean;
   hideCompanyIndividual: boolean;
+  isLoggedIn: boolean;
+  logOut();
 }
+
 interface IHeaderState {
   up?: boolean;
 }
@@ -55,34 +63,52 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
   }
 
   public render() {
-    const { classes } = this.props;
+    const { classes, hideSignUpLogin, isLoggedIn, logOut } = this.props;
 
     const businessLink = (props: any) => <Link to="/business" {...props} />;
     const individualLink = (props: any) => <Link to="/individual" {...props} />;
-    const signUp = (props: any) => <Link to="/signup" {...props} />;
-    const login = (props: any) => <Link to="/login" {...props} />;
+    const signUpLink = (props: any) => <Link to="/signup" {...props} />;
+    const loginLink = (props: any) => <Link to="/login" {...props} />;
 
-    const button = this.state.up ? (
-      <Button
-        className={classes.button}
-        component={login}
-        variant="raised"
-        color="primary"
-        onScroll={this.handleScroll}
-      >
-        Se connecter
-      </Button>
-    ) : (
-      <Button
-        className={classes.button}
-        component={signUp}
-        variant="raised"
-        color="primary"
-        onScroll={this.handleScroll}
-      >
-        S'inscrire
-      </Button>
-    );
+    let button;
+
+    if (isLoggedIn) {
+      button = (
+        <Button
+          className={classes.accountButton}
+          onClick={logOut}
+          variant="raised"
+          color="secondary"
+          onScroll={this.handleScroll}
+        >
+          Se déconnecter
+        </Button>
+      );
+    } else if (this.state.up) {
+      button = (
+        <Button
+          className={classes.accountButton}
+          component={loginLink}
+          variant="raised"
+          color="primary"
+          onScroll={this.handleScroll}
+        >
+          Se connecter
+        </Button>
+      );
+    } else {
+      button = (
+        <Button
+          className={classes.accountButton}
+          component={signUpLink}
+          variant="raised"
+          color="primary"
+          onScroll={this.handleScroll}
+        >
+          S'inscrire
+        </Button>
+      );
+    }
 
     return (
       <AppBar
@@ -91,14 +117,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
       >
         <Toolbar>
           <Grid container={true} justify="flex-start" alignItems="center">
-            <Link to="/">
-              <img
-                src="https://static.cuistotducoin.com/img/logo.svg"
-                alt="Logo de Cuistot du coin"
-                height={40}
-                width={40}
-              />
-            </Link>
+            <Logo />
             {!this.props.hideCompanyIndividual && (
               <Hidden smDown={true}>
                 <Button
@@ -118,12 +137,11 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
               </Hidden>
             )}
           </Grid>
-          {!this.props.hideSignUpLogin && // false is temp
-            false && (
-              <Grid container={true} justify="flex-end">
-                {button}
-              </Grid>
-            )}
+          {!hideSignUpLogin && (
+            <Grid container={true} justify="flex-end">
+              {button}
+            </Grid>
+          )}
         </Toolbar>
       </AppBar>
     );
