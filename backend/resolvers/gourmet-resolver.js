@@ -4,6 +4,7 @@ import {
   insertObject,
   updateObject,
   deleteObject,
+  performOperation,
 } from './utils';
 
 const TABLE_NAME = 'gourmets';
@@ -14,7 +15,16 @@ async function getGourmet(args) {
 }
 
 async function getGourmetBookings(args) {
-  const result = await findWhere('bookings', args.gourmet_id, 'gourmet_id');
+  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...otherArgs } = args;
+  let result = await performOperation(
+    args,
+    getGourmet({ gourmet_id: otherArgs.gourmet_id }),
+    findWhere('bookings', otherArgs.gourmet_id, 'gourmet_id'),
+    'id',
+  );
+  if (result.userError) {
+    result = { bookings: [] };
+  }
   return result;
 }
 
@@ -24,12 +34,24 @@ async function createGourmet(args) {
 }
 
 async function updateGourmet(args) {
-  const result = await updateObject(TABLE_NAME, args);
+  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
+  const result = await performOperation(
+    args,
+    getGourmet({ gourmet_id: updateArgs.id }),
+    updateObject(TABLE_NAME, updateArgs),
+    'id',
+  );
   return result;
 }
 
 async function deleteGourmet(args) {
-  const result = await deleteObject(TABLE_NAME, args.gourmet_id);
+  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...deleteArgs } = args;
+  const result = await performOperation(
+    args,
+    getGourmet({ gourmet_id: deleteArgs.id }),
+    deleteObject(TABLE_NAME, deleteArgs.id),
+    'id',
+  );
   return result;
 }
 

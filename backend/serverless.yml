@@ -86,6 +86,11 @@ custom:
         response: "evaluation/createEvaluation-response-mapping-template.txt"
       - dataSource: Lambda
         type: Mutation
+        field: updateEvaluation
+        request: "evaluation/updateEvaluation-request-mapping-template.txt"
+        response: "evaluation/updateEvaluation-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
         field: deleteEvaluation
         request: "evaluation/deleteEvaluation-request-mapping-template.txt"
         response: "evaluation/deleteEvaluation-response-mapping-template.txt"
@@ -197,6 +202,11 @@ custom:
         request: "cook/cookWorkshops-request-mapping-template.txt"
         response: "cook/cookWorkshops-response-mapping-template.txt"
       - dataSource: Lambda
+        type: Cook
+        field: evaluations
+        request: "cook/cookEvaluations-request-mapping-template.txt"
+        response: "cook/cookEvaluations-response-mapping-template.txt"
+      - dataSource: Lambda
         type: Workshop
         field: kitchen
         request: "workshop/workshopKitchen-request-mapping-template.txt"
@@ -227,15 +237,20 @@ custom:
         request: "booking/bookingWorkshop-request-mapping-template.txt"
         response: "booking/bookingWorkshop-response-mapping-template.txt"
       - dataSource: Lambda
-        type: Booking
-        field: evaluation
-        request: "booking/bookingEvaluation-request-mapping-template.txt"
-        response: "booking/bookingEvaluation-response-mapping-template.txt"
+        type: Evaluation
+        field: cook
+        request: "evaluation/evaluationCook-request-mapping-template.txt"
+        response: "evaluation/evaluationCook-response-mapping-template.txt"
       - dataSource: Lambda
         type: Evaluation
-        field: booking
-        request: "evaluation/evaluationBooking-request-mapping-template.txt"
-        response: "evaluation/evaluationBooking-response-mapping-template.txt"
+        field: author
+        request: "evaluation/evaluationAuthor-request-mapping-template.txt"
+        response: "evaluation/evaluationAuthor-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Kitchen
+        field: author
+        request: "kitchen/kitchenAuthor-request-mapping-template.txt"
+        response: "kitchen/kitchenAuthor-response-mapping-template.txt"
     serviceRole: "AppSyncServiceRole"
     dataSources:
       - type: AWS_LAMBDA
@@ -300,7 +315,7 @@ resources:
         EmailVerificationMessage:
           Fn::Sub:
             <h3>Vous avez oublié votre mot de passe. Pas de panique !</h3>
-            <p>Vous aurez juste besoin du code de vérification qui suit pour le réinitialiser: {####}</p>
+            <p>Vous aurez juste besoin du code de vérification qui suit pour le réinitialiser :&nbsp;{####}</p>
         VerificationMessageTemplate:
           DefaultEmailOption: CONFIRM_WITH_LINK
           EmailMessageByLink:

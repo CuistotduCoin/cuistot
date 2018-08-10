@@ -3,8 +3,8 @@
   "operation": "Invoke",
   "payload": {
     "field": "getGourmet",
-    "arguments": {
-      "gourmet_id": $utils.toJson($context.identity.sub)
+    "arguments":  {
+      "gourmet_id": $utils.toJson($context.source.author_id)
     }
   }
 }

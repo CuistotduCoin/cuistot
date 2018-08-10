@@ -1,9 +1,9 @@
 exports.up = knex => (
   knex.schema.createTable('evaluations', (table) => {
-    table.uuid('booking_id')
+    table.uuid('cook_id')
       .primary()
       .references('id')
-      .inTable('bookings')
+      .inTable('cooks')
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
       .index();

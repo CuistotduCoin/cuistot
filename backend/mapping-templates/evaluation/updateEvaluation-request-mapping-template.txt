@@ -7,9 +7,11 @@
   "version": "2017-02-28",
   "operation": "Invoke",
   "payload": {
-    "field": "deleteWorkshop",
+    "field": "updateEvaluation",
     "arguments": {
-      "id": $utils.toJson($context.arguments.workshop_id),
+      "id": $utils.toJson($context.arguments.evaluation.id),
+      "rating": $utils.toJson($context.arguments.evaluation.rating),
+      "comment": $utils.toJson($context.arguments.evaluation.comment),
       "is_admin": $utils.toJson($isAdmin),
       "request_author_id": $utils.toJson($context.identity.sub)
     }

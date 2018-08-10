@@ -4,7 +4,7 @@
   "payload": {
     "field": "getWorkshop",
     "arguments":  {
-      "workshop_id": $util.toJson($context.source.workshop_id)
+      "workshop_id": $utils.toJson($context.source.workshop_id)
     }
   }
 }
