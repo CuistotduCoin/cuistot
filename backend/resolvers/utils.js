@@ -171,7 +171,7 @@ async function deleteObject(tableName, value, field = 'id') {
     if (result.userError) {
       return result;
     }
-    const query = knex(tableName).where(field, value).del();
+    const query = knex(tableName).where(field, value).update({ deleted_at: knex.fn.now() });
     result = await query;
     if (result > 0) {
       return { message: 'success' };
