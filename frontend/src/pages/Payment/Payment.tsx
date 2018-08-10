@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
 import Head from "components/Head";
 import Header from "components/Header";
+import PaymentCardForm from "components/PaymentCardForm";
 import React from "react";
 import metaInfo from "shared/metaInfo";
 
@@ -17,6 +18,9 @@ const styles = (theme: Theme) => ({
     margin: "0px auto",
     maxWidth: 1080,
     padding: 24
+  },
+  infoReservartion: {
+    padding: theme.spacing.unit * 2
   }
 });
 
@@ -101,6 +105,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                   </Grid>
                   <Grid item={true} xs={4}>
                     <Typography
+                      align="right"
                       variant="subheading"
                       component="p"
                       gutterBottom={true}
@@ -119,6 +124,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                   </Grid>
                   <Grid item={true} xs={4}>
                     <Typography
+                      align="right"
                       variant="subheading"
                       component="p"
                       gutterBottom={true}
@@ -140,6 +146,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                   </Grid>
                   <Grid item={true} xs={4}>
                     <Typography
+                      align="right"
                       variant="subheading"
                       component="p"
                       gutterBottom={true}
@@ -154,13 +161,85 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
         );
       case 1:
         return (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.handleNextStep}
-          >
-            Confirmer et payer
-          </Button>
+          // tslint:disable-next-line:no-unused-expression
+          <Grid container={true} className={classes.grid}>
+            <Grid item={true} xs={8}>
+              <PaymentCardForm />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.handleNextStep}
+              >
+                Confirmer et payer
+              </Button>
+            </Grid>
+            <Grid item={true} xs={4}>
+              <Paper elevation={1} className={classes.infoReservartion}>
+                <Grid container={true}>
+                  <Grid item={true} xs={8}>
+                    <Typography
+                      variant="subheading"
+                      component="p"
+                      gutterBottom={true}
+                    >
+                      {this.props.price}€ x 2 Gourmets
+                    </Typography>
+                  </Grid>
+                  <Grid item={true} xs={4}>
+                    <Typography
+                      align="right"
+                      variant="subheading"
+                      component="p"
+                      gutterBottom={true}
+                    >
+                      100€
+                    </Typography>
+                  </Grid>
+                  <Grid item={true} xs={8}>
+                    <Typography
+                      variant="subheading"
+                      component="p"
+                      gutterBottom={true}
+                    >
+                      frais de service
+                    </Typography>
+                  </Grid>
+                  <Grid item={true} xs={4}>
+                    <Typography
+                      align="right"
+                      variant="subheading"
+                      component="p"
+                      gutterBottom={true}
+                    >
+                      20€
+                    </Typography>
+                  </Grid>
+                  <Grid item={true} xs={12}>
+                    <Divider />
+                  </Grid>
+                  <Grid item={true} xs={8}>
+                    <Typography
+                      variant="subheading"
+                      component="p"
+                      gutterBottom={true}
+                    >
+                      Total
+                    </Typography>
+                  </Grid>
+                  <Grid item={true} xs={4}>
+                    <Typography
+                      align="right"
+                      variant="subheading"
+                      component="p"
+                      gutterBottom={true}
+                    >
+                      120€
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
+          </Grid>
         );
 
       case 2:
@@ -193,7 +272,9 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
             <Divider />
           </Grid>
           <Grid item={true}>
-            <Typography variant="title">Paiement - Récapitulatif</Typography>
+            <Typography variant="title">
+              Paiement - {steps[this.state.activeStep]}
+            </Typography>
           </Grid>
           <Grid item={true}>
             <Stepper activeStep={this.state.activeStep} alternativeLabel={true}>
