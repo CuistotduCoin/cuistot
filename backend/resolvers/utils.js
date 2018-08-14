@@ -8,7 +8,9 @@ import {
   get,
 } from '../utils/utils';
 
-const knex = require('knex')(connection[process.env.NODE_ENV]); // eslint-disable-line
+let knex = require('knex')(connection[process.env.NODE_ENV]);
+
+knex = knex.whereNull('deleted_at');
 
 async function findFirstWhere(tableName, value, field = 'id') {
   try {
