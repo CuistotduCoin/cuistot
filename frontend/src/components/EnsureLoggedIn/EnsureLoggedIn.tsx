@@ -13,13 +13,20 @@ export class EnsureLoggedIn extends React.Component<IEnsureLoggedInProps, {}> {
   public componentDidMount() {
     const { isLoggedIn, setReferer, location, redirectTo } = this.props;
 
+    const redirectToLogin = () => {
+      setReferer(location.pathname);
+      redirectTo("/login");
+    };
+
     if (!isLoggedIn) {
       Auth.currentAuthenticatedUser()
-        .then(user => console.log("Authenticated")) // Don't redirect to /login and delegate to App
-        .catch(err => {
-          setReferer(location.pathname);
-          redirectTo("/login");
-        });
+        .then(user => {
+          console.log(`Authenticated as ${user.username}`);
+          if (user.username === "guest") {
+            redirectToLogin();
+          } // else delegate to App
+        })
+        .catch(err => redirectToLogin());
     }
   }
 
