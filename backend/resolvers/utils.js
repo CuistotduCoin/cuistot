@@ -8,13 +8,14 @@ import {
   get,
 } from '../utils/utils';
 
-let knex = require('knex')(connection[process.env.NODE_ENV]);
-
-knex = knex.whereNull('deleted_at');
+const knex = require('knex')(connection[process.env.NODE_ENV]);
 
 async function findFirstWhere(tableName, value, field = 'id') {
   try {
-    const query = knex(tableName).where(field, value).first();
+    const query = knex(tableName)
+      .whereNull('deleted_at')
+      .where(field, value)
+      .first();
     const result = await query;
     if (result) {
       return { data: result };
@@ -29,7 +30,9 @@ async function findFirstWhere(tableName, value, field = 'id') {
 async function findWhere(tableName, value, field = 'id') {
   let result = [];
   try {
-    const query = knex(tableName).where(field, value);
+    const query = knex(tableName)
+      .whereNull('deleted_at')
+      .where(field, value);
     result = await query;
   } catch (err) {
     console.error(err);
@@ -42,13 +45,13 @@ const cursorCreatedAt = (tableName, cursorId) => `(SELECT created_at FROM ${tabl
 
 const addRangeClause = (query, tableName, args) => {
   if ('after' in args && 'before' in args) {
-    return `${query} WHERE created_at > ${cursorCreatedAt(tableName, args.after)} AND created_at < ${cursorCreatedAt(tableName, args.before)}`;
+    return `${query} WHERE created_at > ${cursorCreatedAt(tableName, args.after)} AND created_at < ${cursorCreatedAt(tableName, args.before)} AND deleted_at IS NULL`;
   }
   if ('after' in args) {
-    return `${query} WHERE created_at > ${cursorCreatedAt(tableName, args.after)}`;
+    return `${query} WHERE created_at > ${cursorCreatedAt(tableName, args.after)} AND deleted_at IS NULL`;
   }
   if ('before' in args) {
-    return `${query} WHERE created_at < ${cursorCreatedAt(tableName, args.before)}`;
+    return `${query} WHERE created_at < ${cursorCreatedAt(tableName, args.before)} AND deleted_at IS NULL`;
   }
   return query;
 };
@@ -90,7 +93,7 @@ async function getConnection(tableName, args) {
       const result = await countQuery;
       hasPreviousPage = result.rows[0].count > rows.length;
     } else if ('after' in args) {
-      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE created_at <= ${cursorCreatedAt(tableName, args.after)}`;
+      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE created_at <= ${cursorCreatedAt(tableName, args.after)} AND deleted_at IS NULL`;
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasPreviousPage = result.rows[0].count > 0;
@@ -102,7 +105,7 @@ async function getConnection(tableName, args) {
       const result = await countQuery;
       hasNextPage = result.rows[0].count > rows.length;
     } else if ('before' in args) {
-      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE created_at >= ${cursorCreatedAt(tableName, args.before)}`;
+      let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE created_at >= ${cursorCreatedAt(tableName, args.before)} AND deleted_at IS NULL`;
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasNextPage = result.rows[0].count > 0;
@@ -138,11 +141,11 @@ async function insertObject(tableName, args) {
     if (result.length) {
       return { data: result[0], message: 'success' };
     }
+    return { userError: 'creation has failed' };
   } catch (err) {
     console.error(err);
     return { userError: formatKnexQueryError(err) };
   }
-  return { userError: 'failure' };
 }
 
 async function updateObject(tableName, args, idField = 'id') {
@@ -150,9 +153,10 @@ async function updateObject(tableName, args, idField = 'id') {
     const updateArgs = cleanKnexQueryArgs(args);
     delete updateArgs.id;
     if (isEmpty(updateArgs)) {
-      return { message: 'not modified' };
+      return { message: 'nothing to update' };
     }
     const query = knex(tableName)
+      .whereNull('deleted_at')
       .where(idField, args.id)
       .update(updateArgs)
       .returning('*');
@@ -160,29 +164,28 @@ async function updateObject(tableName, args, idField = 'id') {
     if (result.length) {
       return { data: result[0], message: 'success' };
     }
+    return { userError: 'could not be updated (you should check the resource exists)' };
   } catch (err) {
     console.error(err);
     return { userError: formatKnexQueryError(err) };
   }
-  return { userError: 'failure' };
 }
 
 async function deleteObject(tableName, value, field = 'id') {
   try {
-    let result = await findFirstWhere(tableName, value, field);
-    if (result.userError) {
-      return result;
-    }
-    const query = knex(tableName).where(field, value).update({ deleted_at: knex.fn.now() });
-    result = await query;
+    const query = knex(tableName)
+      .whereNull('deleted_at')
+      .where(field, value)
+      .update({ deleted_at: knex.fn.now() });
+    const result = await query;
     if (result > 0) {
       return { message: 'success' };
     }
+    return { userError: 'could not be deleted (you should check the resource exists)' };
   } catch (err) {
     console.error(err);
     return { userError: formatKnexQueryError(err) };
   }
-  return { userError: 'failure' };
 }
 
 async function performOperation(args, resourcePromise, operationPromise, authorKey = 'author_id') {
