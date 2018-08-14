@@ -53,7 +53,7 @@ const addRangeClause = (query, tableName, args) => {
   if ('before' in args) {
     return `${query} WHERE created_at < ${cursorCreatedAt(tableName, args.before)} AND deleted_at IS NULL`;
   }
-  return query;
+  return `${query} WHERE deleted_at IS NULL`;
 };
 
 const addLimitClause = (query, args) => {
