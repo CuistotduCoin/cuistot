@@ -6,8 +6,9 @@ import {
   updateCook,
   deleteCook,
   getCookWorkshops,
+  getCookEvaluations,
 } from './resolvers/cook-resolver';
-import { getEvaluation, createEvaluation, deleteEvaluation } from './resolvers/evaluation-resolver';
+import { getEvaluation, createEvaluation, updateEvaluation, deleteEvaluation } from './resolvers/evaluation-resolver';
 import {
   getGourmet,
   createGourmet,
@@ -56,6 +57,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'getCookWorkshops': {
       resolve(getCookWorkshops, 'workshops');
+      break;
+    }
+    case 'getCookEvaluations': {
+      resolve(getCookEvaluations, 'evaluations');
       break;
     }
     case 'getEvaluation': {
@@ -114,6 +119,10 @@ export const graphqlHandler = (event, context, callback) => {
       resolve(createEvaluation, 'evaluation');
       break;
     }
+    case 'updateEvaluation': {
+      resolve(updateEvaluation, 'evaluation');
+      break;
+    }
     case 'deleteEvaluation': {
       resolve(deleteEvaluation);
       break;
@@ -161,22 +170,38 @@ export const graphqlHandler = (event, context, callback) => {
   }
 };
 
-// Add the new gourmet to the gourmet group once the user has been confirmed
 export const postConfirmationHandler = (event, context, callback) => {
+  // Add the new gourmet to the gourmet group once the user has been confirmed
+  if (!event.request.userAttributes['cognito:user_status'] === 'CONFIRMED' || !event.request.userAttributes.email_verified === 'true') {
+    const error = new Error('User was not properly confirmed and/or email not verified');
+    callback(error, event);
+  }
   const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
   const params = {
     GroupName: 'Gourmet',
     UserPoolId: event.userPoolId,
     Username: event.userName,
   };
-  if (!event.request.userAttributes['cognito:user_status'] === 'CONFIRMED' || !event.request.userAttributes.email_verified === 'true') {
-    const error = new Error('User was not properly confirmed and/or email not verified');
-    callback(error, event);
-  }
   cognitoIdentityServiceProvider.adminAddUserToGroup(params, (err) => {
     if (err) {
       callback(err, event);
+    } else {
+      // Create a Gourmet object in RDS
+      const args = {
+        id: event.request.userAttributes.sub,
+        email: event.request.userAttributes.email,
+        first_name: event.request.userAttributes.name,
+        last_name: event.request.userAttributes.family_name,
+      };
+      createGourmet(args).then((result) => {
+        if (result.userError) {
+          callback(result, event);
+        } else {
+          callback(null, event);
+        }
+      }).catch((error) => {
+        callback(error, event);
+      });
     }
-    callback(null, event);
   });
 };

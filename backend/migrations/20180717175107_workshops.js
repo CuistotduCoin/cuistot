@@ -16,13 +16,11 @@ exports.up = knex => (
       .notNullable()
       .references('id')
       .inTable('kitchens')
-      .onDelete('CASCADE')
       .onUpdate('CASCADE');
     table.uuid('cook_id')
       .notNullable()
       .references('id')
       .inTable('cooks')
-      .onDelete('CASCADE')
       .onUpdate('CASCADE')
       .index();
     table.timestamps(true, true);

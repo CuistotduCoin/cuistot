@@ -1,11 +1,10 @@
 import * as content from "!raw-loader!content/presskit.md";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-// @ts-ignore
-import MarkdownElement from "@material-ui/docs/MarkdownElement";
 import Footer from "components/Footer";
 import Head from "components/Head";
 import Header from "components/Header";
+import MarkdownElement from "components/MarkdownElement";
 import React from "react";
 import metaInfo from "shared/metaInfo";
 

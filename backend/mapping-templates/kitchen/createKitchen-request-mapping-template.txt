@@ -8,7 +8,8 @@
       "address": $utils.toJson($context.arguments.kitchen.address),
       "city": $utils.toJson($context.arguments.kitchen.city),
       "zip_code": $utils.toJson($context.arguments.kitchen.zip_code),
-      "location": $utils.toJson($context.arguments.kitchen.location)
+      "location": $utils.toJson($context.arguments.kitchen.location),
+      "author_id": $utils.toJson($context.identity.sub)
     }
   }
 }

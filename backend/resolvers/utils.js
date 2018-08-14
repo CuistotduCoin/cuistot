@@ -146,12 +146,12 @@ async function insertObject(tableName, args) {
 async function updateObject(tableName, args, idField = 'id') {
   try {
     const updateArgs = cleanKnexQueryArgs(args);
-    delete updateArgs[idField];
+    delete updateArgs.id;
     if (isEmpty(updateArgs)) {
       return { message: 'not modified' };
     }
     const query = knex(tableName)
-      .where(idField, args[idField])
+      .where(idField, args.id)
       .update(updateArgs)
       .returning('*');
     const result = await query;
@@ -183,6 +183,22 @@ async function deleteObject(tableName, value, field = 'id') {
   return { userError: 'failure' };
 }
 
+async function performOperation(args, resourcePromise, operationPromise, authorKey = 'author_id') {
+  const { is_admin: isAdmin, request_author_id: requestAuthorId } = args;
+  let result;
+  let isAllowed = isAdmin;
+  if (!isAllowed) {
+    result = await resourcePromise;
+    isAllowed = result.data && result.data[authorKey] === requestAuthorId;
+  }
+  if (isAllowed) {
+    result = await operationPromise;
+  } else {
+    result = { userError: 'cannot perform operation' };
+  }
+  return result;
+}
+
 export {
   findFirstWhere,
   findWhere,
@@ -190,4 +206,5 @@ export {
   deleteObject,
   updateObject,
   getConnection,
+  performOperation,
 };

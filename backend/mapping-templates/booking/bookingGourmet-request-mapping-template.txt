@@ -4,7 +4,7 @@
   "payload": {
     "field": "getGourmet",
     "arguments":  {
-      "gourmet_id": $util.toJson($context.source.gourmet_id)
+      "gourmet_id": $utils.toJson($context.source.gourmet_id)
     }
   }
 }

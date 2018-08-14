@@ -4,9 +4,10 @@
   "payload": {
     "field": "createEvaluation",
     "arguments": {
-      "booking_id": $utils.toJson($context.arguments.evaluation.booking.id),
+      "cook_id": $utils.toJson($context.arguments.evaluation.cook.id),
       "rating": $utils.toJson($context.arguments.evaluation.rating),
-      "comment": $utils.toJson($context.arguments.evaluation.comment)
+      "comment": $utils.toJson($context.arguments.evaluation.comment),
+      "author_id": $utils.toJson($context.identity.sub)
     }
   }
 }
