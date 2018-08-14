@@ -1,5 +1,5 @@
 import { Auth } from "aws-amplify";
-import withRedirect from "decorators/RedirectDecorator";
+import { withRedirect } from "decorators/RedirectDecorator";
 import React from "react";
 
 interface IEnsureLoggedInProps {

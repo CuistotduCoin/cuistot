@@ -311,11 +311,10 @@ resources:
         AliasAttributes:
           - email
         MfaConfiguration: "OFF"
-        EmailVerificationSubject: Votre code de sécurité
+        EmailVerificationSubject: "[Cuistot du Coin] Votre code de sécurité"
         EmailVerificationMessage:
           Fn::Sub:
-            <h3>Vous avez oublié votre mot de passe. Pas de panique !</h3>
-            <p>Vous aurez juste besoin du code de vérification qui suit pour le réinitialiser :&nbsp;{####}</p>
+            <p>Vous allez avoir besoin de ce code :&nbsp;{####}</p>
         VerificationMessageTemplate:
           DefaultEmailOption: CONFIRM_WITH_LINK
           EmailMessageByLink:

@@ -1,8 +1,8 @@
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import AccountConfirmationForm from "components/AccountConfirmationForm";
 import Head from "components/Head";
 import Logo from "components/Logo";
-import ResetPasswordForm from "components/ResetPasswordForm";
 import React from "react";
 import metaInfo from "shared/metaInfo";
 
@@ -15,28 +15,31 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface IResetPasswordProps {
+interface IAccountConfirmationProps {
   classes?: any;
 }
 
-export class ResetPassword extends React.Component<IResetPasswordProps, {}> {
+export class AccountConfirmation extends React.Component<
+  IAccountConfirmationProps,
+  {}
+> {
   public render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.container}>
         <Head
-          title={metaInfo.metaInfo.resetPassword.title}
-          description={metaInfo.metaInfo.resetPassword.description}
+          title={metaInfo.metaInfo.accountConfirmation.title}
+          description={metaInfo.metaInfo.accountConfirmation.description}
         />
         <Logo height={100} width={100} className={classes.logo} />
         <Typography align="center" variant="display1">
-          Un tout nouveau mot de passe
+          Vous avez dû recevoir un code de sécurité
         </Typography>
-        <ResetPasswordForm />
+        <AccountConfirmationForm />
       </div>
     );
   }
 }
 
-export default withStyles(styles as any)(ResetPassword as any) as any;
+export default withStyles(styles as any)(AccountConfirmation as any) as any;

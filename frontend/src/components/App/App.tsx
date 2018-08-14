@@ -2,7 +2,8 @@ import { Auth } from "aws-amplify";
 import EnsureLoggedIn from "components/EnsureLoggedIn";
 import Snackbar from "components/Snackbar";
 import { runtimeConfig } from "config";
-import withRedirect from "decorators/RedirectDecorator";
+import { withRedirect } from "decorators/RedirectDecorator";
+import AccountConfirmation from "pages/AccountConfirmation";
 import Business from "pages/Business/Business";
 import Cook from "pages/Cook";
 import Gift from "pages/Gift";
@@ -124,6 +125,11 @@ export class App extends React.Component<IAppProps, {}> {
                 component={ResetPasswordRequest}
               />
               <Route path="/password/reset" exact component={ResetPassword} />
+              <Route
+                path="/account/confirmation"
+                exact
+                component={AccountConfirmation}
+              />
               <Route path="/" exact component={Home} />
               <Route path="/terms" exact component={Terms} />
               <Route path="/terms-pro" exact component={TermsPro} />

@@ -13,10 +13,6 @@ import { withRouter } from "react-router-dom";
 import { SNACKBAR_MESSAGES } from "shared/constants";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
-import {
-  passwordConfirmationValidation,
-  passwordValidation
-} from "../../shared/validations";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -30,21 +26,19 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface IResetPasswordFormProps {
+interface IAccountConfirmationFormProps {
   classes?: any;
   redirectTo: any;
   location: any;
 }
 
-interface IResetPasswordFormValues {
+interface IAccountConfirmationFormValues {
   username: string;
   code: string;
-  newPassword: string;
-  newPasswordConfirmation: string;
 }
 
-export class ResetPasswordForm extends React.Component<
-  IResetPasswordFormProps,
+export class AccountConfirmationForm extends React.Component<
+  IAccountConfirmationFormProps,
   {}
 > {
   public constructor(props) {
@@ -58,9 +52,7 @@ export class ResetPasswordForm extends React.Component<
     const username = params.username || "";
     return {
       username,
-      code: "",
-      newPassword: "",
-      newPasswordConfirmation: ""
+      code: ""
     };
   }
 
@@ -69,12 +61,10 @@ export class ResetPasswordForm extends React.Component<
 
     const validationSchema = Yup.object().shape({
       username: Yup.string().required("Un nom d'utilisateur est obligatoire"),
-      code: Yup.number().required("Veuillez entrer le code reçu par email"),
-      newPassword: passwordValidation(),
-      newPasswordConfirmation: passwordConfirmationValidation("newPassword")
+      code: Yup.number().required("Veuillez entrer le code reçu par email")
     });
 
-    const resetPasswordFormComponent = () => (
+    const accountConfirmationFormComponent = () => (
       <Form autoComplete="off">
         <Grid container={true} className={classes.grid} spacing={16}>
           <Grid item={true} xs={12}>
@@ -104,35 +94,9 @@ export class ResetPasswordForm extends React.Component<
             </Grid>
           </Grid>
           <Grid item={true} xs={12}>
-            <Grid container={true}>
-              <Field
-                type="password"
-                component={TextField}
-                id="newPassword"
-                label="Votre nouveau mot de passe"
-                name="newPassword"
-                className={classes.textField}
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true}>
-              <Field
-                type="password"
-                component={TextField}
-                id="newPasswordConfirmation"
-                label="Confirmation de votre nouveau mot de passe"
-                name="newPasswordConfirmation"
-                className={classes.textField}
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12}>
             <Grid container={true} justify="center">
               <Button type="submit" variant="contained" color="secondary">
-                Mettre à jour mon mot de passe
+                Confirmer mon compte
               </Button>
             </Grid>
           </Grid>
@@ -145,7 +109,7 @@ export class ResetPasswordForm extends React.Component<
         {(app: any) => (
           <Formik
             initialValues={this.initialValues()}
-            component={resetPasswordFormComponent}
+            component={accountConfirmationFormComponent}
             onSubmit={this.onSubmit(app.openSnackbar)}
             validationSchema={validationSchema}
           />
@@ -156,18 +120,19 @@ export class ResetPasswordForm extends React.Component<
 
   public onSubmit(openSnackbar) {
     return (
-      values: IResetPasswordFormValues,
+      values: IAccountConfirmationFormValues,
       { setSubmitting, setErrors, setStatus, resetForm }
     ) => {
-      Auth.forgotPasswordSubmit(
-        values.username,
-        values.code,
-        values.newPassword
-      )
+      Auth.confirmSignUp(values.username, values.code, {
+        forceAliasCreation: false
+      })
         .then(data => {
           setStatus({ success: true });
           resetForm(this.initialValues());
-          openSnackbar("Mot de passe mis à jour", "success");
+          openSnackbar(
+            "Merci d'avoir confirmé votre compte ! Vous pouvez désormais vous connecter",
+            "success"
+          );
           this.props.redirectTo(`/login`);
         })
         .catch(err => {
@@ -181,5 +146,5 @@ export class ResetPasswordForm extends React.Component<
 }
 
 export default withStyles(styles as any)(withRedirect(withRouter(
-  ResetPasswordForm as any
+  AccountConfirmationForm as any
 ) as any) as any);

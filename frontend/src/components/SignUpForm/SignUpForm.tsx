@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import { AppContainer } from "components/App";
+import { withRedirect } from "decorators/RedirectDecorator";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
@@ -33,6 +34,7 @@ const initialValues = {
 
 interface ISignUpFormProps {
   classes?: any;
+  redirectTo: any;
 }
 
 interface ISignUpFormValues {
@@ -185,15 +187,16 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
         username: values.username
       })
         .then(data => {
-          let successMessage;
           if (data.userSub) {
-            successMessage =
-              "Votre compte a bien été créé. Vous allez recevoir un mail qui vous permettra de le confirmer.";
-          }
-          if (successMessage) {
             setStatus({ success: true });
             resetForm(initialValues);
-            openSnackbar(successMessage, "success");
+            openSnackbar(
+              "Votre compte a bien été créé. Vous allez recevoir un code de sécurité qui vous permettra de le confirmer.",
+              "success"
+            );
+            this.props.redirectTo(
+              `/account/confirmation?username=${values.username}`
+            );
           }
         })
         .catch(err => {
@@ -213,4 +216,6 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(SignUpForm as any) as any;
+export default withStyles(styles as any)(withRedirect(
+  SignUpForm
+) as any) as any;
