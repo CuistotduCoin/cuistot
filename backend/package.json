@@ -20,7 +20,10 @@
     "bluebird": "^3.5.1",
     "dotenv": "^6.0.0",
     "knex": "^0.15.1",
+    "mjml": "^4.1.2",
+    "mjml-utils": "^2.2.1",
     "node-fetch": "^2.1.2",
+    "nodemailer": "^4.6.8",
     "pg": "^7.4.3"
   },
   "devDependencies": {
@@ -28,6 +31,7 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "body-parser": "^1.18.3",
+    "copy-webpack-plugin": "^4.5.2",
     "cors": "2.8.4",
     "env-cmd": "^8.0.2",
     "eslint": "^4.19.1",

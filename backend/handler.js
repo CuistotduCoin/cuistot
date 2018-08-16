@@ -25,6 +25,7 @@ import {
   updateWorkshop,
   deleteWorkshop,
 } from './resolvers/workshop-resolver';
+import { run } from './mailer';
 
 export const graphqlHandler = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false; // eslint-disable-line
@@ -206,4 +207,8 @@ export const postConfirmationHandler = (event, context, callback) => {
       });
     }
   });
+};
+
+export const sendEmail = (event, context) => {
+  run(event, context, (error, result) => context.done(error, result));
 };

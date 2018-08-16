@@ -266,6 +266,9 @@ functions:
   postConfirmation:
     handler: handler.postConfirmationHandler
     role: PostConfirmationLambdaRole
+  sendEmail:
+    handler: handler.sendEmail
+    role: SendEmailLambdaRole
 
 resources:
   Parameters:
@@ -557,6 +560,39 @@ resources:
                   Effect: "Allow"
                   Action: "cognito-idp:AdminAddUserToGroup"
                   Resource: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
+    SendEmailLambdaRole:
+      Type: "AWS::IAM::Role"
+      DeletionPolicy : "Delete"
+      Properties:
+        RoleName: "${self:service}-${self:provider.stage}-${self:provider.region}-sendEmail-lambdaRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "lambda.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "${self:service}-${self:provider.stage}-${self:provider.region}-sendEmail-lambdaRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action: "logs:CreateLogStream"
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-postConfirmation:*
+                -
+                  Effect: "Allow"
+                  Action: "logs:PutLogEvents"
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-postConfirmation:*:*
+                -
+                  Effect: "Allow"
+                  Action: "ses:SendRawEmail"
+                  Resource: "*"
     UserPoolTriggerPostConfirmationInvokePermission:
       Type: "AWS::Lambda::Permission"
       Properties:
