@@ -1,0 +1,7 @@
+extends: airbnb
+overrides:
+  - files: ["*.js"]
+    rules:
+      max-len:
+        - "error"
+        - code: 300

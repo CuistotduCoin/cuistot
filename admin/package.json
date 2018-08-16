@@ -1,5 +1,5 @@
 {
-    "name": "demo",
+    "name": "cuistot-admin",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -9,8 +9,11 @@
         "data-generator": "^1.0.0",
         "fakerest": "~2.1.0",
         "fetch-mock": "~6.3.0",
+        "graphql-tag": "^2.9.2",
         "json-graphql-server": "~2.1.1",
+        "prop-types": "^15.6.2",
         "ra-data-fakerest": "^2.0.0",
+        "ra-data-graphql": "^2.2.0",
         "ra-data-graphql-simple": "^2.1.2",
         "ra-data-simple-rest": "~2.0.0",
         "ra-input-rich-text": "^2.1.0",
@@ -29,7 +32,15 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "lint": "./node_modules/.bin/eslint ."
     },
-    "homepage": "https://marmelab.com/react-admin-demo"
+    "homepage": "https://marmelab.com/react-admin-demo",
+    "devDependencies": {
+        "eslint": "^5.3.0",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jsx-a11y": "^6.1.1",
+        "eslint-plugin-react": "^7.11.1"
+    }
 }
