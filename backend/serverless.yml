@@ -560,6 +560,10 @@ resources:
                   Effect: "Allow"
                   Action: "cognito-idp:AdminAddUserToGroup"
                   Resource: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
+                -
+                  Effect: "Allow"
+                  Action: "SNS:Publish"
+                  Resource: "arn:aws:sns:${self:provider.region}:${self:custom.accountId}:mailer"
     SendEmailLambdaRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
@@ -584,11 +588,11 @@ resources:
                 -
                   Effect: "Allow"
                   Action: "logs:CreateLogStream"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-postConfirmation:*
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-sendEmail:*
                 -
                   Effect: "Allow"
                   Action: "logs:PutLogEvents"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-postConfirmation:*:*
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-sendEmail:*:*
                 -
                   Effect: "Allow"
                   Action: "ses:SendRawEmail"
