@@ -1,0 +1,85 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-container background-color="#c8c0c2" />
+    </mj-attibutes>
+  </mj-head>
+  <mj-body>
+    <mj-container>
+
+      <!-- Header -->
+      <mj-section>
+        <mj-column>
+          <mj-image width="96" src="https://static.cuistotducoin.com/img/logo.png" />
+        </mj-column>
+      </mj-section>
+
+      <!-- Body -->
+      <mj-wrapper background-color="white" border-radius="10px">
+        <mj-section>
+          <mj-column>
+            <mj-text font-size="20px" color="#4a8522">
+              Bonjour {name},
+            </mj-text>
+            <mj-divider
+              border-color="#aca5a7"
+              border-width="2px" />
+          </mj-column>
+        </mj-section>
+
+        <mj-section>
+          <mj-column>
+            <mj-image width="600" src="http://gph.is/2cJDz1D" />
+          </mj-column>
+          <mj-column>
+            <mj-text color="#ee5e40" font-size="15" line-height="2">
+              Toute l'équipe de Cuistot du coin te souhaite la bienvenue. Tu fais désormais parti de notre communauté de gourmets et cela te donne droit à quelques privilèges...
+            </mj-text>
+          </mj-column>
+        </mj-section>
+
+        <mj-section>
+          <mj-column>
+            <mj-divider
+              border-color="#aca5a7"
+              border-width="2px" />
+          </mj-column>
+        </mj-section>
+
+        <!-- Bouton découvrir -->
+        <mj-section>
+          <mj-column>
+            <mj-button
+              href="http://www.cuistotducoin.com/"
+              background-color="#4a8522"
+            >
+              Inscris-toi dès maintenant à un de nos atelier
+            </mj-button>
+          </mj-column>
+        </mj-section>
+      </mj-wrapper>
+
+      <!-- Footer -->
+      <mj-section>
+        <mj-column>
+          <mj-social
+            display="facebook twitter instagram cuistotducoin"
+            facebook-href="https://www.facebook.com/cuistotducoin"
+            facebook-icon-color="#ee5e40"
+            twitter-href="https://twitter.com/cuistotducoin"
+            twitter-icon-color="#ee5e40"
+            instagram-href="https://www.instagram.com/cuistotducoin/"
+            instagram-icon-color="#ee5e40"
+            cuistotducoin-content="Cuistot du coin"
+            cuistotducoin-href="http://www.cuistotducoin.com/"
+            cuistotducoin-icon-color="#ee5e40"
+            cuistotducoin-icon="https://static.cuistotducoin.com/img/logo.png" />
+          <mj-text align="center">
+            &copy; Cuistot du coin<br>06 79 59 88 48
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+    </mj-container>
+  </mj-body>
+</mjml>

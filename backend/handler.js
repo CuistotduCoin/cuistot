@@ -25,6 +25,8 @@ import {
   updateWorkshop,
   deleteWorkshop,
 } from './resolvers/workshop-resolver';
+import { run } from './mailer';
+import { isEmpty } from './utils/utils';
 
 export const graphqlHandler = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false; // eslint-disable-line
@@ -199,11 +201,40 @@ export const postConfirmationHandler = (event, context, callback) => {
         if (result.userError) {
           callback(result, event);
         } else {
-          callback(null, event);
+          const publishParams = {
+            Message: JSON.stringify({
+              from: 'stephane@cuistotducoin.com', // replace by real email
+              to: 'stephane@cuistotducoin.com', // replace by real email
+              subject: 'Cuistot du coin te souhaite la bienvenue',
+              template: 'welcome',
+              context: { name: args.first_name },
+            }),
+            TopicArn: 'arn:aws:sns:eu-west-1:942691749050:mailer',
+          };
+          const publishPromise = new AWS.SNS({ apiVersion: '2010-03-31' }).publish(publishParams).promise();
+          publishPromise
+            .then((data) => {
+              console.log(`Message send sent to the topic ${publishParams.TopicArn}`);
+              console.log(`MessageID is ${data.MessageId}`);
+              callback(null, event);
+            })
+            .catch((error) => {
+              callback(error, event);
+            });
         }
       }).catch((error) => {
         callback(error, event);
       });
     }
   });
+};
+
+export const sendEmail = (event, context) => {
+  let payload;
+  if (!isEmpty(event.Records)) { // lambda is called by SNS
+    payload = JSON.parse(event.Records[0].Sns.Message);
+  } else {
+    payload = event;
+  }
+  run(payload, context, context.done);
 };
