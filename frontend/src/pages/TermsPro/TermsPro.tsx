@@ -1,9 +1,8 @@
 import * as content from "!raw-loader!content/terms-pro.md";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-// @ts-ignore
-import MarkdownElement from "@material-ui/docs/MarkdownElement";
 import Layout from "components/Layout";
+import MarkdownElement from "components/MarkdownElement";
 import React from "react";
 
 const styles = (theme: Theme) => ({

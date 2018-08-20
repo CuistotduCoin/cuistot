@@ -1,9 +1,15 @@
-import { findFirstWhere, insertObject, deleteObject } from './utils';
+import {
+  findFirstWhere,
+  insertObject,
+  deleteObject,
+  updateObject,
+  performOperation,
+} from './utils';
 
 const TABLE_NAME = 'evaluations';
 
 async function getEvaluation(args) {
-  const result = await findFirstWhere(TABLE_NAME, args.booking_id, 'booking_id');
+  const result = await findFirstWhere(TABLE_NAME, args.cook_id, 'cook_id');
   return result;
 }
 
@@ -12,9 +18,24 @@ async function createEvaluation(args) {
   return result;
 }
 
-async function deleteEvaluation(args) {
-  const result = await deleteObject(TABLE_NAME, args.booking_id, 'booking_id');
+async function updateEvaluation(args) {
+  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
+  const result = performOperation(
+    args,
+    getEvaluation({ cook_id: updateArgs.id }),
+    updateObject(TABLE_NAME, updateArgs, 'cook_id'),
+  );
   return result;
 }
 
-export { getEvaluation, createEvaluation, deleteEvaluation };
+async function deleteEvaluation(args) {
+  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...deleteArgs } = args;
+  const result = await performOperation(
+    args,
+    getEvaluation({ cook_id: deleteArgs.id }),
+    deleteObject(TABLE_NAME, deleteArgs.id, 'cook_id'),
+  );
+  return result;
+}
+
+export { getEvaluation, createEvaluation, updateEvaluation, deleteEvaluation };
