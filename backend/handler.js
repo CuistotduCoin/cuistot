@@ -171,6 +171,8 @@ export const graphqlHandler = (event, context, callback) => {
 };
 
 export const postConfirmationHandler = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false; // eslint-disable-line
+
   // Add the new gourmet to the gourmet group once the user has been confirmed
   if (!event.request.userAttributes['cognito:user_status'] === 'CONFIRMED' || !event.request.userAttributes.email_verified === 'true') {
     const error = new Error('User was not properly confirmed and/or email not verified');

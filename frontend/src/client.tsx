@@ -18,7 +18,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import theme from "theme";
 import "typeface-roboto";
-import UNSTATED from "unstated-debug";
+// import UNSTATED from "unstated-debug";
 import "./main.css";
 
 const client = createApolloClient({ ssrMode: false });
@@ -27,7 +27,7 @@ const generateClassName = createGenerateClassName({
   productionPrefix: "c"
 });
 
-UNSTATED.logStateChanges = true;
+// UNSTATED.logStateChanges = true;
 
 ensureReady(routes).then(data =>
   hydrate(

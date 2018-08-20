@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import { AppContainer } from "components/App";
-import withRedirect from "decorators/RedirectDecorator";
+import { withRedirect } from "decorators/RedirectDecorator";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";

@@ -1,2 +1,2 @@
 import withRedirect from "./RedirectDecorator";
-export default withRedirect;
+export { withRedirect };

@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import { AppContainer } from "components/App";
+import { withRedirect } from "decorators/RedirectDecorator";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
@@ -25,6 +26,7 @@ const styles = (theme: Theme) => ({
 
 interface ILoginFormProps {
   classes?: any;
+  redirectTo: any;
 }
 
 interface ILoginFormValues {
@@ -132,21 +134,22 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
           logIn();
         })
         .catch(err => {
-          let errorMessage;
-          let snackbarVariant = "error";
           if (
             err.code === "UserNotFoundException" ||
             err.code === "NotAuthorizedException"
           ) {
-            errorMessage =
-              "Le nom d'utilisateur et/ou le mot de passe sont incorrects";
+            openSnackbar(
+              "Le nom d'utilisateur et/ou le mot de passe sont incorrects",
+              "error"
+            );
           } else if (err.code === "UserNotConfirmedException") {
-            errorMessage =
-              "Vous devez confirmer votre compte avant de pouvoir vous connecter";
-            snackbarVariant = "warning";
-          }
-          if (errorMessage) {
-            openSnackbar(errorMessage, snackbarVariant);
+            openSnackbar(
+              "Vous devez confirmer votre compte avant de pouvoir vous connecter",
+              "warning"
+            );
+            this.props.redirectTo(
+              `/account/confirmation?username=${values.username}`
+            );
           }
           setStatus({ success: false });
           setSubmitting(false);
@@ -156,4 +159,4 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(LoginForm as any) as any;
+export default withStyles(styles as any)(withRedirect(LoginForm) as any) as any;

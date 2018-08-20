@@ -1,7 +1,9 @@
 import { Auth } from "aws-amplify";
 import EnsureLoggedIn from "components/EnsureLoggedIn";
 import Snackbar from "components/Snackbar";
-import withRedirect from "decorators/RedirectDecorator";
+import { runtimeConfig } from "config";
+import { withRedirect } from "decorators/RedirectDecorator";
+import AccountConfirmation from "pages/AccountConfirmation";
 import Business from "pages/Business/Business";
 import Cook from "pages/Cook";
 import Gift from "pages/Gift";
@@ -53,15 +55,30 @@ export class App extends React.Component<IAppProps, {}> {
     if (!isLoggedIn) {
       Auth.currentAuthenticatedUser()
         .then(user => {
-          if (
-            location.pathname !== "/login" &&
-            location.pathname !== "/signup"
-          ) {
-            setReferer(undefined);
+          console.log(`Authenticated as ${user.username}`);
+          if (user.username !== "guest") {
+            if (
+              location.pathname !== "/login" &&
+              location.pathname !== "/signup"
+            ) {
+              setReferer(undefined);
+            }
+            logIn();
           }
-          logIn();
         })
-        .catch(err => console.log("Not authenticated"));
+        .catch(() => {
+          console.log("Not authenticated... Authentication as guest...");
+          Auth.signIn(
+            runtimeConfig.GUEST_USERNAME,
+            runtimeConfig.GUEST_PASSWORD
+          )
+            .then(user => console.log("Authenticated as guest"))
+            .catch(err => {
+              console.log(
+                `Authentication as guest has failed : ${err.message}`
+              );
+            });
+        });
     }
   }
 
@@ -71,12 +88,11 @@ export class App extends React.Component<IAppProps, {}> {
     const isLoggingOut = prevProps.isLoggedIn && !isLoggedIn;
     const isLoggingIn = !prevProps.isLoggedIn && isLoggedIn;
 
-    console.log("is logging in : ", isLoggingIn);
-    console.log("is logging out : ", isLoggingOut);
-
     if (isLoggingIn && referer) {
+      console.log(`Logging in... redirecting to ${referer}`);
       redirectTo(referer);
     } else if (isLoggingOut) {
+      console.log("Logging out...");
       Auth.signOut()
         .then(data => {
           openSnackbar("Vous êtes maintenant déconnecté", "success");
@@ -109,6 +125,11 @@ export class App extends React.Component<IAppProps, {}> {
                 component={ResetPasswordRequest}
               />
               <Route path="/password/reset" exact component={ResetPassword} />
+              <Route
+                path="/account/confirmation"
+                exact
+                component={AccountConfirmation}
+              />
               <Route path="/" exact component={Home} />
               <Route path="/terms" exact component={Terms} />
               <Route path="/terms-pro" exact component={TermsPro} />
