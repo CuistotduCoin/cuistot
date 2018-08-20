@@ -3,11 +3,14 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import { AppContainer } from "components/App";
-import withRedirect from "decorators/RedirectDecorator";
+import { withRedirect } from "decorators/RedirectDecorator";
 import { Field, Form, Formik } from "formik";
 // @ts-ignore
 import { TextField } from "formik-material-ui";
+import { parse } from "query-string";
 import React from "react";
+import { withRouter } from "react-router-dom";
+import { SNACKBAR_MESSAGES } from "shared/constants";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
 import {
@@ -27,16 +30,10 @@ const styles = (theme: Theme) => ({
   }
 });
 
-const initialValues = {
-  username: "",
-  code: "",
-  newPassword: "",
-  newPasswordConfirmation: ""
-};
-
 interface IResetPasswordFormProps {
   classes?: any;
   redirectTo: any;
+  location: any;
 }
 
 interface IResetPasswordFormValues {
@@ -53,6 +50,18 @@ export class ResetPasswordForm extends React.Component<
   public constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+    this.initialValues = this.initialValues.bind(this);
+  }
+
+  public initialValues() {
+    const params = parse(this.props.location.search);
+    const username = params.username || "";
+    return {
+      username,
+      code: "",
+      newPassword: "",
+      newPasswordConfirmation: ""
+    };
   }
 
   public render() {
@@ -135,7 +144,7 @@ export class ResetPasswordForm extends React.Component<
       <Subscribe to={[AppContainer]}>
         {(app: any) => (
           <Formik
-            initialValues={initialValues}
+            initialValues={this.initialValues()}
             component={resetPasswordFormComponent}
             onSubmit={this.onSubmit(app.openSnackbar)}
             validationSchema={validationSchema}
@@ -157,21 +166,12 @@ export class ResetPasswordForm extends React.Component<
       )
         .then(data => {
           setStatus({ success: true });
-          resetForm(initialValues);
+          resetForm(this.initialValues());
           openSnackbar("Mot de passe mis à jour", "success");
           this.props.redirectTo(`/login`);
         })
         .catch(err => {
-          let errorMessage;
-          if (err.code === "CodeMismatchException") {
-            errorMessage = "Le code de sécurité entré est incorrect";
-          } else if (err.code === "ExpiredCodeException") {
-            errorMessage =
-              "Le code de sécurité a expiré. Veuillez faire une nouvelle demande.";
-          }
-          if (errorMessage) {
-            openSnackbar(errorMessage, "error");
-          }
+          openSnackbar(SNACKBAR_MESSAGES[err.code] || "Erreur", "error");
           setStatus({ success: false });
           setSubmitting(false);
           setErrors({ submit: err.message });
@@ -180,6 +180,6 @@ export class ResetPasswordForm extends React.Component<
   }
 }
 
-export default withStyles(styles as any)(withRedirect(
-  ResetPasswordForm
-) as any) as any;
+export default withStyles(styles as any)(withRedirect(withRouter(
+  ResetPasswordForm as any
+) as any) as any);

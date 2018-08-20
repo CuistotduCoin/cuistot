@@ -6,8 +6,9 @@ import {
   updateCook,
   deleteCook,
   getCookWorkshops,
+  getCookEvaluations,
 } from './resolvers/cook-resolver';
-import { getEvaluation, createEvaluation, deleteEvaluation } from './resolvers/evaluation-resolver';
+import { getEvaluation, createEvaluation, updateEvaluation, deleteEvaluation } from './resolvers/evaluation-resolver';
 import {
   getGourmet,
   createGourmet,
@@ -24,6 +25,8 @@ import {
   updateWorkshop,
   deleteWorkshop,
 } from './resolvers/workshop-resolver';
+import { run } from './mailer';
+import { isEmpty } from './utils/utils';
 
 export const graphqlHandler = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false; // eslint-disable-line
@@ -56,6 +59,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'getCookWorkshops': {
       resolve(getCookWorkshops, 'workshops');
+      break;
+    }
+    case 'getCookEvaluations': {
+      resolve(getCookEvaluations, 'evaluations');
       break;
     }
     case 'getEvaluation': {
@@ -114,6 +121,10 @@ export const graphqlHandler = (event, context, callback) => {
       resolve(createEvaluation, 'evaluation');
       break;
     }
+    case 'updateEvaluation': {
+      resolve(updateEvaluation, 'evaluation');
+      break;
+    }
     case 'deleteEvaluation': {
       resolve(deleteEvaluation);
       break;
@@ -161,22 +172,69 @@ export const graphqlHandler = (event, context, callback) => {
   }
 };
 
-// Add the new gourmet to the gourmet group once the user has been confirmed
 export const postConfirmationHandler = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false; // eslint-disable-line
+
+  // Add the new gourmet to the gourmet group once the user has been confirmed
+  if (!event.request.userAttributes['cognito:user_status'] === 'CONFIRMED' || !event.request.userAttributes.email_verified === 'true') {
+    const error = new Error('User was not properly confirmed and/or email not verified');
+    callback(error, event);
+  }
   const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
   const params = {
     GroupName: 'Gourmet',
     UserPoolId: event.userPoolId,
     Username: event.userName,
   };
-  if (!event.request.userAttributes['cognito:user_status'] === 'CONFIRMED' || !event.request.userAttributes.email_verified === 'true') {
-    const error = new Error('User was not properly confirmed and/or email not verified');
-    callback(error, event);
-  }
   cognitoIdentityServiceProvider.adminAddUserToGroup(params, (err) => {
     if (err) {
       callback(err, event);
+    } else {
+      // Create a Gourmet object in RDS
+      const args = {
+        id: event.request.userAttributes.sub,
+        email: event.request.userAttributes.email,
+        first_name: event.request.userAttributes.name,
+        last_name: event.request.userAttributes.family_name,
+      };
+      createGourmet(args).then((result) => {
+        if (result.userError) {
+          callback(result, event);
+        } else {
+          const publishParams = {
+            Message: JSON.stringify({
+              from: 'stephane@cuistotducoin.com', // replace by real email
+              to: 'stephane@cuistotducoin.com', // replace by real email
+              subject: 'Cuistot du coin te souhaite la bienvenue',
+              template: 'welcome',
+              context: { name: args.first_name },
+            }),
+            TopicArn: 'arn:aws:sns:eu-west-1:942691749050:mailer',
+          };
+          const publishPromise = new AWS.SNS({ apiVersion: '2010-03-31' }).publish(publishParams).promise();
+          publishPromise
+            .then((data) => {
+              console.log(`Message send sent to the topic ${publishParams.TopicArn}`);
+              console.log(`MessageID is ${data.MessageId}`);
+              callback(null, event);
+            })
+            .catch((error) => {
+              callback(error, event);
+            });
+        }
+      }).catch((error) => {
+        callback(error, event);
+      });
     }
-    callback(null, event);
   });
+};
+
+export const sendEmail = (event, context) => {
+  let payload;
+  if (!isEmpty(event.Records)) { // lambda is called by SNS
+    payload = JSON.parse(event.Records[0].Sns.Message);
+  } else {
+    payload = event;
+  }
+  run(payload, context, context.done);
 };

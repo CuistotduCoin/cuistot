@@ -1,10 +1,17 @@
+#foreach($group in $ctx.identity.claims.get("cognito:groups"))
+  #if($group == "Gourmet" || $group == "Cook" || $group == "Admin")
+    #set($isAllowed = true)
+    #break
+  #end
+#end
 {
   "version": "2017-02-28",
   "operation": "Invoke",
   "payload": {
     "field": "getWorkshopBookings",
     "arguments":  {
-      "workshop_id": $util.toJson($context.source.id)
+      "workshop_id": $utils.toJson($context.source.id),
+      "is_allowed": $utils.toJson($isAllowed)
     }
   }
 }

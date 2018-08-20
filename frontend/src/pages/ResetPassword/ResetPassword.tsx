@@ -4,7 +4,6 @@ import Head from "components/Head";
 import Logo from "components/Logo";
 import ResetPasswordForm from "components/ResetPasswordForm";
 import React from "react";
-import { Link } from "react-router-dom";
 import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({

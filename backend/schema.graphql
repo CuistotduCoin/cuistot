@@ -63,15 +63,15 @@ type Booking implements Node & Timestamps {
   amount: Int!
   gourmet: Gourmet!
   workshop: Workshop!
-  evaluation: Evaluation
 }
 
 type Evaluation implements Timestamps {
   created_at: String!
   updated_at: String!
-  booking: Booking!
+  cook: Cook!
   rating: Float!
   comment: String!
+  author: Gourmet!
 }
 
 type Gourmet implements Node & Timestamps {
@@ -105,6 +105,7 @@ type Cook implements Node & Timestamps {
   legal_last_name: String
   legal_birthdate: String
   workshops: [Workshop!]!
+  evaluations: [Evaluation!]!
 }
 
 type Kitchen implements Node & Timestamps {
@@ -116,6 +117,7 @@ type Kitchen implements Node & Timestamps {
   city: String!
   zip_code: String!
   location: String!
+  author: Gourmet!
 }
 
 type S3Object {
@@ -196,12 +198,19 @@ input UpdateBookingInput {
 }
 
 input CreateEvaluationInput {
-  booking: BookingInput!
+  cook: CookInput!
+  rating: Float!
+  comment: String!
+}
+
+input UpdateEvaluationInput {
+  id: ID!
   rating: Float!
   comment: String!
 }
 
 input CreateGourmetInput {
+  id: ID!
   email: String!
   first_name: String!
   last_name: String!
@@ -337,11 +346,14 @@ type Mutation {
   ## Evaluations
   createEvaluation(evaluation: CreateEvaluationInput!): EvaluationPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  updateEvaluation(evaluation: UpdateEvaluationInput!): EvaluationPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteEvaluation(booking_id: ID!): PlainPayload!
-    @aws_auth(cognito_groups: ["Admin"])
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 
   ## Gourmets
   createGourmet(gourmet: CreateGourmetInput!): GourmetPayload!
+    @aws_auth(cognito_groups: ["Admin"]) # also called by user pool post confirmation trigger
   updateGourmet(gourmet: UpdateGourmetInput!): GourmetPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteGourmet(gourmet_id: ID!): PlainPayload!
@@ -351,33 +363,30 @@ type Mutation {
 
   ## Cooks
   createCook(cook: CreateCookInput!): CookPayload!
-    @aws_auth(cognito_groups: ["Admin"])
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   updateCook(cook: UpdateCookInput!): CookPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteCook(cook_id: ID!): PlainPayload!
-    @aws_auth(cognito_groups: ["Admin"])
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
 
   ## Kitchens
   createKitchen(kitchen: CreateKitchenInput!): KitchenPayload!
-    @aws_auth(cognito_groups: ["Admin"])
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
   updateKitchen(kitchen: UpdateKitchenInput!): KitchenPayload!
-    @aws_auth(cognito_groups: ["Admin"])
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteKitchen(kitchen_id: ID!): PlainPayload!
-    @aws_auth(cognito_groups: ["Admin"])
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
 }
 
 type Query {
   getWorkshop(workshop_id: ID!): WorkshopPayload!
   getWorkshops(before: String, after: String, first: Int, last: Int): PaginatedWorkshops!
   getGourmet(gourmet_id: ID!): GourmetPayload!
-    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
   getCook(cook_id: ID!): CookPayload!
   getBooking(booking_id: ID!): BookingPayload!
-    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   getKitchen(kitchen_id: ID!): KitchenPayload!
-    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
-  getEvaluation(booking_id: ID!): EvaluationPayload!
-    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
+  getEvaluation(cook_id: ID!): EvaluationPayload!
   getCurrentGourmet: GourmetPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 }

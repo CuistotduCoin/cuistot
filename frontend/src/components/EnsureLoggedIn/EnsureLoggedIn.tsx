@@ -1,20 +1,32 @@
-import withRedirect from "decorators/RedirectDecorator";
+import { Auth } from "aws-amplify";
+import { withRedirect } from "decorators/RedirectDecorator";
 import React from "react";
 
 interface IEnsureLoggedInProps {
   isLoggedIn: boolean;
   location: any;
-  setRedirectUrl(url: string);
+  setReferer(url: string);
   redirectTo(url: string, push?: boolean);
 }
 
 export class EnsureLoggedIn extends React.Component<IEnsureLoggedInProps, {}> {
   public componentDidMount() {
-    const { isLoggedIn, setRedirectUrl, location, redirectTo } = this.props;
+    const { isLoggedIn, setReferer, location, redirectTo } = this.props;
+
+    const redirectToLogin = () => {
+      setReferer(location.pathname);
+      redirectTo("/login");
+    };
 
     if (!isLoggedIn) {
-      setRedirectUrl(location.pathname);
-      redirectTo("/login");
+      Auth.currentAuthenticatedUser()
+        .then(user => {
+          console.log(`Authenticated as ${user.username}`);
+          if (user.username === "guest") {
+            redirectToLogin();
+          } // else delegate to App
+        })
+        .catch(err => redirectToLogin());
     }
   }
 

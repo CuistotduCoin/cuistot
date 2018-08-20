@@ -1,10 +1,12 @@
 const faker = require('faker'); // eslint-disable-line
+const uuidv4 = require('uuid/v4'); // eslint-disable-line
 const { seedData } = require('../utils/seeds/utils');
 
 faker.seed(1000);
 
 const createGourmet = knex => (
   knex('gourmets').insert({
+    id: uuidv4(),
     email: faker.internet.exampleEmail(),
     first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),

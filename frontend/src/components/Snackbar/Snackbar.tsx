@@ -9,9 +9,19 @@ import CloseIcon from "@material-ui/icons/Close";
 import ErrorIcon from "@material-ui/icons/Error";
 import InfoIcon from "@material-ui/icons/Info";
 import WarningIcon from "@material-ui/icons/Warning";
+import cx from "classnames";
 import React from "react";
 
 const styles = (theme: Theme) => ({
+  content: {
+    "& div:first-child": {
+      width: "90%"
+    },
+    "& div:last-child": {
+      position: "absolute",
+      right: "15px"
+    }
+  },
   error: {
     backgroundColor: theme.palette.error.dark
   },
@@ -80,7 +90,7 @@ export class SnackbarWrapper extends React.Component<ISnackbarProps, {}> {
         onClose={onClose}
       >
         <SnackbarContent
-          className={classes[variant]}
+          className={cx(classes[variant], classes.content)}
           message={
             <span className={classes.message}>
               {React.createElement(variantIcon[variant], {

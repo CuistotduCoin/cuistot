@@ -1,3 +1,9 @@
+#foreach($group in $ctx.identity.claims.get("cognito:groups"))
+  #if($group == "Admin")
+    #set($isAdmin = true)
+    #break
+  #end
+#end
 {
   "version": "2017-02-28",
   "operation": "Invoke",
@@ -5,7 +11,9 @@
     "field": "updateBooking",
     "arguments": {
       "id": $utils.toJson($context.arguments.booking.id),
-      "amount": $utils.toJson($context.arguments.booking.amount)
+      "amount": $utils.toJson($context.arguments.booking.amount),
+      "is_admin": $utils.toJson($isAdmin),
+      "request_author_id": $utils.toJson($context.identity.sub)
     }
   }
 }

@@ -1,4 +1,3 @@
-import connection from '../knexfile';
 import {
   findFirstWhere,
   findWhere,
@@ -6,9 +5,8 @@ import {
   deleteObject,
   updateObject,
   getConnection,
+  performOperation,
 } from './utils';
-
-const knex = require('knex')(connection[process.env.NODE_ENV]); // eslint-disable-line
 
 const TABLE_NAME = 'workshops';
 
@@ -23,7 +21,13 @@ async function getWorkshops(args) {
 }
 
 async function getWorkshopBookings(args) {
-  const result = await findWhere('bookings', args.workshop_id, 'workshop_id');
+  const { is_allowed: isAllowed, ...otherArgs } = args;
+  let result;
+  if (isAllowed) {
+    result = await findWhere('bookings', otherArgs.workshop_id, 'workshop_id');
+  } else {
+    result = { bookings: [] };
+  }
   return result;
 }
 
@@ -33,12 +37,24 @@ async function createWorkshop(args) {
 }
 
 async function updateWorkshop(args) {
-  const result = await updateObject(TABLE_NAME, args);
+  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
+  const result = await performOperation(
+    args,
+    getWorkshop({ workshop_id: updateArgs.id }),
+    updateObject(TABLE_NAME, updateArgs),
+    'cook_id',
+  );
   return result;
 }
 
 async function deleteWorkshop(args) {
-  const result = await deleteObject(TABLE_NAME, args.workshop_id);
+  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...deleteArgs } = args;
+  const result = await performOperation(
+    args,
+    getWorkshop({ workshop_id: deleteArgs.id }),
+    deleteObject(TABLE_NAME, deleteArgs.id),
+    'cook_id',
+  );
   return result;
 }
 

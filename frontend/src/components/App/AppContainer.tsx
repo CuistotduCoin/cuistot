@@ -1,7 +1,7 @@
 import { Container } from "unstated";
 
 interface IAppState {
-  redirectUrl: string;
+  referer?: string;
   isLoggedIn: boolean;
   snackbarOpened: boolean;
   snackbarMessage?: string;
@@ -12,11 +12,11 @@ class AppContainer extends Container<IAppState> {
   public state = {
     snackbarOpened: false,
     isLoggedIn: false,
-    redirectUrl: "/"
+    referer: "/"
   };
 
-  public setRedirectUrl = redirectUrl => {
-    this.setState({ redirectUrl });
+  public setReferer = url => {
+    this.setState({ referer: url });
   };
 
   public logIn = () => {
@@ -24,7 +24,7 @@ class AppContainer extends Container<IAppState> {
   };
 
   public logOut = () => {
-    this.setState({ isLoggedIn: false, redirectUrl: "/" });
+    this.setState({ isLoggedIn: false, referer: "/" });
   };
 
   public openSnackbar = (message, variant = "info") => {

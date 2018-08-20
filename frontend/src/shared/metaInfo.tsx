@@ -86,6 +86,11 @@ export default {
       description: "Découvrez qui se cache derrière Cuistot du Coin",
       href: "https://www.cuistotducoin.com/team",
       title: "Qui sommes-nous ? l'équipe de Cuistot du Coin"
+    },
+    accountConfirmation: {
+      description: "Confirmation de compte utilisateur",
+      href: "https://www.cuistotducoin.com/account/confirmation",
+      title: "Confirmation de votre compte utilisateur"
     }
   }
 };

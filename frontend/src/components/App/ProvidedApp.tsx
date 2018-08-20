@@ -16,11 +16,11 @@ export class ProvidedApp extends React.Component {
         <Subscribe to={[AppContainer]}>
           {(app: any) => (
             <App
-              redirectUrl={app.state.redirectUrl}
+              referer={app.state.referer}
               openSnackbar={app.openSnackbar}
               isLoggedIn={app.state.isLoggedIn}
               logIn={app.logIn}
-              setRedirectUrl={app.setRedirectUrl}
+              setReferer={app.setReferer}
             />
           )}
         </Subscribe>
