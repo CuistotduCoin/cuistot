@@ -11,6 +11,7 @@ import {
 import { getEvaluation, createEvaluation, updateEvaluation, deleteEvaluation } from './resolvers/evaluation-resolver';
 import {
   getGourmet,
+  getGourmets,
   createGourmet,
   updateGourmet,
   deleteGourmet,
@@ -71,6 +72,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'getGourmet': {
       resolve(getGourmet, 'gourmet');
+      break;
+    }
+    case 'getGourmets': {
+      resolve(getGourmets, 'gourmets');
       break;
     }
     case 'getGourmetBookings': {

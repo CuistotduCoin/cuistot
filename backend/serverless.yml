@@ -166,6 +166,11 @@ custom:
         response: "gourmet/getGourmet-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
+        field: getGourmets
+        request: "gourmet/getGourmets-request-mapping-template.txt"
+        response: "gourmet/getGourmets-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
         field: getCook
         request: "cook/getCook-request-mapping-template.txt"
         response: "cook/getCook-response-mapping-template.txt"

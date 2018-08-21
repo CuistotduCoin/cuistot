@@ -29,13 +29,29 @@ type PaginatedWorkshops {
   message: String
 }
 
+type PaginatedGourmets {
+  gourmets: GourmetConnection
+  errors: [UserError!]!
+  message: String
+}
+
 type WorkshopConnection {
   edges: [WorkshopEdge!]!
   pageInfo: PageInfo!
 }
 
+type GourmetConnection {
+  edges: [GourmetEdge!]!
+  pageInfo: PageInfo!
+}
+
 type WorkshopEdge {
   node: Workshop!
+  cursor: String!
+}
+
+type GourmetEdge {
+  node: Gourmet!
   cursor: String!
 }
 
@@ -382,6 +398,7 @@ type Query {
   getWorkshop(workshop_id: ID!): WorkshopPayload!
   getWorkshops(before: String, after: String, first: Int, last: Int): PaginatedWorkshops!
   getGourmet(gourmet_id: ID!): GourmetPayload!
+  getGourmets(before: String, after: String, first: Int, last: Int): PaginatedGourmets!
   getCook(cook_id: ID!): CookPayload!
   getBooking(booking_id: ID!): BookingPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])

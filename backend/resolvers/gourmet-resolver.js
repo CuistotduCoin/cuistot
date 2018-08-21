@@ -5,12 +5,18 @@ import {
   updateObject,
   deleteObject,
   performOperation,
+  getConnection,
 } from './utils';
 
 const TABLE_NAME = 'gourmets';
 
 async function getGourmet(args) {
   const result = await findFirstWhere(TABLE_NAME, args.gourmet_id);
+  return result;
+}
+
+async function getGourmets(args) {
+  const result = await getConnection(TABLE_NAME, args);
   return result;
 }
 
@@ -57,6 +63,7 @@ async function deleteGourmet(args) {
 
 export {
   getGourmet,
+  getGourmets,
   getGourmetBookings,
   createGourmet,
   updateGourmet,
