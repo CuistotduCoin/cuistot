@@ -1,15 +1,20 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
-import { Admin } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 
-import buildGraphQLProvider from './dataProvider';
+import authProvider from './authProvider';
+import buildDataProvider from './dataProvider/builder';
 import themeReducer from './themeReducer';
 import Layout from './Layout';
+import Login from './Login';
+import Dashboard from './dashboard/Dashboard';
 import Menu from './Menu';
 import customRoutes from './routes';
 import englishMessages from './i18n/en';
 import frenchMessages from './i18n/fr';
 import './App.css';
+import { WorkshopIcon } from './workshops';
+import WorkshopList from './workshops/WorkshopList';
 
 const i18nProvider = (locale) => {
   if (locale === 'fr') {
@@ -25,12 +30,9 @@ class App extends Component {
     this.state = { dataProvider: null };
   }
 
-  componentDidMount() {
-    buildGraphQLProvider({
-      clientOptions: {
-        uri: process.env.GRAPHQL_API_URL,
-      },
-    }).then(dataProvider => this.setState({ dataProvider }));
+  async componentWillMount() {
+    const dataProvider = await buildDataProvider();
+    this.setState({ dataProvider });
   }
 
   render() {
@@ -47,14 +49,23 @@ class App extends Component {
     return (
       <Admin
         title="Cuistot du coin"
-        dataProvider={dataProvider}
+        dataProvider={this.state.dataProvider}
         customReducers={{ theme: themeReducer }}
         customRoutes={customRoutes}
+        authProvider={authProvider}
         appLayout={Layout}
+        dashboard={Dashboard}
         menu={Menu}
+        loginPage={Login}
         locale="fr"
         i18nProvider={i18nProvider}
-      />
+      >
+        <Resource
+          name="workshops"
+          list={WorkshopList}
+          icon={WorkshopIcon}
+        />
+      </Admin>
     );
   }
 }

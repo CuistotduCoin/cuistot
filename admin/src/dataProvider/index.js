@@ -1,15 +1,34 @@
 import buildDataProvider from 'ra-data-graphql';
 import {
+  GET_LIST,
+  GET_ONE,
+  GET_MANY,
+  GET_MANY_REFERENCE,
+  CREATE,
   DELETE,
   DELETE_MANY,
   UPDATE,
   UPDATE_MANY,
 } from 'react-admin';
+import pluralize from 'pluralize';
 
 import buildQuery from './buildQuery';
 
 const defaultOptions = {
   buildQuery,
+  introspection: {
+    operationNames: {
+      [GET_LIST]: resource => `get${pluralize(resource.name)}`,
+      [GET_ONE]: resource => `get${resource.name}`,
+      [GET_MANY]: resource => `get${pluralize(resource.name)}`,
+      [GET_MANY_REFERENCE]: resource => `get${pluralize(resource.name)}`,
+      [CREATE]: resource => `create${resource.name}`,
+      [UPDATE]: resource => `update${resource.name}`,
+      [DELETE]: resource => `delete${resource.name}`,
+    },
+    exclude: undefined,
+    include: undefined,
+  },
 };
 
 export default options => (

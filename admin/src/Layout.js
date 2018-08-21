@@ -11,8 +11,8 @@ const lightTheme = {
   palette: {
     secondary: {
       light: '#5f5fc4',
-      main: '#283593',
-      dark: '#001064',
+      main: '#F44336',
+      dark: '#F44336',
       contrastText: '#fff',
     },
   },

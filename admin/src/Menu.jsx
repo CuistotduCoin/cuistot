@@ -10,9 +10,10 @@ import {
   Responsive,
 } from 'react-admin';
 import { withRouter } from 'react-router-dom';
+import { WorkshopIcon } from './workshops';
 
 const items = [
-  { name: 'workshops' },
+  { name: 'workshops', icon: <WorkshopIcon /> },
 ];
 
 const styles = {
@@ -53,8 +54,8 @@ const Menu = ({
 );
 
 Menu.propTypes = {
-  onMenuClick: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
+  logout: PropTypes.node.isRequired,
+  onMenuClick: PropTypes.func, // eslint-disable-line
 };
 
 const enhance = compose(

@@ -7,7 +7,6 @@ import {
   UPDATE,
   DELETE,
 } from 'react-admin';
-
 import getFinalType from './getFinalType';
 import isList from './isList';
 
@@ -32,35 +31,27 @@ const buildGetListVariables = introspectionResults => (
     }
 
     if (typeof params.filter[key] === 'object') {
-      const type = introspectionResults.types.find(
-        t => t.name === `${resource.type.name}Filter`
-      );
-      const filterSome = type.inputFields.find(
-        t => t.name === `${key}_some`
-      );
+      const type = introspectionResults.types.find(t => t.name === `${resource.type.name}Filter`);
+      const filterSome = type.inputFields.find(t => t.name === `${key}_some`);
 
       if (filterSome) {
-        const filter = Object.keys(params.filter[key]).reduce(
-          (acc, k) => ({
-            ...acc,
+        const filterResult = Object.keys(params.filter[key]).reduce(
+          (_acc, k) => ({
+            ..._acc,
             [`${k}_in`]: params.filter[key][k],
           }),
-          {}
+          {},
         );
-        return { ...acc, [`${key}_some`]: filter };
+        return { ...acc, [`${key}_some`]: filterResult };
       }
     }
 
     const parts = key.split('.');
 
     if (parts.length > 1) {
-      if (parts[1] == 'id') {
-        const type = introspectionResults.types.find(
-          t => t.name === `${resource.type.name}Filter`
-        );
-        const filterSome = type.inputFields.find(
-          t => t.name === `${parts[0]}_some`
-        );
+      if (parts[1] === 'id') {
+        const type = introspectionResults.types.find(t => t.name === `${resource.type.name}Filter`);
+        const filterSome = type.inputFields.find(t => t.name === `${parts[0]}_some`);
 
         if (filterSome) {
           return {
@@ -72,9 +63,7 @@ const buildGetListVariables = introspectionResults => (
         return { ...acc, [parts[0]]: { id: params.filter[key] } };
       }
 
-      const resourceField = resource.type.fields.find(
-        f => f.name === parts[0]
-      );
+      const resourceField = resource.type.fields.find(f => f.name === parts[0]);
       const type = getFinalType(resourceField.type);
       return { ...acc, [key]: sanitizeValue(type, params.filter[key]) };
     }
@@ -89,10 +78,8 @@ const buildGetListVariables = introspectionResults => (
         return {
           ...acc,
           [key]: Array.isArray(params.filter[key])
-            ? params.filter[key].map(value =>
-                sanitizeValue(type, value)
-              )
-            : sanitizeValue(type, [params.filter[key]]),
+            ? params.filter[key].map(value => sanitizeValue(type, value))
+            : [sanitizeValue(type, params.filter[key])],
         };
       }
 
@@ -103,10 +90,11 @@ const buildGetListVariables = introspectionResults => (
   }, {});
 
   return {
-    page: parseInt(params.pagination.page) - 1,
-    perPage: parseInt(params.pagination.perPage),
-    sortField: params.sort.field,
-    sortOrder: params.sort.order,
+    first: parseInt(params.pagination.first, 10),
+    after: parseInt(params.pagination.after, 10),
+    before: parseInt(params.pagination.before, 10),
+    last: parseInt(params.pagination.last, 10),
+    orderBy: `${params.sort.field}_${params.sort.order}`,
     filter,
   };
 };
@@ -115,8 +103,8 @@ const buildCreateUpdateVariables = () => (
   resource,
   aorFetchType,
   params,
-  queryType
-) =>
+  queryType,
+) => (
   Object.keys(params.data).reduce((acc, key) => {
     if (Array.isArray(params.data[key])) {
       const arg = queryType.args.find(a => a.name === `${key}Ids`);
@@ -144,7 +132,9 @@ const buildCreateUpdateVariables = () => (
       ...acc,
       [key]: params.data[key],
     };
-  }, {});
+  },
+  {})
+);
 
 export default introspectionResults => (
   resource,
@@ -167,14 +157,13 @@ export default introspectionResults => (
       };
     case GET_MANY_REFERENCE: {
       const parts = params.target.split('.');
+
       return {
         filter: { [parts[0]]: { id: params.id } },
       };
     }
     case GET_ONE:
-      return {
-        [resource.type.name]: params.id,
-      };
+      return { [`${resource.type.name}_id`]: params.id };
     case UPDATE: {
       return buildCreateUpdateVariables(introspectionResults)(
         resource,
@@ -191,10 +180,9 @@ export default introspectionResults => (
         queryType,
       );
     }
-    case DELETE:
-      return {
-        [resource.type.name]: params.id,
-      };
+    case DELETE: {
+      return { [`${resource.type.name}_id`]: params.id };
+    }
     default:
       return {};
   }

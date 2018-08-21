@@ -8,13 +8,15 @@ export const buildQueryFactory = (
   buildGqlQueryImpl,
   getResponseParserImpl,
 ) => (introspectionResults) => {
+  console.log('introspectionResults : ', introspectionResults);
   const knownResources = introspectionResults.resources.map(r => r.type.name);
   console.log('knownResources : ', knownResources);
 
   return (aorFetchType, resourceName, params) => {
-    const resource = introspectionResults.resources.find(
-      r => r.type.name === resourceName,
-    );
+    console.log('aorFetchType : ', aorFetchType);
+    console.log('resourceName : ', resourceName);
+    console.log('params : ', params);
+    const resource = introspectionResults.resources.find(r => r.type.name === resourceName);
 
     if (!resource) {
       throw new Error(`Unknown resource ${resourceName}. Make sure it has been declared on your server side schema. Known resources are ${knownResources.join(', ')}`);
@@ -26,12 +28,16 @@ export const buildQueryFactory = (
       throw new Error(`No query or mutation matching aor fetch type ${aorFetchType} could be found for resource ${resource.type.name}`);
     }
 
+    console.log('queryType : ', queryType);
+
     const variables = buildVariablesImpl(introspectionResults)(
       resource,
       aorFetchType,
       params,
       queryType,
     );
+
+    console.log('variables : ', variables);
 
     const query = buildGqlQueryImpl(introspectionResults)(
       resource,
@@ -40,11 +46,15 @@ export const buildQueryFactory = (
       variables,
     );
 
+    console.log('query : ', query);
+
     const parseResponse = getResponseParserImpl(introspectionResults)(
       aorFetchType,
       resource,
       queryType,
     );
+
+    console.log('parseReponse : ', parseResponse);
 
     return {
       query: gql`
