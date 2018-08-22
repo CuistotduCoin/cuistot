@@ -15,7 +15,7 @@
     "deploy": "env-cmd .env serverless deploy --force"
   },
   "dependencies": {
-    "aws-sdk": "^2.285.1",
+    "aws-sdk": "^2.298.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
     "dotenv": "^6.0.0",

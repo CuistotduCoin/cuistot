@@ -20,6 +20,8 @@ custom:
     includeModules:
       forceInclude:
         - pg
+      forceExclude:
+        - aws-sdk
     packager: 'yarn' # Packager that will be used to package your external modules
   dotenv:
     path: .env
