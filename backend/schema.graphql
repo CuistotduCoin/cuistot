@@ -29,8 +29,38 @@ type PaginatedWorkshops {
   message: String
 }
 
-type PaginatedGourmets {
-  gourmets: GourmetConnection
+type PagePaginatedWorkshops {
+  workshops: WorkshopPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedGourmets {
+  gourmets: GourmetPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedCooks {
+  cooks: CookPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedBookings {
+  bookings: BookingPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedKitchens {
+  kitchens: KitchenPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedEvaluations {
+  evaluations: EvaluationPage
   errors: [UserError!]!
   message: String
 }
@@ -40,9 +70,34 @@ type WorkshopConnection {
   pageInfo: PageInfo!
 }
 
-type GourmetConnection {
-  edges: [GourmetEdge!]!
-  pageInfo: PageInfo!
+type WorkshopPage {
+  items: [Workshop!]!
+  total: Int!
+}
+
+type GourmetPage {
+  items: [Gourmet!]!
+  total: Int!
+}
+
+type CookPage {
+  items: [Cook!]!
+  total: Int!
+}
+
+type BookingPage {
+  items: [Booking!]!
+  total: Int!
+}
+
+type KitchenPage {
+  items: [Kitchen!]!
+  total: Int!
+}
+
+type EvaluationPage {
+  items: [Evaluation!]!
+  total: Int!
 }
 
 type WorkshopEdge {
@@ -397,13 +452,24 @@ type Mutation {
 type Query {
   getWorkshop(workshop_id: ID!): WorkshopPayload!
   getWorkshops(before: String, after: String, first: Int, last: Int): PaginatedWorkshops!
+  getWorkshopsPage(limit: Int, page: Int): PagePaginatedWorkshops!
+    @aws_auth(cognito_groups: ["Admin"])
   getGourmet(gourmet_id: ID!): GourmetPayload!
-  getGourmets(before: String, after: String, first: Int, last: Int): PaginatedGourmets!
+  getGourmetsPage(limit: Int, page: Int): PagePaginatedGourmets!
+    @aws_auth(cognito_groups: ["Admin"])
   getCook(cook_id: ID!): CookPayload!
+  getCooksPage(limit: Int, page: Int): PagePaginatedCooks!
+    @aws_auth(cognito_groups: ["Admin"])
   getBooking(booking_id: ID!): BookingPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  getBookingsPage(limit: Int, page: Int): PagePaginatedBookings!
+    @aws_auth(cognito_groups: ["Admin"])
   getKitchen(kitchen_id: ID!): KitchenPayload!
+  getKitchensPage(limit: Int, page: Int): PagePaginatedKitchens!
+    @aws_auth(cognito_groups: ["Admin"])
   getEvaluation(cook_id: ID!): EvaluationPayload!
+  getEvaluationsPage(limit: Int, page: Int): PagePaginatedEvaluations!
+    @aws_auth(cognito_groups: ["Admin"])
   getCurrentGourmet: GourmetPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 }

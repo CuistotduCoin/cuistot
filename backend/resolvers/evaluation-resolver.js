@@ -4,12 +4,18 @@ import {
   deleteObject,
   updateObject,
   performOperation,
+  performPagination,
 } from './utils';
 
 const TABLE_NAME = 'evaluations';
 
 async function getEvaluation(args) {
   const result = await findFirstWhere(TABLE_NAME, args.cook_id, 'cook_id');
+  return result;
+}
+
+async function getEvaluations(args) {
+  const result = await performPagination(TABLE_NAME, args);
   return result;
 }
 
@@ -38,4 +44,10 @@ async function deleteEvaluation(args) {
   return result;
 }
 
-export { getEvaluation, createEvaluation, updateEvaluation, deleteEvaluation };
+export {
+  getEvaluation,
+  getEvaluations,
+  createEvaluation,
+  updateEvaluation,
+  deleteEvaluation,
+};

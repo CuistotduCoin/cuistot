@@ -161,12 +161,17 @@ custom:
         response: "workshop/getWorkshops-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
+        field: getWorkshopsPage
+        request: "workshop/getWorkshops-request-mapping-template.txt"
+        response: "workshop/getWorkshops-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
         field: getGourmet
         request: "gourmet/getGourmet-request-mapping-template.txt"
         response: "gourmet/getGourmet-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
-        field: getGourmets
+        field: getGourmetsPage
         request: "gourmet/getGourmets-request-mapping-template.txt"
         response: "gourmet/getGourmets-response-mapping-template.txt"
       - dataSource: Lambda
@@ -176,9 +181,19 @@ custom:
         response: "cook/getCook-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
+        field: getCooksPage
+        request: "cook/getCooks-request-mapping-template.txt"
+        response: "cook/getCooks-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
         field: getKitchen
         request: "kitchen/getKitchen-request-mapping-template.txt"
         response: "kitchen/getKitchen-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getKitchensPage
+        request: "kitchen/getKitchens-request-mapping-template.txt"
+        response: "kitchen/getKitchens-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
         field: getBooking
@@ -186,9 +201,19 @@ custom:
         response: "booking/getBooking-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
+        field: getBookingsPage
+        request: "booking/getBookings-request-mapping-template.txt"
+        response: "booking/getBookings-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
         field: getEvaluation
         request: "evaluation/getEvaluation-request-mapping-template.txt"
         response: "evaluation/getEvaluation-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getEvaluationsPage
+        request: "evaluation/getEvaluations-request-mapping-template.txt"
+        response: "evaluation/getEvaluations-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
         field: getCurrentGourmet

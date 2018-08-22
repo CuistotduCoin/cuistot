@@ -5,12 +5,18 @@ import {
   updateObject,
   deleteObject,
   performOperation,
+  performPagination,
 } from './utils';
 
 const TABLE_NAME = 'cooks';
 
 async function getCook(args) {
   const result = await findFirstWhere(TABLE_NAME, args.cook_id);
+  return result;
+}
+
+async function getCooks(args) {
+  const result = await performPagination(TABLE_NAME, args);
   return result;
 }
 
@@ -53,6 +59,7 @@ async function deleteCook(args) {
 
 export {
   getCook,
+  getCooks,
   createCook,
   deleteCook,
   updateCook,

@@ -6,6 +6,7 @@ import {
   first,
   last,
   get,
+  isNil,
 } from '../utils/utils';
 
 const knex = require('knex')(connection[process.env.NODE_ENV]);
@@ -44,36 +45,36 @@ async function findWhere(tableName, value, field = 'id') {
 const cursorCreatedAt = (tableName, cursorId) => `(SELECT created_at FROM ${tableName} WHERE id = '${cursorId}')`;
 
 const addRangeClause = (query, tableName, args) => {
-  if ('after' in args && 'before' in args) {
+  if (args.after && args.before) {
     return `${query} WHERE created_at > ${cursorCreatedAt(tableName, args.after)} AND created_at < ${cursorCreatedAt(tableName, args.before)} AND deleted_at IS NULL`;
   }
-  if ('after' in args) {
+  if (args.after) {
     return `${query} WHERE created_at > ${cursorCreatedAt(tableName, args.after)} AND deleted_at IS NULL`;
   }
-  if ('before' in args) {
+  if (args.before) {
     return `${query} WHERE created_at < ${cursorCreatedAt(tableName, args.before)} AND deleted_at IS NULL`;
   }
   return `${query} WHERE deleted_at IS NULL`;
 };
 
 const addLimitClause = (query, args) => {
-  if ('first' in args) {
+  if (!isNil(args.first)) {
     return `${query} ORDER BY created_at ASC LIMIT ${args.first}`;
   }
-  if ('last' in args) {
+  if (!isNil(args.last)) {
     return `${query} ORDER BY created_at DESC LIMIT ${args.last}`;
   }
   return `${query} ORDER BY created_at ASC`;
 };
 
 async function getConnection(tableName, args) {
-  if ('first' in args && 'last' in args) {
+  if (!isNil(args.first) && !isNil(args.last)) {
     return { userError: 'first and last cannot be specified at the same time' };
   }
-  if ('first' in args && args.first < 0) {
+  if (args.first < 0) {
     return { userError: 'first cannot have a negative value' };
   }
-  if ('last' in args && args.last < 0) {
+  if (args.last < 0) {
     return { userError: 'last cannot have a negative value' };
   }
 
@@ -87,24 +88,24 @@ async function getConnection(tableName, args) {
     let hasNextPage = false;
     let hasPreviousPage = false;
 
-    if ('last' in args) {
+    if (!isNil(args.last)) {
       let countQuery = addRangeClause(`SELECT COUNT(*) FROM ${tableName}`, tableName, args);
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasPreviousPage = result.rows[0].count > rows.length;
-    } else if ('after' in args) {
+    } else if (args.after) {
       let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE created_at <= ${cursorCreatedAt(tableName, args.after)} AND deleted_at IS NULL`;
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasPreviousPage = result.rows[0].count > 0;
     }
 
-    if ('first' in args) {
+    if (!isNil(args.first)) {
       let countQuery = addRangeClause(`SELECT COUNT(*) FROM ${tableName}`, tableName, args);
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
       hasNextPage = result.rows[0].count > rows.length;
-    } else if ('before' in args) {
+    } else if (args.before) {
       let countQuery = `SELECT COUNT(*) FROM ${tableName} WHERE created_at >= ${cursorCreatedAt(tableName, args.before)} AND deleted_at IS NULL`;
       countQuery = knex.raw(countQuery);
       const result = await countQuery;
@@ -125,6 +126,39 @@ async function getConnection(tableName, args) {
           cursor: result.id,
           node: result,
         })),
+      },
+    };
+  } catch (err) {
+    console.error(err);
+    return { userError: formatKnexQueryError(err) };
+  }
+}
+
+async function getPage(tableName, args) {
+  if (isNil(args.page) || isNil(args.limit)) {
+    return { userError: 'page and limit arguments have to be provided' };
+  }
+  if (args.page <= 0) {
+    return { userError: 'page must be strictly positive' };
+  }
+  if (args.limit < 0) {
+    return { userError: 'limit cannot have a negative value' };
+  }
+
+  let totalQuery = `SELECT * FROM ${tableName}`;
+  let pageQuery = `${totalQuery} LIMIT ${args.limit} OFFSET ${(args.page - 1) * args.limit}`;
+
+  try {
+    pageQuery = knex.raw(pageQuery);
+    const { rows } = await pageQuery;
+
+    totalQuery = knex.raw(totalQuery);
+    const result = await totalQuery;
+
+    return {
+      data: {
+        items: rows,
+        total: result.rowCount,
       },
     };
   } catch (err) {
@@ -204,12 +238,22 @@ async function performOperation(args, resourcePromise, operationPromise, authorK
   return result;
 }
 
+async function performPagination(tableName, args) {
+  let result;
+  if (!isNil(args.page) && !isNil(args.limit)) {
+    result = await getPage(tableName, args);
+  } else {
+    result = await getConnection(tableName, args);
+  }
+  return result;
+}
+
 export {
   findFirstWhere,
   findWhere,
   insertObject,
   deleteObject,
   updateObject,
-  getConnection,
   performOperation,
+  performPagination,
 };

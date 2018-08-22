@@ -5,7 +5,7 @@ import {
   updateObject,
   deleteObject,
   performOperation,
-  getConnection,
+  performPagination,
 } from './utils';
 
 const TABLE_NAME = 'gourmets';
@@ -16,7 +16,7 @@ async function getGourmet(args) {
 }
 
 async function getGourmets(args) {
-  const result = await getConnection(TABLE_NAME, args);
+  const result = await performPagination(TABLE_NAME, args);
   return result;
 }
 

@@ -1,14 +1,27 @@
 import AWS from 'aws-sdk';
-import { getBooking, createBooking, updateBooking, deleteBooking } from './resolvers/booking-resolver';
+import {
+  getBooking,
+  getBookings,
+  createBooking,
+  updateBooking,
+  deleteBooking,
+} from './resolvers/booking-resolver';
 import {
   getCook,
+  getCooks,
   createCook,
   updateCook,
   deleteCook,
   getCookWorkshops,
   getCookEvaluations,
 } from './resolvers/cook-resolver';
-import { getEvaluation, createEvaluation, updateEvaluation, deleteEvaluation } from './resolvers/evaluation-resolver';
+import {
+  getEvaluation,
+  getEvaluations,
+  createEvaluation,
+  updateEvaluation,
+  deleteEvaluation,
+} from './resolvers/evaluation-resolver';
 import {
   getGourmet,
   getGourmets,
@@ -17,7 +30,13 @@ import {
   deleteGourmet,
   getGourmetBookings,
 } from './resolvers/gourmet-resolver';
-import { getKitchen, createKitchen, updateKitchen, deleteKitchen } from './resolvers/kitchen-resolver';
+import {
+  getKitchen,
+  getKitchens,
+  createKitchen,
+  updateKitchen,
+  deleteKitchen,
+} from './resolvers/kitchen-resolver';
 import {
   getWorkshop,
   getWorkshops,
@@ -54,8 +73,16 @@ export const graphqlHandler = (event, context, callback) => {
       resolve(getBooking, 'booking');
       break;
     }
+    case 'getBookings': {
+      resolve(getBookings, 'bookings');
+      break;
+    }
     case 'getCook': {
       resolve(getCook, 'cook');
+      break;
+    }
+    case 'getCooks': {
+      resolve(getCooks, 'cooks');
       break;
     }
     case 'getCookWorkshops': {
@@ -68,6 +95,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'getEvaluation': {
       resolve(getEvaluation, 'evaluation');
+      break;
+    }
+    case 'getEvaluations': {
+      resolve(getEvaluations, 'evaluations');
       break;
     }
     case 'getGourmet': {
@@ -84,6 +115,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'getKitchen': {
       resolve(getKitchen, 'kitchen');
+      break;
+    }
+    case 'getKitchens': {
+      resolve(getKitchens, 'kitchens');
       break;
     }
     case 'getWorkshop': {

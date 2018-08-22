@@ -4,8 +4,8 @@ import {
   insertObject,
   deleteObject,
   updateObject,
-  getConnection,
   performOperation,
+  performPagination,
 } from './utils';
 
 const TABLE_NAME = 'workshops';
@@ -16,7 +16,7 @@ async function getWorkshop(args) {
 }
 
 async function getWorkshops(args) {
-  const result = await getConnection(TABLE_NAME, args);
+  const result = await performPagination(TABLE_NAME, args);
   return result;
 }
 
