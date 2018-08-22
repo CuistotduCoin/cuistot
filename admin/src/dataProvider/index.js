@@ -18,10 +18,10 @@ const defaultOptions = {
   buildQuery,
   introspection: {
     operationNames: {
-      [GET_LIST]: resource => `get${pluralize(resource.name)}`,
+      [GET_LIST]: resource => `get${pluralize(resource.name)}Page`,
       [GET_ONE]: resource => `get${resource.name}`,
-      [GET_MANY]: resource => `get${pluralize(resource.name)}`,
-      [GET_MANY_REFERENCE]: resource => `get${pluralize(resource.name)}`,
+      [GET_MANY]: resource => `get${pluralize(resource.name)}Page`,
+      [GET_MANY_REFERENCE]: resource => `get${pluralize(resource.name)}Page`,
       [CREATE]: resource => `create${resource.name}`,
       [UPDATE]: resource => `update${resource.name}`,
       [DELETE]: resource => `delete${resource.name}`,

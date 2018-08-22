@@ -11,9 +11,19 @@ import {
 } from 'react-admin';
 import { withRouter } from 'react-router-dom';
 import { WorkshopIcon } from './workshops';
+import { GourmetIcon } from './gourmets';
+import { CookIcon } from './cooks';
+import { BookingIcon } from './bookings';
+import { KitchenIcon } from './kitchens';
+import { EvaluationIcon } from './evaluations';
 
 const items = [
   { name: 'workshops', icon: <WorkshopIcon /> },
+  { name: 'gourmets', icon: <GourmetIcon /> },
+  { name: 'cooks', icon: <CookIcon /> },
+  { name: 'bookings', icon: <BookingIcon /> },
+  { name: 'kitchens', icon: <KitchenIcon /> },
+  { name: 'evaluations', icon: <EvaluationIcon /> },
 ];
 
 const styles = {

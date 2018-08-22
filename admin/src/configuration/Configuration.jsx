@@ -25,7 +25,12 @@ const Configuration = ({
   <Card>
     <ViewTitle title={translate('pos.configuration')} />
     <CardContent>
-      <div className={classes.label}>{translate('pos.theme.name')}</div>
+      <div
+        className={classes.label}
+        style={{ color: theme === 'light' ? 'black' : 'white' }}
+      >
+        {translate('pos.theme.name')}
+      </div>
       <Button
         variant="raised"
         className={classes.button}
@@ -44,7 +49,12 @@ const Configuration = ({
       </Button>
     </CardContent>
     <CardContent>
-      <div className={classes.label}>{translate('pos.language')}</div>
+      <div
+        className={classes.label}
+        style={{ color: theme === 'light' ? 'black' : 'white' }}
+      >
+        {translate('pos.language')}
+      </div>
       <Button
         variant="raised"
         className={classes.button}

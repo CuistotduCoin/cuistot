@@ -29,12 +29,15 @@ export default {
     },
   },
   resources: {
+    fields: {
+      location: 'location',
+    },
     workshops: {
       name: 'Workshop |||| Workshops',
       fields: {
         name: 'Name',
         price: 'Price',
-        duration: 'Duration',
+        duration: 'Duration (minutes)',
         min_gourmet: 'Min. gourmets count',
         max_gourmet: 'Max. gourmets count',
         description: 'Description',
@@ -44,6 +47,16 @@ export default {
       },
       page: {
         delete: 'Delete the workshop',
+      },
+    },
+    gourmets: {
+      name: 'Gourmet |||| Gourmets',
+      fields: {
+        first_name: 'First name',
+        last_name: 'Last name',
+      },
+      page: {
+        delete: 'Delete the gourmet',
       },
     },
   },

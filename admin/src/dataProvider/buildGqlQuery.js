@@ -98,31 +98,38 @@ export default introspectionResults => (
   aorFetchType,
   queryType,
   variables,
+  resourceName,
 ) => {
   const apolloArgs = buildApolloArgs(queryType, variables);
-  console.log('apolloArgs : ', apolloArgs);
   const args = buildArgs(queryType, variables);
-  console.log('args : ', args);
-  console.log('resource.type.fields : ', resource.type.fields);
   const fields = buildFields(introspectionResults)(resource.type.fields);
-  console.log('fields : ', fields);
-  if (
-    aorFetchType === GET_LIST
-    || aorFetchType === GET_MANY
-    || aorFetchType === GET_MANY_REFERENCE
-  ) {
+
+  if (aorFetchType === GET_LIST || aorFetchType === GET_MANY || aorFetchType === GET_MANY_REFERENCE) {
+    const customFields = {
+      [resourceName]: {
+        fields: {
+          items: {
+            fields: {
+              ...fields,
+            },
+          },
+          total: {},
+        },
+      },
+      message: {},
+      errors: {
+        fields: {
+          message: {},
+        },
+      },
+    };
+
     const result = encodeQuery(queryType.name, {
       params: apolloArgs,
       fields: {
-        items: {
-          field: queryType.name,
+        [queryType.name]: {
           params: args,
-          fields,
-        },
-        total: {
-          field: `_${queryType.name}Meta`,
-          params: args,
-          fields: { count: {} },
+          fields: customFields,
         },
       },
     });

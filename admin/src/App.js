@@ -13,8 +13,18 @@ import customRoutes from './routes';
 import englishMessages from './i18n/en';
 import frenchMessages from './i18n/fr';
 import './App.css';
-import { WorkshopIcon } from './workshops';
-import WorkshopList from './workshops/WorkshopList';
+import {
+  WorkshopList,
+  WorkshopShow,
+  WorkshopEdit,
+  WorkshopCreate,
+  WorkshopIcon,
+} from './workshops';
+import { GourmetList, GourmetIcon } from './gourmets';
+import { CookList, CookIcon } from './cooks';
+import { BookingList, BookingIcon } from './bookings';
+import { KitchenList, KitchenIcon } from './kitchens';
+import { EvaluationList, EvaluationIcon } from './evaluations';
 
 const i18nProvider = (locale) => {
   if (locale === 'fr') {
@@ -63,7 +73,35 @@ class App extends Component {
         <Resource
           name="workshops"
           list={WorkshopList}
+          show={WorkshopShow}
+          edit={WorkshopEdit}
+          create={WorkshopCreate}
           icon={WorkshopIcon}
+        />
+        <Resource
+          name="gourmets"
+          list={GourmetList}
+          icon={GourmetIcon}
+        />
+        <Resource
+          name="cooks"
+          list={CookList}
+          icon={CookIcon}
+        />
+        <Resource
+          name="bookings"
+          list={BookingList}
+          icon={BookingIcon}
+        />
+        <Resource
+          name="kitchens"
+          list={KitchenList}
+          icon={KitchenIcon}
+        />
+        <Resource
+          name="evaluations"
+          list={EvaluationList}
+          icon={EvaluationIcon}
         />
       </Admin>
     );

@@ -52,19 +52,16 @@ const sanitizeResource = (introspectionResults, resource) => (
 );
 
 export default introspectionResults => (
-  (aorFetchType, resource) => (
+  (aorFetchType, resource, queryType, resourceName) => (
     (response) => {
       const sanitize = sanitizeResource(introspectionResults, resource);
       const { data } = response;
 
-      if (
-        aorFetchType === GET_LIST
-        || aorFetchType === GET_MANY
-        || aorFetchType === GET_MANY_REFERENCE
-      ) {
+      if (aorFetchType === GET_LIST || aorFetchType === GET_MANY || aorFetchType === GET_MANY_REFERENCE) {
+        const results = response.data[queryType.name][resourceName];
         return {
-          data: response.data.items.map(sanitize),
-          total: response.data.total.count,
+          data: results.items.map(sanitize),
+          total: results.total,
         };
       }
 
