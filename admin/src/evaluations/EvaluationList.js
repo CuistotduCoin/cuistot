@@ -4,8 +4,10 @@ import {
   List,
   Responsive,
   NumberField,
-  LongTextField,
+  RichTextField,
+  ReferenceField,
 } from 'react-admin';
+import { CookNameField, GourmetNameField } from '../fields';
 
 const EvaluationList = props => (
   <List
@@ -15,8 +17,14 @@ const EvaluationList = props => (
     <Responsive
       medium={(
         <Datagrid>
+          <ReferenceField reference="cooks" source="id" linkType="show">
+            <CookNameField />
+          </ReferenceField>
+          <ReferenceField reference="gourmets" source="author.id" linkType="show">
+            <GourmetNameField />
+          </ReferenceField>
           <NumberField source="rating" />
-          <LongTextField source="comment" />
+          <RichTextField source="comment" />
         </Datagrid>
       )}
     />

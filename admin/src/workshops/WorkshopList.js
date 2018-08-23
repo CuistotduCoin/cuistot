@@ -4,9 +4,18 @@ import {
   List,
   Responsive,
   TextField,
+  ReferenceField,
 } from 'react-admin';
+import { withStyles } from '@material-ui/core/styles';
 import WorkshopDate from './WorkshopDate';
 import WorkshopPrice from './WorkshopPrice';
+import { CookNameField } from '../fields';
+
+const styles = {
+  lastCell: {
+    paddingRight: '20px !important',
+  },
+};
 
 const WorkshopList = ({ classes, ...props }) => (
   <List
@@ -18,16 +27,24 @@ const WorkshopList = ({ classes, ...props }) => (
       medium={(
         <Datagrid>
           <TextField source="name" />
+          <ReferenceField reference="cooks" source="cook.id" linkType="show">
+            <CookNameField />
+          </ReferenceField>
+          <ReferenceField reference="kitchens" source="kitchen.id" linkType="show">
+            <TextField source="name" />
+          </ReferenceField>
           <WorkshopPrice />
           <TextField source="duration" />
           <TextField source="min_gourmet" />
           <TextField source="max_gourmet" />
-          <TextField source="description" />
-          <WorkshopDate />
+          <WorkshopDate
+            cellClassName={classes.lastCell}
+            headerClassName={classes.lastCell}
+          />
         </Datagrid>
       )}
     />
   </List>
 );
 
-export default WorkshopList;
+export default withStyles(styles)(WorkshopList);

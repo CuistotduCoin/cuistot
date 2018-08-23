@@ -12,15 +12,6 @@ export default {
       dark: 'Dark',
     },
     dashboard: {
-      monthly_revenue: 'Monthly Revenue',
-      new_orders: 'New Orders',
-      pending_reviews: 'Pending Reviews',
-      new_customers: 'New Customers',
-      pending_orders: 'Pending Orders',
-      order: {
-        items:
-          'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
-      },
       welcome: {
         title: 'Cuistot du coin Admin',
         subtitle: 'Welcome',
@@ -36,6 +27,8 @@ export default {
       name: 'Workshop |||| Workshops',
       fields: {
         name: 'Name',
+        'cook.id': 'Cook',
+        'kitchen.id': 'Kitchen',
         price: 'Price',
         duration: 'Duration (minutes)',
         min_gourmet: 'Min. gourmets count',
@@ -57,6 +50,57 @@ export default {
       },
       page: {
         delete: 'Delete the gourmet',
+      },
+    },
+    cooks: {
+      name: 'Cook |||| Cooks',
+      fields: {
+        'gourmet.id': 'Gourmet',
+        is_pro: 'Pro ?',
+        business_name: 'Company name',
+        siren: 'SIREN',
+        pro_email: 'Email',
+        legal_first_name: 'Last name',
+        legal_last_name: 'First name',
+        legal_birthdate: 'Birthdate',
+      },
+      page: {
+        delete: 'Delete the cook',
+      },
+    },
+    bookings: {
+      name: 'Booking |||| Bookings',
+      fields: {
+        'workshop.id': 'Workshop',
+        'gourmet.id': 'Gourmet',
+        amount: 'Amount',
+      },
+      page: {
+        delete: 'Delete the booking',
+      },
+    },
+    kitchens: {
+      name: 'Kitchen |||| Kitchens',
+      fields: {
+        name: 'Name',
+        address: 'Address',
+        city: 'City',
+        zip_code: 'Zip code',
+      },
+      page: {
+        delete: 'Delete the kitchen',
+      },
+    },
+    evaluations: {
+      name: 'Evaluation |||| Evaluations',
+      fields: {
+        id: 'Cook',
+        'author.id': 'Author',
+        rating: 'Rating',
+        comment: 'Comment',
+      },
+      page: {
+        delete: 'Delete the evaluation',
       },
     },
   },

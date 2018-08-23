@@ -6,7 +6,9 @@ import {
   TextField,
   DateField,
   BooleanField,
+  ReferenceField,
 } from 'react-admin';
+import { GourmetNameField } from '../fields';
 
 const CookList = props => (
   <List
@@ -16,6 +18,9 @@ const CookList = props => (
     <Responsive
       medium={(
         <Datagrid>
+          <ReferenceField reference="gourmets" source="gourmet.id" linkType="show">
+            <GourmetNameField />
+          </ReferenceField>
           <BooleanField source="is_pro" />
           <TextField source="business_name" />
           <TextField source="siren" />

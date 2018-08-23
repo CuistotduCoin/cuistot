@@ -10,6 +10,7 @@ import {
   ReferenceInput,
   SelectInput,
 } from 'react-admin';
+import { CookNameField } from '../fields';
 
 const WorkshopCreate = props => (
   <Create {...props}>
@@ -21,6 +22,9 @@ const WorkshopCreate = props => (
       <NumberInput source="min_gourmet" validate={required()} />
       <NumberInput source="max_gourmet" validate={required()} />
       <DateInput source="date" validate={required()} />
+      <ReferenceInput source="cook_id" reference="cooks">
+        <SelectInput optionText={<CookNameField />} />
+      </ReferenceInput>
       <ReferenceInput source="kitchen_id" reference="kitchens">
         <SelectInput optionText="name" />
       </ReferenceInput>

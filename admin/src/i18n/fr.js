@@ -12,15 +12,6 @@ export default {
       dark: 'Obscur',
     },
     dashboard: {
-      monthly_revenue: 'CA à 30 jours',
-      new_orders: 'Nouvelles commandes',
-      pending_reviews: 'Commentaires à modérer',
-      new_customers: 'Nouveaux clients',
-      pending_orders: 'Commandes à traiter',
-      order: {
-        items:
-          'par %{customer_name}, un poster |||| par %{customer_name}, %{nb_items} posters',
-      },
       welcome: {
         title: 'Admin Cuistot du coin',
         subtitle: 'Bienvenue',
@@ -36,6 +27,8 @@ export default {
       name: 'Atelier |||| Ateliers',
       fields: {
         name: 'Nom',
+        'cook.id': 'Cuistot',
+        'kitchen.id': 'Lieu',
         price: 'Prix',
         duration: 'Durée (minutes)',
         min_gourmet: 'Min. gourmets',
@@ -68,12 +61,14 @@ export default {
     cooks: {
       name: 'Cuistot |||| Cuistots',
       fields: {
+        'gourmet.id': 'Gourmet',
+        is_pro: 'Pro ?',
         business_name: 'Nom de la société',
         siren: 'SIREN',
-        pro_email: 'Email pro.',
-        legal_first_name: 'Prénom (représentant légal)',
-        legal_last_name: 'Nom (représentant légal)',
-        legal_birthdate: 'Date de naissance (représentant légal)',
+        pro_email: 'Email',
+        legal_first_name: 'Prénom',
+        legal_last_name: 'Nom',
+        legal_birthdate: 'Date de naissance',
       },
       page: {
         delete: 'Supprimer le cuistot',
@@ -82,6 +77,8 @@ export default {
     bookings: {
       name: 'Réservation |||| Réservations',
       fields: {
+        'workshop.id': 'Atelier',
+        'gourmet.id': 'Gourmet',
         amount: 'Qté',
       },
       page: {
@@ -103,6 +100,8 @@ export default {
     evaluations: {
       name: 'Evaluation |||| Evaluations',
       fields: {
+        id: 'Cuistot',
+        'author.id': 'Auteur',
         rating: 'Note',
         comment: 'Commentaires',
       },

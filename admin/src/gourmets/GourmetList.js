@@ -6,9 +6,16 @@ import {
   TextField,
   DateField,
 } from 'react-admin';
+import { withStyles } from '@material-ui/core/styles';
 import { LocationField } from '../fields';
 
-const GourmetList = props => (
+const styles = {
+  lastCell: {
+    paddingRight: '20px !important',
+  },
+};
+
+const GourmetList = ({ classes, ...props }) => (
   <List
     {...props}
     sort={{ field: 'last_seen', order: 'DESC' }}
@@ -24,11 +31,14 @@ const GourmetList = props => (
           <TextField source="address" />
           <TextField source="city" />
           <TextField source="zip_code" />
-          <LocationField />
+          <LocationField
+            cellClassName={classes.lastCell}
+            headerClassName={classes.lastCell}
+          />
         </Datagrid>
       )}
     />
   </List>
 );
 
-export default GourmetList;
+export default withStyles(styles)(GourmetList);

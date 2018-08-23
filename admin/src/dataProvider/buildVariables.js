@@ -161,7 +161,7 @@ export default introspectionResults => (
       };
     }
     case GET_ONE:
-      return { [`${resource.type.name}_id`]: params.id };
+      return { [`${resource.type.name.toLowerCase()}_id`]: params.id };
     case UPDATE: {
       return buildCreateUpdateVariables(introspectionResults)(
         resource,
@@ -179,7 +179,7 @@ export default introspectionResults => (
       );
     }
     case DELETE: {
-      return { [`${resource.type.name}_id`]: params.id };
+      return { [`${resource.type.name.toLowerCase()}_id`]: params.id };
     }
     default:
       return {};

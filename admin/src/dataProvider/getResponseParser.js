@@ -1,4 +1,5 @@
 import { TypeKind } from 'graphql';
+import pluralize from 'pluralize';
 import { GET_LIST, GET_MANY, GET_MANY_REFERENCE } from 'react-admin';
 import getFinalType from './getFinalType';
 
@@ -58,14 +59,14 @@ export default introspectionResults => (
       const { data } = response;
 
       if (aorFetchType === GET_LIST || aorFetchType === GET_MANY || aorFetchType === GET_MANY_REFERENCE) {
-        const results = response.data[queryType.name][resourceName];
+        const results = data[queryType.name][resourceName];
         return {
           data: results.items.map(sanitize),
           total: results.total,
         };
       }
 
-      return { data: sanitize(data.data) };
+      return { data: sanitize(data[queryType.name][pluralize.singular(resourceName)]) };
     }
   )
 );

@@ -6,11 +6,25 @@ import {
 } from 'react-admin';
 import { QUERY_TYPES } from 'ra-data-graphql';
 import { TypeKind } from 'graphql';
+import pluralize from 'pluralize';
 
 import { encodeQuery, encodeMutation } from './graphqlify';
 import getFinalType from './getFinalType';
 import isList from './isList';
 import isRequired from './isRequired';
+
+const getField = (fieldName) => {
+  switch (fieldName) {
+    case 'gourmet':
+      return {
+        id: {},
+        first_name: {},
+        last_name: {},
+      };
+    default:
+      return { id: {} };
+  }
+};
 
 export const buildFields = introspectionResults => fields => (
   fields.reduce((acc, field) => {
@@ -27,7 +41,7 @@ export const buildFields = introspectionResults => fields => (
     const linkedResource = introspectionResults.resources.find(r => r.type.name === type.name);
 
     if (linkedResource) {
-      return { ...acc, [field.name]: { fields: { id: {} } } };
+      return { ...acc, [field.name]: { fields: getField(field.name) } };
     }
 
     // const linkedType = introspectionResults.types.find(t => t.name === type.name);
@@ -105,36 +119,32 @@ export default introspectionResults => (
   const fields = buildFields(introspectionResults)(resource.type.fields);
 
   if (aorFetchType === GET_LIST || aorFetchType === GET_MANY || aorFetchType === GET_MANY_REFERENCE) {
-    const customFields = {
-      [resourceName]: {
-        fields: {
-          items: {
-            fields: {
-              ...fields,
-            },
-          },
-          total: {},
-        },
-      },
-      message: {},
-      errors: {
-        fields: {
-          message: {},
-        },
-      },
-    };
-
-    const result = encodeQuery(queryType.name, {
+    return encodeQuery(queryType.name, {
       params: apolloArgs,
       fields: {
         [queryType.name]: {
           params: args,
-          fields: customFields,
+          fields: {
+            [resourceName]: {
+              fields: {
+                items: {
+                  fields: {
+                    ...fields,
+                  },
+                },
+                total: {},
+              },
+            },
+            message: {},
+            errors: {
+              fields: {
+                message: {},
+              },
+            },
+          },
         },
       },
     });
-
-    return result;
   }
 
   if (aorFetchType === DELETE) {
@@ -153,10 +163,21 @@ export default introspectionResults => (
   const query = {
     params: apolloArgs,
     fields: {
-      data: {
-        field: queryType.name,
+      [queryType.name]: {
         params: args,
-        fields,
+        fields: {
+          [pluralize.singular(resourceName)]: {
+            fields: {
+              ...fields,
+            },
+          },
+          message: {},
+          errors: {
+            fields: {
+              message: {},
+            },
+          },
+        },
       },
     },
   };
