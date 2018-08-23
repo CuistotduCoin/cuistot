@@ -11,11 +11,11 @@ import {
 
 const knex = require('knex')(connection[process.env.NODE_ENV]);
 
-async function findFirstWhere(tableName, value, field = 'id') {
+async function findFirstWhere(tableName, value) {
   try {
     const query = knex(tableName)
       .whereNull('deleted_at')
-      .where(field, value)
+      .where('id', value)
       .first();
     const result = await query;
     if (result) {
@@ -182,7 +182,7 @@ async function insertObject(tableName, args) {
   }
 }
 
-async function updateObject(tableName, args, idField = 'id') {
+async function updateObject(tableName, args) {
   try {
     const updateArgs = cleanKnexQueryArgs(args);
     delete updateArgs.id;
@@ -191,7 +191,7 @@ async function updateObject(tableName, args, idField = 'id') {
     }
     const query = knex(tableName)
       .whereNull('deleted_at')
-      .where(idField, args.id)
+      .where('id', args.id)
       .update(updateArgs)
       .returning('*');
     const result = await query;
@@ -205,11 +205,11 @@ async function updateObject(tableName, args, idField = 'id') {
   }
 }
 
-async function deleteObject(tableName, value, field = 'id') {
+async function deleteObject(tableName, value) {
   try {
     const query = knex(tableName)
       .whereNull('deleted_at')
-      .where(field, value)
+      .where('id', value)
       .update({ deleted_at: knex.fn.now() });
     const result = await query;
     if (result > 0) {

@@ -1,6 +1,6 @@
 exports.up = knex => (
   knex.schema.createTable('evaluations', (table) => {
-    table.uuid('cook_id')
+    table.uuid('id')
       .notNullable()
       .references('id')
       .inTable('cooks')

@@ -26,7 +26,7 @@ async function getCookWorkshops(args) {
 }
 
 async function getCookEvaluations(args) {
-  const result = await findWhere('evaluations', args.cook_id, 'cook_id');
+  const result = await findWhere('evaluations', args.cook_id);
   return result;
 }
 

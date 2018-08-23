@@ -137,11 +137,12 @@ type Booking implements Node & Timestamps {
 }
 
 type Evaluation implements Timestamps {
+  id: ID!
   created_at: String!
   updated_at: String!
-  cook: Cook!
   rating: Float!
   comment: String!
+  cook: Cook!
   author: Gourmet!
 }
 
@@ -419,7 +420,7 @@ type Mutation {
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   updateEvaluation(evaluation: UpdateEvaluationInput!): EvaluationPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
-  deleteEvaluation(booking_id: ID!): PlainPayload!
+  deleteEvaluation(evaluation_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 
   ## Gourmets
@@ -467,7 +468,7 @@ type Query {
   getKitchen(kitchen_id: ID!): KitchenPayload!
   getKitchensPage(limit: Int, page: Int): PagePaginatedKitchens!
     @aws_auth(cognito_groups: ["Admin"])
-  getEvaluation(cook_id: ID!): EvaluationPayload!
+  getEvaluation(evaluation_id: ID!): EvaluationPayload!
   getEvaluationsPage(limit: Int, page: Int): PagePaginatedEvaluations!
     @aws_auth(cognito_groups: ["Admin"])
   getCurrentGourmet: GourmetPayload!

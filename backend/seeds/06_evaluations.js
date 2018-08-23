@@ -12,7 +12,7 @@ const createEvaluation = (knex, i) => (
       const cookId = cookIds[i];
       const authorId = randomElement(authorIds).id;
       return knex('evaluations').insert({
-        cook_id: cookId,
+        id: cookId,
         rating: faker.random.number() % 5,
         comment: faker.lorem.sentence(),
         author_id: authorId,
