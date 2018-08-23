@@ -9,6 +9,8 @@ import {
   isNil,
 } from '../utils/utils';
 
+const DEFAULT_LIMIT = 10; // the same defined by react-admin
+
 const knex = require('knex')(connection[process.env.NODE_ENV]);
 
 async function findFirstWhere(tableName, value) {
@@ -135,9 +137,6 @@ async function getConnection(tableName, args) {
 }
 
 async function getPage(tableName, args) {
-  if (isNil(args.page) || isNil(args.limit)) {
-    return { userError: 'page and limit arguments have to be provided' };
-  }
   if (args.page <= 0) {
     return { userError: 'page must be strictly positive' };
   }
@@ -146,19 +145,36 @@ async function getPage(tableName, args) {
   }
 
   let totalQuery = `SELECT * FROM ${tableName}`;
-  let pageQuery = `${totalQuery} LIMIT ${args.limit} OFFSET ${(args.page - 1) * args.limit}`;
+
+  if (!isEmpty(get(args, 'filter.ids'))) {
+    totalQuery = `${totalQuery} WHERE id IN (${args.filter.ids.map(id => `'${id}'`).join(',')})`;
+  }
+
+  let subsetQuery = totalQuery;
+
+  if (args.page) {
+    const limit = args.limit || DEFAULT_LIMIT;
+    subsetQuery = `${subsetQuery} LIMIT ${limit} OFFSET ${(args.page - 1) * limit}`;
+  }
 
   try {
-    pageQuery = knex.raw(pageQuery);
-    const { rows } = await pageQuery;
+    let result;
 
-    totalQuery = knex.raw(totalQuery);
-    const result = await totalQuery;
+    subsetQuery = knex.raw(subsetQuery);
+    result = await subsetQuery;
+    const rows = result.rows;
+
+    if (subsetQuery !== totalQuery) {
+      totalQuery = knex.raw(totalQuery);
+      result = await totalQuery;
+    }
+
+    const rowCount = result.rowCount;
 
     return {
       data: {
         items: rows,
-        total: result.rowCount,
+        total: rowCount,
       },
     };
   } catch (err) {
@@ -240,7 +256,7 @@ async function performOperation(args, resourcePromise, operationPromise, authorK
 
 async function performPagination(tableName, args) {
   let result;
-  if (!isNil(args.page) && !isNil(args.limit)) {
+  if (!isNil(args.page) || !isEmpty(args.filter)) {
     result = await getPage(tableName, args);
   } else {
     result = await getConnection(tableName, args);
