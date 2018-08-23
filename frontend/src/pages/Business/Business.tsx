@@ -41,6 +41,9 @@ const styles = (theme: Theme) => ({
     maxWidth: 320,
     width: "100%"
   },
+  link: {
+    textDecoration: "none"
+  },
   logo: {
     height: "100%",
     maxWidth: 50,
@@ -97,36 +100,42 @@ export class Business extends React.Component<IBusinessProps, {}> {
           "Atelier de deux heures suivi d'une dégustation des produits préparés",
         image:
           "https://static.cuistotducoin.com/img/business/atelier-afterwork.jpg",
-        title: "Atelier Afterwork"
+        title: "Atelier Afterwork",
+        url: "https://cuistotducoin.typeform.com/to/XkgNMt"
       },
       {
         description: "Atelier de trois heures suivi d'un repas convivial",
         image:
           "https://static.cuistotducoin.com/img/business/atelier-et-repas.jpg",
-        title: "Atelier suivi d’un repas"
+        title: "Atelier suivi d’un repas",
+        url: "https://cuistotducoin.typeform.com/to/e0PmFx"
       },
       {
         description: "Atelier découverte et dégustation",
         image: "https://static.cuistotducoin.com/img/business/degustation.jpg",
-        title: "Atelier dégustation"
+        title: "Atelier dégustation",
+        url: "https://cuistotducoin.typeform.com/to/qrhUFk"
       },
       {
         description: "Une solution clé en main pour un dejeunez rapide",
         image: "https://static.cuistotducoin.com/img/business/buffet.jpg",
-        title: "Buffet"
+        title: "Buffet des gourmets",
+        url: "https://cuistotducoin.typeform.com/to/hakg4D"
       },
       {
         description: "Récompensez vos équipes autour d'un repas d'exception !",
         image:
           "https://static.cuistotducoin.com/img/business/repas-prestige.jpg",
-        title: "Repas prestige"
+        title: "Repas prestige",
+        url: "https://cuistotducoin.typeform.com/to/OMwjPe"
       },
       {
         description:
           "Notre cuistot est aux fourneaux et vous prépare des mets du monde à se partager en équipe.",
         image:
           "https://static.cuistotducoin.com/img/business/repas-pratique.jpg",
-        title: "Repas pratique"
+        title: "Repas authentique",
+        url: "https://cuistotducoin.typeform.com/to/XkgNMt"
       }
     ];
 
@@ -282,25 +291,27 @@ export class Business extends React.Component<IBusinessProps, {}> {
           {typeActivity.map((activity, index) => (
             <Grid key={index} item={true} xs={12} sm={6} md={4}>
               <Grid container={true}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.media}
-                    image={activity.image}
-                    title={activity.title}
-                  />
-                  <CardHeader
-                    className={classes.cardHeader}
-                    title={activity.title}
-                    classes={{
-                      title: classes.title
-                    }}
-                  />
-                  <CardContent className={classes.cardShortContent}>
-                    <Typography component="p">
-                      {activity.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <a className={classes.link} href={activity.url} target="_blank">
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.media}
+                      image={activity.image}
+                      title={activity.title}
+                    />
+                    <CardHeader
+                      className={classes.cardHeader}
+                      title={activity.title}
+                      classes={{
+                        title: classes.title
+                      }}
+                    />
+                    <CardContent className={classes.cardShortContent}>
+                      <Typography component="p">
+                        {activity.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </a>
               </Grid>
             </Grid>
           ))}
