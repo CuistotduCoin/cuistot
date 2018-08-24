@@ -160,10 +160,16 @@ export default introspectionResults => (
     return encodeMutation(queryType.name, {
       params: apolloArgs,
       fields: {
-        data: {
-          field: queryType.name,
+        [queryType.name]: {
           params: args,
-          fields: { id: {} },
+          fields: {
+            message: {},
+            errors: {
+              fields: {
+                message: {},
+              },
+            },
+          },
         },
       },
     });

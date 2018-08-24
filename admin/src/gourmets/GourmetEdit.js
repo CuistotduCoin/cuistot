@@ -7,11 +7,23 @@ import {
   TextInput,
   required,
   RadioButtonGroupInput,
+  CardActions,
+  ShowButton,
+  ListButton,
+  RefreshButton,
 } from 'react-admin';
 import { GourmetNameField } from '../fields';
 
-const WorkshopEdit = props => (
-  <Edit title={<GourmetNameField />} {...props}>
+const GourmetEditActions = ({ basePath, data }) => (
+  <CardActions>
+    <ShowButton basePath={basePath} record={data} />
+    <ListButton basePath={basePath} />
+    <RefreshButton />
+  </CardActions>
+);
+
+const GourmetEdit = props => (
+  <Edit actions={<GourmetEditActions />} title={<GourmetNameField />} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
       <DisabledInput source="email" />
@@ -34,4 +46,4 @@ const WorkshopEdit = props => (
   </Edit>
 );
 
-export default WorkshopEdit;
+export default GourmetEdit;

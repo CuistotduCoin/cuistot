@@ -6,11 +6,23 @@ import {
   RichTextField,
   Show,
   SimpleShowLayout,
+  CardActions,
+  EditButton,
+  ListButton,
+  RefreshButton,
 } from 'react-admin';
 import { GourmetNameField } from '../fields';
 
+const GourmetShowActions = ({ basePath, data }) => (
+  <CardActions>
+    <EditButton basePath={basePath} record={data} />
+    <ListButton basePath={basePath} />
+    <RefreshButton />
+  </CardActions>
+);
+
 const GourmetShow = props => (
-  <Show title={<GourmetNameField />} {...props}>
+  <Show actions={<GourmetShowActions />} title={<GourmetNameField />} {...props}>
     <SimpleShowLayout>
       <TextField source="id" />
       <EmailField source="email" />
