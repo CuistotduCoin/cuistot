@@ -13,7 +13,6 @@ const KitchenCreate = props => (
       <TextInput source="address" validate={required()} />
       <TextInput source="city" validate={required()} />
       <TextInput source="zip_code" validate={required()} />
-      <TextInput source="location" validate={required()} />
     </SimpleForm>
   </Create>
 );

@@ -332,11 +332,11 @@ input UpdateCookInput {
 }
 
 input CreateKitchenInput {
-  name: String!
+  name: String
   address: String!
   city: String!
   zip_code: String!
-  location: String!
+  location: String
 }
 
 input UpdateKitchenInput {
