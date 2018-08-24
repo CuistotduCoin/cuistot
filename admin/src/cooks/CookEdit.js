@@ -12,7 +12,7 @@ import { CookNameField } from '../fields';
 const CookEdit = props => (
   <Edit title={<CookNameField />} {...props}>
     <SimpleForm>
-      <DisabledInput label="Id" source="id" />
+      <DisabledInput source="id" />
       <BooleanInput source="is_pro" />
       <TextInput source="business_name" />
       <TextInput source="siren" />

@@ -18,7 +18,7 @@ const EvaluationList = props => (
     <Responsive
       medium={(
         <Datagrid>
-          <ReferenceField reference="cooks" source="id" linkType="show">
+          <ReferenceField reference="cooks" source="cook.id" linkType="show">
             <CookNameField />
           </ReferenceField>
           <ReferenceField reference="gourmets" source="author.id" linkType="show">

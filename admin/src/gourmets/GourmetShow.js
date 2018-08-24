@@ -12,6 +12,7 @@ import { GourmetNameField } from '../fields';
 const GourmetShow = props => (
   <Show title={<GourmetNameField />} {...props}>
     <SimpleShowLayout>
+      <TextField source="id" />
       <EmailField source="email" />
       <TextField source="first_name" />
       <TextField source="last_name" />

@@ -11,6 +11,7 @@ import { CookNameField, NameField } from '../fields';
 const WorkshopShow = props => (
   <Show title={<NameField />} {...props}>
     <SimpleShowLayout>
+      <TextField source="id" />
       <TextField source="name" />
       <TextField source="price" />
       <TextField source="duration" />

@@ -14,10 +14,10 @@ import { GourmetNameField } from '../fields';
 const CookCreate = props => (
   <Create {...props}>
     <SimpleForm>
+      <BooleanInput source="is_pro" />
       <ReferenceInput source="gourmet.id" reference="gourmets" validate={required()}>
         <SelectInput optionText={<GourmetNameField />} />
       </ReferenceInput>
-      <BooleanInput source="is_pro" />
       <TextInput source="business_name" />
       <TextInput source="siren" />
       <TextInput source="pro_email" />

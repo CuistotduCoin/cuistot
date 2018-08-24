@@ -13,6 +13,7 @@ import { CookNameField, GourmetNameField } from '../fields';
 const CookShow = props => (
   <Show title={<CookNameField />} {...props}>
     <SimpleShowLayout>
+      <TextField source="id" />
       <ReferenceField reference="gourmets" source="gourmet.id" linkType="show">
         <GourmetNameField />
       </ReferenceField>
