@@ -68,7 +68,7 @@ export default {
         pro_email: 'Email',
         legal_first_name: 'Prénom',
         legal_last_name: 'Nom',
-        legal_birthdate: 'Date de naissance',
+        legal_birthdate: 'Date immatriculation',
       },
       page: {
         delete: 'Supprimer le cuistot',
@@ -100,7 +100,7 @@ export default {
     evaluations: {
       name: 'Evaluation |||| Evaluations',
       fields: {
-        id: 'Cuistot',
+        'cook.id': 'Cuistot',
         'author.id': 'Auteur',
         rating: 'Note',
         comment: 'Commentaires',

@@ -5,19 +5,14 @@ import {
   Responsive,
   TextField,
   ReferenceField,
+  EditButton,
+  ShowButton,
 } from 'react-admin';
-import { withStyles } from '@material-ui/core/styles';
 import WorkshopDate from './WorkshopDate';
 import WorkshopPrice from './WorkshopPrice';
 import { CookNameField } from '../fields';
 
-const styles = {
-  lastCell: {
-    paddingRight: '20px !important',
-  },
-};
-
-const WorkshopList = ({ classes, ...props }) => (
+const WorkshopList = props => (
   <List
     {...props}
     sort={{ field: 'last_seen', order: 'DESC' }}
@@ -37,14 +32,13 @@ const WorkshopList = ({ classes, ...props }) => (
           <TextField source="duration" />
           <TextField source="min_gourmet" />
           <TextField source="max_gourmet" />
-          <WorkshopDate
-            cellClassName={classes.lastCell}
-            headerClassName={classes.lastCell}
-          />
+          <WorkshopDate />
+          <ShowButton />
+          <EditButton />
         </Datagrid>
       )}
     />
   </List>
 );
 
-export default withStyles(styles)(WorkshopList);
+export default WorkshopList;

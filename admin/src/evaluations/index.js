@@ -1,4 +1,11 @@
 import Icon from '@material-ui/icons/Star';
 import EvaluationList from './EvaluationList';
+import EvaluationCreate from './EvaluationCreate';
+import EvaluationEdit from './EvaluationEdit';
 
-export { EvaluationList, Icon as EvaluationIcon };
+export {
+  EvaluationList,
+  EvaluationCreate,
+  EvaluationEdit,
+  Icon as EvaluationIcon,
+};

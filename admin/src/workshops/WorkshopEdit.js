@@ -3,30 +3,17 @@ import {
   Edit,
   SimpleForm,
   DateInput,
-  CardActions,
-  ShowButton,
-  ListButton,
-  DeleteButton,
-  RefreshButton,
   DisabledInput,
   TextInput,
   NumberInput,
   required,
+  ReferenceInput,
+  SelectInput,
 } from 'react-admin';
-
-const WorkshopName = ({ record }) => <span>{record.name}</span>;
-
-const PostEditActions = ({ basePath, data, resource }) => (
-  <CardActions>
-    <ShowButton basePath={basePath} record={data} />
-    <ListButton basePath={basePath} />
-    <DeleteButton basePath={basePath} record={data} resource={resource} />
-    <RefreshButton />
-  </CardActions>
-);
+import { CookNameField, NameField } from '../fields';
 
 const WorkshopEdit = props => (
-  <Edit actions={<PostEditActions />} title={<WorkshopName />} {...props}>
+  <Edit title={<NameField />} {...props}>
     <SimpleForm>
       <DisabledInput label="Id" source="id" />
       <TextInput source="name" validate={required()} />
@@ -35,6 +22,12 @@ const WorkshopEdit = props => (
       <NumberInput source="min_gourmet" validate={required()} />
       <NumberInput source="max_gourmet" validate={required()} />
       <DateInput source="date" validate={required()} />
+      <ReferenceInput source="cook.id" reference="cooks" validate={required()}>
+        <SelectInput optionText={<CookNameField />} />
+      </ReferenceInput>
+      <ReferenceInput source="kitchen.id" reference="kitchens" validate={required()}>
+        <SelectInput optionText="name" />
+      </ReferenceInput>
     </SimpleForm>
   </Edit>
 );

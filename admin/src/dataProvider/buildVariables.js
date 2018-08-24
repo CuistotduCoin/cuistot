@@ -7,6 +7,7 @@ import {
   UPDATE,
   DELETE,
 } from 'react-admin';
+import isEqual from 'lodash.isequal';
 import getFinalType from './getFinalType';
 import isList from './isList';
 
@@ -97,42 +98,58 @@ const buildGetListVariables = introspectionResults => (
   };
 };
 
-const buildCreateUpdateVariables = () => (
+const buildCreateUpdateVariables = introspectionResults => (
   resource,
   aorFetchType,
   params,
   queryType,
-) => (
-  Object.keys(params.data).reduce((acc, key) => {
-    if (Array.isArray(params.data[key])) {
+) => {
+  const inputTypeName = queryType.args[0].type.ofType.name;
+  const { inputFields } = introspectionResults.types.find(t => t.name === inputTypeName);
+  const inputFieldsNames = inputFields.map(inputField => inputField.name);
+  const data = Object.keys(params.data)
+    .filter(param => inputFieldsNames.includes(param) && (
+      !params.previousData
+      || param === 'id'
+      || !isEqual(params.data[param], params.previousData[param])
+    ))
+    .reduce((acc, key) => {
+      acc[key] = params.data[key];
+      return acc;
+    }, {});
+
+  const result = Object.keys(data).reduce((acc, key) => {
+    if (Array.isArray(data[key])) {
       const arg = queryType.args.find(a => a.name === `${key}Ids`);
 
       if (arg) {
         return {
           ...acc,
-          [`${key}Ids`]: params.data[key].map(({ id }) => id),
+          [`${key}Ids`]: data[key].map(({ id }) => id),
         };
       }
     }
 
-    if (typeof params.data[key] === 'object') {
+    if (typeof data[key] === 'object') {
       const arg = queryType.args.find(a => a.name === `${key}Id`);
 
       if (arg) {
         return {
           ...acc,
-          [`${key}Id`]: params.data[key].id,
+          [`${key}Id`]: data[key].id,
         };
       }
     }
 
     return {
       ...acc,
-      [key]: params.data[key],
+      [key]: data[key],
     };
   },
-  {})
-);
+  {});
+
+  return { [resource.type.name.toLowerCase()]: result };
+};
 
 export default introspectionResults => (
   resource,

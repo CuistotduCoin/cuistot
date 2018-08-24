@@ -27,14 +27,15 @@ export const buildQueryFactory = (
   buildGqlQueryImpl,
   getResponseParserImpl,
 ) => (introspectionResults) => {
-  console.log('introspectionResults : ', introspectionResults);
   const knownResources = introspectionResults.resources.map(r => r.type.name);
-  console.log('knownResources : ', knownResources);
 
   return (aorFetchType, resourceName, params) => {
+    console.log('introspectionResults : ', introspectionResults);
+    console.log('knownResources : ', knownResources);
     console.log('aorFetchType : ', aorFetchType);
     console.log('resourceName : ', resourceName);
     console.log('params : ', params);
+
     const gqlResourceName = getGqlResourceName(resourceName);
     const resource = introspectionResults.resources.find(r => r.type.name === gqlResourceName);
 

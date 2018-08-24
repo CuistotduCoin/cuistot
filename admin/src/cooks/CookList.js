@@ -4,9 +4,12 @@ import {
   List,
   Responsive,
   TextField,
+  EmailField,
   DateField,
   BooleanField,
   ReferenceField,
+  ShowButton,
+  EditButton,
 } from 'react-admin';
 import { GourmetNameField } from '../fields';
 
@@ -24,10 +27,12 @@ const CookList = props => (
           <BooleanField source="is_pro" />
           <TextField source="business_name" />
           <TextField source="siren" />
-          <TextField source="pro_email" />
+          <EmailField source="pro_email" />
           <TextField source="legal_first_name" />
           <TextField source="legal_last_name" />
           <DateField source="legal_birthdate" />
+          <ShowButton />
+          <EditButton />
         </Datagrid>
       )}
     />

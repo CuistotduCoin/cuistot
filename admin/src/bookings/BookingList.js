@@ -6,15 +6,9 @@ import {
   NumberField,
   ReferenceField,
   TextField,
+  EditButton,
 } from 'react-admin';
-import { withStyles } from '@material-ui/core/styles';
 import { GourmetNameField } from '../fields';
-
-const styles = {
-  lastCell: {
-    paddingRight: '40px !important',
-  },
-};
 
 const BookingList = ({ classes, ...props }) => (
   <List
@@ -30,15 +24,12 @@ const BookingList = ({ classes, ...props }) => (
           <ReferenceField reference="gourmets" source="gourmet.id" linkType="show">
             <GourmetNameField />
           </ReferenceField>
-          <NumberField
-            source="amount"
-            cellClassName={classes.lastCell}
-            headerClassName={classes.lastCell}
-          />
+          <NumberField source="amount" />
+          <EditButton />
         </Datagrid>
       )}
     />
   </List>
 );
 
-export default withStyles(styles)(BookingList);
+export default BookingList;

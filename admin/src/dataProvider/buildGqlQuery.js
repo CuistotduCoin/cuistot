@@ -73,36 +73,45 @@ export const getArgType = (arg) => {
   }`;
 };
 
-export const buildArgs = (query, variables) => {
+export const buildArgs = (query, variables, resourceName) => {
   if (query.args.length === 0) {
     return {};
   }
 
-  const validVariables = Object.keys(variables).filter(k => typeof variables[k] !== 'undefined');
-
-  const args = query.args
-    .filter(a => validVariables.includes(a.name))
-    .reduce(
-      (acc, arg) => ({ ...acc, [`${arg.name}`]: `$${arg.name}` }),
-      {},
-    );
+  let args;
+  if (query.args.length === 1 && query.args[0].name === pluralize.singular(resourceName)) {
+    args = { [pluralize.singular(resourceName)]: `$${pluralize.singular(resourceName)}` };
+  } else {
+    const validVariables = Object.keys(variables).filter(k => typeof variables[k] !== 'undefined');
+    args = query.args
+      .filter(a => validVariables.includes(a.name))
+      .reduce(
+        (acc, arg) => ({ ...acc, [`${arg.name}`]: `$${arg.name}` }),
+        {},
+      );
+  }
 
   return args;
 };
 
-export const buildApolloArgs = (query, variables) => {
+export const buildApolloArgs = (query, variables, resourceName) => {
   if (query.args.length === 0) {
     return {};
   }
 
-  const validVariables = Object.keys(variables).filter(k => typeof variables[k] !== 'undefined');
-
-  const args = query.args
-    .filter(a => validVariables.includes(a.name))
-    .reduce(
-      (acc, arg) => ({ ...acc, [`$${arg.name}`]: getArgType(arg) }),
-      {},
-    );
+  let args;
+  if (query.args.length === 1 && query.args[0].name === pluralize.singular(resourceName)) {
+    const inputTypeName = query.args[0].type.ofType.name;
+    args = { [`$${pluralize.singular(resourceName)}`]: `${inputTypeName}!` };
+  } else {
+    const validVariables = Object.keys(variables).filter(k => typeof variables[k] !== 'undefined');
+    args = query.args
+      .filter(a => validVariables.includes(a.name))
+      .reduce(
+        (acc, arg) => ({ ...acc, [`$${arg.name}`]: getArgType(arg) }),
+        {},
+      );
+  }
 
   return args;
 };
@@ -114,8 +123,8 @@ export default introspectionResults => (
   variables,
   resourceName,
 ) => {
-  const apolloArgs = buildApolloArgs(queryType, variables);
-  const args = buildArgs(queryType, variables);
+  const apolloArgs = buildApolloArgs(queryType, variables, resourceName);
+  const args = buildArgs(queryType, variables, resourceName);
   const fields = buildFields(introspectionResults)(resource.type.fields);
 
   if (aorFetchType === GET_LIST || aorFetchType === GET_MANY || aorFetchType === GET_MANY_REFERENCE) {

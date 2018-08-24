@@ -6,6 +6,7 @@ import {
   NumberField,
   RichTextField,
   ReferenceField,
+  EditButton,
 } from 'react-admin';
 import { CookNameField, GourmetNameField } from '../fields';
 
@@ -25,6 +26,7 @@ const EvaluationList = props => (
           </ReferenceField>
           <NumberField source="rating" />
           <RichTextField source="comment" />
+          <EditButton />
         </Datagrid>
       )}
     />

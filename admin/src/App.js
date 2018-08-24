@@ -20,11 +20,38 @@ import {
   WorkshopCreate,
   WorkshopIcon,
 } from './workshops';
-import { GourmetList, GourmetIcon } from './gourmets';
-import { CookList, CookIcon } from './cooks';
-import { BookingList, BookingIcon } from './bookings';
-import { KitchenList, KitchenIcon } from './kitchens';
-import { EvaluationList, EvaluationIcon } from './evaluations';
+import {
+  GourmetList,
+  GourmetShow,
+  GourmetEdit,
+  GourmetIcon,
+} from './gourmets';
+import {
+  CookList,
+  CookShow,
+  CookEdit,
+  CookCreate,
+  CookIcon,
+} from './cooks';
+import {
+  BookingList,
+  BookingCreate,
+  BookingEdit,
+  BookingIcon,
+} from './bookings';
+import {
+  KitchenList,
+  KitchenCreate,
+  KitchenShow,
+  KitchenEdit,
+  KitchenIcon,
+} from './kitchens';
+import {
+  EvaluationList,
+  EvaluationCreate,
+  EvaluationEdit,
+  EvaluationIcon,
+} from './evaluations';
 
 const i18nProvider = (locale) => {
   if (locale === 'fr') {
@@ -81,26 +108,38 @@ class App extends Component {
         <Resource
           name="gourmets"
           list={GourmetList}
+          show={GourmetShow}
+          edit={GourmetEdit}
           icon={GourmetIcon}
         />
         <Resource
           name="cooks"
           list={CookList}
+          show={CookShow}
+          edit={CookEdit}
+          create={CookCreate}
           icon={CookIcon}
         />
         <Resource
           name="bookings"
           list={BookingList}
+          create={BookingCreate}
+          edit={BookingEdit}
           icon={BookingIcon}
         />
         <Resource
           name="kitchens"
           list={KitchenList}
+          show={KitchenShow}
+          create={KitchenCreate}
+          edit={KitchenEdit}
           icon={KitchenIcon}
         />
         <Resource
           name="evaluations"
           list={EvaluationList}
+          create={EvaluationCreate}
+          edit={EvaluationEdit}
           icon={EvaluationIcon}
         />
       </Admin>

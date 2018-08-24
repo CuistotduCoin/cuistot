@@ -62,7 +62,7 @@ export default {
         pro_email: 'Email',
         legal_first_name: 'Last name',
         legal_last_name: 'First name',
-        legal_birthdate: 'Birthdate',
+        legal_birthdate: 'Registration date',
       },
       page: {
         delete: 'Delete the cook',
@@ -94,7 +94,7 @@ export default {
     evaluations: {
       name: 'Evaluation |||| Evaluations',
       fields: {
-        id: 'Cook',
+        'cook.id': 'Cook',
         'author.id': 'Author',
         rating: 'Rating',
         comment: 'Comment',

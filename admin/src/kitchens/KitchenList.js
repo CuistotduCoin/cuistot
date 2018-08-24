@@ -4,6 +4,8 @@ import {
   List,
   Responsive,
   TextField,
+  ShowButton,
+  EditButton,
 } from 'react-admin';
 import { LocationField } from '../fields';
 
@@ -20,6 +22,8 @@ const KitchenList = props => (
           <TextField source="city" />
           <TextField source="zip_code" />
           <LocationField />
+          <ShowButton />
+          <EditButton />
         </Datagrid>
       )}
     />

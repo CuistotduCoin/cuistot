@@ -86,14 +86,8 @@ function encodeField(key, val) {
     return key;
   }
 
-  // console.log('key : ', key);
-  // console.log('val : ', val);
-
   const parts = [key];
 
-  // if (val.field) {
-  //   parts.push(`:${val.field}`);
-  // }
   if (val.params) {
     parts.push(encodeParams(val.params));
   }
