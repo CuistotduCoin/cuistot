@@ -147,7 +147,9 @@ async function getPage(tableName, args) {
   let totalQuery = `SELECT * FROM ${tableName}`;
 
   if (!isEmpty(get(args, 'filter.ids'))) {
-    totalQuery = `${totalQuery} WHERE id IN (${args.filter.ids.map(id => `'${id}'`).join(',')})`;
+    totalQuery = `${totalQuery} WHERE id IN (${args.filter.ids.map(id => `'${id}'`).join(',')}) AND deleted_at IS NULL`;
+  } else {
+    totalQuery = `${totalQuery} WHERE deleted_at IS NULL`;
   }
 
   let subsetQuery = totalQuery;
