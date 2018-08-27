@@ -5,6 +5,7 @@ import {
   TextInput,
   required,
 } from 'react-admin';
+import { validateZipCode } from '../utils';
 
 const KitchenCreate = props => (
   <Create {...props}>
@@ -12,7 +13,7 @@ const KitchenCreate = props => (
       <TextInput source="name" />
       <TextInput source="address" validate={required()} />
       <TextInput source="city" validate={required()} />
-      <TextInput source="zip_code" validate={required()} />
+      <TextInput source="zip_code" validate={[required(), validateZipCode]} />
     </SimpleForm>
   </Create>
 );

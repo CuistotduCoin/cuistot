@@ -107,6 +107,7 @@ const buildCreateUpdateVariables = introspectionResults => (
   const inputTypeName = queryType.args[0].type.ofType.name;
   const { inputFields } = introspectionResults.types.find(t => t.name === inputTypeName);
   const inputFieldsNames = inputFields.map(inputField => inputField.name);
+  const booleanInputFieldsNames = inputFields.filter(inputField => inputField.type.name === 'Boolean').map(inputField => inputField.name);
   const data = Object.keys(params.data)
     .filter(param => inputFieldsNames.includes(param) && (
       !params.previousData
@@ -117,6 +118,12 @@ const buildCreateUpdateVariables = introspectionResults => (
       acc[key] = params.data[key];
       return acc;
     }, {});
+
+  booleanInputFieldsNames.forEach((inputName) => {
+    if (!data[inputName]) {
+      data[inputName] = false;
+    }
+  });
 
   const result = Object.keys(data).reduce((acc, key) => {
     if (Array.isArray(data[key])) {

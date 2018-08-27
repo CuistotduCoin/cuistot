@@ -6,6 +6,7 @@ import {
   DisabledInput,
   TextInput,
   BooleanInput,
+  email,
 } from 'react-admin';
 import { CookNameField } from '../fields';
 
@@ -16,7 +17,7 @@ const CookEdit = props => (
       <BooleanInput source="is_pro" />
       <TextInput source="business_name" />
       <TextInput source="siren" />
-      <TextInput source="pro_email" />
+      <TextInput source="pro_email" validate={email()} />
       <TextInput source="legal_first_name" />
       <TextInput source="legal_last_name" />
       <DateInput source="legal_birthdate" />

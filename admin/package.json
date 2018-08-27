@@ -21,6 +21,7 @@
         "moment": "^2.22.2",
         "pluralize": "^7.0.0",
         "prop-types": "^15.6.2",
+        "query-string": "^6.1.0",
         "ra-data-fakerest": "^2.0.0",
         "ra-data-graphql": "^2.2.0",
         "ra-data-graphql-simple": "^2.1.2",

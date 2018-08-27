@@ -7,6 +7,7 @@ import {
   required,
 } from 'react-admin';
 import { NameField } from '../fields';
+import { validateZipCode } from '../utils';
 
 const KitchenEdit = props => (
   <Edit title={<NameField />} {...props}>
@@ -15,7 +16,7 @@ const KitchenEdit = props => (
       <TextInput source="name" />
       <TextInput source="address" validate={required()} />
       <TextInput source="city" validate={required()} />
-      <TextInput source="zip_code" validate={required()} />
+      <TextInput source="zip_code" validate={[required(), validateZipCode]} />
     </SimpleForm>
   </Edit>
 );

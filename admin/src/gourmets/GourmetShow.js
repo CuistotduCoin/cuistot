@@ -10,16 +10,36 @@ import {
   EditButton,
   ListButton,
   RefreshButton,
+  Button,
 } from 'react-admin';
+import { Link } from 'react-router-dom';
 import { GourmetNameField } from '../fields';
+import { CookIcon } from '../cooks';
 
-const GourmetShowActions = ({ basePath, data }) => (
-  <CardActions>
-    <EditButton basePath={basePath} record={data} />
-    <ListButton basePath={basePath} />
-    <RefreshButton />
-  </CardActions>
-);
+const GourmetShowActions = ({ basePath, data }) => {
+  let createCookButton;
+  if (data && data.id) {
+    createCookButton = (
+      <Button
+        variant="raised"
+        component={Link}
+        to={`/cooks/create?gourmet_id=${data.id}`}
+        label="Créer un cuistot"
+        title="Créer un cuistot"
+      >
+        <CookIcon />
+      </Button>
+    );
+  }
+  return (
+    <CardActions>
+      {createCookButton}
+      <EditButton basePath={basePath} record={data} />
+      <ListButton basePath={basePath} />
+      <RefreshButton />
+    </CardActions>
+  );
+};
 
 const GourmetShow = props => (
   <Show actions={<GourmetShowActions />} title={<GourmetNameField />} {...props}>
