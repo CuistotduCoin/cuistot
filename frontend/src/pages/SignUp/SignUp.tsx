@@ -1,4 +1,4 @@
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
 import Header from "components/Header";
@@ -7,7 +7,7 @@ import SignUpForm from "components/SignUpForm";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const styles = (theme: Theme) => ({});
+const styles = () => ({});
 
 interface ISignUpProps {
   classes?: any;
@@ -15,8 +15,6 @@ interface ISignUpProps {
 
 export class SignUp extends React.Component<ISignUpProps, {}> {
   public render() {
-    const { classes } = this.props;
-
     return (
       <>
         <Header hideSignUpLogin={true} />

@@ -1,10 +1,9 @@
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import React from "react";
-import { Link } from "react-router-dom";
 
-const styles = (theme: Theme) => ({});
+const styles = () => ({});
 
 interface IProfilProps {
   classes?: any;
@@ -12,8 +11,6 @@ interface IProfilProps {
 
 export class Profil extends React.Component<IProfilProps, {}> {
   public render() {
-    const { classes } = this.props;
-
     return (
       <>
         <Header />

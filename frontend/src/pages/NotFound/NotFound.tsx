@@ -1,9 +1,9 @@
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import React from "react";
 
-const styles = (theme: Theme) => ({});
+const styles = () => ({});
 
 interface INotFoundProps {
   classes?: any;
@@ -11,8 +11,6 @@ interface INotFoundProps {
 
 export class NotFound extends React.Component<INotFoundProps, {}> {
   public render() {
-    const { classes } = this.props;
-
     return (
       <>
         <Header />

@@ -1,6 +1,6 @@
 import * as content from "!raw-loader!content/organize.md";
 import Grid from "@material-ui/core/Grid";
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 // @ts-ignore
 import MarkdownElement from "@material-ui/docs/MarkdownElement";
 import Footer from "components/Footer";
@@ -10,7 +10,7 @@ import Hero from "components/Hero";
 import React from "react";
 import metaInfo from "shared/metaInfo";
 
-const styles = (theme: Theme) => ({
+const styles = () => ({
   grid: {
     margin: "0px auto",
     maxWidth: 1080,

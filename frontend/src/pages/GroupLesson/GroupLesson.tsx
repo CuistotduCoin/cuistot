@@ -1,18 +1,9 @@
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import Grid from "@material-ui/core/Grid";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import { Theme, withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import React from "react";
 
-const styles = (theme: Theme) => ({
+const styles = () => ({
   card: {
     maxWidth: 240
   },
@@ -55,65 +46,6 @@ export interface IBusinessProps {
 
 export class Business extends React.Component<IBusinessProps, {}> {
   public render() {
-    const { classes } = this.props;
-
-    const typeActivity = [
-      {
-        description:
-          "Atelier de deux heures suivi d'une dégustation des produits préparés",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Atelier Afterwork"
-      },
-      {
-        description: "Atelier de quatre heures suivi d'un repas convivial",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Atelier suivi d’un repas"
-      },
-      {
-        description: "Atelier découverte et dégustation",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Atelier dégustation"
-      },
-      {
-        description: "Récompensez vos équipes autour d'un repas d'exception !",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Repas prestige"
-      },
-      {
-        description:
-          "Notre cuistot est aux founeaux pour changer de l'habituel traiteur : rapidité et simplicité",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Repas pratique"
-      }
-    ];
-
-    const typeWorld = [
-      {
-        description:
-          "Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots d'ailleurs.",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Cuisine du monde"
-      },
-      {
-        description:
-          "Initiez-vous aux principes de la cuisine végétarienne, vegan ou encore ayurvédique, où l’équilibre et les saveurs sont au cœur de l’assiette.",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Cuisine Bien-être"
-      },
-      {
-        description:
-          "Attachés à votre territoire et aux produits locaux et de saison, plongez au cœur d’une cuisine bretonne qui éveillera votre curiosité.",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Cuisine Terroir"
-      },
-      {
-        description:
-          "Percez les secrets de nos artisans pâtissiers et boulangers au travers de recettes créatives et gourmandes.",
-        image: "https://picsum.photos/240/135/?random",
-        title: "Boulangerie & Pâtisserie"
-      }
-    ];
-
     return (
       <>
         <Header />

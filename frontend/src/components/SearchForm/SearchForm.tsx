@@ -1,6 +1,4 @@
 import { Theme, withStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-
 import React from "react";
 
 const styles = (theme: Theme) => ({
@@ -21,8 +19,6 @@ interface ISearchForm {
 
 export class SearchForm extends React.Component<ISearchForm, {}> {
   public render() {
-    const { classes } = this.props;
-
     return <div />;
   }
 }

@@ -158,6 +158,14 @@ export default [
   {
     component: asyncComponent({
       Placeholder: () => <Loading />,
+      loader: () => import("pages/Subscription")
+    }),
+    exact: true,
+    path: "/subscription"
+  },
+  {
+    component: asyncComponent({
+      Placeholder: () => <Loading />,
       loader: () => import("pages/Team")
     }),
     exact: true,

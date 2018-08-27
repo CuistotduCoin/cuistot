@@ -1,10 +1,10 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
-import Gift from "./Gift";
+import Subscription from "./Subscription";
 
-storiesOf("Cuistot/pages/Gift", module)
+storiesOf("Cuistot/pages/Subscription", module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
-  .add("default", () => <Gift />);
+  .add("default", () => <Subscription />);
