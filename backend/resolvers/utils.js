@@ -185,11 +185,51 @@ async function getPage(tableName, args) {
   }
 }
 
+/* Checks if the object already exists and has been deleted */
+async function objectExists(tableName, args) {
+  switch (tableName) { // eslint-disable-line
+    case 'gourmets':
+    case 'cooks':
+      return knex(tableName)
+        .whereNotNull('deleted_at')
+        .where('id', args.id)
+        .first();
+    case 'bookings':
+      return knex(tableName)
+        .whereNotNull('deleted_at')
+        .where('gourmet_id', args.gourmet_id)
+        .where('workshop_id', args.workshop_id)
+        .first();
+    case 'evaluations':
+      return knex(tableName)
+        .whereNotNull('deleted_at')
+        .where('cook_id', args.cook_id)
+        .where('author_id', args.author_id)
+        .first();
+  }
+  return false;
+}
+
 async function insertObject(tableName, args) {
   try {
-    const createArgs = cleanKnexQueryArgs(args);
-    const query = knex(tableName).insert(createArgs).returning('*');
-    const result = await query;
+    let query;
+    let result = await objectExists(tableName, args);
+    if (result) {
+      const updateArgs = {
+        ...args,
+        deleted_at: null,
+        created_at: result.created_at,
+        updated_at: knex.fn.now(),
+      };
+      query = knex(tableName)
+        .where('id', result.id)
+        .update(updateArgs)
+        .returning('*');
+    } else {
+      const createArgs = cleanKnexQueryArgs(args);
+      query = knex(tableName).insert(createArgs).returning('*');
+    }
+    result = await query;
     if (result.length) {
       return { data: result[0], message: 'success' };
     }
