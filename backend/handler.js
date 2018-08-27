@@ -1,4 +1,5 @@
 import AWS from 'aws-sdk';
+import connection from './knexfile';
 import {
   getBooking,
   getBookings,
@@ -48,10 +49,12 @@ import {
 import { run } from './mailer';
 import { isEmpty } from './utils/utils';
 
+const knex = require('knex')(connection[process.env.NODE_ENV]);
+
 export const graphqlHandler = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false; // eslint-disable-line
 
-  const resolve = (resolver, key) => {
+  const resolve = (resolver, key, resolvedCallback) => {
     resolver(event.arguments).then((result) => {
       const requestResult = { errors: [] };
       if (result.userError) {
@@ -62,7 +65,12 @@ export const graphqlHandler = (event, context, callback) => {
       if (result.message) {
         requestResult.message = result.message;
       }
-      callback(null, requestResult);
+
+      if (resolvedCallback) {
+        resolvedCallback(requestResult, event.arguments);
+      } else {
+        callback(null, requestResult);
+      }
     }).catch((error) => {
       callback(error, null);
     });
@@ -182,7 +190,28 @@ export const graphqlHandler = (event, context, callback) => {
       break;
     }
     case 'createCook': {
-      resolve(createCook, 'cook');
+      resolve(createCook, 'cook', (requestResult) => {
+        const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
+        knex('gourmets').where('id', requestResult.cook.id).first()
+          .then((gourmet) => {
+            const params = {
+              GroupName: 'Cook',
+              UserPoolId: process.env.AWS_USERPOOL_ID,
+              Username: gourmet.username,
+            };
+            cognitoIdentityServiceProvider.adminAddUserToGroup(params, (err) => {
+              if (err) {
+                callback(err, null);
+              } else {
+                callback(null, requestResult);
+              }
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+            callback(err, null);
+          });
+      });
       break;
     }
     case 'updateCook': {
@@ -190,7 +219,28 @@ export const graphqlHandler = (event, context, callback) => {
       break;
     }
     case 'deleteCook': {
-      resolve(deleteCook);
+      resolve(deleteCook, null, (requestResult, args) => {
+        const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
+        knex('gourmets').where('id', args.id).first()
+          .then((gourmet) => {
+            const params = {
+              GroupName: 'Cook',
+              UserPoolId: process.env.AWS_USERPOOL_ID,
+              Username: gourmet.username,
+            };
+            cognitoIdentityServiceProvider.adminRemoveUserFromGroup(params, (err) => {
+              if (err) {
+                callback(err, null);
+              } else {
+                callback(null, requestResult);
+              }
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+            callback(err, null);
+          });
+      });
       break;
     }
     case 'createKitchen': {
@@ -233,6 +283,7 @@ export const postConfirmationHandler = (event, context, callback) => {
       // Create a Gourmet object in RDS
       const args = {
         id: event.request.userAttributes.sub,
+        username: event.userName,
         email: event.request.userAttributes.email,
         first_name: event.request.userAttributes.name,
         last_name: event.request.userAttributes.family_name,
