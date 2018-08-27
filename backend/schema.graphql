@@ -29,13 +29,84 @@ type PaginatedWorkshops {
   message: String
 }
 
+type PagePaginatedWorkshops {
+  workshops: WorkshopPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedGourmets {
+  gourmets: GourmetPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedCooks {
+  cooks: CookPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedBookings {
+  bookings: BookingPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedKitchens {
+  kitchens: KitchenPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedEvaluations {
+  evaluations: EvaluationPage
+  errors: [UserError!]!
+  message: String
+}
+
 type WorkshopConnection {
   edges: [WorkshopEdge!]!
   pageInfo: PageInfo!
 }
 
+type WorkshopPage {
+  items: [Workshop!]!
+  total: Int!
+}
+
+type GourmetPage {
+  items: [Gourmet!]!
+  total: Int!
+}
+
+type CookPage {
+  items: [Cook!]!
+  total: Int!
+}
+
+type BookingPage {
+  items: [Booking!]!
+  total: Int!
+}
+
+type KitchenPage {
+  items: [Kitchen!]!
+  total: Int!
+}
+
+type EvaluationPage {
+  items: [Evaluation!]!
+  total: Int!
+}
+
 type WorkshopEdge {
   node: Workshop!
+  cursor: String!
+}
+
+type GourmetEdge {
+  node: Gourmet!
   cursor: String!
 }
 
@@ -66,11 +137,12 @@ type Booking implements Node & Timestamps {
 }
 
 type Evaluation implements Timestamps {
+  id: ID!
   created_at: String!
   updated_at: String!
-  cook: Cook!
   rating: Float!
   comment: String!
+  cook: Cook!
   author: Gourmet!
 }
 
@@ -260,11 +332,11 @@ input UpdateCookInput {
 }
 
 input CreateKitchenInput {
-  name: String!
+  name: String
   address: String!
   city: String!
   zip_code: String!
-  location: String!
+  location: String
 }
 
 input UpdateKitchenInput {
@@ -322,6 +394,10 @@ type EvaluationPayload {
   evaluation: Evaluation
 }
 
+input Filter {
+  ids: [ID!]
+}
+
 type Mutation {
   ## Workshops
   createWorkshop(workshop: CreateWorkshopInput!): WorkshopPayload!
@@ -348,7 +424,7 @@ type Mutation {
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   updateEvaluation(evaluation: UpdateEvaluationInput!): EvaluationPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
-  deleteEvaluation(booking_id: ID!): PlainPayload!
+  deleteEvaluation(evaluation_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 
   ## Gourmets
@@ -381,12 +457,24 @@ type Mutation {
 type Query {
   getWorkshop(workshop_id: ID!): WorkshopPayload!
   getWorkshops(before: String, after: String, first: Int, last: Int): PaginatedWorkshops!
+  getWorkshopsPage(limit: Int, page: Int, filter: Filter): PagePaginatedWorkshops!
+    @aws_auth(cognito_groups: ["Admin"])
   getGourmet(gourmet_id: ID!): GourmetPayload!
+  getGourmetsPage(limit: Int, page: Int, filter: Filter): PagePaginatedGourmets!
+    @aws_auth(cognito_groups: ["Admin"])
   getCook(cook_id: ID!): CookPayload!
+  getCooksPage(limit: Int, page: Int, filter: Filter): PagePaginatedCooks!
+    @aws_auth(cognito_groups: ["Admin"])
   getBooking(booking_id: ID!): BookingPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  getBookingsPage(limit: Int, page: Int, filter: Filter): PagePaginatedBookings!
+    @aws_auth(cognito_groups: ["Admin"])
   getKitchen(kitchen_id: ID!): KitchenPayload!
-  getEvaluation(cook_id: ID!): EvaluationPayload!
+  getKitchensPage(limit: Int, page: Int, filter: Filter): PagePaginatedKitchens!
+    @aws_auth(cognito_groups: ["Admin"])
+  getEvaluation(evaluation_id: ID!): EvaluationPayload!
+  getEvaluationsPage(limit: Int, page: Int, filter: Filter): PagePaginatedEvaluations!
+    @aws_auth(cognito_groups: ["Admin"])
   getCurrentGourmet: GourmetPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 }

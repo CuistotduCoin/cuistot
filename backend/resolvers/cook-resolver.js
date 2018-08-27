@@ -5,6 +5,7 @@ import {
   updateObject,
   deleteObject,
   performOperation,
+  performPagination,
 } from './utils';
 
 const TABLE_NAME = 'cooks';
@@ -14,13 +15,18 @@ async function getCook(args) {
   return result;
 }
 
+async function getCooks(args) {
+  const result = await performPagination(TABLE_NAME, args);
+  return result;
+}
+
 async function getCookWorkshops(args) {
   const result = await findWhere('workshops', args.cook_id, 'cook_id');
   return result;
 }
 
 async function getCookEvaluations(args) {
-  const result = await findWhere('evaluations', args.cook_id, 'cook_id');
+  const result = await findWhere('evaluations', args.cook_id);
   return result;
 }
 
@@ -53,6 +59,7 @@ async function deleteCook(args) {
 
 export {
   getCook,
+  getCooks,
   createCook,
   deleteCook,
   updateCook,

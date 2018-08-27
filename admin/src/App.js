@@ -2,115 +2,149 @@ import 'babel-polyfill';
 import React, { Component } from 'react';
 import { Admin, Resource } from 'react-admin';
 
-import './App.css';
-
 import authProvider from './authProvider';
-import sagas from './sagas';
+import buildDataProvider from './dataProvider/builder';
 import themeReducer from './themeReducer';
-import Login from './Login';
 import Layout from './Layout';
+import Login from './Login';
+import Dashboard from './dashboard/Dashboard';
 import Menu from './Menu';
-import { Dashboard } from './dashboard';
 import customRoutes from './routes';
 import englishMessages from './i18n/en';
-
+import frenchMessages from './i18n/fr';
+import './App.css';
 import {
-    VisitorList,
-    VisitorEdit,
-    VisitorCreate,
-    VisitorIcon,
-} from './visitors';
-import { CommandList, CommandEdit, CommandIcon } from './commands';
+  WorkshopList,
+  WorkshopShow,
+  WorkshopEdit,
+  WorkshopCreate,
+  WorkshopIcon,
+} from './workshops';
 import {
-    ProductList,
-    ProductCreate,
-    ProductEdit,
-    ProductIcon,
-} from './products';
-import { CategoryList, CategoryEdit, CategoryIcon } from './categories';
-import { ReviewList, ReviewEdit, ReviewIcon } from './reviews';
+  GourmetList,
+  GourmetShow,
+  GourmetEdit,
+  GourmetIcon,
+} from './gourmets';
+import {
+  CookList,
+  CookShow,
+  CookEdit,
+  CookCreate,
+  CookIcon,
+} from './cooks';
+import {
+  BookingList,
+  BookingCreate,
+  BookingEdit,
+  BookingIcon,
+} from './bookings';
+import {
+  KitchenList,
+  KitchenCreate,
+  KitchenShow,
+  KitchenEdit,
+  KitchenIcon,
+} from './kitchens';
+import {
+  EvaluationList,
+  EvaluationCreate,
+  EvaluationEdit,
+  EvaluationIcon,
+} from './evaluations';
 
-import buildDataProvider from './dataProvider';
-
-const i18nProvider = locale => {
-    if (locale === 'fr') {
-        return import('./i18n/fr').then(messages => messages.default);
-    }
-
-    // Always fallback on english
-    return englishMessages;
+const i18nProvider = (locale) => {
+  if (locale === 'fr') {
+    return frenchMessages;
+  }
+  // Always fallback on english
+  return englishMessages;
 };
 
 class App extends Component {
-    state = { dataProvider: null };
+  constructor(props) {
+    super(props);
+    this.state = { dataProvider: null };
+  }
 
-    async componentWillMount() {
-        const dataProvider = await buildDataProvider();
-        this.setState({ dataProvider });
+  async componentWillMount() {
+    const dataProvider = await buildDataProvider();
+    this.setState({ dataProvider });
+  }
+
+  render() {
+    const { dataProvider } = this.state;
+
+    if (!dataProvider) {
+      return (
+        <div className="loader-container">
+          <div className="loader">Loading...</div>
+        </div>
+      );
     }
 
-    render() {
-        const { dataProvider } = this.state;
-
-        if (!dataProvider) {
-            return (
-                <div className="loader-container">
-                    <div className="loader">Loading...</div>
-                </div>
-            );
-        }
-
-        return (
-            <Admin
-                title="Posters Galore Admin"
-                dataProvider={dataProvider}
-                customReducers={{ theme: themeReducer }}
-                customSagas={sagas}
-                customRoutes={customRoutes}
-                authProvider={authProvider}
-                dashboard={Dashboard}
-                loginPage={Login}
-                appLayout={Layout}
-                menu={Menu}
-                locale="fr"
-                i18nProvider={i18nProvider}
-            >
-                <Resource
-                    name="customers"
-                    list={VisitorList}
-                    edit={VisitorEdit}
-                    create={VisitorCreate}
-                    icon={VisitorIcon}
-                />
-                <Resource
-                    name="commands"
-                    list={CommandList}
-                    edit={CommandEdit}
-                    icon={CommandIcon}
-                    options={{ label: 'Orders' }}
-                />
-                <Resource
-                    name="products"
-                    list={ProductList}
-                    create={ProductCreate}
-                    edit={ProductEdit}
-                    icon={ProductIcon}
-                />
-                <Resource
-                    name="categories"
-                    list={CategoryList}
-                    edit={CategoryEdit}
-                    icon={CategoryIcon}
-                />
-                <Resource
-                    name="reviews"
-                    list={ReviewList}
-                    edit={ReviewEdit}
-                    icon={ReviewIcon}
-                />
-            </Admin>
-        );
-    }
+    return (
+      <Admin
+        title="Cuistot du coin"
+        dataProvider={this.state.dataProvider}
+        customReducers={{ theme: themeReducer }}
+        customRoutes={customRoutes}
+        authProvider={authProvider}
+        appLayout={Layout}
+        dashboard={Dashboard}
+        menu={Menu}
+        loginPage={Login}
+        locale="fr"
+        i18nProvider={i18nProvider}
+      >
+        <Resource
+          name="workshops"
+          list={WorkshopList}
+          show={WorkshopShow}
+          edit={WorkshopEdit}
+          create={WorkshopCreate}
+          icon={WorkshopIcon}
+        />
+        <Resource
+          name="gourmets"
+          list={GourmetList}
+          show={GourmetShow}
+          edit={GourmetEdit}
+          icon={GourmetIcon}
+        />
+        <Resource
+          name="cooks"
+          list={CookList}
+          show={CookShow}
+          edit={CookEdit}
+          create={CookCreate}
+          icon={CookIcon}
+        />
+        <Resource
+          name="bookings"
+          list={BookingList}
+          create={BookingCreate}
+          edit={BookingEdit}
+          icon={BookingIcon}
+        />
+        <Resource
+          name="kitchens"
+          list={KitchenList}
+          show={KitchenShow}
+          create={KitchenCreate}
+          edit={KitchenEdit}
+          icon={KitchenIcon}
+        />
+        <Resource
+          name="evaluations"
+          list={EvaluationList}
+          create={EvaluationCreate}
+          edit={EvaluationEdit}
+          icon={EvaluationIcon}
+        />
+      </Admin>
+    );
+  }
 }
 
 export default App;

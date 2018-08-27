@@ -20,6 +20,8 @@ custom:
     includeModules:
       forceInclude:
         - pg
+      forceExclude:
+        - aws-sdk
     packager: 'yarn' # Packager that will be used to package your external modules
   dotenv:
     path: .env
@@ -161,9 +163,19 @@ custom:
         response: "workshop/getWorkshops-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
+        field: getWorkshopsPage
+        request: "workshop/getWorkshops-request-mapping-template.txt"
+        response: "workshop/getWorkshops-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
         field: getGourmet
         request: "gourmet/getGourmet-request-mapping-template.txt"
         response: "gourmet/getGourmet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getGourmetsPage
+        request: "gourmet/getGourmets-request-mapping-template.txt"
+        response: "gourmet/getGourmets-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
         field: getCook
@@ -171,9 +183,19 @@ custom:
         response: "cook/getCook-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
+        field: getCooksPage
+        request: "cook/getCooks-request-mapping-template.txt"
+        response: "cook/getCooks-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
         field: getKitchen
         request: "kitchen/getKitchen-request-mapping-template.txt"
         response: "kitchen/getKitchen-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getKitchensPage
+        request: "kitchen/getKitchens-request-mapping-template.txt"
+        response: "kitchen/getKitchens-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
         field: getBooking
@@ -181,9 +203,19 @@ custom:
         response: "booking/getBooking-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
+        field: getBookingsPage
+        request: "booking/getBookings-request-mapping-template.txt"
+        response: "booking/getBookings-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
         field: getEvaluation
         request: "evaluation/getEvaluation-request-mapping-template.txt"
         response: "evaluation/getEvaluation-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getEvaluationsPage
+        request: "evaluation/getEvaluations-request-mapping-template.txt"
+        response: "evaluation/getEvaluations-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
         field: getCurrentGourmet
@@ -263,6 +295,7 @@ custom:
 functions:
   graphql:
     handler: handler.graphqlHandler
+    role: GraphqlLambdaRole
   postConfirmation:
     handler: handler.postConfirmationHandler
     role: PostConfirmationLambdaRole
@@ -527,6 +560,43 @@ resources:
                     - "logs:CreateLogStream"
                     - "logs:PutLogEvents"
                   Resource: "*"
+    GraphqlLambdaRole:
+      Type: "AWS::IAM::Role"
+      DeletionPolicy: "Delete"
+      Properties:
+        RoleName: "${self:service}-${self:provider.stage}-${self:provider.region}-graphql-lambdaRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "lambda.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "${self:service}-${self:provider.stage}-${self:provider.region}-graphql-lambdaRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action: "logs:CreateLogStream"
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-graphql:*
+                -
+                  Effect: "Allow"
+                  Action: "logs:PutLogEvents"
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-graphql:*:*
+                -
+                  Effect: "Allow"
+                  Action: "cognito-idp:AdminAddUserToGroup"
+                  Resource: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
+                -
+                  Effect: "Allow"
+                  Action: "cognito-idp:AdminRemoveUserFromGroup"
+                  Resource: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
     PostConfirmationLambdaRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"

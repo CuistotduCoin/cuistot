@@ -4,12 +4,18 @@ import {
   updateObject,
   deleteObject,
   performOperation,
+  performPagination,
 } from './utils';
 
 const TABLE_NAME = 'kitchens';
 
 async function getKitchen(args) {
   const result = await findFirstWhere(TABLE_NAME, args.kitchen_id);
+  return result;
+}
+
+async function getKitchens(args) {
+  const result = await performPagination(TABLE_NAME, args);
   return result;
 }
 
@@ -38,4 +44,10 @@ async function deleteKitchen(args) {
   return result;
 }
 
-export { getKitchen, createKitchen, updateKitchen, deleteKitchen };
+export {
+  getKitchen,
+  getKitchens,
+  createKitchen,
+  updateKitchen,
+  deleteKitchen,
+};

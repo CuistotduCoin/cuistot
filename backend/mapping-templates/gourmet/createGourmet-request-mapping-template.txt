@@ -5,6 +5,7 @@
     "field": "createGourmet",
     "arguments": {
       "id": $utils.toJson($context.arguments.gourmet.id),
+      "username": $utils.toJson($context.arguments.gourmet.username),
       "email": $utils.toJson($context.arguments.gourmet.email),
       "first_name": $utils.toJson($context.arguments.gourmet.first_name),
       "last_name": $utils.toJson($context.arguments.gourmet.last_name),
