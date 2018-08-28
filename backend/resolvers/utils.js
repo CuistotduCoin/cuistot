@@ -10,6 +10,16 @@ import {
 } from '../utils/utils';
 
 const DEFAULT_LIMIT = 10; // the same defined by react-admin
+const SEARCHABLE_ATTRIBUTES = {
+  workshops: ['name'],
+  gourmets: ['first_name', 'last_name', 'username'],
+  cooks: ['gourmets.first_name', 'gourmets.last_name', 'gourmets.username'],
+  kitchens: ['name'],
+};
+const JOINS_STRUCTURE = {
+  cooks: { gourmets: ['id', 'id'] },
+  workshops: { bookings: ['id', 'workshop_id'] },
+};
 
 const knex = require('knex')(connection[process.env.NODE_ENV]);
 
@@ -136,6 +146,15 @@ async function getConnection(tableName, args) {
   }
 }
 
+const computeJoins = joins => (
+  joins.map((join) => {
+    const tableName = join[0];
+    const tableToJoin = join[1];
+    const joinAttrs = JOINS_STRUCTURE[tableName][tableToJoin];
+    return `${join[2]} ${tableToJoin} ON ${tableName}.${joinAttrs[0]} = ${tableToJoin}.${joinAttrs[1]} AND ${tableToJoin}.deleted_at IS NULL`;
+  }).join(' ')
+);
+
 async function getPage(tableName, args) {
   if (args.page <= 0) {
     return { userError: 'page must be strictly positive' };
@@ -144,20 +163,61 @@ async function getPage(tableName, args) {
     return { userError: 'limit cannot have a negative value' };
   }
 
-  let totalQuery = `SELECT * FROM ${tableName}`;
+  const conditions = [`${tableName}.deleted_at IS NULL`];
+  const joins = [];
 
   if (!isEmpty(get(args, 'filter.ids'))) {
-    totalQuery = `${totalQuery} WHERE id IN (${args.filter.ids.map(id => `'${id}'`).join(',')}) AND deleted_at IS NULL`;
+    conditions.push(`id IN (${args.filter.ids.map(id => `'${id}'`).join(',')})`);
   } else {
-    totalQuery = `${totalQuery} WHERE deleted_at IS NULL`;
+    // search filters
+    if (Object.keys(SEARCHABLE_ATTRIBUTES).includes(tableName) && get(args, 'filter.q')) {
+      conditions.push(`${SEARCHABLE_ATTRIBUTES[tableName].map(attr => `${attr} ILIKE '%${args.filter.q}%'`).join(' OR ')}`);
+
+      const tablesToJoin = [];
+      SEARCHABLE_ATTRIBUTES[tableName].forEach((attr) => {
+        const chunks = attr.split('.');
+        if (chunks.length > 1 && !tablesToJoin.includes(chunks[0])) {
+          tablesToJoin.push(chunks[0]);
+        }
+      });
+
+      tablesToJoin.forEach(tableToJoin => joins.push([tableName, tableToJoin, 'INNER JOIN']));
+    }
+
+    // workshops has_bookings filter
+    if (args.filter && 'has_bookings' in args.filter) {
+      if (args.filter.has_bookings) {
+        joins.push(['workshops', 'bookings', 'INNER JOIN']);
+      } else {
+        joins.push(['workshops', 'bookings', 'LEFT JOIN']);
+        conditions.push('bookings.workshop_id IS NULL');
+      }
+    }
+
+    // workshops has_been_archived filter
+    if (args.filter && 'has_been_archived' in args.filter) {
+      if (args.filter.has_been_archived) {
+        conditions.push(`workshops.date < ${knex.fn.now()}`);
+      } else {
+        conditions.push(`workshops.date >= ${knex.fn.now()}`);
+      }
+    }
   }
 
+  let totalQuery = `SELECT ${tableName}.* FROM ${tableName} ${computeJoins(joins)} WHERE ${conditions.join(' AND ')}`;
   let subsetQuery = totalQuery;
+
+  if (!isEmpty(args.orderBy)) {
+    subsetQuery = `${subsetQuery} ORDER BY ${args.orderBy.field} ${args.orderBy.order}`;
+  }
 
   if (args.page) {
     const limit = args.limit || DEFAULT_LIMIT;
     subsetQuery = `${subsetQuery} LIMIT ${limit} OFFSET ${(args.page - 1) * limit}`;
   }
+
+  console.log('totalQuery : ', totalQuery);
+  console.log('subsetQuery : ', subsetQuery);
 
   try {
     let result;
@@ -166,7 +226,7 @@ async function getPage(tableName, args) {
     result = await subsetQuery;
     const rows = result.rows;
 
-    if (subsetQuery !== totalQuery) {
+    if (args.page) {
       totalQuery = knex.raw(totalQuery);
       result = await totalQuery;
     }
@@ -298,7 +358,7 @@ async function performOperation(args, resourcePromise, operationPromise, authorK
 
 async function performPagination(tableName, args) {
   let result;
-  if (!isNil(args.page) || !isEmpty(args.filter)) {
+  if (!isNil(args.page) || !isEmpty(args.filter) || !isEmpty(args.orderBy)) {
     result = await getPage(tableName, args);
   } else {
     result = await getConnection(tableName, args);

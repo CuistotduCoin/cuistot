@@ -8,13 +8,32 @@ import {
   DateField,
   ShowButton,
   EditButton,
+  Filter,
+  TextInput,
+  downloadCSV,
 } from 'react-admin';
-import { LocationField } from '../fields';
+import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-disable-line
+
+const exporter = (gourmets) => {
+  const csv = convertToCSV({
+    data: gourmets,
+    fields: ['first_name', 'last_name', 'email', 'gender', 'birthdate', 'address', 'city', 'zip_code'],
+  });
+  downloadCSV(csv, 'gourmets');
+};
+
+const GourmetFilter = props => (
+  <Filter {...props}>
+    <TextInput label="pos.search" source="q" alwaysOn />
+  </Filter>
+);
 
 const GourmetList = props => (
   <List
     {...props}
-    sort={{ field: 'last_seen', order: 'DESC' }}
+    exporter={exporter}
+    filters={<GourmetFilter />}
+    sort={{ field: 'created_at', order: 'DESC' }}
   >
     <Responsive
       medium={(
@@ -27,7 +46,6 @@ const GourmetList = props => (
           <TextField source="address" />
           <TextField source="city" />
           <TextField source="zip_code" />
-          <LocationField />
           <ShowButton />
           <EditButton />
         </Datagrid>

@@ -16,6 +16,11 @@ enum Gender {
   U
 }
 
+enum SortOrder {
+  ASC
+  DESC
+}
+
 type PageInfo {
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
@@ -396,6 +401,19 @@ type EvaluationPayload {
 
 input Filter {
   ids: [ID!]
+  q: String
+}
+
+input WorkshopFilter {
+  ids: [ID!]
+  q: String
+  has_bookings: Boolean
+  has_been_archived: Boolean
+}
+
+input Order {
+  field: String!
+  order: SortOrder!
 }
 
 type Mutation {
@@ -457,23 +475,23 @@ type Mutation {
 type Query {
   getWorkshop(workshop_id: ID!): WorkshopPayload!
   getWorkshops(before: String, after: String, first: Int, last: Int): PaginatedWorkshops!
-  getWorkshopsPage(limit: Int, page: Int, filter: Filter): PagePaginatedWorkshops!
+  getWorkshopsPage(limit: Int, page: Int, filter: WorkshopFilter, orderBy: Order): PagePaginatedWorkshops!
     @aws_auth(cognito_groups: ["Admin"])
   getGourmet(gourmet_id: ID!): GourmetPayload!
-  getGourmetsPage(limit: Int, page: Int, filter: Filter): PagePaginatedGourmets!
+  getGourmetsPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedGourmets!
     @aws_auth(cognito_groups: ["Admin"])
   getCook(cook_id: ID!): CookPayload!
-  getCooksPage(limit: Int, page: Int, filter: Filter): PagePaginatedCooks!
+  getCooksPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedCooks!
     @aws_auth(cognito_groups: ["Admin"])
   getBooking(booking_id: ID!): BookingPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
-  getBookingsPage(limit: Int, page: Int, filter: Filter): PagePaginatedBookings!
+  getBookingsPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedBookings!
     @aws_auth(cognito_groups: ["Admin"])
   getKitchen(kitchen_id: ID!): KitchenPayload!
-  getKitchensPage(limit: Int, page: Int, filter: Filter): PagePaginatedKitchens!
+  getKitchensPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedKitchens!
     @aws_auth(cognito_groups: ["Admin"])
   getEvaluation(evaluation_id: ID!): EvaluationPayload!
-  getEvaluationsPage(limit: Int, page: Int, filter: Filter): PagePaginatedEvaluations!
+  getEvaluationsPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedEvaluations!
     @aws_auth(cognito_groups: ["Admin"])
   getCurrentGourmet: GourmetPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])

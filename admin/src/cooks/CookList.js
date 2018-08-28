@@ -10,18 +10,48 @@ import {
   ReferenceField,
   ShowButton,
   EditButton,
+  Filter,
+  TextInput,
+  downloadCSV,
 } from 'react-admin';
+import moment from 'moment';
+import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-disable-line
 import { GourmetNameField } from '../fields';
+
+const exporter = (cooks) => {
+  const data = cooks.map((cook) => {
+    const { gourmet, ...rest } = cook; // eslint-disable-line
+    const result = { ...rest };
+    result.gourmet = `${gourmet.first_name} ${gourmet.last_name}`;
+    if (result.legal_birthdate) {
+      result.legal_birthdate = moment(result.legal_birthdate).format('L');
+    }
+    return result;
+  });
+  const csv = convertToCSV({
+    data,
+    fields: ['gourmet', 'is_pro', 'business_name', 'siren', 'pro_email', 'legal_first_name', 'legal_last_name', 'legal_birthdate'],
+  });
+  downloadCSV(csv, 'cooks');
+};
+
+const CookFilter = props => (
+  <Filter {...props}>
+    <TextInput label="pos.search" source="q" alwaysOn />
+  </Filter>
+);
 
 const CookList = props => (
   <List
     {...props}
-    sort={{ field: 'last_seen', order: 'DESC' }}
+    exporter={exporter}
+    filters={<CookFilter />}
+    sort={{ field: 'created_at', order: 'DESC' }}
   >
     <Responsive
       medium={(
         <Datagrid>
-          <ReferenceField reference="gourmets" source="gourmet.id" linkType="show">
+          <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
             <GourmetNameField />
           </ReferenceField>
           <BooleanField source="is_pro" />

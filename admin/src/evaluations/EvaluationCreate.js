@@ -6,15 +6,14 @@ import {
   NumberInput,
   required,
   ReferenceInput,
-  SelectInput,
+  AutocompleteInput,
 } from 'react-admin';
-import { CookNameField } from '../fields';
 
 const EvaluationCreate = props => (
   <Create {...props}>
     <SimpleForm>
       <ReferenceInput source="cook.id" reference="cooks" validate={required()}>
-        <SelectInput optionText={<CookNameField />} />
+        <AutocompleteInput optionText={choice => `${choice.gourmet.first_name} ${choice.gourmet.last_name}`} />
       </ReferenceInput>
       <NumberInput source="rating" />
       <LongTextInput source="comment" />

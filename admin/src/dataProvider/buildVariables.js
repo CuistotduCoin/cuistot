@@ -93,7 +93,7 @@ const buildGetListVariables = introspectionResults => (
   return {
     limit: parseInt(params.pagination.perPage, 10),
     page: parseInt(params.pagination.page, 10),
-    orderBy: `${params.sort.field}_${params.sort.order}`,
+    orderBy: { field: params.sort.field, order: params.sort.order },
     filter,
   };
 };
