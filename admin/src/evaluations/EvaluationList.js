@@ -3,12 +3,12 @@ import {
   Datagrid,
   List,
   Responsive,
-  NumberField,
   RichTextField,
   ReferenceField,
   EditButton,
 } from 'react-admin';
 import { CookNameField, GourmetNameField } from '../fields';
+import StarRatingField from './StarRatingField';
 
 const EvaluationList = props => (
   <List
@@ -24,7 +24,7 @@ const EvaluationList = props => (
           <ReferenceField reference="gourmets" source="author.id" linkType="show">
             <GourmetNameField />
           </ReferenceField>
-          <NumberField source="rating" />
+          <StarRatingField />
           <RichTextField source="comment" />
           <EditButton />
         </Datagrid>

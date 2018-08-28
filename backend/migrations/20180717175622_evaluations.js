@@ -11,9 +11,11 @@ exports.up = knex => (
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
       .index();
-    table.float('rating').notNullable();
+    table.integer('rating').notNullable();
     table.text('comment').notNullable();
     table.timestamps(true, true);
+  }).then(() => {
+    knex.raw('ALTER TABLE evaluations ADD CONSTRAINT rating_constraint CHECK(rating >= 1 AND rating <= 5);').then();
   })
 );
 
