@@ -16,7 +16,10 @@ const SEARCHABLE_ATTRIBUTES = {
   cooks: ['gourmets.first_name', 'gourmets.last_name', 'gourmets.username'],
   kitchens: ['name'],
 };
-const JOIN_QUERIES = { cooks: { gourmets: ['id', 'id'] } };
+const JOINS_STRUCTURE = {
+  cooks: { gourmets: ['id', 'id'] },
+  workshops: { bookings: ['id', 'workshop_id'] },
+};
 
 const knex = require('knex')(connection[process.env.NODE_ENV]);
 
@@ -143,24 +146,14 @@ async function getConnection(tableName, args) {
   }
 }
 
-function computeJoins(tableName) {
-  const result = [];
-  const tablesToJoin = [];
-
-  SEARCHABLE_ATTRIBUTES[tableName].forEach((attr) => {
-    const chunks = attr.split('.');
-    if (chunks.length > 1 && !tablesToJoin.includes(chunks[0])) {
-      tablesToJoin.push(chunks[0]);
-    }
-  });
-
-  tablesToJoin.forEach((table) => {
-    const joinAttrs = JOIN_QUERIES[tableName][table];
-    result.push(`INNER JOIN ${table} ON ${tableName}.${joinAttrs[0]} = ${table}.${joinAttrs[1]} AND ${table}.deleted_at IS NULL`);
-  });
-
-  return result;
-}
+const computeJoins = joins => (
+  joins.map((join) => {
+    const tableName = join[0];
+    const tableToJoin = join[1];
+    const joinAttrs = JOINS_STRUCTURE[tableName][tableToJoin];
+    return `${join[2]} ${tableToJoin} ON ${tableName}.${joinAttrs[0]} = ${tableToJoin}.${joinAttrs[1]} AND ${tableToJoin}.deleted_at IS NULL`;
+  }).join(' ')
+);
 
 async function getPage(tableName, args) {
   if (args.page <= 0) {
@@ -179,21 +172,39 @@ async function getPage(tableName, args) {
     // search filters
     if (Object.keys(SEARCHABLE_ATTRIBUTES).includes(tableName) && get(args, 'filter.q')) {
       conditions.push(`${SEARCHABLE_ATTRIBUTES[tableName].map(attr => `${attr} ILIKE '%${args.filter.q}%'`).join(' OR ')}`);
-      joins.push(...computeJoins(tableName));
+
+      const tablesToJoin = [];
+      SEARCHABLE_ATTRIBUTES[tableName].forEach((attr) => {
+        const chunks = attr.split('.');
+        if (chunks.length > 1 && !tablesToJoin.includes(chunks[0])) {
+          tablesToJoin.push(chunks[0]);
+        }
+      });
+
+      tablesToJoin.forEach(tableToJoin => joins.push([tableName, tableToJoin, 'INNER JOIN']));
     }
 
     // workshops has_bookings filter
-    if (tableName === 'workshops' && args.filter && 'has_bookings' in args.filter) {
+    if (args.filter && 'has_bookings' in args.filter) {
       if (args.filter.has_bookings) {
-        joins.push('INNER JOIN bookings ON bookings.workshop_id = workshops.id AND bookings.deleted_at IS NULL');
+        joins.push(['workshops', 'bookings', 'INNER JOIN']);
       } else {
-        joins.push('LEFT JOIN bookings ON bookings.workshop_id = workshops.id AND bookings.deleted_at IS NULL');
+        joins.push(['workshops', 'bookings', 'LEFT JOIN']);
         conditions.push('bookings.workshop_id IS NULL');
+      }
+    }
+
+    // workshops has_been_archived filter
+    if (args.filter && 'has_been_archived' in args.filter) {
+      if (args.filter.has_been_archived) {
+        conditions.push(`workshops.date < ${knex.fn.now()}`);
+      } else {
+        conditions.push(`workshops.date >= ${knex.fn.now()}`);
       }
     }
   }
 
-  let totalQuery = `SELECT ${tableName}.* FROM ${tableName} ${joins.join(' ')} WHERE ${conditions.join(' AND ')}`;
+  let totalQuery = `SELECT ${tableName}.* FROM ${tableName} ${computeJoins(joins)} WHERE ${conditions.join(' AND ')}`;
   let subsetQuery = totalQuery;
 
   if (!isEmpty(args.orderBy)) {
@@ -205,6 +216,9 @@ async function getPage(tableName, args) {
     subsetQuery = `${subsetQuery} LIMIT ${limit} OFFSET ${(args.page - 1) * limit}`;
   }
 
+  console.log('totalQuery : ', totalQuery);
+  console.log('subsetQuery : ', subsetQuery);
+
   try {
     let result;
 
@@ -212,7 +226,7 @@ async function getPage(tableName, args) {
     result = await subsetQuery;
     const rows = result.rows;
 
-    if (subsetQuery !== totalQuery) {
+    if (args.page) {
       totalQuery = knex.raw(totalQuery);
       result = await totalQuery;
     }

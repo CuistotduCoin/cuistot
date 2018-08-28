@@ -402,7 +402,13 @@ type EvaluationPayload {
 input Filter {
   ids: [ID!]
   q: String
+}
+
+input WorkshopFilter {
+  ids: [ID!]
+  q: String
   has_bookings: Boolean
+  has_been_archived: Boolean
 }
 
 input Order {
@@ -469,7 +475,7 @@ type Mutation {
 type Query {
   getWorkshop(workshop_id: ID!): WorkshopPayload!
   getWorkshops(before: String, after: String, first: Int, last: Int): PaginatedWorkshops!
-  getWorkshopsPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedWorkshops!
+  getWorkshopsPage(limit: Int, page: Int, filter: WorkshopFilter, orderBy: Order): PagePaginatedWorkshops!
     @aws_auth(cognito_groups: ["Admin"])
   getGourmet(gourmet_id: ID!): GourmetPayload!
   getGourmetsPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedGourmets!

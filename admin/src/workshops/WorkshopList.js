@@ -36,6 +36,7 @@ const WorkshopFilter = props => (
   <Filter {...props}>
     <TextInput label="pos.search" source="q" alwaysOn />
     <BooleanInput source="has_bookings" label="resources.workshops.has_bookings" />
+    <BooleanInput source="has_been_archived" label="resources.workshops.has_been_archived" />
   </Filter>
 );
 
