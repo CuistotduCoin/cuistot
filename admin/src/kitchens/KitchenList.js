@@ -8,8 +8,18 @@ import {
   EditButton,
   Filter,
   TextInput,
+  downloadCSV,
 } from 'react-admin';
+import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-disable-line
 import { LocationField } from '../fields';
+
+const exporter = (kitchens) => {
+  const csv = convertToCSV({
+    data: kitchens,
+    fields: ['name', 'address', 'city', 'zip_code'],
+  });
+  downloadCSV(csv, 'kitchens');
+};
 
 const KitchenFilter = props => (
   <Filter {...props}>
@@ -20,6 +30,7 @@ const KitchenFilter = props => (
 const KitchenList = props => (
   <List
     {...props}
+    exporter={exporter}
     filters={<KitchenFilter />}
     sort={{ field: 'created_at', order: 'DESC' }}
   >

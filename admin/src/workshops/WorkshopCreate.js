@@ -8,7 +8,6 @@ import {
   required,
   ReferenceInput,
   AutocompleteInput,
-  SelectInput,
 } from 'react-admin';
 import { DateTimeInput } from 'react-admin-date-inputs';
 
@@ -26,7 +25,7 @@ const WorkshopCreate = props => (
         <AutocompleteInput optionText={choice => `${choice.gourmet.first_name} ${choice.gourmet.last_name}`} />
       </ReferenceInput>
       <ReferenceInput source="kitchen.id" reference="kitchens" validate={required()}>
-        <SelectInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
   </Create>

@@ -10,26 +10,27 @@ import {
   Filter,
   TextInput,
   BooleanInput,
-  // downloadCSV,
+  downloadCSV,
 } from 'react-admin';
-// import { unparse as convertToCSV } from 'papaparse/papaparse.min';
+import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-disable-line
 import WorkshopDate from './WorkshopDate';
 import WorkshopPrice from './WorkshopPrice';
 import { CookNameField } from '../fields';
 
-// const exporter = (workshops) => {
-//   const data = workshops.map((workshop) => {
-//     const { workshopForExport, cook, kitchen } = workshop; // eslint-disable-line
-//     workshopForExport.kitchen_name = workshop.kitchen.name;
-//     workshopForExport.cook_name = `${workshop.cook.gourmet.first_name} ${workshop.cook.gourmet.last_name}`;
-//     return workshopForExport;
-//   });
-//   const csv = convertToCSV({
-//     data,
-//     fields: ['id', 'name', 'description', 'price', 'min_gourmet', 'max_gourmet', 'kitchen_name', 'cook_name'], // order fields in the export
-//   });
-//   downloadCSV(csv, 'workshops');
-// };
+const exporter = (workshops) => {
+  const data = workshops.map((workshop) => {
+    const { cook, kitchen, ...rest } = workshop; // eslint-disable-line
+    const result = { ...rest };
+    result.kitchen = kitchen.name;
+    result.cook = `${cook.gourmet.first_name} ${cook.gourmet.last_name}`;
+    return result;
+  });
+  const csv = convertToCSV({
+    data,
+    fields: ['name', 'description', 'price', 'min_gourmet', 'max_gourmet', 'kitchen', 'cook'],
+  });
+  downloadCSV(csv, 'workshops');
+};
 
 const WorkshopFilter = props => (
   <Filter {...props}>
@@ -41,7 +42,7 @@ const WorkshopFilter = props => (
 const WorkshopList = props => (
   <List
     {...props}
-    // exporter={exporter}
+    exporter={exporter}
     filters={<WorkshopFilter />}
     sort={{ field: 'created_at', order: 'DESC' }}
     perPage={15}

@@ -15,11 +15,33 @@ import isRequired from './isRequired';
 
 const getField = (fieldName) => {
   switch (fieldName) {
+    case 'author':
     case 'gourmet':
       return {
         id: {},
         first_name: {},
         last_name: {},
+      };
+    case 'kitchen':
+      return {
+        id: {},
+        name: {},
+      };
+    case 'cook':
+      return {
+        id: {},
+        gourmet: {
+          fields: {
+            id: {},
+            first_name: {},
+            last_name: {},
+          },
+        },
+      };
+    case 'workshop':
+      return {
+        id: {},
+        name: {},
       };
     default:
       return { id: {} };

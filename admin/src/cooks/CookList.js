@@ -12,8 +12,28 @@ import {
   EditButton,
   Filter,
   TextInput,
+  downloadCSV,
 } from 'react-admin';
+import moment from 'moment';
+import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-disable-line
 import { GourmetNameField } from '../fields';
+
+const exporter = (cooks) => {
+  const data = cooks.map((cook) => {
+    const { gourmet, ...rest } = cook; // eslint-disable-line
+    const result = { ...rest };
+    result.gourmet = `${gourmet.first_name} ${gourmet.last_name}`;
+    if (result.legal_birthdate) {
+      result.legal_birthdate = moment(result.legal_birthdate).format('L');
+    }
+    return result;
+  });
+  const csv = convertToCSV({
+    data,
+    fields: ['gourmet', 'is_pro', 'business_name', 'siren', 'pro_email', 'legal_first_name', 'legal_last_name', 'legal_birthdate'],
+  });
+  downloadCSV(csv, 'cooks');
+};
 
 const CookFilter = props => (
   <Filter {...props}>
@@ -24,6 +44,7 @@ const CookFilter = props => (
 const CookList = props => (
   <List
     {...props}
+    exporter={exporter}
     filters={<CookFilter />}
     sort={{ field: 'created_at', order: 'DESC' }}
   >
