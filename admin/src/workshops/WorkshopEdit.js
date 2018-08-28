@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Edit,
   SimpleForm,
-  DateInput,
   DisabledInput,
   TextInput,
   NumberInput,
@@ -10,6 +9,7 @@ import {
   ReferenceInput,
   SelectInput,
 } from 'react-admin';
+import { DateTimeInput } from 'react-admin-date-inputs';
 import { CookNameField, NameField } from '../fields';
 
 const WorkshopEdit = props => (
@@ -21,7 +21,12 @@ const WorkshopEdit = props => (
       <NumberInput source="duration" validate={required()} />
       <NumberInput source="min_gourmet" validate={required()} />
       <NumberInput source="max_gourmet" validate={required()} />
-      <DateInput source="date" validate={required()} />
+      <DateTimeInput
+        source="date"
+        label="resources.workshops.fields.date"
+        options={{ format: 'DD/MM/YYYY, HH:mm:ss', ampm: false, clearable: true }}
+        validate={required()}
+      />
       <ReferenceInput source="cook.id" reference="cooks" validate={required()}>
         <SelectInput optionText={<CookNameField />} />
       </ReferenceInput>
