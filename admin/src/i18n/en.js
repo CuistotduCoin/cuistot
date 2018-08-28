@@ -25,6 +25,7 @@ export default {
     },
     workshops: {
       name: 'Workshop |||| Workshops',
+      has_bookings: 'With booking(s)',
       fields: {
         name: 'Name',
         'cook.id': 'Cook',

@@ -396,6 +396,8 @@ type EvaluationPayload {
 
 input Filter {
   ids: [ID!]
+  q: String
+  has_bookings: Boolean
 }
 
 type Mutation {

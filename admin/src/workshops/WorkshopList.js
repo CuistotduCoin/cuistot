@@ -7,14 +7,42 @@ import {
   ReferenceField,
   EditButton,
   ShowButton,
+  Filter,
+  TextInput,
+  BooleanInput,
+  // downloadCSV,
 } from 'react-admin';
+// import { unparse as convertToCSV } from 'papaparse/papaparse.min';
 import WorkshopDate from './WorkshopDate';
 import WorkshopPrice from './WorkshopPrice';
 import { CookNameField } from '../fields';
 
+// const exporter = (workshops) => {
+//   const data = workshops.map((workshop) => {
+//     const { workshopForExport, cook, kitchen } = workshop; // eslint-disable-line
+//     workshopForExport.kitchen_name = workshop.kitchen.name;
+//     workshopForExport.cook_name = `${workshop.cook.gourmet.first_name} ${workshop.cook.gourmet.last_name}`;
+//     return workshopForExport;
+//   });
+//   const csv = convertToCSV({
+//     data,
+//     fields: ['id', 'name', 'description', 'price', 'min_gourmet', 'max_gourmet', 'kitchen_name', 'cook_name'], // order fields in the export
+//   });
+//   downloadCSV(csv, 'workshops');
+// };
+
+const WorkshopFilter = props => (
+  <Filter {...props}>
+    <TextInput label="pos.search" source="q" alwaysOn />
+    <BooleanInput source="has_bookings" label="resources.workshops.has_bookings" />
+  </Filter>
+);
+
 const WorkshopList = props => (
   <List
     {...props}
+    // exporter={exporter}
+    filters={<WorkshopFilter />}
     sort={{ field: 'last_seen', order: 'DESC' }}
     perPage={15}
   >

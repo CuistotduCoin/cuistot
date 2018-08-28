@@ -5,18 +5,17 @@ import {
   NumberInput,
   required,
   ReferenceInput,
-  SelectInput,
+  AutocompleteInput,
 } from 'react-admin';
-import { GourmetNameField } from '../fields';
 
 const WorkshopCreate = props => (
   <Create {...props}>
     <SimpleForm>
       <ReferenceInput source="workshop.id" reference="workshops" validate={required()}>
-        <SelectInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput source="gourmet.id" reference="gourmets" validate={required()}>
-        <SelectInput optionText={<GourmetNameField />} />
+        <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
       </ReferenceInput>
       <NumberInput source="amount" />
     </SimpleForm>

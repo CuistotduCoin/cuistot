@@ -25,6 +25,7 @@ export default {
     },
     workshops: {
       name: 'Atelier |||| Ateliers',
+      has_bookings: 'Avec réservation(s)',
       fields: {
         name: 'Nom',
         'cook.id': 'Cuistot',

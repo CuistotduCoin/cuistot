@@ -10,6 +10,13 @@ import {
 } from '../utils/utils';
 
 const DEFAULT_LIMIT = 10; // the same defined by react-admin
+const SEARCHABLE_ATTRIBUTES = {
+  workshops: ['name'],
+  gourmets: ['first_name', 'last_name', 'username'],
+  cooks: ['gourmets.first_name', 'gourmets.last_name', 'gourmets.username'],
+  kitchens: ['name'],
+};
+const JOIN_QUERIES = { cooks: { gourmets: ['id', 'id'] } };
 
 const knex = require('knex')(connection[process.env.NODE_ENV]);
 
@@ -136,6 +143,25 @@ async function getConnection(tableName, args) {
   }
 }
 
+function computeJoins(tableName) {
+  const result = [];
+  const tablesToJoin = [];
+
+  SEARCHABLE_ATTRIBUTES[tableName].forEach((attr) => {
+    const chunks = attr.split('.');
+    if (chunks.length > 1 && !tablesToJoin.includes(chunks[0])) {
+      tablesToJoin.push(chunks[0]);
+    }
+  });
+
+  tablesToJoin.forEach((table) => {
+    const joinAttrs = JOIN_QUERIES[tableName][table];
+    result.push(`INNER JOIN ${table} ON ${tableName}.${joinAttrs[0]} = ${table}.${joinAttrs[1]} AND ${table}.deleted_at IS NULL`);
+  });
+
+  return result;
+}
+
 async function getPage(tableName, args) {
   if (args.page <= 0) {
     return { userError: 'page must be strictly positive' };
@@ -144,14 +170,30 @@ async function getPage(tableName, args) {
     return { userError: 'limit cannot have a negative value' };
   }
 
-  let totalQuery = `SELECT * FROM ${tableName}`;
+  const conditions = [`${tableName}.deleted_at IS NULL`];
+  const joins = [];
 
   if (!isEmpty(get(args, 'filter.ids'))) {
-    totalQuery = `${totalQuery} WHERE id IN (${args.filter.ids.map(id => `'${id}'`).join(',')}) AND deleted_at IS NULL`;
+    conditions.push(`id IN (${args.filter.ids.map(id => `'${id}'`).join(',')})`);
   } else {
-    totalQuery = `${totalQuery} WHERE deleted_at IS NULL`;
+    // search filters
+    if (Object.keys(SEARCHABLE_ATTRIBUTES).includes(tableName) && get(args, 'filter.q')) {
+      conditions.push(`${SEARCHABLE_ATTRIBUTES[tableName].map(attr => `${attr} ILIKE '%${args.filter.q}%'`).join(' OR ')}`);
+      joins.push(...computeJoins(tableName));
+    }
+
+    // workshops has_bookings filter
+    if (tableName === 'workshops' && args.filter && 'has_bookings' in args.filter) {
+      if (args.filter.has_bookings) {
+        joins.push('INNER JOIN bookings ON bookings.workshop_id = workshops.id AND bookings.deleted_at IS NULL');
+      } else {
+        joins.push('LEFT JOIN bookings ON bookings.workshop_id = workshops.id AND bookings.deleted_at IS NULL');
+        conditions.push('bookings.workshop_id IS NULL');
+      }
+    }
   }
 
+  let totalQuery = `SELECT ${tableName}.* FROM ${tableName} ${joins.join(' ')} WHERE ${conditions.join(' AND ')}`;
   let subsetQuery = totalQuery;
 
   if (args.page) {

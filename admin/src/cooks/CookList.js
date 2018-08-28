@@ -10,12 +10,21 @@ import {
   ReferenceField,
   ShowButton,
   EditButton,
+  Filter,
+  TextInput,
 } from 'react-admin';
 import { GourmetNameField } from '../fields';
+
+const CookFilter = props => (
+  <Filter {...props}>
+    <TextInput label="pos.search" source="q" alwaysOn />
+  </Filter>
+);
 
 const CookList = props => (
   <List
     {...props}
+    filters={<CookFilter />}
     sort={{ field: 'last_seen', order: 'DESC' }}
   >
     <Responsive

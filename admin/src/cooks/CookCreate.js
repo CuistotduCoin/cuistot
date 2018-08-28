@@ -5,13 +5,12 @@ import {
   TextInput,
   BooleanInput,
   ReferenceInput,
-  SelectInput,
+  AutocompleteInput,
   required,
   email,
   DateInput,
 } from 'react-admin';
 import { parse } from 'query-string';
-import { GourmetNameField } from '../fields';
 
 const CookCreate = (props) => {
   const { gourmet_id: gourmetId } = parse(props.location.search);
@@ -21,7 +20,7 @@ const CookCreate = (props) => {
       <SimpleForm>
         <BooleanInput source="is_pro" />
         <ReferenceInput source="gourmet.id" reference="gourmets" validate={required()} defaultValue={gourmetId}>
-          <SelectInput optionText={<GourmetNameField />} />
+          <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
         </ReferenceInput>
         <TextInput source="business_name" />
         <TextInput source="siren" />

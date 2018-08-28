@@ -7,10 +7,10 @@ import {
   NumberInput,
   required,
   ReferenceInput,
+  AutocompleteInput,
   SelectInput,
 } from 'react-admin';
 import { DateTimeInput } from 'react-admin-date-inputs';
-import { CookNameField } from '../fields';
 
 const WorkshopCreate = props => (
   <Create {...props}>
@@ -23,7 +23,7 @@ const WorkshopCreate = props => (
       <NumberInput source="max_gourmet" validate={required()} />
       <DateTimeInput source="date" label="Date" validate={required()} />
       <ReferenceInput source="cook.id" reference="cooks" validate={required()}>
-        <SelectInput optionText={<CookNameField />} />
+        <AutocompleteInput optionText={choice => `${choice.gourmet.first_name} ${choice.gourmet.last_name}`} />
       </ReferenceInput>
       <ReferenceInput source="kitchen.id" reference="kitchens" validate={required()}>
         <SelectInput optionText="name" />
