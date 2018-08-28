@@ -43,17 +43,17 @@ const WorkshopList = props => (
     {...props}
     // exporter={exporter}
     filters={<WorkshopFilter />}
-    sort={{ field: 'last_seen', order: 'DESC' }}
+    sort={{ field: 'created_at', order: 'DESC' }}
     perPage={15}
   >
     <Responsive
       medium={(
         <Datagrid>
           <TextField source="name" />
-          <ReferenceField reference="cooks" source="cook.id" linkType="show">
+          <ReferenceField reference="cooks" source="cook.id" linkType="show" sortable={false}>
             <CookNameField />
           </ReferenceField>
-          <ReferenceField reference="kitchens" source="kitchen.id" linkType="show">
+          <ReferenceField reference="kitchens" source="kitchen.id" linkType="show" sortable={false}>
             <TextField source="name" />
           </ReferenceField>
           <WorkshopPrice />

@@ -25,12 +25,12 @@ const CookList = props => (
   <List
     {...props}
     filters={<CookFilter />}
-    sort={{ field: 'last_seen', order: 'DESC' }}
+    sort={{ field: 'created_at', order: 'DESC' }}
   >
     <Responsive
       medium={(
         <Datagrid>
-          <ReferenceField reference="gourmets" source="gourmet.id" linkType="show">
+          <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
             <GourmetNameField />
           </ReferenceField>
           <BooleanField source="is_pro" />

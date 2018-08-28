@@ -23,7 +23,7 @@ const GourmetList = props => (
   <List
     {...props}
     filters={<GourmetFilter />}
-    sort={{ field: 'last_seen', order: 'DESC' }}
+    sort={{ field: 'created_at', order: 'DESC' }}
   >
     <Responsive
       medium={(

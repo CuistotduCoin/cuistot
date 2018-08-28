@@ -196,6 +196,10 @@ async function getPage(tableName, args) {
   let totalQuery = `SELECT ${tableName}.* FROM ${tableName} ${joins.join(' ')} WHERE ${conditions.join(' AND ')}`;
   let subsetQuery = totalQuery;
 
+  if (!isEmpty(args.orderBy)) {
+    subsetQuery = `${subsetQuery} ORDER BY ${args.orderBy.field} ${args.orderBy.order}`;
+  }
+
   if (args.page) {
     const limit = args.limit || DEFAULT_LIMIT;
     subsetQuery = `${subsetQuery} LIMIT ${limit} OFFSET ${(args.page - 1) * limit}`;
@@ -340,7 +344,7 @@ async function performOperation(args, resourcePromise, operationPromise, authorK
 
 async function performPagination(tableName, args) {
   let result;
-  if (!isNil(args.page) || !isEmpty(args.filter)) {
+  if (!isNil(args.page) || !isEmpty(args.filter) || !isEmpty(args.orderBy)) {
     result = await getPage(tableName, args);
   } else {
     result = await getConnection(tableName, args);

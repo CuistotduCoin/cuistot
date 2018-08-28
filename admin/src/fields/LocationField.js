@@ -17,6 +17,7 @@ const PureLocationField = pure(LocationField);
 
 PureLocationField.defaultProps = {
   source: 'location',
+  sortable: false,
   label: 'resources.fields.location',
 };
 
