@@ -28,18 +28,19 @@ async function updateKitchen(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = await performOperation(
     args,
-    getKitchen({ kitchen_id: updateArgs.id }),
     updateObject(TABLE_NAME, updateArgs),
+    'author_id',
+    getKitchen({ kitchen_id: updateArgs.id }),
   );
   return result;
 }
 
 async function deleteKitchen(args) {
-  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...deleteArgs } = args;
   const result = await performOperation(
     args,
-    getKitchen({ kitchen_id: deleteArgs.id }),
-    deleteObject(TABLE_NAME, deleteArgs.id),
+    deleteObject(TABLE_NAME, args.id),
+    'author_id',
+    getKitchen({ kitchen_id: args.id }),
   );
   return result;
 }

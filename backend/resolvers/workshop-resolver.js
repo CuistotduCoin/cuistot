@@ -40,20 +40,19 @@ async function updateWorkshop(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = await performOperation(
     args,
-    getWorkshop({ workshop_id: updateArgs.id }),
     updateObject(TABLE_NAME, updateArgs),
     'cook_id',
+    getWorkshop({ workshop_id: updateArgs.id }),
   );
   return result;
 }
 
 async function deleteWorkshop(args) {
-  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...deleteArgs } = args;
   const result = await performOperation(
     args,
-    getWorkshop({ workshop_id: deleteArgs.id }),
-    deleteObject(TABLE_NAME, deleteArgs.id),
+    deleteObject(TABLE_NAME, args.id),
     'cook_id',
+    getWorkshop({ workshop_id: args.id }),
   );
   return result;
 }
