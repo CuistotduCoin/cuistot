@@ -1,9 +1,9 @@
 import Grid from "@material-ui/core/Grid";
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 
-const styles = (theme: Theme) => ({
+const styles = () => ({
   backgroundImage: {
     bottom: 0,
     left: "50%",
@@ -20,9 +20,9 @@ const styles = (theme: Theme) => ({
     background: "rgba(0, 0, 0, 0.5)",
     display: "flex"
   },
-  grid: {
+  gridSearchForm: {
     margin: "0px auto",
-    maxWidth: 1080,
+    maxWidth: 500,
     padding: 24
   },
   home: {
@@ -50,6 +50,7 @@ interface IHeroProps {
   imageURL: string;
   valueProposition: string;
   description: string;
+  searchForm: any;
 }
 
 export class Hero extends React.Component<IHeroProps, {}> {
@@ -91,6 +92,11 @@ export class Hero extends React.Component<IHeroProps, {}> {
                   {this.props.description}
                 </Typography>
               )}
+              <Grid container={true}>
+                <Grid item={true} className={classes.gridSearchForm}>
+                  {this.props.searchForm}
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </div>

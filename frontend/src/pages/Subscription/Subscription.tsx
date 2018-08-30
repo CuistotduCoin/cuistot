@@ -60,7 +60,7 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
           videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Abonnement : Atelier de cuisine pour enfant"
-          description="Marre des activités extra-scolaires classique ? Faites découvrir la pâtisserie à vos enfants !"
+          description="Marre des activités extra-scolaires classiques ? Faites découvrir la pâtisserie à vos enfants !"
         />
         <Grid
           container={true}
@@ -90,12 +90,6 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
             interactifs. En plus d’être assistante maternelle, Audrey possède
             son CAP Pâtisserie.
           </Typography>
-          <Typography variant="body1" align="center">
-            Elle révèlera la créativité de vos enfants avec des ateliers
-            cupcakes super-héros/princesses, elle vous rendra nostalgique avec
-            les gâteaux de votre enfance tels que les « barquettes » ou les «
-            Princes de Lu » etc.
-          </Typography>
           <Typography
             variant="title"
             align="center"
@@ -122,10 +116,10 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
           className={classes.grid}
         >
           <Grid item={true} xs={12} sm={6}>
-            <Grid container={true}>
+            <Grid container={true} justify="center">
               <a
                 className={classes.link}
-                href="https://cuistotducoin.typeform.com/to/qrhUFk"
+                href="https://cuistotducoin.typeform.com/to/xwGUPX"
                 target="_blank"
               >
                 <Card className={classes.card}>
@@ -154,7 +148,7 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
             <Grid container={true}>
               <a
                 className={classes.link}
-                href="https://cuistotducoin.typeform.com/to/qrhUFk"
+                href="https://cuistotducoin.typeform.com/to/xwGUPX"
                 target="_blank"
               >
                 <Card className={classes.card}>

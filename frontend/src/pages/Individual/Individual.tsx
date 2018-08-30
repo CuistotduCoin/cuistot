@@ -31,6 +31,9 @@ const styles = (theme: Theme) => ({
     maxWidth: 1080,
     padding: 24
   },
+  link: {
+    textDecoration: "none"
+  },
   media: {
     height: 135
   },
@@ -55,39 +58,28 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         description: "Ateliers de cuisine collectif chez nos lieux partenaires",
         image:
           "https://static.cuistotducoin.com/img/individual/ateliers-cuisine-collectif.jpg",
-        title: "Ateliers de cuisine collectif"
+        title: "Ateliers de cuisine collectif",
+        url: "https://cuistotducoin.typeform.com/to/rNhgMi"
       },
       {
         description:
           "Ateliers de cuisine privatisé chez vous ou chez nos lieux partenaires",
         image:
           "https://static.cuistotducoin.com/img/individual/ateliers-cuisine-privatise.jpg",
-        title: "Ateliers de cuisine privatisé"
+        title: "Ateliers de cuisine privatisé",
+        url: "https://cuistotducoin.typeform.com/to/WpaATI"
       },
       {
         description:
           "Notre cuistot est aux fourneaux rien que pour vous et vos invités",
         image:
           "https://static.cuistotducoin.com/img/individual/cuistot-a-domicile.jpg",
-        title: "Repas à domicile"
+        title: "Repas à domicile",
+        url: "https://cuistotducoin.typeform.com/to/S2XFjV"
       }
     ];
 
     const workshops = [
-      {
-        availableSeat: 6,
-        date: "samedi 25 aout, 14h30-16h30",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-pate-a-sucre.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Cake Design : Pâte à sucres",
-        nameCook: "Audrey",
-        price: 45,
-        spot: "Audrey, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/RjVIV7"
-      },
       {
         availableSeat: 8,
         date: "samedi 1 septembre, 9h30-13h",
@@ -426,6 +418,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Palais des Thés, Brest",
         totalSeat: 5,
         typeform: "https://cuistotducoin.typeform.com/to/HHelGm"
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-pate-a-sucre.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Cake Design : Pâte à sucres",
+        nameCook: "Audrey",
+        price: 45,
+        spot: "Audrey, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/X06uWu"
       }
     ];
 
@@ -462,25 +468,27 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           {typeActivity.map((activity, index) => (
             <Grid key={index} item={true} xs={12} sm={6} md={3} lg={true}>
               <Grid container={true} justify="center">
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.media}
-                    image={activity.image}
-                    title={activity.title}
-                  />
-                  <CardHeader
-                    className={classes.cardHeader}
-                    title={activity.title}
-                    classes={{
-                      title: classes.title
-                    }}
-                  />
-                  <CardContent className={classes.cardShortContent}>
-                    <Typography component="p">
-                      {activity.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <a className={classes.link} href={activity.url} target="_blank">
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.media}
+                      image={activity.image}
+                      title={activity.title}
+                    />
+                    <CardHeader
+                      className={classes.cardHeader}
+                      title={activity.title}
+                      classes={{
+                        title: classes.title
+                      }}
+                    />
+                    <CardContent className={classes.cardShortContent}>
+                      <Typography component="p">
+                        {activity.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </a>
               </Grid>
             </Grid>
           ))}

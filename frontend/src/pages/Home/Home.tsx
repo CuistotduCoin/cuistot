@@ -5,6 +5,8 @@ import Footer from "components/Footer";
 import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
+import { SearchForm } from "components/SearchForm/SearchForm";
+import { runtimeConfig } from "config";
 import React from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
@@ -94,6 +96,7 @@ const styles = (theme: Theme) => ({
 
 interface IHomeProps {
   classes?: any;
+  history: any;
 }
 
 export class Home extends React.Component<IHomeProps, {}> {
@@ -193,6 +196,13 @@ export class Home extends React.Component<IHomeProps, {}> {
           videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
           description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
+          searchForm={
+            <SearchForm
+              apiKey={runtimeConfig.ALGOLIASEARCH_PLACES_KEY}
+              appId={runtimeConfig.ALGOLIASEARCH_PLACES_APP_ID}
+              history={this.props.history}
+            />
+          }
         />
         <Grid container={true} alignItems="center" className={classes.gridTile}>
           <Grid item={true} xs={12} sm={6}>
