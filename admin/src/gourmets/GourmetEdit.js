@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import { GourmetNameField } from '../fields';
 import { validateZipCode } from '../utils';
 import { CookIcon } from '../cooks';
+import { ImageInput } from '../inputs';
 
 const GourmetEditActions = ({ basePath, data }) => {
   let createCookButton;
@@ -46,6 +47,7 @@ const GourmetEditActions = ({ basePath, data }) => {
 const GourmetEdit = props => (
   <Edit actions={<GourmetEditActions />} title={<GourmetNameField />} {...props}>
     <SimpleForm>
+      <ImageInput path="profile" />
       <DisabledInput source="id" />
       <DisabledInput source="email" />
       <RadioButtonGroupInput

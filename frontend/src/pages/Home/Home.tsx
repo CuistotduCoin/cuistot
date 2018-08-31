@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import { graphqlOperation } from "aws-amplify";
 import { Connect } from "aws-amplify-react";
 import Layout from "components/Layout";
-import GetWorkshops from "queries/GetWorkshops";
+import { GetWorkshops } from "queries";
 import React from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";

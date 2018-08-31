@@ -48,6 +48,8 @@ import {
 } from './resolvers/workshop-resolver';
 import { run } from './mailer';
 import { isEmpty } from './utils/utils';
+import { findWhere, updateObject } from './resolvers/utils';
+import { processImage, suffixFilename } from './processors/image';
 
 const knex = require('knex')(connection[process.env.NODE_ENV]);
 
@@ -328,4 +330,81 @@ export const sendEmail = (event, context) => {
     payload = event;
   }
   run(payload, context, context.done);
+};
+
+/*
+  New file created in the bucket
+    Check if the gourmet already has an image
+      Construct url and delete the original + the cropped version (80 x 80)
+
+    File optimization
+      Put the new file in the bucket with the cropped extension + keep the original
+    Save the url of the cropped file in the relevant gourmet data
+*/
+export const profileImage = (event, context) => {
+  const payload = event.Records[0];
+  let key = payload.s3.object.key.split('/');
+  const identityId = decodeURIComponent(key[1]);
+  const filename = decodeURIComponent(key[3]);
+  const path = `protected/${identityId}/profile`;
+  key = `${path}/${filename}`;
+  const s3 = new AWS.S3();
+
+  s3.headObject({ Bucket: process.env.AWS_BUCKET, Key: key }, (err, data) => {
+    if (data.Metadata && data.Metadata.optimized) {
+      console.log('Image already processed');
+      context.done(null, event);
+    } else {
+      s3.listObjects({ Bucket: process.env.AWS_BUCKET, Prefix: path }, (listErr, listData) => {
+        if (listErr) {
+          context.fail(listErr);
+        } else {
+          console.log('path : ', path);
+          console.log('filename : ', filename);
+          console.log('content : ', listData.Contents);
+
+          const optimizeImage = () => {
+            const newFilename = suffixFilename(filename, 'cropped');
+            processImage(key, `${path}/${newFilename}`, () => {
+              findWhere('gourmets', identityId, 'identity_id')
+                .then((result) => {
+                  const gourmet = result.data[0];
+                  updateObject('gourmets', {
+                    id: gourmet.id,
+                    image: { key: newFilename },
+                  })
+                    .then(() => context.done(null, event))
+                    .catch(updateErr => context.fail(updateErr));
+                })
+                .catch(findErr => context.fail(findErr));
+            }, context.fail);
+          };
+
+          const objectsToDelete = listData.Contents
+            .filter(file => file.Key !== key)
+            .map(file => ({ Key: file.Key }));
+
+          console.log('objects to delete : ', objectsToDelete);
+
+          if (objectsToDelete.length) {
+            s3.deleteObjects({
+              Bucket: process.env.AWS_BUCKET,
+              Delete: {
+                Objects: objectsToDelete,
+                Quiet: false,
+              },
+            }, (deleteErr) => {
+              if (deleteErr) {
+                context.fail(deleteErr);
+              } else {
+                optimizeImage();
+              }
+            });
+          } else {
+            optimizeImage();
+          }
+        }
+      });
+    }
+  });
 };

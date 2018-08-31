@@ -46,6 +46,7 @@ export default {
     },
     gourmets: {
       name: 'Gourmet |||| Gourmets',
+      no_picture: 'Aucune photo de profil',
       fields: {
         first_name: 'Prénom',
         last_name: 'Nom',
