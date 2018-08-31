@@ -38,18 +38,22 @@ class ImageInput extends React.Component {
     const { record, path, refreshView } = this.props;
     const file = event.target.files[0];
     if (file) {
-      Storage.put(`${path}/${sanitizeFilename(file.name)}`, file, {
-        identityId: record.identity_id,
-      })
-        .then((result) => {
-          console.log(result);
-          this.setState({ message: 'Image uploaded', success: true });
-          setTimeout(refreshView, 2000); // force the refresh in order to get the new image
+      if (record.identity_id) {
+        Storage.put(`${path}/${sanitizeFilename(file.name)}`, file, {
+          identityId: record.identity_id,
         })
-        .catch((err) => {
-          console.log(err);
-          this.setState({ message: 'Image upload has failed', success: false });
-        });
+          .then((result) => {
+            console.log(result);
+            this.setState({ message: 'Image uploaded... auto refresh in a few seconds', success: true });
+            setTimeout(refreshView, 5000); // force the refresh in order to get the new image
+          })
+          .catch((err) => {
+            console.log(err);
+            this.setState({ message: 'Image upload has failed', success: false });
+          });
+      } else {
+        this.setState({ message: 'Identity id is missing', success: false });
+      }
     }
   }
 
