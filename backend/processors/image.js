@@ -1,21 +1,9 @@
-// https://github.com/sourcey/s3-image-optimizer/blob/master/optimizer.js
 import async from 'async';
 import AWS from 'aws-sdk';
 
-// const imagemin = require('imagemin');
-// const imageminPngquant = require('imagemin-pngquant');
-// const imageminMozjpeg = require('imagemin-mozjpeg');
-
-// const Imagemin = require('image-min');
+const gm = require('gm').subClass({ imageMagick: true });
 
 const SKIP_FILE_SIZE = +process.env.MAX_FILE_SIZE || -1;
-
-// Imagemin options object for all image types
-// const imageminOptions = {
-//   optimizationLevel: (+process.env.PNG_OPTIM_LEVEL || 7),
-//   progressive: (process.env.JPG_OPTIM_PROGRESSIVE === 'true'),
-//   interlaced: (process.env.GIF_OPTIM_INTERLACED === 'true'),
-// };
 
 const suffixFilename = (filename, suffix) => {
   const chunks = filename.split('.');
@@ -35,6 +23,20 @@ const isImageFile = (key) => {
   }
   return true;
 };
+
+function gmToBuffer(data) {
+  return new Promise((resolve, reject) => {
+    data.stream((err, stdout, stderr) => { // eslint-disable-line
+      if (err) return reject(err);
+      const chunks = [];
+      stdout.on('data', chunk => chunks.push(chunk));
+      // these are 'once' because they can and do fire multiple times for multiple errors,
+      // but this is a promise so you'll have to deal with them one at a time
+      stdout.once('end', () => resolve(Buffer.concat(chunks)));
+      stderr.once('data', result => reject(String(result)));
+    });
+  });
+}
 
 const processImage = (key, newKey, successCallback, failureCallback) => {
   console.log('Processing : ', key);
@@ -69,7 +71,6 @@ const processImage = (key, newKey, successCallback, failureCallback) => {
         return next(null, data);
       });
     },
-
     function download(meta, next) {
       console.log('Download image');
       s3.getObject({ Bucket: process.env.AWS_BUCKET, Key: key }, (err, data) => {
@@ -77,47 +78,25 @@ const processImage = (key, newKey, successCallback, failureCallback) => {
         return next(null, meta, data);
       });
     },
-
     function process(meta, obj, next) {
       console.log('Process image');
-      return next(null, meta, obj, obj.Body);
-      // imagemin.buffer(obj.Body, {
-      //   plugins: [
-      //     imageminPngquant(),
-      //     imageminMozjpeg({ quality: 82 }),
-      //   ],
-      // }).then((buffer) => {
-      //   console.log(`Optimized! Final file size reduced from ${obj.Body.length} to ${buffer.length} bytes`);
-      //   return next(null, meta, obj, buffer);
-      // });
-      // new Imagemin()
-      //   .src(obj.Body)
-      //   .use(Imagemin.jpegtran(imageminOptions))
-      //   .use(Imagemin.gifsicle(imageminOptions))
-      //   .use(Imagemin.optipng(imageminOptions))
-      //   .use(Imagemin.svgo({ plugins: imageminOptions.svgoPlugins || [] }))
-      //   .run((err, files) => {
-      //     console.log(files);
-      //     if (err) return next(err);
-      //     return next(null, meta, obj, files[0]);
-      //   });
+      const data = gm(obj.Body).quality(80).resize(120, 120);
+      gmToBuffer(data)
+        .then(buffer => next(null, meta, obj, buffer))
+        .catch(err => next(err));
     },
-
     function upload(meta, obj, file, next) {
       console.log('Upload image');
       meta.Metadata.optimized = 'y'; // eslint-disable-line
-
       s3.putObject({
-        // ACL: UPLOAD_ACL,
         Bucket: process.env.AWS_BUCKET,
         Key: newKey,
-        // Body: file.contents,
         Body: file,
         ContentType: obj.ContentType,
         Metadata: meta.Metadata,
       }, (err) => {
         if (err) return next(err);
-        console.log('File uploaded', key);
+        console.log('File uploaded', newKey);
         return next();
       });
     },
