@@ -76,24 +76,17 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           "https://static.cuistotducoin.com/img/individual/cuistot-a-domicile.jpg",
         title: "Repas à domicile",
         url: "https://cuistotducoin.typeform.com/to/S2XFjV"
+      },
+      {
+        description:
+          "Marre des activités extra-scolaires classiques ? Faites découvrir la pâtisserie à vos enfants !",
+        image: "https://static.cuistotducoin.com/img/business/buffet.jpg",
+        title: "Abonnement : Ateliers enfants",
+        url: "/subscription"
       }
     ];
 
     const workshops = [
-      {
-        availableSeat: 8,
-        date: "samedi 1 septembre, 9h30-13h",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ronan-royal-chocolat.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
-        name: "Royal Chocolat",
-        nameCook: "Ronan",
-        price: 50,
-        spot: "Schmidt, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/CPRhUS"
-      },
       {
         availableSeat: 8,
         date: "samedi 8 septembre, 9h30-13h",
@@ -199,7 +192,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/workshops/gaetan-decouverte-vins-naturels.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/gaetan.jpg",
-        name: "A la découverte des vins naturels",
+        name: "Repas et dégustation de vins naturels",
         nameCook: "Gaetan",
         price: 50,
         spot: "Soif de Vins, Brest",
@@ -221,7 +214,21 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/jjWrtL"
       },
       {
-        availableSeat: 12,
+        availableSeat: 6,
+        date: "samedi 29 septembre, 10h-12h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-saucisson-au-chocolat.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Saucisson au chocolat et mini choco",
+        nameCook: "Audrey",
+        price: 25,
+        spot: "Audrey, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/j3jx1h"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 29 septembre, 10h-13h",
         duration: 3,
         image:
@@ -231,8 +238,22 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Zhang",
         price: 35,
         spot: "Cuisinella, Brest",
-        totalSeat: 12,
+        totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/gudvAa"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 6 octobre, 10h-12h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-cheesecake-pomme.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Saucisson au chocolat et mini choco",
+        nameCook: "Audrey",
+        price: 40,
+        spot: "Audrey, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/zgXsH3"
       },
       {
         availableSeat: 6,
@@ -466,7 +487,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           className={classes.grid}
         >
           {typeActivity.map((activity, index) => (
-            <Grid key={index} item={true} xs={12} sm={6} md={3} lg={true}>
+            <Grid key={index} item={true} xs={12} sm={6}>
               <Grid container={true} justify="center">
                 <a className={classes.link} href={activity.url} target="_blank">
                   <Card className={classes.card}>
