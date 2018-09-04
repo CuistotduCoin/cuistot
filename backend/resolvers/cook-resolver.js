@@ -39,7 +39,6 @@ async function updateCook(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = performOperation(
     args,
-    getCook({ cook_id: updateArgs.id }),
     updateObject(TABLE_NAME, updateArgs),
     'id',
   );
@@ -47,11 +46,9 @@ async function updateCook(args) {
 }
 
 async function deleteCook(args) {
-  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...deleteArgs } = args;
   const result = await performOperation(
     args,
-    getCook({ cook_id: deleteArgs.id }),
-    deleteObject(TABLE_NAME, deleteArgs.id),
+    deleteObject(TABLE_NAME, args.id),
     'id',
   );
   return result;

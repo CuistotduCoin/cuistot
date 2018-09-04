@@ -3,6 +3,8 @@ import englishMessages from 'ra-language-english';
 export default {
   ...englishMessages,
   pos: {
+    info: 'Information',
+    images: 'Pictures',
     search: 'Search',
     configuration: 'Configuration',
     language: 'Language',
@@ -27,6 +29,7 @@ export default {
       name: 'Workshop |||| Workshops',
       has_bookings: 'With/without booking(s)',
       has_been_archived: 'Archived ?',
+      no_picture: 'No picture',
       fields: {
         name: 'Name',
         'cook.id': 'Cook',
@@ -46,6 +49,7 @@ export default {
     },
     gourmets: {
       name: 'Gourmet |||| Gourmets',
+      no_picture: 'No picture',
       fields: {
         first_name: 'First name',
         last_name: 'Last name',

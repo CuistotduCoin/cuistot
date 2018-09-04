@@ -4,7 +4,7 @@ import {
   AUTH_CHECK,
   AUTH_ERROR,
 } from 'react-admin';
-import { Auth } from 'aws-amplify';
+import { Auth } from './auth';
 
 const isAdmin = user => user.signInUserSession.idToken.payload['cognito:groups'].includes('Admin');
 

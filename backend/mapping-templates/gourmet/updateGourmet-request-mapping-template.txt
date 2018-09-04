@@ -14,6 +14,7 @@
       "email": $utils.toJson($context.arguments.gourmet.email),
       "first_name": $utils.toJson($context.arguments.gourmet.first_name),
       "last_name": $utils.toJson($context.arguments.gourmet.last_name),
+      "identity_id": $utils.toJson($context.arguments.gourmet.identity_id),
       "gender": $utils.toJson($context.arguments.gourmet.gender),
       "birthdate": $utils.toJson($context.arguments.gourmet.birthdate),
       "address": $utils.toJson($context.arguments.gourmet.address),

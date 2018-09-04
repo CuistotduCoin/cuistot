@@ -138,14 +138,10 @@ const buildCreateUpdateVariables = introspectionResults => (
     }
 
     if (typeof data[key] === 'object') {
-      const arg = queryType.args.find(a => a.name === `${key}Id`);
-
-      if (arg) {
-        return {
-          ...acc,
-          [`${key}Id`]: data[key].id,
-        };
-      }
+      return {
+        ...acc,
+        [key]: { id: data[key].id },
+      };
     }
 
     return {

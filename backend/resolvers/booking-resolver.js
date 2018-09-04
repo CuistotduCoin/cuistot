@@ -28,20 +28,19 @@ async function updateBooking(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = performOperation(
     args,
-    getBooking({ booking_id: updateArgs.id }),
     updateObject(TABLE_NAME, updateArgs),
     'gourmet_id',
+    getBooking({ booking_id: updateArgs.id }),
   );
   return result;
 }
 
 async function deleteBooking(args) {
-  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...deleteArgs } = args;
   const result = await performOperation(
     args,
-    getBooking({ booking_id: deleteArgs.id }),
-    deleteObject(TABLE_NAME, deleteArgs.id),
+    deleteObject(TABLE_NAME, args.id),
     'gourmet_id',
+    getBooking({ booking_id: args.id }),
   );
   return result;
 }

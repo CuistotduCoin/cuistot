@@ -1,4 +1,4 @@
-import { Auth } from "aws-amplify";
+import { API, Auth, graphqlOperation } from "aws-amplify";
 import EnsureLoggedIn from "components/EnsureLoggedIn";
 import Snackbar from "components/Snackbar";
 import { runtimeConfig } from "config";
@@ -19,7 +19,7 @@ import Mission from "pages/Mission";
 import NotFound from "pages/NotFound";
 import Organize from "pages/Organize";
 import Presskit from "pages/Presskit";
-import Profil from "pages/Profil";
+import Profile from "pages/Profile";
 import ResetPassword from "pages/ResetPassword";
 import ResetPasswordRequest from "pages/ResetPasswordRequest";
 import Search from "pages/Search";
@@ -29,6 +29,7 @@ import Terms from "pages/Terms";
 import TermsPro from "pages/TermsPro";
 import Testimony from "pages/Testimony";
 import Workshop from "pages/Workshop";
+import { UpdateGourmet } from "queries";
 import React from "react";
 import { Route, Switch } from "react-router";
 import { withRouter } from "react-router-dom";
@@ -91,6 +92,35 @@ export class App extends React.Component<IAppProps, {}> {
     if (isLoggingIn && referer) {
       console.log(`Logging in... redirecting to ${referer}`);
       redirectTo(referer);
+
+      // Get identityId and update user info
+      Auth.currentSession().then(currentSession => {
+        const jwtToken = currentSession.getIdToken().getJwtToken();
+
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: runtimeConfig.AWS_IDENTITY_POOL_ID,
+          Logins: {
+            // tslint:disable-next-line
+            [`cognito-idp.${runtimeConfig.AWS_REGION_IRELAND}.amazonaws.com/${runtimeConfig.AWS_USERPOOL_ID}`]: jwtToken
+          }
+        });
+
+        API.graphql(
+          graphqlOperation(UpdateGourmet, {
+            gourmet: {
+              id: currentSession.getIdToken().payload.sub,
+              identity_id: AWS.config.credentials.identityId
+            }
+          })
+        ).then(result => {
+          console.log("result : ", result);
+          if (result.data.updateGourmet.message === "success") {
+            console.log("identity_id has been populated");
+          } else {
+            console.error("failure while populating identity_id");
+          }
+        });
+      });
     } else if (isLoggingOut) {
       console.log("Logging out...");
       Auth.signOut()
@@ -146,7 +176,7 @@ export class App extends React.Component<IAppProps, {}> {
               <Route path="/mission" exact component={Mission} />
               <Route path="/organize" exact component={Organize} />
               <Route path="/presskit" exact component={Presskit} />
-              <Route path="/profil/:id" exact component={Profil} />
+              <Route path="/profile/:id" exact component={Profile} />
               <Route path="/workshop/:id" exact component={Workshop} />
               <Route path="/s/:name" exact component={Search} />
               <EnsureLoggedIn

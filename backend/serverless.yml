@@ -54,16 +54,6 @@ custom:
         field: deleteWorkshop
         request: "workshop/deleteWorkshop-request-mapping-template.txt"
         response: "workshop/deleteWorkshop-response-mapping-template.txt"
-      - dataSource: Lambda
-        type: Mutation
-        field: addWorkshopImage
-        request: "workshop/addWorkshopImage-request-mapping-template.txt"
-        response: "workshop/addWorkshopImage-response-mapping-template.txt"
-      - dataSource: Lambda
-        type: Mutation
-        field: removeWorkshopImage
-        request: "workshop/removeWorkshopImage-request-mapping-template.txt"
-        response: "workshop/removeWorkshopImage-response-mapping-template.txt"
 
       - dataSource: Lambda
         type: Mutation
@@ -112,11 +102,6 @@ custom:
         field: deleteGourmet
         request: "gourmet/deleteGourmet-request-mapping-template.txt"
         response: "gourmet/deleteGourmet-response-mapping-template.txt"
-      - dataSource: Lambda
-        type: Mutation
-        field: updateGourmetImage
-        request: "gourmet/updateGourmetImage-request-mapping-template.txt"
-        response: "gourmet/updateGourmetImage-response-mapping-template.txt"
 
       - dataSource: Lambda
         type: Mutation
@@ -302,6 +287,12 @@ functions:
   sendEmail:
     handler: handler.sendEmail
     role: SendEmailLambdaRole
+  handleBucketPutEvent:
+    handler: handler.handleBucketPutEvent
+    role: HandleBucketPutEventLambdaRole
+  handleBucketDeleteEvent:
+    handler: handler.handleBucketDeleteEvent
+    role: HandleBucketDeleteEventLambdaRole
 
 resources:
   Parameters:
@@ -667,6 +658,80 @@ resources:
                   Effect: "Allow"
                   Action: "ses:SendRawEmail"
                   Resource: "*"
+    HandleBucketPutEventLambdaRole:
+      Type: "AWS::IAM::Role"
+      DeletionPolicy : "Delete"
+      Properties:
+        RoleName: "${self:service}-${self:provider.stage}-handleBucketPutEvent-lambdaRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "lambda.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "${self:service}-${self:provider.stage}-${self:provider.region}-handleBucketPutEvent-lambdaRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action: "logs:CreateLogStream"
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-handleBucketPutEvent:*
+                -
+                  Effect: "Allow"
+                  Action: "logs:PutLogEvents"
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-handleBucketPutEvent:*:*
+                -
+                  Effect: "Allow"
+                  Action:
+                    - "s3:GetObject"
+                    - "s3:PutObject"
+                    - "s3:DeleteObject"
+                  Resource: arn:aws:s3:::${env:AWS_BUCKET}/*
+                -
+                  Effect: "Allow"
+                  Action: "s3:ListBucket"
+                  Resource: arn:aws:s3:::${env:AWS_BUCKET}
+    HandleBucketDeleteEventLambdaRole:
+      Type: "AWS::IAM::Role"
+      DeletionPolicy : "Delete"
+      Properties:
+        RoleName: "${self:service}-${self:provider.stage}-handleBucketDeleteEvent-lambdaRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "lambda.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "${self:service}-${self:provider.stage}-${self:provider.region}-handleBucketDeleteEvent-lambdaRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action: "logs:CreateLogStream"
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-handleBucketDeleteEvent:*
+                -
+                  Effect: "Allow"
+                  Action: "logs:PutLogEvents"
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-handleBucketDeleteEvent:*:*
+                -
+                  Effect: "Allow"
+                  Action:
+                    - "s3:DeleteObject"
+                  Resource: arn:aws:s3:::${env:AWS_BUCKET}/*
     UserPoolTriggerPostConfirmationInvokePermission:
       Type: "AWS::Lambda::Permission"
       Properties:
@@ -674,3 +739,17 @@ resources:
         Principal: "cognito-idp.amazonaws.com"
         SourceArn: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
         FunctionName: "arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-postConfirmation"
+    BucketHandlePutEventInvokePermission:
+      Type: "AWS::Lambda::Permission"
+      Properties:
+        Action: "lambda:InvokeFunction"
+        Principal: "s3.amazonaws.com"
+        SourceArn: "arn:aws:s3:::store.cuistotducoin.com"
+        FunctionName: "arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-handleBucketPutEvent"
+    BucketHandleDeleteEventInvokePermission:
+      Type: "AWS::Lambda::Permission"
+      Properties:
+        Action: "lambda:InvokeFunction"
+        Principal: "s3.amazonaws.com"
+        SourceArn: "arn:aws:s3:::store.cuistotducoin.com"
+        FunctionName: "arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-handleBucketDeleteEvent"

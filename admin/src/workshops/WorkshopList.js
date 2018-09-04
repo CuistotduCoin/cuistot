@@ -16,6 +16,7 @@ import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-dis
 import WorkshopDate from './WorkshopDate';
 import WorkshopPrice from './WorkshopPrice';
 import { CookNameField } from '../fields';
+import rowStyle from './rowStyle';
 
 const exporter = (workshops) => {
   const data = workshops.map((workshop) => {
@@ -50,7 +51,7 @@ const WorkshopList = props => (
   >
     <Responsive
       medium={(
-        <Datagrid>
+        <Datagrid rowStyle={rowStyle}>
           <TextField source="name" />
           <ReferenceField reference="cooks" source="cook.id" linkType="show" sortable={false}>
             <CookNameField />
