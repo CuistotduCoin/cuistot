@@ -177,8 +177,8 @@ export class App extends React.Component<IAppProps, {}> {
               <Route path="/organize" exact component={Organize} />
               <Route path="/presskit" exact component={Presskit} />
               <Route path="/profile/:id" exact component={Profile} />
-              <Route path="/search" exact component={Search} />
               <Route path="/workshop/:id" exact component={Workshop} />
+              <Route path="/s/:name" exact component={Search} />
               <EnsureLoggedIn
                 isLoggedIn={app.state.isLoggedIn}
                 setReferer={app.setReferer}

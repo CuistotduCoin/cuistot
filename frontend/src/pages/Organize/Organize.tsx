@@ -5,7 +5,7 @@ import Layout from "components/Layout";
 import MarkdownElement from "components/MarkdownElement";
 import React from "react";
 
-const styles = (theme: Theme) => ({
+const styles = () => ({
   grid: {
     margin: "0px auto",
     maxWidth: 1080,

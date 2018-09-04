@@ -3,12 +3,15 @@ import {
   createGenerateClassName,
   MuiThemeProvider
 } from "@material-ui/core/styles";
+import algoliasearch from "algoliasearch/lite";
 import createApolloClient from "createApolloClient";
 import Document from "Document";
 import express from "express";
 import * as React from "react";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { renderToString } from "react-dom/server";
+// @ts-ignore
+import { createInstantSearch } from "react-instantsearch-dom/server";
 import { SheetsRegistry } from "react-jss/lib/jss";
 import JssProvider from "react-jss/lib/JssProvider";
 import routes from "routes";
@@ -20,6 +23,11 @@ const syncLoadAssets = () => {
 };
 syncLoadAssets();
 
+const searchClient = algoliasearch(
+  process.env.ALGOLIASEARCH_SEARCH_APP_ID,
+  process.env.ALGOLIASEARCH_SEARCH_KEY
+);
+
 const server = express()
   .disable("x-powered-by")
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR!))
@@ -30,6 +38,11 @@ const server = express()
       productionPrefix: "c"
     });
 
+    // change searchState & resultsState
+    const searchState = { query: "" };
+    const { InstantSearch, findResultsState } = createInstantSearch();
+    const appInitialState = { searchState, findResultsState };
+
     const customRenderer = (node: any) => {
       const app = (
         <ApolloProvider client={client}>
@@ -38,7 +51,13 @@ const server = express()
             generateClassName={generateClassName}
           >
             <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
-              {node}
+              <InstantSearch
+                searchClient={searchClient}
+                indexName={process.env.ALGOLIASEARCH_SEARCH_APP_ID}
+                searchState={searchState}
+              >
+                {node}
+              </InstantSearch>
             </MuiThemeProvider>
           </JssProvider>
         </ApolloProvider>
@@ -56,6 +75,7 @@ const server = express()
         res,
         routes,
         // tslint:disable-next-line:object-literal-sort-keys
+        appInitialState,
         assets,
         customRenderer,
         document: Document,

@@ -74,6 +74,9 @@ export class Footer extends React.Component<IFooterProps, {}> {
               <Typography component="p" variant={"headline"} color="primary">
                 Gourmets
               </Typography>
+              <Link to="/subscription" className={classes.link}>
+                <Typography color="primary">Abonnement</Typography>
+              </Link>
               <Link
                 to="/how-it-works#pour-les-gourmets"
                 className={classes.link}

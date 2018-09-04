@@ -54,7 +54,7 @@ export default {
     organize: {
       description: "Rejoignez nos Cuistots",
       href: "https://www.cuistotducoin.com/organize",
-      title: "Cuistot du coin : Nos missions"
+      title: "Cuistot du coin : Créer votre atelier"
     },
     payment: {
       description: "Paiement",
@@ -81,6 +81,12 @@ export default {
       description: "Réinitialisation de mot de passe",
       href: "https://www.cuistotducoin.com/password/reset",
       title: "Réinitialisation de votre mot de passe"
+    },
+    subscription: {
+      description: "Abonnement à des ateliers de cuisine pour les enfants",
+      href: "https://www.cuistotducoin.com/subscription",
+      title:
+        "Abonnement à des cours de cuisine pour les enfants pour apprendre en s'amusant"
     },
     team: {
       description: "Découvrez qui se cache derrière Cuistot du Coin",

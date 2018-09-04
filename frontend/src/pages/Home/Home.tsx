@@ -93,6 +93,7 @@ const styles = (theme: Theme) => ({
 
 interface IHomeProps {
   classes?: any;
+  history: any;
 }
 
 export class Home extends React.Component<IHomeProps, {}> {
@@ -177,39 +178,6 @@ export class Home extends React.Component<IHomeProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/home/partners/tuk-tuk-bazar.jpg",
         name: "Tuk Tuk Bazar"
-      }
-    ];
-
-    const participants = [
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/participants/arkea.jpg",
-        name: "arkea"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/participants/brest-metropole.jpg",
-        name: "brest metropole et ville"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/participants/cadiou.jpg",
-        name: "cadiou"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/participants/fortuneo.jpg",
-        name: "fortuneo"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/participants/gl-events.jpg",
-        name: "gl events"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/participants/hippocampe.jpg",
-        name: "hippocampe"
       }
     ];
 

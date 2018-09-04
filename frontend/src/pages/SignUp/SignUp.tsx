@@ -1,4 +1,4 @@
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Head from "components/Head";
 import Logo from "components/Logo";
@@ -22,8 +22,6 @@ interface ISignUpProps {
 
 export class SignUp extends React.Component<ISignUpProps, {}> {
   public render() {
-    const { classes } = this.props;
-
     return (
       <div className={classes.container}>
         <Head
