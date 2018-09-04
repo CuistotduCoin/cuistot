@@ -4,11 +4,12 @@ import AWS from 'aws-sdk';
 const gm = require('gm').subClass({ imageMagick: true });
 
 const SKIP_FILE_SIZE = +process.env.MAX_FILE_SIZE || -1;
+const OPTIMIZED_VERSION_EXTENSION = 'cropped';
 
-const suffixFilename = (filename, suffix) => {
+const optimizedVersionFilename = (filename) => {
   const chunks = filename.split('.');
   const ext = chunks.pop();
-  return `${chunks.join('.')}_${suffix}.${ext}`;
+  return `${chunks.join('.')}_${OPTIMIZED_VERSION_EXTENSION}.${ext}`;
 };
 
 const isImageFile = (key) => {
@@ -24,8 +25,8 @@ const isImageFile = (key) => {
   return true;
 };
 
-function gmToBuffer(data) {
-  return new Promise((resolve, reject) => {
+const gmToBuffer = data => (
+  new Promise((resolve, reject) => {
     data.stream((err, stdout, stderr) => { // eslint-disable-line
       if (err) return reject(err);
       const chunks = [];
@@ -35,15 +36,16 @@ function gmToBuffer(data) {
       stdout.once('end', () => resolve(Buffer.concat(chunks)));
       stderr.once('data', result => reject(String(result)));
     });
-  });
-}
+  })
+);
 
-const processImage = (key, newKey, successCallback, failureCallback) => {
-  console.log('Processing : ', key);
+const processImage = (key, newKey, resolve, reject) => {
+  console.log('Processing');
   const s3 = new AWS.S3();
 
   async.waterfall([
     function check(next) {
+      console.log('Check');
       s3.headObject({ Bucket: process.env.AWS_BUCKET, Key: key }, (err, data) => {
         if (err) return next(err);
 
@@ -72,21 +74,21 @@ const processImage = (key, newKey, successCallback, failureCallback) => {
       });
     },
     function download(meta, next) {
-      console.log('Download image');
+      console.log('Download');
       s3.getObject({ Bucket: process.env.AWS_BUCKET, Key: key }, (err, data) => {
         if (err) return next(err);
         return next(null, meta, data);
       });
     },
     function process(meta, obj, next) {
-      console.log('Process image');
+      console.log('Process');
       const data = gm(obj.Body).quality(80).resize(120, 120);
       gmToBuffer(data)
         .then(buffer => next(null, meta, obj, buffer))
         .catch(err => next(err));
     },
     function upload(meta, obj, file, next) {
-      console.log('Upload image');
+      console.log('Upload');
       meta.Metadata.optimized = 'y'; // eslint-disable-line
       s3.putObject({
         Bucket: process.env.AWS_BUCKET,
@@ -96,17 +98,17 @@ const processImage = (key, newKey, successCallback, failureCallback) => {
         Metadata: meta.Metadata,
       }, (err) => {
         if (err) return next(err);
-        console.log('File uploaded', newKey);
+        console.log('File uploaded : ', newKey);
         return next();
       });
     },
   ], (err, result) => {
     if (err) {
-      failureCallback(err);
+      reject(err);
     } else {
-      successCallback(result);
+      resolve(result);
     }
   });
 };
 
-export { processImage, suffixFilename };
+export { processImage, optimizedVersionFilename, OPTIMIZED_VERSION_EXTENSION };

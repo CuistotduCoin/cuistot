@@ -33,6 +33,7 @@ const getLinkedResourceField = (fieldName) => {
         gourmet: {
           fields: {
             id: {},
+            identity_id: {},
             first_name: {},
             last_name: {},
           },
@@ -51,6 +52,7 @@ const getLinkedResourceField = (fieldName) => {
 const getLinkedTypeField = (fieldName) => {
   switch (fieldName) {
     case 'image':
+    case 'images':
       return {
         key: {},
       };

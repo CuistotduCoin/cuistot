@@ -3,6 +3,8 @@ import frenchMessages from 'ra-language-french';
 export default {
   ...frenchMessages,
   pos: {
+    info: 'Informations',
+    images: 'Images',
     search: 'Rechercher',
     configuration: 'Configuration',
     language: 'Langue',
@@ -27,6 +29,7 @@ export default {
       name: 'Atelier |||| Ateliers',
       has_bookings: 'Avec/sans réservation(s)',
       has_been_archived: 'Archivé ?',
+      no_picture: 'Aucune image',
       fields: {
         name: 'Nom',
         'cook.id': 'Cuistot',

@@ -17,6 +17,9 @@ const styles = {
   message: {
     marginTop: '10px',
   },
+  input: {
+    marginTop: '20px',
+  },
 };
 
 // hidden prop on S3Image : https://github.com/aws-amplify/amplify-js/pull/764
@@ -36,12 +39,12 @@ class ImageInput extends React.Component {
 
   onChange(event) {
     const { record, path, refreshView } = this.props;
+
     const file = event.target.files[0];
     if (file) {
-      if (record.identity_id) {
-        Storage.put(`${path}/${sanitizeFilename(file.name)}`, file, {
-          identityId: record.identity_id,
-        })
+      const identityId = this.props.identityId(record);
+      if (identityId) {
+        Storage.put(`${path(record)}/${sanitizeFilename(file.name)}`, file, { identityId })
           .then((result) => {
             console.log(result);
             this.setState({ message: 'Image uploaded... auto refresh in a few seconds', success: true });
@@ -65,6 +68,7 @@ class ImageInput extends React.Component {
           type="file"
           accept="image/jpeg,image/png,image/jpg"
           onChange={this.onChange}
+          className={classes.input}
         />
         <div
           className={cx(
@@ -83,7 +87,8 @@ class ImageInput extends React.Component {
 }
 
 ImageInput.propTypes = {
-  path: PropTypes.string.isRequired,
+  path: PropTypes.func.isRequired,
+  identityId: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   refreshView: PropTypes.func.isRequired,
 };

@@ -47,7 +47,10 @@ const GourmetEditActions = ({ basePath, data }) => {
 const GourmetEdit = props => (
   <Edit actions={<GourmetEditActions />} title={<GourmetNameField />} {...props}>
     <SimpleForm>
-      <ImageInput path="profile" />
+      <ImageInput
+        path={() => 'profile'}
+        identityId={record => record.identity_id}
+      />
       <DisabledInput source="id" />
       <DisabledInput source="email" />
       <RadioButtonGroupInput
