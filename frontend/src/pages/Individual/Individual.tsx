@@ -80,7 +80,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         description:
           "Marre des activités extra-scolaires classiques ? Faites découvrir la pâtisserie à vos enfants !",
-        image: "https://static.cuistotducoin.com/img/business/buffet.jpg",
+        image:
+          "https://static.cuistotducoin.com/img/individual/atelier-enfant.jpg",
         title: "Abonnement : Ateliers enfants",
         url: "/subscription"
       }
@@ -248,7 +249,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/workshops/audrey-cheesecake-pomme.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Saucisson au chocolat et mini choco",
+        name: "Cheesecake caramel au beurre salé et pommes",
         nameCook: "Audrey",
         price: 40,
         spot: "Audrey, Brest",

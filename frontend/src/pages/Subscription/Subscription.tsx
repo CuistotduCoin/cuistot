@@ -125,7 +125,7 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.media}
-                    image="https://static.cuistotducoin.com/img/business/buffet.jpg"
+                    image="https://static.cuistotducoin.com/img/individual/atelier-enfant.jpg"
                     title="Abonnement de 5 mois"
                   />
                   <CardHeader
@@ -154,7 +154,7 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.media}
-                    image="https://static.cuistotducoin.com/img/business/buffet.jpg"
+                    image="https://static.cuistotducoin.com/img/individual/atelier-enfant.jpg"
                     title="Abonnement de 10 mois"
                   />
                   <CardHeader
