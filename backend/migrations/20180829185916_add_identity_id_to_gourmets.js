@@ -1,11 +1,11 @@
 exports.up = knex => (
   knex.schema.table('gourmets', (table) => {
-    table.string('username', 100).notNullable();
+    table.string('identity_id');
   })
 );
 
 exports.down = knex => (
   knex.schema.table('gourmets', (table) => {
-    table.dropColumn('username');
+    table.dropColumn('identity_id');
   })
 );

@@ -28,18 +28,19 @@ async function updateEvaluation(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = performOperation(
     args,
-    getEvaluation({ evaluation_id: updateArgs.id }),
     updateObject(TABLE_NAME, updateArgs),
+    'author_id',
+    getEvaluation({ evaluation_id: updateArgs.id }),
   );
   return result;
 }
 
 async function deleteEvaluation(args) {
-  const { is_admin: isAdmin, request_author_id: requestAuthorId, ...deleteArgs } = args;
   const result = await performOperation(
     args,
-    getEvaluation({ evaluation_id: deleteArgs.id }),
-    deleteObject(TABLE_NAME, deleteArgs.id),
+    deleteObject(TABLE_NAME, args.id),
+    'author_id',
+    getEvaluation({ evaluation_id: args.id }),
   );
   return result;
 }

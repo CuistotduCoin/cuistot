@@ -35,7 +35,10 @@ const searchClient = algoliasearch(
   runtimeConfig.ALGOLIASEARCH_SEARCH_KEY
 );
 
-UNSTATED.logStateChanges = process.env.NODE_ENV === "development";
+if (process.env.NODE_ENV === "development") {
+  UNSTATED.logStateChanges = true;
+  window.LOG_LEVEL = "DEBUG";
+}
 
 ensureReady(routes).then(data =>
   hydrate(

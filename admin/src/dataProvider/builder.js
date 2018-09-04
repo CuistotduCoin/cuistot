@@ -1,23 +1,10 @@
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
-import Amplify, { Auth } from 'aws-amplify';
 import { createAppSyncLink } from 'aws-appsync';
 
+import { Auth } from '../auth';
 import buildGraphQLProvider from '.';
-
-const AUTHENTICATION_TYPE = 'AMAZON_COGNITO_USER_POOLS';
-
-Amplify.configure({
-  Auth: {
-    region: process.env.REACT_APP_AWS_REGION_IRELAND,
-    userPoolId: process.env.REACT_APP_USER_POOL_ID,
-    userPoolWebClientId: process.env.REACT_APP_USER_POOL_WEB_CLIENT_ID,
-  },
-  aws_appsync_graphqlEndpoint: process.env.REACT_APP_GRAPHQL_API_URL,
-  aws_appsync_region: process.env.REACT_APP_AWS_REGION_IRELAND,
-  aws_appsync_authenticationType: AUTHENTICATION_TYPE,
-});
 
 export default () => {
   const onErrorLink = onError(({ graphQLErrors, networkError }) => {
@@ -33,7 +20,7 @@ export default () => {
     url: process.env.REACT_APP_GRAPHQL_API_URL,
     region: process.env.REACT_APP_AWS_REGION_IRELAND,
     auth: {
-      type: AUTHENTICATION_TYPE,
+      type: process.env.REACT_APP_AWS_AUTHENTICATION_TYPE,
       jwtToken: async () => (
         Auth.currentSession()
           .then(currentSession => currentSession.getIdToken().getJwtToken())

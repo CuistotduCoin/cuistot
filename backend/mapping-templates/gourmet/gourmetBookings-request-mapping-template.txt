@@ -10,7 +10,7 @@
   "payload": {
     "field": "getGourmetBookings",
     "arguments":  {
-      "gourmet_id": $utils.toJson($context.source.id),
+      "id": $utils.toJson($context.source.id),
       "is_admin": $utils.toJson($isAdmin),
       "request_author_id": $utils.toJson($context.identity.sub)
     }

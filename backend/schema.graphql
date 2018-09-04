@@ -125,7 +125,7 @@ type Workshop implements Node & Timestamps {
   min_gourmet: Int!
   max_gourmet: Int!
   description: String
-  images: [S3Object!]!
+  images: [Image!]!
   date: String!
   kitchen: Kitchen!
   cook: Cook!
@@ -156,9 +156,10 @@ type Gourmet implements Node & Timestamps {
   created_at: String!
   updated_at: String!
   email: String!
+  identity_id: String
   first_name: String!
   last_name: String!
-  image: S3Object
+  image: Image
   gender: Gender
   birthdate: String
   address: String
@@ -197,10 +198,8 @@ type Kitchen implements Node & Timestamps {
   author: Gourmet!
 }
 
-type S3Object {
-  bucket: String!
+type Image {
   key: String!
-  region: String!
 }
 
 type WorkshopList {
@@ -226,16 +225,6 @@ input GourmetInput {
 
 input BookingInput {
   id: ID!
-}
-
-input ImageInput {
-  bucket: String!
-  key: String!
-  region: String!
-}
-
-type ImagePayload {
-  image: S3Object
 }
 
 input CreateWorkshopInput {
@@ -305,6 +294,7 @@ input UpdateGourmetInput {
   email: String
   first_name: String
   last_name: String
+  identity_id: String
   gender: Gender
   birthdate: String
   address: String
@@ -424,10 +414,6 @@ type Mutation {
     @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteWorkshop(workshop_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
-  addWorkshopImage(image: ImageInput!): ImagePayload!
-    @aws_auth(cognito_groups: ["Cook", "Admin"])
-  removeWorkshopImage(key: String!): PlainPayload!
-    @aws_auth(cognito_groups: ["Cook", "Admin"])
 
   ## Bookings
   createBooking(booking: CreateBookingInput!): BookingPayload!
@@ -451,8 +437,6 @@ type Mutation {
   updateGourmet(gourmet: UpdateGourmetInput!): GourmetPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteGourmet(gourmet_id: ID!): PlainPayload!
-    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
-  updateGourmetImage(image: ImageInput!): ImagePayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 
   ## Cooks

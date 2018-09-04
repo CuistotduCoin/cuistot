@@ -13,7 +13,7 @@ import getFinalType from './getFinalType';
 import isList from './isList';
 import isRequired from './isRequired';
 
-const getField = (fieldName) => {
+const getLinkedResourceField = (fieldName) => {
   switch (fieldName) {
     case 'author':
     case 'gourmet':
@@ -33,6 +33,7 @@ const getField = (fieldName) => {
         gourmet: {
           fields: {
             id: {},
+            identity_id: {},
             first_name: {},
             last_name: {},
           },
@@ -45,6 +46,18 @@ const getField = (fieldName) => {
       };
     default:
       return { id: {} };
+  }
+};
+
+const getLinkedTypeField = (fieldName) => {
+  switch (fieldName) {
+    case 'image':
+    case 'images':
+      return {
+        key: {},
+      };
+    default:
+      return null;
   }
 };
 
@@ -63,10 +76,17 @@ export const buildFields = introspectionResults => fields => (
     const linkedResource = introspectionResults.resources.find(r => r.type.name === type.name);
 
     if (linkedResource) {
-      return { ...acc, [field.name]: { fields: getField(field.name) } };
+      return { ...acc, [field.name]: { fields: getLinkedResourceField(field.name) } };
     }
 
-    // const linkedType = introspectionResults.types.find(t => t.name === type.name);
+    const linkedType = introspectionResults.types.find(t => t.name === type.name);
+
+    if (linkedType) {
+      const linkedTypeField = getLinkedTypeField(field.name);
+      if (linkedTypeField) {
+        return { ...acc, [field.name]: { fields: linkedTypeField } };
+      }
+    }
 
     // if (linkedType) {
     //   return {

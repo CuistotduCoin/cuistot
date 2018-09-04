@@ -48,6 +48,8 @@ import {
 } from './resolvers/workshop-resolver';
 import { run } from './mailer';
 import { isEmpty } from './utils/utils';
+import { findWhere, findFirstWhere, updateObject } from './resolvers/utils';
+import { processImage, optimizedVersionFilename, OPTIMIZED_VERSION_EXTENSION } from './processors/image';
 
 const knex = require('knex')(connection[process.env.NODE_ENV]);
 
@@ -328,4 +330,148 @@ export const sendEmail = (event, context) => {
     payload = event;
   }
   run(payload, context, context.done);
+};
+
+/*
+  Handle put event in the store bucket
+    Return if the image is a already an optimized version
+    For profiles :
+      Delete all other profile images for the user (original and cropped versions)
+    Optimize, crop and put the optimized version in the bucket
+*/
+export const handleBucketPutEvent = (event, context) => {
+  const s3 = new AWS.S3();
+  const payload = event.Records[0];
+  const url = payload.s3.object.key.split('/');
+  const identityId = decodeURIComponent(url[1]);
+  const type = decodeURIComponent(url[2]);
+
+  const optimizeImage = (path, filename, resolver) => {
+    const newFilename = optimizedVersionFilename(filename);
+    processImage(`${path}/${filename}`, `${path}/${newFilename}`, resolver(newFilename), context.fail);
+  };
+
+  if (type === 'profile') {
+    const filename = decodeURIComponent(url[3]);
+    const path = `protected/${identityId}/profile`;
+    const key = `${path}/${filename}`;
+
+    s3.headObject({ Bucket: process.env.AWS_BUCKET, Key: key }, (err, data) => {
+      if (data.Metadata && data.Metadata.optimized) {
+        console.log('Image already processed');
+        context.done(null, event);
+      } else {
+        s3.listObjects({ Bucket: process.env.AWS_BUCKET, Prefix: path }, (listErr, listData) => {
+          if (listErr) {
+            context.fail(listErr);
+          } else {
+            const resolver = newFilename => () => {
+              findWhere('gourmets', identityId, 'identity_id')
+                .then((result) => {
+                  const gourmet = result.data[0];
+                  updateObject('gourmets', {
+                    id: gourmet.id,
+                    image: { key: newFilename },
+                  })
+                    .then(() => context.done(null, event))
+                    .catch(updateErr => context.fail(updateErr));
+                })
+                .catch(findErr => context.fail(findErr));
+            };
+
+            const objectsToDelete = listData.Contents
+              .filter(file => file.Key !== key)
+              .map(file => ({ Key: file.Key }));
+
+            if (objectsToDelete.length) {
+              s3.deleteObjects({
+                Bucket: process.env.AWS_BUCKET,
+                Delete: {
+                  Objects: objectsToDelete,
+                  Quiet: false,
+                },
+              }, (deleteErr) => {
+                if (deleteErr) {
+                  context.fail(deleteErr);
+                } else {
+                  optimizeImage(path, filename, resolver);
+                }
+              });
+            } else {
+              optimizeImage(path, filename, resolver);
+            }
+          }
+        });
+      }
+    });
+  } else if (type === 'workshops') {
+    const workshopId = decodeURIComponent(url[3]);
+    const filename = decodeURIComponent(url[4]);
+    const path = `protected/${identityId}/workshops/${workshopId}`;
+
+    s3.headObject({ Bucket: process.env.AWS_BUCKET, Key: `${path}/${filename}` }, (err, data) => {
+      if (data.Metadata && data.Metadata.optimized) {
+        console.log('Image already processed');
+        context.done(null, event);
+      } else {
+        const resolver = newFilename => () => {
+          findFirstWhere('workshops', workshopId)
+            .then((result) => {
+              const images = result.data.images;
+              images.push({ key: newFilename });
+              updateObject('workshops', {
+                id: workshopId,
+                images: JSON.stringify(images),
+              })
+                .then(() => context.done(null, event))
+                .catch(updateErr => context.fail(updateErr));
+            })
+            .catch(findErr => context.fail(findErr));
+        };
+        optimizeImage(path, filename, resolver);
+      }
+    });
+  } else {
+    context.done(null, event);
+  }
+};
+
+export const handleBucketDeleteEvent = (event, context) => {
+  const s3 = new AWS.S3();
+  const payload = event.Records[0];
+  const url = payload.s3.object.key.split('/');
+  const type = decodeURIComponent(url[2]);
+  const filename = decodeURIComponent(url[4]);
+
+  if (type === 'workshops' && filename.includes(`_${OPTIMIZED_VERSION_EXTENSION}`)) {
+    const identityId = decodeURIComponent(url[1]);
+    const workshopId = decodeURIComponent(url[3]);
+    const path = `protected/${identityId}/workshops/${workshopId}`;
+    const originalKey = `${path}/${filename.replace(`_${OPTIMIZED_VERSION_EXTENSION}`, '')}`;
+
+    // Deletes the original file from the bucket
+    s3.deleteObjects({
+      Bucket: process.env.AWS_BUCKET,
+      Delete: {
+        Objects: [{ Key: originalKey }],
+        Quiet: false,
+      },
+    }, (deleteErr) => {
+      if (deleteErr) {
+        context.fail(deleteErr);
+      } else {
+        // Remove the key from workshop images in our database
+        findFirstWhere('workshops', workshopId)
+          .then((result) => {
+            const images = result.data.images.filter(image => image.key !== filename);
+            updateObject('workshops', { id: workshopId, images: JSON.stringify(images) })
+              .then(() => context.done(null, event))
+              .catch(updateErr => context.fail(updateErr));
+          })
+          .catch(findErr => context.fail(findErr));
+      }
+    });
+  } else {
+    context.done(null, event);
+  }
 };
