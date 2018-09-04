@@ -13,7 +13,7 @@ import {
   Button,
 } from 'react-admin';
 import { Link } from 'react-router-dom';
-import { GourmetNameField, ImageField } from '../fields';
+import { GourmetNameField, ProfileImageField } from '../fields';
 import { CookIcon } from '../cooks';
 
 const GourmetShowActions = ({ basePath, data }) => {
@@ -44,7 +44,7 @@ const GourmetShowActions = ({ basePath, data }) => {
 const GourmetShow = props => (
   <Show actions={<GourmetShowActions />} title={<GourmetNameField />} {...props}>
     <SimpleShowLayout>
-      <ImageField path="profile" />
+      <ProfileImageField />
       <TextField source="id" />
       <TextField source="identity_id" />
       <EmailField source="email" />

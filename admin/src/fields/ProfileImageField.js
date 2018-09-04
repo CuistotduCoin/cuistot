@@ -7,20 +7,20 @@ import { Storage } from '../auth';
 
 const styles = {
   image: {
-    margin: '50px 0',
+    margin: '40px 0',
   },
 };
 
-class ImageField extends React.Component {
+class ProfileImageField extends React.Component {
   constructor(props) {
     super(props);
     this.state = { imageUrl: null };
   }
 
   componentDidMount() {
-    const { path, record } = this.props;
+    const { record } = this.props;
     if (record.image && record.image.key) {
-      Storage.get(`${path}/${record.image.key}`, { identityId: record.identity_id })
+      Storage.get(`profile/${record.image.key}`, { identityId: record.identity_id })
         .then(result => this.setState({ imageUrl: result }))
         .catch(err => console.log(err));
     }
@@ -46,9 +46,8 @@ class ImageField extends React.Component {
   }
 }
 
-ImageField.propTypes = {
-  path: PropTypes.string.isRequired,
+ProfileImageField.propTypes = {
   translate: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(translate(ImageField));
+export default withStyles(styles)(translate(ProfileImageField));

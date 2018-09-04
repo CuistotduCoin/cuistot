@@ -2,12 +2,12 @@ import LocationField from './LocationField';
 import CookNameField from './CookNameField';
 import GourmetNameField from './GourmetNameField';
 import NameField from './NameField';
-import ImageField from './ImageField';
+import ProfileImageField from './ProfileImageField';
 
 export {
   LocationField,
   CookNameField,
   GourmetNameField,
   NameField,
-  ImageField,
+  ProfileImageField,
 };
