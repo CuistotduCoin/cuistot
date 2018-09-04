@@ -15,28 +15,19 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface IResetPasswordProps {
-  classes?: any;
-}
-
-export class ResetPassword extends React.Component<IResetPasswordProps, {}> {
-  public render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.container}>
-        <Head
-          title={metaInfo.metaInfo.resetPassword.title}
-          description={metaInfo.metaInfo.resetPassword.description}
-        />
-        <Logo height={100} width={100} className={classes.logo} />
-        <Typography align="center" variant="display1">
-          Un tout nouveau mot de passe
-        </Typography>
-        <ResetPasswordForm />
-      </div>
-    );
-  }
-}
+// tslint:disable-next-line
+const ResetPassword: React.SFC<{ classes: any }> = ({ classes }) => (
+  <div className={classes.container}>
+    <Head
+      title={metaInfo.metaInfo.resetPassword.title}
+      description={metaInfo.metaInfo.resetPassword.description}
+    />
+    <Logo height={100} width={100} className={classes.logo} />
+    <Typography align="center" variant="display1">
+      Un tout nouveau mot de passe
+    </Typography>
+    <ResetPasswordForm />
+  </div>
+);
 
 export default withStyles(styles as any)(ResetPassword as any) as any;

@@ -17,31 +17,24 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface ILoginProps {
-  classes?: any;
-}
-
-export class Login extends React.Component<ILoginProps, {}> {
-  public render() {
-    return (
-      <div className={classes.container}>
-        <Head
-          title={metaInfo.metaInfo.login.title}
-          description={metaInfo.metaInfo.login.description}
-        />
-        <Logo height={100} width={100} className={classes.logo} />
-        <LoginForm />
-        <Typography align="center" gutterBottom={true}>
-          Pas encore membre ? <Link to="/signup">Inscrivez vous !</Link>
-        </Typography>
-        <Typography align="center" gutterBottom={true}>
-          <Link to="/password/reset/request">
-            Vous avez oublié votre mot de passe ?
-          </Link>
-        </Typography>
-      </div>
-    );
-  }
-}
+// tslint:disable-next-line
+const Login: React.SFC<{ classes: any }> = ({ classes }) => (
+  <div className={classes.container}>
+    <Head
+      title={metaInfo.metaInfo.login.title}
+      description={metaInfo.metaInfo.login.description}
+    />
+    <Logo height={100} width={100} className={classes.logo} />
+    <LoginForm />
+    <Typography align="center" gutterBottom={true}>
+      Pas encore membre ? <Link to="/signup">Inscrivez vous !</Link>
+    </Typography>
+    <Typography align="center" gutterBottom={true}>
+      <Link to="/password/reset/request">
+        Vous avez oublié votre mot de passe ?
+      </Link>
+    </Typography>
+  </div>
+);
 
 export default withStyles(styles as any)(Login as any) as any;

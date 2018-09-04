@@ -16,36 +16,24 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface IResetPasswordRequestProps {
-  classes?: any;
-}
-
-export class ResetPasswordRequest extends React.Component<
-  IResetPasswordRequestProps,
-  {}
-> {
-  public render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.container}>
-        <Head
-          title={metaInfo.metaInfo.resetPasswordRequest.title}
-          description={metaInfo.metaInfo.resetPasswordRequest.description}
-        />
-        <Logo height={100} width={100} className={classes.logo} />
-        <Typography align="center" variant="display1">
-          Vous avez oublié votre mot de passe ?
-        </Typography>
-        <ResetPasswordRequestForm />
-        <Typography align="center" gutterBottom={true}>
-          <Link to="/login" className={classes.link}>
-            Non c'est bon, je m'en rappelle en fait
-          </Link>
-        </Typography>
-      </div>
-    );
-  }
-}
+// tslint:disable-next-line
+const ResetPasswordRequest: React.SFC<{ classes: any }> = ({ classes }) => (
+  <div className={classes.container}>
+    <Head
+      title={metaInfo.metaInfo.resetPasswordRequest.title}
+      description={metaInfo.metaInfo.resetPasswordRequest.description}
+    />
+    <Logo height={100} width={100} className={classes.logo} />
+    <Typography align="center" variant="display1">
+      Vous avez oublié votre mot de passe ?
+    </Typography>
+    <ResetPasswordRequestForm />
+    <Typography align="center" gutterBottom={true}>
+      <Link to="/login" className={classes.link}>
+        Non c'est bon, je m'en rappelle en fait
+      </Link>
+    </Typography>
+  </div>
+);
 
 export default withStyles(styles as any)(ResetPasswordRequest as any) as any;
