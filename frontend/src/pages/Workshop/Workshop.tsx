@@ -1,4 +1,4 @@
-import { Divider, Modal, RootRef } from "@material-ui/core";
+import { Divider, Modal } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import green from "@material-ui/core/colors/green";
@@ -22,7 +22,6 @@ import Footer from "components/Footer";
 import Header from "components/Header";
 import StarRating from "components/StarRating";
 import React from "react";
-import { Link } from "react-router-dom";
 import Scroll from "react-scroll";
 import Slider from "react-slick";
 import Waypoint from "react-waypoint";

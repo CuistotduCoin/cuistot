@@ -1,9 +1,9 @@
 import { Avatar, Grid, Typography } from "@material-ui/core";
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import React from "react";
 import { StarRating } from "../StarRating/StarRating";
 
-const styles = (theme: Theme) => ({});
+const styles = () => ({});
 
 interface ICommentBlock {
   classes?: any;
@@ -16,8 +16,6 @@ interface ICommentBlock {
 
 export class CommentBlock extends React.Component<ICommentBlock, {}> {
   public render() {
-    const { classes } = this.props;
-
     return (
       <>
         <Grid container={true} spacing={16}>

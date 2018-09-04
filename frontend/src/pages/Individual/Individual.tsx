@@ -27,6 +27,9 @@ const styles = (theme: Theme) => ({
     maxWidth: 1080,
     padding: 24
   },
+  link: {
+    textDecoration: "none"
+  },
   media: {
     height: 135
   },
@@ -51,53 +54,36 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         description: "Ateliers de cuisine collectif chez nos lieux partenaires",
         image:
           "https://static.cuistotducoin.com/img/individual/ateliers-cuisine-collectif.jpg",
-        title: "Ateliers de cuisine collectif"
+        title: "Ateliers de cuisine collectif",
+        url: "https://cuistotducoin.typeform.com/to/rNhgMi"
       },
       {
         description:
           "Ateliers de cuisine privatisé chez vous ou chez nos lieux partenaires",
         image:
           "https://static.cuistotducoin.com/img/individual/ateliers-cuisine-privatise.jpg",
-        title: "Ateliers de cuisine privatisé"
+        title: "Ateliers de cuisine privatisé",
+        url: "https://cuistotducoin.typeform.com/to/WpaATI"
       },
       {
         description:
           "Notre cuistot est aux fourneaux rien que pour vous et vos invités",
         image:
           "https://static.cuistotducoin.com/img/individual/cuistot-a-domicile.jpg",
-        title: "Repas à domicile"
+        title: "Repas à domicile",
+        url: "https://cuistotducoin.typeform.com/to/S2XFjV"
+      },
+      {
+        description:
+          "Marre des activités extra-scolaires classiques ? Faites découvrir la pâtisserie à vos enfants !",
+        image:
+          "https://static.cuistotducoin.com/img/individual/atelier-enfant.jpg",
+        title: "Abonnement : Ateliers enfants",
+        url: "/subscription"
       }
     ];
 
     const workshops = [
-      {
-        availableSeat: 6,
-        date: "samedi 25 aout, 14h30-16h30",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-pate-a-sucre.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Cake Design : Pâte à sucres",
-        nameCook: "Audrey",
-        price: 45,
-        spot: "Audrey, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/RjVIV7"
-      },
-      {
-        availableSeat: 8,
-        date: "samedi 1 septembre, 9h30-13h",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ronan-royal-chocolat.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
-        name: "Royal Chocolat",
-        nameCook: "Ronan",
-        price: 50,
-        spot: "Schmidt, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/CPRhUS"
-      },
       {
         availableSeat: 8,
         date: "samedi 8 septembre, 9h30-13h",
@@ -203,7 +189,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/workshops/gaetan-decouverte-vins-naturels.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/gaetan.jpg",
-        name: "A la découverte des vins naturels",
+        name: "Repas et dégustation de vins naturels",
         nameCook: "Gaetan",
         price: 50,
         spot: "Soif de Vins, Brest",
@@ -225,7 +211,21 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/jjWrtL"
       },
       {
-        availableSeat: 12,
+        availableSeat: 6,
+        date: "samedi 29 septembre, 10h-12h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-saucisson-au-chocolat.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Saucisson au chocolat et mini choco",
+        nameCook: "Audrey",
+        price: 25,
+        spot: "Audrey, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/j3jx1h"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 29 septembre, 10h-13h",
         duration: 3,
         image:
@@ -235,8 +235,22 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Zhang",
         price: 35,
         spot: "Cuisinella, Brest",
-        totalSeat: 12,
+        totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/gudvAa"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 6 octobre, 10h-12h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-cheesecake-pomme.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Cheesecake caramel au beurre salé et pommes",
+        nameCook: "Audrey",
+        price: 40,
+        spot: "Audrey, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/zgXsH3"
       },
       {
         availableSeat: 6,
@@ -422,6 +436,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Palais des Thés, Brest",
         totalSeat: 5,
         typeform: "https://cuistotducoin.typeform.com/to/HHelGm"
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-pate-a-sucre.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Cake Design : Pâte à sucres",
+        nameCook: "Audrey",
+        price: 45,
+        spot: "Audrey, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/X06uWu"
       }
     ];
 
@@ -449,27 +477,29 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           className={classes.grid}
         >
           {typeActivity.map((activity, index) => (
-            <Grid key={index} item={true} xs={12} sm={6} md={3} lg={true}>
+            <Grid key={index} item={true} xs={12} sm={6}>
               <Grid container={true} justify="center">
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.media}
-                    image={activity.image}
-                    title={activity.title}
-                  />
-                  <CardHeader
-                    className={classes.cardHeader}
-                    title={activity.title}
-                    classes={{
-                      title: classes.title
-                    }}
-                  />
-                  <CardContent className={classes.cardShortContent}>
-                    <Typography component="p">
-                      {activity.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <a className={classes.link} href={activity.url} target="_blank">
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.media}
+                      image={activity.image}
+                      title={activity.title}
+                    />
+                    <CardHeader
+                      className={classes.cardHeader}
+                      title={activity.title}
+                      classes={{
+                        title: classes.title
+                      }}
+                    />
+                    <CardContent className={classes.cardShortContent}>
+                      <Typography component="p">
+                        {activity.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </a>
               </Grid>
             </Grid>
           ))}

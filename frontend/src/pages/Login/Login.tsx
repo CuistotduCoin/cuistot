@@ -1,4 +1,4 @@
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
 import Head from "components/Head";
@@ -23,8 +23,6 @@ interface ILoginProps {
 
 export class Login extends React.Component<ILoginProps, {}> {
   public render() {
-    const { classes } = this.props;
-
     return (
       <div className={classes.container}>
         <Head

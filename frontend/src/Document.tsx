@@ -8,6 +8,7 @@ export interface IDocumentProps {
   assets: any;
   data: any;
   initialApolloState: any;
+  appInitialState: any;
   css: any;
 }
 
@@ -22,7 +23,14 @@ export default class Document extends React.Component<IDocumentProps, {}> {
   }
 
   public render() {
-    const { helmet, assets, data, initialApolloState, css } = this.props;
+    const {
+      helmet,
+      assets,
+      data,
+      initialApolloState,
+      appInitialState,
+      css
+    } = this.props;
     // get attributes from React Helmet
     const htmlAttrs = helmet.htmlAttributes.toComponent();
     const bodyAttrs = helmet.bodyAttributes.toComponent();
@@ -181,6 +189,14 @@ export default class Document extends React.Component<IDocumentProps, {}> {
               ).replace(/</g, "\\u003c")};`
             }}
           />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.__APP_INITIAL_STATE__=${serialize(
+                appInitialState
+              )};`
+            }}
+          />
+
           <AfterRoot />
           <AfterData data={data} />
 

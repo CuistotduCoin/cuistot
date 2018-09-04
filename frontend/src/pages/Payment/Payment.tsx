@@ -161,7 +161,6 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
         );
       case 1:
         return (
-          // tslint:disable-next-line:no-unused-expression
           <Grid container={true} className={classes.grid}>
             <Grid item={true} xs={8}>
               <PaymentCardForm />
@@ -241,9 +240,6 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
             </Grid>
           </Grid>
         );
-
-      case 2:
-        return <div>yo</div>;
 
       default:
         return null;

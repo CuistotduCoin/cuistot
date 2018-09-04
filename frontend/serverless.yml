@@ -5,6 +5,7 @@ plugins:
   - serverless-offline
   - serverless-apigw-binary
   - serverless-domain-manager
+  - serverless-sentry
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
@@ -18,6 +19,10 @@ custom:
     domainName: ${env:AWS_DOMAIN}
     createRoute53Record: true
     certificateName: ${env:AWS_DOMAIN}
+  sentry:
+    dsn: ${env:SENTRY_DSN}
+    organization: cuistotducoin
+    project: front
 
 provider:
   name: aws

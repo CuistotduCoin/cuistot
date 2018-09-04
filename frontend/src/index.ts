@@ -1,6 +1,8 @@
 import * as awsServerlessExpress from "aws-serverless-express";
 import express from "express";
+import Raven from "raven";
 import app from "server";
+import RavenLambdaWrapper from "serverless-sentry-lib";
 
 let lambdaOrServer;
 if (process.env.EXECUTION_ENV === "lambda") {
@@ -12,8 +14,12 @@ if (process.env.EXECUTION_ENV === "lambda") {
     undefined,
     binaryMimeTypes
   );
-  lambdaOrServer = (event: any, context: any) =>
-    awsServerlessExpress.proxy(server, event, context);
+  lambdaOrServer = RavenLambdaWrapper.handler(
+    Raven,
+    (event: any, context: any) => {
+      awsServerlessExpress.proxy(server, event, context);
+    }
+  );
 } else {
   if (module.hot) {
     module.hot.accept("./server", () => {
