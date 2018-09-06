@@ -5,7 +5,6 @@ import { Auth } from "aws-amplify";
 import { AppContainer } from "components/App";
 import { withRedirect } from "decorators/RedirectDecorator";
 import { Field, Form, Formik } from "formik";
-// @ts-ignore
 import { TextField } from "formik-material-ui";
 import { parse } from "query-string";
 import React from "react";
@@ -159,11 +158,8 @@ export class ResetPasswordForm extends React.Component<
       values: IResetPasswordFormValues,
       { setSubmitting, setErrors, setStatus, resetForm }
     ) => {
-      Auth.forgotPasswordSubmit(
-        values.username,
-        values.code,
-        values.newPassword
-      )
+      const { username, code, newPassword } = values;
+      Auth.forgotPasswordSubmit(username, code, newPassword)
         .then(data => {
           setStatus({ success: true });
           resetForm(this.initialValues());

@@ -15,31 +15,19 @@ const styles = (theme: Theme) => ({
   }
 });
 
-interface IAccountConfirmationProps {
-  classes?: any;
-}
-
-export class AccountConfirmation extends React.Component<
-  IAccountConfirmationProps,
-  {}
-> {
-  public render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.container}>
-        <Head
-          title={metaInfo.metaInfo.accountConfirmation.title}
-          description={metaInfo.metaInfo.accountConfirmation.description}
-        />
-        <Logo height={100} width={100} className={classes.logo} />
-        <Typography align="center" variant="display1">
-          Vous avez dû recevoir un code de sécurité
-        </Typography>
-        <AccountConfirmationForm />
-      </div>
-    );
-  }
-}
+// tslint:disable-next-line
+const AccountConfirmation: React.SFC<{ classes: any }> = ({ classes }) => (
+  <div className={classes.container}>
+    <Head
+      title={metaInfo.metaInfo.accountConfirmation.title}
+      description={metaInfo.metaInfo.accountConfirmation.description}
+    />
+    <Logo height={100} width={100} className={classes.logo} />
+    <Typography align="center" variant="display1">
+      Vous avez dû recevoir un code de sécurité
+    </Typography>
+    <AccountConfirmationForm />
+  </div>
+);
 
 export default withStyles(styles as any)(AccountConfirmation as any) as any;

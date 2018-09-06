@@ -77,7 +77,6 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
                   id="username"
                   label="Nom d'utilisateur"
                   name="username"
-                  placeholder="Votre nom d'utilisateur"
                   className={classes.textField}
                   margin="normal"
                 />
@@ -91,7 +90,6 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
                   id="password"
                   label="Mot de passe"
                   name="password"
-                  placeholder="Votre mot de passe"
                   className={classes.textField}
                   margin="normal"
                 />

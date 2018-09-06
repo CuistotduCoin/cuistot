@@ -84,7 +84,6 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
                   id="firstname"
                   name="firstname"
                   label="Prénom"
-                  placeholder="Votre prénom"
                   className={classes.textField}
                   margin="normal"
                   type="text"
@@ -96,7 +95,6 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
                   id="lastname"
                   name="lastname"
                   label="Nom"
-                  placeholder="Votre nom"
                   className={classes.textField}
                   margin="normal"
                   type="text"
@@ -112,7 +110,6 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
                   id="username"
                   label="Nom d'utilisateur"
                   name="username"
-                  placeholder="Votre nom d'utilisateur"
                   className={classes.textField}
                   margin="normal"
                 />
@@ -126,7 +123,6 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
                   id="email"
                   label="Email"
                   name="email"
-                  placeholder="Votre email"
                   className={classes.textField}
                   margin="normal"
                 />
@@ -140,7 +136,6 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
                   id="password"
                   label="Mot de passe"
                   name="password"
-                  placeholder="Votre mot de passe"
                   className={classes.textField}
                   margin="normal"
                 />
