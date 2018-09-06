@@ -1,5 +1,5 @@
-export default `mutation updateGourmet($gourmet: UpdateGourmetInput!) {
-  updateGourmet(gourmet: $gourmet) {
+export default `query GetCurrentGourmet {
+  getCurrentGourmet {
     gourmet {
       id
       identity_id
@@ -16,8 +16,8 @@ export default `mutation updateGourmet($gourmet: UpdateGourmetInput!) {
       address
       city
       zip_code
-    }
-    message
+    },
+    message,
     errors {
       message
     }

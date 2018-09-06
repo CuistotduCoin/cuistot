@@ -157,6 +157,7 @@ type Gourmet implements Node & Timestamps {
   updated_at: String!
   email: String!
   identity_id: String
+  username: String!
   first_name: String!
   last_name: String!
   image: Image
@@ -285,23 +286,20 @@ input CreateGourmetInput {
   address: String
   city: String
   zip_code: String
-  location: String
   description: String
 }
 
 input UpdateGourmetInput {
   id: ID!
-  email: String
+  description: String
+  gender: Gender
   first_name: String
   last_name: String
-  identity_id: String
-  gender: Gender
   birthdate: String
   address: String
   city: String
   zip_code: String
-  location: String
-  description: String
+  identity_id: String
 }
 
 input CreateCookInput {
@@ -331,7 +329,6 @@ input CreateKitchenInput {
   address: String!
   city: String!
   zip_code: String!
-  location: String
 }
 
 input UpdateKitchenInput {
@@ -340,7 +337,6 @@ input UpdateKitchenInput {
   address: String
   city: String
   zip_code: String
-  location: String
 }
 
 type UserError {

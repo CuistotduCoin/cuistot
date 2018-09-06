@@ -3,6 +3,7 @@ import EnsureLoggedIn from "components/EnsureLoggedIn";
 import Snackbar from "components/Snackbar";
 import { runtimeConfig } from "config";
 import { withRedirect } from "decorators/RedirectDecorator";
+import Account from "pages/Account";
 import AccountConfirmation from "pages/AccountConfirmation";
 import Business from "pages/Business/Business";
 import Cook from "pages/Cook";
@@ -29,7 +30,7 @@ import Terms from "pages/Terms";
 import TermsPro from "pages/TermsPro";
 import Testimony from "pages/Testimony";
 import Workshop from "pages/Workshop";
-import { UpdateGourmet } from "queries";
+import { GetCurrentGourmet, UpdateGourmet } from "queries";
 import React from "react";
 import { Route, Switch } from "react-router";
 import { withRouter } from "react-router-dom";
@@ -40,10 +41,12 @@ interface IAppProps {
   location: any;
   referer?: string;
   isLoggedIn: boolean;
+  currentGourmet?: object;
   redirectTo(url: string, push?: boolean);
   openSnackbar(message: string, variant: string);
   logIn();
   setReferer(url?: string);
+  setCurrentGourmet(gourmet?: object);
 }
 
 export class App extends React.Component<IAppProps, {}> {
@@ -84,47 +87,72 @@ export class App extends React.Component<IAppProps, {}> {
   }
 
   public componentDidUpdate(prevProps) {
-    const { referer, redirectTo, openSnackbar, isLoggedIn, logIn } = this.props;
+    const {
+      referer,
+      currentGourmet,
+      redirectTo,
+      openSnackbar,
+      isLoggedIn,
+      logIn,
+      setCurrentGourmet
+    } = this.props;
 
     const isLoggingOut = prevProps.isLoggedIn && !isLoggedIn;
     const isLoggingIn = !prevProps.isLoggedIn && isLoggedIn;
 
-    if (isLoggingIn && referer) {
-      console.log(`Logging in... redirecting to ${referer}`);
-      redirectTo(referer);
+    if (isLoggingIn) {
+      if (referer) {
+        console.log(`Logging in... redirecting to ${referer}`);
+        redirectTo(referer);
+      }
 
-      // Get identityId and update user info
-      Auth.currentSession().then(currentSession => {
-        const jwtToken = currentSession.getIdToken().getJwtToken();
+      if (!currentGourmet) {
+        // Already set if logout has failed...
+        API.graphql(graphqlOperation(GetCurrentGourmet)).then(result => {
+          if (result.data.getCurrentGourmet.message === "success") {
+            const gourmet = result.data.getCurrentGourmet.gourmet;
+            setCurrentGourmet(gourmet);
 
-        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-          IdentityPoolId: runtimeConfig.AWS_IDENTITY_POOL_ID,
-          Logins: {
-            // tslint:disable-next-line
-            [`cognito-idp.${runtimeConfig.AWS_REGION_IRELAND}.amazonaws.com/${runtimeConfig.AWS_USERPOOL_ID}`]: jwtToken
-          }
-        });
+            if (!gourmet.identity_id) {
+              Auth.currentSession().then(currentSession => {
+                const jwtToken = currentSession.getIdToken().getJwtToken();
+                const loginKey = `cognito-idp.${
+                  runtimeConfig.AWS_REGION_IRELAND
+                }.amazonaws.com/${runtimeConfig.AWS_USERPOOL_ID}`;
 
-        API.graphql(
-          graphqlOperation(UpdateGourmet, {
-            gourmet: {
-              id: currentSession.getIdToken().payload.sub,
-              identity_id: AWS.config.credentials.identityId
+                AWS.config.credentials = new AWS.CognitoIdentityCredentials(
+                  {
+                    IdentityPoolId: runtimeConfig.AWS_IDENTITY_POOL_ID,
+                    Logins: { [loginKey]: jwtToken }
+                  },
+                  { region: runtimeConfig.AWS_REGION_IRELAND }
+                );
+
+                // Save the gourmet identity id in our base
+                API.graphql(
+                  graphqlOperation(UpdateGourmet, {
+                    gourmet: {
+                      id: currentSession.getIdToken().payload.sub,
+                      identity_id: AWS.config.credentials.identityId
+                    }
+                  })
+                ).then(updateResult => {
+                  if (updateResult.data.updateGourmet.message === "success") {
+                    console.log("identity id has been populated");
+                  } else {
+                    console.error("failure while populating identity id");
+                  }
+                });
+              });
             }
-          })
-        ).then(result => {
-          console.log("result : ", result);
-          if (result.data.updateGourmet.message === "success") {
-            console.log("identity_id has been populated");
-          } else {
-            console.error("failure while populating identity_id");
           }
         });
-      });
+      }
     } else if (isLoggingOut) {
       console.log("Logging out...");
       Auth.signOut()
         .then(data => {
+          setCurrentGourmet(undefined);
           openSnackbar("Vous êtes maintenant déconnecté", "success");
           redirectTo("/");
         })
@@ -179,12 +207,13 @@ export class App extends React.Component<IAppProps, {}> {
               <Route path="/profile/:id" exact component={Profile} />
               <Route path="/workshop/:id" exact component={Workshop} />
               <Route path="/s/:name" exact component={Search} />
+              <Route path="/team" exact component={Team} />
               <EnsureLoggedIn
                 isLoggedIn={app.state.isLoggedIn}
                 setReferer={app.setReferer}
               >
                 <Switch>
-                  <Route path="/team" exact component={Team} />
+                  <Route path="/account" exact component={Account} />
                   <Route component={NotFound} />
                 </Switch>
               </EnsureLoggedIn>

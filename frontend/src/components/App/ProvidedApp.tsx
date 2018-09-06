@@ -17,10 +17,12 @@ export class ProvidedApp extends React.Component {
           {(app: any) => (
             <App
               referer={app.state.referer}
-              openSnackbar={app.openSnackbar}
               isLoggedIn={app.state.isLoggedIn}
+              currentGourmet={app.state.currentGourmet}
+              openSnackbar={app.openSnackbar}
               logIn={app.logIn}
               setReferer={app.setReferer}
+              setCurrentGourmet={app.setCurrentGourmet}
             />
           )}
         </Subscribe>

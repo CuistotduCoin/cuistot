@@ -12,3 +12,8 @@ export const passwordConfirmationValidation = ref =>
   Yup.string()
     .oneOf([Yup.ref(ref), null], "Les mots de passe doivent être identiques")
     .required("Confirmez le mot de passe");
+
+export const zipCodeValidation = () =>
+  Yup.string()
+    .nullable(true)
+    .matches(/^\d{5}$/, "Veuillez saisir un code postal valide");
