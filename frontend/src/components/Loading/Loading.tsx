@@ -14,7 +14,7 @@ interface ILoadingProps {
   classes?: any;
 }
 
-export class Hero extends React.Component<ILoadingProps, {}> {
+export class Loading extends React.Component<ILoadingProps, {}> {
   public render() {
     const { classes } = this.props;
 
@@ -26,4 +26,4 @@ export class Hero extends React.Component<ILoadingProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(Hero as any) as any;
+export default withStyles(styles as any)(Loading as any) as any;

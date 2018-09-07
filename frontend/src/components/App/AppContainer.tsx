@@ -1,3 +1,5 @@
+import { API, graphqlOperation } from "aws-amplify";
+import { GetCurrentGourmetImage } from "queries";
 import { Container } from "unstated";
 
 interface IAppState {
@@ -6,6 +8,7 @@ interface IAppState {
   snackbarOpened: boolean;
   snackbarMessage?: string;
   snackbarVariant?: string;
+  currentGourmet?: object;
 }
 
 class AppContainer extends Container<IAppState> {
@@ -38,6 +41,26 @@ class AppContainer extends Container<IAppState> {
   public closeSnackbar = () => {
     this.setState({
       snackbarOpened: false
+    });
+  };
+
+  public setCurrentGourmet = gourmet => {
+    this.setState({ currentGourmet: gourmet });
+  };
+
+  public updateCurrentGourmetImage = () => {
+    API.graphql(graphqlOperation(GetCurrentGourmetImage)).then(result => {
+      if (result.data.getCurrentGourmet.message === "success") {
+        const gourmet = result.data.getCurrentGourmet.gourmet;
+        this.setState(prevState =>
+          Object.assign({}, prevState, {
+            currentGourmet: {
+              ...prevState.currentGourmet,
+              image: gourmet.image
+            }
+          })
+        );
+      }
     });
   };
 }

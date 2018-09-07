@@ -26,11 +26,7 @@ export class Layout extends React.Component<ILayoutProps, {}> {
             description={metaInfo.metaInfo[pageName].description}
           />
         )}
-        <Subscribe to={[AppContainer]}>
-          {(app: any) => (
-            <Header isLoggedIn={app.state.isLoggedIn} logOut={app.logOut} />
-          )}
-        </Subscribe>
+        <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
           videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"

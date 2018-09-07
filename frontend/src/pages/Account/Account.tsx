@@ -1,7 +1,8 @@
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import AccountConfirmationForm from "components/AccountConfirmationForm";
+import AccountForm from "components/AccountForm";
 import Head from "components/Head";
+import Header from "components/Header";
 import Logo from "components/Logo";
 import React from "react";
 import metaInfo from "shared/metaInfo";
@@ -16,18 +17,18 @@ const styles = (theme: Theme) => ({
 });
 
 // tslint:disable-next-line
-const AccountConfirmation: React.SFC<{ classes: any }> = ({ classes }) => (
+const Account: React.SFC<{ classes: any }> = ({ classes }) => (
   <div className={classes.container}>
     <Head
-      title={metaInfo.metaInfo.accountConfirmation.title}
-      description={metaInfo.metaInfo.accountConfirmation.description}
+      title={metaInfo.metaInfo.accountConfirmation.account}
+      description={metaInfo.metaInfo.accountConfirmation.account}
     />
-    <Logo height={100} width={100} className={classes.logo} />
+    <Header />
     <Typography align="center" variant="display1">
-      Vous avez dû recevoir un code de sécurité
+      Mon compte
     </Typography>
-    <AccountConfirmationForm />
+    <AccountForm />
   </div>
 );
 
-export default withStyles(styles as any)(AccountConfirmation as any) as any;
+export default withStyles(styles as any)(Account as any) as any;

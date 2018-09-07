@@ -31,7 +31,7 @@ async function findFirstWhere(tableName, value) {
       .first();
     const result = await query;
     if (result) {
-      return { data: result };
+      return { data: result, message: 'success' };
     }
   } catch (err) {
     console.error(err);
