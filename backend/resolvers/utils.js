@@ -281,6 +281,11 @@ async function insertObject(tableName, args) {
         created_at: result.created_at,
         updated_at: knex.fn.now(),
       };
+
+      if (tableName === 'cooks') {
+        updateArgs.confirmed = false;
+      }
+
       query = knex(tableName)
         .where('id', result.id)
         .update(updateArgs)
@@ -316,7 +321,7 @@ async function updateObject(tableName, args) {
     if (result.length) {
       return { data: result[0], message: 'success' };
     }
-    return { userError: 'could not be updated (you should check the resource exists)' };
+    return { userError: 'could not be updated (you should check if the resource exists)' };
   } catch (err) {
     console.error(err);
     return { userError: formatKnexQueryError(err) };

@@ -12,6 +12,7 @@ import {
   getCooks,
   createCook,
   updateCook,
+  confirmCook,
   deleteCook,
   getCookWorkshops,
   getCookEvaluations,
@@ -68,10 +69,14 @@ export const graphqlHandler = (event, context, callback) => {
         requestResult.message = result.message;
       }
 
-      if (resolvedCallback) {
-        resolvedCallback(requestResult, event.arguments);
+      if (!requestResult.errors.length) {
+        if (resolvedCallback) {
+          resolvedCallback(requestResult, event.arguments);
+        } else {
+          callback(null, requestResult);
+        }
       } else {
-        callback(null, requestResult);
+        callback(requestResult, null);
       }
     }).catch((error) => {
       callback(error, null);
@@ -192,9 +197,17 @@ export const graphqlHandler = (event, context, callback) => {
       break;
     }
     case 'createCook': {
-      resolve(createCook, 'cook', (requestResult) => {
+      resolve(createCook, 'cook');
+      break;
+    }
+    case 'updateCook': {
+      resolve(updateCook, 'cook');
+      break;
+    }
+    case 'confirmCook': {
+      resolve(confirmCook, null, (requestResult, args) => {
         const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
-        knex('gourmets').where('id', requestResult.cook.id).first()
+        knex('gourmets').where('id', args.id).first()
           .then((gourmet) => {
             const params = {
               GroupName: 'Cook',
@@ -214,10 +227,6 @@ export const graphqlHandler = (event, context, callback) => {
             callback(err, null);
           });
       });
-      break;
-    }
-    case 'updateCook': {
-      resolve(updateCook, 'cook');
       break;
     }
     case 'deleteCook': {

@@ -17,3 +17,8 @@ export const zipCodeValidation = () =>
   Yup.string()
     .nullable(true)
     .matches(/^\d{5}$/, "Veuillez saisir un code postal valide");
+
+export const sirenValidation = () =>
+  Yup.string()
+    .nullable(true)
+    .matches(/^\d{9}$/, "Veuillez saisir un numéro SIREN valide");

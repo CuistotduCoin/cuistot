@@ -14,6 +14,7 @@ const CookShow = props => (
   <Show title={<CookNameField />} {...props}>
     <SimpleShowLayout>
       <TextField source="id" />
+      <BooleanField source="confirmed" />
       <ReferenceField reference="gourmets" source="gourmet.id" linkType="show">
         <GourmetNameField />
       </ReferenceField>

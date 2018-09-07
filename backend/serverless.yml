@@ -115,6 +115,11 @@ custom:
         response: "cook/updateCook-response-mapping-template.txt"
       - dataSource: Lambda
         type: Mutation
+        field: confirmCook
+        request: "cook/confirmCook-request-mapping-template.txt"
+        response: "cook/confirmCook-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
         field: deleteCook
         request: "cook/deleteCook-request-mapping-template.txt"
         response: "cook/deleteCook-response-mapping-template.txt"
