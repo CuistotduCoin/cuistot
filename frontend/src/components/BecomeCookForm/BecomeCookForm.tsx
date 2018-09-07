@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { API, graphqlOperation } from "aws-amplify";
 import { AppContainer } from "components/App";
+import Loading from "components/Loading";
 import { Field, Form, Formik } from "formik";
 import { Switch, TextField } from "formik-material-ui";
 import { CreateCook } from "queries";
@@ -10,7 +11,7 @@ import React from "react";
 import { compose } from "recompose";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
-import { sirenValidation } from "../../shared/validations";
+import { phoneNumberValidation, sirenValidation } from "../../shared/validations";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -39,6 +40,7 @@ const initialValues = {
   business_name: "",
   siren: "",
   pro_email: "",
+  pro_phone_number: "",
   legal_first_name: "",
   legal_last_name: "",
   legal_birthdate: ""
@@ -55,10 +57,18 @@ interface IBecomeCookFormValues {
   business_name: string;
   siren: string;
   pro_email: string;
+  pro_phone_number: string;
   legal_first_name: string;
   legal_last_name: string;
   legal_birthdate: string;
 }
+
+const validationSchema = Yup.object().shape({
+  pro_email: Yup.string()
+    .email("Veuillez saisir une adresse email valide"),
+  siren: sirenValidation(),
+  pro_phone_number: phoneNumberValidation(true),
+});
 
 export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
   public constructor(props) {
@@ -67,18 +77,29 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
   }
 
   public render() {
-    const { classes } = this.props;
+    const { classes, currentGourmet } = this.props;
 
-    const validationSchema = Yup.object().shape({
-      pro_email: Yup.string()
-        .email("Veuillez saisir une adresse email valide"),
-      siren: sirenValidation(),
-    });
+    if (!currentGourmet) {
+      return <Loading />;
+    }
 
     const becomeCookFormComponent = ({ values }) => {
       return (
         <Form autoComplete="off">
           <Grid container={true} className={classes.grid} spacing={16}>
+            <Grid item={true} xs={12}>
+              <Grid container={true}>
+                <Field
+                  type="text"
+                  component={TextField}
+                  id="pro_phone_number"
+                  label="Numéro de téléphone pro."
+                  name="pro_phone_number"
+                  className={classes.textField}
+                  margin="normal"
+                />
+              </Grid>
+            </Grid>
             <Grid item={true} xs={12}>
               <div className={classes.isPro}>
                 <Field
@@ -120,7 +141,7 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
                     type="text"
                     component={TextField}
                     id="pro_email"
-                    label="Email professionnel"
+                    label="Email pro."
                     name="pro_email"
                     className={classes.textField}
                     margin="normal"
@@ -184,7 +205,12 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
       <Subscribe to={[AppContainer]}>
         {(app: any) => (
           <Formik
-            initialValues={initialValues}
+            initialValues={Object.assign({}, initialValues, {
+              pro_email: currentGourmet.email,
+              pro_phone_number: currentGourmet.phone_number || '',
+              legal_first_name: currentGourmet.first_name,
+              legal_last_name: currentGourmet.last_name,
+            })}
             component={becomeCookFormComponent}
             onSubmit={this.onSubmit}
             validationSchema={validationSchema}
@@ -200,24 +226,38 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
     values: IBecomeCookFormValues,
     { setSubmitting, setErrors, setStatus, resetForm }
   ) {
-    const { is_pro, business_name, siren, pro_email, legal_first_name, legal_last_name, legal_birthdate } = values;
+    const {
+      is_pro,
+      business_name,
+      siren,
+      pro_email,
+      pro_phone_number,
+      legal_first_name,
+      legal_last_name,
+      legal_birthdate,
+    } = values;
     const { currentGourmet, openSnackbar } = this.props;
-    API.graphql(
-      graphqlOperation(CreateCook, {
-        cook: {
-          gourmet: {
-            id: currentGourmet.id,
-          },
-          is_pro,
-          business_name,
-          siren,
-          pro_email,
-          legal_first_name,
-          legal_last_name,
-          legal_birthdate: legal_birthdate || null,
-        }
-      })
-    ).then(createResult => {
+
+    const cook = {
+      gourmet: {
+        id: currentGourmet.id,
+      },
+      is_pro,
+      pro_phone_number
+    };
+
+    if (is_pro) {
+      Object.assign(cook, {
+        business_name,
+        siren,
+        pro_email,
+        legal_first_name,
+        legal_last_name,
+        legal_birthdate: legal_birthdate || null,
+      });
+    }
+
+    API.graphql(graphqlOperation(CreateCook, { cook })).then(createResult => {
       if (createResult.data.createCook.message === "success") {
         openSnackbar("Merci ! Nous vous contactons au plus vite pour convenir d'un rendez-vous", "success");
         setStatus({ success: true });

@@ -22,6 +22,7 @@ const CookShow = props => (
       <TextField source="business_name" />
       <TextField source="siren" />
       <EmailField source="pro_email" />
+      <TextField source="pro_phone_number" />
       <TextField source="legal_first_name" />
       <TextField source="legal_last_name" />
       <DateField source="legal_birthdate" />

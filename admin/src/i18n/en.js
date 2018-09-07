@@ -53,6 +53,13 @@ export default {
       fields: {
         first_name: 'First name',
         last_name: 'Last name',
+        email: 'Email',
+        phone_number: 'Phone number',
+        gender: 'Gender',
+        birthdate: 'Birthdate',
+        address: 'Address',
+        city: 'City',
+        zip_code: 'Zip code',
       },
       page: {
         delete: 'Delete the gourmet',
@@ -65,7 +72,8 @@ export default {
         is_pro: 'Pro ?',
         business_name: 'Company name',
         siren: 'SIREN',
-        pro_email: 'Email',
+        pro_email: 'Business email',
+        pro_phone_number: 'Business phone number',
         legal_first_name: 'Last name',
         legal_last_name: 'First name',
         legal_birthdate: 'Registration date',

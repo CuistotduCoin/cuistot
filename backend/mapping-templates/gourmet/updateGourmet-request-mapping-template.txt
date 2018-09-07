@@ -11,7 +11,7 @@
     "field": "updateGourmet",
     "arguments": {
       "id": $utils.toJson($context.arguments.gourmet.id),
-      "email": $utils.toJson($context.arguments.gourmet.email),
+      "phone_number": $utils.toJson($context.arguments.gourmet.phone_number),
       "first_name": $utils.toJson($context.arguments.gourmet.first_name),
       "last_name": $utils.toJson($context.arguments.gourmet.last_name),
       "identity_id": $utils.toJson($context.arguments.gourmet.identity_id),

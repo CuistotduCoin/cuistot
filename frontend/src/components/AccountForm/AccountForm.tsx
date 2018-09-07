@@ -19,7 +19,8 @@ import * as Yup from "yup";
 import {
   passwordConfirmationValidation,
   passwordValidation,
-  zipCodeValidation
+  phoneNumberValidation,
+  zipCodeValidation,
 } from "../../shared/validations";
 
 const styles = (theme: Theme) => ({
@@ -66,6 +67,7 @@ interface IUpdateInfoFormValues {
   email: string;
   description: string;
   birthdate: string;
+  phone_number: string;
   address: string;
   city: string;
   zip_code: string;
@@ -135,7 +137,8 @@ export class AccountForm extends React.Component<
     const infoValidationSchema = Yup.object().shape({
       first_name: Yup.string().required("Un prénom est obligatoire"),
       last_name: Yup.string().required("Un nom est obligatoire"),
-      zip_code: zipCodeValidation()
+      zip_code: zipCodeValidation(),
+      phone_number: phoneNumberValidation(),
     });
 
     const passwordValidationSchema = Yup.object().shape({
@@ -227,6 +230,19 @@ export class AccountForm extends React.Component<
                   InputLabelProps={{
                     shrink: true
                   }}
+                />
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Grid container={true}>
+                <Field
+                  type="text"
+                  component={TextField}
+                  id="phone_number"
+                  label="Numéro de téléphone"
+                  name="phone_number"
+                  className={classes.textField}
+                  margin="normal"
                 />
               </Grid>
             </Grid>
@@ -365,6 +381,7 @@ export class AccountForm extends React.Component<
       email,
       description,
       birthdate,
+      phone_number,
       address,
       city,
       zip_code
@@ -388,6 +405,7 @@ export class AccountForm extends React.Component<
                 email,
                 description,
                 birthdate: moment(birthdate).format("YYYY-MM-DD"),
+                phone_number,
                 address,
                 city,
                 zip_code
@@ -426,6 +444,7 @@ export class AccountForm extends React.Component<
       first_name,
       last_name,
       birthdate,
+      phone_number,
       address,
       city,
       zip_code
@@ -438,6 +457,7 @@ export class AccountForm extends React.Component<
       first_name,
       last_name,
       birthdate: birthdate || null,
+      phone_number,
       address,
       city,
       zip_code

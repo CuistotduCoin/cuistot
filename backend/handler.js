@@ -48,7 +48,7 @@ import {
   deleteWorkshop,
 } from './resolvers/workshop-resolver';
 import { run } from './mailer';
-import { isEmpty } from './utils/utils';
+import { isEmpty, get } from './utils/utils';
 import { findWhere, findFirstWhere, updateObject } from './resolvers/utils';
 import { processImage, optimizedVersionFilename, OPTIMIZED_VERSION_EXTENSION } from './processors/image';
 
@@ -76,7 +76,7 @@ export const graphqlHandler = (event, context, callback) => {
           callback(null, requestResult);
         }
       } else {
-        callback(requestResult, null);
+        callback(requestResult.errors[0].message, null);
       }
     }).catch((error) => {
       callback(error, null);
@@ -299,6 +299,11 @@ export const postConfirmationHandler = (event, context, callback) => {
         first_name: event.request.userAttributes.name,
         last_name: event.request.userAttributes.family_name,
       };
+
+      if (get(event, 'request.userAttributes.phone_number')) {
+        args.phone_number = event.request.userAttributes.phone_number;
+      }
+
       createGourmet(args).then((result) => {
         if (result.userError) {
           callback(result, event);

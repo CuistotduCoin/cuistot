@@ -48,6 +48,7 @@ const GourmetShow = props => (
       <TextField source="id" />
       <TextField source="identity_id" />
       <EmailField source="email" />
+      <TextField source="phone_number" />
       <TextField source="first_name" />
       <TextField source="last_name" />
       <RichTextField source="description" />

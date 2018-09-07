@@ -15,10 +15,12 @@ import {
   RefreshButton,
   CardActions,
   Button,
+  required,
 } from 'react-admin';
 import CheckIcon from '@material-ui/icons/Check';
 import { CookNameField } from '../fields';
 import { ConfirmCook } from '../queries';
+import { validatePhoneNumber } from '../utils';
 
 const confirmCook = (cookId, refreshView) => () => {
   API.graphql(
@@ -66,6 +68,7 @@ const CookEdit = ({ refreshView, ...props }) => (
       <TextInput source="business_name" />
       <TextInput source="siren" />
       <TextInput source="pro_email" validate={email()} />
+      <TextInput source="pro_phone_number" validate={[required(), validatePhoneNumber]} />
       <TextInput source="legal_first_name" />
       <TextInput source="legal_last_name" />
       <DateInput source="legal_birthdate" />

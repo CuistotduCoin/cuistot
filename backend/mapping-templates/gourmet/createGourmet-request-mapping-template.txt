@@ -7,6 +7,7 @@
       "id": $utils.toJson($context.arguments.gourmet.id),
       "username": $utils.toJson($context.arguments.gourmet.username),
       "email": $utils.toJson($context.arguments.gourmet.email),
+      "phone_number": $utils.toJson($context.arguments.gourmet.phone_number),
       "first_name": $utils.toJson($context.arguments.gourmet.first_name),
       "last_name": $utils.toJson($context.arguments.gourmet.last_name),
       "gender": $utils.toJson($context.arguments.gourmet.gender),

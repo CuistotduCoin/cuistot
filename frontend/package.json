@@ -41,6 +41,7 @@
     "graphql": "^0.13.2",
     "graphql-anywhere": "^4.1.18",
     "graphql-tag": "^2.9.2",
+    "libphonenumber-js": "^1.4.5",
     "lodash.get": "^4.4.2",
     "marked": "^0.4.0",
     "mdi-material-ui": "^5.4.0",

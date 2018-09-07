@@ -15,7 +15,7 @@ import {
 } from 'react-admin';
 import { Link } from 'react-router-dom';
 import { GourmetNameField } from '../fields';
-import { validateZipCode } from '../utils';
+import { validateZipCode, validatePhoneNumber } from '../utils';
 import { CookIcon } from '../cooks';
 import { ImageInput } from '../inputs';
 
@@ -63,6 +63,7 @@ const GourmetEdit = props => (
       />
       <TextInput source="first_name" validate={required()} />
       <TextInput source="last_name" validate={required()} />
+      <TextInput source="phone_number" validate={validatePhoneNumber} />
       <TextInput source="description" />
       <DateInput source="birthdate" />
       <TextInput source="address" />

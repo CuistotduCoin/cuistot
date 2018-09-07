@@ -13,6 +13,7 @@ export default `query GetCurrentGourmet {
       email
       description
       birthdate
+      phone_number,
       address
       city
       zip_code

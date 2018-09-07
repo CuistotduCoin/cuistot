@@ -10,7 +10,8 @@ import { TextField } from "formik-material-ui";
 import React from "react";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
-import { passwordValidation } from "../../shared/validations";
+import { PASSWORD_TEXT_HELPER } from '../../shared/constants';
+import { passwordConfirmationValidation, passwordValidation, phoneNumberValidation } from "../../shared/validations";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -27,7 +28,9 @@ const initialValues = {
   email: "",
   firstname: "",
   lastname: "",
+  phoneNumber: "",
   password: "",
+  passwordConfirmation: "",
   username: ""
 };
 
@@ -41,7 +44,9 @@ interface ISignUpFormValues {
   lastname: string;
   username: string;
   email: string;
+  phoneNumber: string;
   password: string;
+  passwordConfirmation: string;
 }
 
 export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
@@ -59,7 +64,9 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
         .required("Une adresse email est obligatoire"),
       firstname: Yup.string().required("Un prénom est obligatoire"),
       lastname: Yup.string().required("Un nom est obligatoire"),
+      phoneNumber: phoneNumberValidation(),
       password: passwordValidation(),
+      passwordConfirmation: passwordConfirmationValidation("password"),
       username: Yup.string().required("Un nom d'utilisateur est obligatoire")
     });
 
@@ -130,11 +137,37 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
             <Grid item={true} xs={12}>
               <Grid container={true}>
                 <Field
+                  type="text"
+                  component={TextField}
+                  id="phoneNumber"
+                  label="Numéro de téléphone"
+                  name="phoneNumber"
+                  className={classes.textField}
+                  margin="normal"
+                />
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Grid container={true}>
+                <Field
                   type="password"
                   component={TextField}
                   id="password"
                   label="Mot de passe"
                   name="password"
+                  className={classes.textField}
+                  margin="normal"
+                />
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Grid container={true}>
+                <Field
+                  type="password"
+                  component={TextField}
+                  id="passwordConfirmation"
+                  label="Confirmation du mot de passe"
+                  name="passwordConfirmation"
                   className={classes.textField}
                   margin="normal"
                 />
@@ -171,14 +204,17 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
       values: ISignUpFormValues,
       { setSubmitting, setErrors, setStatus, resetForm }
     ) => {
+      const { email, firstname, lastname, phoneNumber, password, username } = values;
+
       Auth.signUp({
         attributes: {
-          email: values.email,
-          family_name: values.lastname,
-          name: values.firstname
+          email,
+          family_name: lastname,
+          name: firstname,
+          phone_number: phoneNumber,
         },
-        password: values.password,
-        username: values.username
+        password,
+        username
       })
         .then(data => {
           if (data.userSub) {

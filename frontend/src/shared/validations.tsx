@@ -1,3 +1,4 @@
+import { isValidNumber } from 'libphonenumber-js';
 import * as Yup from "yup";
 
 export const passwordValidation = () =>
@@ -12,6 +13,14 @@ export const passwordConfirmationValidation = ref =>
   Yup.string()
     .oneOf([Yup.ref(ref), null], "Les mots de passe doivent être identiques")
     .required("Confirmez le mot de passe");
+
+export const phoneNumberValidation = (required = false) => {
+  let validator = Yup.string();
+  if (required) {
+    validator = validator.required("Un numéro de téléphone valide est obligatoire")
+  }
+  return validator.test('isValidPhoneNumber', `Numéro de téléphone invalide`, value => !value || isValidNumber(value, 'FR'));
+};
 
 export const zipCodeValidation = () =>
   Yup.string()
