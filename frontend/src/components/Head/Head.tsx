@@ -17,6 +17,7 @@ export class Head extends React.Component<IHeadProps, {}> {
       <Helmet>
         <title>{title}</title>
         <link rel="canonical" href={href} />
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" />
         <meta name="description" content={description} />
         <meta name="og:title" content={title} />
         <meta name="og:description" content={description} />
