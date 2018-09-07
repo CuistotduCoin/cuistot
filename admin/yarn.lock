@@ -6253,9 +6253,9 @@ ra-core@^2.2.3:
     reselect "~3.0.0"
     warning "~3.0.0"
 
-ra-data-fakerest@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/ra-data-fakerest/-/ra-data-fakerest-2.0.2.tgz#6dcc8a2f8d75382eb4b211fb1d64443a94619dd9"
+ra-data-fakerest@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/ra-data-fakerest/-/ra-data-fakerest-2.3.0.tgz#f151fa39415219e85c8d28fefce42e0235cfa075"
   dependencies:
     fakerest "~2.1.0"
 
