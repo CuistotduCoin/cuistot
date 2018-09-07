@@ -1,6 +1,11 @@
 import { TypeKind } from 'graphql';
 import pluralize from 'pluralize';
-import { GET_LIST, GET_MANY, GET_MANY_REFERENCE, DELETE } from 'react-admin';
+import {
+  GET_LIST,
+  GET_MANY,
+  GET_MANY_REFERENCE,
+  DELETE,
+} from 'react-admin';
 import getFinalType from './getFinalType';
 
 const sanitizeResource = (introspectionResults, resource) => (
@@ -53,7 +58,7 @@ const sanitizeResource = (introspectionResults, resource) => (
 );
 
 export default introspectionResults => (
-  (aorFetchType, resource, queryType, resourceName) => (
+  (aorFetchType, resource, queryType, resourceName, variables) => (
     (response) => {
       const sanitize = sanitizeResource(introspectionResults, resource);
       const { data } = response;
@@ -67,7 +72,7 @@ export default introspectionResults => (
       }
 
       if (aorFetchType === DELETE) {
-        return { data: {} };
+        return { data: { id: variables[`${pluralize.singular(resourceName)}_id`] } };
       }
 
       return { data: sanitize(data[queryType.name][pluralize.singular(resourceName)]) };
