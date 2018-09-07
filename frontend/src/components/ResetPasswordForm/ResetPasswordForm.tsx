@@ -12,6 +12,7 @@ import { withRouter } from "react-router-dom";
 import { SNACKBAR_MESSAGES } from "shared/constants";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
+import { PASSWORD_TEXT_HELPER } from '../../shared/constants';
 import {
   passwordConfirmationValidation,
   passwordValidation
@@ -109,6 +110,7 @@ export class ResetPasswordForm extends React.Component<
                 component={TextField}
                 id="newPassword"
                 label="Votre nouveau mot de passe"
+                helperText={PASSWORD_TEXT_HELPER}
                 name="newPassword"
                 className={classes.textField}
                 margin="normal"
@@ -147,6 +149,8 @@ export class ResetPasswordForm extends React.Component<
             component={resetPasswordFormComponent}
             onSubmit={this.onSubmit(app.openSnackbar)}
             validationSchema={validationSchema}
+            validateOnBlur={false}
+            validateOnChange={false}
           />
         )}
       </Subscribe>

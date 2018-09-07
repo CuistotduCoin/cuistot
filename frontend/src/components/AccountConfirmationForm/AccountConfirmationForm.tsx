@@ -111,6 +111,8 @@ export class AccountConfirmationForm extends React.Component<
             component={accountConfirmationFormComponent}
             onSubmit={this.onSubmit(app.openSnackbar)}
             validationSchema={validationSchema}
+            validateOnBlur={false}
+            validateOnChange={false}
           />
         )}
       </Subscribe>

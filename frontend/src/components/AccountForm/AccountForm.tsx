@@ -16,6 +16,7 @@ import React from "react";
 import { compose } from "recompose";
 import { Storage } from "shared/auth";
 import * as Yup from "yup";
+import { PASSWORD_TEXT_HELPER } from '../../shared/constants';
 import {
   passwordConfirmationValidation,
   passwordValidation,
@@ -338,6 +339,7 @@ export class AccountForm extends React.Component<
                 component={TextField}
                 id="newPassword"
                 label="Votre nouveau mot de passe"
+                helperText={PASSWORD_TEXT_HELPER}
                 name="newPassword"
                 className={classes.textField}
                 margin="normal"
@@ -426,6 +428,7 @@ export class AccountForm extends React.Component<
               onSubmit={this.onNewPasswordSubmit}
               validationSchema={passwordValidationSchema}
               validateOnBlur={false}
+              validateOnChange={false}
             />
           </CardContent>
         </Card>

@@ -91,6 +91,8 @@ export class ResetPasswordRequestForm extends React.Component<
             component={resetPasswordRequestFormComponent}
             onSubmit={this.onSubmit(app.openSnackbar)}
             validationSchema={validationSchema}
+            validateOnBlur={false}
+            validateOnChange={false}
           />
         )}
       </Subscribe>

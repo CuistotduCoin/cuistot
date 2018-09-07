@@ -154,6 +154,7 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
                   component={TextField}
                   id="password"
                   label="Mot de passe"
+                  helperText={PASSWORD_TEXT_HELPER}
                   name="password"
                   className={classes.textField}
                   margin="normal"
@@ -193,6 +194,8 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
             component={signUpFormComponent}
             onSubmit={this.onSubmit(app.openSnackbar)}
             validationSchema={validationSchema}
+            validateOnBlur={false}
+            validateOnChange={false}
           />
         )}
       </Subscribe>

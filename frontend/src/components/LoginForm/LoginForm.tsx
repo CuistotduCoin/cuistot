@@ -114,6 +114,8 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
             component={loginFormComponent}
             onSubmit={this.onSubmit(app.openSnackbar, app.logIn)}
             validationSchema={validationSchema}
+            validateOnBlur={false}
+            validateOnChange={false}
           />
         )}
       </Subscribe>

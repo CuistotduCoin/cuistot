@@ -7,3 +7,5 @@ export const SNACKBAR_MESSAGES = {
   CodeMismatchException: "Le code de sécurité entré est incorrect.",
   NotAuthorizedException: "Action non autorisée"
 };
+
+export const PASSWORD_TEXT_HELPER = "Longueur min. de 8 et doit contenir : une majuscule, une minuscule, un chiffre";
