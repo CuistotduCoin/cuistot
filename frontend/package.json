@@ -43,6 +43,7 @@
     "graphql-tag": "^2.9.2",
     "lodash.get": "^4.4.2",
     "marked": "^0.4.0",
+    "mdi-material-ui": "^5.4.0",
     "moment": "^2.22.2",
     "query-string": "^6.1.0",
     "raven": "^2.6.3",

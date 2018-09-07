@@ -8,11 +8,8 @@ import createApolloClient from "createApolloClient";
 import * as React from "react";
 import { ApolloProvider } from "react-apollo";
 import { hydrate } from "react-dom";
-// @ts-ignore
 import { InstantSearch } from "react-instantsearch-dom";
-// @ts-ignore
 import { SheetsRegistry } from "react-jss/lib/jss";
-// @ts-ignore
 import JssProvider from "react-jss/lib/JssProvider";
 import { BrowserRouter } from "react-router-dom";
 import routes from "routes";

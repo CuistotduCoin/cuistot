@@ -10,7 +10,6 @@ import express from "express";
 import * as React from "react";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import { renderToString } from "react-dom/server";
-// @ts-ignore
 import { createInstantSearch } from "react-instantsearch-dom/server";
 import { SheetsRegistry } from "react-jss/lib/jss";
 import JssProvider from "react-jss/lib/JssProvider";

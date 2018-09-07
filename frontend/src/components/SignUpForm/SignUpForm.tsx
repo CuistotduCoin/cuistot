@@ -6,7 +6,6 @@ import { Auth } from "aws-amplify";
 import { AppContainer } from "components/App";
 import { withRedirect } from "decorators/RedirectDecorator";
 import { Field, Form, Formik } from "formik";
-// @ts-ignore
 import { TextField } from "formik-material-ui";
 import React from "react";
 import { Subscribe } from "unstated";
