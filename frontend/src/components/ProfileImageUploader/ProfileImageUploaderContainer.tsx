@@ -1,22 +1,18 @@
 import { AppContainer } from "components/App";
 import React from "react";
 import { Subscribe } from "unstated";
-import ImageUploader from "./ImageUploader";
+import ProfileImageUploader from "./ProfileImageUploader";
 
-interface IImageUploaderContainerProps {
-  previewSrc?: string;
-  multiple?: boolean;
-  path: string;
+interface IProfileImageUploaderContainerProps {
+  imageKey?: string;
   identityId: string;
 }
 
 // tslint:disable-next-line
-const ImageUploaderContainer: React.SFC<
-  IImageUploaderContainerProps
-> = props => (
+const ProfileImageUploaderContainer: React.SFC<IProfileImageUploaderContainerProps> = props => (
   <Subscribe to={[AppContainer]}>
     {(app: any) => (
-      <ImageUploader
+      <ProfileImageUploader
         {...props}
         updateCurrentGourmetImage={app.updateCurrentGourmetImage}
         openSnackbar={app.openSnackbar}
@@ -25,4 +21,4 @@ const ImageUploaderContainer: React.SFC<
   </Subscribe>
 );
 
-export default ImageUploaderContainer;
+export default ProfileImageUploaderContainer;

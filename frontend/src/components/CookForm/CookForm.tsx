@@ -49,6 +49,7 @@ const CookForm: React.SFC<ICookFormProps> = ({ classes, values, action }) => (
             component={TextField}
             id="pro_phone_number"
             label="Numéro de téléphone pro."
+            helperText={action === 'create' ? 'Restera top secret :)' : undefined}
             name="pro_phone_number"
             className={classes.textField}
             margin="normal"

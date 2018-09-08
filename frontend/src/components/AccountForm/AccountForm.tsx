@@ -7,8 +7,8 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { Connect } from "aws-amplify-react";
 import CookForm from "components/CookForm";
-import ImageUploader from "components/ImageUploader";
 import Loading from "components/Loading";
+import ProfileImageUploader from "components/ProfileImageUploader";
 import { Field, Form, Formik } from "formik";
 import { Select, TextField } from "formik-material-ui";
 import get from "lodash.get";
@@ -16,7 +16,6 @@ import moment from "moment";
 import { GetCook, UpdateCook, UpdateGourmet } from "queries";
 import React from "react";
 import { compose } from "recompose";
-import { Storage } from "shared/auth";
 import * as Yup from "yup";
 import { PASSWORD_TEXT_HELPER } from '../../shared/constants';
 import {
@@ -137,33 +136,6 @@ export class AccountForm extends React.Component<
     this.onNewInfoSubmit = this.onNewInfoSubmit.bind(this);
     this.onNewCookInfoSubmit = this.onNewCookInfoSubmit.bind(this);
     this.onNewPasswordSubmit = this.onNewPasswordSubmit.bind(this);
-    this.loadProfileImage = this.loadProfileImage.bind(this);
-    this.state = {};
-  }
-
-  public loadProfileImage() {
-    const { currentGourmet } = this.props;
-    const imageKey = get(currentGourmet, "image.key");
-    if (imageKey) {
-      Storage.get(`profile/${imageKey}`, {
-        identityId: currentGourmet.identity_id
-      })
-        .then(result => this.setState({ imageSrc: result }))
-        .catch(err => console.error(err));
-    }
-  }
-
-  public componentDidMount() {
-    this.loadProfileImage();
-  }
-
-  public componentDidUpdate(prevProps) {
-    if (
-      get(prevProps.currentGourmet, "image.key") !==
-      get(this.props.currentGourmet, "image.key")
-    ) {
-      this.loadProfileImage();
-    }
   }
 
   public render() {
@@ -456,9 +428,8 @@ export class AccountForm extends React.Component<
             <div className={classes.container}>
               <Card className={classes.card}>
                 <CardContent>
-                  <ImageUploader
-                    previewSrc={this.state.imageSrc}
-                    path="profile"
+                  <ProfileImageUploader
+                    imageKey={get(currentGourmet, 'image.key')}
                     identityId={currentGourmet.identity_id}
                   />
                   <Formik

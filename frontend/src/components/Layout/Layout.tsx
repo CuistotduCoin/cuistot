@@ -1,11 +1,9 @@
-import { AppContainer } from "components/App";
 import Footer from "components/Footer";
 import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import React from "react";
 import metaInfo from "shared/metaInfo";
-import { Subscribe } from "unstated";
 
 interface ILayoutProps {
   pageName?: string;
