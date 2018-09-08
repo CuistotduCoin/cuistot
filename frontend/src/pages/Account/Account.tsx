@@ -3,7 +3,6 @@ import Typography from "@material-ui/core/Typography";
 import AccountForm from "components/AccountForm";
 import Head from "components/Head";
 import Header from "components/Header";
-import Logo from "components/Logo";
 import React from "react";
 import metaInfo from "shared/metaInfo";
 
@@ -20,8 +19,8 @@ const styles = (theme: Theme) => ({
 const Account: React.SFC<{ classes: any }> = ({ classes }) => (
   <div className={classes.container}>
     <Head
-      title={metaInfo.metaInfo.accountConfirmation.account}
-      description={metaInfo.metaInfo.accountConfirmation.account}
+      title={metaInfo.metaInfo.account.title}
+      description={metaInfo.metaInfo.account.description}
     />
     <Header />
     <Typography align="center" variant="display1">

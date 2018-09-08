@@ -93,6 +93,11 @@ export default {
       href: "https://www.cuistotducoin.com/account/confirmation",
       title: "Confirmation de votre compte utilisateur"
     },
+    account: {
+      description: "Mes informations personnelles",
+      href: "https://www.cuistotducoin.com/account",
+      title: "Mon compte",
+    },
     becomeCook: {
       description: "Rejoignez nos Cuistots",
       href: "https://www.cuistotducoin.com/become-cook",

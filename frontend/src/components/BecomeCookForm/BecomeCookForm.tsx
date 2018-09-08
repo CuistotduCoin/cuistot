@@ -1,39 +1,13 @@
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import { Theme, withStyles } from "@material-ui/core/styles";
 import { API, graphqlOperation } from "aws-amplify";
 import { AppContainer } from "components/App";
+import CookForm from "components/CookForm";
 import Loading from "components/Loading";
-import { Field, Form, Formik } from "formik";
-import { Switch, TextField } from "formik-material-ui";
+import { Formik } from "formik";
 import { CreateCook } from "queries";
 import React from "react";
-import { compose } from "recompose";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
 import { phoneNumberValidation, sirenValidation } from "../../shared/validations";
-
-const styles = (theme: Theme) => ({
-  grid: {
-    margin: "0px auto",
-    maxWidth: 540,
-    padding: 24
-  },
-  textField: {
-    width: "100%"
-  },
-  submitButton: {
-    marginTop: "30px"
-  },
-  isPro: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  isProLabel: {
-    color: theme.palette.text.secondary
-  }
-});
 
 const initialValues = {
   is_pro: true,
@@ -65,6 +39,7 @@ interface IBecomeCookFormValues {
 
 const validationSchema = Yup.object().shape({
   pro_email: Yup.string()
+    .nullable(true)
     .email("Veuillez saisir une adresse email valide"),
   siren: sirenValidation(),
   pro_phone_number: phoneNumberValidation(true),
@@ -83,124 +58,6 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
       return <Loading />;
     }
 
-    const becomeCookFormComponent = ({ values }) => {
-      return (
-        <Form autoComplete="off">
-          <Grid container={true} className={classes.grid} spacing={16}>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="pro_phone_number"
-                  label="Numéro de téléphone pro."
-                  name="pro_phone_number"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
-            </Grid>
-            <Grid item={true} xs={12}>
-              <div className={classes.isPro}>
-                <Field
-                  id="is_pro"
-                  name="is_pro"
-                  type="checkbox"
-                  checked={values.is_pro}
-                  component={Switch}
-                />
-                <span className={classes.isProLabel}>Vous êtes un(e) professionnel(le) ?</span>
-              </div>
-            </Grid>
-            {values.is_pro && (
-              <>
-                <Grid item={true} xs={12}>
-                  <Field
-                    id="business_name"
-                    name="business_name"
-                    label="Nom de la société"
-                    className={classes.textField}
-                    margin="normal"
-                    type="text"
-                    component={TextField}
-                  />
-                </Grid>
-                <Grid item={true} xs={12}>
-                  <Field
-                    type="text"
-                    component={TextField}
-                    id="siren"
-                    label="SIREN"
-                    name="siren"
-                    className={classes.textField}
-                    margin="normal"
-                  />
-                </Grid>
-                <Grid item={true} xs={12}>
-                  <Field
-                    type="text"
-                    component={TextField}
-                    id="pro_email"
-                    label="Email pro."
-                    name="pro_email"
-                    className={classes.textField}
-                    margin="normal"
-                  />
-                </Grid>
-                <Grid item={true} xs={12}>
-                  <Grid container={true} spacing={16}>
-                    <Grid item={true} xs={6}>
-                      <Field
-                        id="legal_first_name"
-                        name="legal_first_name"
-                        label="Prénom du représentant légal"
-                        className={classes.textField}
-                        margin="normal"
-                        type="text"
-                        component={TextField}
-                      />
-                    </Grid>
-                    <Grid item={true} xs={6}>
-                      <Field
-                        id="legal_last_name"
-                        name="legal_last_name"
-                        label="Nom du représentant légal"
-                        className={classes.textField}
-                        margin="normal"
-                        type="text"
-                        component={TextField}
-                      />
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item={true} xs={12}>
-                  <Field
-                    component={TextField}
-                    type="date"
-                    id="legal_birthdate"
-                    label="Date d'immatriculation de la société"
-                    name="legal_birthdate"
-                    className={classes.textField}
-                    margin="normal"
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
-                </Grid>
-              </>
-            )}
-            <Grid item={true} xs={12}>
-              <Grid container={true} justify="center">
-                <Button type="submit" variant="contained" color="secondary" className={classes.submitButton}>
-                  Devenir cuistot
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Form>
-      );
-    }
-
     return (
       <Subscribe to={[AppContainer]}>
         {(app: any) => (
@@ -211,7 +68,7 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
               legal_first_name: currentGourmet.first_name,
               legal_last_name: currentGourmet.last_name,
             })}
-            component={becomeCookFormComponent}
+            component={({ values }) => <CookForm action="create" values={values} />}
             onSubmit={this.onSubmit}
             validationSchema={validationSchema}
             validateOnBlur={false}
@@ -272,6 +129,4 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
   }
 }
 
-const enhance = compose(withStyles(styles as any));
-
-export default enhance(BecomeCookForm);
+export default BecomeCookForm;
