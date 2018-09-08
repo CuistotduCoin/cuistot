@@ -137,7 +137,7 @@ const buildCreateUpdateVariables = introspectionResults => (
       }
     }
 
-    if (typeof data[key] === 'object') {
+    if (typeof data[key] === 'object' && data[key].id) {
       return {
         ...acc,
         [key]: { id: data[key].id },
