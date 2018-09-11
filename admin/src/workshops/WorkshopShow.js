@@ -16,11 +16,11 @@ const WorkshopShow = props => (
       <Tab label="pos.info">
         <TextField source="id" />
         <TextField source="name" />
+        <TextField source="description" />
         <TextField source="price" />
         <TextField source="duration" />
         <TextField source="min_gourmet" />
         <TextField source="max_gourmet" />
-        <TextField source="description" />
         <DateField source="date" showTime />
         <ReferenceField reference="cooks" source="cook.id" linkType="show">
           <CookNameField />
