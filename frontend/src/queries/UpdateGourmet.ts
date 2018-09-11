@@ -13,6 +13,7 @@ export default `mutation updateGourmet($gourmet: UpdateGourmetInput!) {
       email
       description
       birthdate
+      phone_number
       address
       city
       zip_code

@@ -5,7 +5,6 @@ import { Auth } from "aws-amplify";
 import { AppContainer } from "components/App";
 import { withRedirect } from "decorators/RedirectDecorator";
 import { Field, Form, Formik } from "formik";
-// @ts-ignore
 import { TextField } from "formik-material-ui";
 import { parse } from "query-string";
 import React from "react";
@@ -112,6 +111,8 @@ export class AccountConfirmationForm extends React.Component<
             component={accountConfirmationFormComponent}
             onSubmit={this.onSubmit(app.openSnackbar)}
             validationSchema={validationSchema}
+            validateOnBlur={false}
+            validateOnChange={false}
           />
         )}
       </Subscribe>

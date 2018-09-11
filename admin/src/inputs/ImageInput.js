@@ -22,8 +22,6 @@ const styles = {
   },
 };
 
-// hidden prop on S3Image : https://github.com/aws-amplify/amplify-js/pull/764
-
 const sanitizeFilename = (filename) => {
   const chunks = filename.replace(' ', '_').split('.');
   const ext = chunks.pop();

@@ -7,7 +7,6 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Layout from "components/Layout";
 import React from "react";
-// @ts-ignore
 import HubspotForm from "react-hubspot-form";
 import Slider from "react-slick";
 

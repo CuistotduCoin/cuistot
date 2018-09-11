@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import { translate, changeLocale, ViewTitle } from 'react-admin';
+import { translate, changeLocale, Title } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
 import compose from 'recompose/compose';
 import { changeTheme } from './actions';
@@ -23,7 +23,7 @@ const Configuration = ({
   translate, // eslint-disable-line
 }) => (
   <Card>
-    <ViewTitle title={translate('pos.configuration')} />
+    <Title title="pos.configuration" />
     <CardContent>
       <div
         className={classes.label}

@@ -7,7 +7,6 @@ import { Auth } from "aws-amplify";
 import { AppContainer } from "components/App";
 import { withRedirect } from "decorators/RedirectDecorator";
 import { Field, Form, Formik } from "formik";
-// @ts-ignore
 import { TextField } from "formik-material-ui";
 import React from "react";
 import { Subscribe } from "unstated";
@@ -115,6 +114,8 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
             component={loginFormComponent}
             onSubmit={this.onSubmit(app.openSnackbar, app.logIn)}
             validationSchema={validationSchema}
+            validateOnBlur={false}
+            validateOnChange={false}
           />
         )}
       </Subscribe>

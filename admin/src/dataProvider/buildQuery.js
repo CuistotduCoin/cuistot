@@ -75,6 +75,7 @@ export const buildQueryFactory = (
       resource,
       queryType,
       resourceName,
+      variables,
     );
 
     return {

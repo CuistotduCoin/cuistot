@@ -45,6 +45,11 @@ async function updateCook(args) {
   return result;
 }
 
+async function confirmCook(args) {
+  const result = await updateObject(TABLE_NAME, { id: args.id, confirmed: true });
+  return result;
+}
+
 async function deleteCook(args) {
   const result = await performOperation(
     args,
@@ -60,6 +65,7 @@ export {
   createCook,
   deleteCook,
   updateCook,
+  confirmCook,
   getCookWorkshops,
   getCookEvaluations,
 };

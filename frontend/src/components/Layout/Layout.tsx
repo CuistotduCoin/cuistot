@@ -9,17 +9,18 @@ import { Subscribe } from "unstated";
 
 interface ILayoutProps {
   pageName?: string;
-  valueProposition: string;
+  valueProposition?: string;
   description?: string;
   children: any;
+  className?: string;
 }
 
 export class Layout extends React.Component<ILayoutProps, {}> {
   public render() {
-    const { pageName, valueProposition, description, children } = this.props;
+    const { pageName, valueProposition, description, children, className } = this.props;
 
     return (
-      <>
+      <div className={className}>
         {pageName && (
           <Head
             title={metaInfo.metaInfo[pageName].title}
@@ -27,15 +28,17 @@ export class Layout extends React.Component<ILayoutProps, {}> {
           />
         )}
         <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition={valueProposition}
-          description={description}
-        />
+        {valueProposition && (
+          <Hero
+            imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
+            videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
+            valueProposition={valueProposition}
+            description={description}
+          />
+        )}
         {children}
         <Footer />
-      </>
+      </div>
     );
   }
 }

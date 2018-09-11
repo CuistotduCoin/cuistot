@@ -1,20 +1,19 @@
 import { AppContainer } from "components/App";
 import React from "react";
 import { Subscribe } from "unstated";
-import AccountForm from "./AccountForm";
+import BecomeCookForm from "./BecomeCookForm";
 
 // tslint:disable-next-line
-const AccountFormContainer: React.SFC<{}> = (props) => (
+const BecomeCookFormContainer: React.SFC<{}> = (props) => (
   <Subscribe to={[AppContainer]}>
     {(app: any) => (
-      <AccountForm
+      <BecomeCookForm
         {...props}
         currentGourmet={app.state.currentGourmet}
         openSnackbar={app.openSnackbar}
-        setCurrentGourmet={app.setCurrentGourmet}
       />
     )}
   </Subscribe>
 );
 
-export default AccountFormContainer;
+export default BecomeCookFormContainer;

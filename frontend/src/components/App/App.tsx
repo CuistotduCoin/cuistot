@@ -5,6 +5,7 @@ import { runtimeConfig } from "config";
 import { withRedirect } from "decorators/RedirectDecorator";
 import Account from "pages/Account";
 import AccountConfirmation from "pages/AccountConfirmation";
+import BecomeCook from "pages/BecomeCook";
 import Business from "pages/Business/Business";
 import Cook from "pages/Cook";
 import Gift from "pages/Gift";
@@ -18,7 +19,6 @@ import Join from "pages/Join";
 import Login from "pages/Login";
 import Mission from "pages/Mission";
 import NotFound from "pages/NotFound";
-import Organize from "pages/Organize";
 import Presskit from "pages/Presskit";
 import Profile from "pages/Profile";
 import ResetPassword from "pages/ResetPassword";
@@ -202,7 +202,6 @@ export class App extends React.Component<IAppProps, {}> {
               <Route path="/cook/:id" exact component={Cook} />
               <Route path="/group-lesson" exact component={GroupLesson} />
               <Route path="/mission" exact component={Mission} />
-              <Route path="/organize" exact component={Organize} />
               <Route path="/presskit" exact component={Presskit} />
               <Route path="/profile/:id" exact component={Profile} />
               <Route path="/workshop/:id" exact component={Workshop} />
@@ -214,6 +213,7 @@ export class App extends React.Component<IAppProps, {}> {
               >
                 <Switch>
                   <Route path="/account" exact component={Account} />
+                  <Route path="/become-cook" exact component={BecomeCook} />
                   <Route component={NotFound} />
                 </Switch>
               </EnsureLoggedIn>

@@ -51,11 +51,6 @@ export default {
       href: "https://www.cuistotducoin.com/mission",
       title: "Cuistot du coin : Nos missions"
     },
-    organize: {
-      description: "Rejoignez nos Cuistots",
-      href: "https://www.cuistotducoin.com/organize",
-      title: "Cuistot du coin : Créer votre atelier"
-    },
     payment: {
       description: "Paiement",
       href: "https://www.cuistotducoin.com/payment",
@@ -97,6 +92,11 @@ export default {
       description: "Confirmation de compte utilisateur",
       href: "https://www.cuistotducoin.com/account/confirmation",
       title: "Confirmation de votre compte utilisateur"
+    },
+    becomeCook: {
+      description: "Rejoignez nos Cuistots",
+      href: "https://www.cuistotducoin.com/become-cook",
+      title: "Devenir Cuistot du coin"
     }
   }
 };

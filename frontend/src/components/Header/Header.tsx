@@ -21,6 +21,9 @@ const styles = (theme: Theme) => ({
   },
   button: {
     margin: theme.spacing.unit
+  },
+  logo: {
+    marginRight: 3 * theme.spacing.unit
   }
 });
 
@@ -115,7 +118,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
       >
         <Toolbar>
           <Grid container={true} justify="flex-start" alignItems="center">
-            <Logo />
+            <Logo className={classes.logo} />
             {!hideCompanyIndividual && (
               <Hidden smDown={true}>
                 <Button

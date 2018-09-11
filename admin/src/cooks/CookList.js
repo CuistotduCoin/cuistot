@@ -17,6 +17,7 @@ import {
 import moment from 'moment';
 import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-disable-line
 import { GourmetNameField } from '../fields';
+import rowStyle from './rowStyle';
 
 const exporter = (cooks) => {
   const data = cooks.map((cook) => {
@@ -50,7 +51,7 @@ const CookList = props => (
   >
     <Responsive
       medium={(
-        <Datagrid>
+        <Datagrid rowStyle={rowStyle}>
           <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
             <GourmetNameField />
           </ReferenceField>

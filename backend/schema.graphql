@@ -156,6 +156,7 @@ type Gourmet implements Node & Timestamps {
   created_at: String!
   updated_at: String!
   email: String!
+  phone_number: String
   identity_id: String
   username: String!
   first_name: String!
@@ -177,9 +178,11 @@ type Cook implements Node & Timestamps {
   updated_at: String!
   gourmet: Gourmet!
   is_pro: Boolean!
+  confirmed: Boolean!
   business_name: String
   siren: String
   pro_email: String
+  pro_phone_number: String!
   legal_first_name: String
   legal_last_name: String
   legal_birthdate: String
@@ -279,6 +282,7 @@ input UpdateEvaluationInput {
 input CreateGourmetInput {
   id: ID!
   email: String!
+  phone_number: String
   first_name: String!
   last_name: String!
   gender: Gender
@@ -291,6 +295,7 @@ input CreateGourmetInput {
 
 input UpdateGourmetInput {
   id: ID!
+  phone_number: String
   description: String
   gender: Gender
   first_name: String
@@ -308,6 +313,7 @@ input CreateCookInput {
   business_name: String
   siren: String
   pro_email: String
+  pro_phone_number: String!
   legal_first_name: String
   legal_last_name: String
   legal_birthdate: String
@@ -319,6 +325,7 @@ input UpdateCookInput {
   business_name: String
   siren: String
   pro_email: String
+  pro_phone_number: String
   legal_first_name: String
   legal_last_name: String
   legal_birthdate: String
@@ -440,6 +447,8 @@ type Mutation {
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   updateCook(cook: UpdateCookInput!): CookPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
+  confirmCook(cook: CookInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
   deleteCook(cook_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
 

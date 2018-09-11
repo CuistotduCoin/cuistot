@@ -11,6 +11,7 @@ import {
   DateInput,
 } from 'react-admin';
 import { parse } from 'query-string';
+import { validatePhoneNumber } from '../utils';
 
 const CookCreate = (props) => {
   const { gourmet_id: gourmetId } = parse(props.location.search);
@@ -25,6 +26,7 @@ const CookCreate = (props) => {
         <TextInput source="business_name" />
         <TextInput source="siren" />
         <TextInput source="pro_email" validate={email()} />
+        <TextInput source="pro_phone_number" validate={[required(), validatePhoneNumber]} />
         <TextInput source="legal_first_name" />
         <TextInput source="legal_last_name" />
         <DateInput source="legal_birthdate" />

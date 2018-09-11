@@ -1,4 +1,4 @@
-import { withStyles } from "@material-ui/core/styles";
+import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Head from "components/Head";
 import Logo from "components/Logo";
