@@ -196,18 +196,20 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
           onClose={this.handleModalClose}
         >
           <div className={classes.slider}>
-            <Slider {...sliderSettings}>
-              {this.props.photos.map(photo => (
-                <div key={photo.id}>
-                  <img
-                    src={photo.image}
-                    alt={photo.name}
-                    className={classes.sliderImage}
-                    key={photo.name}
-                  />
-                </div>
-              ))}
-            </Slider>
+            {this.props.photos !== undefined && (
+              <Slider {...sliderSettings}>
+                {this.props.photos.map(photo => (
+                  <div key={photo.id}>
+                    <img
+                      src={photo.image}
+                      alt={photo.name}
+                      className={classes.sliderImage}
+                      key={photo.name}
+                    />
+                  </div>
+                ))}
+              </Slider>
+            )}
           </div>
         </Modal>
         <Header static={true} />

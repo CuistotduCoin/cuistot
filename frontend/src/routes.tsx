@@ -152,8 +152,8 @@ export default [
       Placeholder: () => <Loading />,
       loader: () => import("pages/Search")
     }),
-    exact: true,
-    path: "/s/:name"
+    exact: false,
+    path: "/s/:name?"
   },
   {
     component: asyncComponent({

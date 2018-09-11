@@ -8,6 +8,7 @@ export const formatCardNumber = (num: string) => {
   const clear = clearNumber(num);
   let newNum = "";
   for (let i = 0; i < NUMBER_LENGTH; i += PART_LENGTH) {
+    // tslint:disable-next-line:prefer-template
     newNum += clear.slice(i, i + PART_LENGTH) + " ";
   }
   return newNum.trim();

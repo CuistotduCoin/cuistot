@@ -111,7 +111,7 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
         <Card className={classes.card}>
           <CardHeader
             className={classes.cardHeaderUp}
-            avatar={<Chip label={this.props.price + "€"} />}
+            avatar={<Chip label={`${this.props.price} €`} />}
             classes={{ avatar: classes.chip }}
           />
           <CardMedia

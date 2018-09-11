@@ -89,34 +89,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     const workshops = [
       {
-        availableSeat: 8,
-        date: "samedi 8 septembre, 9h30-13h",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ronan-tarte-au-citron.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
-        name: "Tarte au citron meringuée",
-        nameCook: "Ronan",
-        price: 50,
-        spot: "Schmidt, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/Eik9mk"
-      },
-      {
-        availableSeat: 8,
-        date: "samedi 8 septembre, 9h30-13h30",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/fabien-viennoiseries.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
-        name: "Viennoiseries : Croissants & Pains au chocolat",
-        nameCook: "Fabien",
-        price: 45,
-        spot: "Arthur Bonnet, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/YDNdtB"
-      },
-      {
         availableSeat: 6,
         date: "samedi 15 septembre, 10h-13h",
         duration: 3,
@@ -129,6 +101,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/U3mOaj"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 15 septembre, 10h30-12h",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/anne-chocolat.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
+        name: "Chocolat anti-stress",
+        nameCook: "Anne",
+        price: 25,
+        spot: "Comme les Grands, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/KzH67r"
       },
       {
         availableSeat: 6,
@@ -221,7 +207,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/workshops/audrey-saucisson-au-chocolat.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Saucisson au chocolat et mini choco",
+        name: "Atelier Enfant : Saucisson au chocolat et mini choco",
         nameCook: "Audrey",
         price: 25,
         spot: "Audrey, Brest",
@@ -258,6 +244,61 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
+        date: "samedi 6 octobre, 17h30-20h30",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/enguerrand-ble-noir.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/enguerrand.jpg",
+        name: "Autour du blé noir",
+        nameCook: "Enguerrand",
+        price: 40,
+        spot: "Couleurs cuisines, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/xRzeLG"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 13 octobre, 10h-12h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
+        name: "Initiation au tournage de crêpes de froment",
+        nameCook: "Nadine",
+        price: 20,
+        spot: "Arthur Bonnet, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/QklzRk"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 20 octobre, 10h-12h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-ble-noir.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
+        name: "Crêpes de blé noir",
+        nameCook: "Nadine",
+        price: 25,
+        spot: "Arthur Bonnet, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/Z5oZI7"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 20 octobre, 10h-13h",
+        duration: 3,
+        image: "https://static.cuistotducoin.com/img/workshops/karim-tiep.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/karim.jpg",
+        name: "Tiep bou guinar",
+        nameCook: "Karim",
+        price: 30,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/Z5oZI7"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 20 octobre, 10h-12h",
         duration: 2,
         image:
@@ -269,6 +310,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/EWUT4t"
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 27 octobre, 10h-12h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-cupcake-halloween.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Cupcake Halloween",
+        nameCook: "Audrey",
+        price: 25,
+        spot: "chez Audrey, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/ZuwZnD"
       },
       {
         availableSeat: 8,
@@ -412,20 +467,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/chrUsc"
-      },
-      {
-        availableSeat: 5,
-        date: "à venir",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/christian-kouign-amann.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/christian.jpg",
-        name: "Kouign Amann",
-        nameCook: "Christian",
-        price: 40,
-        spot: "C Chocolat, Brest",
-        totalSeat: 5,
-        typeform: "https://cuistotducoin.typeform.com/to/SFGtYO"
       },
       {
         availableSeat: 5,

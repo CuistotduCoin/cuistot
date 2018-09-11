@@ -7,7 +7,6 @@ export interface IDocumentProps {
   helmet: any;
   assets: any;
   data: any;
-  initialApolloState: any;
   appInitialState: any;
   css: any;
 }
@@ -23,14 +22,7 @@ export default class Document extends React.Component<IDocumentProps, {}> {
   }
 
   public render() {
-    const {
-      helmet,
-      assets,
-      data,
-      initialApolloState,
-      appInitialState,
-      css
-    } = this.props;
+    const { helmet, assets, data, appInitialState, css } = this.props;
     // get attributes from React Helmet
     const htmlAttrs = helmet.htmlAttributes.toComponent();
     const bodyAttrs = helmet.bodyAttributes.toComponent();
@@ -182,28 +174,11 @@ export default class Document extends React.Component<IDocumentProps, {}> {
               __html: `window.env=${serialize(runtimeConfig)};`
             }}
           />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `window.__APOLLO_STATE__=${JSON.stringify(
-                initialApolloState
-              ).replace(/</g, "\\u003c")};`
-            }}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `window.__APP_INITIAL_STATE__=${serialize(
-                appInitialState
-              )};`
-            }}
-          />
-
           <AfterRoot />
           <AfterData data={data} />
-
           {process.env.NODE_ENV === "production" && (
             <script src={assets.client.js} defer={true} />
           )}
-
           {process.env.NODE_ENV !== "production" && (
             <script
               src={assets.client.js}

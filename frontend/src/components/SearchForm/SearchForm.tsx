@@ -29,12 +29,9 @@ export class SearchForm extends React.Component<ISearchForm, {}> {
 
   public handleAddressSelection({ suggestion }) {
     this.props.history.push(
-      "/s/" +
-        suggestion.name +
-        "?lat=" +
-        suggestion.latlng.lat +
-        "&lon=" +
+      `/s/${suggestion.name}?lat=${suggestion.latlng.lat}&lon=${
         suggestion.latlng.lng
+      }`
     );
   }
 
