@@ -9,11 +9,12 @@ import {
   EmailField,
   RichTextField,
 } from 'react-admin';
-import { CookNameField, GourmetNameField } from '../fields';
+import { CookNameField, GourmetNameField, ImageField } from '../fields';
 
 const CookShow = props => (
   <Show title={<CookNameField />} {...props}>
     <SimpleShowLayout>
+      <ImageField path="cook" identityId={record => record.gourmet.identity_id} />
       <TextField source="id" />
       <BooleanField source="confirmed" />
       <BooleanField source="is_pro" />

@@ -6,6 +6,7 @@ export default {
     info: 'Informations',
     images: 'Images',
     search: 'Rechercher',
+    no_picture: 'Aucune photo',
     configuration: 'Configuration',
     language: 'Langue',
     theme: {
@@ -49,7 +50,6 @@ export default {
     },
     gourmets: {
       name: 'Gourmet |||| Gourmets',
-      no_picture: 'Aucune photo de profil',
       fields: {
         first_name: 'Prénom',
         last_name: 'Nom',
@@ -70,6 +70,7 @@ export default {
       fields: {
         'gourmet.id': 'Gourmet',
         is_pro: 'Pro ?',
+        confirmed: 'Confirmé ?',
         business_name: 'Nom de la société',
         siren: 'SIREN',
         pro_email: 'Email pro.',

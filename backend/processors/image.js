@@ -39,7 +39,7 @@ const gmToBuffer = data => (
   })
 );
 
-const processImage = (key, newKey, resolve, reject) => {
+const processImage = (key, newKey, resolve, reject, options) => {
   console.log('Processing');
   const s3 = new AWS.S3();
 
@@ -82,7 +82,10 @@ const processImage = (key, newKey, resolve, reject) => {
     },
     function process(meta, obj, next) {
       console.log('Process');
-      const data = gm(obj.Body).quality(80).resize(120, 120);
+      let data = gm(obj.Body).quality(80);
+      if (options.width && options.height) {
+        data = data.resize(options.width, options.height);
+      }
       gmToBuffer(data)
         .then(buffer => next(null, meta, obj, buffer))
         .catch(err => next(err));
