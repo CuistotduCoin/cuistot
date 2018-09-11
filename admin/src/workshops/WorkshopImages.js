@@ -23,6 +23,9 @@ const styles = theme => ({
       background: theme.palette.secondary.main,
     },
   },
+  tile: {
+    textAlign: 'center',
+  },
 });
 
 class WorkshopImages extends React.Component {
@@ -67,33 +70,40 @@ class WorkshopImages extends React.Component {
           cols={3}
           className={classes.gridList}
         >
-          {urls.map((url, i) => (
-            <GridListTile key={url}>
-              <img src={url} alt={`${i + 1} for ${record.name}`} />
-              {edit && (
-                <GridListTileBar
-                  actionIcon={(
-                    <IconButton className={classes.icon}>
-                      <DeleteIcon
-                        onClick={() => {
-                          Storage.remove(`workshops/${record.id}/${this.state.urls[url]}`, { identityId: record.cook.gourmet.identity_id })
-                            .then((result) => {
-                              console.log(result);
-                              this.setState((prevState) => {
-                                const newState = Object.assign({}, prevState);
-                                delete newState.urls[url];
-                                return newState;
-                              });
-                            })
-                            .catch(err => console.log(err));
-                        }}
-                      />
-                    </IconButton>
-                  )}
-                />
-              )}
-            </GridListTile>
-          ))}
+          {urls.map((url, i) => {
+            let image = <img src={url} alt={`${i + 1} for ${record.name}`} />;
+            if (!edit) {
+              image = <a href={url} target="_blank" rel="noopener noreferrer">{image}</a>;
+            }
+
+            return (
+              <GridListTile key={url} className={classes.tile}>
+                {image}
+                {edit && (
+                  <GridListTileBar
+                    actionIcon={(
+                      <IconButton className={classes.icon}>
+                        <DeleteIcon
+                          onClick={() => {
+                            Storage.remove(`workshops/${record.id}/${this.state.urls[url]}`, { identityId: record.cook.gourmet.identity_id })
+                              .then((result) => {
+                                console.log(result);
+                                this.setState((prevState) => {
+                                  const newState = Object.assign({}, prevState);
+                                  delete newState.urls[url];
+                                  return newState;
+                                });
+                              })
+                              .catch(err => console.log(err));
+                          }}
+                        />
+                      </IconButton>
+                    )}
+                  />
+                )}
+              </GridListTile>
+            );
+          })}
         </GridList>
       );
     }
