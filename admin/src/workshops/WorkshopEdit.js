@@ -5,6 +5,7 @@ import {
   DisabledInput,
   TextInput,
   NumberInput,
+  LongTextInput,
   required,
   ReferenceInput,
   SelectInput,
@@ -31,6 +32,7 @@ const WorkshopEdit = ({ classes, ...props }) => (
         <SimpleForm>
           <DisabledInput label="Id" source="id" />
           <TextInput source="name" validate={required()} />
+          <LongTextInput source="description" />
           <NumberInput source="price" validate={required()} />
           <NumberInput source="duration" validate={required()} />
           <NumberInput source="min_gourmet" validate={required()} />

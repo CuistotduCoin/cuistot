@@ -360,15 +360,39 @@ export const handleBucketPutEvent = (event, context) => {
   const identityId = decodeURIComponent(url[1]);
   const type = decodeURIComponent(url[2]);
 
-  const optimizeImage = (path, filename, resolver) => {
+  const optimizeImage = (path, filename, resolver, options) => {
     const newFilename = optimizedVersionFilename(filename);
-    processImage(`${path}/${filename}`, `${path}/${newFilename}`, resolver(newFilename), context.fail);
+    processImage(`${path}/${filename}`, `${path}/${newFilename}`, resolver(newFilename), context.fail, options);
   };
 
-  if (type === 'profile') {
+  if (type === 'profile' || type === 'cook') {
     const filename = decodeURIComponent(url[3]);
-    const path = `protected/${identityId}/profile`;
+    const path = `protected/${identityId}/${type}`;
     const key = `${path}/${filename}`;
+    let tableName;
+    const options = {};
+
+    if (type === 'profile') {
+      tableName = 'gourmets';
+      options.width = 120;
+      options.height = 120;
+    } else if (type === 'cook') {
+      tableName = 'cooks';
+    }
+
+    const resolver = newFilename => () => {
+      findWhere('gourmets', identityId, 'identity_id')
+        .then((result) => {
+          const gourmet = result.data[0];
+          updateObject(tableName, {
+            id: gourmet.id,
+            image: { key: newFilename },
+          })
+            .then(() => context.done(null, event))
+            .catch(updateErr => context.fail(updateErr));
+        })
+        .catch(findErr => context.fail(findErr));
+    };
 
     s3.headObject({ Bucket: process.env.AWS_BUCKET, Key: key }, (err, data) => {
       if (data.Metadata && data.Metadata.optimized) {
@@ -379,20 +403,6 @@ export const handleBucketPutEvent = (event, context) => {
           if (listErr) {
             context.fail(listErr);
           } else {
-            const resolver = newFilename => () => {
-              findWhere('gourmets', identityId, 'identity_id')
-                .then((result) => {
-                  const gourmet = result.data[0];
-                  updateObject('gourmets', {
-                    id: gourmet.id,
-                    image: { key: newFilename },
-                  })
-                    .then(() => context.done(null, event))
-                    .catch(updateErr => context.fail(updateErr));
-                })
-                .catch(findErr => context.fail(findErr));
-            };
-
             const objectsToDelete = listData.Contents
               .filter(file => file.Key !== key)
               .map(file => ({ Key: file.Key }));
@@ -408,11 +418,11 @@ export const handleBucketPutEvent = (event, context) => {
                 if (deleteErr) {
                   context.fail(deleteErr);
                 } else {
-                  optimizeImage(path, filename, resolver);
+                  optimizeImage(path, filename, resolver, options);
                 }
               });
             } else {
-              optimizeImage(path, filename, resolver);
+              optimizeImage(path, filename, resolver, options);
             }
           }
         });
@@ -442,7 +452,7 @@ export const handleBucketPutEvent = (event, context) => {
             })
             .catch(findErr => context.fail(findErr));
         };
-        optimizeImage(path, filename, resolver);
+        optimizeImage(path, filename, resolver, {});
       }
     });
   } else {

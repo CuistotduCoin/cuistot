@@ -6557,9 +6557,9 @@ ra-language-english@^2.2.0, ra-language-english@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-2.3.0.tgz#d25247bd148a57b02ff0480a66388220ee72ef16"
 
-ra-language-french@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-2.1.3.tgz#d47e7c2c2b4f95035d45e6488aa00107ebc31a4f"
+ra-language-french@^2.2.3:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-2.3.0.tgz#cd85b6634e1232cf4ad395448bd8b79d45ab353a"
 
 ra-ui-materialui@^2.2.4:
   version "2.3.0"
@@ -6640,9 +6640,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-admin-date-inputs@^1.0.19:
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/react-admin-date-inputs/-/react-admin-date-inputs-1.0.19.tgz#998b9ea56d1b5be5466cc73745124de52e50f05c"
+react-admin-date-inputs@^1.0.20:
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/react-admin-date-inputs/-/react-admin-date-inputs-1.0.20.tgz#97f54e7ae282a946adfdb109a480edd9fc9fa998"
   dependencies:
     date-fns "2.0.0-alpha.7"
     material-ui-pickers "^1.0.0-rc.13"

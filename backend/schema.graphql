@@ -177,6 +177,7 @@ type Cook implements Node & Timestamps {
   created_at: String!
   updated_at: String!
   gourmet: Gourmet!
+  description: String
   is_pro: Boolean!
   confirmed: Boolean!
   business_name: String
@@ -186,6 +187,7 @@ type Cook implements Node & Timestamps {
   legal_first_name: String
   legal_last_name: String
   legal_birthdate: String
+  image: Image
   workshops: [Workshop!]!
   evaluations: [Evaluation!]!
 }
@@ -310,6 +312,7 @@ input UpdateGourmetInput {
 input CreateCookInput {
   gourmet: GourmetInput!
   is_pro: Boolean
+  description: String
   business_name: String
   siren: String
   pro_email: String
@@ -322,6 +325,7 @@ input CreateCookInput {
 input UpdateCookInput {
   id: ID!
   is_pro: Boolean
+  description: String
   business_name: String
   siren: String
   pro_email: String

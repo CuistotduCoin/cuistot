@@ -7,18 +7,21 @@ import {
   ReferenceField,
   BooleanField,
   EmailField,
+  RichTextField,
 } from 'react-admin';
-import { CookNameField, GourmetNameField } from '../fields';
+import { CookNameField, GourmetNameField, ImageField } from '../fields';
 
 const CookShow = props => (
   <Show title={<CookNameField />} {...props}>
     <SimpleShowLayout>
+      <ImageField path="cook" identityId={record => record.gourmet.identity_id} />
       <TextField source="id" />
       <BooleanField source="confirmed" />
+      <BooleanField source="is_pro" />
       <ReferenceField reference="gourmets" source="gourmet.id" linkType="show">
         <GourmetNameField />
       </ReferenceField>
-      <BooleanField source="is_pro" />
+      <RichTextField source="description" />
       <TextField source="business_name" />
       <TextField source="siren" />
       <EmailField source="pro_email" />

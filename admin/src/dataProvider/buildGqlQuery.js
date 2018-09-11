@@ -19,6 +19,7 @@ const getLinkedResourceField = (fieldName) => {
     case 'gourmet':
       return {
         id: {},
+        identity_id: {},
         first_name: {},
         last_name: {},
       };

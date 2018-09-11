@@ -199,14 +199,15 @@ export class App extends React.Component<IAppProps, {}> {
               <Route path="/gift" exact component={Gift} />
               <Route path="/how-it-works" exact component={HowItWorks} />
               <Route path="/business" exact component={Business} />
-              <Route path="/cook/:id" exact component={Cook} />
+              <Route path="/cooks/:id" exact component={Cook} />
               <Route path="/group-lesson" exact component={GroupLesson} />
               <Route path="/mission" exact component={Mission} />
               <Route path="/presskit" exact component={Presskit} />
-              <Route path="/profile/:id" exact component={Profile} />
-              <Route path="/workshop/:id" exact component={Workshop} />
+              <Route path="/gourmets/:id" exact component={Profile} />
+              <Route path="/workshops/:id" exact component={Workshop} />
               <Route path="/s/:name" exact component={Search} />
               <Route path="/team" exact component={Team} />
+              <Route path="/404" exact component={NotFound} />
               <EnsureLoggedIn
                 isLoggedIn={app.state.isLoggedIn}
                 setReferer={app.setReferer}

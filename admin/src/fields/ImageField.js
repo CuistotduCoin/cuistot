@@ -8,19 +8,21 @@ import { Storage } from '../auth';
 const styles = {
   image: {
     margin: '40px 0',
+    maxHeight: '500px',
+    maxWidth: '500px',
   },
 };
 
-class ProfileImageField extends React.Component {
+class ImageField extends React.Component {
   constructor(props) {
     super(props);
     this.state = { imageUrl: null };
   }
 
   componentDidMount() {
-    const { record } = this.props;
+    const { record, path, identityId } = this.props;
     if (record.image && record.image.key) {
-      Storage.get(`profile/${record.image.key}`, { identityId: record.identity_id })
+      Storage.get(`${path}/${record.image.key}`, { identityId: identityId(record) })
         .then(result => this.setState({ imageUrl: result }))
         .catch(err => console.log(err));
     }
@@ -39,15 +41,17 @@ class ProfileImageField extends React.Component {
     }
     return (
       <Chip
-        label={translateProps('resources.gourmets.no_picture')}
+        label={translateProps('pos.no_picture')}
         className={classes.image}
       />
     );
   }
 }
 
-ProfileImageField.propTypes = {
+ImageField.propTypes = {
   translate: PropTypes.func.isRequired,
+  identityId: PropTypes.func.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(translate(ProfileImageField));
+export default withStyles(styles)(translate(ImageField));

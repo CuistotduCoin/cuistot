@@ -5,22 +5,24 @@ import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { API, Auth, graphqlOperation } from "aws-amplify";
-import ImageUploader from "components/ImageUploader";
+import { Connect } from "aws-amplify-react";
+import CookForm from "components/CookForm";
 import Loading from "components/Loading";
+import ProfileImageUploader from "components/ProfileImageUploader";
 import { Field, Form, Formik } from "formik";
 import { Select, TextField } from "formik-material-ui";
 import get from "lodash.get";
 import moment from "moment";
-import { UpdateGourmet } from "queries";
+import { GetCook, UpdateCook, UpdateGourmet } from "queries";
 import React from "react";
 import { compose } from "recompose";
-import { Storage } from "shared/auth";
 import * as Yup from "yup";
 import { PASSWORD_TEXT_HELPER } from '../../shared/constants';
 import {
   passwordConfirmationValidation,
   passwordValidation,
   phoneNumberValidation,
+  sirenValidation,
   zipCodeValidation,
 } from "../../shared/validations";
 
@@ -54,6 +56,29 @@ const styles = (theme: Theme) => ({
   }
 });
 
+const infoValidationSchema = Yup.object().shape({
+  first_name: Yup.string().required("Un prénom est obligatoire"),
+  last_name: Yup.string().required("Un nom est obligatoire"),
+  zip_code: zipCodeValidation(),
+  phone_number: phoneNumberValidation(),
+});
+
+const cookInfoValidationSchema = Yup.object().shape({
+  pro_email: Yup.string()
+    .nullable(true)
+    .email("Veuillez saisir une adresse email valide"),
+  siren: sirenValidation(),
+  pro_phone_number: phoneNumberValidation(true),
+});
+
+const passwordValidationSchema = Yup.object().shape({
+  oldPassword: Yup.string().required(
+    "Une formalité pour être sûr qu'il s'agit bien de vous"
+  ),
+  newPassword: passwordValidation(),
+  newPasswordConfirmation: passwordConfirmationValidation("newPassword")
+});
+
 const passwordInitialValues = {
   oldPassword: "",
   newPassword: "",
@@ -72,6 +97,18 @@ interface IUpdateInfoFormValues {
   address: string;
   city: string;
   zip_code: string;
+}
+
+interface IUpdateCookInfoFormValues {
+  is_pro: boolean;
+  business_name?: string;
+  description: string;
+  siren?: string;
+  pro_email?: string;
+  pro_phone_number: string;
+  legal_first_name?: string;
+  legal_last_name?: string;
+  legal_birthdate?: string;
 }
 
 interface IUpdatePasswordFormValues {
@@ -97,35 +134,9 @@ export class AccountForm extends React.Component<
 > {
   public constructor(props) {
     super(props);
-    this.onNewPasswordSubmit = this.onNewPasswordSubmit.bind(this);
     this.onNewInfoSubmit = this.onNewInfoSubmit.bind(this);
-    this.loadProfileImage = this.loadProfileImage.bind(this);
-    this.state = {};
-  }
-
-  public loadProfileImage() {
-    const { currentGourmet } = this.props;
-    const imageKey = get(currentGourmet, "image.key");
-    if (imageKey) {
-      Storage.get(`profile/${imageKey}`, {
-        identityId: currentGourmet.identity_id
-      })
-        .then(result => this.setState({ imageSrc: result }))
-        .catch(err => console.log(err));
-    }
-  }
-
-  public componentDidMount() {
-    this.loadProfileImage();
-  }
-
-  public componentDidUpdate(prevProps) {
-    if (
-      get(prevProps.currentGourmet, "image.key") !==
-      get(this.props.currentGourmet, "image.key")
-    ) {
-      this.loadProfileImage();
-    }
+    this.onNewCookInfoSubmit = this.onNewCookInfoSubmit.bind(this);
+    this.onNewPasswordSubmit = this.onNewPasswordSubmit.bind(this);
   }
 
   public render() {
@@ -134,21 +145,6 @@ export class AccountForm extends React.Component<
     if (!currentGourmet) {
       return <Loading />;
     }
-
-    const infoValidationSchema = Yup.object().shape({
-      first_name: Yup.string().required("Un prénom est obligatoire"),
-      last_name: Yup.string().required("Un nom est obligatoire"),
-      zip_code: zipCodeValidation(),
-      phone_number: phoneNumberValidation(),
-    });
-
-    const passwordValidationSchema = Yup.object().shape({
-      oldPassword: Yup.string().required(
-        "Une formalité pour être sûr qu'il s'agit bien de vous"
-      ),
-      newPassword: passwordValidation(),
-      newPasswordConfirmation: passwordConfirmationValidation("newPassword")
-    });
 
     const updateInfoFormComponent = () => (
       <Form autoComplete="off">
@@ -307,7 +303,7 @@ export class AccountForm extends React.Component<
                   color="secondary"
                   className={classes.submitButton}
                 >
-                  Mettre à jour mes infos
+                  Mettre à jour mes infos Gourmet
                 </Button>
               </Grid>
             </Grid>
@@ -390,55 +386,100 @@ export class AccountForm extends React.Component<
     } = currentGourmet;
 
     return (
-      <div className={classes.container}>
-        <Card className={classes.card}>
-          <CardContent>
-            <ImageUploader
-              previewSrc={this.state.imageSrc}
-              path="profile"
-              identityId={currentGourmet.identity_id}
-            />
-            <Formik
-              initialValues={{
-                username,
-                gender,
-                first_name,
-                last_name,
-                email,
-                description,
-                birthdate: moment(birthdate).format("YYYY-MM-DD"),
-                phone_number,
-                address,
-                city,
-                zip_code
-              }}
-              component={updateInfoFormComponent}
-              onSubmit={this.onNewInfoSubmit}
-              validationSchema={infoValidationSchema}
-              validateOnBlur={false}
-              validateOnChange={false}
-            />
-          </CardContent>
-        </Card>
-        <Card className={classes.card}>
-          <CardContent>
-            <Formik
-              initialValues={passwordInitialValues}
-              component={updatePasswordFormComponent}
-              onSubmit={this.onNewPasswordSubmit}
-              validationSchema={passwordValidationSchema}
-              validateOnBlur={false}
-              validateOnChange={false}
-            />
-          </CardContent>
-        </Card>
-      </div>
+      <Connect query={graphqlOperation(GetCook, { cook_id: currentGourmet.id })}>
+        {({ data }) => {
+          let cookCard;
+          if (get(data, 'getCook.message') === "success" && get(data, 'getCook.cook.confirmed')) {
+            const {
+              is_pro,
+              description,
+              business_name,
+              siren,
+              pro_email,
+              pro_phone_number,
+              legal_first_name,
+              legal_last_name,
+              legal_birthdate,
+            } = data.getCook.cook;
+
+            cookCard = (
+              <Card className={classes.card}>
+                <CardContent>
+                  <Formik
+                    initialValues={{
+                      is_pro,
+                      business_name,
+                      description,
+                      siren,
+                      pro_email,
+                      pro_phone_number,
+                      legal_first_name,
+                      legal_last_name,
+                      legal_birthdate: moment(legal_birthdate).format("YYYY-MM-DD")
+                    }}
+                    component={({ values }) => <CookForm action="update" values={values} />}
+                    onSubmit={this.onNewCookInfoSubmit}
+                    validationSchema={cookInfoValidationSchema}
+                    validateOnChange={false}
+                  />
+                </CardContent>
+              </Card>
+            );
+          }
+
+          return (
+            <div className={classes.container}>
+              <Card className={classes.card}>
+                <CardContent>
+                  <ProfileImageUploader
+                    imageKey={get(currentGourmet, 'image.key')}
+                    identityId={currentGourmet.identity_id}
+                  />
+                  <Formik
+                    initialValues={{
+                      username,
+                      gender,
+                      first_name,
+                      last_name,
+                      email,
+                      description,
+                      birthdate: moment(birthdate).format("YYYY-MM-DD"),
+                      phone_number,
+                      address,
+                      city,
+                      zip_code
+                    }}
+                    component={updateInfoFormComponent}
+                    onSubmit={this.onNewInfoSubmit}
+                    validationSchema={infoValidationSchema}
+                    validateOnBlur={false}
+                    validateOnChange={false}
+                  />
+                </CardContent>
+              </Card>
+              {cookCard}
+              <Card className={classes.card}>
+                <CardContent>
+                  <Formik
+                    initialValues={passwordInitialValues}
+                    component={updatePasswordFormComponent}
+                    onSubmit={this.onNewPasswordSubmit}
+                    validationSchema={passwordValidationSchema}
+                    validateOnBlur={false}
+                    validateOnChange={false}
+                  />
+                </CardContent>
+              </Card>
+            </div>
+          );
+        }}
+      </Connect>
     );
   }
 
   public onNewInfoSubmit(
     values: IUpdateInfoFormValues,
-    { setSubmitting, setErrors, setStatus, resetForm }
+    { setSubmitting, setErrors, setStatus }
   ) {
     const { currentGourmet, setCurrentGourmet, openSnackbar } = this.props;
     const {
@@ -466,20 +507,71 @@ export class AccountForm extends React.Component<
       zip_code
     };
 
-    API.graphql(graphqlOperation(UpdateGourmet, { gourmet })).then(
-      updateResult => {
-        if (updateResult.data.updateGourmet.message === "success") {
-          openSnackbar("Vos informations ont bien été mises à jour", "success");
-          setStatus({ success: true });
-          setCurrentGourmet(updateResult.data.updateGourmet.gourmet);
-        } else {
-          openSnackbar("Échec de la mise à jour de vos informations", "error");
-          setStatus({ success: false });
-          setSubmitting(false);
-          setErrors({ submit: updateResult });
+    API.graphql(graphqlOperation(UpdateGourmet, { gourmet })).then(res => {
+      const result = res.data.updateGourmet;
+      if (result.message === "success") {
+        openSnackbar("Vos informations ont bien été mises à jour", "success");
+        setStatus({ success: true });
+        setCurrentGourmet(result.gourmet);
+      } else {
+        openSnackbar("Échec de la mise à jour de vos informations", "error");
+        setStatus({ success: false });
+        setSubmitting(false);
+        if (result.errors.length) {
+          const error = result.errors[0].message;
+          console.error(error);
+          setErrors({ submit: error });
         }
       }
-    );
+    });
+  }
+
+  public onNewCookInfoSubmit(
+    values: IUpdateCookInfoFormValues,
+    { setSubmitting, setErrors, setStatus }
+  ) {
+    const { currentGourmet, openSnackbar } = this.props;
+    const {
+      is_pro,
+      description,
+      business_name,
+      siren,
+      pro_email,
+      pro_phone_number,
+      legal_first_name,
+      legal_last_name,
+      legal_birthdate,
+    } = values;
+
+    const cook = {
+      id: currentGourmet.id,
+      is_pro,
+      description,
+      business_name,
+      siren,
+      pro_email,
+      pro_phone_number,
+      legal_first_name,
+      legal_last_name,
+      legal_birthdate: legal_birthdate || null,
+    };
+
+    API.graphql(graphqlOperation(UpdateCook, { cook })).then(res => {
+      const result = res.data.updateCook;
+      if (result.message === "success") {
+        openSnackbar("Vos informations ont bien été mises à jour", "success");
+        setStatus({ success: true });
+      } else {
+        openSnackbar("Échec de la mise à jour de vos informations", "error");
+        setStatus({ success: false });
+        setSubmitting(false);
+        if (result.errors.length) {
+          const error = result.errors[0].message;
+          console.error(error);
+          setErrors({ submit: error });
+        }
+      }
+    });
   }
 
   public onNewPasswordSubmit(

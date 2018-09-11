@@ -5,17 +5,22 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
-import { withStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/icons/Person";
 import { AppContainer } from "components/App";
-import PropTypes from "prop-types";
-import React from "react";
 import { withRedirect } from "decorators/RedirectDecorator";
+import React from "react";
+import { compose } from 'recompose';
 import { Subscribe } from "unstated";
 
-const styles = theme => ({});
+interface IAccountDropdownProps {
+  redirectTo(url: string, push?: boolean);
+}
 
-class AccountDropdown extends React.Component {
+interface IAccountDropdownState {
+  open: boolean;
+}
+
+class AccountDropdown extends React.Component<IAccountDropdownProps, IAccountDropdownState> {
   constructor(props) {
     super(props);
     this.state = { open: false };
@@ -41,7 +46,6 @@ class AccountDropdown extends React.Component {
   }
 
   public render() {
-    const { classes } = this.props;
     const { open } = this.state;
 
     return (
@@ -85,8 +89,8 @@ class AccountDropdown extends React.Component {
   }
 }
 
-AccountDropdown.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+const enhance = compose(
+  withRedirect,
+);
 
-export default withRedirect(withStyles(styles)(AccountDropdown));
+export default enhance(AccountDropdown);

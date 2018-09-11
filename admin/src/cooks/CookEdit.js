@@ -9,6 +9,7 @@ import {
   DisabledInput,
   TextInput,
   BooleanInput,
+  LongTextInput,
   email,
   ShowButton,
   ListButton,
@@ -21,6 +22,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import { CookNameField } from '../fields';
 import { ConfirmCook } from '../queries';
 import { validatePhoneNumber } from '../utils';
+import { ImageInput } from '../inputs';
 
 const confirmCook = (cookId, refreshView) => () => {
   API.graphql(
@@ -63,8 +65,13 @@ const CookEditActions = ({ basePath, data, refreshView }) => {
 const CookEdit = ({ refreshView, ...props }) => (
   <Edit actions={<CookEditActions refreshView={refreshView} />} title={<CookNameField />} {...props}>
     <SimpleForm>
+      <ImageInput
+        path={() => 'cook'}
+        identityId={record => record.gourmet.identity_id}
+      />
       <DisabledInput source="id" />
       <BooleanInput source="is_pro" />
+      <LongTextInput source="description" />
       <TextInput source="business_name" />
       <TextInput source="siren" />
       <TextInput source="pro_email" validate={email()} />
