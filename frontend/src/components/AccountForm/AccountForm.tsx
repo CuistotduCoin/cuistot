@@ -102,6 +102,7 @@ interface IUpdateInfoFormValues {
 interface IUpdateCookInfoFormValues {
   is_pro: boolean;
   business_name?: string;
+  description: string;
   siren?: string;
   pro_email?: string;
   pro_phone_number: string;
@@ -391,6 +392,7 @@ export class AccountForm extends React.Component<
           if (get(data, 'getCook.message') === "success" && get(data, 'getCook.cook.confirmed')) {
             const {
               is_pro,
+              description,
               business_name,
               siren,
               pro_email,
@@ -407,6 +409,7 @@ export class AccountForm extends React.Component<
                     initialValues={{
                       is_pro,
                       business_name,
+                      description,
                       siren,
                       pro_email,
                       pro_phone_number,
@@ -530,6 +533,7 @@ export class AccountForm extends React.Component<
     const { currentGourmet, openSnackbar } = this.props;
     const {
       is_pro,
+      description,
       business_name,
       siren,
       pro_email,
@@ -542,6 +546,7 @@ export class AccountForm extends React.Component<
     const cook = {
       id: currentGourmet.id,
       is_pro,
+      description,
       business_name,
       siren,
       pro_email,

@@ -6,6 +6,7 @@ import {
   BooleanInput,
   ReferenceInput,
   AutocompleteInput,
+  LongTextInput,
   required,
   email,
   DateInput,
@@ -23,6 +24,7 @@ const CookCreate = (props) => {
         <ReferenceInput source="gourmet.id" reference="gourmets" validate={required()} defaultValue={gourmetId}>
           <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
         </ReferenceInput>
+        <LongTextInput source="description" />
         <TextInput source="business_name" />
         <TextInput source="siren" />
         <TextInput source="pro_email" validate={email()} />

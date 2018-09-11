@@ -6,6 +6,7 @@
     "arguments": {
       "id": $utils.toJson($context.arguments.cook.gourmet.id),
       "is_pro": $utils.toJson($context.arguments.cook.is_pro),
+      "description": $utils.toJson($context.arguments.cook.description),
       "business_name": $utils.toJson($context.arguments.cook.business_name),
       "siren": $utils.toJson($context.arguments.cook.siren),
       "pro_email": $utils.toJson($context.arguments.cook.pro_email),

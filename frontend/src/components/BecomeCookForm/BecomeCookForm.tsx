@@ -11,6 +11,7 @@ import { phoneNumberValidation, sirenValidation } from "../../shared/validations
 
 const initialValues = {
   is_pro: true,
+  description: "",
   business_name: "",
   siren: "",
   pro_email: "",
@@ -28,6 +29,7 @@ interface IBecomeCookFormProps {
 
 interface IBecomeCookFormValues {
   is_pro: boolean;
+  description: string;
   business_name: string;
   siren: string;
   pro_email: string;
@@ -85,6 +87,7 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
   ) {
     const {
       is_pro,
+      description,
       business_name,
       siren,
       pro_email,
@@ -100,6 +103,7 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
         id: currentGourmet.id,
       },
       is_pro,
+      description,
       pro_phone_number
     };
 

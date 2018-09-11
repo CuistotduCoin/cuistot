@@ -2,6 +2,7 @@ export default `query GetCook($cook_id: ID!) {
   getCook(cook_id: $cook_id) {
     cook {
       is_pro
+      description
       confirmed
       business_name
       siren

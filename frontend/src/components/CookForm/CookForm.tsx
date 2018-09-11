@@ -57,6 +57,19 @@ const CookForm: React.SFC<ICookFormProps> = ({ classes, values, action }) => (
         </Grid>
       </Grid>
       <Grid item={true} xs={12}>
+        <Grid container={true}>
+          <Field
+            type="text"
+            component={TextField}
+            id="cook-description"
+            label="Description"
+            name="description"
+            className={classes.textField}
+            margin="normal"
+          />
+        </Grid>
+      </Grid>
+      <Grid item={true} xs={12}>
         <div className={classes.isPro}>
           <Field
             id="is_pro"

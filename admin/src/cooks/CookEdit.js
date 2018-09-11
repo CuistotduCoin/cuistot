@@ -9,6 +9,7 @@ import {
   DisabledInput,
   TextInput,
   BooleanInput,
+  LongTextInput,
   email,
   ShowButton,
   ListButton,
@@ -65,6 +66,7 @@ const CookEdit = ({ refreshView, ...props }) => (
     <SimpleForm>
       <DisabledInput source="id" />
       <BooleanInput source="is_pro" />
+      <LongTextInput source="description" />
       <TextInput source="business_name" />
       <TextInput source="siren" />
       <TextInput source="pro_email" validate={email()} />
