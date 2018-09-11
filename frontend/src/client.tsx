@@ -5,6 +5,7 @@ import {
 } from "@material-ui/core/styles";
 import algoliasearch from "algoliasearch/lite";
 import createApolloClient from "createApolloClient";
+import moment from 'moment';
 import * as React from "react";
 import { ApolloProvider } from "react-apollo";
 import { hydrate } from "react-dom";
@@ -34,8 +35,11 @@ const searchClient = algoliasearch(
 
 if (process.env.NODE_ENV === "development") {
   UNSTATED.logStateChanges = true;
+  // @ts-ignore
   window.LOG_LEVEL = "DEBUG";
 }
+
+moment.locale('fr');
 
 ensureReady(routes).then(data =>
   hydrate(
