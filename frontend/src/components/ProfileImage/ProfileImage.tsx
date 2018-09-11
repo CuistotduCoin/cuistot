@@ -2,77 +2,69 @@ import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from "@material-ui/core/styles";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import PersonIcon from "@material-ui/icons/Person";
+import cx from 'classnames';
+import S3Image from "components/S3Image";
 import React from 'react';
-import { Storage } from "shared/auth";
 
 const styles = theme => ({
   avatar: {
+    backgroundColor: 'white',
+    border: '5px solid white'
+  },
+  normal: {
     width: '120px',
-    height: '120px',
+    height: '120px'
+  },
+  small: {
+    width: '60px',
+    height: '60px'
   },
   icon: {
-    color: theme.palette.text.secondary,
-    height: '100px',
-    width: '100px',
+    backgroundColor: 'white',
+    border: '5px solid white',
+    borderRadius: '50%',
+    color: theme.palette.text.secondary
   }
 });
 
 interface IProfileImageProps {
   classes: any;
-  imageKey: string;
+  size: "small" | "normal";
+  imageKey?: string;
   identityId: string;
   showAddImagePlaceholder: boolean;
+  alt?: string;
 }
 
-interface IProfileImageState {
-  imageSrc?: any;
-}
-
-class ProfileImage extends React.Component<
-  IProfileImageProps,
-  IProfileImageState
-> {
+class ProfileImage extends React.Component<IProfileImageProps> {
   public static defaultProps: Partial<IProfileImageProps> = {
     showAddImagePlaceholder: false,
+    size: 'normal',
   };
 
-  constructor(props) {
-    super(props);
-    this.loadProfileImage = this.loadProfileImage.bind(this);
-    this.state = {};
-  }
-
-  public componentDidMount() {
-    this.loadProfileImage();
-  }
-
-  public componentDidUpdate(prevProps) {
-    if (prevProps.imageKey !== this.props.imageKey) {
-      this.loadProfileImage();
-    }
-  }
-
-  public loadProfileImage() {
-    const { imageKey, identityId } = this.props;
-    if (imageKey && identityId) {
-      Storage.get(`profile/${imageKey}`, { identityId })
-        .then(result => this.setState({ imageSrc: result }))
-        .catch(err => console.error(err));
-    }
-  }
-
   public render() {
-    const { classes, showAddImagePlaceholder } = this.props;
+    const { classes, imageKey, identityId, showAddImagePlaceholder, size, alt } = this.props;
 
-    if (this.state.imageSrc) {
-      return <Avatar src={this.state.imageSrc} className={classes.avatar} />;
+    const image = (
+      <S3Image
+        component={Avatar}
+        path="profile"
+        imageKey={imageKey}
+        identityId={identityId}
+        alt={alt}
+        className={cx(classes.avatar, classes[size])}
+      />
+    );
+
+    if (image) {
+      return image;
     }
 
     if (showAddImagePlaceholder) {
-      return <AddAPhotoIcon className={classes.icon} />
+      return <AddAPhotoIcon className={cx(classes.icon, classes[size])} />
     }
 
-    return <PersonIcon className={classes.icon} />;
+    return <PersonIcon className={cx(classes.icon, classes[size])} />;
   }
 }
 

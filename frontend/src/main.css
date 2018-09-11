@@ -9,11 +9,9 @@ body {
   font-weight: bold !important;
 }
 
-*[class*="MuiTypography-title-"] {
-  font-family: 'PT Sans', sans-serif !important;
-}
-
-*[class*="MuiTypography-subheading-"] {
+*[class*="MuiTypography-title-"],
+*[class*="MuiTypography-subheading-"],
+*[class*="MuiTypography-body2-"] {
   font-family: 'PT Sans', sans-serif !important;
 }
 
