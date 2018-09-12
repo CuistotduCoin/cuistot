@@ -283,20 +283,14 @@ async function insertObject(tableName, args) {
     let query;
     let result = await objectExists(tableName, args);
     if (result) {
-      const updateArgs = {
-        ...args,
-        deleted_at: null,
-        created_at: result.created_at,
-        updated_at: knex.fn.now(),
-      };
-
-      if (tableName === 'cooks') {
-        updateArgs.confirmed = false;
-      }
-
       query = knex(tableName)
         .where('id', result.id)
-        .update(updateArgs)
+        .update({
+          ...args,
+          deleted_at: null,
+          created_at: result.created_at,
+          updated_at: knex.fn.now(),
+        })
         .returning('*');
     } else {
       const createArgs = cleanKnexQueryArgs(args);
@@ -329,7 +323,7 @@ async function updateObject(tableName, args) {
     if (result.length) {
       return { data: result[0], message: 'success' };
     }
-    return { userError: 'could not be updated (you should check if the resource exists)' };
+    return { userError: 'could not be updated (you should check the resource exists)' };
   } catch (err) {
     console.error(err);
     return { userError: formatKnexQueryError(err) };
@@ -338,10 +332,16 @@ async function updateObject(tableName, args) {
 
 async function deleteObject(tableName, value) {
   try {
+    const updateArgs = { deleted_at: knex.fn.now() };
+
+    if (tableName === 'cooks') {
+      updateArgs.confirmed = false;
+    }
+
     const query = knex(tableName)
       .whereNull('deleted_at')
       .where('id', value)
-      .update({ deleted_at: knex.fn.now() });
+      .update(updateArgs);
     const result = await query;
     if (result > 0) {
       return { message: 'success' };
