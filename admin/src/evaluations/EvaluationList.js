@@ -1,11 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import get from 'lodash.get';
 import {
   Datagrid,
   List,
   Responsive,
   RichTextField,
   ReferenceField,
+  ShowButton,
   EditButton,
+  Filter,
+  BooleanInput,
   downloadCSV,
 } from 'react-admin';
 import { CookNameField, GourmetNameField } from '../fields';
@@ -27,10 +32,17 @@ const exporter = (evaluations) => {
   downloadCSV(csv, 'evaluations');
 };
 
-const EvaluationList = props => (
+const EvaluationFilter = props => (
+  <Filter {...props}>
+    <BooleanInput source="has_been_deleted" label="pos.has_been_deleted" />
+  </Filter>
+);
+
+const EvaluationList = ({ disableEdit, ...props }) => (
   <List
     {...props}
     exporter={exporter}
+    filters={<EvaluationFilter />}
     sort={{ field: 'created_at', order: 'DESC' }}
   >
     <Responsive
@@ -44,11 +56,16 @@ const EvaluationList = props => (
           </ReferenceField>
           <StarRatingField />
           <RichTextField source="comment" />
-          <EditButton />
+          <ShowButton />
+          {!disableEdit && <EditButton />}
         </Datagrid>
       )}
     />
   </List>
 );
 
-export default EvaluationList;
+const mapStateToProps = state => ({
+  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+});
+
+export default connect(mapStateToProps)(EvaluationList);

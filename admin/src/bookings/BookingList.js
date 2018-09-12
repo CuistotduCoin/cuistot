@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import get from 'lodash.get';
 import {
   Datagrid,
   List,
@@ -6,7 +8,10 @@ import {
   NumberField,
   ReferenceField,
   TextField,
+  ShowButton,
   EditButton,
+  Filter,
+  BooleanInput,
   downloadCSV,
 } from 'react-admin';
 import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-disable-line
@@ -27,10 +32,17 @@ const exporter = (bookings) => {
   downloadCSV(csv, 'bookings');
 };
 
-const BookingList = ({ classes, ...props }) => (
+const BookingFilter = props => (
+  <Filter {...props}>
+    <BooleanInput source="has_been_deleted" label="pos.has_been_deleted" />
+  </Filter>
+);
+
+const BookingList = ({ disableEdit, ...props }) => (
   <List
     {...props}
     exporter={exporter}
+    filters={<BookingFilter />}
     sort={{ field: 'updated_at', order: 'DESC' }}
   >
     <Responsive
@@ -43,11 +55,16 @@ const BookingList = ({ classes, ...props }) => (
             <GourmetNameField />
           </ReferenceField>
           <NumberField source="amount" />
-          <EditButton />
+          <ShowButton />
+          {!disableEdit && <EditButton />}
         </Datagrid>
       )}
     />
   </List>
 );
 
-export default BookingList;
+const mapStateToProps = state => ({
+  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+});
+
+export default connect(mapStateToProps)(BookingList);

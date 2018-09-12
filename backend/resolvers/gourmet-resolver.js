@@ -6,12 +6,13 @@ import {
   deleteObject,
   performOperation,
   performPagination,
+  recreateObject,
 } from './utils';
 
 const TABLE_NAME = 'gourmets';
 
 async function getGourmet(args) {
-  const result = await findFirstWhere(TABLE_NAME, args.gourmet_id);
+  const result = await findFirstWhere(TABLE_NAME, args.gourmet_id, args.is_admin);
   return result;
 }
 
@@ -56,6 +57,11 @@ async function deleteGourmet(args) {
   return result;
 }
 
+async function recreateGourmet(args) {
+  const result = await recreateObject(TABLE_NAME, args.id);
+  return result;
+}
+
 export {
   getGourmet,
   getGourmets,
@@ -63,4 +69,5 @@ export {
   createGourmet,
   updateGourmet,
   deleteGourmet,
+  recreateGourmet,
 };

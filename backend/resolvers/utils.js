@@ -23,9 +23,9 @@ const JOINS_STRUCTURE = {
 
 const knex = require('knex')(connection[process.env.NODE_ENV]);
 
-async function findFirstWhere(tableName, value, unscoped = false) {
+async function findFirstWhere(tableName, id, unscoped = false) {
   try {
-    let query = knex(tableName).where('id', value);
+    let query = knex(tableName).where('id', id);
     if (!unscoped) {
       query = query.whereNull('deleted_at');
     }

@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import get from 'lodash.get';
 import {
   Datagrid,
   List,
@@ -12,6 +14,7 @@ import {
   EditButton,
   Filter,
   TextInput,
+  BooleanInput,
   downloadCSV,
 } from 'react-admin';
 import moment from 'moment';
@@ -39,10 +42,11 @@ const exporter = (cooks) => {
 const CookFilter = props => (
   <Filter {...props}>
     <TextInput label="pos.search" source="q" alwaysOn />
+    <BooleanInput source="has_been_deleted" label="pos.has_been_deleted" />
   </Filter>
 );
 
-const CookList = props => (
+const CookList = ({ disableEdit, ...props }) => (
   <List
     {...props}
     exporter={exporter}
@@ -63,11 +67,15 @@ const CookList = props => (
           <TextField source="legal_last_name" />
           <DateField source="legal_birthdate" />
           <ShowButton />
-          <EditButton />
+          {!disableEdit && <EditButton />}
         </Datagrid>
       )}
     />
   </List>
 );
 
-export default CookList;
+const mapStateToProps = state => ({
+  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+});
+
+export default connect(mapStateToProps)(CookList);

@@ -5,12 +5,13 @@ import {
   updateObject,
   performOperation,
   performPagination,
+  recreateObject,
 } from './utils';
 
 const TABLE_NAME = 'evaluations';
 
 async function getEvaluation(args) {
-  const result = await findFirstWhere(TABLE_NAME, args.evaluation_id);
+  const result = await findFirstWhere(TABLE_NAME, args.evaluation_id, args.is_admin);
   return result;
 }
 
@@ -45,10 +46,16 @@ async function deleteEvaluation(args) {
   return result;
 }
 
+async function recreateEvaluation(args) {
+  const result = await recreateObject(TABLE_NAME, args.id);
+  return result;
+}
+
 export {
   getEvaluation,
   getEvaluations,
   createEvaluation,
   updateEvaluation,
   deleteEvaluation,
+  recreateEvaluation,
 };

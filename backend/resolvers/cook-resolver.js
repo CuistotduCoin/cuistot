@@ -6,12 +6,13 @@ import {
   deleteObject,
   performOperation,
   performPagination,
+  recreateObject,
 } from './utils';
 
 const TABLE_NAME = 'cooks';
 
 async function getCook(args) {
-  const result = await findFirstWhere(TABLE_NAME, args.cook_id);
+  const result = await findFirstWhere(TABLE_NAME, args.cook_id, args.is_admin);
   return result;
 }
 
@@ -59,6 +60,11 @@ async function deleteCook(args) {
   return result;
 }
 
+async function recreateCook(args) {
+  const result = await recreateObject(TABLE_NAME, args.id);
+  return result;
+}
+
 export {
   getCook,
   getCooks,
@@ -68,4 +74,5 @@ export {
   confirmCook,
   getCookWorkshops,
   getCookEvaluations,
+  recreateCook,
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   Datagrid,
   List,
@@ -10,8 +11,10 @@ import {
   EditButton,
   Filter,
   TextInput,
+  BooleanInput,
   downloadCSV,
 } from 'react-admin';
+import get from 'lodash.get';
 import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-disable-line
 
 const exporter = (gourmets) => {
@@ -25,10 +28,11 @@ const exporter = (gourmets) => {
 const GourmetFilter = props => (
   <Filter {...props}>
     <TextInput label="pos.search" source="q" alwaysOn />
+    <BooleanInput source="has_been_deleted" label="pos.has_been_deleted" />
   </Filter>
 );
 
-const GourmetList = props => (
+const GourmetList = ({ disableEdit, ...props }) => (
   <List
     {...props}
     exporter={exporter}
@@ -47,11 +51,15 @@ const GourmetList = props => (
           <TextField source="city" />
           <TextField source="zip_code" />
           <ShowButton />
-          <EditButton />
+          {!disableEdit && <EditButton />}
         </Datagrid>
       )}
     />
   </List>
 );
 
-export default GourmetList;
+const mapStateToProps = state => ({
+  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+});
+
+export default connect(mapStateToProps)(GourmetList);
