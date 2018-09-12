@@ -25,7 +25,7 @@ import { RecreateCook } from '../queries';
 const recreateCook = (cookId, refreshView) => () => {
   API.graphql(
     graphqlOperation(RecreateCook, {
-      workshop: { id: cookId },
+      cook: { id: cookId },
     }),
   ).then((result) => {
     if (result.data.recreateCook.message === 'success') {
