@@ -7,6 +7,7 @@ export default {
     images: 'Images',
     search: 'Rechercher',
     no_picture: 'Aucune photo',
+    has_been_deleted: 'Supprimé ?',
     configuration: 'Configuration',
     language: 'Langue',
     theme: {

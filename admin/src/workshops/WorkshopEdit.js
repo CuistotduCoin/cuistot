@@ -10,23 +10,27 @@ import {
   ReferenceInput,
   SelectInput,
   TabbedShowLayout,
+  ShowButton,
+  ListButton,
+  RefreshButton,
+  CardActions,
   Tab,
 } from 'react-admin';
-import { withStyles } from '@material-ui/core/styles';
 import { DateTimeInput } from 'react-admin-date-inputs';
 import { CookNameField, NameField } from '../fields';
 import { ImageInput } from '../inputs';
 import WorkshopImages from './WorkshopImages';
 
-const styles = () => ({
-  gridList: {
-    width: 500,
-    height: 450,
-  },
-});
+const WorkshopEditActions = ({ basePath, data }) => (
+  <CardActions>
+    <ShowButton basePath={basePath} record={data} />
+    <ListButton basePath={basePath} />
+    <RefreshButton />
+  </CardActions>
+);
 
-const WorkshopEdit = ({ classes, ...props }) => (
-  <Edit title={<NameField />} {...props}>
+const WorkshopEdit = props => (
+  <Edit actions={<WorkshopEditActions />} title={<NameField />} {...props}>
     <TabbedShowLayout>
       <Tab label="pos.info">
         <SimpleForm>
@@ -62,4 +66,4 @@ const WorkshopEdit = ({ classes, ...props }) => (
   </Edit>
 );
 
-export default withStyles(styles)(WorkshopEdit);
+export default WorkshopEdit;

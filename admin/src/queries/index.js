@@ -1,3 +1,7 @@
 import ConfirmCook from './ConfirmCook';
+import RecreateWorkshop from './RecreateWorkshop';
 
-export { ConfirmCook };
+export {
+  ConfirmCook,
+  RecreateWorkshop,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   Datagrid,
   List,
@@ -12,6 +13,7 @@ import {
   BooleanInput,
   downloadCSV,
 } from 'react-admin';
+import get from 'lodash.get';
 import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-disable-line
 import WorkshopDate from './WorkshopDate';
 import WorkshopPrice from './WorkshopPrice';
@@ -36,12 +38,13 @@ const exporter = (workshops) => {
 const WorkshopFilter = props => (
   <Filter {...props}>
     <TextInput label="pos.search" source="q" alwaysOn />
+    <BooleanInput source="has_been_deleted" label="pos.has_been_deleted" />
     <BooleanInput source="has_bookings" label="resources.workshops.has_bookings" />
     <BooleanInput source="has_been_archived" label="resources.workshops.has_been_archived" />
   </Filter>
 );
 
-const WorkshopList = props => (
+const WorkshopList = ({ disableEdit, ...props }) => (
   <List
     {...props}
     exporter={exporter}
@@ -65,11 +68,15 @@ const WorkshopList = props => (
           <TextField source="max_gourmet" />
           <WorkshopDate />
           <ShowButton />
-          <EditButton />
+          {!disableEdit && <EditButton />}
         </Datagrid>
       )}
     />
   </List>
 );
 
-export default WorkshopList;
+const mapStateToProps = state => ({
+  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+});
+
+export default connect(mapStateToProps)(WorkshopList);

@@ -46,6 +46,7 @@ import {
   createWorkshop,
   updateWorkshop,
   deleteWorkshop,
+  recreateWorkshop,
 } from './resolvers/workshop-resolver';
 import { run } from './mailer';
 import { isEmpty, get } from './utils/utils';
@@ -158,6 +159,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'deleteWorkshop': {
       resolve(deleteWorkshop);
+      break;
+    }
+    case 'recreateWorkshop': {
+      resolve(recreateWorkshop);
       break;
     }
     case 'createBooking': {

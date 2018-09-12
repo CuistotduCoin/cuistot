@@ -54,6 +54,11 @@ custom:
         field: deleteWorkshop
         request: "workshop/deleteWorkshop-request-mapping-template.txt"
         response: "workshop/deleteWorkshop-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: recreateWorkshop
+        request: "workshop/recreateWorkshop-request-mapping-template.txt"
+        response: "workshop/recreateWorkshop-response-mapping-template.txt"
 
       - dataSource: Lambda
         type: Mutation

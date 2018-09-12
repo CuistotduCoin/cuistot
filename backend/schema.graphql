@@ -8,6 +8,7 @@ interface Node {
 interface Timestamps {
   created_at: String!
   updated_at: String!
+  deleted_at: String
 }
 
 enum Gender {
@@ -119,6 +120,7 @@ type Workshop implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   name: String!
   price: Int!
   duration: Int!
@@ -406,6 +408,7 @@ input WorkshopFilter {
   q: String
   has_bookings: Boolean
   has_been_archived: Boolean
+  has_been_deleted: Boolean
 }
 
 input Order {
@@ -421,6 +424,8 @@ type Mutation {
     @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteWorkshop(workshop_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
+  recreateWorkshop(workshop: WorkshopInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Bookings
   createBooking(booking: CreateBookingInput!): BookingPayload!
