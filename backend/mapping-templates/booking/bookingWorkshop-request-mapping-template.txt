@@ -1,10 +1,17 @@
+#foreach($group in $ctx.identity.claims.get("cognito:groups"))
+  #if($group == "Admin")
+    #set($isAdmin = true)
+    #break
+  #end
+#end
 {
   "version": "2017-02-28",
   "operation": "Invoke",
   "payload": {
     "field": "getWorkshop",
     "arguments":  {
-      "workshop_id": $utils.toJson($context.source.workshop_id)
+      "workshop_id": $utils.toJson($context.source.workshop_id),
+      "is_admin": $utils.toJson($isAdmin)
     }
   }
 }
