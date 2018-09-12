@@ -46,36 +46,45 @@ const CookFilter = props => (
   </Filter>
 );
 
-const CookList = ({ disableEdit, ...props }) => (
-  <List
-    {...props}
-    exporter={exporter}
-    filters={<CookFilter />}
-    sort={{ field: 'created_at', order: 'DESC' }}
-  >
-    <Responsive
-      medium={(
-        <Datagrid rowStyle={rowStyle}>
-          <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
-            <GourmetNameField />
-          </ReferenceField>
-          <BooleanField source="is_pro" />
-          <TextField source="business_name" />
-          <TextField source="siren" />
-          <EmailField source="pro_email" />
-          <TextField source="legal_first_name" />
-          <TextField source="legal_last_name" />
-          <DateField source="legal_birthdate" />
-          <ShowButton />
-          {!disableEdit && <EditButton />}
-        </Datagrid>
-      )}
-    />
-  </List>
-);
+const CookList = ({ showDeletedOnes, ...props }) => {
+  const listProps = {};
+  if (showDeletedOnes) {
+    listProps.bulkActions = false;
+    listProps.bulkActionButtons = false;
+  }
+
+  return (
+    <List
+      {...props}
+      exporter={exporter}
+      filters={<CookFilter />}
+      sort={{ field: 'created_at', order: 'DESC' }}
+      {...listProps}
+    >
+      <Responsive
+        medium={(
+          <Datagrid rowStyle={rowStyle}>
+            <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
+              <GourmetNameField />
+            </ReferenceField>
+            <BooleanField source="is_pro" />
+            <TextField source="business_name" />
+            <TextField source="siren" />
+            <EmailField source="pro_email" />
+            <TextField source="legal_first_name" />
+            <TextField source="legal_last_name" />
+            <DateField source="legal_birthdate" />
+            <ShowButton />
+            {!showDeletedOnes && <EditButton />}
+          </Datagrid>
+        )}
+      />
+    </List>
+  );
+};
 
 const mapStateToProps = state => ({
-  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+  showDeletedOnes: get(state, 'form.filterForm.values.has_been_deleted'),
 });
 
 export default connect(mapStateToProps)(CookList);

@@ -32,34 +32,43 @@ const GourmetFilter = props => (
   </Filter>
 );
 
-const GourmetList = ({ disableEdit, ...props }) => (
-  <List
-    {...props}
-    exporter={exporter}
-    filters={<GourmetFilter />}
-    sort={{ field: 'created_at', order: 'DESC' }}
-  >
-    <Responsive
-      medium={(
-        <Datagrid>
-          <TextField source="first_name" />
-          <TextField source="last_name" />
-          <EmailField source="email" />
-          <TextField source="gender" />
-          <DateField source="birthdate" />
-          <TextField source="address" />
-          <TextField source="city" />
-          <TextField source="zip_code" />
-          <ShowButton />
-          {!disableEdit && <EditButton />}
-        </Datagrid>
-      )}
-    />
-  </List>
-);
+const GourmetList = ({ showDeletedOnes, ...props }) => {
+  const listProps = {};
+  if (showDeletedOnes) {
+    listProps.bulkActions = false;
+    listProps.bulkActionButtons = false;
+  }
+
+  return (
+    <List
+      {...props}
+      exporter={exporter}
+      filters={<GourmetFilter />}
+      sort={{ field: 'created_at', order: 'DESC' }}
+      {...listProps}
+    >
+      <Responsive
+        medium={(
+          <Datagrid>
+            <TextField source="first_name" />
+            <TextField source="last_name" />
+            <EmailField source="email" />
+            <TextField source="gender" />
+            <DateField source="birthdate" />
+            <TextField source="address" />
+            <TextField source="city" />
+            <TextField source="zip_code" />
+            <ShowButton />
+            {!showDeletedOnes && <EditButton />}
+          </Datagrid>
+        )}
+      />
+    </List>
+  );
+};
 
 const mapStateToProps = state => ({
-  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+  showDeletedOnes: get(state, 'form.filterForm.values.has_been_deleted'),
 });
 
 export default connect(mapStateToProps)(GourmetList);

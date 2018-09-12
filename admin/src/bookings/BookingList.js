@@ -38,33 +38,42 @@ const BookingFilter = props => (
   </Filter>
 );
 
-const BookingList = ({ disableEdit, ...props }) => (
-  <List
-    {...props}
-    exporter={exporter}
-    filters={<BookingFilter />}
-    sort={{ field: 'updated_at', order: 'DESC' }}
-  >
-    <Responsive
-      medium={(
-        <Datagrid>
-          <ReferenceField reference="workshops" source="workshop.id" linkType="show" sortable={false}>
-            <TextField source="name" />
-          </ReferenceField>
-          <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
-            <GourmetNameField />
-          </ReferenceField>
-          <NumberField source="amount" />
-          <ShowButton />
-          {!disableEdit && <EditButton />}
-        </Datagrid>
-      )}
-    />
-  </List>
-);
+const BookingList = ({ showDeletedOnes, ...props }) => {
+  const listProps = {};
+  if (showDeletedOnes) {
+    listProps.bulkActions = false;
+    listProps.bulkActionButtons = false;
+  }
+
+  return (
+    <List
+      {...props}
+      exporter={exporter}
+      filters={<BookingFilter />}
+      sort={{ field: 'updated_at', order: 'DESC' }}
+      {...listProps}
+    >
+      <Responsive
+        medium={(
+          <Datagrid>
+            <ReferenceField reference="workshops" source="workshop.id" linkType="show" sortable={false}>
+              <TextField source="name" />
+            </ReferenceField>
+            <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
+              <GourmetNameField />
+            </ReferenceField>
+            <NumberField source="amount" />
+            <ShowButton />
+            {!showDeletedOnes && <EditButton />}
+          </Datagrid>
+        )}
+      />
+    </List>
+  );
+};
 
 const mapStateToProps = state => ({
-  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+  showDeletedOnes: get(state, 'form.filterForm.values.has_been_deleted'),
 });
 
 export default connect(mapStateToProps)(BookingList);

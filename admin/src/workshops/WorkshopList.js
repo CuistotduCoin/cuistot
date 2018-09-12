@@ -44,39 +44,48 @@ const WorkshopFilter = props => (
   </Filter>
 );
 
-const WorkshopList = ({ disableEdit, ...props }) => (
-  <List
-    {...props}
-    exporter={exporter}
-    filters={<WorkshopFilter />}
-    sort={{ field: 'created_at', order: 'DESC' }}
-    perPage={15}
-  >
-    <Responsive
-      medium={(
-        <Datagrid rowStyle={rowStyle}>
-          <TextField source="name" />
-          <ReferenceField reference="cooks" source="cook.id" linkType="show" sortable={false}>
-            <CookNameField />
-          </ReferenceField>
-          <ReferenceField reference="kitchens" source="kitchen.id" linkType="show" sortable={false}>
+const WorkshopList = ({ showDeletedOnes, ...props }) => {
+  const listProps = {};
+  if (showDeletedOnes) {
+    listProps.bulkActions = false;
+    listProps.bulkActionButtons = false;
+  }
+
+  return (
+    <List
+      {...props}
+      exporter={exporter}
+      filters={<WorkshopFilter />}
+      sort={{ field: 'created_at', order: 'DESC' }}
+      perPage={15}
+      {...listProps}
+    >
+      <Responsive
+        medium={(
+          <Datagrid rowStyle={rowStyle}>
             <TextField source="name" />
-          </ReferenceField>
-          <WorkshopPrice />
-          <TextField source="duration" />
-          <TextField source="min_gourmet" />
-          <TextField source="max_gourmet" />
-          <WorkshopDate />
-          <ShowButton />
-          {!disableEdit && <EditButton />}
-        </Datagrid>
-      )}
-    />
-  </List>
-);
+            <ReferenceField reference="cooks" source="cook.id" linkType="show" sortable={false}>
+              <CookNameField />
+            </ReferenceField>
+            <ReferenceField reference="kitchens" source="kitchen.id" linkType="show" sortable={false}>
+              <TextField source="name" />
+            </ReferenceField>
+            <WorkshopPrice />
+            <TextField source="duration" />
+            <TextField source="min_gourmet" />
+            <TextField source="max_gourmet" />
+            <WorkshopDate />
+            <ShowButton />
+            {!showDeletedOnes && <EditButton />}
+          </Datagrid>
+        )}
+      />
+    </List>
+  );
+};
 
 const mapStateToProps = state => ({
-  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+  showDeletedOnes: get(state, 'form.filterForm.values.has_been_deleted'),
 });
 
 export default connect(mapStateToProps)(WorkshopList);

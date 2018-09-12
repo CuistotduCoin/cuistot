@@ -31,31 +31,40 @@ const KitchenFilter = props => (
   </Filter>
 );
 
-const KitchenList = ({ disableEdit, ...props }) => (
-  <List
-    {...props}
-    exporter={exporter}
-    filters={<KitchenFilter />}
-    sort={{ field: 'created_at', order: 'DESC' }}
-  >
-    <Responsive
-      medium={(
-        <Datagrid>
-          <TextField source="name" />
-          <TextField source="address" />
-          <TextField source="city" />
-          <TextField source="zip_code" />
-          <LocationField />
-          <ShowButton />
-          {!disableEdit && <EditButton />}
-        </Datagrid>
-      )}
-    />
-  </List>
-);
+const KitchenList = ({ showDeletedOnes, ...props }) => {
+  const listProps = {};
+  if (showDeletedOnes) {
+    listProps.bulkActions = false;
+    listProps.bulkActionButtons = false;
+  }
+
+  return (
+    <List
+      {...props}
+      exporter={exporter}
+      filters={<KitchenFilter />}
+      sort={{ field: 'created_at', order: 'DESC' }}
+      {...listProps}
+    >
+      <Responsive
+        medium={(
+          <Datagrid>
+            <TextField source="name" />
+            <TextField source="address" />
+            <TextField source="city" />
+            <TextField source="zip_code" />
+            <LocationField />
+            <ShowButton />
+            {!showDeletedOnes && <EditButton />}
+          </Datagrid>
+        )}
+      />
+    </List>
+  );
+};
 
 const mapStateToProps = state => ({
-  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+  showDeletedOnes: get(state, 'form.filterForm.values.has_been_deleted'),
 });
 
 export default connect(mapStateToProps)(KitchenList);

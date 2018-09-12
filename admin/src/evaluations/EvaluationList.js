@@ -38,34 +38,43 @@ const EvaluationFilter = props => (
   </Filter>
 );
 
-const EvaluationList = ({ disableEdit, ...props }) => (
-  <List
-    {...props}
-    exporter={exporter}
-    filters={<EvaluationFilter />}
-    sort={{ field: 'created_at', order: 'DESC' }}
-  >
-    <Responsive
-      medium={(
-        <Datagrid>
-          <ReferenceField reference="cooks" source="cook.id" linkType="show" sortable={false}>
-            <CookNameField />
-          </ReferenceField>
-          <ReferenceField reference="gourmets" source="author.id" linkType="show" sortable={false}>
-            <GourmetNameField />
-          </ReferenceField>
-          <StarRatingField />
-          <RichTextField source="comment" />
-          <ShowButton />
-          {!disableEdit && <EditButton />}
-        </Datagrid>
-      )}
-    />
-  </List>
-);
+const EvaluationList = ({ showDeletedOnes, ...props }) => {
+  const listProps = {};
+  if (showDeletedOnes) {
+    listProps.bulkActions = false;
+    listProps.bulkActionButtons = false;
+  }
+
+  return (
+    <List
+      {...props}
+      exporter={exporter}
+      filters={<EvaluationFilter />}
+      sort={{ field: 'created_at', order: 'DESC' }}
+      {...listProps}
+    >
+      <Responsive
+        medium={(
+          <Datagrid>
+            <ReferenceField reference="cooks" source="cook.id" linkType="show" sortable={false}>
+              <CookNameField />
+            </ReferenceField>
+            <ReferenceField reference="gourmets" source="author.id" linkType="show" sortable={false}>
+              <GourmetNameField />
+            </ReferenceField>
+            <StarRatingField />
+            <RichTextField source="comment" />
+            <ShowButton />
+            {!showDeletedOnes && <EditButton />}
+          </Datagrid>
+        )}
+      />
+    </List>
+  );
+};
 
 const mapStateToProps = state => ({
-  disableEdit: get(state, 'form.filterForm.values.has_been_deleted'),
+  showDeletedOnes: get(state, 'form.filterForm.values.has_been_deleted'),
 });
 
 export default connect(mapStateToProps)(EvaluationList);
