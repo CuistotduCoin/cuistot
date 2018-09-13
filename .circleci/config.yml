@@ -5,12 +5,12 @@ jobs:
       - image: circleci/node:8.10
     steps:
       - checkout
-      - run: cd admin
       - restore_cache:
           key: dependency-cache-{{ checksum "admin/yarn.lock" }}
       - run:
           name: Install dependencies
           command: |
+            cd admin
             yarn install
             sudo apt-get install awscli
       - save_cache:
@@ -19,7 +19,9 @@ jobs:
             - ./node_modules
       - run:
           name: Build admin
-          command: yarn build
+          command: |
+            cd admin
+            yarn build
       - run:
           name: Deploy admin (to AWS S3)
           command: yarn deploy-build
