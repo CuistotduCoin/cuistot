@@ -20,7 +20,7 @@ jobs:
           name: Install awscli
           working_directory: /
           command: |
-            sudo apt-get install python3.6
+            sudo apt-get install python3.4-dev
             curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
             python get-pip.py
             pip install awscli --upgrade --user
