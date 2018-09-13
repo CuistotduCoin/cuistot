@@ -5,18 +5,18 @@ jobs:
       - image: circleci/node:8.10
     steps:
       - checkout
+      - run: cd admin
       - restore_cache:
-          key: dependency-cache-{{ checksum "admin/package.json" }}
+          key: dependency-cache-{{ checksum "admin/yarn.lock" }}
       - run:
           name: Install dependencies
           command: |
             yarn install
             sudo apt-get install awscli
       - save_cache:
-          key: dependency-cache-{{ checksum "admin/package.json" }}
+          key: dependency-cache-{{ checksum "admin/yarn.lock" }}
           paths:
             - ./node_modules
-      - run: cd admin
       - run:
           name: Build admin
           command: yarn build
@@ -29,18 +29,18 @@ jobs:
       - image: circleci/node:8.10
     steps:
       - checkout
+      - run: cd frontend
       - restore_cache:
-          key: dependency-cache-{{ checksum "frontend/package.json" }}
+          key: dependency-cache-{{ checksum "frontend/yarn.lock" }}
       - run:
           name: Install dependencies
           command: |
             sudo npm i -g serverless
             yarn install
       - save_cache:
-          key: dependency-cache-{{ checksum "frontend/package.json" }}
+          key: dependency-cache-{{ checksum "frontend/yarn.lock" }}
           paths:
             - ./node_modules
-      - run: cd frontend
       - run:
           name: Build frontend
           command: yarn build
