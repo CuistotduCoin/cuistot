@@ -22,6 +22,7 @@ jobs:
           command: |
             sudo apt-get install python3.4-dev
             sudo curl -O https://bootstrap.pypa.io/get-pip.py
+            python3.4 get-pip.py --user
       - run:
           name: Build admin
           command: |
