@@ -1,11 +1,66 @@
 version: 2
 jobs:
-  build:
+  deploy-admin:
     docker:
-      - image: circleci/node:8.11
+      - image: circleci/node:8.10
     steps:
-      - cd frontend
       - checkout
-      - run: yarn
-      - run: yarn build
-      - run: yarn deploy
+      - run: cd cuistot/admin
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: |
+            yarn install
+            sudo apt-get install awscli
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Build admin
+          command: yarn build
+      - run:
+          name: Deploy admin (to AWS S3)
+          command: yarn deploy-build
+  
+  deploy-front:
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - checkout
+      - run: cd cuistot/frontend
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: |
+            sudo npm i -g serverless
+            yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Build frontend
+          command: yarn build
+      - run:
+          name: Deploy frontend
+          command: yarn deploy
+
+
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - deploy-admin:
+          filters:
+            branches:
+              only:
+                - master
+                - feature/setup_deployment
+      - deploy-front:
+          filters:
+            branches:
+              only:
+                - master
