@@ -24,19 +24,21 @@ jobs:
             yarn build
       - run:
           name: Deploy admin (to AWS S3)
-          command: yarn deploy-build
+          command: |
+            cd admin
+            yarn deploy-build
   
   deploy-front:
     docker:
       - image: circleci/node:8.10
     steps:
       - checkout
-      - run: cd frontend
       - restore_cache:
           key: dependency-cache-{{ checksum "frontend/yarn.lock" }}
       - run:
           name: Install dependencies
           command: |
+            cd frontend
             sudo npm i -g serverless
             yarn install
       - save_cache:
@@ -45,10 +47,14 @@ jobs:
             - ./node_modules
       - run:
           name: Build frontend
-          command: yarn build
+          command: |
+            cd frontend
+            yarn build
       - run:
           name: Deploy frontend
-          command: yarn deploy
+          command: |
+            cd frontend
+            yarn deploy
 
 
 workflows:
@@ -60,7 +66,7 @@ workflows:
             branches:
               only:
                 - master
-                - feature/setup_deployment
+                - feature/setup_deployment # to remove
       - deploy-front:
           filters:
             branches:
