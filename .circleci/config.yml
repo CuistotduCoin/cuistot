@@ -24,6 +24,10 @@ jobs:
             sudo easy_install3 pip
             pip3 install awscli --upgrade --user
             export PATH=~/.local/bin:$PATH
+            ls ~./local/bin
+            echo $PATH
+            cat ~/.profile
+            cat ~/.bashrc
       - run:
           name: Build admin
           command: |
