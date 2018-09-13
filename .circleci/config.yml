@@ -23,6 +23,7 @@ jobs:
             sudo apt-get install python3.4-dev python3-setuptools
             sudo easy_install3 pip
             pip3 install awscli --upgrade --user
+            export PATH=~/.local/bin:$PATH
       - run:
           name: Build admin
           command: |
