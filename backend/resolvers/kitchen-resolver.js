@@ -5,12 +5,13 @@ import {
   deleteObject,
   performOperation,
   performPagination,
+  recreateObject,
 } from './utils';
 
 const TABLE_NAME = 'kitchens';
 
 async function getKitchen(args) {
-  const result = await findFirstWhere(TABLE_NAME, args.kitchen_id);
+  const result = await findFirstWhere(TABLE_NAME, args.kitchen_id, args.is_admin);
   return result;
 }
 
@@ -45,10 +46,16 @@ async function deleteKitchen(args) {
   return result;
 }
 
+async function recreateKitchen(args) {
+  const result = await recreateObject(TABLE_NAME, args.id);
+  return result;
+}
+
 export {
   getKitchen,
   getKitchens,
   createKitchen,
   updateKitchen,
   deleteKitchen,
+  recreateKitchen,
 };

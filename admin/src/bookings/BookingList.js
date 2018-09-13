@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import get from 'lodash.get';
 import {
   Datagrid,
   List,
@@ -6,7 +8,10 @@ import {
   NumberField,
   ReferenceField,
   TextField,
+  ShowButton,
   EditButton,
+  Filter,
+  BooleanInput,
   downloadCSV,
 } from 'react-admin';
 import { unparse as convertToCSV } from 'papaparse/papaparse.min'; // eslint-disable-line
@@ -27,27 +32,48 @@ const exporter = (bookings) => {
   downloadCSV(csv, 'bookings');
 };
 
-const BookingList = ({ classes, ...props }) => (
-  <List
-    {...props}
-    exporter={exporter}
-    sort={{ field: 'updated_at', order: 'DESC' }}
-  >
-    <Responsive
-      medium={(
-        <Datagrid>
-          <ReferenceField reference="workshops" source="workshop.id" linkType="show" sortable={false}>
-            <TextField source="name" />
-          </ReferenceField>
-          <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
-            <GourmetNameField />
-          </ReferenceField>
-          <NumberField source="amount" />
-          <EditButton />
-        </Datagrid>
-      )}
-    />
-  </List>
+const BookingFilter = props => (
+  <Filter {...props}>
+    <BooleanInput source="has_been_deleted" label="pos.has_been_deleted" />
+  </Filter>
 );
 
-export default BookingList;
+const BookingList = ({ showDeletedOnes, ...props }) => {
+  const listProps = {};
+  if (showDeletedOnes) {
+    listProps.bulkActions = false;
+    listProps.bulkActionButtons = false;
+  }
+
+  return (
+    <List
+      {...props}
+      exporter={exporter}
+      filters={<BookingFilter />}
+      sort={{ field: 'updated_at', order: 'DESC' }}
+      {...listProps}
+    >
+      <Responsive
+        medium={(
+          <Datagrid>
+            <ReferenceField reference="workshops" source="workshop.id" linkType="show" sortable={false}>
+              <TextField source="name" />
+            </ReferenceField>
+            <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
+              <GourmetNameField />
+            </ReferenceField>
+            <NumberField source="amount" />
+            <ShowButton />
+            {!showDeletedOnes && <EditButton />}
+          </Datagrid>
+        )}
+      />
+    </List>
+  );
+};
+
+const mapStateToProps = state => ({
+  showDeletedOnes: get(state, 'form.filterForm.values.has_been_deleted'),
+});
+
+export default connect(mapStateToProps)(BookingList);

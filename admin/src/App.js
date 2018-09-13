@@ -35,6 +35,7 @@ import {
 } from './cooks';
 import {
   BookingList,
+  BookingShow,
   BookingCreate,
   BookingEdit,
   BookingIcon,
@@ -48,6 +49,7 @@ import {
 } from './kitchens';
 import {
   EvaluationList,
+  EvaluationShow,
   EvaluationCreate,
   EvaluationEdit,
   EvaluationIcon,
@@ -123,6 +125,7 @@ class App extends Component {
         <Resource
           name="bookings"
           list={BookingList}
+          show={BookingShow}
           create={BookingCreate}
           edit={BookingEdit}
           icon={BookingIcon}
@@ -138,6 +141,7 @@ class App extends Component {
         <Resource
           name="evaluations"
           list={EvaluationList}
+          show={EvaluationShow}
           create={EvaluationCreate}
           edit={EvaluationEdit}
           icon={EvaluationIcon}

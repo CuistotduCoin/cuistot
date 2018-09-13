@@ -6,12 +6,13 @@ import {
   updateObject,
   performOperation,
   performPagination,
+  recreateObject,
 } from './utils';
 
 const TABLE_NAME = 'workshops';
 
 async function getWorkshop(args) {
-  const result = await findFirstWhere(TABLE_NAME, args.workshop_id);
+  const result = await findFirstWhere(TABLE_NAME, args.workshop_id, args.is_admin);
   return result;
 }
 
@@ -57,6 +58,11 @@ async function deleteWorkshop(args) {
   return result;
 }
 
+async function recreateWorkshop(args) {
+  const result = await recreateObject(TABLE_NAME, args.id);
+  return result;
+}
+
 export {
   getWorkshop,
   getWorkshops,
@@ -64,4 +70,5 @@ export {
   createWorkshop,
   updateWorkshop,
   deleteWorkshop,
+  recreateWorkshop,
 };

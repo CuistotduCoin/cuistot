@@ -1,8 +1,17 @@
+#foreach($group in $ctx.identity.claims.get("cognito:groups"))
+  #if($group == "Admin")
+    #set($isAdmin = true)
+    #break
+  #end
+#end
 {
   "version": "2017-02-28",
   "operation": "Invoke",
   "payload": {
     "field": "getKitchen",
-    "arguments": $utils.toJson($context.arguments)
+    "arguments": {
+      "kitchen_id": $utils.toJson($context.arguments.kitchen_id),
+      "is_admin": $utils.toJson($isAdmin)
+    }
   }
 }

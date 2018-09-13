@@ -54,6 +54,11 @@ custom:
         field: deleteWorkshop
         request: "workshop/deleteWorkshop-request-mapping-template.txt"
         response: "workshop/deleteWorkshop-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: recreateWorkshop
+        request: "workshop/recreateWorkshop-request-mapping-template.txt"
+        response: "workshop/recreateWorkshop-response-mapping-template.txt"
 
       - dataSource: Lambda
         type: Mutation
@@ -70,6 +75,11 @@ custom:
         field: deleteBooking
         request: "booking/deleteBooking-request-mapping-template.txt"
         response: "booking/deleteBooking-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: recreateBooking
+        request: "booking/recreateBooking-request-mapping-template.txt"
+        response: "booking/recreateBooking-response-mapping-template.txt"
 
       - dataSource: Lambda
         type: Mutation
@@ -86,6 +96,11 @@ custom:
         field: deleteEvaluation
         request: "evaluation/deleteEvaluation-request-mapping-template.txt"
         response: "evaluation/deleteEvaluation-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: recreateEvaluation
+        request: "evaluation/recreateEvaluation-request-mapping-template.txt"
+        response: "evaluation/recreateEvaluation-response-mapping-template.txt"
 
       - dataSource: Lambda
         type: Mutation
@@ -102,6 +117,11 @@ custom:
         field: deleteGourmet
         request: "gourmet/deleteGourmet-request-mapping-template.txt"
         response: "gourmet/deleteGourmet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: recreateGourmet
+        request: "gourmet/recreateGourmet-request-mapping-template.txt"
+        response: "gourmet/recreateGourmet-response-mapping-template.txt"
 
       - dataSource: Lambda
         type: Mutation
@@ -123,6 +143,11 @@ custom:
         field: deleteCook
         request: "cook/deleteCook-request-mapping-template.txt"
         response: "cook/deleteCook-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: recreateCook
+        request: "cook/recreateCook-request-mapping-template.txt"
+        response: "cook/recreateCook-response-mapping-template.txt"
 
       - dataSource: Lambda
         type: Mutation
@@ -139,6 +164,11 @@ custom:
         field: deleteKitchen
         request: "kitchen/deleteKitchen-request-mapping-template.txt"
         response: "kitchen/deleteKitchen-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: recreateKitchen
+        request: "kitchen/recreateKitchen-request-mapping-template.txt"
+        response: "kitchen/recreateKitchen-response-mapping-template.txt"
 
       # Query mapping templates
       - dataSource: Lambda

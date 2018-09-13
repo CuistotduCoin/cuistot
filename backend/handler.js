@@ -6,6 +6,7 @@ import {
   createBooking,
   updateBooking,
   deleteBooking,
+  recreateBooking,
 } from './resolvers/booking-resolver';
 import {
   getCook,
@@ -16,6 +17,7 @@ import {
   deleteCook,
   getCookWorkshops,
   getCookEvaluations,
+  recreateCook,
 } from './resolvers/cook-resolver';
 import {
   getEvaluation,
@@ -23,6 +25,7 @@ import {
   createEvaluation,
   updateEvaluation,
   deleteEvaluation,
+  recreateEvaluation,
 } from './resolvers/evaluation-resolver';
 import {
   getGourmet,
@@ -31,6 +34,7 @@ import {
   updateGourmet,
   deleteGourmet,
   getGourmetBookings,
+  recreateGourmet,
 } from './resolvers/gourmet-resolver';
 import {
   getKitchen,
@@ -38,6 +42,7 @@ import {
   createKitchen,
   updateKitchen,
   deleteKitchen,
+  recreateKitchen,
 } from './resolvers/kitchen-resolver';
 import {
   getWorkshop,
@@ -46,6 +51,7 @@ import {
   createWorkshop,
   updateWorkshop,
   deleteWorkshop,
+  recreateWorkshop,
 } from './resolvers/workshop-resolver';
 import { run } from './mailer';
 import { isEmpty, get } from './utils/utils';
@@ -160,6 +166,10 @@ export const graphqlHandler = (event, context, callback) => {
       resolve(deleteWorkshop);
       break;
     }
+    case 'recreateWorkshop': {
+      resolve(recreateWorkshop);
+      break;
+    }
     case 'createBooking': {
       resolve(createBooking, 'booking');
       break;
@@ -170,6 +180,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'deleteBooking': {
       resolve(deleteBooking);
+      break;
+    }
+    case 'recreateBooking': {
+      resolve(recreateBooking);
       break;
     }
     case 'createEvaluation': {
@@ -184,6 +198,10 @@ export const graphqlHandler = (event, context, callback) => {
       resolve(deleteEvaluation);
       break;
     }
+    case 'recreateEvaluation': {
+      resolve(recreateEvaluation);
+      break;
+    }
     case 'createGourmet': {
       resolve(createGourmet, 'gourmet');
       break;
@@ -194,6 +212,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'deleteGourmet': {
       resolve(deleteGourmet);
+      break;
+    }
+    case 'recreateGourmet': {
+      resolve(recreateGourmet);
       break;
     }
     case 'createCook': {
@@ -254,6 +276,10 @@ export const graphqlHandler = (event, context, callback) => {
       });
       break;
     }
+    case 'recreateCook': {
+      resolve(recreateCook);
+      break;
+    }
     case 'createKitchen': {
       resolve(createKitchen, 'kitchen');
       break;
@@ -264,6 +290,10 @@ export const graphqlHandler = (event, context, callback) => {
     }
     case 'deleteKitchen': {
       resolve(deleteKitchen);
+      break;
+    }
+    case 'recreateKitchen': {
+      resolve(recreateKitchen);
       break;
     }
     default: {

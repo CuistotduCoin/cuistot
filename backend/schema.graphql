@@ -8,6 +8,7 @@ interface Node {
 interface Timestamps {
   created_at: String!
   updated_at: String!
+  deleted_at: String
 }
 
 enum Gender {
@@ -119,6 +120,7 @@ type Workshop implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   name: String!
   price: Int!
   duration: Int!
@@ -136,6 +138,7 @@ type Booking implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   amount: Int!
   gourmet: Gourmet!
   workshop: Workshop!
@@ -145,6 +148,7 @@ type Evaluation implements Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   rating: Float!
   comment: String!
   cook: Cook!
@@ -155,6 +159,7 @@ type Gourmet implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   email: String!
   phone_number: String
   identity_id: String
@@ -176,6 +181,7 @@ type Cook implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   gourmet: Gourmet!
   description: String
   is_pro: Boolean!
@@ -196,6 +202,7 @@ type Kitchen implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   name: String!
   address: String!
   city: String!
@@ -230,6 +237,10 @@ input GourmetInput {
 }
 
 input BookingInput {
+  id: ID!
+}
+
+input EvaluationInput {
   id: ID!
 }
 
@@ -399,6 +410,7 @@ type EvaluationPayload {
 input Filter {
   ids: [ID!]
   q: String
+  has_been_deleted: Boolean
 }
 
 input WorkshopFilter {
@@ -406,6 +418,7 @@ input WorkshopFilter {
   q: String
   has_bookings: Boolean
   has_been_archived: Boolean
+  has_been_deleted: Boolean
 }
 
 input Order {
@@ -421,6 +434,8 @@ type Mutation {
     @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteWorkshop(workshop_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
+  recreateWorkshop(workshop: WorkshopInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Bookings
   createBooking(booking: CreateBookingInput!): BookingPayload!
@@ -429,6 +444,8 @@ type Mutation {
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteBooking(booking_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  recreateBooking(booking: BookingInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Evaluations
   createEvaluation(evaluation: CreateEvaluationInput!): EvaluationPayload!
@@ -437,6 +454,8 @@ type Mutation {
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteEvaluation(evaluation_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  recreateEvaluation(evaluation: EvaluationInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Gourmets
   createGourmet(gourmet: CreateGourmetInput!): GourmetPayload!
@@ -445,6 +464,8 @@ type Mutation {
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteGourmet(gourmet_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  recreateGourmet(gourmet: GourmetInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Cooks
   createCook(cook: CreateCookInput!): CookPayload!
@@ -455,6 +476,8 @@ type Mutation {
     @aws_auth(cognito_groups: ["Admin"])
   deleteCook(cook_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
+  recreateCook(cook: CookInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Kitchens
   createKitchen(kitchen: CreateKitchenInput!): KitchenPayload!
@@ -463,6 +486,8 @@ type Mutation {
     @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteKitchen(kitchen_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
+  recreateKitchen(kitchen: KitchenInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 }
 
 type Query {

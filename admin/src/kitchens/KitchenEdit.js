@@ -5,12 +5,24 @@ import {
   TextInput,
   DisabledInput,
   required,
+  CardActions,
+  ShowButton,
+  ListButton,
+  RefreshButton,
 } from 'react-admin';
 import { NameField } from '../fields';
 import { validateZipCode } from '../utils';
 
+const KitchenEditActions = ({ basePath, data }) => (
+  <CardActions>
+    <ShowButton basePath={basePath} record={data} />
+    <ListButton basePath={basePath} />
+    <RefreshButton />
+  </CardActions>
+);
+
 const KitchenEdit = props => (
-  <Edit title={<NameField />} {...props}>
+  <Edit actions={<KitchenEditActions />} title={<NameField />} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
       <TextInput source="name" />

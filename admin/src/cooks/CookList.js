@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import get from 'lodash.get';
 import {
   Datagrid,
   List,
@@ -12,6 +14,7 @@ import {
   EditButton,
   Filter,
   TextInput,
+  BooleanInput,
   downloadCSV,
 } from 'react-admin';
 import moment from 'moment';
@@ -39,35 +42,49 @@ const exporter = (cooks) => {
 const CookFilter = props => (
   <Filter {...props}>
     <TextInput label="pos.search" source="q" alwaysOn />
+    <BooleanInput source="has_been_deleted" label="pos.has_been_deleted" />
   </Filter>
 );
 
-const CookList = props => (
-  <List
-    {...props}
-    exporter={exporter}
-    filters={<CookFilter />}
-    sort={{ field: 'created_at', order: 'DESC' }}
-  >
-    <Responsive
-      medium={(
-        <Datagrid rowStyle={rowStyle}>
-          <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
-            <GourmetNameField />
-          </ReferenceField>
-          <BooleanField source="is_pro" />
-          <TextField source="business_name" />
-          <TextField source="siren" />
-          <EmailField source="pro_email" />
-          <TextField source="legal_first_name" />
-          <TextField source="legal_last_name" />
-          <DateField source="legal_birthdate" />
-          <ShowButton />
-          <EditButton />
-        </Datagrid>
-      )}
-    />
-  </List>
-);
+const CookList = ({ showDeletedOnes, ...props }) => {
+  const listProps = {};
+  if (showDeletedOnes) {
+    listProps.bulkActions = false;
+    listProps.bulkActionButtons = false;
+  }
 
-export default CookList;
+  return (
+    <List
+      {...props}
+      exporter={exporter}
+      filters={<CookFilter />}
+      sort={{ field: 'created_at', order: 'DESC' }}
+      {...listProps}
+    >
+      <Responsive
+        medium={(
+          <Datagrid rowStyle={rowStyle}>
+            <ReferenceField reference="gourmets" source="gourmet.id" linkType="show" sortable={false}>
+              <GourmetNameField />
+            </ReferenceField>
+            <BooleanField source="is_pro" />
+            <TextField source="business_name" />
+            <TextField source="siren" />
+            <EmailField source="pro_email" />
+            <TextField source="legal_first_name" />
+            <TextField source="legal_last_name" />
+            <DateField source="legal_birthdate" />
+            <ShowButton />
+            {!showDeletedOnes && <EditButton />}
+          </Datagrid>
+        )}
+      />
+    </List>
+  );
+};
+
+const mapStateToProps = state => ({
+  showDeletedOnes: get(state, 'form.filterForm.values.has_been_deleted'),
+});
+
+export default connect(mapStateToProps)(CookList);

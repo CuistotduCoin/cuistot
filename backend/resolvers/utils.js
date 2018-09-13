@@ -23,12 +23,13 @@ const JOINS_STRUCTURE = {
 
 const knex = require('knex')(connection[process.env.NODE_ENV]);
 
-async function findFirstWhere(tableName, value) {
+async function findFirstWhere(tableName, id, unscoped = false) {
   try {
-    const query = knex(tableName)
-      .whereNull('deleted_at')
-      .where('id', value)
-      .first();
+    let query = knex(tableName).where('id', id);
+    if (!unscoped) {
+      query = query.whereNull('deleted_at');
+    }
+    query = query.first();
     const result = await query;
     if (result) {
       return { data: result, message: 'success' };
@@ -163,7 +164,7 @@ async function getPage(tableName, args) {
     return { userError: 'limit cannot have a negative value' };
   }
 
-  const conditions = [`${tableName}.deleted_at IS NULL`];
+  const conditions = [];
   const joins = [];
 
   if (!isEmpty(get(args, 'filter.ids'))) {
@@ -201,6 +202,13 @@ async function getPage(tableName, args) {
       } else {
         conditions.push(`workshops.date >= ${knex.fn.now()}`);
       }
+    }
+
+    // has_been_deleted filter
+    if (args.filter && 'has_been_deleted' in args.filter && args.filter.has_been_deleted) {
+      conditions.push(`${tableName}.deleted_at IS NOT NULL`);
+    } else {
+      conditions.push(`${tableName}.deleted_at IS NULL`);
     }
   }
 
@@ -275,20 +283,14 @@ async function insertObject(tableName, args) {
     let query;
     let result = await objectExists(tableName, args);
     if (result) {
-      const updateArgs = {
-        ...args,
-        deleted_at: null,
-        created_at: result.created_at,
-        updated_at: knex.fn.now(),
-      };
-
-      if (tableName === 'cooks') {
-        updateArgs.confirmed = false;
-      }
-
       query = knex(tableName)
         .where('id', result.id)
-        .update(updateArgs)
+        .update({
+          ...args,
+          deleted_at: null,
+          created_at: result.created_at,
+          updated_at: knex.fn.now(),
+        })
         .returning('*');
     } else {
       const createArgs = cleanKnexQueryArgs(args);
@@ -321,7 +323,7 @@ async function updateObject(tableName, args) {
     if (result.length) {
       return { data: result[0], message: 'success' };
     }
-    return { userError: 'could not be updated (you should check if the resource exists)' };
+    return { userError: 'could not be updated (you should check the resource exists)' };
   } catch (err) {
     console.error(err);
     return { userError: formatKnexQueryError(err) };
@@ -330,10 +332,16 @@ async function updateObject(tableName, args) {
 
 async function deleteObject(tableName, value) {
   try {
+    const updateArgs = { deleted_at: knex.fn.now() };
+
+    if (tableName === 'cooks') {
+      updateArgs.confirmed = false;
+    }
+
     const query = knex(tableName)
       .whereNull('deleted_at')
       .where('id', value)
-      .update({ deleted_at: knex.fn.now() });
+      .update(updateArgs);
     const result = await query;
     if (result > 0) {
       return { message: 'success' };
@@ -381,12 +389,30 @@ async function performPagination(tableName, args) {
   return result;
 }
 
+async function recreateObject(tableName, id) {
+  try {
+    const query = knex(tableName)
+      .whereNotNull('deleted_at')
+      .where('id', id)
+      .update({ deleted_at: null });
+    const result = await query;
+    if (result > 0) {
+      return { message: 'success' };
+    }
+    return { userError: 'could not be recreated' };
+  } catch (err) {
+    console.error(err);
+    return { userError: formatKnexQueryError(err) };
+  }
+}
+
 export {
   findFirstWhere,
   findWhere,
   insertObject,
   deleteObject,
   updateObject,
+  recreateObject,
   performOperation,
   performPagination,
 };

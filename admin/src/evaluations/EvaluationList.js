@@ -1,11 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import get from 'lodash.get';
 import {
   Datagrid,
   List,
   Responsive,
   RichTextField,
   ReferenceField,
+  ShowButton,
   EditButton,
+  Filter,
+  BooleanInput,
   downloadCSV,
 } from 'react-admin';
 import { CookNameField, GourmetNameField } from '../fields';
@@ -27,28 +32,49 @@ const exporter = (evaluations) => {
   downloadCSV(csv, 'evaluations');
 };
 
-const EvaluationList = props => (
-  <List
-    {...props}
-    exporter={exporter}
-    sort={{ field: 'created_at', order: 'DESC' }}
-  >
-    <Responsive
-      medium={(
-        <Datagrid>
-          <ReferenceField reference="cooks" source="cook.id" linkType="show" sortable={false}>
-            <CookNameField />
-          </ReferenceField>
-          <ReferenceField reference="gourmets" source="author.id" linkType="show" sortable={false}>
-            <GourmetNameField />
-          </ReferenceField>
-          <StarRatingField />
-          <RichTextField source="comment" />
-          <EditButton />
-        </Datagrid>
-      )}
-    />
-  </List>
+const EvaluationFilter = props => (
+  <Filter {...props}>
+    <BooleanInput source="has_been_deleted" label="pos.has_been_deleted" />
+  </Filter>
 );
 
-export default EvaluationList;
+const EvaluationList = ({ showDeletedOnes, ...props }) => {
+  const listProps = {};
+  if (showDeletedOnes) {
+    listProps.bulkActions = false;
+    listProps.bulkActionButtons = false;
+  }
+
+  return (
+    <List
+      {...props}
+      exporter={exporter}
+      filters={<EvaluationFilter />}
+      sort={{ field: 'created_at', order: 'DESC' }}
+      {...listProps}
+    >
+      <Responsive
+        medium={(
+          <Datagrid>
+            <ReferenceField reference="cooks" source="cook.id" linkType="show" sortable={false}>
+              <CookNameField />
+            </ReferenceField>
+            <ReferenceField reference="gourmets" source="author.id" linkType="show" sortable={false}>
+              <GourmetNameField />
+            </ReferenceField>
+            <StarRatingField />
+            <RichTextField source="comment" />
+            <ShowButton />
+            {!showDeletedOnes && <EditButton />}
+          </Datagrid>
+        )}
+      />
+    </List>
+  );
+};
+
+const mapStateToProps = state => ({
+  showDeletedOnes: get(state, 'form.filterForm.values.has_been_deleted'),
+});
+
+export default connect(mapStateToProps)(EvaluationList);
