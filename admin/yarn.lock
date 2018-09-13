@@ -3455,6 +3455,11 @@ graphql-anywhere@^4.1.14:
   dependencies:
     apollo-utilities "^1.0.16"
 
+"graphql-ast-types@github:Kmaschta/graphql-ast-types#master":
+  version "1.0.2"
+  uid "412a17d44c4c9e05dc93195263c96e6c96f5db85"
+  resolved "https://codeload.github.com/Kmaschta/graphql-ast-types/tar.gz/412a17d44c4c9e05dc93195263c96e6c96f5db85"
+
 graphql-tag@^2.0.0, graphql-tag@^2.4.2, graphql-tag@^2.6.1:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.9.2.tgz#2f60a5a981375f430bf1e6e95992427dc18af686"
@@ -6259,18 +6264,19 @@ ra-data-fakerest@^2.0.0:
   dependencies:
     fakerest "~2.1.0"
 
-ra-data-graphql-simple@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.2.4.tgz#222531ce577af50a6e5c94fbf10175d7121ff490"
+ra-data-graphql-simple@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-2.3.1.tgz#900d21660fde13600a02509bded1bdf66ebe493b"
   dependencies:
+    graphql-ast-types "github:Kmaschta/graphql-ast-types#master"
     graphql-tag "^2.6.1"
     lodash "~4.17.5"
     pluralize "~7.0.0"
-    ra-data-graphql "^2.2.4"
+    ra-data-graphql "^2.3.1"
 
-ra-data-graphql@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.2.4.tgz#ebe76e4fef7c6c1fc5b6d834084c508a9db2cd02"
+ra-data-graphql@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.3.1.tgz#ff0e874d883508c02b401e318a764b8384cc1872"
   dependencies:
     apollo-client "^2.2.8"
     apollo-client-preset "^1.0.6"
