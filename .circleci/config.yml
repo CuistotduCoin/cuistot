@@ -5,7 +5,7 @@ jobs:
       - image: circleci/node:8.10
     steps:
       - checkout
-      - run: cd cuistot/admin
+      - run: cd admin
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
