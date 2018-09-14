@@ -5,17 +5,20 @@ frameworkVersion: ">=1.21.0 <2.0.0"
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${env:NODE_ENV}
+  stage: ${opt:stage,'prod'}
   region: ${env:AWS_REGION_IRELAND}
-  profile: default
 
 plugins:
   - serverless-appsync-plugin
   - serverless-dotenv-plugin
   - serverless-offline
   - serverless-webpack
+  - serverless-stage-manager
 
 custom:
+  stages:
+    - dev
+    - prod
   webpack:
     includeModules:
       forceInclude:

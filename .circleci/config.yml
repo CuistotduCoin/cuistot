@@ -84,7 +84,7 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
-            yarn deploy
+            yarn deploy-prod
 
 workflows:
   version: 2

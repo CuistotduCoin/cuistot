@@ -7,12 +7,17 @@
     "url": "git@github.com:CuistotduCoin/cuistot.git"
   },
   "scripts": {
-    "migrate": "env-cmd .env node_modules/.bin/knex migrate:latest",
-    "rollback": "env-cmd .env node_modules/.bin/knex migrate:rollback",
-    "seed": "env-cmd .env node_modules/.bin/knex seed:run",
-    "setup-dev-db": "env-cmd .env.development ./scripts/setup.sh",
-    "start": "env-cmd .env serverless offline start",
-    "deploy": "env-cmd .env serverless deploy --force"
+    "migrate-prod": "env-cmd .env.prod node_modules/.bin/knex migrate:latest",
+    "rollback-prod": "env-cmd .env.prod node_modules/.bin/knex migrate:rollback",
+    "seed-prod": "env-cmd .env.prod node_modules/.bin/knex seed:run",
+    "start-prod": "env-cmd .env.prod serverless offline start -s prod",
+    "deploy-prod": "env-cmd .env.prod serverless deploy --force -s prod",
+    "setup-db-dev": "env-cmd .env.dev ./scripts/setup.sh",
+    "migrate-dev": "env-cmd .env.dev node_modules/.bin/knex migrate:latest",
+    "rollback-dev": "env-cmd .env.dev node_modules/.bin/knex migrate:rollback",
+    "seed-dev": "env-cmd .env.dev node_modules/.bin/knex seed:run",
+    "start-dev": "env-cmd .env.dev serverless -s dev offline start",
+    "deploy-dev": "env-cmv .env.dev serverless deploy -s dev --force"
   },
   "dependencies": {
     "async": "^2.6.1",
@@ -46,6 +51,7 @@
     "serverless-appsync-plugin": "^1.0.1",
     "serverless-dotenv-plugin": "^1.1.3",
     "serverless-offline": "^3.25.6",
+    "serverless-stage-manager": "^1.0.5",
     "serverless-webpack": "^5.2.0",
     "uuid": "^3.3.2",
     "webpack": "^4.12.0",
