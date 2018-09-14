@@ -55,7 +55,7 @@ custom:
     AWS_IDENTITY_POOL_ID: ${ssm:identity-pool-id}
     AWS_BUCKET: ${ssm:bucket}
     AWS_ACCOUNT_ID: ${ssm:account-id}
-    SLS_DEBUG: *
+    SLS_DEBUG: "*"
   accountId: ${env:AWS_ACCOUNT_ID}
   appSync:
     name: cuistot-appsync-${self:provider.stage}
