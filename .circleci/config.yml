@@ -24,8 +24,6 @@ jobs:
             sudo python2.7 get-pip.py
             sudo apt-get install python-pip libpython-dev groff
             sudo pip install awscli
-            aws configure list
-            aws s3 ls
       - run:
           name: Build admin
           command: |
