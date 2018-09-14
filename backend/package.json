@@ -26,7 +26,8 @@
     "mjml-utils": "^2.2.1",
     "node-fetch": "^2.1.2",
     "nodemailer": "^4.6.8",
-    "pg": "^7.4.3"
+    "pg": "^7.4.3",
+    "env-cmd": "^8.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -35,7 +36,6 @@
     "body-parser": "^1.18.3",
     "copy-webpack-plugin": "^4.5.2",
     "cors": "2.8.4",
-    "env-cmd": "^8.0.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
