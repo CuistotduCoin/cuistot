@@ -27,7 +27,7 @@ custom:
         - aws-sdk
     packager: 'yarn' # Packager that will be used to package your external modules
   dotenv:
-    path: .env
+    path: .env.${self:provider.stage}
   accountId: ${env:AWS_ACCOUNT_ID}
   appSync:
     name: cuistot-appsync-${self:provider.stage}

@@ -7,8 +7,5 @@ yarn-error.log
 
 .serverless
 .env
-.env.dev
-.env.prod
-.env.local
 
 queries/*
