@@ -24,7 +24,9 @@ jobs:
             sudo python2.7 get-pip.py
             sudo apt-get install python-pip libpython-dev groff
             sudo pip install awscli
-            aws help
+            echo $AWS_ACCESS_KEY_ID
+            echo $AWS_DEFAULT_REGION
+            echo $AWS_SECRET_ACCESS_KEY
       - run:
           name: Build admin
           command: |
