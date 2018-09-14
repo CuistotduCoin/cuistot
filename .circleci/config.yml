@@ -68,24 +68,24 @@ jobs:
       - image: circleci/node:8.10
     steps:
       - checkout
-      # - restore_cache:
-      #     key: dependency-cache-{{ checksum "backend/yarn.lock" }}
-      # - run:
-      #     name: Install dependencies
-      #     command: |
-      #       cd backend
-      #       sudo npm i -g serverless
-      #       yarn install --production=false
-      # - save_cache:
-      #     key: dependency-cache-{{ checksum "backend/yarn.lock" }}
-      #     paths:
-      #       - ./node_modules
+      - restore_cache:
+          key: dependency-cache-{{ checksum "backend/yarn.lock" }}
+      - run:
+          name: Install dependencies
+          command: |
+            cd backend
+            sudo npm i -g serverless
+            yarn install --production=false
+      - save_cache:
+          key: dependency-cache-{{ checksum "backend/yarn.lock" }}
+          paths:
+            - ./node_modules
       - run:
           name: Deploy backend
           command: |
             cd backend
-            printenv
-            # yarn deploy-prod
+            printenv >> .env.production
+            yarn deploy-prod
 
 workflows:
   version: 2
