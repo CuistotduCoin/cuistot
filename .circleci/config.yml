@@ -20,10 +20,10 @@ jobs:
           name: Install awscli
           working_directory: /
           command: |
-            sudo apt-get install python3.4-dev python3-setuptools
-            sudo easy_install3 pip
-            pip3 install awscli --upgrade --user
-            export PATH=/usr/bin/python3/bin:$PATH
+            sudo apt-get install python2.7
+            sudo python2.7 get-pip.py
+            sudo pip install awscli
+            aws help
       - run:
           name: Build admin
           command: |
