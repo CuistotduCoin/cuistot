@@ -84,7 +84,6 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
-            printenv >> .env.production
             yarn deploy-prod
 
 workflows:
