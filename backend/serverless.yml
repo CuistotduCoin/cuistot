@@ -10,7 +10,6 @@ provider:
 
 plugins:
   - serverless-appsync-plugin
-  - serverless-dotenv-plugin
   - serverless-offline
   - serverless-webpack
   - serverless-stage-manager
