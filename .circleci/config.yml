@@ -27,6 +27,7 @@ jobs:
             echo $AWS_ACCESS_KEY_ID
             echo $AWS_DEFAULT_REGION
             echo $AWS_SECRET_ACCESS_KEY
+            aws s3 ls
       - run:
           name: Build admin
           command: |
