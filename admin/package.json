@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "7.0.0-beta.55",
     "apollo-cache-inmemory": "^1.2.8",
     "apollo-link": "^1.2.2",
     "apollo-link-error": "^1.1.0",
@@ -35,8 +36,7 @@
     "react-scripts": "1.1.4",
     "recompose": "~0.26.0",
     "redux-form": "~7.3.0",
-    "redux-saga": "~0.16.0",
-    "@babel/runtime": "7.0.0-beta.55"
+    "redux-saga": "~0.16.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,13 +44,15 @@
     "eject": "react-scripts eject",
     "deploy-build": "aws s3 sync build/ s3://admin.cuistotducoin.com",
     "deploy": "yarn build && yarn deploy-build",
-    "lint": "./node_modules/.bin/eslint ."
+    "lint": "./node_modules/.bin/eslint .",
+    "analyze": "source-map-explorer build/static/js/main.*"
   },
   "devDependencies": {
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.1"
+    "eslint-plugin-react": "^7.11.1",
+    "source-map-explorer": "^1.6.0"
   }
 }
