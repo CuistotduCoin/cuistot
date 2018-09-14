@@ -5,7 +5,7 @@ frameworkVersion: ">=1.21.0 <2.0.0"
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${opt:stage,'prod'}
+  stage: ${opt:stage,'development'}
   region: ${env:AWS_REGION_IRELAND}
 
 plugins:
@@ -17,8 +17,8 @@ plugins:
 
 custom:
   stages:
-    - dev
-    - prod
+    - development
+    - production
   webpack:
     includeModules:
       forceInclude:
