@@ -63,28 +63,29 @@ jobs:
             cd frontend
             yarn deploy
 
-  deploy-back:
+  deploy-back-prod:
     docker:
       - image: circleci/node:8.10
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "backend/yarn.lock" }}
-      - run:
-          name: Install dependencies
-          command: |
-            cd backend
-            sudo npm i -g serverless
-            yarn install --production=false
-      - save_cache:
-          key: dependency-cache-{{ checksum "backend/yarn.lock" }}
-          paths:
-            - ./node_modules
+      # - restore_cache:
+      #     key: dependency-cache-{{ checksum "backend/yarn.lock" }}
+      # - run:
+      #     name: Install dependencies
+      #     command: |
+      #       cd backend
+      #       sudo npm i -g serverless
+      #       yarn install --production=false
+      # - save_cache:
+      #     key: dependency-cache-{{ checksum "backend/yarn.lock" }}
+      #     paths:
+      #       - ./node_modules
       - run:
           name: Deploy backend
           command: |
             cd backend
-            yarn deploy-prod
+            printenv
+            # yarn deploy-prod
 
 workflows:
   version: 2
@@ -100,7 +101,7 @@ workflows:
             branches:
               only:
                 - master
-      - deploy-back:
+      - deploy-back-prod:
           filters:
             branches:
               only:
