@@ -75,7 +75,7 @@ jobs:
           command: |
             cd backend
             sudo npm i -g serverless
-            yarn install
+            yarn install --production=false
       - save_cache:
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
           paths:
