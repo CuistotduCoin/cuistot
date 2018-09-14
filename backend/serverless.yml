@@ -7,6 +7,18 @@ provider:
   runtime: nodejs8.10
   stage: ${opt:stage,'development'}
   region: eu-west-1
+  environment:
+    NODE_ENV: ${self:provider.stage}
+    DATABASE_HOST: ${self:custom.databaseHost.${self:provider.stage}}
+    DATABASE_PORT: ${self:custom.databasePort.${self:provider.stage}}
+    DATABASE_NAME: ${self:custom.databaseName.${self:provider.stage}}
+    DATABASE_USERNAME: ${self:custom.databaseUsername.${self:provider.stage}}
+    DATABASE_PASSWORD: ${self:custom.databasePassword.${self:provider.stage}}
+    AWS_USERPOOL_ID: ${ssm:userpool-id}
+    AWS_IDENTITY_POOL_ID: ${ssm:identity-pool-id}
+    AWS_BUCKET: ${ssm:bucket}
+    AWS_ACCOUNT_ID: ${ssm:account-id}
+    SLS_DEBUG: "*"
 
 plugins:
   - serverless-appsync-plugin
@@ -43,18 +55,6 @@ custom:
   databasePassword:
     development: ""
     production: ${ssm:${self:provider.stage}-database-password}
-  environment:
-    NODE_ENV: ${self:provider.stage}
-    DATABASE_HOST: ${self:custom.databaseHost.${self:provider.stage}}
-    DATABASE_PORT: ${self:custom.databasePort.${self:provider.stage}}
-    DATABASE_NAME: ${self:custom.databaseName.${self:provider.stage}}
-    DATABASE_USERNAME: ${self:custom.databaseUsername.${self:provider.stage}}
-    DATABASE_PASSWORD: ${self:custom.databasePassword.${self:provider.stage}}
-    AWS_USERPOOL_ID: ${ssm:userpool-id}
-    AWS_IDENTITY_POOL_ID: ${ssm:identity-pool-id}
-    AWS_BUCKET: ${ssm:bucket}
-    AWS_ACCOUNT_ID: ${ssm:account-id}
-    SLS_DEBUG: "*"
   accountId: ${env:AWS_ACCOUNT_ID}
   appSync:
     name: cuistot-appsync-${self:provider.stage}
