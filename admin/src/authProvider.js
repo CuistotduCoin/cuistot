@@ -19,16 +19,15 @@ export default (type, params) => {
         return Promise.reject();
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         return Promise.reject();
       });
   }
   if (type === AUTH_LOGOUT) {
-    console.log('logout');
     return Auth.signOut()
       .then(() => Promise.resolve())
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         return Promise.reject();
       });
   }
@@ -43,8 +42,8 @@ export default (type, params) => {
         }
         return Promise.reject();
       })
-      .catch(() => {
-        console.log('Not authenticated');
+      .catch((err) => {
+        console.error(err);
         return Promise.reject();
       });
   }

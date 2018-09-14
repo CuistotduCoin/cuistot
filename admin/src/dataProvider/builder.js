@@ -9,10 +9,10 @@ import buildGraphQLProvider from '.';
 export default () => {
   const onErrorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
-      graphQLErrors.map(({ message, locations, path }) => console.log(`[GraphQL error] : Message: ${message}, Location: ${locations}, Path: ${path}`));
+      graphQLErrors.map(({ message, locations, path }) => console.error(`[GraphQL error] : Message: ${message}, Location: ${locations}, Path: ${path}`));
     }
     if (networkError) {
-      console.log(`[Network error]: ${networkError}`);
+      console.error(`[Network error]: ${networkError}`);
     }
   });
 
@@ -30,7 +30,7 @@ export default () => {
                 location.reload(); // eslint-disable-line
               })
               .catch((err) => {
-                console.log(err);
+                console.error(err);
               });
           })
       ),

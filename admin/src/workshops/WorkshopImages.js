@@ -49,7 +49,7 @@ class WorkshopImages extends React.Component {
           }, {});
           this.setState({ urls });
         })
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
     }
   }
 
@@ -86,15 +86,14 @@ class WorkshopImages extends React.Component {
                         <DeleteIcon
                           onClick={() => {
                             Storage.remove(`workshops/${record.id}/${this.state.urls[url]}`, { identityId: record.cook.gourmet.identity_id })
-                              .then((result) => {
-                                console.log(result);
+                              .then(() => {
                                 this.setState((prevState) => {
                                   const newState = Object.assign({}, prevState);
                                   delete newState.urls[url];
                                   return newState;
                                 });
                               })
-                              .catch(err => console.log(err));
+                              .catch(err => console.error(err));
                           }}
                         />
                       </IconButton>

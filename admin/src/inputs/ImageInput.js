@@ -43,13 +43,12 @@ class ImageInput extends React.Component {
       const identityId = this.props.identityId(record);
       if (identityId) {
         Storage.put(`${path(record)}/${sanitizeFilename(file.name)}`, file, { identityId })
-          .then((result) => {
-            console.log(result);
+          .then(() => {
             this.setState({ message: 'Image uploaded... auto refresh in a few seconds', success: true });
             setTimeout(refreshView, 5000); // force the refresh in order to get the new image
           })
           .catch((err) => {
-            console.log(err);
+            console.error(err);
             this.setState({ message: 'Image upload has failed', success: false });
           });
       } else {
