@@ -15,6 +15,9 @@ plugins:
   - serverless-webpack
   - serverless-stage-manager
 
+package:
+  individually: true
+
 custom:
   stages:
     - development
@@ -317,19 +320,19 @@ custom:
 
 functions:
   graphql:
-    handler: handler.graphqlHandler
+    handler: handlers/graphql.handler
     role: GraphqlLambdaRole
   postConfirmation:
-    handler: handler.postConfirmationHandler
+    handler: handlers/postConfirmation.handler
     role: PostConfirmationLambdaRole
   sendEmail:
-    handler: handler.sendEmail
+    handler: handlers/sendEmail.handler
     role: SendEmailLambdaRole
   handleBucketPutEvent:
-    handler: handler.handleBucketPutEvent
+    handler: handlers/handleBucketPutEvent.handler
     role: HandleBucketPutEventLambdaRole
   handleBucketDeleteEvent:
-    handler: handler.handleBucketDeleteEvent
+    handler: handlers/handleBucketDeleteEvent.handler
     role: HandleBucketDeleteEventLambdaRole
 
 resources:

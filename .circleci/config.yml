@@ -95,7 +95,6 @@ workflows:
             branches:
               only:
                 - master
-                - feature/setup_deployment # to remove
       - deploy-front:
           filters:
             branches:
@@ -105,4 +104,5 @@ workflows:
           filters:
             branches:
               only:
+                - feature/setup_deployment # to remove
                 - master
