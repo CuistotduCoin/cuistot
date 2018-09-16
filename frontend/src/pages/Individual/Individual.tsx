@@ -90,34 +90,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const workshops = [
       {
         availableSeat: 6,
-        date: "samedi 15 septembre, 10h-13h",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/anaelle-sarrasin.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/anaelle.jpg",
-        name: "À la découverte du sarrasin",
-        nameCook: "Anaelle",
-        price: 25,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/U3mOaj"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 15 septembre, 10h30-12h",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/anne-chocolat.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
-        name: "Chocolat anti-stress",
-        nameCook: "Anne",
-        price: 25,
-        spot: "Comme les Grands, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/KzH67r"
-      },
-      {
-        availableSeat: 6,
         date: "vendredi 21 septembre, 17h30-20h30",
         duration: 3,
         image:
@@ -295,7 +267,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         price: 30,
         spot: "Schmidt, Brest",
         totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/Z5oZI7"
+        typeform: "https://cuistotducoin.typeform.com/to/ZfYA1b"
       },
       {
         availableSeat: 6,
