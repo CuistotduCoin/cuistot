@@ -1,5 +1,3 @@
-require('dotenv').config(); // eslint-disable-line
-
 const baseConfig = {
   client: 'postgresql',
   connection: {
@@ -18,6 +16,5 @@ const baseConfig = {
 
 module.exports = {
   development: { ...baseConfig },
-  staging: { ...baseConfig },
   production: { ...baseConfig },
 };

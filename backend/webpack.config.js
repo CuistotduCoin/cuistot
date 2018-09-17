@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: slsw.lib.entries,
-  mode: process.env.NODE_ENV,
+  mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
   target: 'node',
   node: { __dirname: false }, // necessary in order to use absolute path with __dirname
   // we use webpack-node-externals to excludes all node deps.
