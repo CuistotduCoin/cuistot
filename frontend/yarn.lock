@@ -1822,6 +1822,16 @@ aws-appsync@^1.3.4:
     url "^0.11.0"
     uuid "3.x"
 
+aws-param-env@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/aws-param-env/-/aws-param-env-1.2.0.tgz#45834b50601b12a620ced8d703f1dd47729cf675"
+  dependencies:
+    aws-param-store "^1.1.0"
+
+aws-param-store@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/aws-param-store/-/aws-param-store-1.1.0.tgz#c1e8098bde8d6144698f0920829eceda0e4fedac"
+
 aws-sdk@2.198.0:
   version "2.198.0"
   resolved "http://registry.npmjs.org/aws-sdk/-/aws-sdk-2.198.0.tgz#2245311337ddc844cc34c13f3fcf3b7ea843f434"
@@ -4443,7 +4453,7 @@ domutils@1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
-dotenv-expand@^4.0.1, dotenv-expand@^4.2.0:
+dotenv-expand@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-4.2.0.tgz#def1f1ca5d6059d24a766e587942c21106ce1275"
 
@@ -4453,7 +4463,7 @@ dotenv-webpack@^1.5.7:
   dependencies:
     dotenv "^5.0.1"
 
-dotenv@4.0.0, dotenv@^4.0.0:
+dotenv@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
 
@@ -10397,14 +10407,6 @@ serverless-domain-manager@^2.6.0:
     aws-sdk "^2.177.0"
     chalk "^2.0.1"
 
-serverless-dotenv-plugin@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/serverless-dotenv-plugin/-/serverless-dotenv-plugin-1.2.0.tgz#2981a9626695bff8a2d1ce65b9b774b7d0d26788"
-  dependencies:
-    chalk "^2.1.0"
-    dotenv "^4.0.0"
-    dotenv-expand "^4.0.1"
-
 serverless-finch@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/serverless-finch/-/serverless-finch-2.3.2.tgz#1d9209ef21451baefb4cd5c4b21f24fc9e41e833"
@@ -10446,6 +10448,10 @@ serverless-sentry@^1.2.0:
     semver "^5.5.0"
     superagent "^3.8.3"
     uuid "^3.3.2"
+
+serverless-stage-manager@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/serverless-stage-manager/-/serverless-stage-manager-1.0.5.tgz#28f9d8c1742d95044564e81ef06a19113f1e064d"
 
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"

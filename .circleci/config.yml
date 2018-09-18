@@ -56,12 +56,12 @@ jobs:
           name: Build frontend
           command: |
             cd frontend
-            yarn build
+            yarn build:prod
       - run:
           name: Deploy frontend
           command: |
             cd frontend
-            yarn deploy
+            yarn deploy:prod
 
   deploy-back-prod:
     docker:
@@ -84,7 +84,7 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
-            yarn deploy-prod
+            yarn deploy:prod
 
 workflows:
   version: 2

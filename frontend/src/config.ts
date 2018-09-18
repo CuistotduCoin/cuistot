@@ -3,12 +3,9 @@ const runtimeConfig =
     ? {
         AWS_APP_CLIENT_ID: window.env.AWS_APP_CLIENT_ID,
         AWS_REGION_IRELAND: window.env.AWS_REGION_IRELAND,
-        AWS_SHORT_DOMAIN: window.env.AWS_SHORT_DOMAIN,
         AWS_USERPOOL_ID: window.env.AWS_USERPOOL_ID,
         AWS_IDENTITY_POOL_ID: window.env.AWS_IDENTITY_POOL_ID,
-        AWS_BUCKET: window.env.AWS_BUCKET,
-        STRIPE_API: window.env.STRIPE_API,
-        STRIPE_API_KEY: window.env.STRIPE_API_KEY,
+        AWS_STORE_BUCKET: window.env.AWS_STORE_BUCKET,
         GRAPHQL_API_URL: window.env.GRAPHQL_API_URL,
         GUEST_USERNAME: window.env.GUEST_USERNAME,
         GUEST_PASSWORD: window.env.GUEST_PASSWORD,
@@ -20,12 +17,9 @@ const runtimeConfig =
     : {
         AWS_APP_CLIENT_ID: process.env.AWS_APP_CLIENT_ID,
         AWS_REGION_IRELAND: process.env.AWS_REGION_IRELAND,
-        AWS_SHORT_DOMAIN: process.env.AWS_SHORT_DOMAIN,
         AWS_USERPOOL_ID: process.env.AWS_USERPOOL_ID,
         AWS_IDENTITY_POOL_ID: process.env.AWS_IDENTITY_POOL_ID,
-        AWS_BUCKET: process.env.AWS_BUCKET,
-        STRIPE_API: process.env.STRIPE_API,
-        STRIPE_API_KEY: process.env.STRIPE_API_KEY,
+        AWS_STORE_BUCKET: process.env.AWS_STORE_BUCKET,
         GRAPHQL_API_URL: process.env.GRAPHQL_API_URL,
         GUEST_USERNAME: process.env.GUEST_USERNAME,
         GUEST_PASSWORD: process.env.GUEST_PASSWORD,
@@ -44,7 +38,7 @@ const awsExports = {
     identityPoolId: runtimeConfig.AWS_IDENTITY_POOL_ID
   },
   Storage: {
-    bucket: runtimeConfig.AWS_BUCKET,
+    bucket: runtimeConfig.AWS_STORE_BUCKET,
     region: runtimeConfig.AWS_REGION_IRELAND
   },
   aws_appsync_graphqlEndpoint: runtimeConfig.GRAPHQL_API_URL,

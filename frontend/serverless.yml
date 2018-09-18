@@ -1,36 +1,54 @@
 service: serverless-ssr
 
 plugins:
-  - serverless-dotenv-plugin
   - serverless-offline
   - serverless-apigw-binary
   - serverless-domain-manager
   - serverless-sentry
+  - serverless-stage-manager
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
 custom:
-  dotenv:
-    path: .env
+  stages:
+    - development
+    - staging
+    - production
   apigwBinary:
     types:
       - '*/*'
   customDomain:
-    domainName: ${env:AWS_DOMAIN}
+    domainName: ${self:provider.environment.AWS_DOMAIN}
     createRoute53Record: true
-    certificateName: ${env:AWS_DOMAIN}
+    certificateName: ${self:provider.environment.AWS_DOMAIN}
   sentry:
-    dsn: ${env:SENTRY_DSN}
+    dsn: ${self:provider.environment.SENTRY_DSN}
     organization: cuistotducoin
     project: front
 
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: dev
-  region: ${env:AWS_REGION_PARIS}
-  deploymentBucket: ${env:AWS_S3_BUCKET}
+  stage: ${opt:stage,'development'}
+  region: eu-west-3
+  deploymentBucket: ${self:provider.environment.AWS_DEPLOYMENT_BUCKET}
   endpointType: regional
+  environment:
+    AWS_DOMAIN: ${ssm:/cuistot/front/${self:provider.stage}/domain~true}
+    AWS_REGION_IRELAND: eu-west-1
+    AWS_DEPLOYMENT_BUCKET: ${ssm:/cuistot/front/${self:provider.stage}/deployment-bucket~true}
+    AWS_USERPOOL_ID: ${ssm:/cuistot/${self:provider.stage}/userpool-id~true}
+    AWS_IDENTITY_POOL_ID: ${ssm:/cuistot/${self:provider.stage}/identity-pool-id~true}
+    AWS_STORE_BUCKET: ${ssm:/cuistot/${self:provider.stage}/store-bucket~true}
+    AWS_APP_CLIENT_ID: ${ssm:/cuistot/front/${self:provider.stage}/app-client-id~true}
+    GRAPHQL_API_URL: ${ssm:/cuistot/front/${self:provider.stage}/graphql-api-url~true}
+    GUEST_USERNAME: ${ssm:/cuistot/front/guest-username~true}
+    GUEST_PASSWORD: ${ssm:/cuistot/front/guest-password~true}
+    ALGOLIASEARCH_SEARCH_APP_ID: ${ssm:/cuistot/front/algolia-search-app-id~true}
+    ALGOLIASEARCH_SEARCH_KEY: ${ssm:/cuistot/front/algolia-search-key~true}
+    ALGOLIASEARCH_PLACES_APP_ID: ${ssm:/cuistot/front/algolia-places-app-id~true}
+    ALGOLIASEARCH_PLACES_KEY: ${ssm:/cuistot/front/algolia-places-key~true}
+    SENTRY_DSN: ${ssm:/cuistot/front/sentry-dsn~true}
 
 package:
   exclude:
