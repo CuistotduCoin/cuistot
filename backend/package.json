@@ -7,16 +7,14 @@
     "url": "git@github.com:CuistotduCoin/cuistot.git"
   },
   "scripts": {
-    "migrate-prod": "NODE_ENV=production node knexenv && env-cmd .env node_modules/.bin/knex migrate:latest",
-    "migrate-dev": "NODE_ENV=development node knexenv && env-cmd .env node_modules/.bin/knex migrate:latest",
-    "rollback-prod": "NODE_ENV=production node knexenv && env-cmd .env node_modules/.bin/knex migrate:rollback",
-    "rollback-dev": "NODE_ENV=development node knexenv && env-cmd .env node_modules/.bin/knex migrate:rollback",
-    "seed-prod": "NODE_ENV=production node knexenv && env-cmd .env node_modules/.bin/knex seed:run",
-    "seed-dev": "NODE_ENV=development node knexenv && env-cmd .env node_modules/.bin/knex seed:run",
-    "start-prod": "serverless offline start -s production",
-    "start-dev": "serverless offline start -s development",
-    "deploy-prod": "serverless deploy --force -s production",
-    "deploy-dev": "serverless deploy --force -s development"
+    "migrate:prod": "NODE_ENV=production node knexenv && env-cmd .env node_modules/.bin/knex migrate:latest",
+    "migrate:dev": "NODE_ENV=development node knexenv && env-cmd .env node_modules/.bin/knex migrate:latest",
+    "rollback:prod": "NODE_ENV=production node knexenv && env-cmd .env node_modules/.bin/knex migrate:rollback",
+    "rollback:dev": "NODE_ENV=development node knexenv && env-cmd .env node_modules/.bin/knex migrate:rollback",
+    "seed:prod": "NODE_ENV=production node knexenv && env-cmd .env node_modules/.bin/knex seed:run",
+    "seed:dev": "NODE_ENV=development node knexenv && env-cmd .env node_modules/.bin/knex seed:run",
+    "deploy:prod": "serverless deploy --force -s production",
+    "deploy:dev": "serverless deploy --force -s development"
   },
   "dependencies": {
     "async": "^2.6.1",
@@ -48,7 +46,6 @@
     "jest": "^23.1.0",
     "jsonfile": "^4.0.0",
     "serverless-appsync-plugin": "^1.0.1",
-    "serverless-offline": "^3.25.6",
     "serverless-stage-manager": "^1.0.5",
     "serverless-webpack": "^5.2.0",
     "uuid": "^3.3.2",

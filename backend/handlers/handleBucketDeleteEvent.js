@@ -17,7 +17,7 @@ export const handler = (event, context) => {
 
     // Deletes the original file from the bucket
     s3.deleteObjects({
-      Bucket: process.env.AWS_BUCKET,
+      Bucket: process.env.AWS_STORE_BUCKET,
       Delete: {
         Objects: [{ Key: originalKey }],
         Quiet: false,

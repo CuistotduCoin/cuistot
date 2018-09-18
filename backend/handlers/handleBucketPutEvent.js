@@ -50,12 +50,12 @@ export const handler = (event, context) => {
         .catch(findErr => context.fail(findErr));
     };
 
-    s3.headObject({ Bucket: process.env.AWS_BUCKET, Key: key }, (err, data) => {
+    s3.headObject({ Bucket: process.env.AWS_STORE_BUCKET, Key: key }, (err, data) => {
       if (data.Metadata && data.Metadata.optimized) {
         console.log('Image already processed');
         context.done(null, event);
       } else {
-        s3.listObjects({ Bucket: process.env.AWS_BUCKET, Prefix: path }, (listErr, listData) => {
+        s3.listObjects({ Bucket: process.env.AWS_STORE_BUCKET, Prefix: path }, (listErr, listData) => {
           if (listErr) {
             context.fail(listErr);
           } else {
@@ -65,7 +65,7 @@ export const handler = (event, context) => {
 
             if (objectsToDelete.length) {
               s3.deleteObjects({
-                Bucket: process.env.AWS_BUCKET,
+                Bucket: process.env.AWS_STORE_BUCKET,
                 Delete: {
                   Objects: objectsToDelete,
                   Quiet: false,
@@ -89,7 +89,7 @@ export const handler = (event, context) => {
     const filename = decodeURIComponent(url[4]);
     const path = `protected/${identityId}/workshops/${workshopId}`;
 
-    s3.headObject({ Bucket: process.env.AWS_BUCKET, Key: `${path}/${filename}` }, (err, data) => {
+    s3.headObject({ Bucket: process.env.AWS_STORE_BUCKET, Key: `${path}/${filename}` }, (err, data) => {
       if (data.Metadata && data.Metadata.optimized) {
         console.log('Image already processed');
         context.done(null, event);

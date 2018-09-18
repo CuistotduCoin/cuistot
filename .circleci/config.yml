@@ -35,7 +35,7 @@ jobs:
             cd admin
             yarn deploy-build
   
-  deploy-front:
+  deploy-front-prod:
     docker:
       - image: circleci/node:8.10
     steps:
@@ -95,7 +95,7 @@ workflows:
             branches:
               only:
                 - master
-      - deploy-front:
+      - deploy-front-prod:
           filters:
             branches:
               only:
@@ -104,5 +104,4 @@ workflows:
           filters:
             branches:
               only:
-                - feature/setup_deployment # to remove
                 - master

@@ -16,13 +16,12 @@ provider:
     DATABASE_PASSWORD: ${ssm:/cuistot/${self:provider.stage}/database/password~true}
     AWS_USERPOOL_ID: ${ssm:/cuistot/${self:provider.stage}/userpool-id~true}
     AWS_IDENTITY_POOL_ID: ${ssm:/cuistot/${self:provider.stage}/identity-pool-id~true}
-    AWS_BUCKET: ${ssm:/cuistot/${self:provider.stage}/bucket~true}
+    AWS_STORE_BUCKET: ${ssm:/cuistot/${self:provider.stage}/store-bucket~true}
     AWS_ACCOUNT_ID: ${ssm:/cuistot/${self:provider.stage}/account-id~true}
     SLS_DEBUG: "*"
 
 plugins:
   - serverless-appsync-plugin
-  - serverless-offline
   - serverless-webpack
   - serverless-stage-manager
 
@@ -32,6 +31,7 @@ package:
 custom:
   stages:
     - development
+    - staging
     - production
   webpack:
     includeModules:
@@ -743,11 +743,11 @@ resources:
                     - "s3:GetObject"
                     - "s3:PutObject"
                     - "s3:DeleteObject"
-                  Resource: arn:aws:s3:::${self:provider.environment.AWS_BUCKET}/*
+                  Resource: arn:aws:s3:::${self:provider.environment.AWS_STORE_BUCKET}/*
                 -
                   Effect: "Allow"
                   Action: "s3:ListBucket"
-                  Resource: arn:aws:s3:::${self:provider.environment.AWS_BUCKET}
+                  Resource: arn:aws:s3:::${self:provider.environment.AWS_STORE_BUCKET}
     HandleBucketDeleteEventLambdaRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
@@ -781,7 +781,7 @@ resources:
                   Effect: "Allow"
                   Action:
                     - "s3:DeleteObject"
-                  Resource: arn:aws:s3:::${self:provider.environment.AWS_BUCKET}/*
+                  Resource: arn:aws:s3:::${self:provider.environment.AWS_STORE_BUCKET}/*
     UserPoolTriggerPostConfirmationInvokePermission:
       Type: "AWS::Lambda::Permission"
       Properties:
