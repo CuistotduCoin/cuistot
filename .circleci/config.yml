@@ -77,8 +77,10 @@ jobs:
           name: Install go
           command: |
             sudo apt-get update
-            sudo apt-get upgrade
-            sudo apt-get install golang
+            sudo apt-get -y upgrade
+            wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
+            sudo tar -xvf go1.10.1.linux-amd64.tar.gz
+            sudo mv go /usr/local
             mkdir /home/circleci/go
             printenv
             echo 'export GOPATH=/home/circleci/go' >> $BASH_ENV
