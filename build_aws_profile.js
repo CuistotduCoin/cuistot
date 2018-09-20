@@ -10,7 +10,7 @@ source_profile = default
 region = eu-west-1
 `;
 
-fs.writeFile(process.env.AWS_CONFIG_FILE, content, (err) => {
+fs.writeFile(`${process.env.AWS_CONFIG_FILE}`, content, (err) => {
   if (err) throw err;
   console.log('aws config saved...');
 });
