@@ -81,8 +81,8 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get -y upgrade
-            wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
-            sudo tar -xf go1.10.1.linux-amd64.tar.gz
+            wget https://golang.org/doc/install/source?download=go1.6.4.src.tar.gz
+            sudo tar -xf go1.6.4.src.tar.gz
             sudo mv go /usr/local
             mkdir $GOPATH
             echo 'export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
