@@ -75,7 +75,9 @@ jobs:
           name: Install go
           command: |
             sudo apt-get install golang
-            mkdir go
+            mkdir ~/go
+            export GOPATH=~/go
+            export PATH=$PATH:$GOPATH/bin
       - run: &install_back_dependencies
           name: Install dependencies
           command: |
@@ -83,7 +85,6 @@ jobs:
             # sudo npm i -g serverless
             # yarn install --production=false
             go env GOPATH
-            go help gopath
             go get -u github.com/remind101/assume-role
       - save_cache: &save_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
