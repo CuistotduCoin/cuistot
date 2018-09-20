@@ -92,6 +92,7 @@ jobs:
           command: |
             sudo mkdir /home/circleci/.aws
             AWS_CONFIG_FILE=$AWS_CONFIG_FILE AWS_CROSS_ACCOUNT_ID=$AWS_CROSS_ACCOUNT_ID STAGE=$STAGE sudo node build_aws_profile
+            ls /home/circleci/.aws
             sudo cat $AWS_CONFIG_FILE
       - run: &install_back_dependencies
           name: Install dependencies
