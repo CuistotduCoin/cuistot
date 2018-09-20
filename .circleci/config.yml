@@ -93,7 +93,7 @@ jobs:
           echo $AWS_CONFIG_FILE
           echo $AWS_CROSS_ACCOUNT_ID
           echo $STAGE
-          touch $AWS_CONFIG_FILE
+          mkdir /home/circleci/.aws
           AWS_CONFIG_FILE=$AWS_CONFIG_FILE AWS_CROSS_ACCOUNT_ID=$AWS_CROSS_ACCOUNT_ID STAGE=$STAGE node build_aws_profile
       - run: &install_back_dependencies
           name: Install dependencies
