@@ -80,9 +80,10 @@ jobs:
             sudo tar -xvf go1.10.1.linux-amd64.tar.gz
             sudo mv go /usr/local
             mkdir ~/go
-            export GOROOT=/usr/local/go
-            export GOPATH=~/go
-            export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+            echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
+            echo 'export GOPATH=~/go' >> ~/.bashrc
+            echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bashrc
+            source ~/.bashrc
             go version
       - run: &install_back_dependencies
           name: Install dependencies
