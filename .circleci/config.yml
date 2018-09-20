@@ -76,6 +76,10 @@ jobs:
             cd backend
             sudo npm i -g serverless
             yarn install --production=false
+            curl https://raw.githubusercontent.com/coinbase/assume-role/master/install-assume-role -O
+            cat install-assume-role # inspect the script for security
+            bash ./install-assume-role # install assume-role
+            assume-role
       - save_cache: &save_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
           paths:
