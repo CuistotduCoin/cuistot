@@ -84,14 +84,12 @@ jobs:
             mkdir $GOPATH
             echo 'export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
-            go env
-            go version
       - run: &install_back_dependencies
           name: Install dependencies
           command: |
             cd backend
-            # sudo npm i -g serverless
-            # yarn install --production=false
+            sudo npm i -g serverless
+            yarn install --production=false
             go get -u github.com/remind101/assume-role
       - save_cache: &save_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
