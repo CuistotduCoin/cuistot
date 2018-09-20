@@ -94,8 +94,6 @@ jobs:
             echo $AWS_CROSS_ACCOUNT_ID
             echo $STAGE
             sudo mkdir /home/circleci/.aws
-            sudo touch /home/circleci/.aws/toto
-            sudo touch /home/circleci/.aws/config
             AWS_CONFIG_FILE=$AWS_CONFIG_FILE AWS_CROSS_ACCOUNT_ID=$AWS_CROSS_ACCOUNT_ID STAGE=$STAGE sudo node build_aws_profile
       - run: &install_back_dependencies
           name: Install dependencies
