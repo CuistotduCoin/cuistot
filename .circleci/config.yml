@@ -82,7 +82,7 @@ jobs:
             sudo tar -xf go1.10.1.linux-amd64.tar.gz
             sudo mv go /usr/local
             mkdir $GOPATH
-            echo 'export PATH=$GOPATH/bin:$PATH' >> $BASH_ENV
+            echo 'export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
             go env
             go version
