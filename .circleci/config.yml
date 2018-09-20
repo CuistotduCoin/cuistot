@@ -74,20 +74,13 @@ jobs:
       - run:
           name: Install go
           command: |
-            sudo curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz
-            sudo tar -xvf go1.6.linux-amd64.tar.gz
-            sudo mv go /usr/local
-            echo PATH=$PATH:/usr/local/go/bin >> ~/.profile
-            source ~/.profile
+            sudo apt-get install golang
       - run: &install_back_dependencies
           name: Install dependencies
           command: |
             cd backend
             sudo npm i -g serverless
             yarn install --production=false
-            ls /usr/local
-            ls /usr/local/go
-            cat ~/.profile
             go get -u github.com/remind101/assume-role
       - save_cache: &save_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
