@@ -69,6 +69,7 @@ jobs:
       - image: circleci/node:8.10
     environment:
       GOPATH: /home/circleci/go
+      GOROOT: /usr/local
     steps:
       - checkout
       - restore_cache: &restore_back_cache
@@ -83,7 +84,7 @@ jobs:
             sudo mv go /usr/local
             mkdir /home/circleci/go
             printenv
-            echo 'export GOPATH=/home/circleci/go' >> $BASH_ENV
+            echo 'export PATH=/home/circleci/go/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
             printenv
             go version
