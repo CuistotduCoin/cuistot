@@ -22,6 +22,7 @@ jobs:
           command: |
             sudo curl -O https://bootstrap.pypa.io/get-pip.py
             sudo python2.7 get-pip.py
+            sudo apt-get update
             sudo apt-get install python-pip libpython-dev groff
             sudo pip install awscli
       - run:
