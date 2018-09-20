@@ -16,5 +16,6 @@ const baseConfig = {
 
 module.exports = {
   development: { ...baseConfig },
+  staging: { ...baseConfig },
   production: { ...baseConfig },
 };

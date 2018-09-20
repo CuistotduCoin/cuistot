@@ -7,14 +7,18 @@
     "url": "git@github.com:CuistotduCoin/cuistot.git"
   },
   "scripts": {
-    "migrate:prod": "NODE_ENV=production node knexenv && env-cmd .env node_modules/.bin/knex migrate:latest",
-    "migrate:dev": "NODE_ENV=development node knexenv && env-cmd .env node_modules/.bin/knex migrate:latest",
-    "rollback:prod": "NODE_ENV=production node knexenv && env-cmd .env node_modules/.bin/knex migrate:rollback",
-    "rollback:dev": "NODE_ENV=development node knexenv && env-cmd .env node_modules/.bin/knex migrate:rollback",
-    "seed:prod": "NODE_ENV=production node knexenv && env-cmd .env node_modules/.bin/knex seed:run",
-    "seed:dev": "NODE_ENV=development node knexenv && env-cmd .env node_modules/.bin/knex seed:run",
-    "deploy:prod": "serverless deploy --force -s production",
-    "deploy:dev": "serverless deploy --force -s development"
+    "migrate:prod": "assume-role production node knexenv && env-cmd .env node_modules/.bin/knex migrate:latest --env production",
+    "migrate:stage": "assume-role staging node knexenv && env-cmd .env node_modules/.bin/knex migrate:latest --env staging",
+    "migrate:dev": "assume-role development node knexenv && env-cmd .env node_modules/.bin/knex migrate:latest --env development",
+    "rollback:prod": "assume-role production node knexenv && env-cmd .env node_modules/.bin/knex migrate:rollback --env production",
+    "rollback:stage": "assume-role staging node knexenv && env-cmd .env node_modules/.bin/knex migrate:rollback --env staging",
+    "rollback:dev": "assume-role development node knexenv && env-cmd .env node_modules/.bin/knex migrate:rollback --env development",
+    "seed:prod": "assume-role production node knexenv && env-cmd .env node_modules/.bin/knex seed:run --env production",
+    "seed:stage": "assume-role staging node knexenv && env-cmd .env node_modules/.bin/knex seed:run --env staging",
+    "seed:dev": "assume-role development node knexenv && env-cmd .env node_modules/.bin/knex seed:run --env development",
+    "deploy:prod": "assume-role production serverless deploy --force -s production",
+    "deploy:stage": "assume-role staging serverless deploy --force -s staging",
+    "deploy:dev": "assume-role development serverless deploy --force -s development"
   },
   "dependencies": {
     "async": "^2.6.1",
