@@ -71,12 +71,6 @@ jobs:
       - checkout
       - restore_cache: &restore_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
-      - run: &install_back_dependencies
-          name: Install dependencies
-          command: |
-            cd backend
-            sudo npm i -g serverless
-            yarn install --production=false
       - run:
           name: Install go
           command: |
@@ -85,7 +79,13 @@ jobs:
             sudo mv go /usr/local
             echo export PATH=$PATH:/usr/local/go/bin >> ~/.profile
             source ~/.profile
-            go
+      - run: &install_back_dependencies
+          name: Install dependencies
+          command: |
+            cd backend
+            sudo npm i -g serverless
+            yarn install --production=false
+            go get -u github.com/remind101/assume-role
       - save_cache: &save_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
           paths:
