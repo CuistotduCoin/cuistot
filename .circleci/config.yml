@@ -107,7 +107,9 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
-            yarn deploy:prod
+            assume-role production
+            eval $(assume-role production)
+            # yarn deploy:prod
 
   deploy-front-stage:
     docker:
