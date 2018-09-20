@@ -76,8 +76,7 @@ jobs:
       - run: &install_go
           name: Install go
           command: |
-            ls ~/.aws
-            vim ~/.aws/credentials
+            sudo find / -name .aws -print
             # sudo apt-get update
             # sudo apt-get -y upgrade
             # wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
