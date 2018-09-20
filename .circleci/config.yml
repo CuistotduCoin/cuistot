@@ -68,8 +68,7 @@ jobs:
     docker:
       - image: circleci/node:8.10
     environment:
-      GOROOT: /usr/local/go
-      GOPATH: ~/go
+      GOPATH: /home/circleci/go
     steps:
       - checkout
       - restore_cache: &restore_back_cache
@@ -77,15 +76,12 @@ jobs:
       - run:
           name: Install go
           command: |
-            sudo apt-get update
-            sudo apt-get -y upgrade
-            wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
-            sudo tar -xvf go1.10.1.linux-amd64.tar.gz
-            sudo mv go /usr/local
-            mkdir ~/go
+            sudo apt-get install golang
+            mkdir /home/circleci/go
             printenv
-            echo 'export PATH=~/go/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
-            source /home/circleci/.bashrc
+            echo 'export GOPATH=/home/circleci/go' >> $BASH_ENV
+            source $BASH_ENV
+            printenv
             go version
       - run: &install_back_dependencies
           name: Install dependencies
