@@ -16,7 +16,7 @@ jobs:
           key: dependency-cache-{{ checksum "admin/yarn.lock" }}
           paths:
             - ./node_modules
-      - run:
+      - run: &install_awscli
           name: Install awscli
           working_directory: /
           command: |
@@ -75,6 +75,7 @@ jobs:
       - checkout
       - restore_cache: &restore_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
+      - run: *install_awscli
       - run: &install_go
           name: Install go
           command: |
@@ -106,6 +107,8 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
+            sudo cat $AWS_CONFIG_PATH/credentials
+            sudo cat $AWS_CONFIG_PATH/config
             assume-role staging
             # yarn deploy:prod
 
