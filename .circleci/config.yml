@@ -16,7 +16,7 @@ jobs:
           key: dependency-cache-{{ checksum "admin/yarn.lock" }}
           paths:
             - ./node_modules
-      - run: &install_awscli
+      - run:
           name: Install awscli
           working_directory: /
           command: |
@@ -75,6 +75,7 @@ jobs:
           name: Install go
           command: |
             sudo apt-get install golang
+            export GOPATH="."
       - run: &install_back_dependencies
           name: Install dependencies
           command: |
