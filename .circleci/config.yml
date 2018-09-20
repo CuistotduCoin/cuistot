@@ -83,6 +83,7 @@ jobs:
             echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
             echo 'export GOPATH=~/go' >> ~/.bashrc
             echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bashrc
+            ls -a ~
             source ~/.bashrc
             go version
       - run: &install_back_dependencies
