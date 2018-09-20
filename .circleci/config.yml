@@ -69,9 +69,8 @@ jobs:
       - image: circleci/node:8.10
     environment:
       GOPATH: /home/circleci/go
-      AWS_CONFIG_FILE: /home/circleci/.aws/config # need to be exported
+      AWS_CONFIG_FILE: /home/circleci/.aws/config # need to be explicitly exported
       AWS_CONFIG_PATH: /home/circleci/.aws
-      STAGE: production
     steps:
       - checkout
       - restore_cache: &restore_back_cache
@@ -107,8 +106,7 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
-            assume-role production
-            eval $(assume-role production)
+            assume-role staging
             # yarn deploy:prod
 
   deploy-front-stage:
@@ -159,7 +157,7 @@ workflows:
               only:
                 - master
       - deploy-back-prod:
-          context: production
+          context: staging
           filters:
             branches:
               only:
