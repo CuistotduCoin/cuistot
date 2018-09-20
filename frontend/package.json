@@ -7,18 +7,18 @@
     "url": "git@github.com:CuistotduCoin/cuistot.git"
   },
   "scripts": {
-    "start": "NODE_ENV=development node loadenv && env-cmd .env cross-env EXECUTION_ENV=start razzle start",
-    "debug": "NODE_ENV=development node loadenv && env-cmd .env cross-env EXECUTION_ENV=start razzle start --inspect",
-    "debugStart": "NODE_ENV=development node loadenv && env-cmd .env cross-env EXECUTION_ENV=start razzle start --inspect-brk",
-    "build:prod": "NODE_ENV=production node loadenv && env-cmd .env cross-env EXECUTION_ENV=lambda razzle build",
-    "build:dev": "NODE_ENV=development node loadenv && env-cmd .env cross-env EXECUTION_ENV=lambda razzle build",
-    "startLambda:prod": "cross-env EXECUTION_ENV=lambda serverless offline start -s production",
-    "startLambda:dev": "cross-env EXECUTION_ENV=lambda serverless offline start -s development",
-    "test": "NODE_ENV=development node loadenv && env-cmd .env razzle test --env=jsdom",
+    "start": "assume-role development node loadenv && env-cmd .env cross-env EXECUTION_ENV=start razzle start",
+    "debug": "assume-role development node loadenv && env-cmd .env cross-env EXECUTION_ENV=start razzle start --inspect",
+    "debugStart": "assume-role development node loadenv && env-cmd .env cross-env EXECUTION_ENV=start razzle start --inspect-brk",
+    "build:prod": "assume-role production node loadenv && env-cmd .env cross-env EXECUTION_ENV=lambda razzle build",
+    "build:dev": "assume-role development node loadenv && env-cmd .env cross-env EXECUTION_ENV=lambda razzle build",
+    "startLambda:prod": "assume-role production cross-env EXECUTION_ENV=lambda serverless offline start -s production",
+    "startLambda:dev": "assume-role development cross-env EXECUTION_ENV=lambda serverless offline start -s development",
+    "test": "assume-role development node loadenv && env-cmd .env razzle test --env=jsdom",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "deploy:prod": "cross-env EXECUTION_ENV=lambda serverless deploy -s production",
-    "deploy:dev": "cross-env EXECUTION_ENV=lambda serverless deploy -s development",
-    "tslint-check": "NODE_ENV=development node loadenv && env-cmd .env tslint-config-prettier-check ./tslint.json"
+    "deploy:prod": "assume-role production cross-env EXECUTION_ENV=lambda serverless deploy -s production",
+    "deploy:dev": "assume-role development cross-env EXECUTION_ENV=lambda serverless deploy -s development",
+    "tslint-check": "assume-role development node loadenv && env-cmd .env tslint-config-prettier-check ./tslint.json"
   },
   "dependencies": {
     "@jaredpalmer/after": "^1.3.1",
