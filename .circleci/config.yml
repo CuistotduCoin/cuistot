@@ -68,9 +68,7 @@ jobs:
     docker:
       - image: circleci/node:8.10
     environment:
-      GOROOT: /usr/local/go
-      GOPATH: ~/go
-      PATH: ~/go/bin:/usr/local/go/bin:$PATH
+      BASH_ENV: ~/.bashrc
     steps:
       - checkout
       - restore_cache: &restore_back_cache
@@ -84,6 +82,10 @@ jobs:
             sudo tar -xvf go1.10.1.linux-amd64.tar.gz
             sudo mv go /usr/local
             mkdir ~/go
+            echo 'export GOPATH=~/go' >> $BASH_ENV
+            echo 'export GOROOT=/usr/local/go' >> $BASH_ENV 
+            echo 'export PATH=~/go/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
+            source $BASH_ENV
             go version
       - run: &install_back_dependencies
           name: Install dependencies
