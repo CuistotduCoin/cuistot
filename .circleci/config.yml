@@ -75,25 +75,23 @@ jobs:
       - checkout
       - restore_cache: &restore_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
-      # - run: &install_go
-      #     name: Install go
-      #     command: |
-      #       sudo apt-get update
-      #       sudo apt-get -y upgrade
-      #       wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
-      #       sudo tar -xf go1.10.1.linux-amd64.tar.gz
-      #       sudo mv go /usr/local
-      #       mkdir $GOPATH
-      #       echo 'export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
-      #       source $BASH_ENV
-      #       go get -u github.com/remind101/assume-role
+      - run: &install_go
+          name: Install go
+          command: |
+            sudo apt-get update
+            sudo apt-get -y upgrade
+            wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
+            sudo tar -xf go1.10.1.linux-amd64.tar.gz
+            sudo mv go /usr/local
+            mkdir $GOPATH
+            echo 'export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
+            source $BASH_ENV
+            go get -u github.com/remind101/assume-role
       - run: &build_aws_profiles
           name: Build AWS profiles
           command: |
             sudo mkdir /home/circleci/.aws
             sudo AWS_CONFIG_FILE=$AWS_CONFIG_FILE AWS_CROSS_ACCOUNT_ID=$AWS_CROSS_ACCOUNT_ID STAGE=$STAGE node build_aws_profile
-            ls /home/circleci/.aws
-            sudo cat $AWS_CONFIG_FILE
       - run: &install_back_dependencies
           name: Install dependencies
           command: |
