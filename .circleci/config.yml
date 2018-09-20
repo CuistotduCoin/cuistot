@@ -40,15 +40,15 @@ jobs:
       - image: circleci/node:8.10
     steps:
       - checkout
-      - restore_cache:
+      - restore_cache: &restore_front_cache
           key: dependency-cache-{{ checksum "frontend/yarn.lock" }}
-      - run:
+      - run: &install_front_dependencies
           name: Install dependencies
           command: |
             cd frontend
             sudo npm i -g serverless
             yarn install
-      - save_cache:
+      - save_cache: &save_front_cache
           key: dependency-cache-{{ checksum "frontend/yarn.lock" }}
           paths:
             - ./node_modules
@@ -68,15 +68,15 @@ jobs:
       - image: circleci/node:8.10
     steps:
       - checkout
-      - restore_cache:
+      - restore_cache: &restore_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
-      - run:
+      - run: &install_back_dependencies
           name: Install dependencies
           command: |
             cd backend
             sudo npm i -g serverless
             yarn install --production=false
-      - save_cache:
+      - save_cache: &save_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
           paths:
             - ./node_modules
@@ -85,6 +85,39 @@ jobs:
           command: |
             cd backend
             yarn deploy:prod
+
+  deploy-front-stage:
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - checkout
+      - restore_cache: *restore_front_cache
+      - run: *install_front_dependencies
+      - save_cache: *save_front_cache
+      - run:
+          name: Build frontend
+          command: |
+            cd frontend
+            yarn build:stage
+      - run:
+          name: Deploy frontend
+          command: |
+            cd frontend
+            yarn deploy:stage
+
+  deploy-back-stage:
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - checkout
+      - restore_cache: *restore_back_cache
+      - run: *install_back_dependencies
+      - save_cache: *save_back_cache
+      - run:
+          name: Deploy backend
+          command: |
+            cd backend
+            yarn deploy:stage
 
 workflows:
   version: 2
@@ -105,3 +138,13 @@ workflows:
             branches:
               only:
                 - master
+      - deploy-front-stage:
+          filters:
+            branches:
+              only:
+                - release/*
+      - deploy-back-stage:
+          filters:
+            branches:
+              only:
+                - release/*
