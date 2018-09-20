@@ -85,6 +85,9 @@ jobs:
             cd backend
             sudo npm i -g serverless
             yarn install --production=false
+            ls /usr/local
+            ls /usr/local/go
+            cat ~/.profile
             go get -u github.com/remind101/assume-role
       - save_cache: &save_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
