@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const content = `\
+let content = `\
 [profile circle]
 region = eu-west-1
 
@@ -15,7 +15,7 @@ fs.writeFile(`${process.env.AWS_CONFIG_PATH}/config`, content, (err) => {
   console.log('aws config saved...');
 });
 
-const content = `\
+content = `\
 [circle]
 aws_access_key_id = ${process.env.AWS_ACCESS_KEY_ID}
 aws_secret_access_key = ${process.env.AWS_SECRET_ACCESS_KEY}
