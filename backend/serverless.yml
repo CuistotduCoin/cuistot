@@ -392,7 +392,7 @@ resources:
         EmailVerificationSubject: "[Cuistot du Coin] Votre code de sécurité"
         EmailVerificationMessage:
           Fn::Sub:
-            <p>Vous allez avoir besoin de ce code :&nbsp;{####}}</p>
+            <p>Vous allez avoir besoin de ce code :&nbsp;{####}</p>
         LambdaConfig:
           PostConfirmation: "arn:aws:lambda:${{self:custom.appSync.region}}:${{self:custom.accountId}}:function:${{self:service}}-${{self:provider.stage}}-postConfirmation"
         Schema:
@@ -413,9 +413,9 @@ resources:
             RequireUppercase: true
         AdminCreateUserConfig:
           InviteMessageTemplate:
-            EmailMessage: "Bienvenue sur Cuistot du coin ! Voici vos identifiants de connexion (email / mot de passe) : {username}} / {####}}"
+            EmailMessage: "Bienvenue sur Cuistot du coin ! Voici vos identifiants de connexion (email / mot de passe) : {username} / {####}"
             EmailSubject: "Votre mot de passe temporaire. Pensez bien à le changer :)"
-            SMSMessage: "Bienvenue sur Cuistot du coin ! Voici vos identifiants de connexion : {username}} / {####}}. Pensez bien à changer votre mot de passe :)"
+            SMSMessage: "Bienvenue sur Cuistot du coin ! Voici vos identifiants de connexion : {username} / {####}. Pensez bien à changer votre mot de passe :)"
           UnusedAccountValidityDays: 7
           AllowAdminCreateUserOnly: false
     UserPoolClient:

@@ -137,6 +137,7 @@ workflows:
           filters:
             branches:
               only:
+                - feature/setup_deployment # to remove
                 - master
       - deploy-front-stage:
           filters:
