@@ -75,24 +75,25 @@ jobs:
       - checkout
       - restore_cache: &restore_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
-      - run: *install_awscli
-      - run: &install_go
-          name: Install go
-          command: |
-            sudo apt-get update
-            sudo apt-get -y upgrade
-            wget https://dl.google.com/go/go1.6.4.linux-amd64.tar.gz
-            sudo tar -xf go1.6.4.linux-amd64.tar.gz
-            sudo mv go /usr/local
-            mkdir $GOPATH
-            echo 'export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
-            source $BASH_ENV
-            go get -u github.com/remind101/assume-role
+      # - run: *install_awscli
+      # - run: &install_go
+      #     name: Install go
+      #     command: |
+      #       sudo apt-get update
+      #       sudo apt-get -y upgrade
+      #       wget https://dl.google.com/go/go1.6.4.linux-amd64.tar.gz
+      #       sudo tar -xf go1.6.4.linux-amd64.tar.gz
+      #       sudo mv go /usr/local
+      #       mkdir $GOPATH
+      #       echo 'export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
+      #       source $BASH_ENV
+      #       go get -u github.com/remind101/assume-role
       - run: &build_aws_profiles
           name: Build AWS config
           command: |
             sudo mkdir $AWS_CONFIG_PATH
             sudo AWS_CONFIG_PATH=$AWS_CONFIG_PATH AWS_CROSS_ACCOUNT_ID=$AWS_CROSS_ACCOUNT_ID STAGE=$STAGE AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY node build_aws_profile
+            ls -l ~/.aws
       - run: &install_back_dependencies
           name: Install dependencies
           command: |
