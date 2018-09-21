@@ -86,7 +86,7 @@ jobs:
             echo 'export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
             go get -u github.com/remind101/assume-role
-      - run: &build_aws_profiles
+      - run: &build_aws_config
           name: Build AWS config
           command: |
             sudo mkdir $AWS_CONFIG_PATH
@@ -129,9 +129,14 @@ jobs:
   deploy-back-stage:
     docker:
       - image: circleci/node:8.10
+    environment:
+      GOPATH: /home/circleci/go
+      AWS_CONFIG_PATH: /home/circleci/.aws
     steps:
       - checkout
       - restore_cache: *restore_back_cache
+      - run: *install_go
+      - run: *build_aws_config
       - run: *install_back_dependencies
       - save_cache: *save_back_cache
       - run:
@@ -159,15 +164,16 @@ workflows:
           filters:
             branches:
               only:
-                - feature/setup_deployment # to remove
                 - master
       - deploy-front-stage:
           filters:
             branches:
               only:
-                - release/*
+                - release-*
       - deploy-back-stage:
+          context: staging
           filters:
             branches:
               only:
-                - release/*
+                - feature/setup_deployment # to remove
+                - release-*
