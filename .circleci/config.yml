@@ -16,7 +16,7 @@ jobs:
           key: dependency-cache-{{ checksum "admin/yarn.lock" }}
           paths:
             - ./node_modules
-      - run: &install_awscli
+      - run:
           name: Install awscli
           working_directory: /
           command: |
@@ -68,21 +68,19 @@ jobs:
     docker:
       - image: circleci/node:8.10
     environment:
-      GOPATH: /home/circleci/go
-      # AWS_CONFIG_FILE: /home/circleci/.aws/config # need to be explicitly exported
-      AWS_CONFIG_PATH: /home/circleci/.aws
+      GOPATH: ~/go
+      AWS_CONFIG_PATH: ~/.aws
     steps:
       - checkout
       - restore_cache: &restore_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
-      # - run: *install_awscli
       - run: &install_go
           name: Install go
           command: |
             sudo apt-get update
             sudo apt-get -y upgrade
-            wget https://dl.google.com/go/go1.6.4.linux-amd64.tar.gz
-            sudo tar -xf go1.6.4.linux-amd64.tar.gz
+            wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
+            sudo tar -xf go1.10.1.linux-amd64.tar.gz
             sudo mv go /usr/local
             mkdir $GOPATH
             echo 'export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
@@ -107,8 +105,6 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
-            sudo cat $AWS_CONFIG_PATH/credentials
-            sudo cat $AWS_CONFIG_PATH/config
             assume-role production
             # yarn deploy:prod
 
