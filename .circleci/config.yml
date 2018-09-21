@@ -105,6 +105,7 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
+            yarn migrate:prod
             yarn deploy:prod
 
   deploy-front-stage:
@@ -143,6 +144,7 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
+            yarn migrate:stage
             yarn deploy:stage
 
 workflows:
@@ -155,6 +157,7 @@ workflows:
               only:
                 - master
       - deploy-front-prod:
+          context: production
           filters:
             branches:
               only:
@@ -166,6 +169,7 @@ workflows:
               only:
                 - master
       - deploy-front-stage:
+          context: staging
           filters:
             branches:
               only:
@@ -175,5 +179,5 @@ workflows:
           filters:
             branches:
               only:
-                - feature/setup_deployment # to remove
+                - feature/setup_deployment
                 - release-*
