@@ -179,5 +179,4 @@ workflows:
           filters:
             branches:
               only:
-                - feature/setup_deployment
                 - release-*
