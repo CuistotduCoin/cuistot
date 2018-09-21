@@ -81,8 +81,8 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get -y upgrade
-            wget https://golang.org/doc/install/source?download=go1.6.4.src.tar.gz
-            sudo tar -xf go1.6.4.src.tar.gz
+            wget https://dl.google.com/go/go1.6.4.linux-amd64.tar.gz
+            sudo tar -xf go1.6.4.linux-amd64.tar.gz
             sudo mv go /usr/local
             mkdir $GOPATH
             echo 'export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
@@ -109,7 +109,7 @@ jobs:
             cd backend
             sudo cat $AWS_CONFIG_PATH/credentials
             sudo cat $AWS_CONFIG_PATH/config
-            assume-role staging
+            assume-role production
             # yarn deploy:prod
 
   deploy-front-stage:
@@ -160,7 +160,7 @@ workflows:
               only:
                 - master
       - deploy-back-prod:
-          context: staging
+          context: production
           filters:
             branches:
               only:
