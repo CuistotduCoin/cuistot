@@ -1,3 +1,5 @@
+// Used by CircleCI job and assume-role tool to create necessary aws config files
+
 const fs = require('fs');
 
 let content = `\
@@ -17,8 +19,8 @@ fs.writeFile(`${process.env.AWS_CONFIG_PATH}/config`, content, (err) => {
 
 content = `\
 [circle]
-aws_access_key_id = ${process.env.AWS_KEY}
-aws_secret_access_key = ${process.env.AWS_SECRET_KEY}
+aws_access_key_id = ${process.env.AWS_MASTER_ACCESS_KEY_ID}
+aws_secret_access_key = ${process.env.AWS_MASTER_SECRET_ACCESS_KEY}
 `;
 
 fs.writeFile(`${process.env.AWS_CONFIG_PATH}/credentials`, content, (err) => {
