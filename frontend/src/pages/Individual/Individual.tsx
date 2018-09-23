@@ -89,62 +89,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     const workshops = [
       {
-        availableSeat: 6,
-        date: "vendredi 21 septembre, 17h30-20h30",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/luis-agnolotti.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/luis.jpg",
-        name: "Agnolotti ricotta",
-        nameCook: "Luis",
-        price: 50,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/xM8qKQ"
-      },
-      {
-        availableSeat: 8,
-        date: "samedi 22 septembre, 9h30-13h",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ronan-pate-a-choux-eclairs.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
-        name: "Pâte à choux et éclairs",
-        nameCook: "Ronan",
-        price: 50,
-        spot: "Schmidt, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/eczcFw"
-      },
-      {
-        availableSeat: 8,
-        date: "samedi 22 septembre, 10h30-12h30",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/vanessa-amuses-bouches-exotiques.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/vanessa.jpg",
-        name: "Amuses-bouches exotiques et punch maison",
-        nameCook: "Vanessa",
-        price: 25,
-        spot: "Cuisinella, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/wOBLjm"
-      },
-      {
-        availableSeat: 8,
-        date: "samedi 22 septembre, 14h-18h",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/fabien-pain-maison.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
-        name: "Faire son pain maison",
-        nameCook: "Fabien",
-        price: 50,
-        spot: "Couleurs cuisines, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/RpiaBS"
-      },
-      {
         availableSeat: 12,
         date: "vendredi 28 septembre, 20h-22h",
         duration: 3,
@@ -230,7 +174,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
-        date: "samedi 13 octobre, 10h-12h30",
+        date: "samedi 13 octobre, 14h-16h",
         duration: 2,
         image:
           "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
