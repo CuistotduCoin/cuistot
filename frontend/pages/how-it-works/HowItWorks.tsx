@@ -31,6 +31,7 @@ export class HowItWorks extends React.Component<IHowItWorksProps, {}> {
         <Head
           title={metaInfo.metaInfo.howitworks.title}
           description={metaInfo.metaInfo.howitworks.description}
+          href={metaInfo.metaInfo.howitworks.href}
         />
         <Header />
         <Hero

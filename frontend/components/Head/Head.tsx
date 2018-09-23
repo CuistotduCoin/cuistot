@@ -13,7 +13,10 @@ export class Head extends React.Component<IHeadProps, {}> {
   public render() {
     const { title, description, image, children, href } = this.props;
 
+    console.log(this.props);
+
     return (
+      <div /> /*
       <NextSeo
         config={{
           canonical: { href },
@@ -32,7 +35,7 @@ export class Head extends React.Component<IHeadProps, {}> {
         }}
       >
         {children}
-      </NextSeo>
+      </NextSeo>*/
     );
   }
 }
