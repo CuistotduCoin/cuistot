@@ -28,10 +28,10 @@ const styles = (theme: Theme) => ({
 });
 
 interface IHeaderProps {
-  classes?: any;
+  classes: any;
   static?: boolean;
-  hideSignUpLogin: boolean;
-  hideCompanyIndividual: boolean;
+  hideSignUpLogin?: boolean;
+  hideCompanyIndividual?: boolean;
   isLoggedIn: boolean;
 }
 

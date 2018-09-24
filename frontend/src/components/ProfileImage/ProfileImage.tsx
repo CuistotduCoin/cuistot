@@ -29,10 +29,10 @@ const styles = theme => ({
 
 interface IProfileImageProps {
   classes: any;
-  size: "small" | "normal";
+  size?: "small" | "normal";
   imageKey?: string;
   identityId: string;
-  showAddImagePlaceholder: boolean;
+  showAddImagePlaceholder?: boolean;
   alt?: string;
 }
 

@@ -61,7 +61,7 @@ const getCook = `query GetCook($cook_id: ID!) {
         }
       }
     },
-    message,
+    message
     errors {
       message
     }
