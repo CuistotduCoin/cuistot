@@ -11,10 +11,8 @@ import Slider from "react-slick";
 // import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import Footer from "../../components/Footer";
-import Head from "../../components/Head";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
-import metaInfo from "../../shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -208,10 +206,6 @@ export class Business extends React.Component<IBusinessProps, {}> {
     ];
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo.business.title}
-          description={metaInfo.metaInfo.business.description}
-        />
         <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"

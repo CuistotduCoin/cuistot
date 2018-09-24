@@ -7,11 +7,9 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Footer from "../../components/Footer";
-import Head from "../../components/Head";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
 import WorkshopCardList from "../../components/WorkshopCardList";
-import metaInfo from "../../shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -416,10 +414,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo.individual.title}
-          description={metaInfo.metaInfo.individual.description}
-        />
         <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"

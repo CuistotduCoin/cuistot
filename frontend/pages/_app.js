@@ -6,8 +6,7 @@ import JssProvider from 'react-jss/lib/JssProvider';
 import getPageContext from './getPageContext';
 import { Provider } from 'unstated'
 import Raven from 'raven-js'
-import NextSeo from 'next-seo';
-import SEO from '../next-seo.config';
+import Head from '../components/Head';
 
 const SENTRY_PUBLIC_DSN = ''
 
@@ -55,7 +54,7 @@ class MyApp extends App {
             {/* Pass pageContext to the _document though the renderPage enhancer
                 to render collected styles on server side. */}
             <Provider>
-              <NextSeo config={SEO} />
+              <Head />
               <Component pageContext={this.pageContext} {...pageProps} /></Provider>
           </MuiThemeProvider>
         </JssProvider>

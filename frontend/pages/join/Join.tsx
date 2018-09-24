@@ -8,7 +8,6 @@ import Hero from "../../components/Hero";
 import components from "../../content/components";
 // @ts-ignore
 import Content from "../../content/join.mdx";
-import metaInfo from "../../shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -28,10 +27,6 @@ export class Join extends React.Component<IJoinProps, {}> {
 
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo.join.title}
-          description={metaInfo.metaInfo.join.description}
-        />
         <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"

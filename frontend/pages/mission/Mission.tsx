@@ -8,7 +8,6 @@ import Hero from "../../components/Hero";
 import components from "../../content/components";
 // @ts-ignore
 import Content from "../../content/mission.mdx";
-import metaInfo from "../../shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -28,10 +27,6 @@ export class Mission extends React.Component<IMissionProps, {}> {
 
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo.mission.title}
-          description={metaInfo.metaInfo.mission.description}
-        />
         <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"

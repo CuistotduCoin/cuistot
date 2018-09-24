@@ -8,7 +8,6 @@ import Hero from "../../components/Hero";
 import components from "../../content/components";
 // @ts-ignore
 import Content from "../../content/howitworks.mdx";
-import metaInfo from "../../shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -28,11 +27,6 @@ export class HowItWorks extends React.Component<IHowItWorksProps, {}> {
 
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo.howitworks.title}
-          description={metaInfo.metaInfo.howitworks.description}
-          href={metaInfo.metaInfo.howitworks.href}
-        />
         <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"

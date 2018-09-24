@@ -2,13 +2,11 @@ import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import React from "react";
 import Footer from "../../components/Footer";
-import Head from "../../components/Head";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
 import components from "../../content/components";
 // @ts-ignore
 import Content from "../../content/organize.mdx";
-import metaInfo from "../../shared/metaInfo";
 
 const styles = () => ({
   grid: {
@@ -28,10 +26,6 @@ export class Organize extends React.Component<IOrganizeProps, {}> {
 
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo.organize.title}
-          description={metaInfo.metaInfo.organize.description}
-        />
         <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"

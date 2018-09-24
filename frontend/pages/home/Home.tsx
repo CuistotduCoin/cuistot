@@ -10,7 +10,6 @@ import Footer from "../../components/Footer";
 import Head from "../../components/Head";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
-import metaInfo from "../../shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   block: {
@@ -183,10 +182,6 @@ export class Home extends React.Component<IHomeProps, {}> {
 
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo.home.title}
-          description={metaInfo.metaInfo.home.description}
-        />
         <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
@@ -194,12 +189,12 @@ export class Home extends React.Component<IHomeProps, {}> {
           valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
           description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
           /*searchForm={
-          <SearchForm
-            apiKey={runtimeConfig.ALGOLIASEARCH_PLACES_KEY}
-            appId={runtimeConfig.ALGOLIASEARCH_PLACES_APP_ID}
-            history={this.props.history}
-          />
-        }*/
+    <SearchForm
+      apiKey={runtimeConfig.ALGOLIASEARCH_PLACES_KEY}
+      appId={runtimeConfig.ALGOLIASEARCH_PLACES_APP_ID}
+      history={this.props.history}
+    />
+  }*/
         />
         <Grid container={true} alignItems="center" className={classes.gridTile}>
           <Grid item={true} xs={12} sm={6}>

@@ -2,13 +2,11 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import React from "react";
 import Footer from "../../components/Footer";
-import Head from "../../components/Head";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
 import components from "../../content/components";
 // @ts-ignore
 import Content from "../../content/presskit.mdx";
-import metaInfo from "../../shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -28,10 +26,6 @@ export class Presskit extends React.Component<IPresskitProps, {}> {
 
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo.presskit.title}
-          description={metaInfo.metaInfo.presskit.description}
-        />
         <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"

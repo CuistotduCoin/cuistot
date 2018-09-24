@@ -12,7 +12,7 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    if (pathname === "/") {
+    if (pathname === "/" || pathname === "") {
       app.render(req, res, "/home", query);
     } else {
       handle(req, res, parsedUrl);

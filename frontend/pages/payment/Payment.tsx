@@ -8,10 +8,8 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Footer from "../../components/Footer";
-import Head from "../../components/Head";
 import Header from "../../components/Header";
 import PaymentCardForm from "../../components/PaymentCardForm";
-import metaInfo from "../../shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -252,10 +250,6 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
 
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo.payment.title}
-          description={metaInfo.metaInfo.payment.description}
-        />
         <Header static={true} hideCompanyIndividual={true} />
         <Grid
           container={true}

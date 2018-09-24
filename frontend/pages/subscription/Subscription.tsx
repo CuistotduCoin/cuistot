@@ -9,10 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import React from "react";
 import Footer from "../../components/Footer";
-import Head from "../../components/Head";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
-import metaInfo from "../../shared/metaInfo";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -51,10 +49,6 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
 
     return (
       <>
-        <Head
-          title={metaInfo.metaInfo.subscription.title}
-          description={metaInfo.metaInfo.subscription.description}
-        />
         <Header />
         <Hero
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
