@@ -1,5 +1,3 @@
-require('dotenv').config(); // eslint-disable-line
-
 const baseConfig = {
   client: 'postgresql',
   connection: {

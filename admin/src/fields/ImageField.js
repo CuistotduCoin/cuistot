@@ -24,7 +24,7 @@ class ImageField extends React.Component {
     if (record.image && record.image.key) {
       Storage.get(`${path}/${record.image.key}`, { identityId: identityId(record) })
         .then(result => this.setState({ imageUrl: result }))
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
     }
   }
 

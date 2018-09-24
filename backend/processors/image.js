@@ -46,7 +46,7 @@ const processImage = (key, newKey, resolve, reject, options) => {
   async.waterfall([
     function check(next) {
       console.log('Check');
-      s3.headObject({ Bucket: process.env.AWS_BUCKET, Key: key }, (err, data) => {
+      s3.headObject({ Bucket: process.env.AWS_STORE_BUCKET, Key: key }, (err, data) => {
         if (err) return next(err);
 
         if (data.Metadata && data.Metadata.optimized) {
@@ -75,7 +75,7 @@ const processImage = (key, newKey, resolve, reject, options) => {
     },
     function download(meta, next) {
       console.log('Download');
-      s3.getObject({ Bucket: process.env.AWS_BUCKET, Key: key }, (err, data) => {
+      s3.getObject({ Bucket: process.env.AWS_STORE_BUCKET, Key: key }, (err, data) => {
         if (err) return next(err);
         return next(null, meta, data);
       });
@@ -94,7 +94,7 @@ const processImage = (key, newKey, resolve, reject, options) => {
       console.log('Upload');
       meta.Metadata.optimized = 'y'; // eslint-disable-line
       s3.putObject({
-        Bucket: process.env.AWS_BUCKET,
+        Bucket: process.env.AWS_STORE_BUCKET,
         Key: newKey,
         Body: file,
         ContentType: obj.ContentType,

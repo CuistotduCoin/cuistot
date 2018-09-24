@@ -30,12 +30,6 @@ export const buildQueryFactory = (
   const knownResources = introspectionResults.resources.map(r => r.type.name);
 
   return (aorFetchType, resourceName, params) => {
-    console.log('introspectionResults : ', introspectionResults);
-    console.log('knownResources : ', knownResources);
-    console.log('aorFetchType : ', aorFetchType);
-    console.log('resourceName : ', resourceName);
-    console.log('params : ', params);
-
     const gqlResourceName = getGqlResourceName(resourceName);
     const resource = introspectionResults.resources.find(r => r.type.name === gqlResourceName);
 
@@ -49,16 +43,12 @@ export const buildQueryFactory = (
       throw new Error(`No query or mutation matching aor fetch type ${aorFetchType} could be found for resource ${resource.type.name}`);
     }
 
-    console.log('queryType : ', queryType);
-
     const variables = buildVariablesImpl(introspectionResults)(
       resource,
       aorFetchType,
       params,
       queryType,
     );
-
-    console.log('variables : ', variables);
 
     const query = buildGqlQueryImpl(introspectionResults)(
       resource,
@@ -67,8 +57,6 @@ export const buildQueryFactory = (
       variables,
       resourceName,
     );
-
-    console.log('query : ', query);
 
     const parseResponse = getResponseParserImpl(introspectionResults)(
       aorFetchType,

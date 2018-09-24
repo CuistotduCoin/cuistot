@@ -29,7 +29,7 @@ const searchClient = algoliasearch(
 
 const server = express()
   .disable("x-powered-by")
-  .use(express.static(process.env.RAZZLE_PUBLIC_DIR!))
+  .use(express.static("./build/public"))
   .get("/*", async (req: express.Request, res: express.Response) => {
     const client = createApolloClient({ ssrMode: true });
     const sheetsRegistry = new SheetsRegistry();

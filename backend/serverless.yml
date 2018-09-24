@@ -5,17 +5,34 @@ frameworkVersion: ">=1.21.0 <2.0.0"
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${env:NODE_ENV}
-  region: ${env:AWS_REGION_IRELAND}
-  profile: default
+  stage: ${{opt:stage,'development'}}
+  region: eu-west-1
+  variableSyntax: "\\${{([ ~:a-zA-Z0-9._\\'\",\\-\\/\\(\\)]+?)}}" # https://serverless.com/framework/docs/providers/aws/guide/variables/#using-custom-variable-syntax
+  environment:
+    NODE_ENV: ${{self:provider.stage}}
+    DATABASE_HOST: ${{ssm:/cuistot/database/host~true}}
+    DATABASE_PORT: ${{ssm:/cuistot/database/port~true}}
+    DATABASE_NAME: ${{ssm:/cuistot/database/name~true}}
+    DATABASE_USERNAME: ${{ssm:/cuistot/database/username~true}}
+    DATABASE_PASSWORD: ${{ssm:/cuistot/database/password~true}}
+    AWS_USERPOOL_ID: ${{ssm:/cuistot/userpool-id~true}}
+    AWS_STORE_BUCKET: ${{ssm:/cuistot/store-bucket~true}}
+    AWS_ACCOUNT_ID: ${{ssm:/cuistot/account-id~true}}
+    SLS_DEBUG: "*"
 
 plugins:
   - serverless-appsync-plugin
-  - serverless-dotenv-plugin
-  - serverless-offline
   - serverless-webpack
+  - serverless-stage-manager
+
+package:
+  individually: true
 
 custom:
+  stages:
+    - development
+    - staging
+    - production
   webpack:
     includeModules:
       forceInclude:
@@ -23,20 +40,18 @@ custom:
       forceExclude:
         - aws-sdk
     packager: 'yarn' # Packager that will be used to package your external modules
-  dotenv:
-    path: .env
-  accountId: ${env:AWS_ACCOUNT_ID}
+  accountId: ${{self:provider.environment.AWS_ACCOUNT_ID}}
   appSync:
-    name: cuistot-appsync-${self:provider.stage}
+    name: cuistot-appsync-${{self:provider.stage}}
     authenticationType: AMAZON_COGNITO_USER_POOLS
     userPoolConfig:
-      awsRegion: ${env:AWS_REGION_IRELAND}
+      awsRegion: ${{self:provider.region}}
       defaultAction: ALLOW
-      userPoolId: ${env:AWS_USERPOOL_ID}
+      userPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     logConfig:
-      loggingRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Logging-${self:custom.appSync.serviceRole}-${self:provider.stage}"
+      loggingRoleArn: "arn:aws:iam::${{self:custom.accountId}}:role/Logging-${{self:custom.appSync.serviceRole}}-${{self:provider.stage}}"
       level: ALL
-    region: ${env:AWS_REGION_IRELAND}
+    region: ${{self:provider.region}}
     mappingTemplates:
       # Mutation mapping templates
       - dataSource: Lambda
@@ -309,24 +324,24 @@ custom:
         name: Lambda
         description: 'Lambda DataSource'
         config:
-          lambdaFunctionArn: "arn:aws:lambda:${self:custom.appSync.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-graphql"
-          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Lambda-${self:custom.appSync.serviceRole}-${self:provider.stage}"
+          lambdaFunctionArn: "arn:aws:lambda:${{self:custom.appSync.region}}:${{self:custom.accountId}}:function:${{self:service}}-${{self:provider.stage}}-graphql"
+          serviceRoleArn: "arn:aws:iam::${{self:custom.accountId}}:role/Lambda-${{self:custom.appSync.serviceRole}}-${{self:provider.stage}}"
 
 functions:
   graphql:
-    handler: handler.graphqlHandler
+    handler: handlers/graphql.handler
     role: GraphqlLambdaRole
   postConfirmation:
-    handler: handler.postConfirmationHandler
+    handler: handlers/postConfirmation.handler
     role: PostConfirmationLambdaRole
   sendEmail:
-    handler: handler.sendEmail
+    handler: handlers/sendEmail.handler
     role: SendEmailLambdaRole
   handleBucketPutEvent:
-    handler: handler.handleBucketPutEvent
+    handler: handlers/handleBucketPutEvent.handler
     role: HandleBucketPutEventLambdaRole
   handleBucketDeleteEvent:
-    handler: handler.handleBucketDeleteEvent
+    handler: handlers/handleBucketDeleteEvent.handler
     role: HandleBucketDeleteEventLambdaRole
 
 resources:
@@ -354,20 +369,21 @@ resources:
       Type: "AWS::RDS::DBInstance"
       DeletionPolicy: "Retain"
       Properties:
-        DBInstanceIdentifier: "cuistot-postgres-${self:provider.stage}"
-        DBName: "cuistot_${self:provider.stage}"
+        DBInstanceIdentifier: "cuistot-postgres-${{self:provider.stage}}"
+        DBName: "cuistot_${{self:provider.stage}}"
         AllocatedStorage: "20"
         DBInstanceClass: "db.t2.micro"
         Engine: "postgres"
         EngineVersion: "9.6.6"
-        MasterUsername: ${env:DATABASE_USERNAME}
-        MasterUserPassword: ${env:DATABASE_PASSWORD}
+        MasterUsername: ${{self:provider.environment.DATABASE_USERNAME}}
+        MasterUserPassword: ${{self:provider.environment.DATABASE_PASSWORD}}
+
     UserPool:
       Condition: NeedsNewUserPool
       Type: "AWS::Cognito::UserPool"
       DeletionPolicy: "Retain"
       Properties:
-        UserPoolName: "cuistot-user-pool-${self:provider.stage}"
+        UserPoolName: "cuistot-user-pool-${{self:provider.stage}}"
         AutoVerifiedAttributes:
           - email
         AliasAttributes:
@@ -377,16 +393,8 @@ resources:
         EmailVerificationMessage:
           Fn::Sub:
             <p>Vous allez avoir besoin de ce code :&nbsp;{####}</p>
-        VerificationMessageTemplate:
-          DefaultEmailOption: CONFIRM_WITH_LINK
-          EmailMessageByLink:
-            Fn::Sub:
-              <h3>Bienvenue chez Cuistot du coin !</h3>
-              <p>Nous avons besoin de confirmer votre compte. Pour cela, veuillez cliquez sur ce lien ci-dessous :</p>
-              <p>{##Je confirme mon compte##}</p>
-          EmailSubjectByLink: Confirmation de votre compte Cuistot du coin
         LambdaConfig:
-          PostConfirmation: "arn:aws:lambda:${self:custom.appSync.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-postConfirmation"
+          PostConfirmation: "arn:aws:lambda:${{self:custom.appSync.region}}:${{self:custom.accountId}}:function:${{self:service}}-${{self:provider.stage}}-postConfirmation"
         Schema:
           - Name: name
             AttributeDataType: String
@@ -417,43 +425,35 @@ resources:
         ClientName: cuistot-app-client
         GenerateSecret: false
         RefreshTokenValidity: 7
-        UserPoolId: ${env:AWS_USERPOOL_ID}
-    TestUserPoolClient:
-      Type: AWS::Cognito::UserPoolClient
-      DeletionPolicy: "Retain"
-      Properties:
-        ClientName: cuistot-app-client-test
-        GenerateSecret: false
-        RefreshTokenValidity: 7
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     AdminGroup:
       Type: AWS::Cognito::UserPoolGroup
       Properties:
         Description: "Admin group"
         GroupName: "Admin"
         Precedence: 1
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     GourmetGroup:
       Type: AWS::Cognito::UserPoolGroup
       Properties:
         Description: "Gourmets group"
         GroupName: "Gourmet"
         Precedence: 3
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     CookGroup:
       Type: AWS::Cognito::UserPoolGroup
       Properties:
         Description: "Cooks group"
         GroupName: "Cook"
         Precedence: 2
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     GuestGroup:
       Type: AWS::Cognito::UserPoolGroup
       Properties:
         Description: "Guests group"
         GroupName: "Guest"
         Precedence: 4
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     AdminUser:
       Type: AWS::Cognito::UserPoolUser
       Properties:
@@ -463,7 +463,7 @@ resources:
           - Name: email
             Value: stephane@cuistotducoin.com
         Username: admin
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     GourmetUser:
       Type: AWS::Cognito::UserPoolUser
       Properties:
@@ -473,7 +473,7 @@ resources:
           - Name: email
             Value: stephane@cuistotducoin.com
         Username: gourmet
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     CookUser:
       Type: AWS::Cognito::UserPoolUser
       Properties:
@@ -483,7 +483,7 @@ resources:
           - Name: email
             Value: stephane@cuistotducoin.com
         Username: cook
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     GuestUser:
       Type: AWS::Cognito::UserPoolUser
       Properties:
@@ -493,7 +493,7 @@ resources:
           - Name: email
             Value: stephane@cuistotducoin.com
         Username: guest
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     AddAdminToAdminGroup:
       DependsOn:
         - AdminUser
@@ -502,7 +502,7 @@ resources:
       Properties:
         GroupName: Admin
         Username: admin
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     AddGourmetToGourmetGroup:
       DependsOn:
         - GourmetUser
@@ -511,7 +511,7 @@ resources:
       Properties:
         GroupName: Gourmet
         Username: gourmet
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     AddCookToCookGroup:
       DependsOn:
         - CookUser
@@ -520,7 +520,7 @@ resources:
       Properties:
         GroupName: Cook
         Username: cook
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
     AddGuestToGuestGroup:
       DependsOn:
         - GuestUser
@@ -529,12 +529,37 @@ resources:
       Properties:
         GroupName: Guest
         Username: guest
-        UserPoolId: ${env:AWS_USERPOOL_ID}
+        UserPoolId: ${{self:provider.environment.AWS_USERPOOL_ID}}
+
+    StoreBucket:
+      Type: AWS::S3::Bucket
+      DependsOn:
+        - HandleBucketPutEventLambdaFunction
+        - HandleBucketDeleteEventLambdaFunction
+      Properties:
+        AccessControl: BucketOwnerFullControl
+        BucketName: ${{self:provider.environment.AWS_STORE_BUCKET}}
+        NotificationConfiguration:
+          LambdaConfigurations:
+            - Event: 's3:ObjectCreated:Put'
+              Function: arn:aws:lambda:${{self:provider.region}}:${{self:custom.accountId}}:function:${{self:service}}-${{self:provider.stage}}-handleBucketPutEvent
+            - Event: 's3:ObjectRemoved:Delete'
+              Function: arn:aws:lambda:${{self:provider.region}}:${{self:custom.accountId}}:function:${{self:service}}-${{self:provider.stage}}-handleBucketDeleteEvent
+
+    StoreBucketIdentityPool:
+      Type: AWS::Cognito::IdentityPool
+      Properties:
+        IdentityPoolName: StoreBucketIdentityPool
+        AllowUnauthenticatedIdentities: false
+        CognitoIdentityProviders:
+          - ClientId: ${{ssm:/cuistot/app-client-id~true}}
+            ProviderName: cognito-idp.${{self:provider.region}}.amazonaws.com/${{self:provider.environment.AWS_USERPOOL_ID}}
+
     AppSyncServiceRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
       Properties:
-        RoleName: "Lambda-${self:custom.appSync.serviceRole}-${self:provider.stage}"
+        RoleName: "Lambda-${{self:custom.appSync.serviceRole}}-${{self:provider.stage}}"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -547,7 +572,7 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "Lambda-${self:custom.appSync.serviceRole}-${self:provider.stage}-Policy"
+            PolicyName: "Lambda-${{self:custom.appSync.serviceRole}}-${{self:provider.stage}}-Policy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
@@ -556,13 +581,14 @@ resources:
                   Action:
                     - "lambda:invokeFunction"
                   Resource:
-                    - "arn:aws:lambda:${self:custom.appSync.region}:*:function:${self:service}-${self:provider.stage}-graphql"
-                    - "arn:aws:lambda:${self:custom.appSync.region}:*:function:${self:service}-${self:provider.stage}-graphql:*"
+                    - "arn:aws:lambda:${{self:custom.appSync.region}}:*:function:${{self:service}}-${{self:provider.stage}}-graphql"
+                    - "arn:aws:lambda:${{self:custom.appSync.region}}:*:function:${{self:service}}-${{self:provider.stage}}-graphql:*"
+
     AppSyncLoggingServiceRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
       Properties:
-        RoleName: "Logging-${self:custom.appSync.serviceRole}-${self:provider.stage}"
+        RoleName: "Logging-${{self:custom.appSync.serviceRole}}-${{self:provider.stage}}"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -575,7 +601,7 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "Logging-${self:custom.appSync.serviceRole}-${self:provider.stage}-Policy"
+            PolicyName: "Logging-${{self:custom.appSync.serviceRole}}-${{self:provider.stage}}-Policy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
@@ -586,11 +612,12 @@ resources:
                     - "logs:CreateLogStream"
                     - "logs:PutLogEvents"
                   Resource: "*"
+
     GraphqlLambdaRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy: "Delete"
       Properties:
-        RoleName: "${self:service}-${self:provider.stage}-${self:provider.region}-graphql-lambdaRole"
+        RoleName: "${{self:service}}-${{self:provider.stage}}-graphql-lambdaRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -603,31 +630,32 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "${self:service}-${self:provider.stage}-${self:provider.region}-graphql-lambdaRole-Policy"
+            PolicyName: "${{self:service}}-${{self:provider.stage}}-graphql-lambdaRole-Policy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
                 -
                   Effect: "Allow"
                   Action: "logs:CreateLogStream"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-graphql:*
+                  Resource: arn:aws:logs:${{self:provider.region}}:${{self:custom.accountId}}:log-group:/aws/lambda/${{self:service}}-${{self:provider.stage}}-graphql:*
                 -
                   Effect: "Allow"
                   Action: "logs:PutLogEvents"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-graphql:*:*
+                  Resource: arn:aws:logs:${{self:provider.region}}:${{self:custom.accountId}}:log-group:/aws/lambda/${{self:service}}-${{self:provider.stage}}-graphql:*:*
                 -
                   Effect: "Allow"
                   Action: "cognito-idp:AdminAddUserToGroup"
-                  Resource: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
+                  Resource: "arn:aws:cognito-idp:${{self:provider.region}}:${{self:custom.accountId}}:userpool/${{self:provider.environment.AWS_USERPOOL_ID}}"
                 -
                   Effect: "Allow"
                   Action: "cognito-idp:AdminRemoveUserFromGroup"
-                  Resource: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
+                  Resource: "arn:aws:cognito-idp:${{self:provider.region}}:${{self:custom.accountId}}:userpool/${{self:provider.environment.AWS_USERPOOL_ID}}"
+
     PostConfirmationLambdaRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
       Properties:
-        RoleName: "${self:service}-${self:provider.stage}-${self:provider.region}-postConfirmation-lambdaRole"
+        RoleName: "${{self:service}}-${{self:provider.stage}}-postConfirmation-lambdaRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -640,31 +668,32 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "${self:service}-${self:provider.stage}-${self:provider.region}-postConfirmation-lambdaRole-Policy"
+            PolicyName: "${{self:service}}-${{self:provider.stage}}-postConfirmation-lambdaRole-Policy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
                 -
                   Effect: "Allow"
                   Action: "logs:CreateLogStream"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-postConfirmation:*
+                  Resource: arn:aws:logs:${{self:provider.region}}:${{self:custom.accountId}}:log-group:/aws/lambda/${{self:service}}-${{self:provider.stage}}-postConfirmation:*
                 -
                   Effect: "Allow"
                   Action: "logs:PutLogEvents"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-postConfirmation:*:*
+                  Resource: arn:aws:logs:${{self:provider.region}}:${{self:custom.accountId}}:log-group:/aws/lambda/${{self:service}}-${{self:provider.stage}}-postConfirmation:*:*
                 -
                   Effect: "Allow"
                   Action: "cognito-idp:AdminAddUserToGroup"
-                  Resource: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
+                  Resource: "arn:aws:cognito-idp:${{self:provider.region}}:${{self:custom.accountId}}:userpool/${{self:provider.environment.AWS_USERPOOL_ID}}"
                 -
                   Effect: "Allow"
                   Action: "SNS:Publish"
-                  Resource: "arn:aws:sns:${self:provider.region}:${self:custom.accountId}:mailer"
+                  Resource: "arn:aws:sns:${{self:provider.region}}:${{self:custom.accountId}}:mailer"
+
     SendEmailLambdaRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
       Properties:
-        RoleName: "${self:service}-${self:provider.stage}-${self:provider.region}-sendEmail-lambdaRole"
+        RoleName: "${{self:service}}-${{self:provider.stage}}-sendEmail-lambdaRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -677,27 +706,28 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "${self:service}-${self:provider.stage}-${self:provider.region}-sendEmail-lambdaRole-Policy"
+            PolicyName: "${{self:service}}-${{self:provider.stage}}-sendEmail-lambdaRole-Policy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
                 -
                   Effect: "Allow"
                   Action: "logs:CreateLogStream"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-sendEmail:*
+                  Resource: arn:aws:logs:${{self:provider.region}}:${{self:custom.accountId}}:log-group:/aws/lambda/${{self:service}}-${{self:provider.stage}}-sendEmail:*
                 -
                   Effect: "Allow"
                   Action: "logs:PutLogEvents"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-sendEmail:*:*
+                  Resource: arn:aws:logs:${{self:provider.region}}:${{self:custom.accountId}}:log-group:/aws/lambda/${{self:service}}-${{self:provider.stage}}-sendEmail:*:*
                 -
                   Effect: "Allow"
                   Action: "ses:SendRawEmail"
                   Resource: "*"
+
     HandleBucketPutEventLambdaRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
       Properties:
-        RoleName: "${self:service}-${self:provider.stage}-handleBucketPutEvent-lambdaRole"
+        RoleName: "${{self:service}}-${{self:provider.stage}}-handleBucketPutEvent-lambdaRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -710,34 +740,35 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "${self:service}-${self:provider.stage}-${self:provider.region}-handleBucketPutEvent-lambdaRole-Policy"
+            PolicyName: "${{self:service}}-${{self:provider.stage}}-handleBucketPutEvent-lambdaRole-Policy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
                 -
                   Effect: "Allow"
                   Action: "logs:CreateLogStream"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-handleBucketPutEvent:*
+                  Resource: arn:aws:logs:${{self:provider.region}}:${{self:custom.accountId}}:log-group:/aws/lambda/${{self:service}}-${{self:provider.stage}}-handleBucketPutEvent:*
                 -
                   Effect: "Allow"
                   Action: "logs:PutLogEvents"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-handleBucketPutEvent:*:*
+                  Resource: arn:aws:logs:${{self:provider.region}}:${{self:custom.accountId}}:log-group:/aws/lambda/${{self:service}}-${{self:provider.stage}}-handleBucketPutEvent:*:*
                 -
                   Effect: "Allow"
                   Action:
                     - "s3:GetObject"
                     - "s3:PutObject"
                     - "s3:DeleteObject"
-                  Resource: arn:aws:s3:::${env:AWS_BUCKET}/*
+                  Resource: arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}/*
                 -
                   Effect: "Allow"
                   Action: "s3:ListBucket"
-                  Resource: arn:aws:s3:::${env:AWS_BUCKET}
+                  Resource: arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}
+
     HandleBucketDeleteEventLambdaRole:
       Type: "AWS::IAM::Role"
       DeletionPolicy : "Delete"
       Properties:
-        RoleName: "${self:service}-${self:provider.stage}-handleBucketDeleteEvent-lambdaRole"
+        RoleName: "${{self:service}}-${{self:provider.stage}}-handleBucketDeleteEvent-lambdaRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -750,41 +781,138 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "${self:service}-${self:provider.stage}-${self:provider.region}-handleBucketDeleteEvent-lambdaRole-Policy"
+            PolicyName: "${{self:service}}-${{self:provider.stage}}-handleBucketDeleteEvent-lambdaRole-Policy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
                 -
                   Effect: "Allow"
                   Action: "logs:CreateLogStream"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-handleBucketDeleteEvent:*
+                  Resource: arn:aws:logs:${{self:provider.region}}:${{self:custom.accountId}}:log-group:/aws/lambda/${{self:service}}-${{self:provider.stage}}-handleBucketDeleteEvent:*
                 -
                   Effect: "Allow"
                   Action: "logs:PutLogEvents"
-                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.accountId}:log-group:/aws/lambda/${self:service}-${self:provider.stage}-handleBucketDeleteEvent:*:*
+                  Resource: arn:aws:logs:${{self:provider.region}}:${{self:custom.accountId}}:log-group:/aws/lambda/${{self:service}}-${{self:provider.stage}}-handleBucketDeleteEvent:*:*
                 -
                   Effect: "Allow"
                   Action:
                     - "s3:DeleteObject"
-                  Resource: arn:aws:s3:::${env:AWS_BUCKET}/*
+                  Resource: arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}/*
+
+    StoreBucketIdentityPoolRole:
+      Type: "AWS::IAM::Role"
+      DeletionPolicy : "Delete"
+      Properties:
+        RoleName: "${{self:service}}-${{self:provider.stage}}-storeBucket-identityPoolRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Federated:
+                  - "cognito-identity.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "${{self:service}}-${{self:provider.stage}}-storeBucket-identityPoolRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: Allow
+                  Action:
+                    - s3:GetObject
+                    - s3:PutObject
+                    - s3:DeleteObject
+                  Resource:
+                    - arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}/*
+                  Condition:
+                    StringEquals:
+                      "cognito-identity.amazonaws.com:sub":
+                        - ${{self:provider.region}}:${{ssm:/cuistot/admin-sub~true}}
+                -
+                  Effect: Allow
+                  Action:
+                    - s3:ListBucket
+                  Resource:
+                    - arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}
+                  Condition:
+                    StringEquals:
+                      "cognito-identity.amazonaws.com:sub":
+                        - ${{self:provider.region}}:${{ssm:/cuistot/admin-sub~true}}
+                -
+                  Effect: Allow
+                  Action:
+                    - s3:GetObject
+                    - s3:PutObject
+                    - s3:DeleteObject
+                  Resource:
+                    - "arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}/public/*"
+                    - "arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}/protected/${cognito-identity.amazonaws.com:sub}/*"
+                    - "arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}/private/${cognito-identity.amazonaws.com:sub}/*"
+                -
+                  Effect: Allow
+                  Action:
+                    - s3:GetObject
+                  Resource:
+                    - "arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}/protected/*"
+                -
+                  Effect: Allow
+                  Action:
+                    - s3:ListBucket
+                  Resource:
+                    - "arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}"
+                  Condition:
+                    StringLike:
+                      s3:prefix:
+                        - public/
+                        - protected/
+                        - "private/${cognito-identity.amazonaws.com:sub}/"
+
+    StoreBucketIdentityPoolRoleAttachment:
+      Type: AWS::Cognito::IdentityPoolRoleAttachment
+      DependsOn:
+        - StoreBucketIdentityPool
+      Properties:
+        IdentityPoolId:
+          Ref: StoreBucketIdentityPool
+        Roles:
+          authenticated:
+            Fn::GetAtt:
+              - StoreBucketIdentityPoolRole
+              - Arn
+
     UserPoolTriggerPostConfirmationInvokePermission:
-      Type: "AWS::Lambda::Permission"
+      Type: AWS::Lambda::Permission
+      DependsOn:
+        - PostConfirmationLambdaFunction
       Properties:
-        Action: "lambda:InvokeFunction"
-        Principal: "cognito-idp.amazonaws.com"
-        SourceArn: "arn:aws:cognito-idp:${self:provider.region}:${self:custom.accountId}:userpool/${env:AWS_USERPOOL_ID}"
-        FunctionName: "arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-postConfirmation"
-    BucketHandlePutEventInvokePermission:
-      Type: "AWS::Lambda::Permission"
+        Action: lambda:InvokeFunction
+        Principal: cognito-idp.amazonaws.com
+        SourceArn: arn:aws:cognito-idp:${{self:provider.region}}:${{self:custom.accountId}}:userpool/${{self:provider.environment.AWS_USERPOOL_ID}}
+        FunctionName: arn:aws:lambda:${{self:provider.region}}:${{self:custom.accountId}}:function:${{self:service}}-${{self:provider.stage}}-postConfirmation
+    StoreBucketHandlePutEventInvokePermission:
+      Type: AWS::Lambda::Permission
+      DependsOn:
+        - HandleBucketPutEventLambdaFunction
       Properties:
-        Action: "lambda:InvokeFunction"
-        Principal: "s3.amazonaws.com"
-        SourceArn: "arn:aws:s3:::store.cuistotducoin.com"
-        FunctionName: "arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-handleBucketPutEvent"
-    BucketHandleDeleteEventInvokePermission:
-      Type: "AWS::Lambda::Permission"
+        Action: lambda:InvokeFunction
+        Principal: s3.amazonaws.com
+        SourceArn: arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}
+        FunctionName: arn:aws:lambda:${{self:provider.region}}:${{self:custom.accountId}}:function:${{self:service}}-${{self:provider.stage}}-handleBucketPutEvent
+    StoreBucketHandleDeleteEventInvokePermission:
+      Type: AWS::Lambda::Permission
+      DependsOn:
+        - HandleBucketDeleteEventLambdaFunction
       Properties:
-        Action: "lambda:InvokeFunction"
-        Principal: "s3.amazonaws.com"
-        SourceArn: "arn:aws:s3:::store.cuistotducoin.com"
-        FunctionName: "arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:function:${self:service}-${self:provider.stage}-handleBucketDeleteEvent"
+        Action: lambda:InvokeFunction
+        Principal: s3.amazonaws.com
+        SourceArn: arn:aws:s3:::${{self:provider.environment.AWS_STORE_BUCKET}}
+        FunctionName: arn:aws:lambda:${{self:provider.region}}:${{self:custom.accountId}}:function:${{self:service}}-${{self:provider.stage}}-handleBucketDeleteEvent
+
+Outputs:
+  IdentityPoolId:
+    Value:
+      Ref: StoreBucketIdentityPool
