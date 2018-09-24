@@ -827,10 +827,13 @@ resources:
             -
               Effect: "Allow"
               Principal:
-                Federated:
-                  - "cognito-identity.amazonaws.com"
-              Action:
-                - "sts:AssumeRole"
+                Federated: "cognito-identity.amazonaws.com"
+              Action: "sts:AssumeRoleWithWebIdentity"
+              Condition:
+                StringEquals:
+                  "cognito-identity.amazonaws.com:aud": ${{ssm:/cuistot/identity-pool-id~true}}
+                ForAnyValue:StringLike:
+                  "cognito-identity.amazonaws.com:amr": "authenticated"
         Policies:
           -
             PolicyName: "${{self:service}}-${{self:provider.stage}}-storeBucket-identityPoolRole-Policy"
@@ -848,7 +851,7 @@ resources:
                   Condition:
                     StringEquals:
                       "cognito-identity.amazonaws.com:sub":
-                        - ${{self:provider.region}}:${{ssm:/cuistot/admin-sub~true}}
+                        - ${{ssm:/cuistot/admin-identity-id~true}}
                 -
                   Effect: Allow
                   Action:
@@ -858,7 +861,7 @@ resources:
                   Condition:
                     StringEquals:
                       "cognito-identity.amazonaws.com:sub":
-                        - ${{self:provider.region}}:${{ssm:/cuistot/admin-sub~true}}
+                        - ${{ssm:/cuistot/admin-identity-id~true}}
                 -
                   Effect: Allow
                   Action:
