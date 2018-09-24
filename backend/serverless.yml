@@ -539,6 +539,23 @@ resources:
       Properties:
         AccessControl: BucketOwnerFullControl
         BucketName: ${{self:provider.environment.AWS_STORE_BUCKET}}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - '*'
+              AllowedOrigins:
+                - '*'
+              ExposedHeaders:
+                - 'x-amz-server-side-encryption'
+                - 'x-amz-request-id'
+                - 'x-amz-id-2'
+              MaxAge: '3000'
+              AllowedMethods:
+                - HEAD
+                - GET
+                - PUT
+                - POST
+                - DELETE
         NotificationConfiguration:
           LambdaConfigurations:
             - Event: 's3:ObjectCreated:Put'
