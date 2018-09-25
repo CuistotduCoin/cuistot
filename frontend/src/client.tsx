@@ -9,6 +9,7 @@ import moment from 'moment';
 import * as React from "react";
 import { ApolloProvider } from "react-apollo";
 import { hydrate } from "react-dom";
+import "react-input-range/lib/css/index.css";
 import { InstantSearch } from "react-instantsearch-dom";
 import { SheetsRegistry } from "react-jss/lib/jss";
 import JssProvider from "react-jss/lib/JssProvider";

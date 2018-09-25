@@ -142,10 +142,6 @@ export class AccountForm extends React.Component<
   public render() {
     const { classes, currentGourmet } = this.props;
 
-    if (!currentGourmet) {
-      return <Loading />;
-    }
-
     const updateInfoFormComponent = () => (
       <Form autoComplete="off">
         <Grid container={true} className={classes.grid} spacing={16}>
@@ -509,6 +505,7 @@ export class AccountForm extends React.Component<
 
     API.graphql(graphqlOperation(UpdateGourmet, { gourmet })).then(res => {
       const result = res.data.updateGourmet;
+      setSubmitting(false);
       if (result.message === "success") {
         openSnackbar("Vos informations ont bien été mises à jour", "success");
         setStatus({ success: true });
@@ -516,7 +513,6 @@ export class AccountForm extends React.Component<
       } else {
         openSnackbar("Échec de la mise à jour de vos informations", "error");
         setStatus({ success: false });
-        setSubmitting(false);
         if (result.errors.length) {
           const error = result.errors[0].message;
           console.error(error);
@@ -558,13 +554,13 @@ export class AccountForm extends React.Component<
 
     API.graphql(graphqlOperation(UpdateCook, { cook })).then(res => {
       const result = res.data.updateCook;
+      setSubmitting(false);
       if (result.message === "success") {
         openSnackbar("Vos informations ont bien été mises à jour", "success");
         setStatus({ success: true });
       } else {
         openSnackbar("Échec de la mise à jour de vos informations", "error");
         setStatus({ success: false });
-        setSubmitting(false);
         if (result.errors.length) {
           const error = result.errors[0].message;
           console.error(error);
@@ -585,6 +581,7 @@ export class AccountForm extends React.Component<
       .then(data => {
         openSnackbar("Votre mot de passe a bien été mis à jour", "success");
         setStatus({ success: true });
+        setSubmitting(false);
         resetForm(passwordInitialValues);
       })
       .catch(err => {

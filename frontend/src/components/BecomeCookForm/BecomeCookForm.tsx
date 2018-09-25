@@ -56,10 +56,6 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
   public render() {
     const { classes, currentGourmet } = this.props;
 
-    if (!currentGourmet) {
-      return <Loading />;
-    }
-
     return (
       <Subscribe to={[AppContainer]}>
         {(app: any) => (

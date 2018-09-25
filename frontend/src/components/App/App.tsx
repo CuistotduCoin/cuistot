@@ -30,6 +30,7 @@ import Terms from "pages/Terms";
 import TermsPro from "pages/TermsPro";
 import Testimony from "pages/Testimony";
 import Workshop from "pages/Workshop";
+import WorkshopNew from "pages/WorkshopNew";
 import { GetCurrentGourmet, UpdateGourmet } from "queries";
 import React from "react";
 import { Route, Switch } from "react-router";
@@ -204,20 +205,22 @@ export class App extends React.Component<IAppProps, {}> {
               <Route path="/mission" exact component={Mission} />
               <Route path="/presskit" exact component={Presskit} />
               <Route path="/gourmets/:id" exact component={Profile} />
-              <Route path="/workshops/:id" exact component={Workshop} />
               <Route path="/s/:name" exact component={Search} />
               <Route path="/team" exact component={Team} />
               <Route path="/404" exact component={NotFound} />
               <EnsureLoggedIn
                 isLoggedIn={app.state.isLoggedIn}
+                currentGourmet={app.state.currentGourmet}
                 setReferer={app.setReferer}
               >
                 <Switch>
                   <Route path="/account" exact component={Account} />
                   <Route path="/become-cook" exact component={BecomeCook} />
+                  <Route path="/workshops/new" exact component={WorkshopNew} />
                   <Route component={NotFound} />
                 </Switch>
               </EnsureLoggedIn>
+              <Route path="/workshops/:id" exact component={Workshop} />
             </Switch>
           </>
         )}

@@ -12,6 +12,7 @@
     "jsx-boolean-value": false,
     "object-literal-sort-keys": false,
     "object-shorthand-properties-first": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "prefer-array-literal": false
   }
 }

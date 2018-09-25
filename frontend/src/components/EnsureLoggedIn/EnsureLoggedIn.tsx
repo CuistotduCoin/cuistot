@@ -1,10 +1,12 @@
 import { Auth } from "aws-amplify";
+import Loading from "components/Loading";
 import { withRedirect } from "decorators/RedirectDecorator";
 import React from "react";
 
 interface IEnsureLoggedInProps {
   isLoggedIn: boolean;
   location: any;
+  currentGourmet?: object;
   setReferer(url: string);
   redirectTo(url: string, push?: boolean);
 }
@@ -31,11 +33,16 @@ export class EnsureLoggedIn extends React.Component<IEnsureLoggedInProps, {}> {
   }
 
   public render() {
-    const { isLoggedIn, children } = this.props;
+    const { isLoggedIn, children, currentGourmet } = this.props;
 
     if (isLoggedIn) {
+      if (!currentGourmet) {
+        return <Loading />;
+      }
+
       return children;
     }
+
     return null;
   }
 }

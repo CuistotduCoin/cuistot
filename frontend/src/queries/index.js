@@ -5,6 +5,8 @@ import GetCurrentGourmetImage from './GetCurrentGourmetImage';
 import CreateCook from './CreateCook';
 import GetCook from './GetCook';
 import UpdateCook from './UpdateCook';
+import GetWorkshop from './GetWorkshop';
+import CreateWorkshop from './CreateWorkshop';
 
 export {
   GetWorkshops,
@@ -14,4 +16,6 @@ export {
   CreateCook,
   GetCook,
   UpdateCook,
+  GetWorkshop,
+  CreateWorkshop,
 };
