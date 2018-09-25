@@ -59,7 +59,7 @@ package:
 functions:
   ssr:
     timeout: 30
-    handler: build/server.handler
+    handler: build/lambda.handler
     events:
       - http:
           method: get

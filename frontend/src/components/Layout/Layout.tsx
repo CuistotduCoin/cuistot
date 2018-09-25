@@ -1,12 +1,9 @@
 import Footer from "components/Footer";
-import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import React from "react";
-import metaInfo from "shared/metaInfo";
 
 interface ILayoutProps {
-  pageName?: string;
   valueProposition?: string;
   description?: string;
   children: any;
@@ -15,16 +12,10 @@ interface ILayoutProps {
 
 export class Layout extends React.Component<ILayoutProps, {}> {
   public render() {
-    const { pageName, valueProposition, description, children, className } = this.props;
+    const { valueProposition, description, children, className } = this.props;
 
     return (
       <div className={className}>
-        {pageName && (
-          <Head
-            title={metaInfo.metaInfo[pageName].title}
-            description={metaInfo.metaInfo[pageName].description}
-          />
-        )}
         <Header />
         {valueProposition && (
           <Hero

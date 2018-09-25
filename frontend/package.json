@@ -7,24 +7,24 @@
     "url": "git@github.com:CuistotduCoin/cuistot.git"
   },
   "scripts": {
-    "start": "assume-role development node loadenv && env-cmd .env cross-env EXECUTION_ENV=start razzle start",
-    "debug": "assume-role development node loadenv && env-cmd .env cross-env EXECUTION_ENV=start razzle start --inspect",
-    "debugStart": "assume-role development node loadenv && env-cmd .env cross-env EXECUTION_ENV=start razzle start --inspect-brk",
-    "build:prod": "assume-role production node loadenv && env-cmd .env cross-env EXECUTION_ENV=lambda razzle build",
-    "build:dev": "assume-role development node loadenv && env-cmd .env cross-env EXECUTION_ENV=lambda razzle build",
-    "startLambda:prod": "assume-role production cross-env EXECUTION_ENV=lambda serverless offline start -s production",
-    "startLambda:dev": "assume-role development cross-env EXECUTION_ENV=lambda serverless offline start -s development",
-    "test": "assume-role development node loadenv && env-cmd .env razzle test --env=jsdom",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "deploy:prod": "assume-role production cross-env EXECUTION_ENV=lambda serverless deploy -s production",
-    "deploy:dev": "assume-role development cross-env EXECUTION_ENV=lambda serverless deploy -s development",
-    "tslint-check": "assume-role development node loadenv && env-cmd .env tslint-config-prettier-check ./tslint.json"
+    "dev": "assume-role development node loadenv && env-cmd .env nodemon server/index.ts",
+    "build:dev": "assume-role development node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json",
+    "build:prod": "assume-role production node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json",
+    "lambda:dev": "assume-role development sls offline start -s development",
+    "lambda:prod": "assume-role production sls offline start -s production",
+    "start": "assume-role development node build/index.js",
+    "deploy:dev": "assume-role development sls deploy -s development",
+    "deploy:prod": "assume-role production sls deploy -s production",
+    "storybook": "start-storybook -p 9001"
   },
   "dependencies": {
-    "@jaredpalmer/after": "^1.3.1",
-    "@material-ui/core": "^3.0.1",
-    "@material-ui/docs": "^1.0.0-alpha.5",
+    "@material-ui/core": "^3.1.1",
     "@material-ui/icons": "^3.0.1",
+    "@mdx-js/mdx": "^0.15.4",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-mdx": "^1.2.0",
+    "@zeit/next-typescript": "^1.1.1",
+    "compression": "^1.7.3",
     "algolia-places-react": "^1.3.0",
     "algoliasearch": "^3.30.0",
     "apollo-cache-inmemory": "^1.3.0-beta.6",
@@ -36,7 +36,6 @@
     "aws-appsync": "^1.3.4",
     "aws-appsync-react": "^1.1.4",
     "aws-serverless-express": "^3.3.5",
-    "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "express": "^4.16.3",
     "formik": "^1.1.1",
@@ -49,10 +48,12 @@
     "marked": "^0.4.0",
     "mdi-material-ui": "^5.4.0",
     "moment": "^2.22.2",
+    "next": "^7.0.0",
+    "next-seo": "^1.2.0",
+    "node-fetch": "^2.2.0",
+    "raven": "^2.6.4",
+    "raven-js": "^3.27.0",
     "query-string": "^6.1.0",
-    "raven": "^2.6.3",
-    "razzle": "^2.4.0",
-    "razzle-plugin-typescript": "^2.4.0",
     "react": "^16.4.2",
     "react-apollo": "2.1.9",
     "react-credit-cards": "^0.7.0",
@@ -88,8 +89,10 @@
     "@types/graphql": "^0.13.4",
     "@types/jest": "^23.3.1",
     "@types/node": "^10.9.3",
+    "@types/next": "^6.1.8",
     "@types/prop-types": "^15.5.5",
     "@types/react": "16.4.6",
+    "awesome-typescript-loader": "^5.2.1",
     "@types/react-dom": "^16.0.7",
     "@types/react-helmet": "^5.0.7",
     "@types/react-router": "4.0.29",
@@ -123,26 +126,8 @@
     "tslint-plugin-prettier": "^1.3.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.0.1",
+    "next-compose-plugins": "^2.1.1",
+    "nodemon": "^1.18.4",
     "unstated-debug": "^0.2.0"
-  },
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js",
-      "^.+\\.css$": "<rootDir>/node_modules/razzle/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/node_modules/razzle/config/jest/fileTransform.js"
-    },
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.(ts|js)?(x)",
-      "<rootDir>/src/**/?(*.)(spec|test).(ts|js)?(x)"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}"
-    ]
   }
 }

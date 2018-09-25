@@ -1,5 +1,5 @@
+import Link from "next/link";
 import React from "react";
-import { Link } from "react-router-dom";
 
 interface ILogoProps {
   className?: any;
@@ -17,14 +17,16 @@ export class Logo extends React.Component<ILogoProps, {}> {
     const { height, width, className } = this.props;
 
     return (
-      <Link to="/">
-        <img
-          src="https://static.cuistotducoin.com/img/logo.svg"
-          alt="Logo de Cuistot du coin"
-          height={height}
-          width={width}
-          className={className}
-        />
+      <Link href="/">
+        <a>
+          <img
+            src="https://static.cuistotducoin.com/img/logo.svg"
+            alt="Logo de Cuistot du coin"
+            height={height}
+            width={width}
+            className={className}
+            />
+        </a>
       </Link>
     );
   }
