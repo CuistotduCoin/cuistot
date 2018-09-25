@@ -15,16 +15,24 @@ import Kitchen from "@material-ui/icons/Kitchen";
 import LocalDining from "@material-ui/icons/LocalDining";
 import Lock from "@material-ui/icons/Lock";
 import People from "@material-ui/icons/People";
+import { graphqlOperation } from "aws-amplify";
+import { Connect } from "aws-amplify-react";
 import BookForm from "components/BookForm";
 import CommentBlock from "components/CommentBlock";
 import Cover from "components/Cover";
 import Footer from "components/Footer";
 import Header from "components/Header";
+import Loading from "components/Loading";
 import StarRating from "components/StarRating";
+import get from "lodash.get";
+import { GetWorkshop } from "queries";
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Scroll from "react-scroll";
 import Slider from "react-slick";
 import Waypoint from "react-waypoint";
+import { compose } from "recompose";
+import { formatName } from "shared/util";
 
 const styles = (theme: Theme) => ({
   avatar: {
@@ -114,24 +122,20 @@ interface IWorkshopProps {
   date: string;
   duration: number;
   mainPhoto: string;
-  photos: any;
   imageCook: string;
   nameCook: string;
   rating?: number;
   ratingNumber?: number;
   availableSeat: number;
   spot: string;
-  minSeat: string;
-  maxSeat: number;
   totalDate?: number;
   dayEndBook: number;
   eventType: string;
   cuisineType: string;
-  timeEvent: string;
   descriptionCook: string;
   descriptionWorkshop: string;
-  comments: any;
   furtherInformation: string;
+  match: any;
 }
 
 interface IWorkshopState {
@@ -187,395 +191,413 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
       slidesToShow: 1
     };
 
-    return (
-      <>
-        <Modal
-          aria-labelledby="carousel"
-          aria-describedby="To"
-          open={this.state.modalOpen}
-          onClose={this.handleModalClose}
-        >
-          <div className={classes.slider}>
-            <Slider {...sliderSettings}>
-              {this.props.photos.map(photo => (
-                <div key={photo.id}>
-                  <img
-                    src={photo.image}
-                    alt={photo.name}
-                    className={classes.sliderImage}
-                    key={photo.name}
-                  />
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </Modal>
-        <Header static={true} />
-        <div onClick={this.handleModalOpen}>
-          <Cover imageURL={this.props.mainPhoto} />
-        </div>
-        <Grid
-          container={true}
-          justify="space-around"
-          alignItems="center"
-          className={classes.grid}
-        >
-          <Grid item={true} xs={2}>
-            <Grid container={true} justify="center">
-              <Avatar className={classes.avatar} src={this.props.imageCook} />
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={10}>
-            <Grid container={true}>
-              <Grid item={true}>
-                {this.props.rating && (
-                  <Grid container={true}>
-                    <StarRating rating={this.props.rating} />
-                    {this.props.ratingNumber && (
-                      <Typography
-                        variant="caption"
-                        className={classes.ratingNumber}
-                      >
-                        ({this.props.ratingNumber})
-                      </Typography>
-                    )}
-                  </Grid>
-                )}
-                <Typography variant="title" component="p" gutterBottom={true}>
-                  Recontrez {this.props.nameCook}
-                </Typography>
-                <Typography
-                  variant="headline"
-                  component="h2"
-                  gutterBottom={true}
-                >
-                  {this.props.name}
-                </Typography>
-                <Typography
-                  variant="subheading"
-                  component="p"
-                  gutterBottom={true}
-                >
-                  {this.props.date}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid container={true} justify="space-around" className={classes.grid}>
-          <Grid item={true} xs={8}>
-            <Tabs
-              value={this.state.tabIndex}
-              indicatorColor="primary"
-              textColor="primary"
-              onChange={this.handleChangeTabIndex}
-              className={classes.sticky}
-            >
-              <Tab label="Au menu" className={classes.tabs} />
-              <Tab label="Le Cuistot" className={classes.tabs} />
-              <Tab label="Commentaires" className={classes.tabs} />
-              <Tab
-                label="Informations complémentaires"
-                className={classes.tabs}
-              />
-              <Tab className={classes.tabs} icon={<KeyboardArrowUp />} />
-            </Tabs>
-            <Grid
-              container={true}
-              justify="space-around"
-              alignItems="center"
-              className={classes.innerGrid}
-            >
-              <Grid item={true}>
-                <Grid container={true}>
-                  <Kitchen />
-                  <Typography>{this.props.eventType}</Typography>
-                </Grid>
-              </Grid>
-              <Grid item={true}>
-                <Grid container={true}>
-                  <LocalDining />
-                  <Typography>{this.props.cuisineType}</Typography>
-                </Grid>
-              </Grid>
-              <Grid item={true}>
-                <Grid container={true}>
-                  <People />
-                  <Typography>
-                    de {this.props.minSeat} à {this.props.maxSeat} invités
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid item={true}>
-                <Grid container={true}>
-                  <AccessTime />
-                  <Typography>{this.props.timeEvent}</Typography>
-                </Grid>
-              </Grid>
-            </Grid>
+    const { id: workshopId } = this.props.match.params;
 
-            <Grid
-              container={true}
-              className={classes.leftGrid}
-              direction="column"
-            >
-              <Scroll.Element name="0" />
-              <Waypoint onEnter={this.handleWayPoint(0)}>
-                <div>
-                  <Grid item={true} className={classes.itemGrid}>
-                    <Typography
-                      variant="headline"
-                      component="h2"
-                      gutterBottom={true}
-                    >
-                      Au menu
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      component="p"
-                      paragraph={true}
-                      className={classes.paragraph}
-                    >
-                      {this.props.descriptionWorkshop}
-                    </Typography>
-                  </Grid>
-                  <Grid item={true} className={classes.itemGrid}>
-                    <Typography
-                      variant="headline"
-                      component="h2"
-                      gutterBottom={true}
-                    >
-                      Photos & Videos
-                    </Typography>
-                    <Grid
-                      container={true}
-                      alignItems="center"
-                      justify="space-around"
-                    >
-                      {this.props.photos !== undefined &&
-                        this.props.photos.slice(0, 3).map((photo, i) => (
-                          <Grid key={photo.id} item={true}>
-                            {i !== 2 ? (
-                              <img
-                                src={photo.image}
-                                alt={photo.name}
-                                width={200}
-                                onClick={this.handleModalOpen}
-                              />
-                            ) : (
-                              <div
-                                className={classes.tileContainer}
-                                onClick={this.handleModalOpen}
-                              >
-                                <img
-                                  src={photo.image}
-                                  alt={photo.name}
-                                  className={classes.img}
-                                  width={200}
-                                />
-                                <div className={classes.tile}>
-                                  <Typography
-                                    variant="body1"
-                                    component="p"
-                                    align="center"
-                                    color="inherit"
-                                  >
-                                    Voir plus de photos
-                                  </Typography>
-                                </div>
-                              </div>
-                            )}
-                          </Grid>
-                        ))}
-                    </Grid>
-                  </Grid>
+    return (
+      <Connect query={graphqlOperation(GetWorkshop, { workshop_id: workshopId })}>
+        {({ data, errors }) => {
+          if (get(errors, 'length')) {
+            if (errors[0].message === 'resource not found') {
+              return <Redirect to="/404" />;
+            }
+          }
+
+          if (!data.getWorkshop) {
+            return <Loading />;
+          }
+
+          const workshop = data.getWorkshop.workshop;
+
+          return (
+            <>
+              <Modal
+                aria-labelledby="carousel"
+                aria-describedby="To"
+                open={this.state.modalOpen}
+                onClose={this.handleModalClose}
+              >
+                <div className={classes.slider}>
+                  <Slider {...sliderSettings}>
+                    {workshop.images.map(image => (
+                      <div key={image.key}>
+                        <img
+                          src={image.key}
+                          alt={image.name || 'Coming soon : the name'}
+                          className={classes.sliderImage}
+                        />
+                      </div>
+                    ))}
+                  </Slider>
                 </div>
-              </Waypoint>
-              <Scroll.Element name="1" />
-              <Waypoint onEnter={this.handleWayPoint(1)}>
-                <div>
-                  <Grid item={true} className={classes.itemGrid}>
-                    <Typography
-                      variant="headline"
-                      component="h2"
-                      gutterBottom={true}
-                    >
-                      Le Cuistot
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      component="p"
-                      paragraph={true}
-                      className={classes.paragraph}
-                    >
-                      {this.props.descriptionCook}
-                    </Typography>
-                  </Grid>
-                </div>
-              </Waypoint>
-              <Scroll.Element name="2" />
-              <Waypoint onEnter={this.handleWayPoint(2)}>
-                <div>
-                  <Grid item={true} className={classes.itemGrid}>
-                    <Typography
-                      variant="headline"
-                      component="h2"
-                      gutterBottom={true}
-                    >
-                      Commentaires
-                    </Typography>
-                    <Grid container={true}>
-                      {this.props.comments !== undefined &&
-                        this.props.comments.slice(0, 3).map((comment, i) => (
-                          <>
-                            <Grid
-                              key={comment.id}
-                              item={true}
-                              className={classes.commentBlock}
-                            >
-                              <CommentBlock
-                                comment={comment.comment}
-                                date={comment.date}
-                                name={comment.name}
-                                picture={comment.picture}
-                                stars={comment.stars}
-                              />
-                            </Grid>
-                            {i !== 2 && (
-                              <Grid item={true} xs={12}>
-                                <Divider />
-                              </Grid>
-                            )}
-                          </>
-                        ))}
-                    </Grid>
-                  </Grid>
-                </div>
-              </Waypoint>
-              <Scroll.Element name="3" />
-              <Waypoint onEnter={this.handleWayPoint(3)}>
-                <div>
-                  <Grid item={true} className={classes.itemGrid}>
-                    <Typography
-                      variant="headline"
-                      component="h2"
-                      gutterBottom={true}
-                    >
-                      Informations complémentaires
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      component="p"
-                      paragraph={true}
-                      className={classes.paragraph}
-                    >
-                      {this.props.furtherInformation}
-                    </Typography>
-                  </Grid>
-                </div>
-              </Waypoint>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={4}>
-            <div className={classes.sticky}>
-              <Paper elevation={1} className={classes.infoReservartion}>
-                <BookForm
-                  price={this.props.price}
-                  availableSeat={this.props.availableSeat}
-                  dayEndBook={this.props.dayEndBook}
-                />
-              </Paper>
+              </Modal>
+              <Header static />
+              <div onClick={this.handleModalOpen}>
+                <Cover imageURL={this.props.mainPhoto} />
+              </div>
               <Grid
                 container={true}
-                direction="column"
                 justify="space-around"
                 alignItems="center"
-                className={classes.innerGrid}
+                className={classes.grid}
               >
-                <Grid item={true} className={classes.itemGrid}>
-                  <Grid container={true}>
-                    <Lock />
-                    <Typography variant="body1">
-                      Paiement sécurisé par Mangopay
-                    </Typography>
+                <Grid item={true} xs={2}>
+                  <Grid container={true} justify="center">
+                    <Avatar className={classes.avatar} src={this.props.imageCook} />
                   </Grid>
-                  <Grid
-                    container={true}
-                    alignItems="center"
-                    justify="space-around"
-                  >
+                </Grid>
+                <Grid item={true} xs={10}>
+                  <Grid container={true}>
                     <Grid item={true}>
-                      <img
-                        src="https://static.cuistotducoin.com/img/workshop/visa.png"
-                        alt="visa"
-                        height="24"
-                        width="40"
-                      />
-                      <img
-                        src="https://static.cuistotducoin.com/img/workshop/masterpass.png"
-                        alt="masterpass"
-                        height="24"
-                        width="40"
-                      />
-                      <img
-                        src="https://static.cuistotducoin.com/img/workshop/maestro.png"
-                        alt="maestro"
-                        height="24"
-                        width="40"
-                      />
+                      {this.props.rating && (
+                        <Grid container={true}>
+                          <StarRating rating={this.props.rating} />
+                          {this.props.ratingNumber && (
+                            <Typography
+                              variant="caption"
+                              className={classes.ratingNumber}
+                            >
+                              ({this.props.ratingNumber})
+                            </Typography>
+                          )}
+                        </Grid>
+                      )}
+                      <Typography variant="title" component="p" gutterBottom={true}>
+                        Recontrez {formatName(workshop, 'cook.gourmet.first_name', 'cook.gourmet.last_name')}
+                      </Typography>
+                      <Typography
+                        variant="headline"
+                        component="h2"
+                        gutterBottom={true}
+                      >
+                        {this.props.name}
+                      </Typography>
+                      <Typography
+                        variant="subheading"
+                        component="p"
+                        gutterBottom={true}
+                      >
+                        {this.props.date}
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item={true} className={classes.itemGrid}>
-                  <Grid container={true}>
-                    <Typography
-                      variant="body1"
-                      onMouseEnter={this.handlePopoverOpen}
-                      onMouseLeave={this.handlePopoverClose}
-                    >
-                      Conditions d'annulation
-                    </Typography>
-                    <Popover
-                      className={classes.popover}
-                      open={open}
-                      anchorEl={this.state.popoverAnnulation}
-                      anchorOrigin={{
-                        horizontal: "left",
-                        vertical: "bottom"
-                      }}
-                      transformOrigin={{
-                        horizontal: "left",
-                        vertical: "top"
-                      }}
-                      onClose={this.handlePopoverClose}
-                      disableRestoreFocus={true}
-                    >
-                      <Paper elevation={2} className={classes.cancellation}>
-                        <Typography variant="body1">
-                          Les conditions d'annulation sont les suivantes : Si
-                          vous annulez jusqu'à 3 jours avant la date de
-                          l'atelier, vous recevez un remboursement intégral
-                          (minoré des frais de service). En cas d'annulation
-                          dans les 3 jours précédant l'atelier, la réservation
-                          n'est pas remboursable.
+              </Grid>
+              <Grid container={true} justify="space-around" className={classes.grid}>
+                <Grid item={true} xs={8}>
+                  <Tabs
+                    value={this.state.tabIndex}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    onChange={this.handleChangeTabIndex}
+                    className={classes.sticky}
+                  >
+                    <Tab label="Au menu" className={classes.tabs} />
+                    <Tab label="Le Cuistot" className={classes.tabs} />
+                    <Tab label="Commentaires" className={classes.tabs} />
+                    <Tab
+                      label="Informations complémentaires"
+                      className={classes.tabs}
+                    />
+                    <Tab className={classes.tabs} icon={<KeyboardArrowUp />} />
+                  </Tabs>
+                  <Grid
+                    container={true}
+                    justify="space-around"
+                    alignItems="center"
+                    className={classes.innerGrid}
+                  >
+                    <Grid item={true}>
+                      <Grid container={true}>
+                        <Kitchen />
+                        <Typography>_Repas_</Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item={true}>
+                      <Grid container={true}>
+                        <LocalDining />
+                        <Typography>_Japonaise_</Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item={true}>
+                      <Grid container={true}>
+                        <People />
+                        <Typography>
+                          de {workshop.min_gourmet} à {workshop.max_gourmet} invités
                         </Typography>
-                      </Paper>
-                    </Popover>
+                      </Grid>
+                    </Grid>
+                    <Grid item={true}>
+                      <Grid container={true}>
+                        <AccessTime />
+                        <Typography>{workshop.duration}</Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
+                  <Grid
+                    container={true}
+                    className={classes.leftGrid}
+                    direction="column"
+                  >
+                    <Scroll.Element name="0" />
+                    <Waypoint onEnter={this.handleWayPoint(0)}>
+                      <div>
+                        <Grid item={true} className={classes.itemGrid}>
+                          <Typography
+                            variant="headline"
+                            component="h2"
+                            gutterBottom={true}
+                          >
+                            Au menu
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            component="p"
+                            paragraph={true}
+                            className={classes.paragraph}
+                          >
+                            {this.props.descriptionWorkshop}
+                          </Typography>
+                        </Grid>
+                        <Grid item={true} className={classes.itemGrid}>
+                          <Typography
+                            variant="headline"
+                            component="h2"
+                            gutterBottom={true}
+                          >
+                            Photos & Videos
+                          </Typography>
+                          <Grid
+                            container={true}
+                            alignItems="center"
+                            justify="space-around"
+                          >
+                            {workshop.images.slice(0, Math.min(workshop.images.length, 3)).map((image, i) => (
+                                <Grid key={image.id} item={true}>
+                                  {i !== 2 ? (
+                                    <img
+                                      src={image.key}
+                                      alt={image.name || 'Coming soon : the name'}
+                                      width={200}
+                                      onClick={this.handleModalOpen}
+                                    />
+                                  ) : (
+                                    <div
+                                      className={classes.tileContainer}
+                                      onClick={this.handleModalOpen}
+                                    >
+                                      <img
+                                        src={image.key}
+                                        alt={image.name || 'Coming soon : the name'}
+                                        className={classes.img}
+                                        width={200}
+                                      />
+                                      <div className={classes.tile}>
+                                        <Typography
+                                          variant="body1"
+                                          component="p"
+                                          align="center"
+                                          color="inherit"
+                                        >
+                                          Voir plus de photos
+                                        </Typography>
+                                      </div>
+                                    </div>
+                                  )}
+                                </Grid>
+                              ))}
+                          </Grid>
+                        </Grid>
+                      </div>
+                    </Waypoint>
+                    <Scroll.Element name="1" />
+                    <Waypoint onEnter={this.handleWayPoint(1)}>
+                      <div>
+                        <Grid item={true} className={classes.itemGrid}>
+                          <Typography
+                            variant="headline"
+                            component="h2"
+                            gutterBottom={true}
+                          >
+                            Le Cuistot
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            component="p"
+                            paragraph={true}
+                            className={classes.paragraph}
+                          >
+                            {this.props.descriptionCook}
+                          </Typography>
+                        </Grid>
+                      </div>
+                    </Waypoint>
+                    <Scroll.Element name="2" />
+                    <Waypoint onEnter={this.handleWayPoint(2)}>
+                      <div>
+                        <Grid item={true} className={classes.itemGrid}>
+                          <Typography
+                            variant="headline"
+                            component="h2"
+                            gutterBottom={true}
+                          >
+                            Commentaires
+                          </Typography>
+                          <Grid container={true}>
+                            {workshop.cook.evaluations.slice(0, Math.min(workshop.cook.evaluations.length, 3)).map((evaluation, i) => (
+                                <>
+                                  <Grid
+                                    key={evaluation.id}
+                                    item={true}
+                                    className={classes.commentBlock}
+                                  >
+                                    <CommentBlock
+                                      authorIdentityId={evaluation.author.identity_id}
+                                      authorImageKey={get(evaluation, 'author.image.key')}
+                                      comment={evaluation.comment}
+                                      date={evaluation.created_at}
+                                      rating={evaluation.rating}
+                                      name={formatName(evaluation, 'author.first_name', 'author.last_name')}
+                                    />
+                                  </Grid>
+                                  {i !== 2 && (
+                                    <Grid item={true} xs={12}>
+                                      <Divider />
+                                    </Grid>
+                                  )}
+                                </>
+                              ))}
+                          </Grid>
+                        </Grid>
+                      </div>
+                    </Waypoint>
+                    <Scroll.Element name="3" />
+                    <Waypoint onEnter={this.handleWayPoint(3)}>
+                      <div>
+                        <Grid item={true} className={classes.itemGrid}>
+                          <Typography
+                            variant="headline"
+                            component="h2"
+                            gutterBottom={true}
+                          >
+                            Informations complémentaires
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            component="p"
+                            paragraph={true}
+                            className={classes.paragraph}
+                          >
+                            {this.props.furtherInformation}
+                          </Typography>
+                        </Grid>
+                      </div>
+                    </Waypoint>
                   </Grid>
                 </Grid>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                >
-                  Poser une question au cuistot
-                </Button>
+                <Grid item={true} xs={4}>
+                  <div className={classes.sticky}>
+                    <Paper elevation={1} className={classes.infoReservartion}>
+                      <BookForm
+                        price={this.props.price}
+                        availableSeat={this.props.availableSeat}
+                        dayEndBook={this.props.dayEndBook}
+                      />
+                    </Paper>
+                    <Grid
+                      container={true}
+                      direction="column"
+                      justify="space-around"
+                      alignItems="center"
+                      className={classes.innerGrid}
+                    >
+                      <Grid item={true} className={classes.itemGrid}>
+                        <Grid container={true}>
+                          <Lock />
+                          <Typography variant="body1">
+                            Paiement sécurisé par Mangopay
+                          </Typography>
+                        </Grid>
+                        <Grid
+                          container={true}
+                          alignItems="center"
+                          justify="space-around"
+                        >
+                          <Grid item={true}>
+                            <img
+                              src="https://static.cuistotducoin.com/img/workshop/visa.png"
+                              alt="visa"
+                              height="24"
+                              width="40"
+                            />
+                            <img
+                              src="https://static.cuistotducoin.com/img/workshop/masterpass.png"
+                              alt="masterpass"
+                              height="24"
+                              width="40"
+                            />
+                            <img
+                              src="https://static.cuistotducoin.com/img/workshop/maestro.png"
+                              alt="maestro"
+                              height="24"
+                              width="40"
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                      <Grid item={true} className={classes.itemGrid}>
+                        <Grid container={true}>
+                          <Typography
+                            variant="body1"
+                            onMouseEnter={this.handlePopoverOpen}
+                            onMouseLeave={this.handlePopoverClose}
+                          >
+                            Conditions d'annulation
+                          </Typography>
+                          <Popover
+                            className={classes.popover}
+                            open={open}
+                            anchorEl={this.state.popoverAnnulation}
+                            anchorOrigin={{
+                              horizontal: "left",
+                              vertical: "bottom"
+                            }}
+                            transformOrigin={{
+                              horizontal: "left",
+                              vertical: "top"
+                            }}
+                            onClose={this.handlePopoverClose}
+                            disableRestoreFocus={true}
+                          >
+                            <Paper elevation={2} className={classes.cancellation}>
+                              <Typography variant="body1">
+                                Les conditions d'annulation sont les suivantes : Si
+                                vous annulez jusqu'à 3 jours avant la date de
+                                l'atelier, vous recevez un remboursement intégral
+                                (minoré des frais de service). En cas d'annulation
+                                dans les 3 jours précédant l'atelier, la réservation
+                                n'est pas remboursable.
+                              </Typography>
+                            </Paper>
+                          </Popover>
+                        </Grid>
+                      </Grid>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                      >
+                        Poser une question au cuistot
+                      </Button>
+                    </Grid>
+                  </div>
+                </Grid>
               </Grid>
-            </div>
-          </Grid>
-        </Grid>
-        <Footer />
-      </>
+              <Footer />
+            </>
+          );
+        }}
+      </Connect>
     );
   }
 
@@ -588,4 +610,8 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
   };
 }
 
-export default withStyles(styles as any)(Workshop as any) as any;
+const enhance = compose(
+  withStyles(styles as any),
+);
+
+export default enhance(Workshop);
