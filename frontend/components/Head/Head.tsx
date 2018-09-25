@@ -51,17 +51,17 @@ export class Head extends React.Component<IHeadProps, {}> {
       }
     };
 
-    if (metaInfo[cleanPath].description) {
+    if (metaInfo[cleanPath] && metaInfo[cleanPath].description) {
       configSEO.description = metaInfo[cleanPath].description;
       configSEO.openGraph.description = metaInfo[cleanPath].description;
     }
 
-    if (metaInfo[cleanPath].href) {
+    if (metaInfo[cleanPath] && metaInfo[cleanPath].href) {
       configSEO.canonical = metaInfo[cleanPath].url;
       configSEO.openGraph.url = metaInfo[cleanPath].url;
     }
 
-    if (metaInfo[cleanPath].title) {
+    if (metaInfo[cleanPath] && metaInfo[cleanPath].title) {
       configSEO.title = metaInfo[cleanPath].title;
       configSEO.openGraph.title = metaInfo[cleanPath].title;
     }

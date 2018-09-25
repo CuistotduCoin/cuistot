@@ -933,9 +933,9 @@
   dependencies:
     "@mdx-js/tag" "^0.15.0"
 
-"@mdx-js/mdx@^0.15.3":
-  version "0.15.3"
-  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.15.3.tgz#8ab4968b7d9f447ecc39285872c16f79dcd7c25b"
+"@mdx-js/mdx@^0.15.4":
+  version "0.15.4"
+  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.15.4.tgz#fb1799158e63eacd0dbdecb649b13cea55377ee8"
   dependencies:
     change-case "^3.0.2"
     mdast-util-to-hast "^3.0.0"
@@ -1249,9 +1249,9 @@
     csstype "^2.0.0"
     indefinite-observable "^1.0.1"
 
-"@types/next@^6.1.7":
-  version "6.1.7"
-  resolved "https://registry.yarnpkg.com/@types/next/-/next-6.1.7.tgz#663e6118353d88eea6c45b6da9495a9419fad5ef"
+"@types/next@^6.1.8":
+  version "6.1.8"
+  resolved "https://registry.yarnpkg.com/@types/next/-/next-6.1.8.tgz#6859a2a9ae9b3b93b8294bc1bb65e9f78b7f3df5"
   dependencies:
     "@types/node" "*"
     "@types/node-fetch" "*"
@@ -1267,9 +1267,9 @@
   version "10.10.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.10.1.tgz#d5c96ca246a418404914d180b7fdd625ad18eca6"
 
-"@types/node@^10.10.2":
-  version "10.10.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.10.3.tgz#09c75a4ad84d6a3d286790bdd9489a4f8ee9906c"
+"@types/node@^10.11.0":
+  version "10.11.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.0.tgz#ddd0d67a3b6c3810dd1a59e36675fa82de5e19ae"
 
 "@types/prop-types@*":
   version "15.5.5"
@@ -2743,6 +2743,24 @@ component-emitter@^1.2.0, component-emitter@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
 
+compressible@~2.0.14:
+  version "2.0.15"
+  resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.15.tgz#857a9ab0a7e5a07d8d837ed43fe2defff64fe212"
+  dependencies:
+    mime-db ">= 1.36.0 < 2"
+
+compression@^1.7.3:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/compression/-/compression-1.7.3.tgz#27e0e176aaf260f7f2c2813c3e440adb9f1993db"
+  dependencies:
+    accepts "~1.3.5"
+    bytes "3.0.0"
+    compressible "~2.0.14"
+    debug "2.6.9"
+    on-headers "~1.0.1"
+    safe-buffer "5.1.2"
+    vary "~1.1.2"
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -3366,6 +3384,12 @@ enhanced-resolve@^4.0.0, enhanced-resolve@^4.1.0:
 enquire.js@^2.1.6:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/enquire.js/-/enquire.js-2.1.6.tgz#3e8780c9b8b835084c3f60e166dbc3c2a3c89814"
+
+env-cmd@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/env-cmd/-/env-cmd-8.0.2.tgz#e3bf53b8e4676781bdc3a0b1a2f7612cbcda4da4"
+  dependencies:
+    cross-spawn "^6.0.5"
 
 envify@^4.0.0:
   version "4.1.0"
@@ -5415,7 +5439,7 @@ miller-rabin@^4.0.0:
     bn.js "^4.0.0"
     brorand "^1.0.1"
 
-mime-db@1.x.x, mime-db@~1.36.0:
+mime-db@1.x.x, "mime-db@>= 1.36.0 < 2", mime-db@~1.36.0:
   version "1.36.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.36.0.tgz#5020478db3c7fe93aad7bbcc4dcf869c43363397"
 
@@ -5952,6 +5976,10 @@ on-finished@~2.3.0:
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
   dependencies:
     ee-first "1.1.1"
+
+on-headers@~1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/on-headers/-/on-headers-1.0.1.tgz#928f5d0f470d49342651ea6794b0857c100693f7"
 
 once@^1.3.0, once@^1.3.1, once@^1.4.0:
   version "1.4.0"
@@ -6698,9 +6726,9 @@ react-inspector@^2.3.0:
     babel-runtime "^6.26.0"
     is-dom "^1.0.9"
 
-react-instantsearch-core@^5.2.3:
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/react-instantsearch-core/-/react-instantsearch-core-5.2.3.tgz#35d57433356c9c994d2e7146ff6b7df6b6679e30"
+react-instantsearch-core@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-core/-/react-instantsearch-core-5.3.0.tgz#31570d29b5967505436deaf373d0e2f24a9adfd4"
   dependencies:
     algoliasearch-helper "^2.26.0"
     lodash "^4.17.4"
@@ -6715,16 +6743,16 @@ react-instantsearch-dom-maps@^5.3.0:
     react-lifecycles-compat "^3.0.4"
     scriptjs "^2.5.8"
 
-react-instantsearch-dom@^5.2.3:
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/react-instantsearch-dom/-/react-instantsearch-dom-5.2.3.tgz#d83d7db0cb4c0c096f17fdad7dd271ff28534e00"
+react-instantsearch-dom@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-dom/-/react-instantsearch-dom-5.3.0.tgz#b8e7d10cbbf885055a6b9e21fdae6e6d4c1a6da9"
   dependencies:
     algoliasearch "^3.27.1"
     algoliasearch-helper "^2.26.0"
     classnames "^2.2.5"
     lodash "^4.17.4"
     prop-types "^15.5.10"
-    react-instantsearch-core "^5.2.3"
+    react-instantsearch-core "^5.3.0"
 
 react-jss@^8.1.0:
   version "8.6.1"
@@ -7194,7 +7222,7 @@ safe-buffer@5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
-safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
+safe-buffer@5.1.2, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
 
@@ -7328,13 +7356,17 @@ serverless-domain-manager@^2.6.5:
     aws-sdk "^2.177.0"
     chalk "^2.0.1"
 
-serverless-dotenv-plugin@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/serverless-dotenv-plugin/-/serverless-dotenv-plugin-1.2.1.tgz#d439d4e44748fbdba057173761b3cf5bf3d076b8"
+serverless-dotenv-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/serverless-dotenv-plugin/-/serverless-dotenv-plugin-2.0.0.tgz#8413653d1f98d91f836fdd5b4a74f4c1d6d0c1c6"
   dependencies:
     chalk "^2.1.0"
     dotenv "^4.0.0"
     dotenv-expand "^4.0.1"
+
+serverless-http@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/serverless-http/-/serverless-http-1.6.0.tgz#bc94c2c39dcf43b47a190d982b2bc43be09d3748"
 
 serverless-offline@^3.25.14:
   version "3.25.14"
