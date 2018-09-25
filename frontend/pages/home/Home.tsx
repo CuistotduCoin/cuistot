@@ -3,13 +3,13 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { graphqlOperation } from "aws-amplify";
 import { Connect } from "aws-amplify-react";
-import Layout from "components/Layout";
 import Link from "next/link";
-import { GetWorkshops } from "queries";
+import { GetWorkshops } from "../../queries";
 import React from "react";
 import Slider from "react-slick";
 // import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import Layout from "../../components/Layout";
 
 const styles = (theme: Theme) => ({
   block: {

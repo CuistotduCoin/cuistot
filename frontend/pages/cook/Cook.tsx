@@ -6,16 +6,16 @@ import Typography from "@material-ui/core/Typography";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import { graphqlOperation } from "aws-amplify";
 import { Connect } from "aws-amplify-react";
-import CommentBlock from "components/CommentBlock";
-import Layout from "components/Layout";
-import Loading from "components/Loading";
-import ProfileImage from "components/ProfileImage";
-import S3Image from 'components/S3Image';
-import WorkshopListItem from "components/WorkshopListItem";
-import get from 'lodash.get';
+import get from "lodash.get";
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { formatName } from 'shared/util';
+import { formatName } from "shared/util";
+import CommentBlock from "../../components/CommentBlock";
+import Layout from "../../components/Layout";
+import Loading from "../../components/Loading";
+import ProfileImage from "../../components/ProfileImage";
+import S3Image from "../../components/S3Image";
+import WorkshopListItem from "../../components/WorkshopListItem";
 
 const getCook = `query GetCook($cook_id: ID!) {
   getCook(cook_id: $cook_id) {

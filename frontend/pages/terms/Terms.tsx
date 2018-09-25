@@ -1,14 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-<<<<<<< HEAD:frontend/src/pages/Terms/Terms.tsx
-import Layout from "components/Layout";
-import MarkdownElement from "components/MarkdownElement";
-=======
->>>>>>> 20c8bd36da7ff5ae1174a885a59d9dade7abc438:frontend/pages/terms/Terms.tsx
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
+import Layout from "../../components/Layout";
 import components from "../../content/components";
 // @ts-ignore
 import Content from "../../content/terms.mdx";

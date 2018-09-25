@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@material-ui/core";
-import ProfileImage from "components/ProfileImage";
+import ProfileImage from "../../components/ProfileImage";
 import moment from 'moment';
 import React from "react";
 import { StarRating } from "../StarRating/StarRating";

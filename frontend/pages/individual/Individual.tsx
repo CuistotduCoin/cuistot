@@ -5,7 +5,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Layout from "components/Layout";
+import Layout from "../../components/Layout";
 import React from "react";
 import WorkshopCardList from "../../components/WorkshopCardList";
 
