@@ -8,7 +8,6 @@ import { graphqlOperation } from "aws-amplify";
 import { Connect } from "aws-amplify-react";
 import get from "lodash.get";
 import React from "react";
-import { Redirect } from "react-router-dom";
 import { formatName } from "shared/util";
 import CommentBlock from "../../components/CommentBlock";
 import Layout from "../../components/Layout";
@@ -16,6 +15,7 @@ import Loading from "../../components/Loading";
 import ProfileImage from "../../components/ProfileImage";
 import S3Image from "../../components/S3Image";
 import WorkshopListItem from "../../components/WorkshopListItem";
+import { withRedirect } from "../../decorators/Redirect";
 
 const getCook = `query GetCook($cook_id: ID!) {
   getCook(cook_id: $cook_id) {
@@ -113,7 +113,7 @@ interface ICookProps {
 
 export class Cook extends React.Component<ICookProps, {}> {
   public render() {
-    const { classes } = this.props;
+    const { classes, redirectToNotFound } = this.props;
 
     const { id: cookId } = this.props.match.params;
 
@@ -123,7 +123,7 @@ export class Cook extends React.Component<ICookProps, {}> {
           {({ data, errors }) => {
             if (get(errors, 'length')) {
               if (errors[0].message === 'resource not found') {
-                return <Redirect to="/404" />;
+                redirectToNotFound();
               }
             }
 
@@ -134,7 +134,7 @@ export class Cook extends React.Component<ICookProps, {}> {
             const cook = data.getCook.cook;
 
             if (!cook.confirmed) {
-              return <Redirect to="/404" />
+              redirectToNotFound();
             }
 
             const workshops = cook.workshops;
@@ -231,4 +231,9 @@ export class Cook extends React.Component<ICookProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(Cook as any) as any;
+const enhance = compose(
+  withStyles(styles as any),
+  withRedirect,
+)
+
+export default enhance(Cook);

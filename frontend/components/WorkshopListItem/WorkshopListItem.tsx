@@ -9,10 +9,10 @@ import HourglassFullIcon from "@material-ui/icons/HourglassFull";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import cx from "classnames";
 import get from "lodash.get";
+import Router from "next/router";
 import React from "react";
 import { compose } from "recompose";
 import S3Image from "../../components/S3Image";
-import { withRedirect } from "../../decorators/RedirectDecorator";
 import { format } from "../../shared/date-utils";
 
 const styles = (theme: Theme) => ({
@@ -53,14 +53,13 @@ interface IWorkshopListItemProps {
   classes: any;
   workshop: any;
   authorIdentityId: string;
-  redirectTo(url: string, push?: boolean);
 }
 
 // tslint:disable-next-line
-const WorkshopListItem: React.SFC<IWorkshopListItemProps> = ({ classes, workshop, authorIdentityId, redirectTo }) => (
+const WorkshopListItem: React.SFC<IWorkshopListItemProps> = ({ classes, workshop, authorIdentityId }) => (
   <Card
     className={classes.card}
-    onClick={() => redirectTo(`workshops/${workshop.id}`, true)}
+    onClick={() => Router.push(`workshops/${workshop.id}`)}
   >
     <div className={classes.column}>
       <CardContent className={cx(classes.column, classes.content)}>
@@ -107,7 +106,6 @@ const WorkshopListItem: React.SFC<IWorkshopListItemProps> = ({ classes, workshop
 
 const enhance = compose(
   withStyles(styles as any),
-  withRedirect,
-)
+);
 
 export default enhance(WorkshopListItem);

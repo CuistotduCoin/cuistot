@@ -6,21 +6,16 @@ import MenuList from "@material-ui/core/MenuList";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import Icon from "@material-ui/icons/Person";
+import Router from "next/router";
 import React from "react";
-import { compose } from 'recompose';
 import { Subscribe } from "unstated";
 import { AppContainer } from "../../components/App";
-import { withRedirect } from "../../decorators/RedirectDecorator";
-
-interface IAccountDropdownProps {
-  redirectTo(url: string, push?: boolean);
-}
 
 interface IAccountDropdownState {
   open: boolean;
 }
 
-class AccountDropdown extends React.Component<IAccountDropdownProps, IAccountDropdownState> {
+class AccountDropdown extends React.Component<{}, IAccountDropdownState> {
   constructor(props) {
     super(props);
     this.state = { open: false };
@@ -42,7 +37,7 @@ class AccountDropdown extends React.Component<IAccountDropdownProps, IAccountDro
 
   public goToAccount(event) {
     this.handleClose(event);
-    this.props.redirectTo("/account");
+    Router.push("/account");
   }
 
   public render() {
@@ -89,8 +84,4 @@ class AccountDropdown extends React.Component<IAccountDropdownProps, IAccountDro
   }
 }
 
-const enhance = compose(
-  withRedirect,
-);
-
-export default enhance(AccountDropdown);
+export default AccountDropdown;

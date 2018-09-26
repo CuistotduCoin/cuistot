@@ -4,13 +4,12 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
-import { parse } from "query-string";
+import Router, { withRouter } from "next/router";
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
 import { AppContainer } from "../../components/App";
-import { withRedirect } from "../../decorators/RedirectDecorator";
 import { SNACKBAR_MESSAGES } from "../../shared/constants";
 
 const styles = (theme: Theme) => ({
@@ -22,12 +21,14 @@ const styles = (theme: Theme) => ({
   },
   textField: {
     width: "100%"
+  },
+  submitButton: {
+    marginTop: 16,
   }
 });
 
 interface IAccountConfirmationFormProps {
   classes?: any;
-  redirectTo: any;
   location: any;
 }
 
@@ -47,10 +48,8 @@ export class AccountConfirmationForm extends React.Component<
   }
 
   public initialValues() {
-    const params = parse(this.props.location.search);
-    const username = params.username || "";
     return {
-      username,
+      username: this.props.router.query.username || "",
       code: ""
     };
   }
@@ -65,39 +64,33 @@ export class AccountConfirmationForm extends React.Component<
 
     const accountConfirmationFormComponent = () => (
       <Form autoComplete="off">
-        <Grid container={true} className={classes.grid} spacing={16}>
-          <Grid item={true} xs={12}>
-            <Grid container={true}>
-              <Field
-                type="text"
-                component={TextField}
-                id="username"
-                label="Nom d'utilisateur"
-                name="username"
-                className={classes.textField}
-                margin="normal"
-              />
-            </Grid>
+        <Grid container className={classes.grid} spacing={16}>
+          <Grid item xs={12}>
+            <Field
+              type="text"
+              component={TextField}
+              id="username"
+              label="Nom d'utilisateur"
+              name="username"
+              className={classes.textField}
+              margin="normal"
+            />
           </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true}>
-              <Field
-                type="text"
-                component={TextField}
-                id="code"
-                label="Code de sécurité"
-                name="code"
-                className={classes.textField}
-                margin="normal"
-              />
-            </Grid>
+          <Grid item xs={12}>
+            <Field
+              type="text"
+              component={TextField}
+              id="code"
+              label="Code de sécurité"
+              name="code"
+              className={classes.textField}
+              margin="normal"
+            />
           </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
-              <Button type="submit" variant="contained" color="secondary">
-                Confirmer mon compte
-              </Button>
-            </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="secondary" className={classes.submitButton}>
+              Confirmer mon compte
+            </Button>
           </Grid>
         </Grid>
       </Form>
@@ -134,7 +127,7 @@ export class AccountConfirmationForm extends React.Component<
             "Merci d'avoir confirmé votre compte ! Vous pouvez désormais vous connecter",
             "success"
           );
-          this.props.redirectTo(`/login`);
+          Router.replace(`/login`);
         })
         .catch(err => {
           openSnackbar(SNACKBAR_MESSAGES[err.code] || "Erreur", "error");
@@ -146,6 +139,9 @@ export class AccountConfirmationForm extends React.Component<
   }
 }
 
-export default withStyles(styles as any)(withRedirect(withRouter(
-  AccountConfirmationForm as any
-) as any) as any);
+const enhance = compose(
+  withStyles(styles as any),
+  withRouter
+);
+
+export default enhance(AccountConfirmationForm);

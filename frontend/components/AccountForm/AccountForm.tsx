@@ -148,38 +148,34 @@ export class AccountForm extends React.Component<
 
     const updateInfoFormComponent = () => (
       <Form autoComplete="off">
-        <Grid container={true} className={classes.grid} spacing={16}>
-          <Grid item={true} xs={12}>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="username"
-                  label="Nom d'utilisateur"
-                  name="username"
-                  className={classes.textField}
-                  margin="normal"
-                  disabled
-                />
-              </Grid>
+        <Grid container className={classes.grid} spacing={16}>
+          <Grid item xs={12}>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="username"
+                label="Nom d'utilisateur"
+                name="username"
+                className={classes.textField}
+                margin="normal"
+                disabled
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="email"
-                  label="Email"
-                  name="email"
-                  className={classes.textField}
-                  margin="normal"
-                  disabled
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="email"
+                label="Email"
+                name="email"
+                className={classes.textField}
+                margin="normal"
+                disabled
+              />
             </Grid>
-            <Grid container={true} spacing={16} className={classes.block}>
-              <Grid item={true} xs={2}>
+            <Grid container spacing={16} className={classes.block}>
+              <Grid item xs={2}>
                 <Field
                   id="gender"
                   name="gender"
@@ -191,7 +187,7 @@ export class AccountForm extends React.Component<
                   <MenuItem value="U">Autre</MenuItem>
                 </Field>
               </Grid>
-              <Grid item={true} xs={5}>
+              <Grid item xs={5}>
                 <Field
                   id="firstname"
                   name="first_name"
@@ -202,7 +198,7 @@ export class AccountForm extends React.Component<
                   component={TextField}
                 />
               </Grid>
-              <Grid item={true} xs={5}>
+              <Grid item xs={5}>
                 <Field
                   id="lastname"
                   name="last_name"
@@ -214,98 +210,84 @@ export class AccountForm extends React.Component<
                 />
               </Grid>
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  component={TextField}
-                  type="date"
-                  id="birthdate"
-                  label="Date de naissance"
-                  name="birthdate"
-                  className={classes.textField}
-                  margin="normal"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                component={TextField}
+                type="date"
+                id="birthdate"
+                label="Date de naissance"
+                name="birthdate"
+                className={classes.textField}
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="phone_number"
-                  label="Numéro de téléphone"
-                  name="phone_number"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="phone_number"
+                label="Numéro de téléphone"
+                name="phone_number"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="description"
-                  label="Description"
-                  name="description"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="description"
+                label="Description"
+                name="description"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="address"
-                  label="Adresse"
-                  name="address"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="address"
+                label="Adresse"
+                name="address"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="city"
-                  label="Ville"
-                  name="city"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="city"
+                label="Ville"
+                name="city"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="zipCode"
-                  label="Code postal"
-                  name="zip_code"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="zipCode"
+                label="Code postal"
+                name="zip_code"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true} justify="center">
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  className={classes.submitButton}
-                >
-                  Mettre à jour mes infos Gourmet
-                </Button>
-              </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="secondary"
+                className={classes.submitButton}
+              >
+                Mettre à jour mes infos Gourmet
+              </Button>
             </Grid>
           </Grid>
         </Grid>
@@ -314,58 +296,50 @@ export class AccountForm extends React.Component<
 
     const updatePasswordFormComponent = () => (
       <Form autoComplete="off">
-        <Grid container={true} className={classes.grid} spacing={16}>
-          <Grid item={true} xs={12}>
-            <Grid container={true}>
-              <Field
-                type="password"
-                component={TextField}
-                id="oldPassword"
-                label="Votre mot de passe actuel"
-                name="oldPassword"
-                className={classes.textField}
-                margin="normal"
-              />
-            </Grid>
+        <Grid container className={classes.grid} spacing={16}>
+          <Grid item xs={12}>
+            <Field
+              type="password"
+              component={TextField}
+              id="oldPassword"
+              label="Votre mot de passe actuel"
+              name="oldPassword"
+              className={classes.textField}
+              margin="normal"
+            />
           </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true}>
-              <Field
-                type="password"
-                component={TextField}
-                id="newPassword"
-                label="Votre nouveau mot de passe"
-                helperText={PASSWORD_TEXT_HELPER}
-                name="newPassword"
-                className={classes.textField}
-                margin="normal"
-              />
-            </Grid>
+          <Grid item xs={12}>
+            <Field
+              type="password"
+              component={TextField}
+              id="newPassword"
+              label="Votre nouveau mot de passe"
+              helperText={PASSWORD_TEXT_HELPER}
+              name="newPassword"
+              className={classes.textField}
+              margin="normal"
+            />
           </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true}>
-              <Field
-                type="password"
-                component={TextField}
-                id="newPasswordConfirmation"
-                label="Confirmation de votre nouveau mot de passe"
-                name="newPasswordConfirmation"
-                className={classes.textField}
-                margin="normal"
-              />
-            </Grid>
+          <Grid item xs={12}>
+            <Field
+              type="password"
+              component={TextField}
+              id="newPasswordConfirmation"
+              label="Confirmation de votre nouveau mot de passe"
+              name="newPasswordConfirmation"
+              className={classes.textField}
+              margin="normal"
+            />
           </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
-              <Button
-                type="submit"
-                variant="contained"
-                color="secondary"
-                className={classes.submitButton}
-              >
-                Mettre à jour mon mot de passe
-              </Button>
-            </Grid>
+          <Grid item xs={12}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="secondary"
+              className={classes.submitButton}
+            >
+              Mettre à jour mon mot de passe
+            </Button>
           </Grid>
         </Grid>
       </Form>

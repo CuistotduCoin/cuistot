@@ -52,7 +52,6 @@
     "next-seo": "^1.2.0",
     "node-fetch": "^2.2.0",
     "prop-types": "^15.6.2",
-    "query-string": "^6.1.0",
     "raven": "^2.6.4",
     "raven-js": "^3.27.0",
     "react": "^16.5.2",

@@ -1,15 +1,14 @@
 import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
+import Router from "next/router";
 import React from "react";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
 import { AppContainer } from "../../components/App";
-import { withRedirect } from "../../decorators/RedirectDecorator";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -20,6 +19,9 @@ const styles = (theme: Theme) => ({
   },
   textField: {
     width: "100%"
+  },
+  submitButton: {
+    marginTop: 16
   }
 });
 
@@ -28,8 +30,7 @@ const initialValues = {
 };
 
 interface IResetPasswordRequestFormProps {
-  classes?: any;
-  redirectTo: any;
+  classes: any;
 }
 
 interface IResetPasswordRequestFormValues {
@@ -56,28 +57,24 @@ export class ResetPasswordRequestForm extends React.Component<
 
     const resetPasswordRequestFormComponent = () => (
       <Form autoComplete="off">
-        <Grid container={true} className={classes.grid} spacing={16}>
-          <Grid item={true} xs={12}>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="username"
-                  label="Nom d'utilisateur"
-                  name="username"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+        <Grid container className={classes.grid} spacing={16}>
+          <Grid item xs={12}>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="username"
+                label="Nom d'utilisateur"
+                name="username"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
           </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
-              <Button type="submit" variant="contained" color="secondary">
-                Réinitialiser mon mot de passe
-              </Button>
-            </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="secondary" className={classes.submitButton}>
+              Réinitialiser mon mot de passe
+            </Button>
           </Grid>
         </Grid>
       </Form>
@@ -108,16 +105,13 @@ export class ResetPasswordRequestForm extends React.Component<
         .then(data => {
           let successMessage;
           if (data.CodeDeliveryDetails) {
-            successMessage =
-              "Vous allez recevoir un mail qui vous permettra de réinitialiser votre mot de passe.";
+            successMessage = "Vous allez recevoir un mail qui vous permettra de réinitialiser votre mot de passe.";
           }
           if (successMessage) {
             setStatus({ success: true });
             resetForm(initialValues);
-            this.props.redirectTo(
-              `/password/reset?username=${values.username}`
-            );
             openSnackbar(successMessage, "success");
+            Router.replace(`/password-reset?username=${values.username}`);
           }
         })
         .catch(err => {
@@ -136,6 +130,4 @@ export class ResetPasswordRequestForm extends React.Component<
   }
 }
 
-export default withStyles(styles as any)(withRedirect(
-  ResetPasswordRequestForm
-) as any) as any;
+export default withStyles(styles as any)(ResetPasswordRequestForm);

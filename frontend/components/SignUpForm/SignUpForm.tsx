@@ -1,15 +1,14 @@
 import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
+import Router from "next/router";
 import React from "react";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
 import { AppContainer } from "../../components/App";
-import { withRedirect } from "../../decorators/RedirectDecorator";
 import { PASSWORD_TEXT_HELPER } from '../../shared/constants';
 import { passwordConfirmationValidation, passwordValidation, phoneNumberValidation } from "../../shared/validations";
 
@@ -21,6 +20,9 @@ const styles = (theme: Theme) => ({
   },
   textField: {
     width: "100%"
+  },
+  submitButton: {
+    marginTop: 16
   }
 });
 
@@ -36,7 +38,6 @@ const initialValues = {
 
 interface ISignUpFormProps {
   classes?: any;
-  redirectTo: any;
 }
 
 interface ISignUpFormValues {
@@ -72,20 +73,10 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
 
     const signUpFormComponent = () => (
       <Form autoComplete="off">
-        <Grid container={true} className={classes.grid} spacing={16}>
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
-              <Button variant="outlined" color="secondary">
-                S'inscrire avec Facebook
-              </Button>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12}>
-            <Divider />
-          </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true} spacing={16}>
-              <Grid item={true} xs={6}>
+        <Grid container className={classes.grid} spacing={16}>
+          <Grid item xs={12}>
+            <Grid container spacing={16}>
+              <Grid item xs={6}>
                 <Field
                   id="firstname"
                   name="firstname"
@@ -96,7 +87,7 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
                   component={TextField}
                 />
               </Grid>
-              <Grid item={true} xs={6}>
+              <Grid item xs={6}>
                 <Field
                   id="lastname"
                   name="lastname"
@@ -108,79 +99,67 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
                 />
               </Grid>
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="username"
-                  label="Nom d'utilisateur"
-                  name="username"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="username"
+                label="Nom d'utilisateur"
+                name="username"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="email"
-                  label="Email"
-                  name="email"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="email"
+                label="Email"
+                name="email"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="phoneNumber"
-                  label="Numéro de téléphone"
-                  name="phoneNumber"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="text"
+                component={TextField}
+                id="phoneNumber"
+                label="Numéro de téléphone"
+                name="phoneNumber"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="password"
-                  component={TextField}
-                  id="password"
-                  label="Mot de passe"
-                  helperText={PASSWORD_TEXT_HELPER}
-                  name="password"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="password"
+                component={TextField}
+                id="password"
+                label="Mot de passe"
+                helperText={PASSWORD_TEXT_HELPER}
+                name="password"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
-                <Field
-                  type="password"
-                  component={TextField}
-                  id="passwordConfirmation"
-                  label="Confirmation du mot de passe"
-                  name="passwordConfirmation"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+            <Grid item xs={12}>
+              <Field
+                type="password"
+                component={TextField}
+                id="passwordConfirmation"
+                label="Confirmation du mot de passe"
+                name="passwordConfirmation"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
           </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
-              <Button type="submit" variant="contained" color="secondary">
-                S'inscrire
-              </Button>
-            </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="secondary" className={classes.submitButton}>
+              S'inscrire
+            </Button>
           </Grid>
         </Grid>
       </Form>
@@ -227,9 +206,7 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
               "Votre compte a bien été créé. Vous allez recevoir un code de sécurité qui vous permettra de le confirmer.",
               "success"
             );
-            this.props.redirectTo(
-              `/account/confirmation?username=${values.username}`
-            );
+            Router.replace(`/account-confirmation?username=${values.username}`);
           }
         })
         .catch(err => {
@@ -249,6 +226,4 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(withRedirect(
-  SignUpForm
-) as any) as any;
+export default withStyles(styles as any)(SignUpForm);

@@ -6,11 +6,11 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
+import Router from 'next/router';
 import React from "react";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
 import { AppContainer } from "../../components/App";
-import { withRedirect } from "../../decorators/RedirectDecorator";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -25,7 +25,6 @@ const styles = (theme: Theme) => ({
 
 interface ILoginFormProps {
   classes?: any;
-  redirectTo: any;
 }
 
 interface ILoginFormValues {
@@ -57,19 +56,19 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
     const loginFormComponent = () => (
       <Form autoComplete="off">
         <FormControl>
-          <Grid container={true} className={classes.grid} spacing={16}>
-            <Grid item={true} xs={12}>
-              <Grid container={true} justify="center">
+          <Grid container className={classes.grid} spacing={16}>
+            <Grid item xs={12}>
+              <Grid container justify="center">
                 <Button variant="outlined" color="secondary">
                   Se connecter avec Facebook
                 </Button>
               </Grid>
             </Grid>
-            <Grid item={true} xs={12}>
+            <Grid item xs={12}>
               <Divider />
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
+            <Grid item xs={12}>
+              <Grid container>
                 <Field
                   type="text"
                   component={TextField}
@@ -81,8 +80,8 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
                 />
               </Grid>
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
+            <Grid item xs={12}>
+              <Grid container>
                 <Field
                   type="password"
                   component={TextField}
@@ -94,8 +93,8 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
                 />
               </Grid>
             </Grid>
-            <Grid item={true} xs={12}>
-              <Grid container={true} justify="center">
+            <Grid item xs={12}>
+              <Grid container justify="center">
                 <Button type="submit" variant="contained" color="secondary">
                   Se connecter
                 </Button>
@@ -146,9 +145,7 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
               "Vous devez confirmer votre compte avant de pouvoir vous connecter",
               "warning"
             );
-            this.props.redirectTo(
-              `/account/confirmation?username=${values.username}`
-            );
+            Router.push(`/account-confirmation?username=${values.username}`);
           }
           setStatus({ success: false });
           setSubmitting(false);
@@ -158,4 +155,4 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
   }
 }
 
-export default withStyles(styles as any)(withRedirect(LoginForm) as any) as any;
+export default withStyles(styles as any)(LoginForm);
