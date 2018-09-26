@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@material-ui/core";
-import ProfileImage from "../../components/ProfileImage";
-import moment from 'moment';
 import React from "react";
+import ProfileImage from "../../components/ProfileImage";
+import { distanceInWordsToNow } from "../../shared/date-utils";
 import { StarRating } from "../StarRating/StarRating";
 
 interface ICommentBlock {
@@ -38,7 +38,7 @@ export class CommentBlock extends React.Component<ICommentBlock, {}> {
                 </Grid>
                 <Grid item>
                   <Typography variant="caption" component="span">
-                    {moment(date).fromNow()}
+                    {distanceInWordsToNow(date)}
                   </Typography>
                 </Grid>
               </Grid>

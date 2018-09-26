@@ -9,7 +9,6 @@ import { Connect } from "aws-amplify-react";
 import { Field, Form, Formik } from "formik";
 import { Select, TextField } from "formik-material-ui";
 import get from "lodash.get";
-import moment from "moment";
 import React from "react";
 import { compose } from "recompose";
 import * as Yup from "yup";
@@ -17,7 +16,8 @@ import CookForm from "../../components/CookForm";
 import Loading from "../../components/Loading";
 import ProfileImageUploader from "../../components/ProfileImageUploader";
 import { GetCook, UpdateCook, UpdateGourmet } from "../../queries";
-import { PASSWORD_TEXT_HELPER } from '../../shared/constants';
+import { PASSWORD_TEXT_HELPER } from "../../shared/constants";
+import { format } from "../../shared/date-utils";
 import {
   passwordConfirmationValidation,
   passwordValidation,
@@ -415,7 +415,7 @@ export class AccountForm extends React.Component<
                       pro_phone_number,
                       legal_first_name,
                       legal_last_name,
-                      legal_birthdate: moment(legal_birthdate).format("YYYY-MM-DD")
+                      legal_birthdate: format(legal_birthdate, "YYYY-MM-DD"),
                     }}
                     component={({ values }) => <CookForm action="update" values={values} />}
                     onSubmit={this.onNewCookInfoSubmit}
@@ -443,7 +443,7 @@ export class AccountForm extends React.Component<
                       last_name,
                       email,
                       description,
-                      birthdate: moment(birthdate).format("YYYY-MM-DD"),
+                      birthdate: format(birthdate, "YYYY-MM-DD"),
                       phone_number,
                       address,
                       city,

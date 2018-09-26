@@ -7,13 +7,13 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import HourglassFullIcon from "@material-ui/icons/HourglassFull";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import cx from 'classnames';
-import get from 'lodash.get';
-import moment from 'moment';
-import React from 'react';
-import { compose } from 'recompose';
+import cx from "classnames";
+import get from "lodash.get";
+import React from "react";
+import { compose } from "recompose";
 import S3Image from "../../components/S3Image";
 import { withRedirect } from "../../decorators/RedirectDecorator";
+import { format } from "../../shared/date-utils";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -67,7 +67,7 @@ const WorkshopListItem: React.SFC<IWorkshopListItemProps> = ({ classes, workshop
         <div className={classes.header}>
           <Typography variant="title">{workshop.name}</Typography>
         </div>
-        {workshop.date && <Typography variant="subheading">{moment(workshop.date).format("[Le] DD MMMM [à] HH[h]mm")}</Typography>}
+        {workshop.date && <Typography variant="subheading">{format(workshop.date, "[Le] DD MMMM [à] HH[h]mm")}</Typography>}
         <Typography variant="caption">{workshop.kitchen.name}</Typography>
       </CardContent>
     </div>
