@@ -61,19 +61,19 @@ export default {
     href: "https://www.cuistotducoin.com/presskit",
     title: "Apprendez en plus sur Cuistot du Coin : Articles de presse"
   },
-  'sign-up': {
+  signup: {
     description: "Inscription",
     href: "https://www.cuistotducoin.com/signup",
     title: "Devenez un gourmet Cuistot du Coin"
   },
   'reset-password-request': {
     description: "Demande de réinitialisation de votre mot de passe",
-    href: "https://www.cuistotducoin.com/password/reset/request",
+    href: "https://www.cuistotducoin.com/password-reset-request",
     title: "Mot de passe oublié"
   },
   'reset-password': {
     description: "Réinitialisation de mot de passe",
-    href: "https://www.cuistotducoin.com/password/reset",
+    href: "https://www.cuistotducoin.com/password-reset",
     title: "Réinitialisation de votre mot de passe"
   },
   subscription: {
@@ -89,7 +89,7 @@ export default {
   },
   'account-confirmation': {
     description: "Confirmation de compte utilisateur",
-    href: "https://www.cuistotducoin.com/account/confirmation",
+    href: "https://www.cuistotducoin.com/account-confirmation",
     title: "Confirmation de votre compte utilisateur"
   },
   account: {
