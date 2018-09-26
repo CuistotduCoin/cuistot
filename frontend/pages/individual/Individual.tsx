@@ -27,9 +27,6 @@ const styles = (theme: Theme) => ({
     maxWidth: 1080,
     padding: 24
   },
-  link: {
-    textDecoration: "none"
-  },
   media: {
     height: 135
   },
@@ -435,7 +432,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           {typeActivity.map((activity, index) => (
             <Grid key={index} item xs={12} sm={6}>
               <Grid container justify="center">
-                <a className={classes.link} href={activity.url} target="_blank">
+                <a href={activity.url} target="_blank">
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.media}

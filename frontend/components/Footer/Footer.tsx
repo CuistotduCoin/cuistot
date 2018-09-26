@@ -14,9 +14,6 @@ const styles = (theme: Theme) => ({
     maxWidth: 1080,
     padding: 24
   },
-  link: {
-    textDecoration: "none"
-  },
   root: {
     backgroundColor: grey[900]
   },
@@ -63,21 +60,21 @@ export class Footer extends React.Component<IFooterProps, {}> {
                 Cuistot du Coin
               </Typography>
               <Link href="/team">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>L'équipe</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>L'équipe</Typography></a>
               </Link>
               <Link href="/mission">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Notre mission</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Notre mission</Typography></a>
               </Link>
               <Link href="/join">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Nous rejoindre</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Nous rejoindre</Typography></a>
               </Link>
               <Link href="/presskit">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Contact & Presse</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Contact & Presse</Typography></a>
               </Link>
               <Link href="/terms">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Conditions légales</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Conditions légales</Typography></a>
               </Link>
-              <a className={classes.link} href="http://www.blog.cuistotducoin.com" target="_blank">
+              <a href="http://www.blog.cuistotducoin.com" target="_blank">
                 <Typography variant="subheading" className={classes.subheading}>Blog</Typography>
               </a>
             </Grid>
@@ -93,19 +90,19 @@ export class Footer extends React.Component<IFooterProps, {}> {
                 Gourmets
               </Typography>
               <Link href="/subscription">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Abonnement</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Abonnement</Typography></a>
               </Link>
               <Link href="/how-it-works#pour-les-gourmets">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Comment ça marche</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Comment ça marche</Typography></a>
               </Link>
               <Link href="/testimony">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Temoignages</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Temoignages</Typography></a>
               </Link>
               <Link href="/gift">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Offrir</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Offrir</Typography></a>
               </Link>
               <Link href="/invite">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Parrainage</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Parrainage</Typography></a>
               </Link>
             </Grid>
           </Grid>
@@ -120,13 +117,13 @@ export class Footer extends React.Component<IFooterProps, {}> {
                 Cuistots
               </Typography>
               <Link href="/how-it-works#pour-les-cuistots">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Comment ça marche</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Comment ça marche</Typography></a>
               </Link>
               <Link href="/testimony">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Temoignages</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Temoignages</Typography></a>
               </Link>
               <Link href="/become-cook">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Devenir Cuistot</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Devenir Cuistot</Typography></a>
               </Link>
             </Grid>
           </Grid>
@@ -141,16 +138,16 @@ export class Footer extends React.Component<IFooterProps, {}> {
                 Entreprises
               </Typography>
               <Link href="/how-it-works#pour-les-entreprises">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Comment ça marche</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Comment ça marche</Typography></a>
               </Link>
               <Link href="/testimony">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Temoignages</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Temoignages</Typography></a>
               </Link>
               <Link href="/invite-business">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Parrainage</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Parrainage</Typography></a>
               </Link>
               <Link href="/terms-pro">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Conditions légales</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Conditions légales</Typography></a>
               </Link>
             </Grid>
           </Grid>
@@ -165,13 +162,13 @@ export class Footer extends React.Component<IFooterProps, {}> {
                 Partenaires
               </Typography>
               <Link href="/how-it-works#pour-les-partenaires">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Comment ça marche</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Comment ça marche</Typography></a>
               </Link>
               <Link href="/testimony">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Temoignages</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Temoignages</Typography></a>
               </Link>
               <Link href="/invite-business">
-                <a className={classes.link}><Typography variant="subheading" className={classes.subheading}>Devenir partenaires</Typography></a>
+                <a><Typography variant="subheading" className={classes.subheading}>Devenir partenaires</Typography></a>
               </Link>
             </Grid>
           </Grid>

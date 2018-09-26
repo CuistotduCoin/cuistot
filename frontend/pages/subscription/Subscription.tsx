@@ -30,9 +30,6 @@ const styles = (theme: Theme) => ({
     maxWidth: 1080,
     padding: 24
   },
-  link: {
-    textDecoration: "none"
-  },
   media: {
     height: 135
   },
@@ -112,7 +109,6 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
           <Grid item xs={12} sm={6}>
             <Grid container justify="center">
               <a
-                className={classes.link}
                 href="https://cuistotducoin.typeform.com/to/xwGUPX"
                 target="_blank"
               >
@@ -141,7 +137,6 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
           <Grid item xs={12} sm={6}>
             <Grid container>
               <a
-                className={classes.link}
                 href="https://cuistotducoin.typeform.com/to/xwGUPX"
                 target="_blank"
               >

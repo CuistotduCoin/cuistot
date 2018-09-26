@@ -28,9 +28,6 @@ const styles = (theme: Theme) => ({
     maxWidth: 1080,
     padding: 24
   },
-  link: {
-    textDecoration: "none"
-  },
   media: {
     height: 135
   },
@@ -66,7 +63,6 @@ export class Invite extends React.Component<IInviteProps, {}> {
           <Grid item xs={12}>
             <Grid container justify="center">
               <a
-                className={classes.link}
                 href="https://cuistotducoin.typeform.com/to/s9TN8K"
                 target="_blank"
               >

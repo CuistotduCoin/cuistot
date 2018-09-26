@@ -48,9 +48,6 @@ const styles = (theme: Theme) => ({
     color: green[900],
     height: 15
   },
-  link: {
-    textDecoration: "none"
-  },
   media: {
     height: 194
   },
@@ -107,7 +104,7 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
     }
 
     return (
-      <a className={classes.link} href={this.props.typeform} target="_blank">
+      <a href={this.props.typeform} target="_blank">
         <Card className={classes.card}>
           <CardHeader
             className={classes.cardHeaderUp}

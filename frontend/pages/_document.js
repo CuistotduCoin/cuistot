@@ -28,6 +28,10 @@ class MyDocument extends Document {
             font-family: Roboto;
           }
 
+          a {
+            text-decoration: none;
+          }
+
           *[class*="MuiTypography-headline-"] {
             font-family: 'PT Sans', sans-serif !important;
             font-weight: bold !important;

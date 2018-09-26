@@ -41,9 +41,6 @@ const styles = (theme: Theme) => ({
     maxWidth: 320,
     width: "100%"
   },
-  link: {
-    textDecoration: "none"
-  },
   logo: {
     height: "100%",
     maxWidth: 50,
@@ -290,7 +287,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           {typeActivity.map((activity, index) => (
             <Grid key={index} item xs={12} sm={6} md={4}>
               <Grid container>
-                <a className={classes.link} href={activity.url} target="_blank">
+                <a href={activity.url} target="_blank">
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.media}

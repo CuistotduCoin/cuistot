@@ -11,9 +11,6 @@ const styles = (theme: Theme) => ({
   },
   logo: {
     margin: 3 * theme.spacing.unit
-  },
-  link: {
-    textDecoration: "none"
   }
 });
 
@@ -27,7 +24,7 @@ const ResetPasswordRequest: React.SFC<{ classes: any }> = ({ classes }) => (
     <ResetPasswordRequestForm />
     <Typography align="center" gutterBottom={true}>
       <Link href="/login">
-        <a className={classes.link}>Non c'est bon, je m'en rappelle en fait</a>
+        <a>Non c'est bon, je m'en rappelle en fait</a>
       </Link>
     </Typography>
   </div>
