@@ -125,5 +125,8 @@
     "tslint-react": "^3.6.0",
     "typescript": "^3.0.3",
     "unstated-debug": "^0.3.0"
+  },
+  "resolutions": {
+    "@aws-amplify/analytics": "1.0.9"
   }
 }

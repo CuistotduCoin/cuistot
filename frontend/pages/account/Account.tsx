@@ -1,8 +1,10 @@
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
+import { compose } from "recompose";
 import AccountForm from "../../components/AccountForm";
 import Header from "../../components/Header";
+import { withAuth } from '../../decorators/WithAuth';
 
 const styles = (theme: Theme) => ({
   container: {
@@ -24,4 +26,9 @@ const Account: React.SFC<{ classes: any }> = ({ classes }) => (
   </div>
 );
 
-export default withStyles(styles as any)(Account as any) as any;
+const enhance = compose(
+  withStyles(styles as any),
+  withAuth,
+)
+
+export default enhance(Account);

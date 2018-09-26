@@ -48,21 +48,21 @@ class AppContainer extends Container<IAppState> {
     this.setState({ currentGourmet: gourmet });
   };
 
-  // public updateCurrentGourmetImage = () => {
-  //   API.graphql(graphqlOperation(GetCurrentGourmetImage)).then(result => {
-  //     if (result.data.getCurrentGourmet.message === "success") {
-  //       const gourmet = result.data.getCurrentGourmet.gourmet;
-  //       this.setState(prevState =>
-  //         Object.assign({}, prevState, {
-  //           currentGourmet: {
-  //             ...prevState.currentGourmet,
-  //             image: gourmet.image
-  //           }
-  //         })
-  //       );
-  //     }
-  //   });
-  // };
+  public updateCurrentGourmetImage = () => {
+    API.graphql(graphqlOperation(GetCurrentGourmetImage)).then(result => {
+      if (result.data.getCurrentGourmet.message === "success") {
+        const gourmet = result.data.getCurrentGourmet.gourmet;
+        this.setState(prevState =>
+          Object.assign({}, prevState, {
+            currentGourmet: {
+              ...prevState.currentGourmet,
+              image: gourmet.image
+            }
+          })
+        );
+      }
+    });
+  };
 }
 
 export default AppContainer;
