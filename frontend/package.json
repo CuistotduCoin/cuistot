@@ -7,16 +7,16 @@
     "url": "git@github.com:CuistotduCoin/cuistot.git"
   },
   "scripts": {
-    "dev": "assume-role development && env-cmd .env nodemon server/index.ts",
-    "build:dev": "assume-role development node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json",
-    "build:prod": "assume-role production node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json",
-    "lambda:dev": "assume-role development sls offline start -s development",
-    "lambda:prod": "assume-role production sls offline start -s production",
-    "start": "assume-role development node build/index.js",
-    "deploy:dev": "assume-role development sls deploy -s development",
-    "deploy:prod": "assume-role production sls deploy -s production",
+    "dev": "NODE_ENV=development assume-role development node loadenv && env-cmd .env nodemon server/index.ts",
+    "build:dev": "NODE_ENV=development assume-role development node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json",
+    "build:prod": "NODE_ENV=production assume-role production node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json",
+    "lambda:dev": "NODE_ENV=development assume-role development sls offline start -s development",
+    "lambda:prod": "NODE_ENV=production assume-role production sls offline start -s production",
+    "start": "NODE_ENV=development assume-role development node build/index.js",
+    "deploy:dev": "NODE_ENV=development assume-role development sls deploy -s development",
+    "deploy:prod": "NODE_ENV=production assume-role production sls deploy -s production",
     "storybook": "start-storybook -p 9001",
-    "tslint-check": "assume-role development node loadenv && env-cmd .env tslint-config-prettier-check ./tslint.json"
+    "tslint-check": "NODE_ENV=development assume-role development node loadenv && env-cmd .env tslint-config-prettier-check ./tslint.json"
   },
   "dependencies": {
     "@material-ui/core": "^3.1.1",
@@ -39,6 +39,7 @@
     "classnames": "^2.2.6",
     "compression": "^1.7.3",
     "date-fns": "^1.29.0",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "formik": "^1.1.1",
     "formik-material-ui": "^0.0.9",
