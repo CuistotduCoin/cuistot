@@ -39,16 +39,16 @@ export default {
     title:
       "Cadeau cours cuisine - Offrez un atelier de cuisine Cuistot du coin à vos proches"
   },
+  login: {
+    description: "Connexion",
+    href: "https://www.cuistotducoin.com/login",
+    title: "Connexion"
+  },
   mission: {
     description:
       "Cuistot du coin à trois missions: Des rencontres aussi riches que les saveurs en cuisine; La sauvegarde d’un patrimoine et de savoir-faire; Une véritable Immersion dans des univers culinaires diversifiés",
     href: "https://www.cuistotducoin.com/mission",
     title: "Cuistot du coin : Nos missions"
-  },
-  organize: {
-    description: "Rejoignez nos Cuistots",
-    href: "https://www.cuistotducoin.com/organize",
-    title: "Cuistot du coin : Créer votre atelier"
   },
   payment: {
     description: "Paiement",
@@ -61,6 +61,21 @@ export default {
     href: "https://www.cuistotducoin.com/presskit",
     title: "Apprendez en plus sur Cuistot du Coin : Articles de presse"
   },
+  'sign-up': {
+    description: "Inscription",
+    href: "https://www.cuistotducoin.com/signup",
+    title: "Devenez un gourmet Cuistot du Coin"
+  },
+  'reset-password-request': {
+    description: "Demande de réinitialisation de votre mot de passe",
+    href: "https://www.cuistotducoin.com/password/reset/request",
+    title: "Mot de passe oublié"
+  },
+  'reset-password': {
+    description: "Réinitialisation de mot de passe",
+    href: "https://www.cuistotducoin.com/password/reset",
+    title: "Réinitialisation de votre mot de passe"
+  },
   subscription: {
     description: "Abonnement à des ateliers de cuisine pour les enfants",
     href: "https://www.cuistotducoin.com/subscription",
@@ -71,5 +86,20 @@ export default {
     description: "Découvrez qui se cache derrière Cuistot du Coin",
     href: "https://www.cuistotducoin.com/team",
     title: "Qui sommes-nous ? l'équipe de Cuistot du Coin"
+  },
+  'account-confirmation': {
+    description: "Confirmation de compte utilisateur",
+    href: "https://www.cuistotducoin.com/account/confirmation",
+    title: "Confirmation de votre compte utilisateur"
+  },
+  account: {
+    description: "Mes informations personnelles",
+    href: "https://www.cuistotducoin.com/account",
+    title: "Mon compte",
+  },
+  'become-cook': {
+    description: "Rejoignez nos Cuistots",
+    href: "https://www.cuistotducoin.com/become-cook",
+    title: "Devenir Cuistot du coin"
   }
 };
