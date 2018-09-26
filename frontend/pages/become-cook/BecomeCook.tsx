@@ -1,11 +1,11 @@
 import * as content from "!raw-loader!content/organize.md";
 import { Theme, withStyles } from "@material-ui/core/styles";
+import React from "react";
+import { compose } from "recompose";
 import BecomeCookForm from "../../components/BecomeCookForm";
 import Layout from "../../components/Layout";
 import Logo from "../../components/Logo";
 import MarkdownElement from "../../components/MarkdownElement";
-import React from "react";
-import { compose } from "recompose";
 
 const styles = (theme: Theme) => ({
   container: {
@@ -23,7 +23,7 @@ const styles = (theme: Theme) => ({
 
 // tslint:disable-next-line
 const BecomeCook: React.SFC<{ classes: any }> = ({ classes }) => (
-  <Layout pageName="becomeCook" className={classes.container}>
+  <Layout className={classes.container}>
     <Logo height={100} width={100} className={classes.logo} />
     <MarkdownElement text={content} className={classes.text} />
     <BecomeCookForm />

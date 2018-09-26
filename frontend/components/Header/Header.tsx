@@ -4,10 +4,10 @@ import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import AccountDropdown from "../../components/AccountDropdown";
-import Logo from "../../components/Logo";
 import Link from "next/link";
 import React from "react";
+import AccountDropdown from "../../components/AccountDropdown";
+import Logo from "../../components/Logo";
 
 const styles = (theme: Theme) => ({
   accountButton: {

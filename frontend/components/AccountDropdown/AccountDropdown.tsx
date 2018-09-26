@@ -6,11 +6,11 @@ import MenuList from "@material-ui/core/MenuList";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import Icon from "@material-ui/icons/Person";
-import { AppContainer } from "../../components/App";
-import { withRedirect } from "../../decorators/RedirectDecorator";
 import React from "react";
 import { compose } from 'recompose';
 import { Subscribe } from "unstated";
+import { AppContainer } from "../../components/App";
+import { withRedirect } from "../../decorators/RedirectDecorator";
 
 interface IAccountDropdownProps {
   redirectTo(url: string, push?: boolean);

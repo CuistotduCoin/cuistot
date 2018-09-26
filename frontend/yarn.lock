@@ -1385,10 +1385,6 @@
   version "14.0.1"
   resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-14.0.1.tgz#ff44c20fefdf0cf8c390f64b0dfbbc3c10dbaa87"
 
-"@types/history@*":
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.0.tgz#2fac51050c68f7d6f96c5aafc631132522f4aa3f"
-
 "@types/jest@^23.3.2":
   version "23.3.2"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.2.tgz#07b90f6adf75d42c34230c026a2529e56c249dbb"
@@ -1441,21 +1437,6 @@
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.7.tgz#54d0f867a76b90597e8432030d297982f25c20ba"
   dependencies:
     "@types/node" "*"
-    "@types/react" "*"
-
-"@types/react-router-dom@^4.3.1":
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-4.3.1.tgz#71fe2918f8f60474a891520def40a63997dafe04"
-  dependencies:
-    "@types/history" "*"
-    "@types/react" "*"
-    "@types/react-router" "*"
-
-"@types/react-router@*", "@types/react-router@4.0.31":
-  version "4.0.31"
-  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-4.0.31.tgz#416bac49d746800810886c7b8582a622ed9604fc"
-  dependencies:
-    "@types/history" "*"
     "@types/react" "*"
 
 "@types/react-scroll@^1.5.4":

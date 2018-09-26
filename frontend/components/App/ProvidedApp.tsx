@@ -1,34 +1,23 @@
-// import React from "react";
-// import { Provider, Subscribe } from "unstated";
-// import { App, AppContainer } from ".";
+import React from "react";
+import { Provider } from "unstated";
+import { AppContainer } from ".";
 
-// export class ProvidedApp extends React.Component {
-//   public appContainer: any;
+export class ProvidedApp extends React.Component {
+  public appContainer: any;
 
-//   public constructor(props) {
-//     super(props);
-//     this.appContainer = new AppContainer();
-//   }
+  public constructor(props) {
+    super(props);
+    this.appContainer = new AppContainer();
+  }
 
-//   public render() {
-//     return (
-//       <Provider inject={[this.appContainer]}>
-//         <Subscribe to={[AppContainer]}>
-//           {(app: any) => (
-//             <App
-//               referer={app.state.referer}
-//               isLoggedIn={app.state.isLoggedIn}
-//               currentGourmet={app.state.currentGourmet}
-//               openSnackbar={app.openSnackbar}
-//               logIn={app.logIn}
-//               setReferer={app.setReferer}
-//               setCurrentGourmet={app.setCurrentGourmet}
-//             />
-//           )}
-//         </Subscribe>
-//       </Provider>
-//     );
-//   }
-// }
+  public render() {
+    const { children } = this.props;
+    return (
+      <Provider inject={[this.appContainer]}>
+        {children}
+      </Provider>
+    );
+  }
+}
 
-// export default ProvidedApp as any;
+export default ProvidedApp as any;
