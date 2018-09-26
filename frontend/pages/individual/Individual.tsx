@@ -426,15 +426,15 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           y en a pour tous les goûts !
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
           className={classes.grid}
         >
           {typeActivity.map((activity, index) => (
-            <Grid key={index} item={true} xs={12} sm={6}>
-              <Grid container={true} justify="center">
+            <Grid key={index} item xs={12} sm={6}>
+              <Grid container justify="center">
                 <a className={classes.link} href={activity.url} target="_blank">
                   <Card className={classes.card}>
                     <CardMedia

@@ -33,7 +33,7 @@ export class Presskit extends React.Component<IPresskitProps, {}> {
           valueProposition="Presskit"
         />
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}

@@ -25,7 +25,7 @@ export class TermsPro extends React.Component<ITermsProProps, {}> {
     return (
       <Layout valueProposition="Conditions légales">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}

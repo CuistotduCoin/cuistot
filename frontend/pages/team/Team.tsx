@@ -25,7 +25,7 @@ export class Team extends React.Component<ITeamProps, {}> {
     return (
       <Layout valueProposition="Qui sommes-nous ? l'équipe de Cuistot du Coin">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}

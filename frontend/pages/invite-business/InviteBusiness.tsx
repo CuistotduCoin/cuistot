@@ -25,7 +25,7 @@ export class InviteBusiness extends React.Component<IInviteBusinessProps, {}> {
     return (
       <Layout valueProposition="Invitez vos proches">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}

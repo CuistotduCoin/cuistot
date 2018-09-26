@@ -41,35 +41,31 @@ const BUTTON_TITLES = {
 // tslint:disable-next-line
 const CookForm: React.SFC<ICookFormProps> = ({ classes, values, action }) => (
   <Form autoComplete="off">
-    <Grid container={true} className={classes.grid} spacing={16}>
-      <Grid item={true} xs={12}>
-        <Grid container={true}>
-          <Field
-            type="text"
-            component={TextField}
-            id="pro_phone_number"
-            label="Numéro de téléphone pro."
-            helperText={action === 'create' ? 'Restera top secret :)' : undefined}
-            name="pro_phone_number"
-            className={classes.textField}
-            margin="normal"
-          />
-        </Grid>
+    <Grid container className={classes.grid} spacing={16}>
+      <Grid item xs={12}>
+        <Field
+          type="text"
+          component={TextField}
+          id="pro_phone_number"
+          label="Numéro de téléphone pro."
+          helperText={action === 'create' ? 'Restera top secret :)' : undefined}
+          name="pro_phone_number"
+          className={classes.textField}
+          margin="normal"
+        />
       </Grid>
-      <Grid item={true} xs={12}>
-        <Grid container={true}>
-          <Field
-            type="text"
-            component={TextField}
-            id="cook-description"
-            label="Description"
-            name="description"
-            className={classes.textField}
-            margin="normal"
-          />
-        </Grid>
+      <Grid item xs={12}>
+        <Field
+          type="text"
+          component={TextField}
+          id="cook-description"
+          label="Description"
+          name="description"
+          className={classes.textField}
+          margin="normal"
+        />
       </Grid>
-      <Grid item={true} xs={12}>
+      <Grid item xs={12}>
         <div className={classes.isPro}>
           <Field
             id="is_pro"
@@ -83,7 +79,7 @@ const CookForm: React.SFC<ICookFormProps> = ({ classes, values, action }) => (
       </Grid>
       {values.is_pro && (
         <>
-          <Grid item={true} xs={12}>
+          <Grid item xs={12}>
             <Field
               id="business_name"
               name="business_name"
@@ -94,7 +90,7 @@ const CookForm: React.SFC<ICookFormProps> = ({ classes, values, action }) => (
               component={TextField}
             />
           </Grid>
-          <Grid item={true} xs={12}>
+          <Grid item xs={12}>
             <Field
               type="text"
               component={TextField}
@@ -105,7 +101,7 @@ const CookForm: React.SFC<ICookFormProps> = ({ classes, values, action }) => (
               margin="normal"
             />
           </Grid>
-          <Grid item={true} xs={12}>
+          <Grid item xs={12}>
             <Field
               type="text"
               component={TextField}
@@ -116,9 +112,9 @@ const CookForm: React.SFC<ICookFormProps> = ({ classes, values, action }) => (
               margin="normal"
             />
           </Grid>
-          <Grid item={true} xs={12}>
-            <Grid container={true} spacing={16}>
-              <Grid item={true} xs={6}>
+          <Grid item xs={12}>
+            <Grid container spacing={16}>
+              <Grid item xs={6}>
                 <Field
                   id="legal_first_name"
                   name="legal_first_name"
@@ -129,7 +125,7 @@ const CookForm: React.SFC<ICookFormProps> = ({ classes, values, action }) => (
                   component={TextField}
                 />
               </Grid>
-              <Grid item={true} xs={6}>
+              <Grid item xs={6}>
                 <Field
                   id="legal_last_name"
                   name="legal_last_name"
@@ -142,7 +138,7 @@ const CookForm: React.SFC<ICookFormProps> = ({ classes, values, action }) => (
               </Grid>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12}>
+          <Grid item xs={12}>
             <Field
               component={TextField}
               type="date"
@@ -158,12 +154,10 @@ const CookForm: React.SFC<ICookFormProps> = ({ classes, values, action }) => (
           </Grid>
         </>
       )}
-      <Grid item={true} xs={12}>
-        <Grid container={true} justify="center">
-          <Button type="submit" variant="contained" color="secondary" className={classes.submitButton}>
-            {BUTTON_TITLES[action]}
-          </Button>
-        </Grid>
+      <Grid item xs={12}>
+        <Button type="submit" variant="contained" color="secondary" className={classes.submitButton}>
+          {BUTTON_TITLES[action]}
+        </Button>
       </Grid>
     </Grid>
   </Form>

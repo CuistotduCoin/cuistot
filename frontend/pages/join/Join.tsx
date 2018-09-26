@@ -25,7 +25,7 @@ export class Join extends React.Component<IJoinProps, {}> {
     return (
       <Layout valueProposition="Rejoignez l'équipe de Cuistot du Coin">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}

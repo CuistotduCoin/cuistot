@@ -162,15 +162,15 @@ export class Search extends React.Component<ISearchProps, ISearchState> {
           resultsState={this.props.resultsState}
         >
           <Grid
-            container={true}
+            container
             justify="space-around"
             spacing={16}
             className={classes.grid}
           >
-            <Grid container={true} justify="flex-start" alignItems="center">
+            <Grid container justify="flex-start" alignItems="center">
               <MenuSelect attribute="category" />
             </Grid>
-            <Grid container={true} justify="flex-end">
+            <Grid container justify="flex-end">
               <FormControlLabel
                 control={
                   <Switch
@@ -183,13 +183,13 @@ export class Search extends React.Component<ISearchProps, ISearchState> {
               />
             </Grid>
           </Grid>
-          <Grid container={true}>
-            <Grid item={true} xs={9}>
+          <Grid container>
+            <Grid item xs={9}>
               {this.customHits}
               <Pagination />
             </Grid>
             {this.state.mapOpen && (
-              <Grid item={true} xs={3}>
+              <Grid item xs={3}>
                 <div className={classes.map}>
                   <GoogleMapsLoader
                     apiKey="AIzaSyBawL8VbstJDdU5397SUX7pEt9DslAwWgQ"

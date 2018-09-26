@@ -28,10 +28,10 @@ export class WorkshopCardList extends React.Component<
     const { classes, workshops } = this.props;
 
     return (
-      <Grid container={true} justify="space-around" className={classes.grid}>
+      <Grid container justify="space-around" className={classes.grid}>
         {workshops.map((workshop, index) => (
-          <Grid key={index} item={true} xs={12} md={6} lg={4}>
-            <Grid container={true} justify="center" className={classes.card}>
+          <Grid key={index} item xs={12} md={6} lg={4}>
+            <Grid container justify="center" className={classes.card}>
               <WorkshopCard {...workshop} />
             </Grid>
           </Grid>

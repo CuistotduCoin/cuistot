@@ -3,10 +3,9 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import React from "react";
 import Layout from "../../components/Layout";
 import components from "../../content/components";
-// @ts-ignore
 import Content from "../../content/terms.mdx";
 
-const styles = (theme: Theme) => ({
+const styles = () => ({
   grid: {
     margin: "0px auto",
     maxWidth: 1080,
@@ -25,7 +24,7 @@ export class Terms extends React.Component<ITermsProps, {}> {
     return (
       <Layout valueProposition="Conditions légales">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}

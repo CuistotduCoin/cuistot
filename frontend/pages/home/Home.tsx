@@ -187,9 +187,9 @@ export class Home extends React.Component<IHomeProps, {}> {
             valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
             description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
           >  
-            <Grid container={true} alignItems="center" className={classes.gridTile}>
-              <Grid item={true} xs={12} sm={6}>
-                <Grid container={true} className={classes.tileEntreprise}>
+            <Grid container alignItems="center" className={classes.gridTile}>
+              <Grid item xs={12} sm={6}>
+                <Grid container className={classes.tileEntreprise}>
                   <div className={classes.block}>
                     <img
                       src="https://static.cuistotducoin.com/img/home/business.jpg"
@@ -199,7 +199,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                     <Link href="/business">
                       <a>
                         <div className={classes.tile}>
-                          <Grid container={true} direction="column">
+                          <Grid container direction="column">
                             <Typography
                               variant="headline"
                               align="center"
@@ -224,8 +224,8 @@ export class Home extends React.Component<IHomeProps, {}> {
                   </div>
                 </Grid>
               </Grid>
-              <Grid item={true} xs={12} sm={6}>
-                <Grid container={true} className={classes.tileParticulier}>
+              <Grid item xs={12} sm={6}>
+                <Grid container className={classes.tileParticulier}>
                   <div className={classes.block}>
                     <img
                       src="https://static.cuistotducoin.com/img/home/individual.jpg"
@@ -235,7 +235,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                     <Link href="/individual">
                       <a>
                         <div className={classes.tile}>
-                          <Grid container={true} direction="column">
+                          <Grid container direction="column">
                             <Typography
                               variant="headline"
                               align="center"
@@ -271,14 +271,14 @@ export class Home extends React.Component<IHomeProps, {}> {
               Ateliers, dégustations ou repas, retrouvez nos ingrédients clés :
             </Typography>
             <Grid
-              container={true}
+              container
               justify="space-around"
               spacing={16}
               className={classes.grid}
             >
-            <Grid item={true} xs={12} sm={4}>
+            <Grid item xs={12} sm={4}>
                 <Grid
-                  container={true}
+                  container
                   justify="space-between"
                   alignItems="flex-start"
                   direction="column"
@@ -297,9 +297,9 @@ export class Home extends React.Component<IHomeProps, {}> {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item={true} xs={12} sm={4}>
+              <Grid item xs={12} sm={4}>
                 <Grid
-                  container={true}
+                  container
                   justify="space-between"
                   alignItems="flex-start"
                   direction="column"
@@ -317,9 +317,9 @@ export class Home extends React.Component<IHomeProps, {}> {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item={true} xs={12} sm={4}>
+              <Grid item xs={12} sm={4}>
                 <Grid
-                  container={true}
+                  container
                   justify="space-between"
                   alignItems="flex-start"
                   direction="column"
@@ -347,12 +347,12 @@ export class Home extends React.Component<IHomeProps, {}> {
               Nos partenaires
             </Typography>
             <Grid
-              container={true}
+              container
               justify="space-around"
               spacing={16}
               className={classes.grid}
             >
-              <Grid item={true} xs={12}>
+              <Grid item xs={12}>
                 <Typography variant={"body1"}>
                   Le talent culinaire est partout et Cuistot du Coin souhaite le
                   révéler. Nous nous sommes entourés d’artisans et de

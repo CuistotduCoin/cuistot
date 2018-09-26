@@ -25,7 +25,7 @@ export class HowItWorks extends React.Component<IHowItWorksProps, {}> {
     return (
       <Layout valueProposition="Comment ça marche ?">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}

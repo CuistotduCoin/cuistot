@@ -25,7 +25,7 @@ export class Mission extends React.Component<IMissionProps, {}> {
     return (
       <Layout valueProposition="Nos mission à Cuistot du Coin">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}

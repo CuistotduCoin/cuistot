@@ -208,14 +208,14 @@ export class Business extends React.Component<IBusinessProps, {}> {
         description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
       >
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           className={classes.grid}
           spacing={16}
         >
-          <Grid item={true} sm={6} xs={12}>
-            <Grid container={true} justify="center">
+          <Grid item sm={6} xs={12}>
+            <Grid container justify="center">
               <img
                 className={classes.image}
                 alt="Atelier Cuistot du Coin"
@@ -223,7 +223,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               />
             </Grid>
           </Grid>
-          <Grid item={true} sm={6} xs={12}>
+          <Grid item sm={6} xs={12}>
             <Typography
               variant="title"
               align="center"
@@ -240,13 +240,13 @@ export class Business extends React.Component<IBusinessProps, {}> {
           </Grid>
         </Grid>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           className={classes.grid}
           spacing={16}
         >
-          <Grid item={true} sm={6} xs={12}>
+          <Grid item sm={6} xs={12}>
             <Typography
               variant="title"
               align="center"
@@ -262,8 +262,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
               plats «fait-maison».
             </Typography>
           </Grid>
-          <Grid item={true} sm={6} xs={12}>
-            <Grid container={true} justify="center">
+          <Grid item sm={6} xs={12}>
+            <Grid container justify="center">
               <img
                 className={classes.image}
                 alt="Atelier Cuistot du Coin"
@@ -281,15 +281,15 @@ export class Business extends React.Component<IBusinessProps, {}> {
           Plutôt atelier de cuisine ou repas ? Il y en a pour tous les goûts !
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
           className={classes.grid}
         >
           {typeActivity.map((activity, index) => (
-            <Grid key={index} item={true} xs={12} sm={6} md={4}>
-              <Grid container={true}>
+            <Grid key={index} item xs={12} sm={6} md={4}>
+              <Grid container>
                 <a className={classes.link} href={activity.url} target="_blank">
                   <Card className={classes.card}>
                     <CardMedia
@@ -324,14 +324,14 @@ export class Business extends React.Component<IBusinessProps, {}> {
           Notre recette ?
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
@@ -342,9 +342,9 @@ export class Business extends React.Component<IBusinessProps, {}> {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
@@ -358,9 +358,9 @@ export class Business extends React.Component<IBusinessProps, {}> {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
@@ -383,7 +383,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
         >
           C’est parti pour le voyage des papilles !
         </Typography>
-        <Grid container={true} className={classes.grid}>
+        <Grid container className={classes.grid}>
           <Typography variant={"body1"} paragraph={true}>
             Passionnés de cuisine, nos Cuistots ont à cœur de partager leurs
             savoir-faire et leurs recettes authentiques, mais surtout de vous
@@ -402,15 +402,15 @@ export class Business extends React.Component<IBusinessProps, {}> {
           A vous de choisir votre destination !
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
           className={classes.grid}
         >
           {typeWorld.map((world, index) => (
-            <Grid key={index} item={true} xs={12} sm={6} md={3} lg={true}>
-              <Grid container={true} justify="center">
+            <Grid key={index} item xs={12} sm={6} md={3} lg={true}>
+              <Grid container justify="center">
                 <Card className={classes.cardtypeWorld}>
                   <CardMedia
                     className={classes.media}
@@ -441,12 +441,12 @@ export class Business extends React.Component<IBusinessProps, {}> {
           Ils ont voyagé aux côtés de nos Cuistots
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12}>
+          <Grid item xs={12}>
             <Typography variant={"body1"}>
               Ils ont participez à nos ateliers, déjeunez aux cotés de nos
               Cuistots, pour renforcez les liens de leurs salariés, récompensez
@@ -478,7 +478,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           culinaire !
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}

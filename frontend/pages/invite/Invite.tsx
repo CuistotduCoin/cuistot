@@ -48,7 +48,7 @@ export class Invite extends React.Component<IInviteProps, {}> {
     return (
       <Layout valueProposition="Invitez vos proches">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
@@ -57,14 +57,14 @@ export class Invite extends React.Component<IInviteProps, {}> {
           <Content components={components} />
         </Grid>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
+          <Grid item xs={12}>
+            <Grid container justify="center">
               <a
                 className={classes.link}
                 href="https://cuistotducoin.typeform.com/to/s9TN8K"

@@ -57,7 +57,7 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
           description="Marre des activités extra-scolaires classiques ? Faites découvrir la pâtisserie à vos enfants !"
         />
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           className={classes.grid}
@@ -103,14 +103,14 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
           </Typography>
         </Grid>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12} sm={6}>
-            <Grid container={true} justify="center">
+          <Grid item xs={12} sm={6}>
+            <Grid container justify="center">
               <a
                 className={classes.link}
                 href="https://cuistotducoin.typeform.com/to/xwGUPX"
@@ -138,8 +138,8 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
               </a>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12} sm={6}>
-            <Grid container={true}>
+          <Grid item xs={12} sm={6}>
+            <Grid container>
               <a
                 className={classes.link}
                 href="https://cuistotducoin.typeform.com/to/xwGUPX"

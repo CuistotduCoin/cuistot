@@ -25,7 +25,7 @@ export class Gift extends React.Component<IGiftProps, {}> {
     return (
       <Layout valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}

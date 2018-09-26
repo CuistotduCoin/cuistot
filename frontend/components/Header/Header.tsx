@@ -114,7 +114,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
         className={classes.appBar}
       >
         <Toolbar>
-          <Grid container={true} justify="flex-start" alignItems="center">
+          <Grid container justify="flex-start" alignItems="center">
           <Logo className={classes.logo} />
             {!hideCompanyIndividual && (
               <Hidden smDown={true}>
@@ -132,7 +132,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
             )}
           </Grid>
           {rightElement && (
-            <Grid container={true} justify="flex-end">
+            <Grid container justify="flex-end">
               {rightElement}
             </Grid>
           )}

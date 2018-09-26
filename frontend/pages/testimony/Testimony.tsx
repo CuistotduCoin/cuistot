@@ -25,7 +25,7 @@ export class Testimony extends React.Component<ITestimonyProps, {}> {
     return (
       <Layout valueProposition="Ils nous font confiance">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
