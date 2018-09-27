@@ -1,15 +1,17 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import get from "lodash.get";
 import Link from "next/link";
 import React from "react";
+import { graphql } from "react-apollo";
 import Slider from "react-slick";
+import { compose } from "recompose";
 // import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import Footer from "../../components/Footer";
-import Head from "../../components/Head";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
+import Layout from "../../components/Layout";
+import { withData } from "../../decorators";
+import { GetWorkshops } from "../../queries";
 
 const styles = (theme: Theme) => ({
   block: {
@@ -181,24 +183,13 @@ export class Home extends React.Component<IHomeProps, {}> {
     ];
 
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
-          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
-          /*searchForm={
-    <SearchForm
-      apiKey={runtimeConfig.ALGOLIASEARCH_PLACES_KEY}
-      appId={runtimeConfig.ALGOLIASEARCH_PLACES_APP_ID}
-      history={this.props.history}
-    />
-  }*/
-        />
-        <Grid container={true} alignItems="center" className={classes.gridTile}>
-          <Grid item={true} xs={12} sm={6}>
-            <Grid container={true} className={classes.tileEntreprise}>
+      <Layout
+        valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
+        description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
+      >  
+        <Grid container alignItems="center" className={classes.gridTile}>
+          <Grid item xs={12} sm={6}>
+            <Grid container className={classes.tileEntreprise}>
               <div className={classes.block}>
                 <img
                   src="https://static.cuistotducoin.com/img/home/business.jpg"
@@ -208,7 +199,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                 <Link href="/business">
                   <a>
                     <div className={classes.tile}>
-                      <Grid container={true} direction="column">
+                      <Grid container direction="column">
                         <Typography
                           variant="headline"
                           align="center"
@@ -233,8 +224,8 @@ export class Home extends React.Component<IHomeProps, {}> {
               </div>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12} sm={6}>
-            <Grid container={true} className={classes.tileParticulier}>
+          <Grid item xs={12} sm={6}>
+            <Grid container className={classes.tileParticulier}>
               <div className={classes.block}>
                 <img
                   src="https://static.cuistotducoin.com/img/home/individual.jpg"
@@ -244,7 +235,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                 <Link href="/individual">
                   <a>
                     <div className={classes.tile}>
-                      <Grid container={true} direction="column">
+                      <Grid container direction="column">
                         <Typography
                           variant="headline"
                           align="center"
@@ -280,57 +271,69 @@ export class Home extends React.Component<IHomeProps, {}> {
           Ateliers, dégustations ou repas, retrouvez nos ingrédients clés :
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12} sm={4}>
+        <Grid item xs={12} sm={4}>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"title"} component="h3" gutterBottom={true}>
+              <Typography
+                variant={"title"}
+                component="h3"
+                gutterBottom={true}
+              >
                 Authenticité et Convivialité
               </Typography>
               <Typography variant={"body1"}>
-                Parce que le voyage commence d’abord dans l’assiette, découvrez
-                une cuisine qui invite à l’évasion et percez les secrets des
-                recettes de nos Cuistots passionnés.
+                Parce que le voyage commence d’abord dans l’assiette,
+                découvrez une cuisine qui invite à l’évasion et percez les
+                secrets des recettes de nos Cuistots passionnés.
               </Typography>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"title"} component="h3" gutterBottom={true}>
+              <Typography
+                variant={"title"}
+                component="h3"
+                gutterBottom={true}
+              >
                 Partage
               </Typography>
               <Typography variant={"body1"}>
-                Au-delà de la cuisine, plongez dans les univers de nos Cuistots
-                et découvrez de nouveaux horizons.
+                Au-delà de la cuisine, plongez dans les univers de nos
+                Cuistots et découvrez de nouveaux horizons.
               </Typography>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"title"} component="h3" gutterBottom={true}>
+              <Typography
+                variant={"title"}
+                component="h3"
+                gutterBottom={true}
+              >
                 Diversité
               </Typography>
               <Typography variant={"body1"}>
-                Divers formats et univers culinaires sont proposés chez Cuistot
-                du Coin. De quoi satisfaire vos papilles !
+                Divers formats et univers culinaires sont proposés chez
+                Cuistot du Coin. De quoi satisfaire vos papilles !
               </Typography>
             </Grid>
           </Grid>
@@ -344,16 +347,17 @@ export class Home extends React.Component<IHomeProps, {}> {
           Nos partenaires
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12}>
+          <Grid item xs={12}>
             <Typography variant={"body1"}>
               Le talent culinaire est partout et Cuistot du Coin souhaite le
-              révéler. Nous nous sommes entourés d’artisans et de commerçants
-              passionnés pour vous offrir des expériences culinaires sur-mesure.
+              révéler. Nous nous sommes entourés d’artisans et de
+              commerçants passionnés pour vous offrir des expériences
+              culinaires sur-mesure.
             </Typography>
           </Grid>
         </Grid>
@@ -372,10 +376,22 @@ export class Home extends React.Component<IHomeProps, {}> {
             ))}
           </Slider>
         </div>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }
 
-export default withStyles(styles as any)(Home as any) as any;
+const enhance = compose(
+  withData,
+  graphql(GetWorkshops, {
+    options: {
+      fetchPolicy: 'cache-and-network'
+    },
+    props: props => ({
+      workshops: get(props, 'data.getWorkshops.workshops') || []
+    }),
+  }),
+  withStyles(styles as any),
+);
+
+export default enhance(Home);

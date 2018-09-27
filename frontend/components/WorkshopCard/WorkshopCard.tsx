@@ -48,9 +48,6 @@ const styles = (theme: Theme) => ({
     color: green[900],
     height: 15
   },
-  link: {
-    textDecoration: "none"
-  },
   media: {
     height: 194
   },
@@ -107,7 +104,7 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
     }
 
     return (
-      <a className={classes.link} href={this.props.typeform} target="_blank">
+      <a href={this.props.typeform} target="_blank">
         <Card className={classes.card}>
           <CardHeader
             className={classes.cardHeaderUp}
@@ -120,11 +117,11 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
             title={this.props.name}
           />
           <CardContent className={classes.cardContent}>
-            <Grid container={true} justify="space-between">
-              <Grid item={true}>
-                <Grid container={true}>
-                  <Grid item={true}>{avatar}</Grid>
-                  <Grid item={true}>
+            <Grid container justify="space-between">
+              <Grid item>
+                <Grid container>
+                  <Grid item>{avatar}</Grid>
+                  <Grid item>
                     <Typography className={classes.nameCook} variant="body1">
                       Rencontrez {this.props.nameCook}
                     </Typography>
@@ -132,8 +129,8 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
                 </Grid>
               </Grid>
               {this.props.rating && (
-                <Grid item={true}>
-                  <Grid container={true} justify="flex-end">
+                <Grid item>
+                  <Grid container justify="flex-end">
                     <StarRating rating={this.props.rating} />
                     {this.props.ratingNumber && (
                       <Typography
@@ -148,33 +145,33 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
               )}
             </Grid>
             <Grid
-              container={true}
+              container
               alignItems="center"
               direction="column"
               className={classes.bottomContentCard}
             >
-              <Grid item={true} className={classes.bottomContentCardItem}>
+              <Grid item className={classes.bottomContentCardItem}>
                 <Chip label="Atelier collectif" className={classes.chip} />
               </Grid>
-              <Grid item={true} className={classes.bottomContentCardItem}>
+              <Grid item className={classes.bottomContentCardItem}>
                 <Typography align="center" variant="title">
                   {this.props.name}
                 </Typography>
               </Grid>
-              <Grid item={true} className={classes.bottomContentCardItem}>
+              <Grid item className={classes.bottomContentCardItem}>
                 <Typography variant="subheading">{this.props.date}</Typography>
               </Grid>
             </Grid>
             <Divider />
-            <Grid container={true}>
-              <Grid item={true} xs={6}>
-                <Grid container={true} justify="center">
+            <Grid container>
+              <Grid item xs={6}>
+                <Grid container justify="center">
                   <Place className={classes.icon} />
                   <Typography variant="caption">{this.props.spot}</Typography>
                 </Grid>
               </Grid>
-              <Grid item={true} xs={6}>
-                <Grid container={true} justify="center">
+              <Grid item xs={6}>
+                <Grid container justify="center">
                   <HourglassFull className={classes.icon} />
                   <Typography variant="caption">
                     {this.props.duration}h

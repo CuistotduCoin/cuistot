@@ -5,14 +5,12 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import Layout from "../../components/Layout";
 import React from "react";
 import HubspotForm from "react-hubspot-form";
 import Slider from "react-slick";
 // import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -42,9 +40,6 @@ const styles = (theme: Theme) => ({
     height: "100%",
     maxWidth: 320,
     width: "100%"
-  },
-  link: {
-    textDecoration: "none"
   },
   logo: {
     height: "100%",
@@ -205,23 +200,19 @@ export class Business extends React.Component<IBusinessProps, {}> {
       }
     ];
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
-          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
-        />
+      <Layout
+        valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
+        description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
+      >
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           className={classes.grid}
           spacing={16}
         >
-          <Grid item={true} sm={6} xs={12}>
-            <Grid container={true} justify="center">
+          <Grid item sm={6} xs={12}>
+            <Grid container justify="center">
               <img
                 className={classes.image}
                 alt="Atelier Cuistot du Coin"
@@ -229,7 +220,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               />
             </Grid>
           </Grid>
-          <Grid item={true} sm={6} xs={12}>
+          <Grid item sm={6} xs={12}>
             <Typography
               variant="title"
               align="center"
@@ -246,13 +237,13 @@ export class Business extends React.Component<IBusinessProps, {}> {
           </Grid>
         </Grid>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           className={classes.grid}
           spacing={16}
         >
-          <Grid item={true} sm={6} xs={12}>
+          <Grid item sm={6} xs={12}>
             <Typography
               variant="title"
               align="center"
@@ -268,8 +259,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
               plats «fait-maison».
             </Typography>
           </Grid>
-          <Grid item={true} sm={6} xs={12}>
-            <Grid container={true} justify="center">
+          <Grid item sm={6} xs={12}>
+            <Grid container justify="center">
               <img
                 className={classes.image}
                 alt="Atelier Cuistot du Coin"
@@ -287,16 +278,16 @@ export class Business extends React.Component<IBusinessProps, {}> {
           Plutôt atelier de cuisine ou repas ? Il y en a pour tous les goûts !
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
           className={classes.grid}
         >
           {typeActivity.map((activity, index) => (
-            <Grid key={index} item={true} xs={12} sm={6} md={4}>
-              <Grid container={true}>
-                <a className={classes.link} href={activity.url} target="_blank">
+            <Grid key={index} item xs={12} sm={6} md={4}>
+              <Grid container>
+                <a href={activity.url} target="_blank">
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.media}
@@ -330,14 +321,14 @@ export class Business extends React.Component<IBusinessProps, {}> {
           Notre recette ?
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
@@ -348,9 +339,9 @@ export class Business extends React.Component<IBusinessProps, {}> {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
@@ -364,9 +355,9 @@ export class Business extends React.Component<IBusinessProps, {}> {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item={true} xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
@@ -389,7 +380,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
         >
           C’est parti pour le voyage des papilles !
         </Typography>
-        <Grid container={true} className={classes.grid}>
+        <Grid container className={classes.grid}>
           <Typography variant={"body1"} paragraph={true}>
             Passionnés de cuisine, nos Cuistots ont à cœur de partager leurs
             savoir-faire et leurs recettes authentiques, mais surtout de vous
@@ -408,15 +399,15 @@ export class Business extends React.Component<IBusinessProps, {}> {
           A vous de choisir votre destination !
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
           className={classes.grid}
         >
           {typeWorld.map((world, index) => (
-            <Grid key={index} item={true} xs={12} sm={6} md={3} lg={true}>
-              <Grid container={true} justify="center">
+            <Grid key={index} item xs={12} sm={6} md={3} lg={true}>
+              <Grid container justify="center">
                 <Card className={classes.cardtypeWorld}>
                   <CardMedia
                     className={classes.media}
@@ -447,12 +438,12 @@ export class Business extends React.Component<IBusinessProps, {}> {
           Ils ont voyagé aux côtés de nos Cuistots
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12}>
+          <Grid item xs={12}>
             <Typography variant={"body1"}>
               Ils ont participez à nos ateliers, déjeunez aux cotés de nos
               Cuistots, pour renforcez les liens de leurs salariés, récompensez
@@ -484,7 +475,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           culinaire !
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
@@ -495,8 +486,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
             formId="2db2fd4a-3e67-4396-a725-e8320947201e"
           />
         </Grid>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

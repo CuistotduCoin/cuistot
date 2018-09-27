@@ -1,14 +1,11 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
+import Layout from "../../components/Layout";
 import components from "../../content/components";
-// @ts-ignore
 import Content from "../../content/terms.mdx";
 
-const styles = (theme: Theme) => ({
+const styles = () => ({
   grid: {
     margin: "0px auto",
     maxWidth: 1080,
@@ -25,15 +22,9 @@ export class Terms extends React.Component<ITermsProps, {}> {
     const { classes } = this.props;
 
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Conditions légales"
-        />
+      <Layout valueProposition="Conditions légales">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
@@ -41,8 +32,7 @@ export class Terms extends React.Component<ITermsProps, {}> {
         >
           <Content components={components} />
         </Grid>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

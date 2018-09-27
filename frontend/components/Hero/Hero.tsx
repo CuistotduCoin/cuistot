@@ -72,8 +72,8 @@ export class Hero extends React.Component<IHeroProps, {}> {
     return (
       <div className={classes.home}>
         <div className={classes.content} style={this.innerHeight}>
-          <Grid container={true} direction="column">
-            <Grid item={true}>
+          <Grid container direction="column">
+            <Grid item>
               <Typography
                 variant="headline"
                 align="center"
@@ -92,8 +92,8 @@ export class Hero extends React.Component<IHeroProps, {}> {
                   {this.props.description}
                 </Typography>
               )}
-              <Grid container={true}>
-                <Grid item={true} className={classes.gridSearchForm}>
+              <Grid container>
+                <Grid item className={classes.gridSearchForm}>
                   {this.props.searchForm}
                 </Grid>
               </Grid>

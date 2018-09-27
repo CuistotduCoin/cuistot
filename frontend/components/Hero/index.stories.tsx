@@ -1,5 +1,5 @@
 import { storiesOf } from "@storybook/react";
-import SearchForm from "components/SearchForm";
+import SearchForm from "../../components/SearchForm";
 import React from "react";
 import Hero from "./Hero";
 

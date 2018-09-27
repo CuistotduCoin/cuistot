@@ -1,9 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
+import Layout from "../../components/Layout";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
 import components from "../../content/components";
 // @ts-ignore
 import Content from "../../content/gift.mdx";
@@ -25,15 +23,9 @@ export class Gift extends React.Component<IGiftProps, {}> {
     const { classes } = this.props;
 
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
-        />
+      <Layout valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
@@ -41,8 +33,7 @@ export class Gift extends React.Component<IGiftProps, {}> {
         >
           <Content components={components} />
         </Grid>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

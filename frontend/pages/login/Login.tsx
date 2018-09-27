@@ -1,44 +1,36 @@
-import { withStyles } from "@material-ui/core/styles";
+import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import LoginForm from "../../components/LoginForm";
+import Logo from "../../components/Logo";
 import Link from "next/link";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
-import LoginForm from "../../components/LoginForm";
 
-const styles = () => ({});
-
-interface ILoginProps {
-  classes?: any;
-}
-
-export class Login extends React.Component<ILoginProps, {}> {
-  public render() {
-    return (
-      <>
-        <Header hideSignUpLogin={true} />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
-        />
-        <LoginForm />
-        <Typography align="center">
-          Pas encore membre ?{" "}
-          <Link href="/signup">
-            <a>Inscrivez vous !</a>
-          </Link>
-        </Typography>
-        <Typography align="center" gutterBottom={true}>
-          <Link href="/signup">
-            <a>Vous avez oubliez votre mot de passe ?</a>
-          </Link>
-        </Typography>
-        <Footer />
-      </>
-    );
+const styles = (theme: Theme) => ({
+  container: {
+    textAlign: "center"
+  },
+  logo: {
+    marginTop: 3 * theme.spacing.unit
   }
-}
+});
+
+// tslint:disable-next-line
+const Login: React.SFC<{ classes: any }> = ({ classes }) => (
+  <div className={classes.container}>
+    <Logo height={100} width={100} className={classes.logo} />
+    <LoginForm />
+    <Typography align="center" gutterBottom={true}>
+      Pas encore membre ?{' '}
+      <Link href="/signup">
+        <a>Inscrivez vous !</a>
+      </Link>
+    </Typography>
+    <Typography align="center" gutterBottom={true}>
+      <Link href="/password/reset/request">
+        <a>Vous avez oublié votre mot de passe ?</a>
+      </Link>
+    </Typography>
+  </div>
+);
 
 export default withStyles(styles as any)(Login as any) as any;

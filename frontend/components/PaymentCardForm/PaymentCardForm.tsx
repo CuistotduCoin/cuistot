@@ -89,9 +89,9 @@ export class PaymentCardForm extends React.Component<
     ) => (
       <Form autoComplete="off">
         <FormControl>
-          <Grid container={true} justify="space-around" spacing={16}>
-            <Grid item={true} xs={12}>
-              <Grid container={true}>
+          <Grid container justify="space-around" spacing={16}>
+            <Grid item xs={12}>
+              <Grid container>
                 <Card
                   cvc={props.values.cvc || ""}
                   expiry={props.values.expiry || ""}
@@ -101,11 +101,11 @@ export class PaymentCardForm extends React.Component<
                 />
               </Grid>
             </Grid>
-            <Grid item={true} xs={12}>
+            <Grid item xs={12}>
               <Divider />
             </Grid>
-            <Grid item={true} xs={8}>
-              <Grid container={true}>
+            <Grid item xs={8}>
+              <Grid container>
                 <FastField
                   type="text"
                   component={TextField}
@@ -122,8 +122,8 @@ export class PaymentCardForm extends React.Component<
               </Grid>
             </Grid>
           </Grid>
-          <Grid item={true} xs={4}>
-            <Grid container={true}>
+          <Grid item xs={4}>
+            <Grid container>
               <FastField
                 type="text"
                 component={TextField}
@@ -139,8 +139,8 @@ export class PaymentCardForm extends React.Component<
               />
             </Grid>
           </Grid>
-          <Grid item={true} xs={8}>
-            <Grid container={true}>
+          <Grid item xs={8}>
+            <Grid container>
               <FastField
                 type="text"
                 component={TextField}
@@ -156,8 +156,8 @@ export class PaymentCardForm extends React.Component<
               />
             </Grid>
           </Grid>
-          <Grid item={true} xs={4}>
-            <Grid container={true}>
+          <Grid item xs={4}>
+            <Grid container>
               <FastField
                 type="text"
                 component={TextField}

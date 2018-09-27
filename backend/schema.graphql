@@ -8,12 +8,18 @@ interface Node {
 interface Timestamps {
   created_at: String!
   updated_at: String!
+  deleted_at: String
 }
 
 enum Gender {
   F
   M
   U
+}
+
+enum SortOrder {
+  ASC
+  DESC
 }
 
 type PageInfo {
@@ -29,9 +35,75 @@ type PaginatedWorkshops {
   message: String
 }
 
+type PagePaginatedWorkshops {
+  workshops: WorkshopPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedGourmets {
+  gourmets: GourmetPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedCooks {
+  cooks: CookPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedBookings {
+  bookings: BookingPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedKitchens {
+  kitchens: KitchenPage
+  errors: [UserError!]!
+  message: String
+}
+
+type PagePaginatedEvaluations {
+  evaluations: EvaluationPage
+  errors: [UserError!]!
+  message: String
+}
+
 type WorkshopConnection {
   edges: [WorkshopEdge!]!
   pageInfo: PageInfo!
+}
+
+type WorkshopPage {
+  items: [Workshop!]!
+  total: Int!
+}
+
+type GourmetPage {
+  items: [Gourmet!]!
+  total: Int!
+}
+
+type CookPage {
+  items: [Cook!]!
+  total: Int!
+}
+
+type BookingPage {
+  items: [Booking!]!
+  total: Int!
+}
+
+type KitchenPage {
+  items: [Kitchen!]!
+  total: Int!
+}
+
+type EvaluationPage {
+  items: [Evaluation!]!
+  total: Int!
 }
 
 type WorkshopEdge {
@@ -39,17 +111,23 @@ type WorkshopEdge {
   cursor: String!
 }
 
+type GourmetEdge {
+  node: Gourmet!
+  cursor: String!
+}
+
 type Workshop implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   name: String!
   price: Int!
   duration: Int!
   min_gourmet: Int!
   max_gourmet: Int!
   description: String
-  images: [S3Object!]!
+  images: [Image!]!
   date: String!
   kitchen: Kitchen!
   cook: Cook!
@@ -60,28 +138,35 @@ type Booking implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   amount: Int!
   gourmet: Gourmet!
   workshop: Workshop!
-  evaluation: Evaluation
 }
 
 type Evaluation implements Timestamps {
+  id: ID!
   created_at: String!
   updated_at: String!
-  booking: Booking!
+  deleted_at: String
   rating: Float!
   comment: String!
+  cook: Cook!
+  author: Gourmet!
 }
 
 type Gourmet implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   email: String!
+  phone_number: String
+  identity_id: String
+  username: String!
   first_name: String!
   last_name: String!
-  image: S3Object
+  image: Image
   gender: Gender
   birthdate: String
   address: String
@@ -96,32 +181,38 @@ type Cook implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   gourmet: Gourmet!
+  description: String
   is_pro: Boolean!
+  confirmed: Boolean!
   business_name: String
   siren: String
   pro_email: String
+  pro_phone_number: String!
   legal_first_name: String
   legal_last_name: String
   legal_birthdate: String
+  image: Image
   workshops: [Workshop!]!
+  evaluations: [Evaluation!]!
 }
 
 type Kitchen implements Node & Timestamps {
   id: ID!
   created_at: String!
   updated_at: String!
+  deleted_at: String
   name: String!
   address: String!
   city: String!
   zip_code: String!
   location: String!
+  author: Gourmet!
 }
 
-type S3Object {
-  bucket: String!
+type Image {
   key: String!
-  region: String!
 }
 
 type WorkshopList {
@@ -149,14 +240,8 @@ input BookingInput {
   id: ID!
 }
 
-input ImageInput {
-  bucket: String!
-  key: String!
-  region: String!
-}
-
-type ImagePayload {
-  image: S3Object
+input EvaluationInput {
+  id: ID!
 }
 
 input CreateWorkshopInput {
@@ -196,13 +281,21 @@ input UpdateBookingInput {
 }
 
 input CreateEvaluationInput {
-  booking: BookingInput!
+  cook: CookInput!
+  rating: Float!
+  comment: String!
+}
+
+input UpdateEvaluationInput {
+  id: ID!
   rating: Float!
   comment: String!
 }
 
 input CreateGourmetInput {
+  id: ID!
   email: String!
+  phone_number: String
   first_name: String!
   last_name: String!
   gender: Gender
@@ -210,30 +303,31 @@ input CreateGourmetInput {
   address: String
   city: String
   zip_code: String
-  location: String
   description: String
 }
 
 input UpdateGourmetInput {
   id: ID!
-  email: String
+  phone_number: String
+  description: String
+  gender: Gender
   first_name: String
   last_name: String
-  gender: Gender
   birthdate: String
   address: String
   city: String
   zip_code: String
-  location: String
-  description: String
+  identity_id: String
 }
 
 input CreateCookInput {
   gourmet: GourmetInput!
   is_pro: Boolean
+  description: String
   business_name: String
   siren: String
   pro_email: String
+  pro_phone_number: String!
   legal_first_name: String
   legal_last_name: String
   legal_birthdate: String
@@ -242,20 +336,21 @@ input CreateCookInput {
 input UpdateCookInput {
   id: ID!
   is_pro: Boolean
+  description: String
   business_name: String
   siren: String
   pro_email: String
+  pro_phone_number: String
   legal_first_name: String
   legal_last_name: String
   legal_birthdate: String
 }
 
 input CreateKitchenInput {
-  name: String!
+  name: String
   address: String!
   city: String!
   zip_code: String!
-  location: String!
 }
 
 input UpdateKitchenInput {
@@ -264,7 +359,6 @@ input UpdateKitchenInput {
   address: String
   city: String
   zip_code: String
-  location: String
 }
 
 type UserError {
@@ -313,6 +407,25 @@ type EvaluationPayload {
   evaluation: Evaluation
 }
 
+input Filter {
+  ids: [ID!]
+  q: String
+  has_been_deleted: Boolean
+}
+
+input WorkshopFilter {
+  ids: [ID!]
+  q: String
+  has_bookings: Boolean
+  has_been_archived: Boolean
+  has_been_deleted: Boolean
+}
+
+input Order {
+  field: String!
+  order: SortOrder!
+}
+
 type Mutation {
   ## Workshops
   createWorkshop(workshop: CreateWorkshopInput!): WorkshopPayload!
@@ -321,10 +434,8 @@ type Mutation {
     @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteWorkshop(workshop_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
-  addWorkshopImage(image: ImageInput!): ImagePayload!
-    @aws_auth(cognito_groups: ["Cook", "Admin"])
-  removeWorkshopImage(key: String!): PlainPayload!
-    @aws_auth(cognito_groups: ["Cook", "Admin"])
+  recreateWorkshop(workshop: WorkshopInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Bookings
   createBooking(booking: CreateBookingInput!): BookingPayload!
@@ -333,51 +444,73 @@ type Mutation {
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteBooking(booking_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  recreateBooking(booking: BookingInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Evaluations
   createEvaluation(evaluation: CreateEvaluationInput!): EvaluationPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
-  deleteEvaluation(booking_id: ID!): PlainPayload!
+  updateEvaluation(evaluation: UpdateEvaluationInput!): EvaluationPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  deleteEvaluation(evaluation_id: ID!): PlainPayload!
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  recreateEvaluation(evaluation: EvaluationInput!): PlainPayload!
     @aws_auth(cognito_groups: ["Admin"])
 
   ## Gourmets
   createGourmet(gourmet: CreateGourmetInput!): GourmetPayload!
+    @aws_auth(cognito_groups: ["Admin"]) # also called by user pool post confirmation trigger
   updateGourmet(gourmet: UpdateGourmetInput!): GourmetPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   deleteGourmet(gourmet_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
-  updateGourmetImage(image: ImageInput!): ImagePayload!
-    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  recreateGourmet(gourmet: GourmetInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
 
   ## Cooks
   createCook(cook: CreateCookInput!): CookPayload!
-    @aws_auth(cognito_groups: ["Admin"])
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
   updateCook(cook: UpdateCookInput!): CookPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
+  confirmCook(cook: CookInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
   deleteCook(cook_id: ID!): PlainPayload!
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
+  recreateCook(cook: CookInput!): PlainPayload!
     @aws_auth(cognito_groups: ["Admin"])
 
   ## Kitchens
   createKitchen(kitchen: CreateKitchenInput!): KitchenPayload!
-    @aws_auth(cognito_groups: ["Admin"])
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
   updateKitchen(kitchen: UpdateKitchenInput!): KitchenPayload!
-    @aws_auth(cognito_groups: ["Admin"])
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteKitchen(kitchen_id: ID!): PlainPayload!
+    @aws_auth(cognito_groups: ["Cook", "Admin"])
+  recreateKitchen(kitchen: KitchenInput!): PlainPayload!
     @aws_auth(cognito_groups: ["Admin"])
 }
 
 type Query {
   getWorkshop(workshop_id: ID!): WorkshopPayload!
   getWorkshops(before: String, after: String, first: Int, last: Int): PaginatedWorkshops!
+  getWorkshopsPage(limit: Int, page: Int, filter: WorkshopFilter, orderBy: Order): PagePaginatedWorkshops!
+    @aws_auth(cognito_groups: ["Admin"])
   getGourmet(gourmet_id: ID!): GourmetPayload!
-    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
+  getGourmetsPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedGourmets!
+    @aws_auth(cognito_groups: ["Admin"])
   getCook(cook_id: ID!): CookPayload!
+  getCooksPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedCooks!
+    @aws_auth(cognito_groups: ["Admin"])
   getBooking(booking_id: ID!): BookingPayload!
-    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
+    @aws_auth(cognito_groups: ["Gourmet", "Admin"])
+  getBookingsPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedBookings!
+    @aws_auth(cognito_groups: ["Admin"])
   getKitchen(kitchen_id: ID!): KitchenPayload!
-    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
-  getEvaluation(booking_id: ID!): EvaluationPayload!
-    @aws_auth(cognito_groups: ["Gourmet", "Cook", "Admin"])
+  getKitchensPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedKitchens!
+    @aws_auth(cognito_groups: ["Admin"])
+  getEvaluation(evaluation_id: ID!): EvaluationPayload!
+  getEvaluationsPage(limit: Int, page: Int, filter: Filter, orderBy: Order): PagePaginatedEvaluations!
+    @aws_auth(cognito_groups: ["Admin"])
   getCurrentGourmet: GourmetPayload!
     @aws_auth(cognito_groups: ["Gourmet", "Admin"])
 }

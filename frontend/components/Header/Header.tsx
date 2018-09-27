@@ -6,14 +6,24 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Link from "next/link";
 import React from "react";
+import AccountDropdown from "../../components/AccountDropdown";
+import Logo from "../../components/Logo";
 
 const styles = (theme: Theme) => ({
+  accountButton: {
+    extend: "button",
+    color: "white"
+  },
   appBar: {
     background:
-      "linear-gradient(180deg,hsla(0,0%,100%,.9) 0,hsla(0,0%,100%,.8))"
+      "linear-gradient(180deg,hsla(0,0%,100%,.9) 0,hsla(0,0%,100%,.8))",
+    boxShadow: "none"
   },
   button: {
     margin: theme.spacing.unit
+  },
+  logo: {
+    marginRight: 3 * theme.spacing.unit
   }
 });
 
@@ -22,7 +32,9 @@ interface IHeaderProps {
   static?: boolean;
   hideSignUpLogin: boolean;
   hideCompanyIndividual: boolean;
+  isLoggedIn: boolean;
 }
+
 interface IHeaderState {
   up?: boolean;
 }
@@ -55,31 +67,46 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
   }
 
   public render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      hideSignUpLogin,
+      isLoggedIn,
+      hideCompanyIndividual
+    } = this.props;
 
-    const button = this.state.up ? (
-      <Link href="/login" passHref={true}>
-        <Button
-          className={classes.button}
-          variant="raised"
-          color="primary"
-          onScroll={this.handleScroll}
-        >
-          Se connecter
-        </Button>
-      </Link>
-    ) : (
-      <Link href="/signup" passHref={true}>
-        <Button
-          className={classes.button}
-          variant="raised"
-          color="primary"
-          onScroll={this.handleScroll}
-        >
-          S'inscrire
-        </Button>
-      </Link>
-    );
+    let rightElement;
+
+    if (isLoggedIn) {
+      rightElement = <AccountDropdown />;
+    } else if (!hideSignUpLogin) {
+      if (this.state.up) {
+        rightElement = (
+          <Link href="/login" passHref={true}>
+            <Button
+              className={classes.button}
+              variant="raised"
+              color="primary"
+              onScroll={this.handleScroll}
+            >
+              Se connecter
+            </Button>
+          </Link>
+        );
+      } else {
+        rightElement = (
+          <Link href="/signup" passHref={true}>
+            <Button
+              className={classes.button}
+              variant="raised"
+              color="primary"
+              onScroll={this.handleScroll}
+            >
+              S'inscrire
+            </Button>
+          </Link>
+        );
+      }
+    }
 
     return (
       <AppBar
@@ -87,18 +114,9 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
         className={classes.appBar}
       >
         <Toolbar>
-          <Grid container={true} justify="flex-start" alignItems="center">
-            <Link href="/">
-              <a>
-                <img
-                  src="https://static.cuistotducoin.com/img/logo.svg"
-                  alt="Logo de Cuistot du coin"
-                  height={40}
-                  width={40}
-                />
-              </a>
-            </Link>
-            {!this.props.hideCompanyIndividual && (
+          <Grid container justify="flex-start" alignItems="center">
+          <Logo className={classes.logo} />
+            {!hideCompanyIndividual && (
               <Hidden smDown={true}>
                 <Link href="/business" passHref={true}>
                   <Button className={classes.button} color="primary">
@@ -113,12 +131,11 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
               </Hidden>
             )}
           </Grid>
-          {!this.props.hideSignUpLogin && // false is temp
-            false && (
-              <Grid container={true} justify="flex-end">
-                {button}
-              </Grid>
-            )}
+          {rightElement && (
+            <Grid container justify="flex-end">
+              {rightElement}
+            </Grid>
+          )}
         </Toolbar>
       </AppBar>
     );

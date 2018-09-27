@@ -21,6 +21,46 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
           />
+          <style>{`
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: Roboto;
+          }
+
+          a {
+            text-decoration: none;
+          }
+
+          *[class*="MuiTypography-headline-"] {
+            font-family: 'PT Sans', sans-serif !important;
+            font-weight: bold !important;
+          }
+
+          *[class*="MuiTypography-title-"],
+          *[class*="MuiTypography-subheading-"],
+          *[class*="MuiTypography-body2-"] {
+            font-family: 'PT Sans', sans-serif !important;
+          }
+
+          /* Input Range */
+
+          *[class*="input-range__slider"] {
+            background: #388e3c;
+            border: 1px solid #388e3c;
+          }
+
+          *[class*="input-range__track--active"] {
+            background: #388e3c;
+          }
+
+          /* --- */
+
+          .slick-prev:before,
+          .slick-next:before {
+            color: black;
+          }
+          `}</style>
         </Head>
         <body>
           <Main />

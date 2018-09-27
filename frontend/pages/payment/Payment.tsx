@@ -66,8 +66,8 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
     switch (stepIndex) {
       case 0:
         return (
-          <Grid container={true} className={classes.grid}>
-            <Grid item={true} xs={8}>
+          <Grid container className={classes.grid}>
+            <Grid item xs={8}>
               <Typography variant="title" component="p" gutterBottom={true}>
                 Recontrez {this.props.nameCook}
               </Typography>
@@ -89,10 +89,10 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                 Continuer
               </Button>
             </Grid>
-            <Grid item={true} xs={4}>
+            <Grid item xs={4}>
               <Paper elevation={1} className={classes.infoReservartion}>
-                <Grid container={true}>
-                  <Grid item={true} xs={8}>
+                <Grid container>
+                  <Grid item xs={8}>
                     <Typography
                       variant="subheading"
                       component="p"
@@ -101,7 +101,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       {this.props.price}€ x 2 Gourmets
                     </Typography>
                   </Grid>
-                  <Grid item={true} xs={4}>
+                  <Grid item xs={4}>
                     <Typography
                       align="right"
                       variant="subheading"
@@ -111,7 +111,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       100€
                     </Typography>
                   </Grid>
-                  <Grid item={true} xs={8}>
+                  <Grid item xs={8}>
                     <Typography
                       variant="subheading"
                       component="p"
@@ -120,7 +120,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       frais de service
                     </Typography>
                   </Grid>
-                  <Grid item={true} xs={4}>
+                  <Grid item xs={4}>
                     <Typography
                       align="right"
                       variant="subheading"
@@ -130,10 +130,10 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       20€
                     </Typography>
                   </Grid>
-                  <Grid item={true} xs={12}>
+                  <Grid item xs={12}>
                     <Divider />
                   </Grid>
-                  <Grid item={true} xs={8}>
+                  <Grid item xs={8}>
                     <Typography
                       variant="subheading"
                       component="p"
@@ -142,7 +142,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       Total
                     </Typography>
                   </Grid>
-                  <Grid item={true} xs={4}>
+                  <Grid item xs={4}>
                     <Typography
                       align="right"
                       variant="subheading"
@@ -159,8 +159,8 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
         );
       case 1:
         return (
-          <Grid container={true} className={classes.grid}>
-            <Grid item={true} xs={8}>
+          <Grid container className={classes.grid}>
+            <Grid item xs={8}>
               <PaymentCardForm />
               <Button
                 variant="contained"
@@ -170,10 +170,10 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                 Confirmer et payer
               </Button>
             </Grid>
-            <Grid item={true} xs={4}>
+            <Grid item xs={4}>
               <Paper elevation={1} className={classes.infoReservartion}>
-                <Grid container={true}>
-                  <Grid item={true} xs={8}>
+                <Grid container>
+                  <Grid item xs={8}>
                     <Typography
                       variant="subheading"
                       component="p"
@@ -182,7 +182,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       {this.props.price}€ x 2 Gourmets
                     </Typography>
                   </Grid>
-                  <Grid item={true} xs={4}>
+                  <Grid item xs={4}>
                     <Typography
                       align="right"
                       variant="subheading"
@@ -192,7 +192,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       100€
                     </Typography>
                   </Grid>
-                  <Grid item={true} xs={8}>
+                  <Grid item xs={8}>
                     <Typography
                       variant="subheading"
                       component="p"
@@ -201,7 +201,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       frais de service
                     </Typography>
                   </Grid>
-                  <Grid item={true} xs={4}>
+                  <Grid item xs={4}>
                     <Typography
                       align="right"
                       variant="subheading"
@@ -211,10 +211,10 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       20€
                     </Typography>
                   </Grid>
-                  <Grid item={true} xs={12}>
+                  <Grid item xs={12}>
                     <Divider />
                   </Grid>
-                  <Grid item={true} xs={8}>
+                  <Grid item xs={8}>
                     <Typography
                       variant="subheading"
                       component="p"
@@ -223,7 +223,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       Total
                     </Typography>
                   </Grid>
-                  <Grid item={true} xs={4}>
+                  <Grid item xs={4}>
                     <Typography
                       align="right"
                       variant="subheading"
@@ -252,21 +252,21 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
       <>
         <Header static={true} hideCompanyIndividual={true} />
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12}>
+          <Grid item xs={12}>
             <Divider />
           </Grid>
-          <Grid item={true}>
+          <Grid item>
             <Typography variant="title">
               Paiement - {steps[this.state.activeStep]}
             </Typography>
           </Grid>
-          <Grid item={true}>
+          <Grid item>
             <Stepper activeStep={this.state.activeStep} alternativeLabel={true}>
               {steps.map((label, index) => {
                 return (
@@ -279,7 +279,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
               })}
             </Stepper>
           </Grid>
-          <Grid item={true} xs={12}>
+          <Grid item xs={12}>
             <Divider />
           </Grid>
         </Grid>

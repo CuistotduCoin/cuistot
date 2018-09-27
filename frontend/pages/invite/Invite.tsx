@@ -7,10 +7,8 @@ import {
 } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
+import Layout from "../../components/Layout";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
 import components from "../../content/components";
 // @ts-ignore
 import Content from "../../content/invite.mdx";
@@ -30,9 +28,6 @@ const styles = (theme: Theme) => ({
     maxWidth: 1080,
     padding: 24
   },
-  link: {
-    textDecoration: "none"
-  },
   media: {
     height: 135
   },
@@ -48,15 +43,9 @@ export class Invite extends React.Component<IInviteProps, {}> {
     const { classes } = this.props;
 
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Invitez vos proches"
-        />
+      <Layout valueProposition="Invitez vos proches">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
@@ -65,16 +54,15 @@ export class Invite extends React.Component<IInviteProps, {}> {
           <Content components={components} />
         </Grid>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12}>
-            <Grid container={true} justify="center">
+          <Grid item xs={12}>
+            <Grid container justify="center">
               <a
-                className={classes.link}
                 href="https://cuistotducoin.typeform.com/to/s9TN8K"
                 target="_blank"
               >
@@ -102,8 +90,7 @@ export class Invite extends React.Component<IInviteProps, {}> {
             </Grid>
           </Grid>
         </Grid>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

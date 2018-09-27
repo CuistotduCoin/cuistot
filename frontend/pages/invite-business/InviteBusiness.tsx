@@ -1,9 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
+import Layout from "../../components/Layout";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
 import components from "../../content/components";
 // @ts-ignore
 import Content from "../../content/invite.mdx";
@@ -25,15 +23,9 @@ export class InviteBusiness extends React.Component<IInviteBusinessProps, {}> {
     const { classes } = this.props;
 
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Invitez vos proches"
-        />
+      <Layout valueProposition="Invitez vos proches">
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
@@ -41,8 +33,7 @@ export class InviteBusiness extends React.Component<IInviteBusinessProps, {}> {
         >
           <Content components={components} />
         </Grid>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

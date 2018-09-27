@@ -1,9 +1,6 @@
 exports.up = knex => (
-  knex.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";').createTable('gourmets', (table) => {
-    table.uuid('id')
-      .defaultTo(knex.raw('uuid_generate_v4()'))
-      .primary()
-      .index();
+  knex.schema.createTable('gourmets', (table) => {
+    table.uuid('id').primary().index(); // references user pool sub ids
     table.string('email', 255).notNullable();
     table.string('first_name', 100).notNullable();
     table.string('last_name', 100).notNullable();

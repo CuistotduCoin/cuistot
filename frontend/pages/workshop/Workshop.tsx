@@ -217,21 +217,21 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
           <Cover imageURL={this.props.mainPhoto} />
         </div>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           className={classes.grid}
         >
-          <Grid item={true} xs={2}>
-            <Grid container={true} justify="center">
+          <Grid item xs={2}>
+            <Grid container justify="center">
               <Avatar className={classes.avatar} src={this.props.imageCook} />
             </Grid>
           </Grid>
-          <Grid item={true} xs={10}>
-            <Grid container={true}>
-              <Grid item={true}>
+          <Grid item xs={10}>
+            <Grid container>
+              <Grid item>
                 {this.props.rating && (
-                  <Grid container={true}>
+                  <Grid container>
                     <StarRating rating={this.props.rating} />
                     {this.props.ratingNumber && (
                       <Typography
@@ -264,8 +264,8 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
             </Grid>
           </Grid>
         </Grid>
-        <Grid container={true} justify="space-around" className={classes.grid}>
-          <Grid item={true} xs={8}>
+        <Grid container justify="space-around" className={classes.grid}>
+          <Grid item xs={8}>
             <Tabs
               value={this.state.tabIndex}
               indicatorColor="primary"
@@ -283,33 +283,33 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
               <Tab className={classes.tabs} icon={<KeyboardArrowUp />} />
             </Tabs>
             <Grid
-              container={true}
+              container
               justify="space-around"
               alignItems="center"
               className={classes.innerGrid}
             >
-              <Grid item={true}>
-                <Grid container={true}>
+              <Grid item>
+                <Grid container>
                   <Kitchen />
                   <Typography>{this.props.eventType}</Typography>
                 </Grid>
               </Grid>
-              <Grid item={true}>
-                <Grid container={true}>
+              <Grid item>
+                <Grid container>
                   <LocalDining />
                   <Typography>{this.props.cuisineType}</Typography>
                 </Grid>
               </Grid>
-              <Grid item={true}>
-                <Grid container={true}>
+              <Grid item>
+                <Grid container>
                   <People />
                   <Typography>
                     de {this.props.minSeat} à {this.props.maxSeat} invités
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item={true}>
-                <Grid container={true}>
+              <Grid item>
+                <Grid container>
                   <AccessTime />
                   <Typography>{this.props.timeEvent}</Typography>
                 </Grid>
@@ -317,14 +317,14 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
             </Grid>
 
             <Grid
-              container={true}
+              container
               className={classes.leftGrid}
               direction="column"
             >
               <Scroll.Element name="0" />
               <Waypoint onEnter={this.handleWayPoint(0)}>
                 <div>
-                  <Grid item={true} className={classes.itemGrid}>
+                  <Grid item className={classes.itemGrid}>
                     <Typography
                       variant="headline"
                       component="h2"
@@ -341,7 +341,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                       {this.props.descriptionWorkshop}
                     </Typography>
                   </Grid>
-                  <Grid item={true} className={classes.itemGrid}>
+                  <Grid item className={classes.itemGrid}>
                     <Typography
                       variant="headline"
                       component="h2"
@@ -350,13 +350,13 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                       Photos & Videos
                     </Typography>
                     <Grid
-                      container={true}
+                      container
                       alignItems="center"
                       justify="space-around"
                     >
                       {this.props.photos !== undefined &&
                         this.props.photos.slice(0, 3).map((photo, i) => (
-                          <Grid key={photo.id} item={true}>
+                          <Grid key={photo.id} item>
                             {i !== 2 ? (
                               <img
                                 src={photo.image}
@@ -396,7 +396,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
               <Scroll.Element name="1" />
               <Waypoint onEnter={this.handleWayPoint(1)}>
                 <div>
-                  <Grid item={true} className={classes.itemGrid}>
+                  <Grid item className={classes.itemGrid}>
                     <Typography
                       variant="headline"
                       component="h2"
@@ -418,7 +418,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
               <Scroll.Element name="2" />
               <Waypoint onEnter={this.handleWayPoint(2)}>
                 <div>
-                  <Grid item={true} className={classes.itemGrid}>
+                  <Grid item className={classes.itemGrid}>
                     <Typography
                       variant="headline"
                       component="h2"
@@ -426,13 +426,13 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                     >
                       Commentaires
                     </Typography>
-                    <Grid container={true}>
+                    <Grid container>
                       {this.props.comments !== undefined &&
                         this.props.comments.slice(0, 3).map((comment, i) => (
                           <>
                             <Grid
                               key={comment.id}
-                              item={true}
+                              item
                               className={classes.commentBlock}
                             >
                               <CommentBlock
@@ -444,7 +444,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                               />
                             </Grid>
                             {i !== 2 && (
-                              <Grid item={true} xs={12}>
+                              <Grid item xs={12}>
                                 <Divider />
                               </Grid>
                             )}
@@ -457,7 +457,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
               <Scroll.Element name="3" />
               <Waypoint onEnter={this.handleWayPoint(3)}>
                 <div>
-                  <Grid item={true} className={classes.itemGrid}>
+                  <Grid item className={classes.itemGrid}>
                     <Typography
                       variant="headline"
                       component="h2"
@@ -478,7 +478,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
               </Waypoint>
             </Grid>
           </Grid>
-          <Grid item={true} xs={4}>
+          <Grid item xs={4}>
             <div className={classes.sticky}>
               <Paper elevation={1} className={classes.infoReservartion}>
                 <BookForm
@@ -488,25 +488,25 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                 />
               </Paper>
               <Grid
-                container={true}
+                container
                 direction="column"
                 justify="space-around"
                 alignItems="center"
                 className={classes.innerGrid}
               >
-                <Grid item={true} className={classes.itemGrid}>
-                  <Grid container={true}>
+                <Grid item className={classes.itemGrid}>
+                  <Grid container>
                     <Lock />
                     <Typography variant="body1">
                       Paiement sécurisé par Mangopay
                     </Typography>
                   </Grid>
                   <Grid
-                    container={true}
+                    container
                     alignItems="center"
                     justify="space-around"
                   >
-                    <Grid item={true}>
+                    <Grid item>
                       <img
                         src="https://static.cuistotducoin.com/img/workshop/visa.png"
                         alt="visa"
@@ -528,8 +528,8 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item={true} className={classes.itemGrid}>
-                  <Grid container={true}>
+                <Grid item className={classes.itemGrid}>
+                  <Grid container>
                     <Typography
                       variant="body1"
                       onMouseEnter={this.handlePopoverOpen}

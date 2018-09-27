@@ -5,10 +5,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import Layout from "../../components/Layout";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
 import WorkshopCardList from "../../components/WorkshopCardList";
 
 const styles = (theme: Theme) => ({
@@ -28,9 +26,6 @@ const styles = (theme: Theme) => ({
     margin: "0px auto",
     maxWidth: 1080,
     padding: 24
-  },
-  link: {
-    textDecoration: "none"
   },
   media: {
     height: 135
@@ -413,14 +408,10 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     ];
 
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Participez à des ateliers de cuisine authentiques et en toute convivialité !"
-          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
-        />
+      <Layout
+        valueProposition="Participez à des ateliers de cuisine authentiques et en toute convivialité !"
+        description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
+      >
         <Typography
           variant="title"
           align="center"
@@ -432,16 +423,16 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           y en a pour tous les goûts !
         </Typography>
         <Grid
-          container={true}
+          container
           justify="space-around"
           alignItems="center"
           spacing={16}
           className={classes.grid}
         >
           {typeActivity.map((activity, index) => (
-            <Grid key={index} item={true} xs={12} sm={6}>
-              <Grid container={true} justify="center">
-                <a className={classes.link} href={activity.url} target="_blank">
+            <Grid key={index} item xs={12} sm={6}>
+              <Grid container justify="center">
+                <a href={activity.url} target="_blank">
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.media}
@@ -489,8 +480,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           Soyez prévenu des prochaines dates d'ateliers !
         </Typography>
         <WorkshopCardList workshops={workshopsPending} />
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }
