@@ -1,6 +1,7 @@
-import { API, graphqlOperation } from "aws-amplify";
 import { Formik } from "formik";
 import React from "react";
+import { graphql } from "react-apollo";
+import { compose } from "recompose";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
 import { AppContainer } from "../../components/App";
@@ -25,6 +26,7 @@ interface IBecomeCookFormProps {
   classes?: any;
   currentGourmet: any;
   openSnackbar(message: string, variant: string);
+  createCook(cook: any);
 }
 
 interface IBecomeCookFormValues {
@@ -85,6 +87,8 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
     values: IBecomeCookFormValues,
     { setSubmitting, setErrors, setStatus, resetForm }
   ) {
+    const { currentGourmet, openSnackbar, createCook } = this.props;
+
     const {
       is_pro,
       description,
@@ -96,7 +100,6 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
       legal_last_name,
       legal_birthdate,
     } = values;
-    const { currentGourmet, openSnackbar } = this.props;
 
     const cook = {
       gourmet: {
@@ -118,20 +121,39 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
       });
     }
 
-    // @ts-ignore
-    API.graphql(graphqlOperation(CreateCook, { cook })).then(createResult => {
-      if (createResult.data.createCook.message === "success") {
-        openSnackbar("Merci ! Nous vous contactons au plus vite pour convenir d'un rendez-vous", "success");
-        setStatus({ success: true });
-        resetForm(initialValues);
-      } else {
-        openSnackbar("Échec lors de la création de votre compte cuistot", "error");
-        setStatus({ success: false });
-        setSubmitting(false);
-        setErrors({ submit: createResult });
+    const createCookError = (result) => {
+      openSnackbar("Échec lors de la création de votre compte cuistot", "error");
+      setStatus({ success: false });
+      setSubmitting(false);
+      if (result.errors.length) {
+        const error = result.errors[0].message;
+        console.error(error);
+        setErrors({ submit: error });
       }
-    });
+    };
+
+    createCook(cook)
+      .then(res => {
+        const result = res.data.createCook;
+        if (result.message === "success") {
+          openSnackbar("Merci ! Nous vous contactons au plus vite pour convenir d'un rendez-vous", "success");
+          setStatus({ success: true });
+          setSubmitting(false);
+          resetForm(initialValues);
+        } else {
+          createCookError(result);
+        }
+      })
+      .catch(createCookError);
   }
 }
 
-export default BecomeCookForm;
+const enhance = compose(
+  graphql(CreateCook, {
+    props: (props: any) => ({
+      createCook: (cook) => props.mutate({ variables: { cook } }),
+    }),
+  }),
+);
+
+export default enhance(BecomeCookForm);

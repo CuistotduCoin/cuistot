@@ -6,6 +6,7 @@ import "../../shared/auth";
 
 if (process.env.NODE_ENV === "development") {
   UNSTATED.logStateChanges = true;
+  // @ts-ignore
   window.LOG_LEVEL = "DEBUG";
 }
 

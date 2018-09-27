@@ -17,7 +17,9 @@ export const passwordConfirmationValidation = ref =>
 export const phoneNumberValidation = (required = false) => {
   let validator = Yup.string();
   if (required) {
-    validator = validator.required("Un numéro de téléphone valide est obligatoire")
+    validator = validator.required("Un numéro de téléphone valide est obligatoire");
+  } else {
+    validator = validator.nullable(true);
   }
   return validator.test('isValidPhoneNumber', `Numéro de téléphone invalide`, value => !value || isValidNumber(value, 'FR'));
 };

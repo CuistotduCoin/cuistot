@@ -4,13 +4,13 @@ import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import { API, Auth, graphqlOperation } from "aws-amplify";
-import { Connect } from "aws-amplify-react";
+import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 import { Select, TextField } from "formik-material-ui";
 import get from "lodash.get";
 import React from "react";
-import { compose } from "recompose";
+import { graphql, Query } from "react-apollo";
+import { compose } from "recompose";;
 import * as Yup from "yup";
 import CookForm from "../../components/CookForm";
 import Loading from "../../components/Loading";
@@ -122,6 +122,8 @@ interface IAccountFormProps {
   currentGourmet: any;
   openSnackbar(message: string, variant: string);
   setCurrentGourmet(gourmet?: object);
+  updateCook(cook: object);
+  updateGourmet(gourmet: object);
 }
 
 interface IAccountFormState {
@@ -142,9 +144,7 @@ export class AccountForm extends React.Component<
   public render() {
     const { classes, currentGourmet } = this.props;
 
-    if (!currentGourmet) {
-      return <Loading />;
-    }
+    if (!currentGourmet) return <Loading />;
 
     const updateInfoFormComponent = () => (
       <Form autoComplete="off">
@@ -360,8 +360,12 @@ export class AccountForm extends React.Component<
     } = currentGourmet;
 
     return (
-      <Connect query={graphqlOperation(GetCook, { cook_id: currentGourmet.id })}>
-        {({ data }) => {
+      <Query query={GetCook} variables={{ cook_id: currentGourmet.id }}>
+        {({ loading, error, data }) => {
+          if (loading) return <Loading />;
+          // catch resource not found here
+          if (error) return `Error: ${error}`;
+
           let cookCard;
           if (get(data, 'getCook.message') === "success" && get(data, 'getCook.cook.confirmed')) {
             const {
@@ -447,7 +451,7 @@ export class AccountForm extends React.Component<
             </div>
           );
         }}
-      </Connect>
+      </Query>
     );
   }
 
@@ -455,7 +459,8 @@ export class AccountForm extends React.Component<
     values: IUpdateInfoFormValues,
     { setSubmitting, setErrors, setStatus }
   ) {
-    const { currentGourmet, setCurrentGourmet, openSnackbar } = this.props;
+    const { currentGourmet, setCurrentGourmet, openSnackbar, updateGourmet } = this.props;
+
     const {
       description,
       gender,
@@ -481,31 +486,37 @@ export class AccountForm extends React.Component<
       zip_code
     };
 
-    // @ts-ignore
-    API.graphql(graphqlOperation(UpdateGourmet, { gourmet })).then(res => {
-      const result = res.data.updateGourmet;
-      if (result.message === "success") {
-        openSnackbar("Vos informations ont bien été mises à jour", "success");
-        setStatus({ success: true });
-        setCurrentGourmet(result.gourmet);
-      } else {
-        openSnackbar("Échec de la mise à jour de vos informations", "error");
-        setStatus({ success: false });
-        setSubmitting(false);
-        if (result.errors.length) {
-          const error = result.errors[0].message;
-          console.error(error);
-          setErrors({ submit: error });
-        }
+    const updateGourmetError = (result) => {
+      openSnackbar("Échec de la mise à jour de vos informations", "error");
+      setStatus({ success: false });
+      setSubmitting(false);
+      if (result.errors.length) {
+        const error = result.errors[0].message;
+        console.error(error);
+        setErrors({ submit: error });
       }
-    });
+    };
+
+    updateGourmet(gourmet)
+      .then(res => {
+        const result = res.data.updateGourmet;
+        if (result.message === "success") {
+          openSnackbar("Vos informations ont bien été mises à jour", "success");
+          setStatus({ success: true });
+          setSubmitting(false);
+          setCurrentGourmet(result.gourmet);
+        } else {
+          updateGourmetError(result);
+        }
+      })
+      .catch(updateGourmetError);
   }
 
   public onNewCookInfoSubmit(
     values: IUpdateCookInfoFormValues,
     { setSubmitting, setErrors, setStatus }
   ) {
-    const { currentGourmet, openSnackbar } = this.props;
+    const { currentGourmet, openSnackbar, updateCook } = this.props;
     const {
       is_pro,
       description,
@@ -531,23 +542,29 @@ export class AccountForm extends React.Component<
       legal_birthdate: legal_birthdate || null,
     };
 
-    // @ts-ignore
-    API.graphql(graphqlOperation(UpdateCook, { cook })).then(res => {
-      const result = res.data.updateCook;
-      if (result.message === "success") {
-        openSnackbar("Vos informations ont bien été mises à jour", "success");
-        setStatus({ success: true });
-      } else {
-        openSnackbar("Échec de la mise à jour de vos informations", "error");
-        setStatus({ success: false });
-        setSubmitting(false);
-        if (result.errors.length) {
-          const error = result.errors[0].message;
-          console.error(error);
-          setErrors({ submit: error });
-        }
+    const updateCookError = (result) => {
+      openSnackbar("Échec de la mise à jour de vos informations", "error");
+      setStatus({ success: false });
+      setSubmitting(false);
+      if (result.errors.length) {
+        const error = result.errors[0].message;
+        console.error(error);
+        setErrors({ submit: error });
       }
-    });
+    };
+
+    updateCook(cook)
+      .then(res => {
+        const result = res.data.updateCook;
+        if (result.message === "success") {
+          openSnackbar("Vos informations ont bien été mises à jour", "success");
+          setStatus({ success: true });
+          setSubmitting(false);
+        } else {
+          updateCookError(result);
+        }
+      })
+      .catch(updateCookError);
   }
 
   public onNewPasswordSubmit(
@@ -561,6 +578,7 @@ export class AccountForm extends React.Component<
       .then(data => {
         openSnackbar("Votre mot de passe a bien été mis à jour", "success");
         setStatus({ success: true });
+        setSubmitting(false);
         resetForm(passwordInitialValues);
       })
       .catch(err => {
@@ -572,6 +590,18 @@ export class AccountForm extends React.Component<
   }
 }
 
-const enhance = compose(withStyles(styles as any));
+const enhance = compose(
+  graphql(UpdateCook, {
+    props: (props: any) => ({
+      updateCook: (cook) => props.mutate({ variables: { cook } }),
+    }),
+  }),
+  graphql(UpdateGourmet, {
+    props: (props: any) => ({
+      updateGourmet: (gourmet) => props.mutate({ variables: { gourmet } }),
+    }),
+  }),
+  withStyles(styles as any)
+);
 
 export default enhance(AccountForm);

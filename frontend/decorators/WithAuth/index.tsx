@@ -1,2 +1,2 @@
 import withAuth from "./WithAuth";
-export { withAuth };
+export default withAuth;

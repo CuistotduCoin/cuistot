@@ -20,6 +20,12 @@ const styles = (theme: Theme) => ({
   },
   textField: {
     width: "100%"
+  },
+  submitButton: {
+    marginTop: 16
+  },
+  divider: {
+    marginTop: 16
   }
 });
 
@@ -58,47 +64,39 @@ export class LoginForm extends React.Component<ILoginFormProps, {}> {
         <FormControl>
           <Grid container className={classes.grid} spacing={16}>
             <Grid item xs={12}>
-              <Grid container justify="center">
-                <Button variant="outlined" color="secondary">
-                  Se connecter avec Facebook
-                </Button>
-              </Grid>
+              <Button variant="outlined" color="secondary">
+                Se connecter avec Facebook
+              </Button>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} className={classes.divider}>
               <Divider />
             </Grid>
             <Grid item xs={12}>
-              <Grid container>
-                <Field
-                  type="text"
-                  component={TextField}
-                  id="username"
-                  label="Nom d'utilisateur"
-                  name="username"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+              <Field
+                type="text"
+                component={TextField}
+                id="username"
+                label="Nom d'utilisateur"
+                name="username"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
             <Grid item xs={12}>
-              <Grid container>
-                <Field
-                  type="password"
-                  component={TextField}
-                  id="password"
-                  label="Mot de passe"
-                  name="password"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
+              <Field
+                type="password"
+                component={TextField}
+                id="password"
+                label="Mot de passe"
+                name="password"
+                className={classes.textField}
+                margin="normal"
+              />
             </Grid>
             <Grid item xs={12}>
-              <Grid container justify="center">
-                <Button type="submit" variant="contained" color="secondary">
-                  Se connecter
-                </Button>
-              </Grid>
+              <Button type="submit" variant="contained" color="secondary" className={classes.submitButton}>
+                Se connecter
+              </Button>
             </Grid>
           </Grid>
         </FormControl>

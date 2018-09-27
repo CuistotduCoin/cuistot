@@ -1,4 +1,7 @@
-const awsExports = {
+import { Auth } from "aws-amplify";
+import { AUTH_TYPE } from "aws-appsync/lib/link/auth-link";
+
+const amplifyConfig = {
   Auth: {
     mandatorySignIn: false,
     region: process.env.AWS_REGION_IRELAND,
@@ -12,7 +15,24 @@ const awsExports = {
   },
   aws_appsync_graphqlEndpoint: process.env.GRAPHQL_API_URL,
   aws_appsync_region: process.env.AWS_REGION_IRELAND,
-  aws_appsync_authenticationType: "AMAZON_COGNITO_USER_POOLS"
+  aws_appsync_authenticationType: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS
 };
 
-export { awsExports };
+const apolloConfig = {
+  url: process.env.GRAPHQL_API_URL,
+  region: process.env.AWS_REGION_IRELAND,
+  auth: {
+    type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
+    jwtToken: async () => {
+      return Auth.currentSession()
+        .then(currentSession => {
+          return currentSession.getIdToken().getJwtToken();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  },
+};
+
+export { amplifyConfig, apolloConfig };

@@ -1,7 +1,7 @@
 import Amplify, { Storage } from "aws-amplify";
-import { awsExports } from "./config";
+import { amplifyConfig } from "./config";
 
-Amplify.configure(awsExports);
+Amplify.configure(amplifyConfig);
 
 Storage.configure({ level: "protected" });
 

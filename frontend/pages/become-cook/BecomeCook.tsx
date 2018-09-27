@@ -7,7 +7,7 @@ import Layout from "../../components/Layout";
 import Logo from "../../components/Logo";
 import components from "../../content/components";
 import Content from "../../content/organize.mdx";
-import { withAuth } from '../../decorators/WithAuth';
+import { withAuth, withData } from '../../decorators';
 
 const styles = (theme: Theme) => ({
   container: {
@@ -41,8 +41,9 @@ const BecomeCook: React.SFC<{ classes: any }> = ({ classes }) => (
 );
 
 const enhance = compose(
+  withData,
+  withAuth,
   withStyles(styles as any),
-  withAuth
 );
 
 export default enhance(BecomeCook);

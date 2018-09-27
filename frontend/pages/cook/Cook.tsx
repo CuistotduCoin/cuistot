@@ -4,38 +4,25 @@ import { Theme, withStyles } from "@material-ui/core/styles";
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from "@material-ui/core/Typography";
 import CheckCircle from "@material-ui/icons/CheckCircle";
-import { graphqlOperation } from "aws-amplify";
-import { Connect } from "aws-amplify-react";
+import gql from 'graphql-tag';
 import get from "lodash.get";
 import React from "react";
-import { formatName } from "shared/util";
+import { Query } from "react-apollo";
+import { compose } from "recompose";
 import CommentBlock from "../../components/CommentBlock";
 import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
 import ProfileImage from "../../components/ProfileImage";
 import S3Image from "../../components/S3Image";
 import WorkshopListItem from "../../components/WorkshopListItem";
-import { withRedirect } from "../../decorators/Redirect";
+import { withRedirect } from "../../decorators";
+import { formatName } from "../../shared/util";
 
-const getCook = `query GetCook($cook_id: ID!) {
-  getCook(cook_id: $cook_id) {
-    cook {
-      gourmet {
-        identity_id
-        first_name
-        last_name
-        image {
-          key
-        }
-      }
-      image {
-        key
-      }
-      description
-      is_pro
-      confirmed
-      evaluations {
-        author {
+const getCook = gql`
+  query GetCook($cook_id: ID!) {
+    getCook(cook_id: $cook_id) {
+      cook {
+        gourmet {
           identity_id
           first_name
           last_name
@@ -43,30 +30,46 @@ const getCook = `query GetCook($cook_id: ID!) {
             key
           }
         }
-        rating
-        comment
-        created_at
-      }
-      workshops {
-        id
-        name
-        duration
-        price
-        date
-        kitchen {
-          name
-        }
-        images {
+        image {
           key
         }
+        description
+        is_pro
+        confirmed
+        evaluations {
+          author {
+            identity_id
+            first_name
+            last_name
+            image {
+              key
+            }
+          }
+          rating
+          comment
+          created_at
+        }
+        workshops {
+          id
+          name
+          duration
+          price
+          date
+          kitchen {
+            name
+          }
+          images {
+            key
+          }
+        }
+      },
+      message,
+      errors {
+        message
       }
-    },
-    message,
-    errors {
-      message
     }
   }
-}`;
+`;
 
 const styles = (theme: Theme) => ({
   cookProfile: {
@@ -108,6 +111,7 @@ const styles = (theme: Theme) => ({
 
 interface ICookProps {
   classes?: any;
+  redirectToNotFound: any;
   match: any;
 }
 
@@ -119,17 +123,11 @@ export class Cook extends React.Component<ICookProps, {}> {
 
     return (
       <Layout>
-        <Connect query={graphqlOperation(getCook, { cook_id: cookId })}>
-          {({ data, errors }) => {
-            if (get(errors, 'length')) {
-              if (errors[0].message === 'resource not found') {
-                redirectToNotFound();
-              }
-            }
-
-            if (!data.getCook) {
-              return <Loading />;
-            }
+        <Query query={getCook} variables={{ cook_id: cookId }}>
+          {({ loading, error, data }) => {
+            if (loading) return <Loading />;
+            // catch resource not found here
+            if (error) return `Error: ${error}`;
 
             const cook = data.getCook.cook;
 
@@ -225,7 +223,7 @@ export class Cook extends React.Component<ICookProps, {}> {
               </>
             );
           }}
-        </Connect>
+        </Query>
       </Layout>
     );
   }
