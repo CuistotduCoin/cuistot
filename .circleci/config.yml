@@ -183,10 +183,10 @@ workflows:
           filters:
             branches:
               only:
-                - release-*
+                - /^release-*/
       - deploy-back-stage:
           context: staging
           filters:
             branches:
               only:
-                - release-*
+                - /^release-*/
