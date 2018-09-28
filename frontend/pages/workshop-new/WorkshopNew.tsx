@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import KitchenIcon from "@material-ui/icons/LocationOn";
 import WorkshopIcon from "@material-ui/icons/RestaurantMenu";
-import { Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 import { Select, TextField } from "formik-material-ui";
 import gql from "graphql-tag";
 import moment from "moment";
@@ -16,7 +16,6 @@ import { compose } from "recompose";
 import * as Yup from "yup";
 import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
-import ProgressBar from "../../components/ProgressBar";
 import WizardForm from "../../components/WizardForm";
 import { withRedirect } from "../../decorators";
 import { CreateWorkshop, GetKitchens } from "../../queries";
@@ -33,6 +32,10 @@ const styles = {
   },
   gourmetRange: {
     margin: '30px 0 30px'
+  },
+  error: {
+    color: 'red',
+    paddingTop: 10
   }
 };
 
@@ -43,13 +46,6 @@ interface IWorkshopNewProps {
   redirectToNotFound();
   createWorkshop(workshop: object);
 }
-
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Vous devez entrer un nom pour cet atelier"),
-  price: Yup.number().required("Veuillez entrer un prix").positive(),
-  duration: Yup.number().required("Veuillez entrer la durée estimée de votre atelier en minutes").positive(),
-  date: Yup.string().required("Veuillez entrer la date à laquelle aura lieu votre atelier")
-});
 
 const initialValues = {
   name: '',
@@ -158,16 +154,19 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                 className={classes.form}
                 initialValues={initialValues}
                 onSubmit={this.onSubmit}
-                renderProgressBar={(page) => (
-                  <ProgressBar
-                    className={classes.progressBar}
-                    icons={[{ icon: WorkshopIcon }, { icon: KitchenIcon }]}
-                    page={page}
-                  />
-                )}
-                validationSchema={validationSchema}
+                progressBarProps={{
+                  className: classes.progressBar,
+                  icons: [{ icon: WorkshopIcon }, { icon: KitchenIcon }]
+                }}
               >
-                <WizardForm.Page>
+                <WizardForm.Page
+                  validationSchema={Yup.object().shape({
+                    name: Yup.string().required("Vous devez entrer un nom pour cet atelier"),
+                    price: Yup.number().required("Veuillez entrer un prix").positive(),
+                    duration: Yup.number().required("Veuillez entrer la durée estimée de votre atelier en minutes").positive(),
+                    date: Yup.string().required("Veuillez entrer la date à laquelle aura lieu votre atelier")
+                  })}
+                >
                   <Typography
                     variant="headline"
                     align="center"
@@ -264,7 +263,11 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                     </Grid>
                   </Grid>
                 </WizardForm.Page>
-                <WizardForm.Page>
+                <WizardForm.Page
+                  validationSchema={Yup.object().shape({
+                    kitchenId: Yup.string().required("Vous devez nous proposer un lieu partenaire"),
+                  })}
+                >
                   <Typography
                     variant="headline"
                     align="center"

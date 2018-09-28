@@ -12,6 +12,9 @@ const styles = (theme: Theme) => ({
     transform: 'scale(1)',
     transition: 'all 200ms ease-in'
   },
+  clickable: {
+    cursor: 'pointer'
+  },
   validAvatar: {
     backgroundColor: theme.palette.primary.dark,
     transition: 'all 300ms ease-in',
@@ -37,21 +40,36 @@ interface IProgressBarProps {
   icons: Array<{icon: any}>;
   page: number;
   className?: string;
+  enableProgress?: boolean;
+  onIconClick?(page: number);
 }
 
 // tslint:disable-next-line
-const ProgressBar: React.SFC<IProgressBarProps> = ({ classes, icons, page, className }) => (
+const ProgressBar: React.SFC<IProgressBarProps> = ({ classes, icons, page, className, onIconClick, enableProgress }) => (
   <Grid container className={className}>
     <Grid item md={4} />
     <Grid md={4} item container justify="space-between" alignItems="center">
-      {icons.map((icon, i) => (
-        <>
-          <Avatar className={cx(classes.avatar, { [classes.validAvatar]: i <= page })} key={`ProgressBarIcon_${i}`}>
-            {React.createElement(icon.icon)}
-          </Avatar>
-          {i < icons.length - 1 && <div className={cx(classes.line, { [classes.validLine]: i < page })} />}
-        </>
-      ))}
+      {icons.map((icon, i) => {
+        const clickable = onIconClick && (i <= page || enableProgress);
+        return (
+          <>
+            <Avatar
+              className={cx(classes.avatar, {
+                [classes.validAvatar]: i <= page,
+                [classes.clickable]: clickable,
+              })}
+              key={`ProgressBarIcon_${i}`}
+              onClick={() => {
+                // @ts-ignore
+                if (clickable) onIconClick(i);
+              }}
+            >
+              {React.createElement(icon.icon)}
+            </Avatar>
+            {i < icons.length - 1 && <div className={cx(classes.line, { [classes.validLine]: i < page })} />}
+          </>
+        );
+      })}
     </Grid>
   </Grid>
 );

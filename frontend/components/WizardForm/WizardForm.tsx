@@ -2,8 +2,10 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
+import isEmpty from 'lodash.isempty';
 import React from "react";
 import { compose } from "recompose";
+import ProgressBar from "../../components/ProgressBar";
 
 const styles = {
   form: {
@@ -23,9 +25,8 @@ interface IWizardFormProps {
   children: any;
   className?: string;
   initialValues: object;
-  validationSchema?: object;
+  progressBarProps?: object;
   onSubmit(values: any, bag: any);
-  renderProgressBar(page: number): any;
 }
 
 interface IWizardFormState {
@@ -41,12 +42,11 @@ class WizardForm extends React.Component<IWizardFormProps, IWizardFormState> {
     this.state = { page: 0 };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
-    this.validate = this.validate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.computeButtons = this.computeButtons.bind(this);
   }
 
-  public next(values) {
+  public next() {
     this.setState(state => ({ page: Math.min(state.page + 1, this.props.children.length - 1) }));
   }
 
@@ -54,18 +54,13 @@ class WizardForm extends React.Component<IWizardFormProps, IWizardFormState> {
     this.setState(state => ({ page: Math.max(state.page - 1, 0) }));
   }
 
-  public validate(values) {
-    const activePage: any = React.Children.toArray(this.props.children)[this.state.page];
-    return activePage.props.validate ? activePage.props.validate(values) : {};
-  };
-
   public handleSubmit(values, bag) {
     const { children, onSubmit } = this.props;
     const isLastPage = this.state.page === React.Children.count(children) - 1;
     if (isLastPage) {
       return onSubmit(values, bag);
     }
-    this.next(values);
+    this.next();
     bag.setSubmitting(false);
   };
 
@@ -99,24 +94,45 @@ class WizardForm extends React.Component<IWizardFormProps, IWizardFormState> {
   }; 
 
   public render() {
-    const { children, initialValues, renderProgressBar, validationSchema, className, classes } = this.props;
+    const { children, initialValues, progressBarProps, className, classes } = this.props;
     const { page } = this.state;
-    const activePage = React.Children.toArray(children)[page];
+    const activePage: any = React.Children.toArray(children)[page];
 
     return (
       <Formik
         initialValues={initialValues}
         enableReinitialize={false}
-        validate={this.validate}
         onSubmit={this.handleSubmit}
-        validationSchema={validationSchema}
-        validateOnBlur={false}
         validateOnChange={false}
-        render={({ values, handleSubmit, isSubmitting, handleReset }) => {
+        validationSchema={activePage.props.validationSchema}
+        render={(props) => {
+          const { handleSubmit, isSubmitting, isValid, validateForm } = props;
+
           const buttons = this.computeButtons(page, isSubmitting);
+
+          let progressBar;
+          if (progressBarProps) {
+            progressBar = React.createElement(ProgressBar, {
+              ...progressBarProps,
+              page,
+              onIconClick: (newPage: number) => {
+                if (newPage < page) {
+                  this.setState({ page: newPage });
+                } else if (newPage > page) {
+                  validateForm().then(res => {
+                    if (isEmpty(res)) {
+                      this.setState({ page: newPage });
+                    }
+                  })
+                }
+              },
+              enableProgress: isValid,
+            });
+          }
+
           return (
             <div className={className}>
-              {renderProgressBar && renderProgressBar(page)}
+              {progressBar}
               <form onSubmit={handleSubmit} className={classes.form}>
                 {activePage}
                 <Grid
