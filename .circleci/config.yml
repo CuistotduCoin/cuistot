@@ -35,34 +35,6 @@ jobs:
           command: |
             cd admin
             yarn deploy-build
-  
-  deploy-front-prod:
-    docker:
-      - image: circleci/node:8.10
-    steps:
-      - checkout
-      - restore_cache: &restore_front_cache
-          key: dependency-cache-{{ checksum "frontend/yarn.lock" }}
-      - run: &install_front_dependencies
-          name: Install dependencies
-          command: |
-            cd frontend
-            sudo npm i -g serverless
-            yarn install
-      - save_cache: &save_front_cache
-          key: dependency-cache-{{ checksum "frontend/yarn.lock" }}
-          paths:
-            - ./node_modules
-      - run:
-          name: Build frontend
-          command: |
-            cd frontend
-            yarn build:prod
-      - run:
-          name: Deploy frontend
-          command: |
-            cd frontend
-            yarn deploy:prod
 
   deploy-back-prod:
     docker:
@@ -74,8 +46,8 @@ jobs:
       - checkout
       - restore_cache: &restore_back_cache
           key: dependency-cache-{{ checksum "backend/yarn.lock" }}
-      - run: &install_go
-          name: Install go
+      - run: &install_assume_role
+          name: Install assume role tool
           command: |
             sudo apt-get update
             sudo apt-get -y upgrade
@@ -108,12 +80,50 @@ jobs:
             yarn migrate:prod
             yarn deploy:prod
 
+  deploy-front-prod:
+    docker:
+      - image: circleci/node:8.10
+    environment:
+      GOPATH: /home/circleci/go
+      AWS_CONFIG_PATH: /home/circleci/.aws
+    steps:
+      - checkout
+      - restore_cache: &restore_front_cache
+          key: dependency-cache-{{ checksum "frontend/yarn.lock" }}
+      - run: *install_assume_role
+      - run: *build_aws_config
+      - run: &install_front_dependencies
+          name: Install dependencies
+          command: |
+            cd frontend
+            sudo npm i -g serverless
+            yarn install
+      - save_cache: &save_front_cache
+          key: dependency-cache-{{ checksum "frontend/yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Build frontend
+          command: |
+            cd frontend
+            yarn build:prod
+      - run:
+          name: Deploy frontend
+          command: |
+            cd frontend
+            yarn deploy:prod
+
   deploy-front-stage:
     docker:
       - image: circleci/node:8.10
+    environment:
+      GOPATH: /home/circleci/go
+      AWS_CONFIG_PATH: /home/circleci/.aws
     steps:
       - checkout
       - restore_cache: *restore_front_cache
+      - run: *install_assume_role
+      - run: *build_aws_config
       - run: *install_front_dependencies
       - save_cache: *save_front_cache
       - run:
@@ -136,7 +146,7 @@ jobs:
     steps:
       - checkout
       - restore_cache: *restore_back_cache
-      - run: *install_go
+      - run: *install_assume_role
       - run: *build_aws_config
       - run: *install_back_dependencies
       - save_cache: *save_back_cache
@@ -172,11 +182,9 @@ workflows:
           context: staging
           filters:
             branches:
-              only:
-                - release-*
+              only: /release-.+/
       - deploy-back-stage:
           context: staging
           filters:
             branches:
-              only:
-                - release-*
+              only: /release-.+/
