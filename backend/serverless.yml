@@ -228,6 +228,11 @@ custom:
         response: "kitchen/getKitchen-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
+        field: getKitchens
+        request: "kitchen/getKitchens-request-mapping-template.txt"
+        response: "kitchen/getKitchens-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
         field: getKitchensPage
         request: "kitchen/getKitchens-request-mapping-template.txt"
         response: "kitchen/getKitchens-response-mapping-template.txt"

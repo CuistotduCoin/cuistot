@@ -19,7 +19,7 @@ import Loading from "../../components/Loading";
 import ProgressBar from "../../components/ProgressBar";
 import WizardForm from "../../components/WizardForm";
 import { withRedirect } from "../../decorators";
-import { CreateWorkshop } from "../../queries";
+import { CreateWorkshop, GetKitchens } from "../../queries";
 
 const styles = {
   form: {
@@ -275,22 +275,36 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                   </Typography>
                   <Grid container={true} spacing={16}>
                     <Grid item={true} xs={12}>
-                      <Field
-                        component={Select}
-                        name="kitchenId"
-                        label="Lieu partenaire"
-                        className={classes.textField}
-                        margin="normal"
-                      >
-                        <MenuItem value="toto">Toto</MenuItem>
-                        {/* {[...Array(this.props.availableSeat)].map((e, i) => {
+                      <Query query={GetKitchens}>
+                        {({ loading: kitchensLoading, error: kitchensError, data: kitchensData }) => {
+                          if (kitchensLoading) return <Loading />;
+                          if (kitchensError) return `Error: ${error}`;
+                          const kitchens = kitchensData.getKitchens.kitchens.edges;
                           return (
-                            <MenuItem key={i + 1} value={i + 1}>
-                              {i + 1}
-                            </MenuItem>
+                            <>
+                              <Field
+                                component={Select}
+                                name="kitchenId"
+                                label="Lieu partenaire"
+                                className={classes.textField}
+                                margin="normal"
+                              >
+                                {kitchens.map(kitchen => (
+                                  <MenuItem key={kitchen.node.id} value={kitchen.node.id}>
+                                    {kitchen.node.name}
+                                  </MenuItem>
+                                ))}
+                              </Field>
+                              <ErrorMessage
+                                name="kitchenId"
+                                component="div"
+                                // @ts-ignore
+                                className={classes.error}
+                              />
+                            </>
                           );
-                        })} */}
-                      </Field>
+                        }}
+                      </Query>
                     </Grid>
                   </Grid>
                 </WizardForm.Page>

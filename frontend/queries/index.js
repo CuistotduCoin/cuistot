@@ -7,6 +7,7 @@ import GetCook from './GetCook';
 import UpdateCook from './UpdateCook';
 import GetWorkshop from './GetWorkshop';
 import CreateWorkshop from './CreateWorkshop';
+import GetKitchens from './GetKitchens';
 
 export {
   GetWorkshops,
@@ -18,4 +19,5 @@ export {
   UpdateCook,
   GetWorkshop,
   CreateWorkshop,
+  GetKitchens,
 };
