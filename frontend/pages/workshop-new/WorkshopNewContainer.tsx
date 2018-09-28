@@ -1,6 +1,8 @@
-import { AppContainer } from "components/App";
 import React from "react";
+import { compose } from "recompose";
 import { Subscribe } from "unstated";
+import { AppContainer } from "../../components/App";
+import { withAuth, withData } from "../../decorators";
 import WorkshopNew from "./WorkshopNew";
 
 // tslint:disable-next-line
@@ -16,4 +18,9 @@ const WorkshopNewContainer: React.SFC<{}> = props => (
   </Subscribe>
 );
 
-export default WorkshopNewContainer;
+const enhance = compose(
+  withData,
+  withAuth,
+);
+
+export default enhance(WorkshopNewContainer);

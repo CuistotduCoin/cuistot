@@ -4,22 +4,22 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import KitchenIcon from "@material-ui/icons/LocationOn";
 import WorkshopIcon from "@material-ui/icons/RestaurantMenu";
-import { API, graphqlOperation } from "aws-amplify";
-import { Connect } from "aws-amplify-react";
-import Layout from "components/Layout";
-import Loading from "components/Loading";
-import ProgressBar from "components/ProgressBar";
-import WizardForm from "components/WizardForm";
 import { Field } from "formik";
 import { Select, TextField } from "formik-material-ui";
-import get from 'lodash.get';
-import moment from 'moment';
-import { CreateWorkshop } from "queries";
+import gql from "graphql-tag";
+import moment from "moment";
 import React from "react";
+import { graphql, Query } from "react-apollo";
 import InputRange from "react-input-range";
-import { Redirect } from "react-router-dom";
+import "react-input-range/lib/css/index.css";
 import { compose } from "recompose";
 import * as Yup from "yup";
+import Layout from "../../components/Layout";
+import Loading from "../../components/Loading";
+import ProgressBar from "../../components/ProgressBar";
+import WizardForm from "../../components/WizardForm";
+import { withRedirect } from "../../decorators";
+import { CreateWorkshop } from "../../queries";
 
 const styles = {
   form: {
@@ -40,13 +40,15 @@ interface IWorkshopNewProps {
   classes: any;
   currentGourmet: any;
   openSnackbar(message: string, variant: string);
+  redirectToNotFound();
+  createWorkshop(workshop: object);
 }
 
 const validationSchema = Yup.object().shape({
-  // name: Yup.string().required("Vous devez entrer un nom pour cet atelier"),
-  // price: Yup.number().required("Veuillez entrer un prix").positive(),
-  // duration: Yup.number().required("Veuillez entrer la durée estimée de votre atelier en minutes").positive(),
-  // date: Yup.string().required("Veuillez entrer la date à laquelle aura lieu votre atelier")
+  name: Yup.string().required("Vous devez entrer un nom pour cet atelier"),
+  price: Yup.number().required("Veuillez entrer un prix").positive(),
+  duration: Yup.number().required("Veuillez entrer la durée estimée de votre atelier en minutes").positive(),
+  date: Yup.string().required("Veuillez entrer la date à laquelle aura lieu votre atelier")
 });
 
 const initialValues = {
@@ -61,17 +63,19 @@ const initialValues = {
   gourmetRange: { min: 4, max: 8 },
 };
 
-const getCook = `query GetCook($cook_id: ID!) {
-  getCook(cook_id: $cook_id) {
-    cook {
-      confirmed
-    }
-    message
-    errors {
+const getCook = gql`
+  query GetCook($cook_id: ID!) {
+    getCook(cook_id: $cook_id) {
+      cook {
+        confirmed
+      }
       message
+      errors {
+        message
+      }
     }
   }
-}`;
+`;
 
 class WorkshopNew extends React.Component<IWorkshopNewProps> {
   constructor(props) {
@@ -80,7 +84,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
   }
 
   public onSubmit(values, { setSubmitting, setErrors, setStatus }) {
-    const { currentGourmet, openSnackbar } = this.props;
+    const { currentGourmet, openSnackbar, createWorkshop } = this.props;
     const {
       name,
       description,
@@ -107,47 +111,46 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
       }
     };
 
-    console.log(workshop);
+    const createWorkshopError = (result) => {
+      openSnackbar("Échec lors de la création de votre atelier. Veuillez réessayer", "error");
+      setStatus({ success: false });
+      setSubmitting(false);
+      if (result.errors.length) {
+        const error = result.errors[0].message;
+        console.error(error);
+        setErrors({ submit: error });
+      }
+    };
 
-    // API.graphql(graphqlOperation(CreateWorkshop, { workshop })).then(res => {
-    //   const result = res.data.createWorkshop;
-    //   setSubmitting(false);
-    //   if (result.message === "success") {
-    //     openSnackbar("Votre atelier a bien été crée", "success");
-    //     setStatus({ success: true });
-    //   } else {
-    //     openSnackbar("Échec lors de la création de votre atelier. Veuillez réessayer", "error");
-    //     setStatus({ success: false });
-    //     if (result.errors.length) {
-    //       const error = result.errors[0].message;
-    //       console.error(error);
-    //       setErrors({ submit: error });
-    //     }
-    //   }
-    // });
+    createWorkshop(workshop)
+      .then(res => {
+        const result = res.data.createWorkshop;
+        if (result.message === "success") {
+          openSnackbar("Votre atelier a bien été crée", "success");
+          setStatus({ success: true });
+          setSubmitting(false);
+        } else {
+          createWorkshopError(result);
+        }
+      })
+      .catch(createWorkshopError);
   }
 
   public render() {
-    const { classes, currentGourmet } = this.props;
+    const { classes, currentGourmet, redirectToNotFound } = this.props;
 
     return (
       <Layout pageName="workshopNew">
-        <Connect query={graphqlOperation(getCook, { cook_id: currentGourmet.id })}>
-          {({ data, errors }) => {
-            if (get(errors, 'length')) {
-              if (errors[0].message === 'resource not found') {
-                return <Redirect to="/404" />;
-              }
-            }
-
-            if (!data.getCook) {
-              return <Loading />;
-            }
-
+        <Query query={getCook} variables={{ cook_id: currentGourmet.id }}>
+          {({ loading, error, data }) => {
+            if (loading) return <Loading />;
+            // catch resource not found here
+            if (error) return `Error: ${error}`;
+            
             const cook = data.getCook.cook;
 
             if (!cook.confirmed) {
-              return <Redirect to="/404" />
+              redirectToNotFound();
             }
 
             return (
@@ -294,13 +297,19 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
               </WizardForm>
             );
           }}
-        </Connect>
+        </Query>
       </Layout>
     );
   }
 };
 
 const enhance = compose(
+  withRedirect,
+  graphql(CreateWorkshop, {
+    props: (props: any) => ({
+      createWorkshop: (workshop) => props.mutate({ variables: { workshop } }),
+    }),
+  }),
   withStyles(styles as any),
 );
 
