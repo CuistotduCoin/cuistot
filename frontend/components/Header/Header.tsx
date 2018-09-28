@@ -10,17 +10,16 @@ import AccountDropdown from "../../components/AccountDropdown";
 import Logo from "../../components/Logo";
 
 const styles = (theme: Theme) => ({
-  accountButton: {
-    extend: "button",
-    color: "white"
-  },
   appBar: {
-    background:
-      "linear-gradient(180deg,hsla(0,0%,100%,.9) 0,hsla(0,0%,100%,.8))",
+    background: "linear-gradient(180deg,hsla(0,0%,100%,.9) 0,hsla(0,0%,100%,.8))",
     boxShadow: "none"
   },
   button: {
     margin: theme.spacing.unit
+  },
+  accountButton: {
+    extend: "button",
+    color: "white"
   },
   logo: {
     marginRight: 3 * theme.spacing.unit
@@ -83,7 +82,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
         rightElement = (
           <Link href="/login" passHref={true}>
             <Button
-              className={classes.button}
+              className={classes.accountButton}
               variant="raised"
               color="primary"
               onScroll={this.handleScroll}
@@ -96,7 +95,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
         rightElement = (
           <Link href="/signup" passHref={true}>
             <Button
-              className={classes.button}
+              className={classes.accountButton}
               variant="raised"
               color="primary"
               onScroll={this.handleScroll}
