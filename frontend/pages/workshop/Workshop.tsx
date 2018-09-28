@@ -28,6 +28,7 @@ import Cover from "../../components/Cover";
 import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
 import StarRating from "../../components/StarRating";
+import { withData } from "../../decorators";
 import { GetWorkshop } from "../../queries";
 import { formatName } from "../../shared/util";
 
@@ -132,7 +133,7 @@ interface IWorkshopProps {
   descriptionCook: string;
   descriptionWorkshop: string;
   furtherInformation: string;
-  match: any;
+  workshopId: string;
 }
 
 interface IWorkshopState {
@@ -142,6 +143,10 @@ interface IWorkshopState {
 }
 
 export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
+  public static getInitialProps ({ query: { id } }) {
+    return { workshopId: id };
+  }
+
   public state = {
     modalOpen: false,
     popoverAnnulation: null,
@@ -178,7 +183,8 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
   };
 
   public render() {
-    const { classes } = this.props;
+    const { classes, workshopId } = this.props;
+
     const open = Boolean(this.state.popoverAnnulation);
     const sliderSettings = {
       autoplay: true,
@@ -187,8 +193,6 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
       slidesToScroll: 1,
       slidesToShow: 1
     };
-
-    const { id: workshopId } = this.props.match.params;
 
     return (
       <Query query={GetWorkshop}  variables={{ workshop_id: workshopId }}>
@@ -599,6 +603,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
 }
 
 const enhance = compose(
+  withData,
   withStyles(styles as any),
 );
 
