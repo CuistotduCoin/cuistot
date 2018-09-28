@@ -5,8 +5,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Layout from "../../components/Layout";
 import React from "react";
+import Layout from "../../components/Layout";
 import WorkshopCardList from "../../components/WorkshopCardList";
 
 const styles = (theme: Theme) => ({
@@ -202,11 +202,11 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         name: "Tiep bou guinar",
         nameCook: "Karim",
         price: 30,
-        spot: "Schmidt, Brest",
+        spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/ZfYA1b"
       },
-      {
+      /*{
         availableSeat: 6,
         date: "samedi 20 octobre, 10h-12h",
         duration: 2,
@@ -219,7 +219,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/EWUT4t"
-      },
+      },*/
       {
         availableSeat: 8,
         date: "samedi 27 octobre, 10h-12h",
