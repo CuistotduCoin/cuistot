@@ -132,6 +132,7 @@ type Workshop implements Node & Timestamps {
   created_at: String!
   updated_at: String!
   deleted_at: String
+  confirmed: Boolean!
   name: String!
   price: Int!
   duration: Int!
@@ -445,6 +446,8 @@ type Mutation {
     @aws_auth(cognito_groups: ["Cook", "Admin"])
   deleteWorkshop(workshop_id: ID!): PlainPayload!
     @aws_auth(cognito_groups: ["Cook", "Admin"])
+  confirmWorkshop(workshop: WorkshopInput!): PlainPayload!
+    @aws_auth(cognito_groups: ["Admin"])
   recreateWorkshop(workshop: WorkshopInput!): PlainPayload!
     @aws_auth(cognito_groups: ["Admin"])
 
