@@ -34,6 +34,7 @@ provider:
   deploymentBucket: ${self:provider.environment.AWS_DEPLOYMENT_BUCKET}
   endpointType: regional
   environment:
+    NODE_ENV: ${self:provider.stage}
     AWS_DOMAIN: ${ssm:/cuistot/front/domain~true}
     AWS_REGION_IRELAND: eu-west-1
     AWS_DEPLOYMENT_BUCKET: ${ssm:/cuistot/front/deployment-bucket~true}
@@ -49,6 +50,7 @@ provider:
     ALGOLIASEARCH_PLACES_APP_ID: ${ssm:/cuistot/front/algolia-places-app-id~true}
     ALGOLIASEARCH_PLACES_KEY: ${ssm:/cuistot/front/algolia-places-key~true}
     SENTRY_DSN: ${ssm:/cuistot/front/sentry-dsn~true}
+    SLS_DEBUG: "*"
 
 package:
   exclude:
