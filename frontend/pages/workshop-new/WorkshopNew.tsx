@@ -8,6 +8,7 @@ import { ErrorMessage, Field } from "formik";
 import { Select, TextField } from "formik-material-ui";
 import gql from "graphql-tag";
 import moment from "moment";
+import Router from "next/router";
 import React from "react";
 import { graphql, Query } from "react-apollo";
 import InputRange from "react-input-range";
@@ -124,7 +125,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
         if (result.message === "success") {
           openSnackbar("Votre atelier a bien été crée", "success");
           setStatus({ success: true });
-          setSubmitting(false);
+          Router.replace(`/workshops/${result.workshop.id}`);
         } else {
           createWorkshopError(result);
         }
