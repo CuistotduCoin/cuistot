@@ -89,62 +89,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     const workshops = [
       {
-        availableSeat: 12,
-        date: "vendredi 28 septembre, 20h-22h",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/gaetan-decouverte-vins-naturels.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/gaetan.jpg",
-        name: "Repas et dégustation de vins naturels",
-        nameCook: "Gaetan",
-        price: 50,
-        spot: "Soif de Vins, Brest",
-        totalSeat: 12,
-        typeform: "https://cuistotducoin.typeform.com/to/UmTqhi"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 29 septembre, 9h30-13h30",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ronan-macarons.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
-        name: "Macarons",
-        nameCook: "Ronan",
-        price: 50,
-        spot: "Arthur Bonnet, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/jjWrtL"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 29 septembre, 10h-12h",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-saucisson-au-chocolat.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Atelier Enfant : Saucisson au chocolat et mini choco",
-        nameCook: "Audrey",
-        price: 25,
-        spot: "Audrey, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/j3jx1h"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 29 septembre, 10h-13h",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/zhang-jiaozi.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/zhang.jpg",
-        name: "Jiaozi ou raviolis chinois",
-        nameCook: "Zhang",
-        price: 35,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/gudvAa"
-      },
-      {
         availableSeat: 6,
         date: "samedi 6 octobre, 10h-12h30",
         duration: 2,
@@ -209,11 +153,11 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         name: "Tiep bou guinar",
         nameCook: "Karim",
         price: 30,
-        spot: "Schmidt, Brest",
+        spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/ZfYA1b"
       },
-      {
+      /*{
         availableSeat: 6,
         date: "samedi 20 octobre, 10h-12h",
         duration: 2,
@@ -226,6 +170,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/EWUT4t"
+      },*/
+      {
+        availableSeat: 6,
+        date: "vendredi 26 octobre, 17h30-20h",
+        duration: 2.5,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/luis-agnolotti.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/luis.jpg",
+        name: "Cuisine italienne avec Luis",
+        nameCook: "Luis",
+        price: 50,
+        spot: "Cuisinella, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/hEcymm"
       },
       {
         availableSeat: 8,
@@ -255,7 +213,21 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         totalSeat: 8,
         typeform: "https://cuistotducoin.typeform.com/to/Voq2Qo"
       },
-      /*{
+      {
+        availableSeat: 6,
+        date: "samedi 3 novembre, 10h30-13h30",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/vanessa-amuses-bouches-exotiques.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/vanessa.jpg",
+        name: "Amuses-bouches exotiques et punch maison",
+        nameCook: "Vanessa",
+        price: 30,
+        spot: "Cuisinella, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/LKH380"
+      },
+      {
         availableSeat: 8,
         date: "samedi 24 novembre, 9h-13h",
         duration: 4,
@@ -268,7 +240,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Schmidt, Brest",
         totalSeat: 8,
         typeform: "https://cuistotducoin.typeform.com/to/RpiaBS"
-      },*/
+      },
       {
         availableSeat: 6,
         date: "samedi 24 novembre, 9h-12h",
