@@ -8,9 +8,7 @@ import {
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
+import Layout from "../../components/Layout";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -45,14 +43,10 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
     const { classes } = this.props;
 
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Abonnement : Atelier de cuisine pour enfant"
-          description="Marre des activités extra-scolaires classiques ? Faites découvrir la pâtisserie à vos enfants !"
-        />
+      <Layout
+        valueProposition="Abonnement : Atelier de cuisine pour enfant"
+        description="Marre des activités extra-scolaires classiques ? Faites découvrir la pâtisserie à vos enfants !"
+      >
         <Grid
           container
           justify="space-around"
@@ -163,8 +157,7 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
             </Grid>
           </Grid>
         </Grid>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

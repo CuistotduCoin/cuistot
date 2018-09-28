@@ -7,8 +7,7 @@ import Stepper from "@material-ui/core/Stepper";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Layout from "../../components/Layout";
 import PaymentCardForm from "../../components/PaymentCardForm";
 
 const styles = (theme: Theme) => ({
@@ -249,8 +248,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
     const steps = ["Récapitulatif", "Paiement", "Infos"];
 
     return (
-      <>
-        <Header static={true} hideCompanyIndividual={true} />
+      <Layout headerProps={{ static: true, hideCompanyIndividual: true }}>
         <Grid
           container
           justify="space-around"
@@ -285,8 +283,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
         </Grid>
         {this.state.activeStep <= steps.length &&
           this.getStepContent(this.state.activeStep)}
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

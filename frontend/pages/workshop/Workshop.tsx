@@ -25,8 +25,7 @@ import { compose } from "recompose";
 import BookForm from "../../components/BookForm";
 import CommentBlock from "../../components/CommentBlock";
 import Cover from "../../components/Cover";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
 import StarRating from "../../components/StarRating";
 import { GetWorkshop } from "../../queries";
@@ -201,7 +200,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
           const workshop = data.getWorkshop.workshop;
 
           return (
-            <>
+            <Layout headerProps={{ static: true }}>
               <Modal
                 aria-labelledby="carousel"
                 aria-describedby="To"
@@ -222,7 +221,6 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                   </Slider>
                 </div>
               </Modal>
-              <Header static />
               <div onClick={this.handleModalOpen}>
                 <Cover imageURL={this.props.mainPhoto} />
               </div>
@@ -584,8 +582,7 @@ export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                   </div>
                 </Grid>
               </Grid>
-              <Footer />
-            </>
+            </Layout>
           );
         }}
       </Query>
