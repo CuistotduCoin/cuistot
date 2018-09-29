@@ -18,7 +18,10 @@
     "seed:dev": "assume-role development node knexenv && env-cmd .env node_modules/.bin/knex seed:run --env development",
     "deploy:prod": "assume-role production serverless deploy --force -s production",
     "deploy:stage": "assume-role staging serverless deploy --force -s staging",
-    "deploy:dev": "assume-role development serverless deploy --force -s development"
+    "deploy:dev": "assume-role development serverless deploy --force -s development",
+    "psql:prod": "assume-role production node knexenv && env-cmd .env sh ./scripts/psql.sh",
+    "psql:stage": "assume-role staging node knexenv && env-cmd .env sh ./scripts/psql.sh",
+    "psql:dev": "assume-role development node knexenv && env-cmd .env sh ./scripts/psql.sh"
   },
   "dependencies": {
     "async": "^2.6.1",

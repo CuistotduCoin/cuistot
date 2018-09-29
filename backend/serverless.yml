@@ -71,6 +71,11 @@ custom:
         response: "workshop/deleteWorkshop-response-mapping-template.txt"
       - dataSource: Lambda
         type: Mutation
+        field: confirmWorkshop
+        request: "workshop/confirmWorkshop-request-mapping-template.txt"
+        response: "workshop/confirmWorkshop-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
         field: recreateWorkshop
         request: "workshop/recreateWorkshop-request-mapping-template.txt"
         response: "workshop/recreateWorkshop-response-mapping-template.txt"
@@ -226,6 +231,11 @@ custom:
         field: getKitchen
         request: "kitchen/getKitchen-request-mapping-template.txt"
         response: "kitchen/getKitchen-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: getKitchens
+        request: "kitchen/getKitchens-request-mapping-template.txt"
+        response: "kitchen/getKitchens-response-mapping-template.txt"
       - dataSource: Lambda
         type: Query
         field: getKitchensPage

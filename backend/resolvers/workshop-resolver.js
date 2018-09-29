@@ -63,6 +63,11 @@ async function recreateWorkshop(args) {
   return result;
 }
 
+async function confirmWorkshop(args) {
+  const result = await updateObject(TABLE_NAME, { id: args.id, confirmed: true });
+  return result;
+}
+
 export {
   getWorkshop,
   getWorkshops,
@@ -71,4 +76,5 @@ export {
   updateWorkshop,
   deleteWorkshop,
   recreateWorkshop,
+  confirmWorkshop,
 };

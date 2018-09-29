@@ -203,7 +203,7 @@ export class SignUpForm extends React.Component<ISignUpFormProps, {}> {
             setStatus({ success: true });
             resetForm(initialValues);
             openSnackbar(
-              "Votre compte a bien été créé. Vous allez recevoir un code de sécurité qui vous permettra de le confirmer.",
+              "Votre compte a bien été créé. Vous allez recevoir un code de sécurité par email qui vous permettra de le confirmer.",
               "success"
             );
             Router.replace(`/account-confirmation?username=${values.username}`);

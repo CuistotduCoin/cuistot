@@ -144,8 +144,6 @@ export class AccountForm extends React.Component<
   public render() {
     const { classes, currentGourmet } = this.props;
 
-    if (!currentGourmet) return <Loading />;
-
     const updateInfoFormComponent = () => (
       <Form autoComplete="off">
         <Grid container className={classes.grid} spacing={16}>

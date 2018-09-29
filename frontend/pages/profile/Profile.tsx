@@ -1,7 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Layout from "../../components/Layout";
 
 const styles = () => ({});
 
@@ -12,10 +11,7 @@ interface IProfilProps {
 export class Profil extends React.Component<IProfilProps, {}> {
   public render() {
     return (
-      <>
-        <Header />
-        <Footer />
-      </>
+      <Layout />
     );
   }
 }

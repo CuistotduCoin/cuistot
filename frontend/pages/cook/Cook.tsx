@@ -62,8 +62,8 @@ const getCook = gql`
             key
           }
         }
-      },
-      message,
+      }
+      message
       errors {
         message
       }

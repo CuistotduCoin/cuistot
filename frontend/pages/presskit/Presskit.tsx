@@ -1,9 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero";
+import Layout from "../../components/Layout";
 import components from "../../content/components";
 // @ts-ignore
 import Content from "../../content/presskit.mdx";
@@ -25,13 +23,7 @@ export class Presskit extends React.Component<IPresskitProps, {}> {
     const { classes } = this.props;
 
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition="Presskit"
-        />
+      <Layout valueProposition="Presskit">
         <Grid
           container
           justify="space-around"
@@ -41,8 +33,7 @@ export class Presskit extends React.Component<IPresskitProps, {}> {
         >
           <Content components={components} />
         </Grid>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

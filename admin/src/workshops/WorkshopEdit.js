@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { refreshView as refreshViewAction } from 'ra-core';
+import { API, graphqlOperation } from 'aws-amplify';
 import {
   Edit,
   SimpleForm,
@@ -14,23 +17,56 @@ import {
   ListButton,
   RefreshButton,
   CardActions,
+  Button,
   Tab,
 } from 'react-admin';
+import CheckIcon from '@material-ui/icons/Check';
 import { DateTimeInput } from 'react-admin-date-inputs';
 import { CookNameField, NameField } from '../fields';
+import { ConfirmWorkshop } from '../queries';
 import { ImageInput } from '../inputs';
 import WorkshopImages from './WorkshopImages';
 
-const WorkshopEditActions = ({ basePath, data }) => (
-  <CardActions>
-    <ShowButton basePath={basePath} record={data} />
-    <ListButton basePath={basePath} />
-    <RefreshButton />
-  </CardActions>
-);
+const confirmWorkshop = (workshopId, refreshView) => () => {
+  API.graphql(
+    graphqlOperation(ConfirmWorkshop, {
+      workshop: { id: workshopId },
+    }),
+  ).then((result) => {
+    if (result.data.confirmWorkshop.message === 'success') {
+      refreshView();
+    } else {
+      console.error('Failure while confirming workshop');
+    }
+  });
+};
 
-const WorkshopEdit = props => (
-  <Edit actions={<WorkshopEditActions />} title={<NameField />} {...props}>
+const WorkshopEditActions = ({ basePath, data, refreshView }) => {
+  let confirmWorkshopButton;
+  if (data && data.id && !data.confirmed) {
+    confirmWorkshopButton = (
+      <Button
+        variant="raised"
+        label="Confirmer l'atelier"
+        title="Confirmer l'atelier"
+        onClick={confirmWorkshop(data.id, refreshView)}
+      >
+        <CheckIcon />
+      </Button>
+    );
+  }
+  return (
+    <CardActions>
+      {confirmWorkshopButton}
+      <ShowButton basePath={basePath} record={data} />
+      <ListButton basePath={basePath} />
+      <RefreshButton />
+    </CardActions>
+  );
+};
+
+const WorkshopEdit = ({ refreshView, ...props }) => (
+  <Edit actions={<WorkshopEditActions refreshView={refreshView} />} title={<NameField />} {...props}>
     <TabbedShowLayout>
       <Tab label="pos.info">
         <SimpleForm>
@@ -66,4 +102,4 @@ const WorkshopEdit = props => (
   </Edit>
 );
 
-export default WorkshopEdit;
+export default connect(null, { refreshView: refreshViewAction })(WorkshopEdit);

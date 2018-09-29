@@ -48,6 +48,7 @@ import {
   getWorkshop,
   getWorkshops,
   getWorkshopBookings,
+  confirmWorkshop,
   createWorkshop,
   updateWorkshop,
   deleteWorkshop,
@@ -164,6 +165,10 @@ export const handler = (event, context, callback) => {
     }
     case 'recreateWorkshop': {
       resolve(recreateWorkshop);
+      break;
+    }
+    case 'confirmWorkshop': {
+      resolve(confirmWorkshop);
       break;
     }
     case 'createBooking': {

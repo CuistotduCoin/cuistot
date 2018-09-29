@@ -1,4 +1,5 @@
 import ConfirmCook from './ConfirmCook';
+import ConfirmWorkshop from './ConfirmWorkshop';
 import RecreateWorkshop from './RecreateWorkshop';
 import RecreateGourmet from './RecreateGourmet';
 import RecreateCook from './RecreateCook';
@@ -8,6 +9,7 @@ import RecreateEvaluation from './RecreateEvaluation';
 
 export {
   ConfirmCook,
+  ConfirmWorkshop,
   RecreateWorkshop,
   RecreateGourmet,
   RecreateCook,
