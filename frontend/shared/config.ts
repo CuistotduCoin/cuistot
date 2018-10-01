@@ -1,5 +1,5 @@
-import { Auth } from "aws-amplify";
 import { AUTH_TYPE } from "aws-appsync/lib/link/auth-link";
+import { Auth } from "../components/Amplify";
 
 const amplifyConfig = {
   Auth: {

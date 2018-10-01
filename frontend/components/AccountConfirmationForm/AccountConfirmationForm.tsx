@@ -1,7 +1,6 @@
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
 import Router, { withRouter } from "next/router";
@@ -9,6 +8,7 @@ import React from "react";
 import { compose } from "recompose";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
+import { Auth } from "../../components/Amplify";
 import { AppContainer } from "../../components/App";
 import { SNACKBAR_MESSAGES } from "../../shared/constants";
 

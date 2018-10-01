@@ -1,8 +1,14 @@
+import dynamic from 'next/dynamic'
 import React from "react";
 import { Provider, Subscribe } from "unstated";
 import UNSTATED from "unstated-debug";
 import { App, AppContainer } from ".";
-import "../../shared/auth";
+
+// @ts-ignore
+dynamic({
+  loader: () => import('../../shared/auth'),
+  ssr: false
+})
 
 if (process.env.NODE_ENV === "development") {
   UNSTATED.logStateChanges = true;

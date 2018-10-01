@@ -17,7 +17,6 @@ const matches = [
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    // @ts-ignore
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
     let hasMatch = false;

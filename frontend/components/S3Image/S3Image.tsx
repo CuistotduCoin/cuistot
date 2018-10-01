@@ -1,5 +1,11 @@
+import dynamic from 'next/dynamic'
 import React from 'react';
-import { Storage } from "../../shared/auth";
+
+// @ts-ignore
+dynamic({
+  loader: () => import('../../shared/auth'),
+  ssr: false
+})
 
 interface IS3ImageProps {
   component: any;
@@ -19,7 +25,7 @@ interface IS3ImageState {
 class S3Image extends React.Component<
   IS3ImageProps,
   IS3ImageState
-> {
+  > {
   public static defaultProps: Partial<IS3ImageProps> = {
     urlProp: 'src',
   };

@@ -1,5 +1,5 @@
-import { API, graphqlOperation } from "aws-amplify";
 import { Container } from "unstated";
+import { API, graphqlOperation } from "../../components/Amplify"
 import { GetCurrentGourmetImage } from "../../queries";
 
 interface IAppState {

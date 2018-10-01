@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Document, { Head, Main, NextScript } from 'next/document';
 import flush from 'styled-jsx/server';
 
@@ -100,10 +99,6 @@ MyDocument.getInitialProps = ctx => {
     const WrappedComponent = props => {
       pageContext = props.pageContext;
       return <Component {...props} />;
-    };
-
-    WrappedComponent.propTypes = {
-      pageContext: PropTypes.object.isRequired,
     };
 
     return WrappedComponent;

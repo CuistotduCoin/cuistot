@@ -1,6 +1,6 @@
-import { Auth } from "aws-amplify";
 import Router, { withRouter } from "next/router";
 import React, { Component } from "react";
+import { Auth } from "../../components/Amplify";
 import Loading from "../../components/Loading";
 
 interface IWithAuthDecoratorProps {

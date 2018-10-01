@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { Field, Form, Formik } from "formik";
 import { Select } from "formik-material-ui";
 import React from "react";
+import { Auth } from "../../components/Amplify"
 
 const styles = (theme: Theme) => ({
   formControl: {
@@ -39,7 +40,7 @@ export class BookForm extends React.Component<IBookForm, {}> {
 
     const onSubmit = async (values: IBookFormValues) => {
       try {
-        // await Auth.signIn(values.email, values.password);
+        await Auth.signIn(values.email, values.password);
         alert("Logged in");
       } catch (e) {
         alert(e.message);

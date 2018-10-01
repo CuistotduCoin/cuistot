@@ -1,8 +1,16 @@
-import serverless from "serverless-http";
-import appServer from "./app";
+import * as serverless from "serverless-http";
+import { app, server } from "./app";
 
+process.env.NODE_ENV = 'production'
 const binaryMimeTypes = ["*/*"];
-const handler = serverless(appServer, {
-  binary: binaryMimeTypes
-});
-exports.handler = (evt, ctx, callback) => handler(evt, ctx, callback);
+
+exports.handler = (event, context, callback) => {
+  app.prepare()
+    .then(() => {
+
+      const handler = serverless(server, {
+        binary: binaryMimeTypes,
+      });
+      return handler(event, context, callback);
+    });
+};

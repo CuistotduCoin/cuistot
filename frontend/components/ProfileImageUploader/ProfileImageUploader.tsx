@@ -1,8 +1,14 @@
 import { withStyles } from "@material-ui/core/styles";
+import dynamic from 'next/dynamic'
 import React from "react";
 import Dropzone from "react-dropzone";
 import ProfileImage from "../../components/ProfileImage";
-import { Storage } from "../../shared/auth";
+
+// @ts-ignore
+dynamic({
+  loader: () => import('../../shared/auth'),
+  ssr: false
+})
 
 const styles = theme => ({
   container: {

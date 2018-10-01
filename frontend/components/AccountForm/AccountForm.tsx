@@ -4,7 +4,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 import { Select, TextField } from "formik-material-ui";
 import get from "lodash.get";
@@ -12,6 +11,7 @@ import React from "react";
 import { graphql, Query } from "react-apollo";
 import { compose } from "recompose";;
 import * as Yup from "yup";
+import { Auth } from "../../components/Amplify";
 import CookForm from "../../components/CookForm";
 import Loading from "../../components/Loading";
 import ProfileImageUploader from "../../components/ProfileImageUploader";
@@ -133,7 +133,7 @@ interface IAccountFormState {
 export class AccountForm extends React.Component<
   IAccountFormProps,
   IAccountFormState
-> {
+  > {
   public constructor(props) {
     super(props);
     this.onNewInfoSubmit = this.onNewInfoSubmit.bind(this);

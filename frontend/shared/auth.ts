@@ -1,4 +1,4 @@
-import Amplify, { Storage } from "aws-amplify";
+import { Amplify, Storage } from "../components/Amplify";
 import { amplifyConfig } from "./config";
 
 Amplify.configure(amplifyConfig);

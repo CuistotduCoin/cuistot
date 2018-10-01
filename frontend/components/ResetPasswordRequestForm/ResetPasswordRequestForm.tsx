@@ -1,7 +1,6 @@
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
 import Router from "next/router";
@@ -9,6 +8,7 @@ import React from "react";
 import { Subscribe } from "unstated";
 import * as Yup from "yup";
 import { AppContainer } from "../../components/App";
+import { Auth } from "../../components/Amplify";
 
 const styles = (theme: Theme) => ({
   grid: {
@@ -40,7 +40,7 @@ interface IResetPasswordRequestFormValues {
 export class ResetPasswordRequestForm extends React.Component<
   IResetPasswordRequestFormProps,
   {}
-> {
+  > {
   public constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);

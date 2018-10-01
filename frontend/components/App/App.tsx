@@ -1,9 +1,9 @@
-import { API, Auth, graphqlOperation } from "aws-amplify";
 import Router, { withRouter } from "next/router";
 import React from "react";
 import { compose } from "recompose";
 import { Subscribe } from "unstated";
 import { AppContainer } from ".";
+import { API, Auth, graphqlOperation } from "../../components/Amplify";
 import Snackbar from "../../components/Snackbar";
 import { GetCurrentGourmet, UpdateGourmet } from "../../queries";
 
@@ -11,6 +11,7 @@ interface IAppProps {
   referer?: string;
   isLoggedIn: boolean;
   currentGourmet?: object;
+  router: any;
   openSnackbar(message: string, variant: string);
   logIn();
   setReferer(url?: string);
