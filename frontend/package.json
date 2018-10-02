@@ -51,6 +51,7 @@
     "yup": "^0.26.3"
   },
   "devDependencies": {
+    "aws-param-env": "^1.2.0",
     "@storybook/addon-actions": "^4.0.0-alpha.21",
     "@storybook/addon-info": "^4.0.0-alpha.21",
     "@storybook/addon-knobs": "^4.0.0-alpha.21",
