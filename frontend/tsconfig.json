@@ -4,7 +4,10 @@
     "allowUnreachableCode": false,
     "baseUrl": "src",
     "paths": {
-      "*": ["*", "src/*"]
+      "*": [
+        "*",
+        "src/*"
+      ]
     },
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
@@ -37,7 +40,8 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "razzle.config.js"
+    "razzle.config.js",
+    "loadenv.js"
   ],
   "types": [
     "typePatches",
