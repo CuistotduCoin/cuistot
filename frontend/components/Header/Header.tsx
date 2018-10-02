@@ -77,7 +77,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
 
     if (isLoggedIn) {
       rightElement = <AccountDropdown />;
-    } else if (!hideSignUpLogin) {
+    } else if (false) {
       if (this.state.up) {
         rightElement = (
           <Link href="/login" passHref={true}>
@@ -114,7 +114,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
       >
         <Toolbar>
           <Grid container justify="flex-start" alignItems="center">
-          <Logo className={classes.logo} />
+            <Logo className={classes.logo} />
             {!hideCompanyIndividual && (
               <Hidden smDown={true}>
                 <Link href="/business" passHref={true}>

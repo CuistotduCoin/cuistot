@@ -1,17 +1,13 @@
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import get from "lodash.get";
 import Link from "next/link";
 import React from "react";
-import { graphql } from "react-apollo";
 import Slider from "react-slick";
 import { compose } from "recompose";
-// import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import Layout from "../../components/Layout";
-import { withData } from "../../decorators";
-import { GetWorkshops } from "../../queries";
+import "./slick-theme.css";
 
 const styles = (theme: Theme) => ({
   block: {
@@ -186,7 +182,7 @@ export class Home extends React.Component<IHomeProps, {}> {
       <Layout
         valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
         description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
-      >  
+      >
         <Grid container alignItems="center" className={classes.gridTile}>
           <Grid item xs={12} sm={6}>
             <Grid container className={classes.tileEntreprise}>
@@ -276,7 +272,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           spacing={16}
           className={classes.grid}
         >
-        <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Grid
               container
               justify="space-between"
@@ -382,15 +378,6 @@ export class Home extends React.Component<IHomeProps, {}> {
 }
 
 const enhance = compose(
-  withData,
-  graphql(GetWorkshops, {
-    options: {
-      fetchPolicy: 'cache-and-network'
-    },
-    props: props => ({
-      workshops: get(props, 'data.getWorkshops.workshops') || []
-    }),
-  }),
   withStyles(styles as any),
 );
 

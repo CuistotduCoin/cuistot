@@ -1,4 +1,4 @@
-import { AUTH_TYPE } from "aws-appsync/lib/link/auth-link";
+/*import { AUTH_TYPE } from "aws-appsync/lib/link/auth-link";
 import { Auth } from "../components/Amplify";
 
 const amplifyConfig = {
@@ -35,4 +35,4 @@ const apolloConfig = {
   },
 };
 
-export { amplifyConfig, apolloConfig };
+export { amplifyConfig, apolloConfig };*/
