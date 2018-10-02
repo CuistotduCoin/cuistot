@@ -30,11 +30,12 @@ provider:
   runtime: nodejs8.10
   stage: ${opt:stage,'development'}
   region: eu-west-1
+  deploymentBucket: ${ssm:/cuistot/front/deployment-bucket~true}-${opt:stage,'development'}
   endpointType: regional
   environment:
     AWS_DOMAIN: ${ssm:/cuistot/front/domain~true}
     AWS_REGION_IRELAND: eu-west-1
-    AWS_DEPLOYMENT_BUCKET: ${ssm:/cuistot/front/deployment-bucket~true}
+    AWS_DEPLOYMENT_BUCKET: ${ssm:/cuistot/front/deployment-bucket~true}-${opt:stage,'development'}
     AWS_USERPOOL_ID: ${ssm:/cuistot/userpool-id~true}
     AWS_IDENTITY_POOL_ID: ${ssm:/cuistot/identity-pool-id~true}
     AWS_STORE_BUCKET: ${ssm:/cuistot/store-bucket~true}
@@ -53,12 +54,6 @@ package:
     - ./**
   include:
     - build/**
-    - node_modules/compression/**
-    - node_modules/express/**
-    - node_modules/next/**
-    - node_modules/path-match/**
-    - node_modules/url/**
-    - node_modules/serverless-http/**
 
 functions:
   ssr:
