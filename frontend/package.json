@@ -9,10 +9,11 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development && assume-role development node loadenv && env-cmd .env nodemon server/index.ts",
     "dev-win": "cross-env NODE_ENV=development && env-cmd .env nodemon server/index.ts",
-    "build:dev": "NODE_ENV=development assume-role development node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json",
-    "build-win": "cross-env NODE_ENV=production env-cmd .env next build && tsc --project tsconfig.server.json",
-    "build:stage": "cross-env NODE_ENV=staging assume-role staging node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json",
-    "build:prod": "cross-env NODE_ENV=production assume-role production node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json",
+    "build:dev": "NODE_ENV=development assume-role development node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json && webpack",
+    "build-win": "cross-env NODE_ENV=production env-cmd .env next build && tsc --project tsconfig.server.json && webpack",
+    "build:stage": "cross-env NODE_ENV=staging assume-role staging node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json && webpack",
+    "build:prod": "cross-env NODE_ENV=production assume-role production node loadenv && env-cmd .env next build && tsc --project tsconfig.server.json && webpack",
+    "webpack": "webpack",
     "lambda:dev": "assume-role development serverless offline start -s development",
     "lambda:prod": "assume-role production serverless offline start -s production",
     "start": "cross-env NODE_ENV=development assume-role development node build/index.js",
@@ -128,6 +129,8 @@
     "tslint-plugin-prettier": "^2.0.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.1.1",
-    "unstated-debug": "^0.3.0"
+    "unstated-debug": "^0.3.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
   }
 }
