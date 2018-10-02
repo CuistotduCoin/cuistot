@@ -16,6 +16,10 @@ custom:
   apigwBinary:
     types:
       - '*/*'
+  customDomain:
+    domainName: ${self:provider.environment.AWS_DOMAIN}
+    createRoute53Record: true
+    certificateName: ${self:provider.environment.AWS_DOMAIN}
   sentry:
     dsn: ${self:provider.environment.SENTRY_DSN}
     organization: cuistotducoin
@@ -26,7 +30,7 @@ provider:
   runtime: nodejs8.10
   stage: ${opt:stage,'development'}
   region: eu-west-1
-  deploymentBucket: ${self:provider.environment.AWS_DEPLOYMENT_BUCKET}
+  deploymentBucket: ${self:provider.environment.AWS_DOMAIN}
   endpointType: regional
   environment:
     AWS_DOMAIN: ${ssm:/cuistot/front/domain~true}
@@ -64,3 +68,10 @@ functions:
           method: any
           path: /{any+}
           cors: true
+
+resources:
+  Resources:
+    MyBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${ssm:/cuistot/front/deployment-bucket~true}
