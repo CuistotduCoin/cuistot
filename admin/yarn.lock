@@ -6509,9 +6509,9 @@ ra-language-english@^2.2.0, ra-language-english@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-2.3.0.tgz#d25247bd148a57b02ff0480a66388220ee72ef16"
 
-ra-language-french@^2.2.3:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-2.3.0.tgz#cd85b6634e1232cf4ad395448bd8b79d45ab353a"
+ra-language-french@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-2.3.1.tgz#9a18e18b4d34d8c17e9ae6f354e5daed0b9c6586"
 
 ra-ui-materialui@^2.2.4:
   version "2.3.0"
