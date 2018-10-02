@@ -45,24 +45,6 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
     this.state = {
       up: true
     };
-
-    this.handleScroll = this.handleScroll.bind(this);
-  }
-
-  public handleScroll = (evt: any) => {
-    if (window.scrollY > 0) {
-      this.setState({ up: false });
-    } else {
-      this.setState({ up: true });
-    }
-  };
-
-  public componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-  }
-
-  public componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
   }
 
   public render() {
@@ -72,40 +54,6 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
       isLoggedIn,
       hideCompanyIndividual
     } = this.props;
-
-    let rightElement;
-
-    if (isLoggedIn) {
-      rightElement = <AccountDropdown />;
-    } else if (false) {
-      if (this.state.up) {
-        rightElement = (
-          <Link href="/login" passHref={true}>
-            <Button
-              className={classes.accountButton}
-              variant="raised"
-              color="primary"
-              onScroll={this.handleScroll}
-            >
-              Se connecter
-            </Button>
-          </Link>
-        );
-      } else {
-        rightElement = (
-          <Link href="/signup" passHref={true}>
-            <Button
-              className={classes.accountButton}
-              variant="raised"
-              color="primary"
-              onScroll={this.handleScroll}
-            >
-              S'inscrire
-            </Button>
-          </Link>
-        );
-      }
-    }
 
     return (
       <AppBar
@@ -130,11 +78,6 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
               </Hidden>
             )}
           </Grid>
-          {rightElement && (
-            <Grid container justify="flex-end">
-              {rightElement}
-            </Grid>
-          )}
         </Toolbar>
       </AppBar>
     );

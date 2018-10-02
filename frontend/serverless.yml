@@ -4,7 +4,7 @@ plugins:
   - serverless-offline
   - serverless-apigw-binary
   - serverless-domain-manager
-  - serverless-sentry
+  - serverless-dotenv-plugin
   - serverless-stage-manager
 
 frameworkVersion: ">=1.21.0 <2.0.0"
@@ -14,26 +14,23 @@ custom:
     - development
     - staging
     - production
+  dotenv:
+    path: .env
   apigwBinary:
     types:
       - '*/*'
   customDomain:
-    domainName: ${self:provider.environment.AWS_DOMAIN}
+    domainName: ${env:AWS_DOMAIN}
     createRoute53Record: true
-    certificateName: ${self:provider.environment.AWS_DOMAIN}
-  sentry:
-    dsn: ${self:provider.environment.SENTRY_DSN}
-    organization: cuistotducoin
-    project: front
+    certificateName: ${env:AWS_DOMAIN}
 
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${opt:stage,'development'}
-  region: eu-west-1
-  deploymentBucket: ${self:provider.environment.AWS_DEPLOYMENT_BUCKET}
+  stage: production
+  region: ${env:AWS_REGION_PARIS}
+  deploymentBucket: ${env:AWS_S3_BUCKET}
   endpointType: regional
-
 
 package:
   exclude:
@@ -48,7 +45,9 @@ functions:
     events:
       - http:
           method: any
+          cors: true
           path: /
       - http:
           method: any
           path: /{any+}
+          cors: true
