@@ -58,7 +58,7 @@ package:
 functions:
   ssr:
     timeout: 30
-    handler: build/handler.handler
+    handler: build/lambda.handler
     events:
       - http:
           method: any
