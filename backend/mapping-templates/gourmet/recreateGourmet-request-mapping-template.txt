@@ -1,0 +1,10 @@
+{
+  "version": "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+    "field": "recreateGourmet",
+    "arguments": {
+      "id": $utils.toJson($context.arguments.gourmet.id)
+    }
+  }
+}

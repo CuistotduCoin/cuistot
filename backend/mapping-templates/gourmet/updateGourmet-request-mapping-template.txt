@@ -1,3 +1,9 @@
+#foreach($group in $ctx.identity.claims.get("cognito:groups"))
+  #if($group == "Admin")
+    #set($isAdmin = true)
+    #break
+  #end
+#end
 {
   "version": "2017-02-28",
   "operation": "Invoke",
@@ -5,16 +11,18 @@
     "field": "updateGourmet",
     "arguments": {
       "id": $utils.toJson($context.arguments.gourmet.id),
-      "email": $utils.toJson($context.arguments.gourmet.email),
+      "phone_number": $utils.toJson($context.arguments.gourmet.phone_number),
       "first_name": $utils.toJson($context.arguments.gourmet.first_name),
       "last_name": $utils.toJson($context.arguments.gourmet.last_name),
+      "identity_id": $utils.toJson($context.arguments.gourmet.identity_id),
       "gender": $utils.toJson($context.arguments.gourmet.gender),
       "birthdate": $utils.toJson($context.arguments.gourmet.birthdate),
       "address": $utils.toJson($context.arguments.gourmet.address),
       "city": $utils.toJson($context.arguments.gourmet.city),
-      "zip_code": $utils.toJson($context.arguments.gourmet.zip_cde),
-      "location": $utils.toJson($context.arguments.gourmet.location),
-      "description": $utils.toJson($context.arguments.gourmet.description)
+      "zip_code": $utils.toJson($context.arguments.gourmet.zip_code),
+      "description": $utils.toJson($context.arguments.gourmet.description),
+      "is_admin": $utils.toJson($isAdmin),
+      "request_author_id": $utils.toJson($context.identity.sub)
     }
   }
 }

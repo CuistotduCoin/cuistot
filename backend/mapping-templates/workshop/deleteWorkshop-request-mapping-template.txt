@@ -1,8 +1,18 @@
+#foreach($group in $ctx.identity.claims.get("cognito:groups"))
+  #if($group == "Admin")
+    #set($isAdmin = true)
+    #break
+  #end
+#end
 {
   "version": "2017-02-28",
   "operation": "Invoke",
   "payload": {
     "field": "deleteWorkshop",
-    "arguments": $utils.toJson($context.arguments)
+    "arguments": {
+      "id": $utils.toJson($context.arguments.workshop_id),
+      "is_admin": $utils.toJson($isAdmin),
+      "request_author_id": $utils.toJson($context.identity.sub)
+    }
   }
 }

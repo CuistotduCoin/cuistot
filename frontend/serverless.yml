@@ -1,15 +1,19 @@
 service: serverless-ssr
 
 plugins:
-  - serverless-dotenv-plugin
   - serverless-offline
   - serverless-apigw-binary
   - serverless-domain-manager
-  - serverless-sentry
+  - serverless-dotenv-plugin
+  - serverless-stage-manager
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
 custom:
+  stages:
+    - development
+    - staging
+    - production
   dotenv:
     path: .env
   apigwBinary:
@@ -19,15 +23,11 @@ custom:
     domainName: ${env:AWS_DOMAIN}
     createRoute53Record: true
     certificateName: ${env:AWS_DOMAIN}
-  sentry:
-    dsn: ${env:SENTRY_DSN}
-    organization: cuistotducoin
-    project: front
 
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: dev
+  stage: production
   region: ${env:AWS_REGION_PARIS}
   deploymentBucket: ${env:AWS_S3_BUCKET}
   endpointType: regional
@@ -41,13 +41,13 @@ package:
 functions:
   ssr:
     timeout: 30
-    handler: build/server.handler
+    handler: build/lambda.handler
     events:
       - http:
-          method: get
+          method: any
           cors: true
           path: /
       - http:
           method: any
+          path: /{any+}
           cors: true
-          path: /{proxy+}

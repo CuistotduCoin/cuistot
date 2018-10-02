@@ -1,3 +1,9 @@
+#foreach($group in $ctx.identity.claims.get("cognito:groups"))
+  #if($group == "Admin")
+    #set($isAdmin = true)
+    #break
+  #end
+#end
 {
   "version": "2017-02-28",
   "operation": "Invoke",
@@ -6,12 +12,16 @@
     "arguments": {
       "id": $utils.toJson($context.arguments.cook.id),
       "is_pro": $utils.toJson($context.arguments.cook.is_pro),
+      "description": $utils.toJson($context.arguments.cook.description),
       "business_name": $utils.toJson($context.arguments.cook.business_name),
       "siren": $utils.toJson($context.arguments.cook.siren),
       "pro_email": $utils.toJson($context.arguments.cook.pro_email),
+      "pro_phone_number": $utils.toJson($context.arguments.cook.pro_phone_number),
       "legal_first_name": $utils.toJson($context.arguments.cook.legal_first_name),
       "legal_last_name": $utils.toJson($context.arguments.cook.legal_last_name),
-      "legal_birthdate": $utils.toJson($context.arguments.cook.legal_birthdate)
+      "legal_birthdate": $utils.toJson($context.arguments.cook.legal_birthdate),
+      "is_admin": $utils.toJson($isAdmin),
+      "request_author_id": $utils.toJson($context.identity.sub)
     }
   }
 }

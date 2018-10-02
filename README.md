@@ -19,3 +19,4 @@ Marketplace for Cook
   - `npm install -g yarn`
   - Set up [credentials](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
   - Then go to one of the directory then follow instructions
+  - https://github.com/remind101/assume-role
