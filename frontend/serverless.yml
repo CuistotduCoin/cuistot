@@ -3,16 +3,13 @@ service: serverless-ssr
 plugins:
   - serverless-offline
   - serverless-apigw-binary
+  - serverless-domain-manager
   - serverless-sentry
   - serverless-stage-manager
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
 custom:
-  stages:
-    - development
-    - staging
-    - production
   apigwBinary:
     types:
       - '*/*'
@@ -58,13 +55,13 @@ package:
 functions:
   ssr:
     timeout: 30
-    handler: build/lambda.handler
+    handler: build/server.handler
     events:
       - http:
-          method: any
+          method: get
           cors: true
           path: /
       - http:
           method: any
           cors: true
-          path: /{any+}
+          path: /{proxy+}

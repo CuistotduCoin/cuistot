@@ -1,29 +1,47 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "jsx": "preserve",
     "allowJs": true,
-    "moduleResolution": "node",
+    "allowUnreachableCode": false,
+    "baseUrl": "src",
+    "paths": {
+      "*": ["*", "src/*"]
+    },
+    "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types/"
-    ],
+    "downlevelIteration": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
     "lib": [
-      "dom",
-      "es2016"
-    ]
+      "es6",
+      "es2015",
+      "es2017",
+      "dom"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": false,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "pretty": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es2016",
   },
   "exclude": [
     "node_modules",
-    "build"
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "razzle.config.js"
+  ],
+  "types": [
+    "typePatches",
+    "node",
+    "webpack-env"
   ]
 }
