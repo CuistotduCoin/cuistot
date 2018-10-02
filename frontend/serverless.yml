@@ -5,6 +5,7 @@ plugins:
   - serverless-apigw-binary
   - serverless-sentry
   - serverless-stage-manager
+  - serverless-webpack
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
@@ -24,6 +25,8 @@ custom:
     dsn: ${self:provider.environment.SENTRY_DSN}
     organization: cuistotducoin
     project: front
+  webpack:
+    config: 'webpack.config.js'
 
 provider:
   name: aws
