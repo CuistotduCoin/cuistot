@@ -20,7 +20,7 @@
     "deploy:dev": "assume-role development serverless deploy -s development",
     "deploy-win": "serverless deploy -s development",
     "deploy:stage": "assume-role staging serverless deploy -s staging",
-    "deploy:prod": "assume-role production serverless deploy -s dev",
+    "deploy:prod": "assume-role production serverless deploy -s production",
     "storybook": "start-storybook -p 9001",
     "tslint-check": "cross-env NODE_ENV=development assume-role development node loadenv && env-cmd .env tslint-config-prettier-check ./tslint.json"
   },
