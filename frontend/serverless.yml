@@ -53,12 +53,12 @@ package:
     - ./**
   include:
     - build/**
-    - node_modules/compression
-    - node_modules/express
-    - node_modules/next
-    - node_modules/path-match
-    - node_modules/url
-    - node_modules/serverless-http
+    - node_modules/compression/**
+    - node_modules/express/**
+    - node_modules/next/**
+    - node_modules/path-match/**
+    - node_modules/url/**
+    - node_modules/serverless-http/**
 
 functions:
   ssr:
