@@ -20,6 +20,5 @@ ALGOLIASEARCH_PLACES_KEY=${process.env['algolia-places-key']}
 `;
 
 fs.writeFile('.env', content, (err) => {
-    if (err) throw err;
-    console.log('.env saved...');
+    if (err) { throw err };
 });
