@@ -10,7 +10,7 @@ plugins:
 frameworkVersion: ">=1.21.0 <2.0.0"
 
 custom:
-    stages:
+  stages:
     - development
     - staging
     - production
