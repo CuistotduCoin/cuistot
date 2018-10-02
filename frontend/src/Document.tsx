@@ -1,6 +1,10 @@
 import { AfterData, AfterRoot } from "@jaredpalmer/after";
+import { MuiThemeProvider } from "@material-ui/core";
+import { createGenerateClassName } from "@material-ui/core/styles";
 import React from "react";
+import { JssProvider, SheetsRegistry } from "react-jss";
 import serialize from "serialize-javascript";
+import theme from "theme";
 import { runtimeConfig } from "./config";
 
 export interface IDocumentProps {
@@ -13,12 +17,20 @@ export interface IDocumentProps {
 
 export default class Document extends React.Component<IDocumentProps, {}> {
   public static async getInitialProps({ assets, data, renderPage }: any) {
-    const page = await renderPage();
-    return {
-      assets,
-      data,
-      ...page
-    };
+    const sheets = new SheetsRegistry();
+    const generateClassName = createGenerateClassName({
+      productionPrefix: "c"
+    });
+
+    // tslint:disable-next-line:variable-name
+    const page = await renderPage(After => props => (
+      <JssProvider registry={sheets} generateClassName={generateClassName}>
+        <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
+          <After {...props} />
+        </MuiThemeProvider>
+      </JssProvider>
+    ));
+    return { assets, data, sheets, ...page };
   }
 
   public render() {

@@ -44,6 +44,7 @@ provider:
     ALGOLIASEARCH_PLACES_APP_ID: ${ssm:/cuistot/front/algolia-places-app-id~true}
     ALGOLIASEARCH_PLACES_KEY: ${ssm:/cuistot/front/algolia-places-key~true}
     SENTRY_DSN: ${ssm:/cuistot/front/sentry-dsn~true}
+    EXECUTION_ENV: lambda
 
 package:
   exclude:

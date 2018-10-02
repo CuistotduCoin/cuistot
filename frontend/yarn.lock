@@ -1921,6 +1921,16 @@ autotrack@^2.4.1:
     rollup-plugin-node-resolve "^3.0.0"
     source-map "^0.5.6"
 
+aws-param-env@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/aws-param-env/-/aws-param-env-1.2.0.tgz#45834b50601b12a620ced8d703f1dd47729cf675"
+  dependencies:
+    aws-param-store "^1.1.0"
+
+aws-param-store@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/aws-param-store/-/aws-param-store-1.1.0.tgz#c1e8098bde8d6144698f0920829eceda0e4fedac"
+
 aws-sdk@^2.177.0:
   version "2.326.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.326.0.tgz#2a8c036bdf3dbc67ccafab4c3deb9b4dfe89ce8f"
@@ -7582,7 +7592,7 @@ node-releases@^1.0.0-alpha.12:
   dependencies:
     semver "^5.3.0"
 
-node@^10.10.0:
+node@^10.11.0:
   version "10.11.0"
   resolved "https://registry.yarnpkg.com/node/-/node-10.11.0.tgz#2f6b2392c9bf9f7dc100a0115885bd053957c4bf"
   dependencies:
@@ -9749,6 +9759,10 @@ serverless-sentry@^1.2.0:
     semver "^5.5.0"
     superagent "^3.8.3"
     uuid "^3.3.2"
+
+serverless-stage-manager@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/serverless-stage-manager/-/serverless-stage-manager-1.0.5.tgz#28f9d8c1742d95044564e81ef06a19113f1e064d"
 
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
