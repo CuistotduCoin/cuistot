@@ -30,7 +30,6 @@ provider:
   runtime: nodejs8.10
   stage: ${opt:stage,'development'}
   region: eu-west-1
-  deploymentBucket: ${self:provider.environment.AWS_DOMAIN}
   endpointType: regional
   environment:
     AWS_DOMAIN: ${ssm:/cuistot/front/domain~true}
