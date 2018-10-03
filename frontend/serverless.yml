@@ -5,7 +5,6 @@ plugins:
   - serverless-apigw-binary
   - serverless-sentry
   - serverless-stage-manager
-  - serverless-domain-manager
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
@@ -21,10 +20,6 @@ custom:
     dsn: ${self:provider.environment.SENTRY_DSN}
     organization: cuistotducoin
     project: front
-  customDomain:
-    domainName: ${self:provider.environment.AWS_DOMAIN}
-    createRoute53Record: true
-    certificateName: ${self:provider.environment.AWS_DOMAIN}
 
 provider:
   name: aws
@@ -50,6 +45,7 @@ provider:
     ALGOLIASEARCH_PLACES_KEY: ${ssm:/cuistot/front/algolia-places-key~true}
     SENTRY_DSN: ${ssm:/cuistot/front/sentry-dsn~true}
     EXECUTION_ENV: lambda
+    NODE_ENV: ${opt:stage,'development'}
 
 package:
   exclude:
@@ -65,6 +61,8 @@ functions:
       - http:
           method: get
           path: /
+          cors: true
       - http:
           method: any
           path: /{proxy+}
+          cors: true
