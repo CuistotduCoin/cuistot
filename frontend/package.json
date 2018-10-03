@@ -48,7 +48,8 @@
     "serverless-sentry-lib": "^1.1.2",
     "slick-carousel": "^1.8.1",
     "typeface-roboto": "^0.0.54",
-    "yup": "^0.26.3"
+    "yup": "^0.26.3",
+    "aws-sdk": "^2.327.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^4.0.0-alpha.21",
