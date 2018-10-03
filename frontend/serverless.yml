@@ -5,6 +5,7 @@ plugins:
   - serverless-apigw-binary
   - serverless-sentry
   - serverless-stage-manager
+  - serverless-domain-manager
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
@@ -20,6 +21,12 @@ custom:
     dsn: ${self:provider.environment.SENTRY_DSN}
     organization: cuistotducoin
     project: front
+  customDomain:
+    domainName: ${ssm:/cuistot/front/domain~true}
+    stage: ${opt:stage,'development'}
+    certificateName: ${ssm:/cuistot/front/domain~true}
+    createRoute53Record: true
+    endpointType: 'regional'
 
 provider:
   name: aws
