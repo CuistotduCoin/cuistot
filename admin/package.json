@@ -15,7 +15,7 @@
     "fakerest": "~2.1.0",
     "fetch-mock": "~6.3.0",
     "graphql": "^0.13.2",
-    "graphql-tag": "^2.9.2",
+    "graphql-tag": "^2.10.0",
     "libphonenumber-js": "^1.4.4",
     "lodash.get": "^4.4.2",
     "lodash.isequal": "^4.5.0",
