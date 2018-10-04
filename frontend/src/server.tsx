@@ -1,18 +1,17 @@
 import { render } from "@jaredpalmer/after";
 import Document from "Document";
 import express from "express";
-import path from "path";
 import routes from "routes";
 
 let assets: any;
 const syncLoadAssets = () => {
-  assets = require(process.env.RAZZLE_ASSETS_MANIFEST!);
+  assets = require("assets.json");
 };
 syncLoadAssets();
 
 const server = express()
   .disable("x-powered-by")
-  .use(express.static(path.join(__dirname, process.env.RAZZLE_PUBLIC_DIR!)))
+  .use(express.static(process.env.RAZZLE_PUBLIC_DIR!))
   .get("/*", async (req: express.Request, res: express.Response) => {
     try {
       const options = {

@@ -16,7 +16,7 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "deploy": "env-cmd .env cross-env EXECUTION_ENV=lambda serverless deploy",
     "tslint-check": "env-cmd .env tslint-config-prettier-check ./tslint.json",
-    "build:prod": "cross-env NODE_ENV=production assume-role production node loadenv && env-cmd .env cross-env CI=false RAZZLE_PUBLIC_DIR=./public razzle build",
+    "build:prod": "cross-env NODE_ENV=production assume-role production node loadenv && env-cmd .env cross-env CI=false RAZZLE_PUBLIC_DIR=public razzle build",
     "deploy:prod": "assume-role production serverless deploy -s production"
   },
   "dependencies": {
