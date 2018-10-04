@@ -10,10 +10,9 @@ const syncLoadAssets = () => {
 };
 syncLoadAssets();
 
-console.log(path.join(__dirname, "public"));
 const server = express()
   .disable("x-powered-by")
-  .use(express.static(path.join(__dirname, "public")!))
+  .use(express.static(path.join(__dirname, process.env.RAZZLE_PUBLIC_DIR!)))
   .get("/*", async (req: express.Request, res: express.Response) => {
     try {
       const options = {
