@@ -12,7 +12,7 @@ syncLoadAssets();
 
 const server = express()
   .disable("x-powered-by")
-  .use(express.static(path.join(__dirname, "../build/public")!))
+  .use(express.static(path.join(__dirname, "./public")!))
   .get("/*", async (req: express.Request, res: express.Response) => {
     try {
       const options = {

@@ -46,6 +46,7 @@ provider:
     SENTRY_DSN: ${ssm:/cuistot/front/sentry-dsn~true}
     EXECUTION_ENV: lambda
     NODE_ENV: ${opt:stage,'development'}
+    RAZZLE_PUBLIC_DIR: ./public
 
 package:
   exclude:
