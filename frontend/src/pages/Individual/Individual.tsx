@@ -187,7 +187,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },*/
       {
         availableSeat: 6,
-        date: "à venir",
+        date: "samedi 3 novembre, 10h30-13h30",
         duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/vanessa-amuses-bouches-exotiques.jpg",
