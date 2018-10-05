@@ -118,6 +118,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
+        date: "vendredi 26 octobre, 17h30-20h30",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/luis-lasagnes.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/luis.jpg",
+        name: "Cuisine italienne avec Luis",
+        nameCook: "Luis",
+        price: 50,
+        spot: "Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/hEcymm"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 27 octobre, 10h-13h",
         duration: 3,
         image: "https://static.cuistotducoin.com/img/workshops/karim-tiep.jpg",
@@ -129,20 +143,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/ZfYA1b"
       },
-      /*{
-        availableSeat: 6,
-        date: "samedi 20 octobre, 10h-12h",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ahmed-cacao-cru.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
-        name: "Cacao cru",
-        nameCook: "Ahmed",
-        price: 25,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/EWUT4t"
-      },*/
       {
         availableSeat: 8,
         date: "samedi 27 octobre, 10h-12h",
@@ -187,6 +187,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },*/
       {
         availableSeat: 6,
+        date: "à venir",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/vanessa-amuses-bouches-exotiques.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/vanessa.jpg",
+        name: "Amuses-bouches exotiques et punch maison",
+        nameCook: "Vanessa",
+        price: 30,
+        spot: "Brest, Cuisinella",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/LKH380"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 24 novembre, 9h-12h",
         duration: 3,
         image:
@@ -212,9 +226,23 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         name: "Découverte de la cuisine indienne",
         nameCook: "Shyam",
         price: 35,
-        spot: "Arthur Bonnet, Brest",
+        spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/qgukpu"
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ivan-empanadas.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ivan.jpg",
+        name: "Empanadas",
+        nameCook: "Ivan",
+        price: 35,
+        spot: "Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/NaHNJK"
       },
       {
         availableSeat: 6,
@@ -226,23 +254,9 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         name: "Coxinhas & Caipirinha",
         nameCook: "Valquiria",
         price: 35,
-        spot: "Arthur Bonnet, Brest",
+        spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/fivZ7h"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
-        name: "Sushis, makis et temaris",
-        nameCook: "Takako",
-        price: 40,
-        spot: "Schmidt, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/ywYxcY"
       },
       {
         availableSeat: 6,
@@ -257,6 +271,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/O0N0S8"
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
+        name: "Sushis, makis et temaris",
+        nameCook: "Takako",
+        price: 40,
+        spot: "Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/ywYxcY"
       },
       {
         availableSeat: 6,
@@ -282,7 +310,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         name: "Inspiration Africaine",
         nameCook: "Ahmed",
         price: 35,
-        spot: "Schmidt, Brest",
+        spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/qieHUn"
       },
@@ -313,6 +341,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Palais des Thés, Brest",
         totalSeat: 5,
         typeform: "https://cuistotducoin.typeform.com/to/HHelGm"
+      },
+      {
+        availableSeat: 6,
+        date: "à venir",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ahmed-cacao-cru.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
+        name: "Cacao cru",
+        nameCook: "Ahmed",
+        price: 25,
+        spot: "Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/EWUT4t"
       },
       {
         availableSeat: 6,
