@@ -90,7 +90,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const workshops = [
       {
         availableSeat: 6,
-        date: "samedi 13 octobre, 10h-12h30",
+        date: "samedi 13 octobre, 14h-16h",
         duration: 2,
         image:
           "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
