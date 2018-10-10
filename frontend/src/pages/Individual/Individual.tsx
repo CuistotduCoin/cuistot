@@ -153,8 +153,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         name: "Cupcake Halloween",
         nameCook: "Audrey",
         price: 25,
-        spot: "chez Audrey, Brest",
-        totalSeat: 8,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/ZuwZnD"
       },
       {
