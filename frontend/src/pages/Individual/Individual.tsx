@@ -158,34 +158,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/ZuwZnD"
       },
       {
-        availableSeat: 8,
-        date: "samedi 27 octobre, 14h-18h",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/fabien-pains-stop-au-gaspi.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
-        name: "Recyclez son pain : stop au gaspi",
-        nameCook: "Fabien",
-        price: 45,
-        spot: "Schmidt, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/Voq2Qo"
-      },
-      /*{
-        availableSeat: 8,
-        date: "samedi 24 novembre, 9h-13h",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/fabien-pain-maison.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
-        name: "Faire son pain maison",
-        nameCook: "Fabien",
-        price: 50,
-        spot: "Schmidt, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/RpiaBS"
-      },*/
-      {
         availableSeat: 6,
         date: "samedi 3 novembre, 10h30-13h30",
         duration: 3,
