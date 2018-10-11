@@ -98,7 +98,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         name: "Initiation au tournage de crêpes de froment",
         nameCook: "Nadine",
         price: 20,
-        spot: "Cuisinella, Brest",
+        spot: "The Corner, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/QklzRk"
       },
