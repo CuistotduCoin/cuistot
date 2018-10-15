@@ -198,7 +198,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
                 <Typography variant={"title"}>Team building</Typography>
               </Grid>
               <Typography variant={"body1"}>
-                Découvrez nos buffets et ateliersfédérateurs pour soutenir
+                Découvrez nos buffets et ateliers fédérateurs pour soutenir
                 votreculture d’entreprise, renforcer lebien-être au travail,
                 consoliderl’esprit d’équipe
               </Typography>
@@ -216,7 +216,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
                 <Typography variant={"title"}>Diversité</Typography>
               </Grid>
               <Typography variant={"body1"}>
-                Curieux ou amateurs de saveursplus traditionnelles, nous
+                Curieux ou amateurs de saveurs plus traditionnelles, nous
                 voussuggérons des universculinaires qui permettront àvos équipes
                 de voyager.
               </Typography>
