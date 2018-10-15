@@ -199,8 +199,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
               </Grid>
               <Typography variant={"body1"}>
                 Découvrez nos buffets et ateliers fédérateurs pour soutenir
-                votreculture d’entreprise, renforcer lebien-être au travail,
-                consoliderl’esprit d’équipe
+                votreculture d’entreprise, renforcer le bien-être au travail,
+                consolider l’esprit d’équipe
               </Typography>
             </Grid>
           </Grid>
@@ -217,8 +217,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
               </Grid>
               <Typography variant={"body1"}>
                 Curieux ou amateurs de saveurs plus traditionnelles, nous
-                voussuggérons des universculinaires qui permettront àvos équipes
-                de voyager.
+                voussuggérons des univers culinaires qui permettront à vos
+                équipes de voyager.
               </Typography>
             </Grid>
           </Grid>
