@@ -5,6 +5,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import Group from "@material-ui/icons/Group";
+import Public from "@material-ui/icons/Public";
+import VpnKey from "@material-ui/icons/VpnKey";
 import Footer from "components/Footer";
 import Head from "components/Head";
 import Header from "components/Header";
@@ -52,13 +55,16 @@ const styles = (theme: Theme) => ({
     maxWidth: 50,
     width: "100%"
   },
+  marginTop: {
+    marginTop: 10
+  },
   media: {
     height: 135
   },
   slider: {
     margin: "0px auto",
     maxWidth: 1080,
-    paddingBottom: 75,
+    paddingBottom: 25,
     width: "calc(100% - 120px)"
   },
   sliderImage: {
@@ -99,77 +105,24 @@ export class Business extends React.Component<IBusinessProps, {}> {
 
     const typeActivity = [
       {
-        description:
-          "Atelier de deux heures suivi d'une dégustation des produits préparés",
+        description: "Atelier suivi d'une dégustation ou d'un repas",
         image:
           "https://static.cuistotducoin.com/img/business/atelier-afterwork.jpg",
-        title: "Atelier Afterwork",
+        title: "Atelier de cuisine",
         url: "https://cuistotducoin.typeform.com/to/XkgNMt"
-      },
-      {
-        description: "Atelier de trois heures suivi d'un repas convivial",
-        image:
-          "https://static.cuistotducoin.com/img/business/atelier-et-repas.jpg",
-        title: "Atelier suivi d’un repas",
-        url: "https://cuistotducoin.typeform.com/to/e0PmFx"
-      },
-      {
-        description: "Atelier découverte et dégustation",
-        image: "https://static.cuistotducoin.com/img/business/degustation.jpg",
-        title: "Atelier dégustation",
-        url: "https://cuistotducoin.typeform.com/to/qrhUFk"
       },
       {
         description: "Une solution clé en main pour un dejeunez rapide",
         image: "https://static.cuistotducoin.com/img/business/buffet.jpg",
-        title: "Buffet des gourmets",
+        title: "Buffet",
         url: "https://cuistotducoin.typeform.com/to/hakg4D"
       },
       {
         description: "Récompensez vos équipes autour d'un repas d'exception !",
         image:
           "https://static.cuistotducoin.com/img/business/repas-prestige.jpg",
-        title: "Repas prestige",
+        title: "Repas",
         url: "https://cuistotducoin.typeform.com/to/OMwjPe"
-      },
-      {
-        description:
-          "Notre cuistot est aux fourneaux et vous prépare des mets du monde à se partager en équipe.",
-        image:
-          "https://static.cuistotducoin.com/img/business/repas-pratique.jpg",
-        title: "Repas authentique",
-        url: "https://cuistotducoin.typeform.com/to/XkgNMt"
-      }
-    ];
-
-    const typeWorld = [
-      {
-        description:
-          "Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots d'ailleurs.",
-        image:
-          "https://static.cuistotducoin.com/img/business/cuisine-du-monde.jpg",
-        title: "Cuisine du monde"
-      },
-      {
-        description:
-          "Initiez-vous aux principes de la cuisine végétarienne, vegan ou encore ayurvédique, où l’équilibre et les saveurs sont au cœur de l’assiette.",
-        image:
-          "https://static.cuistotducoin.com/img/business/cuisine-bien-etre.jpg",
-        title: "Cuisine Bien-être"
-      },
-      {
-        description:
-          "Attachés à votre territoire et aux produits locaux et de saison, plongez au cœur d’une cuisine bretonne qui éveillera votre curiosité.",
-        image:
-          "https://static.cuistotducoin.com/img/business/cuisine-terroir.jpg",
-        title: "Cuisine Terroir"
-      },
-      {
-        description:
-          "Percez les secrets de nos artisans pâtissiers et boulangers au travers de recettes créatives et gourmandes.",
-        image:
-          "https://static.cuistotducoin.com/img/business/boulangerie-et-patisserie.jpg",
-        title: "Boulangerie & Pâtisserie"
       }
     ];
 
@@ -218,68 +171,72 @@ export class Business extends React.Component<IBusinessProps, {}> {
           valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
           description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
         />
+        <Typography
+          variant="title"
+          align="center"
+          component="h2"
+          gutterBottom={true}
+          className={classes.marginTop}
+        >
+          Notre recette ?
+        </Typography>
         <Grid
           container={true}
           justify="space-around"
-          alignItems="center"
-          className={classes.grid}
           spacing={16}
+          className={classes.grid}
         >
-          <Grid item={true} sm={6} xs={12}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.image}
-                alt="Atelier Cuistot du Coin"
-                src="https://static.cuistotducoin.com/img/business/organisez.jpg"
-              />
+          <Grid item={true} xs={12} sm={4}>
+            <Grid
+              container={true}
+              justify="space-between"
+              alignItems="flex-start"
+              direction="column"
+            >
+              <Grid container={true} direction="row">
+                <Group />
+                <Typography variant={"title"}>Team building</Typography>
+              </Grid>
+              <Typography variant={"body1"}>
+                Découvrez nos buffets et ateliersfédérateurs pour soutenir
+                votreculture d’entreprise, renforcer lebien-être au travail,
+                consoliderl’esprit d’équipe
+              </Typography>
             </Grid>
           </Grid>
-          <Grid item={true} sm={6} xs={12}>
-            <Typography
-              variant="title"
-              align="center"
-              component="h2"
-              gutterBottom={true}
+          <Grid item={true} xs={12} sm={4}>
+            <Grid
+              container={true}
+              justify="space-between"
+              alignItems="flex-start"
+              direction="column"
             >
-              Organisez avec nous des ateliers culinaires pour vos équipes
-            </Typography>
-            <Typography variant="body1" align="center">
-              Enfilez le tablier et partagez des moments privilégiés et
-              fédérateurs en équipe aux côtés de nos Cuistots passionnés aux
-              univers culinaires diversifiés
-            </Typography>
+              <Grid container={true} direction="row">
+                <Public />
+                <Typography variant={"title"}>Diversité</Typography>
+              </Grid>
+              <Typography variant={"body1"}>
+                Curieux ou amateurs de saveursplus traditionnelles, nous
+                voussuggérons des universculinaires qui permettront àvos équipes
+                de voyager.
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid
-          container={true}
-          justify="space-around"
-          alignItems="center"
-          className={classes.grid}
-          spacing={16}
-        >
-          <Grid item={true} sm={6} xs={12}>
-            <Typography
-              variant="title"
-              align="center"
-              component="h2"
-              gutterBottom={true}
+          <Grid item={true} xs={12} sm={4}>
+            <Grid
+              container={true}
+              justify="space-between"
+              alignItems="flex-start"
+              direction="column"
             >
-              Passez à table, régalez-vous ! Nos Cuistots s’occupent de tout !
-            </Typography>
-            <Typography variant="body1" align="center">
-              Découverte de saveurs et partage s’invitent au cœur de vos repas
-              concoctés par nos Cuistots. Partez à leur rencontre et
-              laissez-vous porter le temps d’un voyage gustatif autour de leurs
-              plats «fait-maison».
-            </Typography>
-          </Grid>
-          <Grid item={true} sm={6} xs={12}>
-            <Grid container={true} justify="center">
-              <img
-                className={classes.image}
-                alt="Atelier Cuistot du Coin"
-                src="https://static.cuistotducoin.com/img/business/passez-a-table.jpg"
-              />
+              <Grid container={true} direction="row">
+                <VpnKey />
+                <Typography variant={"title"}>Clés en mains</Typography>
+              </Grid>
+              <Typography variant={"body1"}>
+                Repas et ateliers sont organisés de A à Z par nos soins. Enfilez
+                le tablier ou passez à table: il n’y a plus qu’à déguster !
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
@@ -289,8 +246,18 @@ export class Business extends React.Component<IBusinessProps, {}> {
           component="h2"
           gutterBottom={true}
         >
-          Plutôt atelier de cuisine ou repas ? Il y en a pour tous les goûts !
+          C’est parti pour le voyage des papilles !
         </Typography>
+        <Grid container={true} className={classes.grid}>
+          <Typography variant={"body1"} paragraph={true}>
+            Passionnés de cuisine, nos Cuistots ont à cœur de partager leurs
+            savoir-faire et leurs recettes authentiques, mais surtout de vous
+            faire découvrir leurs univers ! Ils vous invitent à vivre une
+            expérience culinaire inédite au sein de votre entreprise ou dans
+            l’un de nos lieux partenaires le temps d’un atelier culinaire ou
+            d’un repas savoureux
+          </Typography>
+        </Grid>
         <Grid
           container={true}
           justify="space-around"
@@ -322,123 +289,6 @@ export class Business extends React.Component<IBusinessProps, {}> {
                     </CardContent>
                   </Card>
                 </a>
-              </Grid>
-            </Grid>
-          ))}
-        </Grid>
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom={true}
-        >
-          Notre recette ?
-        </Typography>
-        <Grid
-          container={true}
-          justify="space-around"
-          spacing={16}
-          className={classes.grid}
-        >
-          <Grid item={true} xs={12} sm={4}>
-            <Grid
-              container={true}
-              justify="space-between"
-              alignItems="flex-start"
-              direction="column"
-            >
-              <Typography variant={"subheading"}>A votre écoute</Typography>
-              <Typography variant={"body1"}>
-                Faîtes-nous part de vos besoins et de vos envies.
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={4}>
-            <Grid
-              container={true}
-              justify="space-between"
-              alignItems="flex-start"
-              direction="column"
-            >
-              <Typography variant={"subheading"}>
-                Une diversité de saveurs
-              </Typography>
-              <Typography variant={"body1"}>
-                Nous sélectionnons nos ateliers et nos repas les mieux adaptés
-                et définissons ensemble leurs modalités.
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid item={true} xs={12} sm={4}>
-            <Grid
-              container={true}
-              justify="space-between"
-              alignItems="flex-start"
-              direction="column"
-            >
-              <Typography variant={"subheading"}>
-                On s’occupe de tout
-              </Typography>
-              <Typography variant={"body1"}>
-                Repas et ateliers sont organisés de A à Z par nos soins. Enfilez
-                le tablier ou passez à table: il n’y a plus qu’à déguster!
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom={true}
-        >
-          C’est parti pour le voyage des papilles !
-        </Typography>
-        <Grid container={true} className={classes.grid}>
-          <Typography variant={"body1"} paragraph={true}>
-            Passionnés de cuisine, nos Cuistots ont à cœur de partager leurs
-            savoir-faire et leurs recettes authentiques, mais surtout de vous
-            faire découvrir leurs univers ! Ils vous invitent à vivre une
-            expérience culinaire inédite au sein de votre entreprise ou dans
-            l’un de nos lieux partenaires le temps d’un atelier culinaire ou
-            d’un repas savoureux
-          </Typography>
-        </Grid>
-        <Typography
-          variant="title"
-          align="center"
-          component="p"
-          gutterBottom={true}
-        >
-          A vous de choisir votre destination !
-        </Typography>
-        <Grid
-          container={true}
-          justify="space-around"
-          alignItems="center"
-          spacing={16}
-          className={classes.grid}
-        >
-          {typeWorld.map((world, index) => (
-            <Grid key={index} item={true} xs={12} sm={6} md={3} lg={true}>
-              <Grid container={true} justify="center">
-                <Card className={classes.cardtypeWorld}>
-                  <CardMedia
-                    className={classes.media}
-                    image={world.image}
-                    title={world.title}
-                  />
-                  <CardHeader
-                    className={classes.cardHeader}
-                    title={world.title}
-                    classes={{
-                      title: classes.title
-                    }}
-                  />
-                  <CardContent className={classes.cardLongContent}>
-                    <Typography component="p">{world.description}</Typography>
-                  </CardContent>
-                </Card>
               </Grid>
             </Grid>
           ))}

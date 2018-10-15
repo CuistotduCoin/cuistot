@@ -55,13 +55,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     const typeActivity: any[] = [
       {
-        description: "Ateliers de cuisine collectif chez nos lieux partenaires",
-        image:
-          "https://static.cuistotducoin.com/img/individual/ateliers-cuisine-collectif.jpg",
-        title: "Ateliers de cuisine collectif",
-        url: "https://cuistotducoin.typeform.com/to/rNhgMi"
-      },
-      {
         description:
           "Ateliers de cuisine privatisé chez vous ou chez nos lieux partenaires",
         image:
@@ -88,20 +81,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     ];
 
     const workshops = [
-      {
-        availableSeat: 6,
-        date: "samedi 13 octobre, 14h-16h",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
-        name: "Initiation au tournage de crêpes de froment",
-        nameCook: "Nadine",
-        price: 20,
-        spot: "The Corner, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/QklzRk"
-      },
       {
         availableSeat: 6,
         date: "samedi 20 octobre, 10h-12h30",
@@ -364,8 +343,33 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           gutterBottom={true}
           className={classes.typography}
         >
-          Plutôt atelier de cuisine collectif ou privatisé, ou encore repas ? Il
-          y en a pour tous les goûts !
+          Nos prochains ateliers collectifs
+        </Typography>
+        <Typography variant="body1" align="center">
+          Ateliers de cuisine collectif chez nos lieux partenaires
+        </Typography>
+        <WorkshopCardList workshops={workshops} />
+        <Typography
+          variant="title"
+          align="center"
+          component="h2"
+          gutterBottom={true}
+          className={classes.typography}
+        >
+          Nos ateliers à venir
+        </Typography>
+        <Typography variant="body1" align="center">
+          Soyez prévenu des prochaines dates d'ateliers !
+        </Typography>
+        <WorkshopCardList workshops={workshopsPending} />
+        <Typography
+          variant="title"
+          align="center"
+          component="h2"
+          gutterBottom={true}
+          className={classes.typography}
+        >
+          Nos autres prestations sur-mesure
         </Typography>
         <Grid
           container={true}
@@ -402,29 +406,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
             </Grid>
           ))}
         </Grid>
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom={true}
-          className={classes.typography}
-        >
-          Nos prochains ateliers collectifs
-        </Typography>
-        <WorkshopCardList workshops={workshops} />
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom={true}
-          className={classes.typography}
-        >
-          Nos ateliers à venir
-        </Typography>
-        <Typography variant="body1" align="center">
-          Soyez prévenu des prochaines dates d'ateliers !
-        </Typography>
-        <WorkshopCardList workshops={workshopsPending} />
         <Footer />
       </>
     );
