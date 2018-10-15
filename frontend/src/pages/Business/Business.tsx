@@ -199,7 +199,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               </Grid>
               <Typography variant={"body1"}>
                 Découvrez nos buffets et ateliers fédérateurs pour soutenir
-                votreculture d’entreprise, renforcer le bien-être au travail,
+                votre culture d’entreprise, renforcer le bien-être au travail,
                 consolider l’esprit d’équipe
               </Typography>
             </Grid>
