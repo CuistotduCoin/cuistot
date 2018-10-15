@@ -216,9 +216,9 @@ export class Business extends React.Component<IBusinessProps, {}> {
                 <Typography variant={"title"}>Diversité</Typography>
               </Grid>
               <Typography variant={"body1"}>
-                Curieux ou amateurs de saveurs plus traditionnelles, nous
-                voussuggérons des univers culinaires qui permettront à vos
-                équipes de voyager.
+                Curieux ou amateurs de saveurs plus traditionnelles, nous vous
+                suggérons des univers culinaires qui permettront à vos équipes
+                de voyager.
               </Typography>
             </Grid>
           </Grid>
