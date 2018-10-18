@@ -2,73 +2,75 @@
 # yarn lockfile v1
 
 
-"@aws-amplify/analytics@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/analytics/-/analytics-1.0.7.tgz#5b609ba16239cd89f21990d699e74a5548d13609"
+"@aws-amplify/analytics@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/analytics/-/analytics-1.2.4.tgz#68ab464d01b298818ff7ad36431a5c042b1fb04e"
   dependencies:
-    "@aws-amplify/cache" "^1.0.7"
-    "@aws-amplify/core" "^1.0.7"
-    aws-sdk "2.198.0"
+    "@aws-amplify/cache" "^1.0.16"
+    "@aws-amplify/core" "^1.0.16"
     uuid "^3.2.1"
 
-"@aws-amplify/api@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/api/-/api-1.0.8.tgz#08e79d77810d515f79c506560f6e7d0781c37022"
+"@aws-amplify/api@^1.0.18":
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/api/-/api-1.0.18.tgz#eee9cb961065beb7ef24d342c42a92a41047cc6a"
   dependencies:
-    "@aws-amplify/auth" "^1.0.8"
-    "@aws-amplify/cache" "^1.0.7"
-    "@aws-amplify/core" "^1.0.7"
+    "@aws-amplify/auth" "^1.2.7"
+    "@aws-amplify/cache" "^1.0.16"
+    "@aws-amplify/core" "^1.0.16"
     "@types/zen-observable" "^0.5.3"
     axios "^0.17.0"
     graphql "0.13.0"
-    zen-observable "^0.8.6"
-
-"@aws-amplify/auth@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/auth/-/auth-1.0.8.tgz#d4e581ef560097e6686c6815b6b7c819c2b14a65"
-  dependencies:
-    "@aws-amplify/cache" "^1.0.7"
-    "@aws-amplify/core" "^1.0.7"
-    amazon-cognito-auth-js "^1.1.9"
-    amazon-cognito-identity-js "^2.0.23"
-
-"@aws-amplify/cache@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/cache/-/cache-1.0.7.tgz#d70be9ec6314268f601b9c74604d55fb3fbe1a00"
-  dependencies:
-    "@aws-amplify/core" "^1.0.7"
-
-"@aws-amplify/core@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-1.0.7.tgz#b30e9871e18b46110d07c0accd29d9156cb369ac"
-  dependencies:
-    aws-sdk "2.198.0"
-    url "^0.11.0"
-
-"@aws-amplify/interactions@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/interactions/-/interactions-1.0.7.tgz#8e5cde3fd8b58a0801518a059f243b505508deed"
-  dependencies:
-    "@aws-amplify/core" "^1.0.7"
-    aws-sdk "2.198.0"
-
-"@aws-amplify/pubsub@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/pubsub/-/pubsub-1.0.7.tgz#d39c534649cebc8dca6a138335577d3a891964be"
-  dependencies:
-    "@aws-amplify/core" "^1.0.7"
-    "@types/paho-mqtt" "^1.0.3"
-    "@types/zen-observable" "^0.5.3"
-    paho-mqtt "^1.0.4"
     uuid "^3.2.1"
     zen-observable "^0.8.6"
 
-"@aws-amplify/storage@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/storage/-/storage-1.0.7.tgz#833cb6639f612e4f297ed61c42a16b67194ee2b9"
+"@aws-amplify/auth@^1.2.7":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/auth/-/auth-1.2.7.tgz#919019d91f024755c2fde2386e4965d2e3b1dd4c"
   dependencies:
-    "@aws-amplify/core" "^1.0.7"
-    aws-sdk "2.198.0"
+    "@aws-amplify/cache" "^1.0.16"
+    "@aws-amplify/core" "^1.0.16"
+    amazon-cognito-auth-js "^1.1.9"
+    amazon-cognito-identity-js "^3.0.3"
+
+"@aws-amplify/cache@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/cache/-/cache-1.0.16.tgz#4b36813f38b0c87851f8809972e0d1d8493bcc40"
+  dependencies:
+    "@aws-amplify/core" "^1.0.16"
+
+"@aws-amplify/core@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-1.0.16.tgz#7236548144eaa65ccb1cbb0bc804003a2465b7bd"
+  dependencies:
+    aws-sdk "2.329.0"
+    url "^0.11.0"
+
+"@aws-amplify/interactions@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/interactions/-/interactions-1.0.16.tgz#d9da03d82c48b92b37d810754eba5d031beb12c5"
+  dependencies:
+    "@aws-amplify/core" "^1.0.16"
+
+"@aws-amplify/pubsub@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/pubsub/-/pubsub-1.0.16.tgz#9b4a029c941c6250c5500d357fa869134e02a885"
+  dependencies:
+    "@aws-amplify/core" "^1.0.16"
+    "@types/zen-observable" "^0.5.3"
+    uuid "^3.2.1"
+    zen-observable "^0.8.6"
+
+"@aws-amplify/storage@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/storage/-/storage-1.0.16.tgz#84b2a0712ee30e6d27920a04a79ff03197252bcd"
+  dependencies:
+    "@aws-amplify/core" "^1.0.16"
+
+"@aws-amplify/xr@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/xr/-/xr-0.1.6.tgz#c77a587b73d21dafac526352bb01d2a1404be945"
+  dependencies:
+    "@aws-amplify/core" "^1.0.16"
 
 "@babel/runtime@7.0.0-beta.54":
   version "7.0.0-beta.54"
@@ -155,10 +157,6 @@
   dependencies:
     csstype "^2.0.0"
     indefinite-observable "^1.0.1"
-
-"@types/paho-mqtt@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@types/paho-mqtt/-/paho-mqtt-1.0.3.tgz#2eda0886584e1e69551f5203934878c326fe3566"
 
 "@types/react-transition-group@^2.0.8":
   version "2.0.11"
@@ -288,12 +286,12 @@ amazon-cognito-auth-js@^1.1.9:
   dependencies:
     js-cookie "^2.1.4"
 
-amazon-cognito-identity-js@^2.0.23:
-  version "2.0.23"
-  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-2.0.23.tgz#46cf1565754f45fc15a4f6ffb93e900df335b424"
+amazon-cognito-identity-js@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-3.0.3.tgz#4095ee649648c10d725517ed82e7b53f19644814"
   dependencies:
     buffer "4.9.1"
-    crypto-browserify "1.0.9"
+    crypto-js "^3.1.9-1"
     js-cookie "^2.1.4"
 
 amdefine@>=0.0.4:
@@ -669,18 +667,19 @@ autosuggest-highlight@^3.1.1:
   dependencies:
     diacritic "0.0.2"
 
-aws-amplify@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-1.0.8.tgz#6fda1a88851fb5462031e61853458b9ca9bb0099"
+aws-amplify@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-1.1.7.tgz#f0f5e1562a7e397ae58e2281f0fa0a1395823301"
   dependencies:
-    "@aws-amplify/analytics" "^1.0.7"
-    "@aws-amplify/api" "^1.0.8"
-    "@aws-amplify/auth" "^1.0.8"
-    "@aws-amplify/cache" "^1.0.7"
-    "@aws-amplify/core" "^1.0.7"
-    "@aws-amplify/interactions" "^1.0.7"
-    "@aws-amplify/pubsub" "^1.0.7"
-    "@aws-amplify/storage" "^1.0.7"
+    "@aws-amplify/analytics" "^1.2.4"
+    "@aws-amplify/api" "^1.0.18"
+    "@aws-amplify/auth" "^1.2.7"
+    "@aws-amplify/cache" "^1.0.16"
+    "@aws-amplify/core" "^1.0.16"
+    "@aws-amplify/interactions" "^1.0.16"
+    "@aws-amplify/pubsub" "^1.0.16"
+    "@aws-amplify/storage" "^1.0.16"
+    "@aws-amplify/xr" "^0.1.6"
 
 aws-appsync@^1.3.3:
   version "1.3.3"
@@ -700,19 +699,19 @@ aws-appsync@^1.3.3:
     url "^0.11.0"
     uuid "3.x"
 
-aws-sdk@2.198.0:
-  version "2.198.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.198.0.tgz#2245311337ddc844cc34c13f3fcf3b7ea843f434"
+aws-sdk@2.329.0:
+  version "2.329.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.329.0.tgz#616da7ca5e1909e53333148694990e068272150f"
   dependencies:
     buffer "4.9.1"
-    events "^1.1.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
     jmespath "0.15.0"
     querystring "0.2.0"
     sax "1.2.1"
     url "0.10.3"
     uuid "3.1.0"
-    xml2js "0.4.17"
-    xmlbuilder "4.2.1"
+    xml2js "0.4.19"
 
 aws-sdk@^2.139.0:
   version "2.296.0"
@@ -2162,10 +2161,6 @@ cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-crypto-browserify@1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/crypto-browserify/-/crypto-browserify-1.0.9.tgz#cc5449685dfb85eb11c9828acc7cb87ab5bbfcc0"
-
 crypto-browserify@^3.11.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/crypto-browserify/-/crypto-browserify-3.12.0.tgz#396cf9f3137f03e4b8e532c58f698254e00f80ec"
@@ -2181,6 +2176,10 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
+
+crypto-js@^3.1.9-1:
+  version "3.1.9-1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
 
 crypto-random-string@^1.0.0:
   version "1.0.0"
@@ -3079,7 +3078,7 @@ eventemitter3@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.0.tgz#090b4d6cdbd645ed10bf750d4b5407942d7ba163"
 
-events@1.1.1, events@^1.0.0, events@^1.1.1:
+events@1.1.1, events@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
@@ -5148,7 +5147,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@~4.17.5:
+"lodash@>=3.5 <5", lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@~4.17.5:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -5847,10 +5846,6 @@ package-json@^4.0.0:
     registry-auth-token "^3.0.1"
     registry-url "^3.0.3"
     semver "^5.1.0"
-
-paho-mqtt@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/paho-mqtt/-/paho-mqtt-1.0.4.tgz#279822dd8ea00a961bf141f03d09c9f4339ebb79"
 
 pako@~1.0.5:
   version "1.0.6"
@@ -8515,25 +8510,12 @@ xml-name-validator@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-2.0.1.tgz#4d8b8f1eccd3419aa362061becef515e1e559635"
 
-xml2js@0.4.17:
-  version "0.4.17"
-  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.4.17.tgz#17be93eaae3f3b779359c795b419705a8817e868"
-  dependencies:
-    sax ">=0.6.0"
-    xmlbuilder "^4.1.0"
-
 xml2js@0.4.19, xml2js@^0.4.17:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.4.19.tgz#686c20f213209e94abf0d1bcf1efaa291c7827a7"
   dependencies:
     sax ">=0.6.0"
     xmlbuilder "~9.0.1"
-
-xmlbuilder@4.2.1, xmlbuilder@^4.1.0:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-4.2.1.tgz#aa58a3041a066f90eaa16c2f5389ff19f3f461a5"
-  dependencies:
-    lodash "^4.0.0"
 
 xmlbuilder@~9.0.1:
   version "9.0.7"
