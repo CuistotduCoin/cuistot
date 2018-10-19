@@ -102,10 +102,10 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/workshops/luis-lasagnes.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/luis.jpg",
-        name: "Cuisine italienne avec Luis",
+        name: "Cuisine italienne",
         nameCook: "Luis",
         price: 50,
-        spot: "Brest",
+        spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/hEcymm"
       },
