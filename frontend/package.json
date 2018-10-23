@@ -34,7 +34,7 @@
     "formik-material-ui": "^0.0.9",
     "mdi-material-ui": "^5.5.0",
     "raven": "^2.6.4",
-    "react": "^16.5.0",
+    "react": "^16.6.0",
     "react-credit-cards": "^0.7.0",
     "react-dom": "^16.5.0",
     "react-helmet": "^5.2.0",
