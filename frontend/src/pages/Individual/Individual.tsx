@@ -138,6 +138,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
+        date: "samedi 17 novembre, 9h30-14h",
+        duration: 4,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/michel-decouverte-ayurvedique.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/michel.jpg",
+        name: "Cuisine ayurvédique",
+        nameCook: "Michel",
+        price: 40,
+        spot: "Michel, Plougastel-Daoulas",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/rQo1Zx"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 24 novembre, 9h-12h",
         duration: 3,
         image:
