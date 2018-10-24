@@ -78,7 +78,7 @@
     "aws-param-env": "^1.2.0",
     "cross-env": "^5.2.0",
     "env-cmd": "^8.0.2",
-    "node": "^10.11.0",
+    "node": "^11.0.0",
     "prettier": "^1.14.2",
     "razzle": "^2.4.0",
     "razzle-plugin-typescript": "^2.4.0",
