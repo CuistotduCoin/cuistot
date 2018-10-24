@@ -7610,9 +7610,9 @@ node-releases@^1.0.0-alpha.12:
   dependencies:
     semver "^5.3.0"
 
-node@^10.11.0:
-  version "10.11.0"
-  resolved "https://registry.yarnpkg.com/node/-/node-10.11.0.tgz#2f6b2392c9bf9f7dc100a0115885bd053957c4bf"
+node@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-11.0.0.tgz#20aff1b49ec65717b1603d6d90bbb61e0cfd0b7e"
   dependencies:
     node-bin-setup "^1.0.0"
 
