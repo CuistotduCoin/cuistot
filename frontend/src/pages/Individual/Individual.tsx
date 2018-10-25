@@ -163,7 +163,36 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/sETMyV"
+      },
+      {
+        availableSeat: 6,
+        date: "mercredi 28 novembre, 14h30-16h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-crinkles.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Atelier enfant : Crinkles",
+        nameCook: "Audrey",
+        price: 30,
+        spot: "Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/YWptrY"
+      },
+      {
+        availableSeat: 6,
+        date: "mercredi 28 novembre, 10h-12h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-maison-pain-epices.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Atelier enfant : Maison en pain d'épices",
+        nameCook: "Audrey",
+        price: 30,
+        spot: "Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/r7wTMZ"
       }
+
     ];
 
     const workshopsPending = [
@@ -212,20 +241,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/anne-pate-a-tartiner-maison.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
-        name: "Pour enfants : Pâte à tartiner maison",
-        nameCook: "Anne",
-        price: 25,
-        spot: "Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/O0N0S8"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
         duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
@@ -240,20 +255,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       {
         availableSeat: 6,
         date: "à venir",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/michel-decouverte-ayurvedique.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/michel.jpg",
-        name: "Découverte de la cuisine ayurvédique",
-        nameCook: "Michel",
-        price: 40,
-        spot: "Michel, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/wDNHki"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
         duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/ahmed-inspiration-africaine.jpg",
@@ -264,20 +265,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/qieHUn"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-cupcakes-enfants.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Pour enfants : Cupcakes",
-        nameCook: "Audrey",
-        price: 30,
-        spot: "Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/chrUsc"
       },
       {
         availableSeat: 5,
