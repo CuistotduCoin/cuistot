@@ -192,7 +192,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/r7wTMZ"
       }
-
     ];
 
     const workshopsPending = [
