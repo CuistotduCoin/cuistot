@@ -180,7 +180,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
-        date: "mercredi 28 novembre, 10h-12h",
+        date: "samedi 15 décembre, 10h-12h",
         duration: 2,
         image:
           "https://static.cuistotducoin.com/img/workshops/audrey-maison-pain-epices.jpg",
