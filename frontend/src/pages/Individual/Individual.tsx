@@ -173,7 +173,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
         name: "Atelier enfant : Crinkles",
         nameCook: "Audrey",
-        price: 30,
+        price: 25,
         spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/YWptrY"
@@ -187,7 +187,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
         name: "Atelier enfant : Maison en pain d'épices",
         nameCook: "Audrey",
-        price: 30,
+        price: 35,
         spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/r7wTMZ"
