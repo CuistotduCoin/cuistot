@@ -97,6 +97,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
+        date: "vendredi 9 novembre, 15h-16h",
+        duration: 1,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/luis-agnolotti.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/luis.jpg",
+        name: "Pâtes fraîches",
+        nameCook: "Luis",
+        price: 0,
+        spot: "Salon Vins et Gastronomie",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/HKsqIp"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 10 novembre, 14h-16h",
         duration: 2,
         image:
@@ -108,6 +122,34 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Schmidt, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/MZZba8"
+      },
+      {
+        availableSeat: 6,
+        date: "dimanche 11 novembre, 16h-17h",
+        duration: 1,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
+        name: "Démonstration tournage de crêpes",
+        nameCook: "Nadine",
+        price: 0,
+        spot: "Salon Vins et Gastronomie",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/vobFia"
+      },
+      {
+        availableSeat: 6,
+        date: "lundi 12 novembre, 14h30-15h30",
+        duration: 1,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ahmed-cacao-cru.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
+        name: "Autour du cacao cru",
+        nameCook: "Ahmed",
+        price: 0,
+        spot: "Salon Vins et Gastronomie",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/UjQYe4"
       },
       {
         availableSeat: 6,
@@ -209,20 +251,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/qgukpu"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ivan-empanadas.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ivan.jpg",
-        name: "Empanadas",
-        nameCook: "Ivan",
-        price: 35,
-        spot: "Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/NaHNJK"
       },
       {
         availableSeat: 6,
