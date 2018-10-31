@@ -102,7 +102,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/workshops/luis-agnolotti.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/luis.jpg",
-        name: "Pâtes fraîches",
+        name: "Salon de la gastronomie - Pâtes fraîches",
         nameCook: "Luis",
         price: 0,
         spot: "Salon Vins et Gastronomie",
@@ -130,7 +130,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
-        name: "Démonstration tournage de crêpes",
+        name: "Salon de la gastronomie - Démonstration tournage de crêpes",
         nameCook: "Nadine",
         price: 0,
         spot: "Salon Vins et Gastronomie",
@@ -144,7 +144,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/workshops/ahmed-cacao-cru.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
-        name: "Autour du cacao cru",
+        name: "Salon de la gastronomie - Autour du cacao cru",
         nameCook: "Ahmed",
         price: 0,
         spot: "Salon Vins et Gastronomie",

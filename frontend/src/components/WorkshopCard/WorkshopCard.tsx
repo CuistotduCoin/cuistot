@@ -106,12 +106,19 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
       );
     }
 
+    let price;
+    if (this.props.price === 0) {
+      price = "gratuit";
+    } else {
+      price = `${this.props.price} €`;
+    }
+
     return (
       <a className={classes.link} href={this.props.typeform} target="_blank">
         <Card className={classes.card}>
           <CardHeader
             className={classes.cardHeaderUp}
-            avatar={<Chip label={`${this.props.price} €`} />}
+            avatar={<Chip label={price} />}
             classes={{ avatar: classes.chip }}
           />
           <CardMedia
