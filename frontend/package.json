@@ -74,7 +74,7 @@
     "@types/storybook__addon-options": "^3.2.2",
     "@types/storybook__react": "^3.0.9",
     "@types/webpack-env": "^1.13.6",
-    "@types/yup": "^0.24.9",
+    "@types/yup": "^0.26.1",
     "aws-param-env": "^1.2.0",
     "cross-env": "^5.2.0",
     "env-cmd": "^8.0.2",
