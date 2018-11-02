@@ -223,6 +223,19 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
+        date: "samedi 8 décembre, 9h-13h",
+        duration: 4,
+        image: "https://static.cuistotducoin.com/img/workshops/ahmed-noel.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
+        name: "Repas de Noël ",
+        nameCook: "Ahmed",
+        price: 50,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/hGXtRg"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 15 décembre, 10h-12h",
         duration: 2,
         image:
@@ -234,6 +247,19 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/r7wTMZ"
+      },
+      {
+        availableSeat: 6,
+        date: "jeudi 27 décembre, 15h-17h",
+        duration: 2,
+        image: "https://static.cuistotducoin.com/img/workshops/anne-barre.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
+        name: "Atelier enfant : Que la force soit avec toi !",
+        nameCook: "Anne",
+        price: 25,
+        spot: "Refuge Royal, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/hropRg"
       }
     ];
 
