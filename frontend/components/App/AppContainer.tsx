@@ -1,6 +1,7 @@
-import { API, graphqlOperation } from "aws-amplify";
 import { Container } from "unstated";
+import initApollo from '../../pages/initApollo';
 import { GetCurrentGourmetImage } from "../../queries";
+import { apolloConfig } from '../../shared/config';
 
 interface IAppState {
   referer?: string;
@@ -49,8 +50,8 @@ class AppContainer extends Container<IAppState> {
   };
 
   public updateCurrentGourmetImage = () => {
-    // @ts-ignore
-    API.graphql(graphqlOperation(GetCurrentGourmetImage)).then(result => {
+    const client = initApollo({}, apolloConfig);
+    client.query({ query: GetCurrentGourmetImage, fetchPolicy: "no-cache" }).then(result => {
       if (result.data.getCurrentGourmet.message === "success") {
         const gourmet = result.data.getCurrentGourmet.gourmet;
         this.setState(prevState =>

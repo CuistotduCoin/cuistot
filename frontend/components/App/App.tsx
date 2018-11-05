@@ -1,11 +1,13 @@
-import { API, Auth, graphqlOperation } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import Router, { withRouter } from "next/router";
 import React from "react";
 import { compose } from "recompose";
 import { Subscribe } from "unstated";
 import { AppContainer } from ".";
 import Snackbar from "../../components/Snackbar";
+import initApollo from '../../pages/initApollo';
 import { GetCurrentGourmet, UpdateGourmet } from "../../queries";
+import { apolloConfig } from '../../shared/config';
 
 interface IAppProps {
   referer?: string;
@@ -67,7 +69,9 @@ export class App extends React.Component<IAppProps, {}> {
 
       if (!currentGourmet) {
         // Already set if logout has failed...
-        API.graphql(graphqlOperation(GetCurrentGourmet)).then(result => {
+        const client = initApollo({}, apolloConfig);
+
+        client.query({ query: GetCurrentGourmet }).then(result => {
           if (result.data.getCurrentGourmet.message === "success") {
             const gourmet = result.data.getCurrentGourmet.gourmet;
             setCurrentGourmet(gourmet);
@@ -86,14 +90,15 @@ export class App extends React.Component<IAppProps, {}> {
                 );
 
                 // Save the gourmet identity id in our base
-                API.graphql(
-                  graphqlOperation(UpdateGourmet, {
+                client.mutate({
+                  mutation: UpdateGourmet,
+                  variables: {
                     gourmet: {
                       id: currentSession.getIdToken().payload.sub,
                       identity_id: AWS.config.credentials.identityId
                     }
-                  })
-                ).then(updateResult => {
+                  }
+                }).then(updateResult => {
                   if (updateResult.data.updateGourmet.message === "success") {
                     console.log("identity id has been populated");
                   } else {
