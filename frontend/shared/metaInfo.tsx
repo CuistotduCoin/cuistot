@@ -101,5 +101,10 @@ export default {
     description: "Rejoignez nos Cuistots",
     href: "https://www.cuistotducoin.com/become-cook",
     title: "Devenir Cuistot du coin"
+  },
+  'workshop-new': {
+    description: "Nouvel atelier",
+    href: "https://www.cuistotducoin.com/workshop-new",
+    title: "Nouvel atelier"
   }
 };

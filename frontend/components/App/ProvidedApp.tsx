@@ -4,7 +4,7 @@ import UNSTATED from "unstated-debug";
 import { App, AppContainer } from ".";
 import "../../shared/auth";
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development" && typeof window !== 'undefined') {
   UNSTATED.logStateChanges = true;
   // @ts-ignore
   window.LOG_LEVEL = "DEBUG";

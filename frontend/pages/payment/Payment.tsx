@@ -7,8 +7,7 @@ import Stepper from "@material-ui/core/Stepper";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Layout from "../../components/Layout";
 import PaymentCardForm from "../../components/PaymentCardForm";
 
 const styles = (theme: Theme) => ({
@@ -68,16 +67,16 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
         return (
           <Grid container className={classes.grid}>
             <Grid item xs={8}>
-              <Typography variant="title" component="p" gutterBottom={true}>
+              <Typography variant="title" component="p" gutterBottom>
                 Recontrez {this.props.nameCook}
               </Typography>
-              <Typography variant="headline" component="h2" gutterBottom={true}>
+              <Typography variant="headline" component="h2" gutterBottom>
                 {this.props.name}
               </Typography>
               <Typography
                 variant="subheading"
                 component="p"
-                gutterBottom={true}
+                gutterBottom
               >
                 {this.props.date}
               </Typography>
@@ -96,7 +95,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       {this.props.price}€ x 2 Gourmets
                     </Typography>
@@ -106,7 +105,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       100€
                     </Typography>
@@ -115,7 +114,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       frais de service
                     </Typography>
@@ -125,7 +124,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       20€
                     </Typography>
@@ -137,7 +136,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       Total
                     </Typography>
@@ -147,7 +146,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       120€
                     </Typography>
@@ -177,7 +176,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       {this.props.price}€ x 2 Gourmets
                     </Typography>
@@ -187,7 +186,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       100€
                     </Typography>
@@ -196,7 +195,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       frais de service
                     </Typography>
@@ -206,7 +205,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       20€
                     </Typography>
@@ -218,7 +217,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       Total
                     </Typography>
@@ -228,7 +227,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       120€
                     </Typography>
@@ -249,8 +248,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
     const steps = ["Récapitulatif", "Paiement", "Infos"];
 
     return (
-      <>
-        <Header static={true} hideCompanyIndividual={true} />
+      <Layout headerProps={{ static: true, hideCompanyIndividual: true }}>
         <Grid
           container
           justify="space-around"
@@ -267,7 +265,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
             </Typography>
           </Grid>
           <Grid item>
-            <Stepper activeStep={this.state.activeStep} alternativeLabel={true}>
+            <Stepper activeStep={this.state.activeStep} alternativeLabel>
               {steps.map((label, index) => {
                 return (
                   <Step key={label}>
@@ -285,8 +283,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
         </Grid>
         {this.state.activeStep <= steps.length &&
           this.getStepContent(this.state.activeStep)}
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

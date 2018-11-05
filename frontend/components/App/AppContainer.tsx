@@ -49,6 +49,7 @@ class AppContainer extends Container<IAppState> {
   };
 
   public updateCurrentGourmetImage = () => {
+    // @ts-ignore
     API.graphql(graphqlOperation(GetCurrentGourmetImage)).then(result => {
       if (result.data.getCurrentGourmet.message === "success") {
         const gourmet = result.data.getCurrentGourmet.gourmet;

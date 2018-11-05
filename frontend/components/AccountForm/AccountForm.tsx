@@ -126,14 +126,7 @@ interface IAccountFormProps {
   updateGourmet(gourmet: object);
 }
 
-interface IAccountFormState {
-  imageSrc?: any;
-}
-
-export class AccountForm extends React.Component<
-  IAccountFormProps,
-  IAccountFormState
-> {
+class AccountForm extends React.Component<IAccountFormProps> {
   public constructor(props) {
     super(props);
     this.onNewInfoSubmit = this.onNewInfoSubmit.bind(this);
@@ -143,8 +136,6 @@ export class AccountForm extends React.Component<
 
   public render() {
     const { classes, currentGourmet } = this.props;
-
-    if (!currentGourmet) return <Loading />;
 
     const updateInfoFormComponent = () => (
       <Form autoComplete="off">

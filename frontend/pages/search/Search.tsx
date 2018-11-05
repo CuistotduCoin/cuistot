@@ -1,7 +1,6 @@
 import { FormControlLabel, Switch } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import Router from "next/router";
 // import { parse } from "query-string";
 import React, { Fragment } from "react";
 import {
@@ -16,9 +15,7 @@ import {
   GoogleMapsLoader
 } from "react-instantsearch-dom-maps";
 import { createInstantSearch } from "react-instantsearch-dom/server";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Hero from "../../components/Hero/Hero";
+import Layout from "../../components/Layout";
 
 const { InstantSearch, findResultsState } = createInstantSearch();
 
@@ -144,16 +141,8 @@ export class Search extends React.Component<ISearchProps, ISearchState> {
 
   public render() {
     const { classes } = this.props;
-    const valueProposition = "Ateliers de cuisine autour de vous";
-
     return (
-      <>
-        <Header />
-        <Hero
-          imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
-          videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
-          valueProposition={valueProposition}
-        />
+      <Layout valueProposition="Ateliers de cuisine autour de vous">
         <InstantSearch
           appId="appId"
           apiKey="apiKey"
@@ -208,8 +197,7 @@ export class Search extends React.Component<ISearchProps, ISearchState> {
             )}
           </Grid>
         </InstantSearch>
-        <Footer />
-      </>
+      </Layout>
     );
   }
 }

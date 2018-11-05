@@ -3,12 +3,12 @@
 const fs = require('fs');
 
 let content = `\
-[profile circle]
+[profile default]
 region = eu-west-1
 
 [profile ${process.env.STAGE}]
 role_arn = arn:aws:iam::${process.env.AWS_CROSS_ACCOUNT_ID}:role/DeveloperAccess
-source_profile = circle
+source_profile = default
 region = eu-west-1
 `;
 
@@ -18,7 +18,7 @@ fs.writeFile(`${process.env.AWS_CONFIG_PATH}/config`, content, (err) => {
 });
 
 content = `\
-[circle]
+[default]
 aws_access_key_id = ${process.env.AWS_MASTER_ACCESS_KEY_ID}
 aws_secret_access_key = ${process.env.AWS_MASTER_SECRET_ACCESS_KEY}
 `;

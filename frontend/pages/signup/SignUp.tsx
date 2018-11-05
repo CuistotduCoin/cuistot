@@ -1,9 +1,9 @@
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Logo from "../../components/Logo";
-import SignUpForm from "../../components/SignUpForm";
 import Link from "next/link";
 import React from "react";
+import Logo from "../../components/Logo";
+import SignUpForm from "../../components/SignUpForm";
 
 const styles = (theme: Theme) => ({
   container: {
@@ -19,7 +19,7 @@ const SignUp: React.SFC<{ classes: any }> = ({ classes }) => (
   <div className={classes.container}>
     <Logo height={100} width={100} className={classes.logo} />
     <SignUpForm />
-    <Typography align="center" gutterBottom={true}>
+    <Typography align="center" gutterBottom>
       Déjà membre ? <Link href="/login"><a>Connectez vous !</a></Link>
     </Typography>
   </div>

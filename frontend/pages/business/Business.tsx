@@ -225,7 +225,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               variant="title"
               align="center"
               component="h2"
-              gutterBottom={true}
+              gutterBottom
             >
               Organisez avec nous des ateliers culinaires pour vos équipes
             </Typography>
@@ -248,7 +248,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               variant="title"
               align="center"
               component="h2"
-              gutterBottom={true}
+              gutterBottom
             >
               Passez à table, régalez-vous ! Nos Cuistots s’occupent de tout !
             </Typography>
@@ -273,7 +273,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           variant="title"
           align="center"
           component="h2"
-          gutterBottom={true}
+          gutterBottom
         >
           Plutôt atelier de cuisine ou repas ? Il y en a pour tous les goûts !
         </Typography>
@@ -316,7 +316,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           variant="title"
           align="center"
           component="h2"
-          gutterBottom={true}
+          gutterBottom
         >
           Notre recette ?
         </Typography>
@@ -376,12 +376,12 @@ export class Business extends React.Component<IBusinessProps, {}> {
           variant="title"
           align="center"
           component="h2"
-          gutterBottom={true}
+          gutterBottom
         >
           C’est parti pour le voyage des papilles !
         </Typography>
         <Grid container className={classes.grid}>
-          <Typography variant={"body1"} paragraph={true}>
+          <Typography variant={"body1"} paragraph>
             Passionnés de cuisine, nos Cuistots ont à cœur de partager leurs
             savoir-faire et leurs recettes authentiques, mais surtout de vous
             faire découvrir leurs univers ! Ils vous invitent à vivre une
@@ -394,7 +394,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           variant="title"
           align="center"
           component="p"
-          gutterBottom={true}
+          gutterBottom
         >
           A vous de choisir votre destination !
         </Typography>
@@ -406,7 +406,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           className={classes.grid}
         >
           {typeWorld.map((world, index) => (
-            <Grid key={index} item xs={12} sm={6} md={3} lg={true}>
+            <Grid key={index} item xs={12} sm={6} md={3} lg>
               <Grid container justify="center">
                 <Card className={classes.cardtypeWorld}>
                   <CardMedia
@@ -433,7 +433,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           variant="title"
           align="center"
           component="p"
-          gutterBottom={true}
+          gutterBottom
         >
           Ils ont voyagé aux côtés de nos Cuistots
         </Typography>
@@ -469,7 +469,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           variant="title"
           align="center"
           component="p"
-          gutterBottom={true}
+          gutterBottom
         >
           Réservez votre billet et embarquez en équipe pour un savoureux voyage
           culinaire !
