@@ -67,16 +67,16 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
         return (
           <Grid container className={classes.grid}>
             <Grid item xs={8}>
-              <Typography variant="title" component="p" gutterBottom={true}>
+              <Typography variant="title" component="p" gutterBottom>
                 Recontrez {this.props.nameCook}
               </Typography>
-              <Typography variant="headline" component="h2" gutterBottom={true}>
+              <Typography variant="headline" component="h2" gutterBottom>
                 {this.props.name}
               </Typography>
               <Typography
                 variant="subheading"
                 component="p"
-                gutterBottom={true}
+                gutterBottom
               >
                 {this.props.date}
               </Typography>
@@ -95,7 +95,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       {this.props.price}€ x 2 Gourmets
                     </Typography>
@@ -105,7 +105,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       100€
                     </Typography>
@@ -114,7 +114,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       frais de service
                     </Typography>
@@ -124,7 +124,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       20€
                     </Typography>
@@ -136,7 +136,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       Total
                     </Typography>
@@ -146,7 +146,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       120€
                     </Typography>
@@ -176,7 +176,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       {this.props.price}€ x 2 Gourmets
                     </Typography>
@@ -186,7 +186,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       100€
                     </Typography>
@@ -195,7 +195,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       frais de service
                     </Typography>
@@ -205,7 +205,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       20€
                     </Typography>
@@ -217,7 +217,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                     <Typography
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       Total
                     </Typography>
@@ -227,7 +227,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                       align="right"
                       variant="subheading"
                       component="p"
-                      gutterBottom={true}
+                      gutterBottom
                     >
                       120€
                     </Typography>
@@ -265,7 +265,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
             </Typography>
           </Grid>
           <Grid item>
-            <Stepper activeStep={this.state.activeStep} alternativeLabel={true}>
+            <Stepper activeStep={this.state.activeStep} alternativeLabel>
               {steps.map((label, index) => {
                 return (
                   <Step key={label}>

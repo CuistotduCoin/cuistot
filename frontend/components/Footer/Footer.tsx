@@ -48,10 +48,10 @@ export class Footer extends React.Component<IFooterProps, {}> {
 
     return (
       <div className={classes.root}>
-        <Grid container={true} justify="space-around" className={classes.grid}>
-          <Grid item={true}>
+        <Grid container justify="space-around" className={classes.grid}>
+          <Grid item>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
@@ -79,9 +79,9 @@ export class Footer extends React.Component<IFooterProps, {}> {
               </a>
             </Grid>
           </Grid>
-          <Grid item={true}>
+          <Grid item>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
@@ -106,9 +106,9 @@ export class Footer extends React.Component<IFooterProps, {}> {
               </Link>
             </Grid>
           </Grid>
-          <Grid item={true}>
+          <Grid item>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
@@ -127,9 +127,9 @@ export class Footer extends React.Component<IFooterProps, {}> {
               </Link>
             </Grid>
           </Grid>
-          <Grid item={true}>
+          <Grid item>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"
@@ -151,9 +151,9 @@ export class Footer extends React.Component<IFooterProps, {}> {
               </Link>
             </Grid>
           </Grid>
-          <Grid item={true}>
+          <Grid item>
             <Grid
-              container={true}
+              container
               justify="space-between"
               alignItems="flex-start"
               direction="column"

@@ -10,13 +10,13 @@
 
 Marketplace for Cook
   - Deployed using _Serverless_ | AWS Lambda | AWS S3.  
-  - Backend API = **GraphQL** with AWS SyncApp & AWS Lambda
+  - Backend API = **GraphQL** with AWS AppSync & AWS Lambda
   - Client-side API requests are generated from **Apollo Client** wrapped components.
-  - The rest of the app sits on **React.js** & **React Router*(V4)** (with Code splitting)
+  - The rest of the app sits on **Next.js**
 
 ## SETUP:
   - `npm install -g serverless`
   - `npm install -g yarn`
   - Set up [credentials](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
+  - Install  [Assume role](https://github.com/remind101/assume-role) for getting env variables
   - Then go to one of the directory then follow instructions
-  - https://github.com/remind101/assume-role

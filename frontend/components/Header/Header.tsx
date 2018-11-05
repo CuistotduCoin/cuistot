@@ -81,7 +81,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
     } else if (!hideSignUpLogin) {
       if (this.state.up) {
         rightElement = (
-          <Link href="/login" passHref={true}>
+          <Link href="/login" passHref>
             <Button
               className={classes.accountButton}
               variant="raised"
@@ -94,7 +94,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
         );
       } else {
         rightElement = (
-          <Link href="/signup" passHref={true}>
+          <Link href="/signup" passHref>
             <Button
               className={classes.accountButton}
               variant="raised"
@@ -117,13 +117,13 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
           <Grid container justify="flex-start" alignItems="center">
           <Logo className={classes.logo} />
             {!hideCompanyIndividual && (
-              <Hidden smDown={true}>
-                <Link href="/business" passHref={true}>
+              <Hidden smDown>
+                <Link href="/business" passHref>
                   <Button className={classes.button} color="primary">
                     Entreprise
                   </Button>
                 </Link>
-                <Link href="/individual" passHref={true}>
+                <Link href="/individual" passHref>
                   <Button className={classes.button} color="primary">
                     Particulier
                   </Button>
