@@ -22,7 +22,7 @@ const ResetPasswordRequest: React.SFC<{ classes: any }> = ({ classes }) => (
       Vous avez oublié votre mot de passe ?
     </Typography>
     <ResetPasswordRequestForm />
-    <Typography align="center" gutterBottom={true}>
+    <Typography align="center" gutterBottom>
       <Link href="/login">
         <a>Non c'est bon, je m'en rappelle en fait</a>
       </Link>

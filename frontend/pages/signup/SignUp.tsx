@@ -19,7 +19,7 @@ const SignUp: React.SFC<{ classes: any }> = ({ classes }) => (
   <div className={classes.container}>
     <Logo height={100} width={100} className={classes.logo} />
     <SignUpForm />
-    <Typography align="center" gutterBottom={true}>
+    <Typography align="center" gutterBottom>
       Déjà membre ? <Link href="/login"><a>Connectez vous !</a></Link>
     </Typography>
   </div>

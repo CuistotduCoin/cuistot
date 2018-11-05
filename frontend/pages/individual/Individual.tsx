@@ -416,7 +416,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           variant="title"
           align="center"
           component="h2"
-          gutterBottom={true}
+          gutterBottom
           className={classes.typography}
         >
           Plutôt atelier de cuisine collectif ou privatisé, ou encore repas ? Il
@@ -461,7 +461,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           variant="title"
           align="center"
           component="h2"
-          gutterBottom={true}
+          gutterBottom
           className={classes.typography}
         >
           Nos prochains ateliers collectifs
@@ -471,7 +471,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           variant="title"
           align="center"
           component="h2"
-          gutterBottom={true}
+          gutterBottom
           className={classes.typography}
         >
           Nos ateliers à venir

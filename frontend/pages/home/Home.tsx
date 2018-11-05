@@ -265,7 +265,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           variant="headline"
           align="center"
           component="h2"
-          gutterBottom={true}
+          gutterBottom
           className={classes.typography}
         >
           Ateliers, dégustations ou repas, retrouvez nos ingrédients clés :
@@ -286,7 +286,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               <Typography
                 variant={"title"}
                 component="h3"
-                gutterBottom={true}
+                gutterBottom
               >
                 Authenticité et Convivialité
               </Typography>
@@ -307,7 +307,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               <Typography
                 variant={"title"}
                 component="h3"
-                gutterBottom={true}
+                gutterBottom
               >
                 Partage
               </Typography>
@@ -327,7 +327,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               <Typography
                 variant={"title"}
                 component="h3"
-                gutterBottom={true}
+                gutterBottom
               >
                 Diversité
               </Typography>
@@ -342,7 +342,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           variant="title"
           align="center"
           component="h2"
-          gutterBottom={true}
+          gutterBottom
         >
           Nos partenaires
         </Typography>

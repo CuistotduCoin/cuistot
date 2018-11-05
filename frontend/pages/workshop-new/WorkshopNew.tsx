@@ -176,8 +176,8 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                   >
                     Informations
                   </Typography>
-                  <Grid container={true} spacing={16}>
-                    <Grid item={true} xs={12}>
+                  <Grid container spacing={16}>
+                    <Grid item xs={12}>
                       <Field
                         type="text"
                         component={TextField}
@@ -188,7 +188,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                         margin="normal"
                       />
                     </Grid>
-                    <Grid item={true} xs={12}>
+                    <Grid item xs={12}>
                       <Field
                         type="text"
                         component={TextField}
@@ -199,7 +199,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                         margin="normal"
                       />
                     </Grid>
-                    <Grid item={true} xs={12}>
+                    <Grid item xs={12}>
                       <Field
                         type="text"
                         component={TextField}
@@ -211,7 +211,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                         margin="normal"
                       />
                     </Grid>
-                    <Grid item={true} xs={12}>
+                    <Grid item xs={12}>
                       <Field
                         type="text"
                         component={TextField}
@@ -223,7 +223,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                         margin="normal"
                       />
                     </Grid>
-                    <Grid item={true} xs={12} className={classes.gourmetRange}>
+                    <Grid item xs={12} className={classes.gourmetRange}>
                       <Field
                         name="gourmetRange"
                         render={({ field, form }) => (
@@ -248,7 +248,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                         )}
                       />
                     </Grid>
-                    <Grid item={true} xs={12}>
+                    <Grid item xs={12}>
                       <Field
                         component={TextField}
                         type="date"
@@ -277,8 +277,8 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                   >
                     Lieu souhaité
                   </Typography>
-                  <Grid container={true} spacing={16}>
-                    <Grid item={true} xs={12}>
+                  <Grid container spacing={16}>
+                    <Grid item xs={12}>
                       <Query query={GetKitchens}>
                         {({ loading: kitchensLoading, error: kitchensError, data: kitchensData }) => {
                           if (kitchensLoading) return <Loading />;

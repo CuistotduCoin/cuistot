@@ -104,9 +104,9 @@ export class Hero extends React.Component<IHeroProps, {}> {
         <div className={classes.backgroundImage} style={this.innerBackground} />
         <video
           className={classes.video}
-          autoPlay={true}
-          muted={true}
-          loop={true}
+          autoPlay
+          muted
+          loop
           poster={this.props.imageURL}
         >
           <source src={this.props.videoURL} type="video/mp4" />

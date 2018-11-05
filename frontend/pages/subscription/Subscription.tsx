@@ -58,7 +58,7 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
             variant="title"
             align="center"
             component="h2"
-            gutterBottom={true}
+            gutterBottom
           >
             Votre enfant cuisine et apprend en s'amusant !
           </Typography>
@@ -79,7 +79,7 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
             variant="title"
             align="center"
             component="h2"
-            gutterBottom={true}
+            gutterBottom
           >
             Comment ça marche ?
           </Typography>

@@ -19,7 +19,7 @@ const Login: React.SFC<{ classes: any }> = ({ classes }) => (
   <div className={classes.container}>
     <Logo height={100} width={100} className={classes.logo} />
     <LoginForm />
-    <Typography align="center" gutterBottom={true}>
+    <Typography align="center" gutterBottom>
       Pas encore membre ?{' '}
       <Link href="/signup">
         <a>Inscrivez vous !</a>
