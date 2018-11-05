@@ -11,6 +11,7 @@ import Logo from "../../components/Logo";
 
 const styles = (theme: Theme) => ({
   appBar: {
+    zIndex: 10000,
     background: "linear-gradient(180deg,hsla(0,0%,100%,.9) 0,hsla(0,0%,100%,.8))",
     boxShadow: "none"
   },

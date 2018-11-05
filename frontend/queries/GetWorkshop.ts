@@ -7,13 +7,16 @@ export default gql`
         name
         description
         duration
+        price
         date
+        confirmed
         min_gourmet
         max_gourmet
         images {
           key
         }
         cook {
+          id
           image {
             key
           }

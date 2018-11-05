@@ -5,19 +5,18 @@ import Typography from "@material-ui/core/Typography";
 import KitchenIcon from "@material-ui/icons/LocationOn";
 import WorkshopIcon from "@material-ui/icons/RestaurantMenu";
 import { ErrorMessage, Field } from "formik";
-import { Select, TextField } from "formik-material-ui";
+import { Select } from "formik-material-ui";
 import gql from "graphql-tag";
 import moment from "moment";
 import Router from "next/router";
 import React from "react";
 import { graphql, Query } from "react-apollo";
-import InputRange from "react-input-range";
-import "react-input-range/lib/css/index.css";
 import { compose } from "recompose";
 import * as Yup from "yup";
 import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
 import WizardForm from "../../components/WizardForm";
+import WorkshopForm from "../../components/WorkshopForm";
 import { withRedirect } from "../../decorators";
 import { CreateWorkshop, GetKitchens } from "../../queries";
 
@@ -176,93 +175,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                   >
                     Informations
                   </Typography>
-                  <Grid container spacing={16}>
-                    <Grid item xs={12}>
-                      <Field
-                        type="text"
-                        component={TextField}
-                        id="name"
-                        label="Nom de l'atelier"
-                        name="name"
-                        className={classes.textField}
-                        margin="normal"
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Field
-                        type="text"
-                        component={TextField}
-                        id="description"
-                        label="Description"
-                        name="description"
-                        className={classes.textField}
-                        margin="normal"
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Field
-                        type="text"
-                        component={TextField}
-                        id="price"
-                        label="Prix"
-                        name="price"
-                        helperText="En € et par personne"
-                        className={classes.textField}
-                        margin="normal"
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Field
-                        type="text"
-                        component={TextField}
-                        id="duration"
-                        label="Durée"
-                        name="duration"
-                        helperText="En minutes"
-                        className={classes.textField}
-                        margin="normal"
-                      />
-                    </Grid>
-                    <Grid item xs={12} className={classes.gourmetRange}>
-                      <Field
-                        name="gourmetRange"
-                        render={({ field, form }) => (
-                          <InputRange
-                            maxValue={30}
-                            minValue={2}
-                            allowSameValues
-                            // @ts-ignore
-                            formatLabel={(val, type) => {
-                              if (type === 'value') {
-                                return val;
-                              }
-                              const label = `${val} gourmets`;
-                              if (type === 'min') {
-                                return `${label} min.`;
-                              }
-                              return `${label} max.`;
-                            }}
-                            value={field.value}
-                            onChange={(val) => form.setFieldValue(field.name, val)}
-                          />
-                        )}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Field
-                        component={TextField}
-                        type="date"
-                        id="date"
-                        label="Date"
-                        name="date"
-                        className={classes.textField}
-                        margin="normal"
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                    </Grid>
-                  </Grid>
+                  <WorkshopForm />
                 </WizardForm.Page>
                 <WizardForm.Page
                   validationSchema={Yup.object().shape({

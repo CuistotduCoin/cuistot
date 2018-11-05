@@ -8,7 +8,7 @@ import { compose } from 'recompose';
 const styles = (theme: Theme) => ({
   avatar: {
     background: '#757575',
-    zIndex: 10000,
+    zIndex: 999,
     transform: 'scale(1)',
     transition: 'all 200ms ease-in'
   },

@@ -142,8 +142,8 @@ interface IWorkshopState {
   modalOpen: boolean;
 }
 
-export class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
-  public static getInitialProps ({ query: { id } }) {
+class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
+  public static getInitialProps({ query: { id } }) {
     return { workshopId: id };
   }
 
