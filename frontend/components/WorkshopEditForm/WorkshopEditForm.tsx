@@ -4,6 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Form, Formik } from "formik";
+import Router from "next/router";
 import React from "react";
 import { graphql, Query } from "react-apollo";
 import { compose } from "recompose";;
@@ -230,6 +231,7 @@ class WorkshopEditForm extends React.Component<IWorkshopEditFormProps> {
         const result = res.data.deleteWorkshop;
         if (result.message === "success") {
           openSnackbar("L'atelier a bien été supprimé", "success");
+          Router.replace("/");
         } else {
           deleteWorkshopError(result);
         }
