@@ -83,20 +83,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const workshops = [
       {
         availableSeat: 6,
-        date: "samedi 3 novembre, 10h30-13h30",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/vanessa-amuses-bouches-exotiques.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/vanessa.jpg",
-        name: "Amuses-bouches exotiques et punch maison",
-        nameCook: "Vanessa",
-        price: 30,
-        spot: "Brest, Cuisinella",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/LKH380"
-      },
-      {
-        availableSeat: 6,
         date: "vendredi 9 novembre, 15h-16h",
         duration: 1,
         image:
