@@ -1,5 +1,5 @@
 import { AWSAppSyncClient } from "aws-appsync";
-import fetch from 'node-fetch'
+import fetch from "node-fetch";
 
 // https://github.com/dabit3/next-apollo-appsync
 let apolloClient = null;

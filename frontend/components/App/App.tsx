@@ -1,4 +1,4 @@
-import { Auth } from "aws-amplify";
+import Auth from "@aws-amplify/auth";
 import Router, { withRouter } from "next/router";
 import React from "react";
 import { compose } from "recompose";
