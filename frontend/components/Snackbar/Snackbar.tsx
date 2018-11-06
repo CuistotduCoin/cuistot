@@ -13,6 +13,9 @@ import cx from "classnames";
 import React from "react";
 
 const styles = (theme: Theme) => ({
+  snackbar: {
+    zIndex: 20000,
+  },
   content: {
     "& div:first-child": {
       width: "90%"
@@ -88,6 +91,7 @@ export class SnackbarWrapper extends React.Component<ISnackbarProps, {}> {
         open={open}
         autoHideDuration={5000}
         onClose={onClose}
+        className={classes.snackbar}
       >
         <SnackbarContent
           className={cx(classes[variant], classes.content)}
