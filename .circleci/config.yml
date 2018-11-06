@@ -3,6 +3,8 @@ jobs:
   deploy-admin:
     docker:
       - image: circleci/node:8.10
+    environment:
+      AWS_CONFIG_PATH: /home/circleci/.aws
     steps:
       - checkout
       - restore_cache:
@@ -25,6 +27,11 @@ jobs:
             sudo apt-get update
             sudo apt-get install python-pip libpython-dev groff
             sudo pip install awscli
+      - run:
+        name: Build AWS config
+        command: |
+          sudo mkdir $AWS_CONFIG_PATH
+          sudo AWS_CONFIG_PATH=$AWS_CONFIG_PATH AWS_MASTER_ACCESS_KEY_ID=$AWS_MASTER_ACCESS_KEY_ID AWS_MASTER_SECRET_ACCESS_KEY=$AWS_MASTER_SECRET_ACCESS_KEY node build_aws_profile
       - run:
           name: Build admin
           command: |
@@ -166,6 +173,7 @@ workflows:
             branches:
               only:
                 - master
+                - develop/stephane
       - deploy-front-prod:
           context: production
           filters:
