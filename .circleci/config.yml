@@ -173,7 +173,6 @@ workflows:
             branches:
               only:
                 - master
-                - develop/stephane
       - deploy-front-prod:
           context: production
           filters:
