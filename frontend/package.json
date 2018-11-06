@@ -72,7 +72,7 @@
     "@types/react-sticky": "^6.0.2",
     "@types/storybook__addon-knobs": "^3.4.1",
     "@types/storybook__addon-options": "^3.2.2",
-    "@types/storybook__react": "^3.0.9",
+    "@types/storybook__react": "^4.0.0",
     "@types/webpack-env": "^1.13.6",
     "@types/yup": "^0.24.9",
     "aws-param-env": "^1.2.0",
