@@ -1,7 +1,7 @@
+import Auth from "@aws-amplify/auth";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-material-ui";
 import Router from "next/router";

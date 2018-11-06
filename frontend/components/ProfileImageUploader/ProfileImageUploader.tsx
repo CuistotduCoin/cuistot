@@ -1,8 +1,8 @@
+import Storage from "@aws-amplify/storage";
 import { withStyles } from "@material-ui/core/styles";
 import React from "react";
 import Dropzone from "react-dropzone";
 import ProfileImage from "../../components/ProfileImage";
-import { Storage } from "../../shared/auth";
 
 const styles = theme => ({
   container: {

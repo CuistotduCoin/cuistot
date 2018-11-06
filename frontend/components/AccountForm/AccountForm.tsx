@@ -1,10 +1,10 @@
+import Auth from "@aws-amplify/auth";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import { Auth } from "aws-amplify";
 import { Field, Form, Formik } from "formik";
 import { Select, TextField } from "formik-material-ui";
 import get from "lodash.get";

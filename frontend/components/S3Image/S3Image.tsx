@@ -1,5 +1,5 @@
+import Storage from "@aws-amplify/storage";
 import React from 'react';
-import { Storage } from "../../shared/auth";
 
 interface IS3ImageProps {
   component: any;
