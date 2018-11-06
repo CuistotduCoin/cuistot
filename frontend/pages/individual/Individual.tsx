@@ -195,7 +195,21 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
-        date: "samedi 20 octobre, 10h-13h",
+        date: "vendredi 23 novembre, 17h30-20h",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/valquiria-coxinhas.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/valquiria.jpg",
+        name: "Cuisine brésilienne",
+        nameCook: "Valquiria",
+        price: 35,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/RjQEhI"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 24 novembre, 9h-12h",
         duration: 3,
         image: "https://static.cuistotducoin.com/img/workshops/karim-tiep.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/karim.jpg",
@@ -297,22 +311,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         availableSeat: 6,
         date: "à venir",
         duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/valquiria-coxinhas.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/valquiria.jpg",
-        name: "Coxinhas & Caipirinha",
-        nameCook: "Valquiria",
-        price: 35,
-        spot: "Arthur Bonnet, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/fivZ7h"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
+        image: "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
         name: "Sushis, makis et temaris",
         nameCook: "Takako",
