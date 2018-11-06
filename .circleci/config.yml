@@ -28,10 +28,10 @@ jobs:
             sudo apt-get install python-pip libpython-dev groff
             sudo pip install awscli
       - run:
-        name: Build AWS config
-        command: |
-          sudo mkdir $AWS_CONFIG_PATH
-          sudo AWS_CONFIG_PATH=$AWS_CONFIG_PATH AWS_MASTER_ACCESS_KEY_ID=$AWS_MASTER_ACCESS_KEY_ID AWS_MASTER_SECRET_ACCESS_KEY=$AWS_MASTER_SECRET_ACCESS_KEY node build_aws_profile
+          name: Build AWS config
+          command: |
+            sudo mkdir $AWS_CONFIG_PATH
+            sudo AWS_CONFIG_PATH=$AWS_CONFIG_PATH AWS_MASTER_ACCESS_KEY_ID=$AWS_MASTER_ACCESS_KEY_ID AWS_MASTER_SECRET_ACCESS_KEY=$AWS_MASTER_SECRET_ACCESS_KEY node build_aws_profile
       - run:
           name: Build admin
           command: |
