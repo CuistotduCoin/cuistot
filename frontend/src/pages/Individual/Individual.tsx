@@ -153,8 +153,8 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
-        date: "vendredi 23 novembre, 17h30-20h",
-        duration: 3,
+        date: "vendredi 23 novembre, 17h30-19h30",
+        duration: 2,
         image:
           "https://static.cuistotducoin.com/img/workshops/valquiria-coxinhas.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/valquiria.jpg",
