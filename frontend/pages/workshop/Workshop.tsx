@@ -1,5 +1,4 @@
 import { Divider, Modal } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import green from "@material-ui/core/colors/green";
 import Grid from "@material-ui/core/Grid";
@@ -15,6 +14,7 @@ import Kitchen from "@material-ui/icons/Kitchen";
 import LocalDining from "@material-ui/icons/LocalDining";
 import Lock from "@material-ui/icons/Lock";
 import People from "@material-ui/icons/People";
+import cx from 'classnames';
 import get from "lodash.get";
 import React from "react";
 import { Query } from "react-apollo";
@@ -27,9 +27,12 @@ import CommentBlock from "../../components/CommentBlock";
 import Cover from "../../components/Cover";
 import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
+import ProfileImage from "../../components/ProfileImage";
+import S3Image from "../../components/S3Image";
 import StarRating from "../../components/StarRating";
 import { withData } from "../../decorators";
 import { GetWorkshop } from "../../queries";
+import { format } from "../../shared/date-utils";
 import { formatName } from "../../shared/util";
 
 const styles = (theme: Theme) => ({
@@ -110,28 +113,19 @@ const styles = (theme: Theme) => ({
     display: "block",
     position: "relative",
     width: "100%"
+  },
+  workshopImage: {
+    width: 200,
   }
 });
 
 interface IWorkshopProps {
   classes?: any;
-  price: number;
-  name: string;
-  date: string;
-  duration: number;
   mainPhoto: string;
-  imageCook: string;
-  nameCook: string;
   rating?: number;
   ratingNumber?: number;
-  availableSeat: number;
-  spot: string;
-  totalDate?: number;
-  dayEndBook: number;
   eventType: string;
   cuisineType: string;
-  descriptionCook: string;
-  descriptionWorkshop: string;
   furtherInformation: string;
   workshopId: string;
 }
@@ -202,6 +196,8 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
           if (error) return `Error: ${error}`;
 
           const workshop = data.getWorkshop.workshop;
+          const cookName = formatName(workshop, 'cook.gourmet.first_name', 'cook.gourmet.last_name');
+          const availableSeat = workshop.max_gourmet - workshop.bookings.length;
 
           return (
             <Layout headerProps={{ static: true }}>
@@ -213,11 +209,14 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
               >
                 <div className={classes.slider}>
                   <Slider {...sliderSettings}>
-                    {workshop.images.map(image => (
+                    {workshop.images.map((image, i) => (
                       <div key={image.key}>
-                        <img
-                          src={image.key}
-                          alt={image.name || 'Coming soon : the name'}
+                        <S3Image
+                          component="img"
+                          alt={`Photo ${i+1} de l'atelier ${workshop.name}`}
+                          path={`workshops/${workshop.id}`}
+                          imageKey={image.key}
+                          identityId={workshop.cook.gourmet.identity_id}
                           className={classes.sliderImage}
                         />
                       </div>
@@ -236,7 +235,14 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
               >
                 <Grid item xs={2}>
                   <Grid container justify="center">
-                    <Avatar className={classes.avatar} src={this.props.imageCook} />
+                    <ProfileImage
+                      size="small"
+                      path="cook"
+                      imageKey={workshop.cook.image.key}
+                      identityId={workshop.cook.gourmet.identity_id}
+                      alt={`Photo de profil de ${cookName}`}
+                      className={classes.avatar}
+                    />
                   </Grid>
                 </Grid>
                 <Grid item xs={10}>
@@ -256,21 +262,21 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                         </Grid>
                       )}
                       <Typography variant="title" component="p" gutterBottom>
-                        Recontrez {formatName(workshop, 'cook.gourmet.first_name', 'cook.gourmet.last_name')}
+                        Recontrez {cookName}
                       </Typography>
                       <Typography
                         variant="headline"
                         component="h2"
                         gutterBottom
                       >
-                        {this.props.name}
+                        {workshop.name}
                       </Typography>
                       <Typography
                         variant="subheading"
                         component="p"
                         gutterBottom
                       >
-                        {this.props.date}
+                        {format(workshop.date, "[Le] DD MMMM [à] HH[h]mm")}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -323,7 +329,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                     <Grid item>
                       <Grid container>
                         <AccessTime />
-                        <Typography>{workshop.duration}</Typography>
+                        <Typography>{workshop.duration} min.</Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -365,40 +371,47 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                             alignItems="center"
                             justify="space-around"
                           >
-                            {workshop.images.slice(0, Math.min(workshop.images.length, 3)).map((image, i) => (
-                              <Grid key={image.id} item>
-                                {i !== 2 ? (
-                                  <img
-                                    src={image.key}
-                                    alt={image.name || 'Coming soon : the name'}
-                                    width={200}
-                                    onClick={this.handleModalOpen}
-                                  />
-                                ) : (
-                                  <div
-                                    className={classes.tileContainer}
-                                    onClick={this.handleModalOpen}
-                                  >
-                                    <img
-                                      src={image.key}
-                                      alt={image.name || 'Coming soon : the name'}
-                                      className={classes.img}
-                                      width={200}
+                            {workshop.images.slice(0, Math.min(workshop.images.length, 3)).map((image, i) => {
+                              const imageProps = {
+                                component: "img",
+                                alt: `Photo ${i+1} de l'atelier ${workshop.name}`,
+                                path: `workshops/${workshop.id}`,
+                                imageKey: image.key,
+                                identityId: workshop.cook.gourmet.identity_id,
+                              };
+
+                              return (
+                                <Grid key={image.id} item>
+                                  {i < 2 ? (
+                                    <S3Image
+                                      {...imageProps}
+                                      className={classes.workshopImage}
+                                      onClick={this.handleModalOpen}
                                     />
-                                    <div className={classes.tile}>
-                                      <Typography
-                                        variant="body1"
-                                        component="p"
-                                        align="center"
-                                        color="inherit"
-                                      >
-                                        Voir plus de photos
-                                      </Typography>
+                                  ) : (
+                                    <div
+                                      className={classes.tileContainer}
+                                      onClick={this.handleModalOpen}
+                                    >
+                                      <S3Image
+                                        {...imageProps}
+                                        className={cx(classes.workshopImage, classes.img)}
+                                      />
+                                      <div className={classes.tile}>
+                                        <Typography
+                                          variant="body1"
+                                          component="p"
+                                          align="center"
+                                          color="inherit"
+                                        >
+                                          Voir plus de photos
+                                        </Typography>
+                                      </div>
                                     </div>
-                                  </div>
-                                )}
-                              </Grid>
-                            ))}
+                                  )}
+                                </Grid>
+                              );
+                            })}
                           </Grid>
                         </Grid>
                       </div>
@@ -420,7 +433,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                             paragraph
                             className={classes.paragraph}
                           >
-                            {workshop.cook.description}
+                            {workshop.cook.description || "Pas encore de description pour ce cuistot"}
                           </Typography>
                         </Grid>
                       </div>
@@ -492,9 +505,8 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                   <div className={classes.sticky}>
                     <Paper elevation={1} className={classes.infoReservartion}>
                       <BookForm
-                        price={this.props.price}
-                        availableSeat={this.props.availableSeat}
-                        dayEndBook={this.props.dayEndBook}
+                        price={workshop.price}
+                        availableSeat={availableSeat}
                       />
                     </Paper>
                     <Grid

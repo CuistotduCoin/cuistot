@@ -194,7 +194,7 @@ class WorkshopEditForm extends React.Component<IWorkshopEditFormProps> {
       openSnackbar("Échec de la mise à jour de l'atelier", "error");
       setStatus({ success: false });
       setSubmitting(false);
-      if (result.errors.length) {
+      if (result.errors && result.errors.length) {
         const error = result.errors[0].message;
         console.error(error);
         setErrors({ submit: error });
@@ -220,7 +220,7 @@ class WorkshopEditForm extends React.Component<IWorkshopEditFormProps> {
 
     const deleteWorkshopError = (result) => {
       openSnackbar("Erreur lors de la suppression de l'atelier. Veuillez réessayer.", "error");
-      if (result.errors.length) {
+      if (result.errors && result.errors.length) {
         const error = result.errors[0].message;
         console.error(error);
       }
