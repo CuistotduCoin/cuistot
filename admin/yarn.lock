@@ -2335,10 +2335,6 @@ data-generator@^1.0.0:
   dependencies:
     path "^0.12.7"
 
-date-fns@2.0.0-alpha.7:
-  version "2.0.0-alpha.7"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.7.tgz#245ad16f95764eababfb2c0a41fd5d033c20e57a"
-
 date-fns@^1.29.0:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
@@ -4948,7 +4944,7 @@ jsx-ast-utils@^2.0.0, jsx-ast-utils@^2.0.1:
   dependencies:
     array-includes "^3.0.3"
 
-keycode@^2.1.9, keycode@^2.2.0:
+keycode@^2.1.9:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
 
@@ -5216,17 +5212,6 @@ material-ui-chip-input@^1.0.0-beta.6:
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.1"
-
-material-ui-pickers@^1.0.0-rc.13:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/material-ui-pickers/-/material-ui-pickers-1.0.1.tgz#396f90fff2f2dbb7c477bce2b9a62101eb3bd26d"
-  dependencies:
-    classnames "^2.2.6"
-    keycode "^2.2.0"
-    react-event-listener "^0.6.4"
-    react-text-mask "=5.4.1"
-    react-transition-group "^2.5.0"
-    tslib "^1.9.3"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
@@ -6379,7 +6364,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@~15.6.1:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@~15.6.1:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -6495,15 +6480,15 @@ ra-data-graphql@^2.2.0:
     lodash "~4.17.5"
     pluralize "~7.0.0"
 
-ra-language-english@^2.1.3, ra-language-english@^2.2.0, ra-language-english@^2.3.0:
+ra-language-english@^2.1.3, ra-language-english@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-2.3.0.tgz#d25247bd148a57b02ff0480a66388220ee72ef16"
 
-ra-language-french@^2.2.3:
+ra-language-french@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-2.3.1.tgz#9a18e18b4d34d8c17e9ae6f354e5daed0b9c6586"
 
-ra-ui-materialui@^2.2.4:
+ra-ui-materialui@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-2.4.1.tgz#3f9dd524d84d3f41bfd72ad4f2700730861591ee"
   dependencies:
@@ -6582,20 +6567,13 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-"react-admin-date-inputs@https://github.com/CuistotduCoin/react-admin-date-inputs":
-  version "1.0.20"
-  resolved "https://github.com/CuistotduCoin/react-admin-date-inputs#b00ed975ce76831dc81e8d00e1841a7516d802df"
+react-admin@2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.4.1.tgz#cdebdd76eac5a3d0cef9302c7230ffed22fafe11"
   dependencies:
-    date-fns "2.0.0-alpha.7"
-    material-ui-pickers "^1.0.0-rc.13"
-
-react-admin@2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-2.2.4.tgz#3d4ea7d2cbfb7f79edd9d803d1bac0a7042919f9"
-  dependencies:
-    ra-core "^2.2.3"
-    ra-language-english "^2.2.0"
-    ra-ui-materialui "^2.2.4"
+    ra-core "^2.4.1"
+    ra-language-english "^2.3.0"
+    ra-ui-materialui "^2.4.1"
 
 react-autosuggest@^9.4.2:
   version "9.4.2"
@@ -6656,7 +6634,7 @@ react-error-overlay@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.1.tgz#417addb0814a90f3a7082eacba7cee588d00da89"
 
-react-event-listener@^0.6.2, react-event-listener@^0.6.4:
+react-event-listener@^0.6.2:
   version "0.6.4"
   resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.6.4.tgz#d0ea5ed897da1a796616c44b5a8758898140f203"
   dependencies:
@@ -6785,19 +6763,13 @@ react-scripts@1.1.4:
   optionalDependencies:
     fsevents "^1.1.3"
 
-react-text-mask@=5.4.1:
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/react-text-mask/-/react-text-mask-5.4.1.tgz#c3dd3e550e31d38b7c9da0178a2725960770e443"
-  dependencies:
-    prop-types "^15.5.6"
-
 react-themeable@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-themeable/-/react-themeable-1.1.0.tgz#7d4466dd9b2b5fa75058727825e9f152ba379a0e"
   dependencies:
     object-assign "^3.0.0"
 
-react-transition-group@^2.2.1, react-transition-group@^2.5.0:
+react-transition-group@^2.2.1:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.5.0.tgz#70bca0e3546102c4dc5cf3f5f57f73447cce6874"
   dependencies:
@@ -6966,7 +6938,7 @@ redux-persist@^4.6.0:
     lodash "^4.17.4"
     lodash-es "^4.17.4"
 
-redux-saga@~0.16.0:
+redux-saga@~0.16.0, redux-saga@~0.16.2:
   version "0.16.2"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.2.tgz#993662e86bc945d8509ac2b8daba3a8c615cc971"
 
@@ -7974,7 +7946,7 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-tslib@^1.9.0, tslib@^1.9.3:
+tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
