@@ -4,6 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import { Form, Formik } from "formik";
+import Link from "next/link";
 import Router from "next/router";
 import React from "react";
 import { graphql, Query } from "react-apollo";
@@ -31,6 +32,9 @@ const styles = (theme: Theme) => ({
   },
   button: {
     marginBottom: 50
+  },
+  showButton: {
+    margin: '30px 0 20px'
   },
   container: {
     display: "flex",
@@ -116,6 +120,7 @@ class WorkshopEditForm extends React.Component<IWorkshopEditFormProps> {
           }
 
           const {
+            id,
             name,
             description,
             price,
@@ -127,6 +132,15 @@ class WorkshopEditForm extends React.Component<IWorkshopEditFormProps> {
 
           return (
             <div className={classes.container}>
+              <Link href={`/workshops/${id}`}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className={classes.showButton}
+                >
+                  Aller sur la page de l'atelier
+                </Button>
+              </Link>
               <Card className={classes.card}>
                 <CardContent>
                   <span>Les photos de l'atelier</span>
@@ -194,7 +208,7 @@ class WorkshopEditForm extends React.Component<IWorkshopEditFormProps> {
       openSnackbar("Échec de la mise à jour de l'atelier", "error");
       setStatus({ success: false });
       setSubmitting(false);
-      if (result.errors.length) {
+      if (result.errors && result.errors.length) {
         const error = result.errors[0].message;
         console.error(error);
         setErrors({ submit: error });
@@ -220,7 +234,8 @@ class WorkshopEditForm extends React.Component<IWorkshopEditFormProps> {
 
     const deleteWorkshopError = (result) => {
       openSnackbar("Erreur lors de la suppression de l'atelier. Veuillez réessayer.", "error");
-      if (result.errors.length) {
+      console.error(result);
+      if (result.errors && result.errors.length) {
         const error = result.errors[0].message;
         console.error(error);
       }
