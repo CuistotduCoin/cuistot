@@ -79,14 +79,14 @@ export class App extends React.Component<IAppProps, {}> {
             if (!gourmet.identity_id) {
               Auth.currentSession().then(currentSession => {
                 const jwtToken = currentSession.getIdToken().getJwtToken();
-                const loginKey = `cognito-idp.${process.env.AWS_REGION}.amazonaws.com/${process.env.AWS_USERPOOL_ID}`;
+                const loginKey = `cognito-idp.${process.env.AWS_REGION_IRELAND}.amazonaws.com/${process.env.AWS_USERPOOL_ID}`;
 
                 AWS.config.credentials = new AWS.CognitoIdentityCredentials(
                   {
                     IdentityPoolId: process.env.AWS_IDENTITY_POOL_ID,
                     Logins: { [loginKey]: jwtToken }
                   },
-                  { region: process.env.AWS_REGION }
+                  { region: process.env.AWS_REGION_IRELAND }
                 );
 
                 // Save the gourmet identity id in our base

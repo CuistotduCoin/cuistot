@@ -36,7 +36,7 @@ provider:
   environment:
     NODE_ENV: ${self:provider.stage}
     AWS_DOMAIN: ${ssm:/cuistot/front/domain~true}
-    AWS_REGION: ${self:provider.region}
+    AWS_REGION_IRELAND: ${self:provider.region}
     AWS_DEPLOYMENT_BUCKET: ${ssm:/cuistot/front/deployment-bucket~true}
     AWS_USERPOOL_ID: ${ssm:/cuistot/userpool-id~true}
     AWS_IDENTITY_POOL_ID: ${ssm:/cuistot/identity-pool-id~true}
