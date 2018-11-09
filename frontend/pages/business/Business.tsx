@@ -5,12 +5,12 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Layout from "../../components/Layout";
 import React from "react";
 import HubspotForm from "react-hubspot-form";
 import Slider from "react-slick";
 // import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import Layout from "../../components/Layout";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -333,8 +333,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"subheading"}>A votre écoute</Typography>
-              <Typography variant={"body1"}>
+              <Typography variant="subheading">A votre écoute</Typography>
+              <Typography variant="body1">
                 Faîtes-nous part de vos besoins et de vos envies.
               </Typography>
             </Grid>
@@ -346,10 +346,10 @@ export class Business extends React.Component<IBusinessProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"subheading"}>
+              <Typography variant="subheading">
                 Une diversité de saveurs
               </Typography>
-              <Typography variant={"body1"}>
+              <Typography variant="body1">
                 Nous sélectionnons nos ateliers et nos repas les mieux adaptés
                 et définissons ensemble leurs modalités.
               </Typography>
@@ -362,10 +362,10 @@ export class Business extends React.Component<IBusinessProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant={"subheading"}>
+              <Typography variant="subheading">
                 On s’occupe de tout
               </Typography>
-              <Typography variant={"body1"}>
+              <Typography variant="body1">
                 Repas et ateliers sont organisés de A à Z par nos soins. Enfilez
                 le tablier ou passez à table: il n’y a plus qu’à déguster!
               </Typography>
@@ -381,7 +381,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           C’est parti pour le voyage des papilles !
         </Typography>
         <Grid container className={classes.grid}>
-          <Typography variant={"body1"} paragraph>
+          <Typography variant="body1" paragraph>
             Passionnés de cuisine, nos Cuistots ont à cœur de partager leurs
             savoir-faire et leurs recettes authentiques, mais surtout de vous
             faire découvrir leurs univers ! Ils vous invitent à vivre une
@@ -444,7 +444,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           className={classes.grid}
         >
           <Grid item xs={12}>
-            <Typography variant={"body1"}>
+            <Typography variant="body1">
               Ils ont participez à nos ateliers, déjeunez aux cotés de nos
               Cuistots, pour renforcez les liens de leurs salariés, récompensez
               la réussite d'un projet ou encore pour acceuillir leurs

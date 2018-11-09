@@ -193,7 +193,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               <div className={classes.block}>
                 <img
                   src="https://static.cuistotducoin.com/img/home/business.jpg"
-                  alt={"Entreprise"}
+                  alt="Entreprise"
                   className={classes.image}
                 />
                 <Link href="/business">
@@ -229,7 +229,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               <div className={classes.block}>
                 <img
                   src="https://static.cuistotducoin.com/img/home/individual.jpg"
-                  alt={"Particulier"}
+                  alt="Particulier"
                   className={classes.image}
                 />
                 <Link href="/individual">
@@ -284,13 +284,13 @@ export class Home extends React.Component<IHomeProps, {}> {
               direction="column"
             >
               <Typography
-                variant={"title"}
+                variant="title"
                 component="h3"
                 gutterBottom
               >
                 Authenticité et Convivialité
               </Typography>
-              <Typography variant={"body1"}>
+              <Typography variant="body1">
                 Parce que le voyage commence d’abord dans l’assiette,
                 découvrez une cuisine qui invite à l’évasion et percez les
                 secrets des recettes de nos Cuistots passionnés.
@@ -305,13 +305,13 @@ export class Home extends React.Component<IHomeProps, {}> {
               direction="column"
             >
               <Typography
-                variant={"title"}
+                variant="title"
                 component="h3"
                 gutterBottom
               >
                 Partage
               </Typography>
-              <Typography variant={"body1"}>
+              <Typography variant="body1">
                 Au-delà de la cuisine, plongez dans les univers de nos
                 Cuistots et découvrez de nouveaux horizons.
               </Typography>
@@ -325,13 +325,13 @@ export class Home extends React.Component<IHomeProps, {}> {
               direction="column"
             >
               <Typography
-                variant={"title"}
+                variant="title"
                 component="h3"
                 gutterBottom
               >
                 Diversité
               </Typography>
-              <Typography variant={"body1"}>
+              <Typography variant="body1">
                 Divers formats et univers culinaires sont proposés chez
                 Cuistot du Coin. De quoi satisfaire vos papilles !
               </Typography>
@@ -353,7 +353,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           className={classes.grid}
         >
           <Grid item xs={12}>
-            <Typography variant={"body1"}>
+            <Typography variant="body1">
               Le talent culinaire est partout et Cuistot du Coin souhaite le
               révéler. Nous nous sommes entourés d’artisans et de
               commerçants passionnés pour vous offrir des expériences
