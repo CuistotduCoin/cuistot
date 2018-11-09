@@ -13,6 +13,7 @@ interface IAppProps {
   referer?: string;
   isLoggedIn: boolean;
   currentGourmet?: object;
+  router: any;
   openSnackbar(message: string, variant: string);
   logIn();
   setReferer(url?: string);
@@ -31,7 +32,8 @@ export class App extends React.Component<IAppProps, {}> {
         .then(user => {
           console.log(`Authenticated as ${user.username}`);
           if (user.username !== "guest") {
-            if (router.pathname !== "/login" && router.pathname !== "/signup") {
+            if (router.asPath !== "/login" && router.asPath !== "/signup") {
+              // Don't redirect to home page if user is already connected (except for login and signup pages)
               setReferer(undefined);
             }
             logIn();
