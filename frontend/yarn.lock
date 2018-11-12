@@ -5026,9 +5026,9 @@ formidable@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.2.1.tgz#70fb7ca0290ee6ff961090415f4b3df3d2082659"
 
-formik-material-ui@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/formik-material-ui/-/formik-material-ui-0.0.9.tgz#9e4eec1147556ad2db8240bd64904d3665930530"
+formik-material-ui@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/formik-material-ui/-/formik-material-ui-0.0.15.tgz#e8ecb47ee17d639eb1661c932e474071430fe4a6"
 
 formik@^1.2.0:
   version "1.3.0"
