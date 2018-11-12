@@ -31,7 +31,7 @@
     "aws-serverless-express": "^3.3.5",
     "express": "^4.16.3",
     "formik": "^1.2.0",
-    "formik-material-ui": "^0.0.9",
+    "formik-material-ui": "^0.0.15",
     "mdi-material-ui": "^5.5.0",
     "raven": "^2.6.4",
     "react": "^16.5.0",
