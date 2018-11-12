@@ -83,34 +83,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const workshops = [
       {
         availableSeat: 6,
-        date: "dimanche 11 novembre, 16h-17h",
-        duration: 1,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
-        name: "Salon de la gastronomie - Démonstration tournage de crêpes",
-        nameCook: "Nadine",
-        price: 0,
-        spot: "Salon Vins et Gastronomie",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/vobFia"
-      },
-      {
-        availableSeat: 6,
-        date: "lundi 12 novembre, 14h30-15h30",
-        duration: 1,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ahmed-cacao-cru.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
-        name: "Salon de la gastronomie - Autour du cacao cru",
-        nameCook: "Ahmed",
-        price: 0,
-        spot: "Salon Vins et Gastronomie",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/UjQYe4"
-      },
-      {
-        availableSeat: 6,
         date: "samedi 17 novembre, 9h30-14h",
         duration: 4,
         image:
