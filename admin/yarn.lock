@@ -6491,9 +6491,9 @@ ra-core@^2.2.3, ra-core@^2.3.0:
     reselect "~3.0.0"
     warning "~3.0.0"
 
-ra-data-graphql@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.2.0.tgz#07b8d10d5272377b83b1e87f2745420d5447c9ff"
+ra-data-graphql@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-2.4.2.tgz#35ee6d51c4f2045a06ab932811537e4cd867a07e"
   dependencies:
     apollo-client "^2.2.8"
     apollo-client-preset "^1.0.6"
