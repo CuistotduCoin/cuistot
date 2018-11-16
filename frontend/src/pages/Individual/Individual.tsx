@@ -80,21 +80,24 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       }
     ];
 
-    const workshops = [
+    const workshopsQuimper = [
       {
         availableSeat: 6,
-        date: "samedi 17 novembre, 9h30-14h",
+        date: "samedi 17 novembre, 9h30-13h30",
         duration: 4,
         image:
-          "https://static.cuistotducoin.com/img/workshops/michel-decouverte-ayurvedique.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/michel.jpg",
-        name: "Cuisine ayurvédique",
-        nameCook: "Michel",
-        price: 40,
-        spot: "Michel, Plougastel-Daoulas",
+          "https://static.cuistotducoin.com/img/workshops/mickael-buche-3-chocolats.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/generique.jpg",
+        name: "Bûche 3 chocolats",
+        nameCook: "Mickael",
+        price: 50,
+        spot: "Ixina , Quimper",
         totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/rQo1Zx"
-      },
+        typeform: "https://cuistotducoin.typeform.com/to/YHpjAM"
+      }
+    ];
+
+    const workshops = [
       {
         availableSeat: 6,
         date: "mercredi 21 novembre, 17h30-20h",
@@ -314,7 +317,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           gutterBottom={true}
           className={classes.typography}
         >
-          Nos prochains ateliers collectifs
+          Nos prochains ateliers collectifs à Quimper
+        </Typography>
+        <Typography variant="body1" align="center">
+          Ateliers de cuisine collectif chez nos lieux partenaires
+        </Typography>
+        <WorkshopCardList workshops={workshopsQuimper} />
+        <Typography
+          variant="title"
+          align="center"
+          component="h2"
+          gutterBottom={true}
+          className={classes.typography}
+        >
+          Nos prochains ateliers collectifs à Brest
         </Typography>
         <Typography variant="body1" align="center">
           Ateliers de cuisine collectif chez nos lieux partenaires
