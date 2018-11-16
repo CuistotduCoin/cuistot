@@ -83,7 +83,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const workshopsQuimper = [
       {
         availableSeat: 6,
-        date: "samedi 17 novembre, 9h30-13h30",
+        date: "samedi 8 décembre, 9h30-13h30",
         duration: 4,
         image:
           "https://static.cuistotducoin.com/img/workshops/mickael-buche-3-chocolats.jpg",
