@@ -16,7 +16,7 @@
     "fetch-mock": "~6.3.0",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
-    "libphonenumber-js": "^1.4.4",
+    "libphonenumber-js": "^1.6.7",
     "lodash.get": "^4.4.2",
     "lodash.isequal": "^4.5.0",
     "moment": "^2.22.2",
