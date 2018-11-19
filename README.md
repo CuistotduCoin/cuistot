@@ -1,6 +1,5 @@
 # [Cuistot du Coin](https://www.cuistotducoin.com) :
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/CuistotduCoin/cuistot.svg)](https://greenkeeper.io/)
 [![CircleCI](https://circleci.com/gh/CuistotduCoin/cuistot.svg?style=shield)](https://circleci.com/gh/CuistotduCoin/cuistot)
 
 | FrontEnd | BackEnd | Admin | Email Template |
