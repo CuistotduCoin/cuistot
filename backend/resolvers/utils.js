@@ -353,7 +353,7 @@ async function deleteObject(tableName, value) {
   }
 }
 
-async function performOperation(args, operationPromise, authorKey, resourcePromise) {
+async function performOperation(args, operation, authorKey, resource) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId } = args;
   let result;
   let isAllowed = isAdmin;
@@ -361,8 +361,8 @@ async function performOperation(args, operationPromise, authorKey, resourcePromi
     let authorId;
     if (authorKey === 'id') {
       authorId = args.id;
-    } else if (resourcePromise) {
-      result = await resourcePromise;
+    } else if (resource) {
+      result = await resource();
       if (result.data) {
         authorId = result.data[authorKey];
       }
@@ -372,7 +372,7 @@ async function performOperation(args, operationPromise, authorKey, resourcePromi
     }
   }
   if (isAllowed) {
-    result = await operationPromise;
+    result = await operation();
   } else {
     result = { userError: 'cannot perform operation' };
   }

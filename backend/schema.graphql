@@ -300,8 +300,8 @@ input CreateEvaluationInput {
 
 input UpdateEvaluationInput {
   id: ID!
-  rating: Float!
-  comment: String!
+  rating: Float
+  comment: String
 }
 
 input CreateGourmetInput {

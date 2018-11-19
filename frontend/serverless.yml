@@ -26,12 +26,12 @@ provider:
   runtime: nodejs8.10
   stage: ${opt:stage,'development'}
   region: eu-west-1
-  deploymentBucket: ${ssm:/cuistot/front/deployment-bucket~true}-${opt:stage,'development'}
+  deploymentBucket: ${self:provider.environment.AWS_DEPLOYMENT_BUCKET}
   endpointType: regional
   environment:
-    AWS_DOMAIN: ${ssm:/cuistot/front/domain~true}
-    AWS_REGION_IRELAND: eu-west-1
-    AWS_DEPLOYMENT_BUCKET: ${ssm:/cuistot/front/deployment-bucket~true}-${opt:stage,'development'}
+    NODE_ENV: ${self:provider.stage}
+    AWS_REGION_IRELAND: ${self:provider.region}
+    AWS_DEPLOYMENT_BUCKET: ${ssm:/cuistot/front/deployment-bucket~true}
     AWS_USERPOOL_ID: ${ssm:/cuistot/userpool-id~true}
     AWS_IDENTITY_POOL_ID: ${ssm:/cuistot/identity-pool-id~true}
     AWS_STORE_BUCKET: ${ssm:/cuistot/store-bucket~true}
@@ -44,8 +44,7 @@ provider:
     ALGOLIASEARCH_PLACES_APP_ID: ${ssm:/cuistot/front/algolia-places-app-id~true}
     ALGOLIASEARCH_PLACES_KEY: ${ssm:/cuistot/front/algolia-places-key~true}
     SENTRY_DSN: ${ssm:/cuistot/front/sentry-dsn~true}
-    EXECUTION_ENV: lambda
-    NODE_ENV: ${opt:stage,'development'}
+    SLS_DEBUG: "*"
 
 package:
   exclude:
@@ -56,13 +55,13 @@ package:
 functions:
   ssr:
     timeout: 30
-    handler: build/server.handler
+    handler: build/lambda.handler
     events:
       - http:
           method: get
-          path: /
           cors: true
+          path: /
       - http:
           method: any
-          path: /{proxy+}
           cors: true
+          path: /{proxy+}
