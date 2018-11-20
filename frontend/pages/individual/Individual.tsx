@@ -411,74 +411,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         valueProposition="Participez à des ateliers de cuisine authentiques et en toute convivialité !"
         description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
       >
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom
-          className={classes.typography}
-        >
-          Plutôt atelier de cuisine collectif ou privatisé, ou encore repas ? Il
-          y en a pour tous les goûts !
-        </Typography>
-        <Grid
-          container
-          justify="space-around"
-          alignItems="center"
-          spacing={16}
-          className={classes.grid}
-        >
-          {typeActivity.map((activity, index) => (
-            <Grid key={index} item xs={12} sm={6}>
-              <Grid container justify="center">
-                <a href={activity.url} target="_blank">
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.media}
-                      image={activity.image}
-                      title={activity.title}
-                    />
-                    <CardHeader
-                      className={classes.cardHeader}
-                      title={activity.title}
-                      classes={{
-                        title: classes.title
-                      }}
-                    />
-                    <CardContent className={classes.cardShortContent}>
-                      <Typography component="p">
-                        {activity.description}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </a>
-              </Grid>
-            </Grid>
-          ))}
-        </Grid>
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom
-          className={classes.typography}
-        >
-          Nos prochains ateliers collectifs
-        </Typography>
-        <WorkshopCardList workshops={workshops} />
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom
-          className={classes.typography}
-        >
-          Nos ateliers à venir
-        </Typography>
-        <Typography variant="body1" align="center">
-          Soyez prévenu des prochaines dates d'ateliers !
-        </Typography>
-        <WorkshopCardList workshops={workshopsPending} />
+        hey
       </Layout>
     );
   }
