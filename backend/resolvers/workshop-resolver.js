@@ -34,6 +34,9 @@ async function getWorkshopBookings(args) {
 
 async function createWorkshop(args) {
   const result = await insertObject(TABLE_NAME, args);
+  if (result) {
+    index.addObject(args);
+  }
   return result;
 }
 
@@ -45,6 +48,9 @@ async function updateWorkshop(args) {
     'cook_id',
     () => getWorkshop({ workshop_id: updateArgs.id }),
   );
+  if (result) {
+    index.saveObject(updateArgs);
+  }
   return result;
 }
 
@@ -55,11 +61,17 @@ async function deleteWorkshop(args) {
     'cook_id',
     () => getWorkshop({ workshop_id: args.id }),
   );
+  if (result) {
+    index.deleteObject(args.id);
+  }
   return result;
 }
 
 async function recreateWorkshop(args) {
   const result = await recreateObject(TABLE_NAME, args.id);
+  if (result) {
+    index.addObject(args);
+  }
   return result;
 }
 
