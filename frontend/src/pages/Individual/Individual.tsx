@@ -128,7 +128,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
-        date: "samedi 24 novembre, 9h-12h",
+        date: "samedi 24 novembre, 10h-13h",
         duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/ahmed-entre-ici-et-ailleurs.jpg",
@@ -169,7 +169,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
-        date: "samedi 15 décembre, 10h-12h",
+        date: "samedi 15 décembre, 14h-16h",
         duration: 2,
         image:
           "https://static.cuistotducoin.com/img/workshops/audrey-maison-pain-epices.jpg",
