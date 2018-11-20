@@ -100,20 +100,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const workshops = [
       {
         availableSeat: 6,
-        date: "mercredi 21 novembre, 17h30-20h",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ivan-empanadas.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ivan.jpg",
-        name: "Empanadas",
-        nameCook: "Ivan",
-        price: 35,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/smJrgE"
-      },
-      {
-        availableSeat: 6,
         date: "vendredi 23 novembre, 17h-19h30",
         duration: 3,
         image:
@@ -194,6 +180,34 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/r7wTMZ"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 15 décembre, 14h-16h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-ble-noir.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
+        name: "Apéro Festif autour du blé noir",
+        nameCook: "Nadine",
+        price: 30,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/c6Rg7h"
+      },
+      {
+        availableSeat: 6,
+        date: "mardi 18 décembre, 16h-18h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
+        name: "Initiation au tournage de crêpes de froment",
+        nameCook: "Nadine",
+        price: 25,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/SNn9Pu"
       },
       {
         availableSeat: 6,
