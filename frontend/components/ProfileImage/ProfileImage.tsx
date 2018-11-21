@@ -3,8 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import PersonIcon from "@material-ui/icons/Person";
 import cx from 'classnames';
-import React from 'react';
 import S3Image from "../../components/S3Image";
+import React from 'react';
 
 const styles = theme => ({
   avatar: {
@@ -30,41 +30,29 @@ const styles = theme => ({
 interface IProfileImageProps {
   classes: any;
   size?: "small" | "normal";
-  path?: string;
   imageKey?: string;
   identityId: string;
   showAddImagePlaceholder?: boolean;
   alt?: string;
-  className?: string;
 }
 
 class ProfileImage extends React.Component<IProfileImageProps> {
   public static defaultProps: Partial<IProfileImageProps> = {
-    path: "profile",
     showAddImagePlaceholder: false,
     size: 'normal',
   };
 
   public render() {
-    const {
-      classes,
-      imageKey,
-      path,
-      identityId,
-      showAddImagePlaceholder,
-      size,
-      alt,
-      className
-    } = this.props;
+    const { classes, imageKey, identityId, showAddImagePlaceholder, size, alt } = this.props;
 
     const image = (
       <S3Image
         component={Avatar}
-        path={path}
+        path="profile"
         imageKey={imageKey}
         identityId={identityId}
         alt={alt}
-        className={cx(classes.avatar, classes[size], className)}
+        className={cx(classes.avatar, classes[size])}
       />
     );
 
@@ -73,10 +61,10 @@ class ProfileImage extends React.Component<IProfileImageProps> {
     }
 
     if (showAddImagePlaceholder) {
-      return <AddAPhotoIcon className={cx(classes.icon, classes[size], className)} />
+      return <AddAPhotoIcon className={cx(classes.icon, classes[size])} />
     }
 
-    return <PersonIcon className={cx(classes.icon, classes[size], className)} />;
+    return <PersonIcon className={cx(classes.icon, classes[size])} />;
   }
 }
 

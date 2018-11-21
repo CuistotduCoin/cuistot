@@ -121,8 +121,7 @@ export class BecomeCookForm extends React.Component<IBecomeCookFormProps, {}> {
       openSnackbar("Échec lors de la création de votre compte cuistot", "error");
       setStatus({ success: false });
       setSubmitting(false);
-      console.error(result);
-      if (result.errors && result.errors.length) {
+      if (result.errors.length) {
         const error = result.errors[0].message;
         console.error(error);
         setErrors({ submit: error });

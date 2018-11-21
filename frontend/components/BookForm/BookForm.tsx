@@ -26,6 +26,7 @@ interface IBookForm {
   classes?: any;
   price: number;
   availableSeat: number;
+  dayEndBook: number;
 }
 
 interface IBookFormValues {

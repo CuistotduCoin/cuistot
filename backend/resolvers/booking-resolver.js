@@ -29,9 +29,9 @@ async function updateBooking(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = performOperation(
     args,
-    () => updateObject(TABLE_NAME, updateArgs),
+    updateObject(TABLE_NAME, updateArgs),
     'gourmet_id',
-    () => getBooking({ booking_id: updateArgs.id }),
+    getBooking({ booking_id: updateArgs.id }),
   );
   return result;
 }
@@ -39,9 +39,9 @@ async function updateBooking(args) {
 async function deleteBooking(args) {
   const result = await performOperation(
     args,
-    () => deleteObject(TABLE_NAME, args.id),
+    deleteObject(TABLE_NAME, args.id),
     'gourmet_id',
-    () => getBooking({ booking_id: args.id }),
+    getBooking({ booking_id: args.id }),
   );
   return result;
 }

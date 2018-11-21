@@ -8,10 +8,6 @@ import {
   performPagination,
   recreateObject,
 } from './utils';
-import algoliasearch from algoliasearch;
-
-var client = algoliasearch(process.env.ALGOLIASEARCH_SEARCH_APP_ID, process.env.ALGOLIASEARCH_SEARCH_KEY);
-var index = client.initIndex(process.env.ALGOLIASEARCH_INDEX);
 
 const TABLE_NAME = 'workshops';
 
@@ -45,42 +41,30 @@ async function updateWorkshop(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = await performOperation(
     args,
-    () => updateObject(TABLE_NAME, updateArgs),
+    updateObject(TABLE_NAME, updateArgs),
     'cook_id',
-    () => getWorkshop({ workshop_id: updateArgs.id }),
+    getWorkshop({ workshop_id: updateArgs.id }),
   );
-  if (result && result.data && result.data.confirmed == true) {
-    index.saveObject(result.data);
-  }
   return result;
 }
 
 async function deleteWorkshop(args) {
   const result = await performOperation(
     args,
-    () => deleteObject(TABLE_NAME, args.id),
+    deleteObject(TABLE_NAME, args.id),
     'cook_id',
-    () => getWorkshop({ workshop_id: args.id }),
+    getWorkshop({ workshop_id: args.id }),
   );
-  if (result && result.data && result.data.confirmed == true) {
-    index.deleteObject(result.data);
-  }
   return result;
 }
 
 async function recreateWorkshop(args) {
   const result = await recreateObject(TABLE_NAME, args.id);
-  if (result && result.data && result.data.confirmed == true) {
-    index.addObject(result.data);
-  }
   return result;
 }
 
 async function confirmWorkshop(args) {
   const result = await updateObject(TABLE_NAME, { id: args.id, confirmed: true });
-  if (result && result.data && result.data.confirmed == true) {
-    index.addObject(result.data);
-  }
   return result;
 }
 

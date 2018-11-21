@@ -10,7 +10,6 @@ interface IS3ImageProps {
   title?: string;
   alt?: string;
   className?: string;
-  onClick?: any;
 }
 
 interface IS3ImageState {

@@ -30,7 +30,6 @@ const styles = (theme: Theme) => ({
 interface IAccountConfirmationFormProps {
   classes?: any;
   location: any;
-  router: any;
 }
 
 interface IAccountConfirmationFormValues {

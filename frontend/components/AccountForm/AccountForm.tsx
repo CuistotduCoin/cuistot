@@ -481,7 +481,7 @@ class AccountForm extends React.Component<IAccountFormProps> {
       openSnackbar("Échec de la mise à jour de vos informations", "error");
       setStatus({ success: false });
       setSubmitting(false);
-      if (result.errors && result.errors.length) {
+      if (result.errors.length) {
         const error = result.errors[0].message;
         console.error(error);
         setErrors({ submit: error });
@@ -537,7 +537,7 @@ class AccountForm extends React.Component<IAccountFormProps> {
       openSnackbar("Échec de la mise à jour de vos informations", "error");
       setStatus({ success: false });
       setSubmitting(false);
-      if (result.errors && result.errors.length) {
+      if (result.errors.length) {
         const error = result.errors[0].message;
         console.error(error);
         setErrors({ submit: error });

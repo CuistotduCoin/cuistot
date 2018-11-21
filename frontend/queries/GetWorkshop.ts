@@ -4,7 +4,6 @@ export default gql`
   query GetWorkshop($workshop_id: ID!) {
     getWorkshop(workshop_id: $workshop_id) {
       workshop {
-        id
         name
         description
         duration
@@ -22,7 +21,6 @@ export default gql`
             key
           }
           gourmet {
-            identity_id
             first_name
             last_name
           }
@@ -40,9 +38,6 @@ export default gql`
             comment
             created_at
           }
-        }
-        bookings {
-          id
         }
       }
       message

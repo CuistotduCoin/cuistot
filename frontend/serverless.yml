@@ -3,6 +3,7 @@ service: serverless-ssr
 plugins:
   - serverless-offline
   - serverless-apigw-binary
+  - serverless-domain-manager
   - serverless-sentry
   - serverless-stage-manager
 
@@ -16,6 +17,10 @@ custom:
   apigwBinary:
     types:
       - '*/*'
+  customDomain:
+    domainName: ${self:provider.environment.AWS_DOMAIN}
+    createRoute53Record: true
+    certificateName: ${self:provider.environment.AWS_DOMAIN}
   sentry:
     dsn: ${self:provider.environment.SENTRY_DSN}
     organization: cuistotducoin
@@ -30,7 +35,8 @@ provider:
   endpointType: regional
   environment:
     NODE_ENV: ${self:provider.stage}
-    AWS_REGION_IRELAND: ${self:provider.region}
+    AWS_DOMAIN: ${ssm:/cuistot/front/domain~true}
+    AWS_REGION: ${self:provider.region}
     AWS_DEPLOYMENT_BUCKET: ${ssm:/cuistot/front/deployment-bucket~true}
     AWS_USERPOOL_ID: ${ssm:/cuistot/userpool-id~true}
     AWS_IDENTITY_POOL_ID: ${ssm:/cuistot/identity-pool-id~true}

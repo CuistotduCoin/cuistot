@@ -111,7 +111,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
       openSnackbar("Échec lors de la création de votre atelier. Veuillez réessayer", "error");
       setStatus({ success: false });
       setSubmitting(false);
-      if (result.errors && result.errors.length) {
+      if (result.errors.length) {
         const error = result.errors[0].message;
         console.error(error);
         setErrors({ submit: error });

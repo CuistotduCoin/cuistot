@@ -24,7 +24,7 @@ async function getGourmets(args) {
 async function getGourmetBookings(args) {
   let result = await performOperation(
     args,
-    () => findWhere('bookings', args.id, 'gourmet_id'),
+    findWhere('bookings', args.id, 'gourmet_id'),
     'id',
   );
   if (result.userError) {
@@ -42,7 +42,7 @@ async function updateGourmet(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = await performOperation(
     args,
-    () => updateObject(TABLE_NAME, updateArgs),
+    updateObject(TABLE_NAME, updateArgs),
     'id',
   );
   return result;
@@ -51,7 +51,7 @@ async function updateGourmet(args) {
 async function deleteGourmet(args) {
   const result = await performOperation(
     args,
-    () => deleteObject(TABLE_NAME, args.id),
+    deleteObject(TABLE_NAME, args.id),
     'id',
   );
   return result;

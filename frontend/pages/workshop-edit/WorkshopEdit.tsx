@@ -1,5 +1,4 @@
 import { withStyles } from "@material-ui/core/styles";
-import { withRouter } from "next/router";
 import React from "react";
 import { compose } from "recompose";
 import Layout from "../../components/Layout";
@@ -14,20 +13,28 @@ const styles = () => ({
 
 interface IWorkshopEditProps {
   classes: any;
-  router: any;
+  workshopId: string;
 }
 
 // tslint:disable-next-line
-const WorkshopEdit: React.SFC<IWorkshopEditProps> = ({ classes, router }) => (
-  <Layout className={classes.container}>
-    <WorkshopEditForm workshopId={router.query.id} />
-  </Layout>
-);
+export class WorkshopEdit extends React.Component<IWorkshopEditProps> {
+  public static async getInitialProps({ query: { id }}) {
+    return { workshopId: id };
+  }
+
+  public render() {
+    const { classes, workshopId } = this.props;
+    return (
+      <Layout className={classes.container}>
+        <WorkshopEditForm workshopId={workshopId} />
+      </Layout>
+    );
+  }
+}
 
 const enhance = compose(
   withData,
-  withAuth,
-  withRouter,
+  // withAuth,
   withStyles(styles as any),
 );
 

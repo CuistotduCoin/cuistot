@@ -3,7 +3,6 @@ import { withStyles } from "@material-ui/core/styles";
 import React from "react";
 import Dropzone from "react-dropzone";
 import ProfileImage from "../../components/ProfileImage";
-import { sanitizeFilename } from "../../shared/util";
 
 const styles = theme => ({
   container: {
@@ -34,6 +33,12 @@ interface IProfileImageUploaderProps {
   updateCurrentGourmetImage();
   openSnackbar(message: string, variant: string);
 }
+
+const sanitizeFilename = filename => {
+  const chunks = filename.replace(" ", "_").split(".");
+  const ext = chunks.pop();
+  return `${chunks.join(".")}_${Date.now()}.${ext}`;
+};
 
 export class ProfileImageUploader extends React.Component<IProfileImageUploaderProps> {
   constructor(props) {

@@ -29,9 +29,9 @@ async function updateEvaluation(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = performOperation(
     args,
-    () => updateObject(TABLE_NAME, updateArgs),
+    updateObject(TABLE_NAME, updateArgs),
     'author_id',
-    () => getEvaluation({ evaluation_id: updateArgs.id }),
+    getEvaluation({ evaluation_id: updateArgs.id }),
   );
   return result;
 }
@@ -39,9 +39,9 @@ async function updateEvaluation(args) {
 async function deleteEvaluation(args) {
   const result = await performOperation(
     args,
-    () => deleteObject(TABLE_NAME, args.id),
+    deleteObject(TABLE_NAME, args.id),
     'author_id',
-    () => getEvaluation({ evaluation_id: args.id }),
+    getEvaluation({ evaluation_id: args.id }),
   );
   return result;
 }

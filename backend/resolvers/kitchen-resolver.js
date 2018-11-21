@@ -29,9 +29,9 @@ async function updateKitchen(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = await performOperation(
     args,
-    () => updateObject(TABLE_NAME, updateArgs),
+    updateObject(TABLE_NAME, updateArgs),
     'author_id',
-    () => getKitchen({ kitchen_id: updateArgs.id }),
+    getKitchen({ kitchen_id: updateArgs.id }),
   );
   return result;
 }
@@ -39,9 +39,9 @@ async function updateKitchen(args) {
 async function deleteKitchen(args) {
   const result = await performOperation(
     args,
-    () => deleteObject(TABLE_NAME, args.id),
+    deleteObject(TABLE_NAME, args.id),
     'author_id',
-    () => getKitchen({ kitchen_id: args.id }),
+    getKitchen({ kitchen_id: args.id }),
   );
   return result;
 }

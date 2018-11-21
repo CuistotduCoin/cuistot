@@ -13,7 +13,6 @@ interface IAppProps {
   referer?: string;
   isLoggedIn: boolean;
   currentGourmet?: object;
-  router: any;
   openSnackbar(message: string, variant: string);
   logIn();
   setReferer(url?: string);
@@ -32,8 +31,7 @@ export class App extends React.Component<IAppProps, {}> {
         .then(user => {
           console.log(`Authenticated as ${user.username}`);
           if (user.username !== "guest") {
-            if (router.asPath !== "/login" && router.asPath !== "/signup") {
-              // Don't redirect to home page if user is already connected (except for login and signup pages)
+            if (router.pathname !== "/login" && router.pathname !== "/signup") {
               setReferer(undefined);
             }
             logIn();
@@ -81,14 +79,14 @@ export class App extends React.Component<IAppProps, {}> {
             if (!gourmet.identity_id) {
               Auth.currentSession().then(currentSession => {
                 const jwtToken = currentSession.getIdToken().getJwtToken();
-                const loginKey = `cognito-idp.${process.env.AWS_REGION_IRELAND}.amazonaws.com/${process.env.AWS_USERPOOL_ID}`;
+                const loginKey = `cognito-idp.${process.env.AWS_REGION}.amazonaws.com/${process.env.AWS_USERPOOL_ID}`;
 
                 AWS.config.credentials = new AWS.CognitoIdentityCredentials(
                   {
                     IdentityPoolId: process.env.AWS_IDENTITY_POOL_ID,
                     Logins: { [loginKey]: jwtToken }
                   },
-                  { region: process.env.AWS_REGION_IRELAND }
+                  { region: process.env.AWS_REGION }
                 );
 
                 // Save the gourmet identity id in our base
