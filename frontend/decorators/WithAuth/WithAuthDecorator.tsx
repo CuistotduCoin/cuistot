@@ -16,7 +16,7 @@ class WithAuthDecorator extends Component<IWithAuthDecoratorProps> {
     const { isLoggedIn, setReferer, router } = this.props;
 
     const redirectToLogin = () => {
-      setReferer(router.pathname);
+      setReferer(router.asPath);
       Router.replace("/login");
     };
 

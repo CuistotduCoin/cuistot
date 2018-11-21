@@ -40,7 +40,7 @@ async function updateCook(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = performOperation(
     args,
-    updateObject(TABLE_NAME, updateArgs),
+    () => updateObject(TABLE_NAME, updateArgs),
     'id',
   );
   return result;
@@ -54,7 +54,7 @@ async function confirmCook(args) {
 async function deleteCook(args) {
   const result = await performOperation(
     args,
-    deleteObject(TABLE_NAME, args.id),
+    () => deleteObject(TABLE_NAME, args.id),
     'id',
   );
   return result;

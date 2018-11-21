@@ -1,6 +1,6 @@
-import { AppContainer } from "../../components/App";
 import React from "react";
 import { Subscribe } from "unstated";
+import { AppContainer } from "../../components/App";
 import ProfileImageUploader from "./ProfileImageUploader";
 
 interface IProfileImageUploaderContainerProps {

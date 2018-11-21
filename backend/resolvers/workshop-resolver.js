@@ -45,9 +45,9 @@ async function updateWorkshop(args) {
   const { is_admin: isAdmin, request_author_id: requestAuthorId, ...updateArgs } = args;
   const result = await performOperation(
     args,
-    updateObject(TABLE_NAME, updateArgs),
+    () => updateObject(TABLE_NAME, updateArgs),
     'cook_id',
-    getWorkshop({ workshop_id: updateArgs.id }),
+    () => getWorkshop({ workshop_id: updateArgs.id }),
   );
   if (result && result.data && result.data.confirmed == true) {
     index.saveObject(result.data);
@@ -58,9 +58,9 @@ async function updateWorkshop(args) {
 async function deleteWorkshop(args) {
   const result = await performOperation(
     args,
-    deleteObject(TABLE_NAME, args.id),
+    () => deleteObject(TABLE_NAME, args.id),
     'cook_id',
-    getWorkshop({ workshop_id: args.id }),
+    () => getWorkshop({ workshop_id: args.id }),
   );
   if (result && result.data && result.data.confirmed == true) {
     index.deleteObject(result.data);

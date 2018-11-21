@@ -108,7 +108,6 @@
     "prettier": "^1.15.2",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "serverless-apigw-binary": "^0.4.4",
-    "serverless-domain-manager": "^2.6.6",
     "serverless-offline": "^3.31.3",
     "serverless-sentry": "^1.2.0",
     "serverless-stage-manager": "^1.0.5",
