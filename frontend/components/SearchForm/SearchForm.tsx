@@ -1,5 +1,6 @@
 import { Theme, withStyles } from "@material-ui/core/styles";
 import AlgoliaPlaces from "algolia-places-react";
+import Router from 'next/router'
 import React from "react";
 
 const styles = (theme: Theme) => ({
@@ -28,11 +29,10 @@ export class SearchForm extends React.Component<ISearchForm, {}> {
   }
 
   public handleAddressSelection({ suggestion }) {
-    this.props.history.push(
-      `/s/${suggestion.name}?lat=${suggestion.latlng.lat}&lon=${
-        suggestion.latlng.lng
-      }`
-    );
+    Router.push({
+      pathname: '/search',
+      query: { city: suggestion.name }
+    });
   }
 
   public render() {
