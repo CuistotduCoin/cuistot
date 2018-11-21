@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
+    "@babel/runtime": "7.1.5",
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
     "apollo-cache-inmemory": "^1.2.8",
