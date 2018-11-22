@@ -50,7 +50,7 @@ interface IHeroProps {
   imageURL: string;
   valueProposition: string;
   description: string;
-  searchForm: any;
+  children: any;
 }
 
 export class Hero extends React.Component<IHeroProps, {}> {
@@ -94,7 +94,7 @@ export class Hero extends React.Component<IHeroProps, {}> {
               )}
               <Grid container>
                 <Grid item className={classes.gridSearchForm}>
-                  {this.props.searchForm}
+                  {this.props.children}
                 </Grid>
               </Grid>
             </Grid>

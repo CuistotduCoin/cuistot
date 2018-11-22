@@ -6,8 +6,10 @@ import React, { Fragment } from "react";
 import {
   connectHits,
   Highlight,
-  MenuSelect,
-  Pagination
+  Pagination,
+  Panel,
+  PoweredBy,
+  RefinementList
 } from "react-instantsearch-dom";
 import {
   CustomMarker,
@@ -52,14 +54,6 @@ interface ISearchState {
 }
 
 export class Search extends React.Component<ISearchProps, ISearchState> {
-  /*public static async getInitialProps(params) {
-    const searchState = params.asPath.includes("?")
-      ? qs.parse(params.asPath.substring(params.asPath.indexOf("?") + 1))
-      : {};
-    const resultsState = await findResultsState(App, { searchState });
-    return { resultsState, searchState };
-  }*/
-
   public customHits = connectHits(({ hits, selectedHit, onHitOver }) => (
     <div className="hits">
       {hits.map(hit => {
@@ -141,6 +135,8 @@ export class Search extends React.Component<ISearchProps, ISearchState> {
 
   public render() {
     const { classes } = this.props;
+    const initialPosition = { lat: 0, lng: 0 };
+
     return (
       <Layout valueProposition="Ateliers de cuisine autour de vous">
         <InstantSearch
@@ -157,7 +153,14 @@ export class Search extends React.Component<ISearchProps, ISearchState> {
             className={classes.grid}
           >
             <Grid container justify="flex-start" alignItems="center">
-              <MenuSelect attribute="category" />
+              <Panel
+                className=""
+                header="Type d'événement"
+              >
+                <RefinementList
+                  attribute="type"
+                />
+              </Panel>
             </Grid>
             <Grid container justify="flex-end">
               <FormControlLabel
@@ -174,8 +177,10 @@ export class Search extends React.Component<ISearchProps, ISearchState> {
           </Grid>
           <Grid container>
             <Grid item xs={9}>
-              {this.customHits}
-              <Pagination />
+              <>
+                {this.customHits}
+                <Pagination />
+              </>
             </Grid>
             {this.state.mapOpen && (
               <Grid item xs={3}>
@@ -185,7 +190,7 @@ export class Search extends React.Component<ISearchProps, ISearchState> {
                     endpoint="https://maps.googleapis.com/maps/api/js?v=3.34"
                   >
                     {google => (
-                      <GeoSearch google={google}>
+                      <GeoSearch google={google} initialPosition={initialPosition}>
                         {({ hits }) => (
                           <Fragment>{hits.map(this.renderGeoHit)}</Fragment>
                         )}
@@ -196,6 +201,7 @@ export class Search extends React.Component<ISearchProps, ISearchState> {
               </Grid>
             )}
           </Grid>
+          <PoweredBy />
         </InstantSearch>
       </Layout>
     );

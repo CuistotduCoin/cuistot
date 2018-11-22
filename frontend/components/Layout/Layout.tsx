@@ -49,9 +49,10 @@ export class Layout extends React.Component<ILayoutProps, {}> {
               videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
               valueProposition={valueProposition}
               description={description}
-            />
+            >
+              <SearchForm />
+            </Hero>
           )}
-          <SearchForm />
           {children}
         </div>
         <Footer />

@@ -25,7 +25,6 @@
     "ra-language-french": "^2.3.1",
     "react": "^16.6.3",
     "react-admin": "^2.4.2",
-    "react-admin-date-inputs": "^1.1.0",
     "react-dom": "^16.6.3",
     "react-scripts": "^2.1.1"
   },

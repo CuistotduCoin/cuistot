@@ -19,7 +19,6 @@ interface ISearchForm {
   classes?: any;
   appId: string;
   apiKey: string;
-  history: any;
 }
 
 export class SearchForm extends React.Component<ISearchForm, {}> {

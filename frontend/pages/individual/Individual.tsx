@@ -1,13 +1,6 @@
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Layout from "../../components/Layout";
-import WorkshopCardList from "../../components/WorkshopCardList";
 
 const styles = (theme: Theme) => ({
   card: {
@@ -50,6 +43,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       <Layout
         valueProposition="Participez à des ateliers de cuisine authentiques et en toute convivialité !"
         description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
+        showSearchForm={true}
       >
         -
       </Layout>
