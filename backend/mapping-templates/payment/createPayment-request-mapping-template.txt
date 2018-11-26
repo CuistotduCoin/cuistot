@@ -1,0 +1,18 @@
+{
+  "version": "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+    "field": "createPayment",
+    "arguments": {
+      "name": $utils.toJson($context.arguments.payment.name),
+      "price": $utils.toJson($context.arguments.payment.price),
+      "duration": $utils.toJson($context.arguments.payment.duration),
+      "min_gourmet": $utils.toJson($context.arguments.payment.min_gourmet),
+      "max_gourmet": $utils.toJson($context.arguments.payment.max_gourmet),
+      "description": $utils.toJson($context.arguments.payment.description),
+      "date": $utils.toJson($context.arguments.payment.date),
+      "kitchen_id": $utils.toJson($context.arguments.payment.kitchen.id),
+      "cook_id": $utils.toJson($context.arguments.payment.cook.id)
+    }
+  }
+}
