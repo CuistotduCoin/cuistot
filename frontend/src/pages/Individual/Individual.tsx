@@ -100,62 +100,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const workshops = [
       {
         availableSeat: 6,
-        date: "vendredi 23 novembre, 17h-19h30",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-ble-noir.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
-        name: "Garnissage de galettes",
-        nameCook: "Nadine",
-        price: 30,
-        spot: "Schmidt, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/J5pSXj"
-      },
-      {
-        availableSeat: 6,
-        date: "vendredi 23 novembre, 17h30-19h30",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/valquiria-coxinhas.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/valquiria.jpg",
-        name: "Cuisine brésilienne",
-        nameCook: "Valquiria",
-        price: 35,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/RjQEhI"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 24 novembre, 10h-13h",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ahmed-entre-ici-et-ailleurs.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
-        name: "Entre ici et ailleurs",
-        nameCook: "Ahmed",
-        price: 35,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/sETMyV"
-      },
-      {
-        availableSeat: 6,
-        date: "mercredi 28 novembre, 14h30-16h30",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-crinkles.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Atelier enfant : Crinkles",
-        nameCook: "Audrey",
-        price: 25,
-        spot: "Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/YWptrY"
-      },
-      {
-        availableSeat: 6,
         date: "samedi 8 décembre, 9h-13h",
         duration: 4,
         image: "https://static.cuistotducoin.com/img/workshops/ahmed-noel.jpg",
@@ -186,7 +130,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         date: "samedi 15 décembre, 14h-16h",
         duration: 2,
         image:
-          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-ble-noir.jpg",
+          "https://static.cuistotducoin.com/img/workshops/nadine-apéro.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
         name: "Apéro Festif autour du blé noir",
         nameCook: "Nadine",
@@ -208,6 +152,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Schmidt, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/SNn9Pu"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 12 janvier, 9h-14h",
+        duration: 5,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/kevin-brassage.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/generique.jpg",
+        name: "Atelier brassage",
+        nameCook: "Kevin",
+        price: 60,
+        spot: "Brest, The Corner",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/SYDOzE"
       },
       {
         availableSeat: 6,
