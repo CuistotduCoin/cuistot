@@ -113,6 +113,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
+        date: "samedi 15 décembre, 12h-14h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/anne-bien-etre.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
+        name: "Déjeuner bien-être",
+        nameCook: "Anne",
+        price: 35,
+        spot: "Le Pop Up du Père Noël Brestoa",
+        totalSeat: 5,
+        typeform: "https://cuistotducoin.typeform.com/to/PPzMhJ"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 15 décembre, 14h-16h",
         duration: 2,
         image:
