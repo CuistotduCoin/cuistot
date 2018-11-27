@@ -26,12 +26,13 @@
   "dependencies": {
     "algoliasearch": "^3.30.0",
     "async": "^2.6.1",
-    "aws-sdk": "^2.360.0",
+    "aws-sdk": "^2.362.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.3",
     "gm": "^1.23.1",
     "knex": "^0.15.2",
-    "mjml": "^4.2.0",
+    "mangopay2-nodejs-sdk": "^1.8.0",
+    "mjml": "^4.2.1",
     "mjml-utils": "^2.2.1",
     "node-fetch": "^2.3.0",
     "nodemailer": "^4.7.0",
@@ -56,7 +57,7 @@
     "serverless-stage-manager": "^1.0.5",
     "serverless-webpack": "^5.2.0",
     "uuid": "^3.3.2",
-    "webpack": "^4.26.0",
+    "webpack": "^4.26.1",
     "webpack-node-externals": "^1.7.2"
   }
 }

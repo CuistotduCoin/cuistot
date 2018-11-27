@@ -12,6 +12,9 @@ exports.up = knex => (
     table.string('zip_code', 10);
     table.specificType('location', 'POINT').defaultTo(knex.raw('POINT (48.390394, -4.486076)'));
     table.text('description');
+    table.text('country',2);
+    table.text('country_of_residence',2);
+    table.text('nationality',2);
     table.timestamps(true, true);
   }).then(() => {
     knex.raw("ALTER TABLE gourmets ADD CONSTRAINT gender_constraint CHECK(gender='F' OR gender='M' OR gender='U');").then();
