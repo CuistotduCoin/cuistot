@@ -17,6 +17,10 @@ const createGourmet = knex => (
     city: faker.address.city(),
     zip_code: faker.address.zipCode(),
     description: faker.lorem.sentence(),
+    country: faker.address.countryCode(),
+    nationality: faker.address.countryCode(),
+    mango_user_id: faker.random.number(),
+    mango_wallet_id: faker.random.number()
   })
 );
 

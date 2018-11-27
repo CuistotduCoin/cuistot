@@ -13,13 +13,22 @@ import mangopay from "mangopay2-nodejs-sdk";
 const TABLE_NAME = 'gourmets';
 
 var api = new mangopay({
-  clientId: 'your_client_id',
-  clientApiKey: 'your_client_api_key',
-  baseUrl: 'https://api.mangopay.com'
+  clientId: process.env.MANGO_PAY_CLIENT_ID,
+  clientApiKey: process.env.MANGO_PAY_CLIENT_API_KEY,
+  baseUrl: process.env.MANGO_PAY_BASE_URL
 });
 
 async function getGourmet(args) {
   const result = await findFirstWhere(TABLE_NAME, args.gourmet_id, args.is_admin);
+  if (result && result.data) {
+    api.Wallet.get(data.mango_wallet_id).then(function(data){
+      let balance = {
+        "amount": data.Amount,
+        "currency": data.Currency
+      }
+      result.balance = balance;
+    });
+  }
   return result;
 }
 
@@ -48,10 +57,21 @@ async function createGourmet(args) {
       "LastName": result.data.last_name,
       "Birthday": result.data.birthday,
       "Nationality": result.data.nationality,
-      "CountryOfResidence": result.data.country_of_residence,
+      "CountryOfResidence": result.data.country,
       "Email": result.data.email
-    }
-    api.Users.create(user)
+    };
+    api.Users.create(user).then(function(){
+      updateGourmet({ id: result.data.id, mango_user_id: user.Id });
+      let wallet = {
+        "Owners": [ user.Id ],
+        "Description": "gourmet e-wallet",
+        "Currency": "EUR"
+      };
+      api.Wallets.create(wallet)then(function(){
+        updateGourmet({ id: result.data.id, mango_wallet: wallet.Id });
+      };
+    });
+
   }
   return result;
 }

@@ -9,9 +9,16 @@ import {
   recreateObject,
 } from './utils';
 import algoliasearch from algoliasearch;
+import mangopay from "mangopay2-nodejs-sdk";
 
 var client = algoliasearch(process.env.ALGOLIASEARCH_SEARCH_APP_ID, process.env.ALGOLIASEARCH_SEARCH_KEY);
 var index = client.initIndex(process.env.ALGOLIASEARCH_INDEX);
+
+var api = new mangopay({
+  clientId: process.env.MANGO_PAY_CLIENT_ID,
+  clientApiKey: process.env.MANGO_PAY_CLIENT_API_KEY,
+  baseUrl: process.env.MANGO_PAY_BASE_URL
+});
 
 const TABLE_NAME = 'workshops';
 
@@ -38,6 +45,14 @@ async function getWorkshopBookings(args) {
 
 async function createWorkshop(args) {
   const result = await insertObject(TABLE_NAME, args);
+  let wallet = {
+    "Owners": [ result.cook_id ],
+    "Description": "workshop e-wallet",
+    "Currency": "EUR"
+  };
+  api.Wallets.create(wallet)then(function(){
+    updateWorkshop({ id: result.data.id, mango_wallet_id: wallet.Id });
+  };
   return result;
 }
 

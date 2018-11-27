@@ -11,6 +11,7 @@ exports.up = knex => (
     table.integer('max_gourmet').notNullable();
     table.text('description');
     table.json('images');
+    table.integer('mango_wallet_id');
     table.dateTime('date').notNullable();
     table.uuid('kitchen_id')
       .notNullable()

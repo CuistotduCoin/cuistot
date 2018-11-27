@@ -17,8 +17,7 @@
       "city": $utils.toJson($context.arguments.gourmet.city),
       "zip_code": $utils.toJson($context.arguments.gourmet.zip_code)
       "country": $utils.toJson($context.arguments.gourmet.country),
-      "nationality": $utils.toJson($context.arguments.gourmet.nationality),
-      "country_of_residence": $utils.toJson($context.arguments.gourmet.country_of_residence)
+      "nationality": $utils.toJson($context.arguments.gourmet.nationality)
     }
   }
 }

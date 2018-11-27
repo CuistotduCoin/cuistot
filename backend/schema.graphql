@@ -187,6 +187,7 @@ type Gourmet implements Node & Timestamps {
   location: String
   description: String
   bookings: [Booking!]!
+  balance: Balance!
 }
 
 type Cook implements Node & Timestamps {
@@ -225,6 +226,11 @@ type Kitchen implements Node & Timestamps {
 
 type Image {
   key: String!
+}
+
+type Balance {
+  amount: Float!
+  currency: String!
 }
 
 type WorkshopList {
@@ -311,11 +317,13 @@ input CreateGourmetInput {
   first_name: String!
   last_name: String!
   gender: Gender
-  birthdate: String
+  birthdate: String!
   address: String
   city: String
   zip_code: String
   description: String
+  country: String!
+  nationality: String!
 }
 
 input UpdateGourmetInput {
@@ -330,6 +338,8 @@ input UpdateGourmetInput {
   city: String
   zip_code: String
   identity_id: String
+  country: String
+  nationality: String
 }
 
 input CreateCookInput {
