@@ -10,9 +10,11 @@ exports.up = knex => (
     table.integer('min_gourmet').notNullable();
     table.integer('max_gourmet').notNullable();
     table.text('description');
-    table.json('images');
+    table.json('images').notNullable().defaultTo('[]');
     table.integer('mango_wallet_id');
     table.dateTime('date').notNullable();
+    table.string('state').notNullable().defaultTo('DRAFT');
+    table.string('reason_refuse');
     table.uuid('kitchen_id')
       .notNullable()
       .references('id')
@@ -27,6 +29,7 @@ exports.up = knex => (
     table.timestamps(true, true);
   }).then(() => {
     knex.raw('ALTER TABLE workshops ADD CONSTRAINT gourmet_count_constraint CHECK(min_gourmet <= max_gourmet);').then();
+    knex.raw("ALTER TABLE workshops ADD CONSTRAINT state_constraint CHECK(state='DRAFT' OR state='REFUSE' OR state='PUBLISH' OR state='CANCEL' OR state='CONFIRM' OR state='DONE');").then();
   })
 );
 

@@ -8,6 +8,12 @@ exports.up = knex => (
     table.string('address', 100).notNullable();
     table.string('city', 100).notNullable();
     table.string('zip_code', 10).notNullable();
+    table.uuid('author_id')
+      .notNullable()
+      .references('id')
+      .inTable('gourmets')
+      .onUpdate('CASCADE');
+    table.timestamp('deleted_at');
     table.specificType('location', 'POINT').defaultTo(knex.raw('POINT (48.390394, -4.486076)'));
     table.timestamps(true, true);
   })

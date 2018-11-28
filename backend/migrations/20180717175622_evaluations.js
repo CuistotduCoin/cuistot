@@ -11,11 +11,20 @@ exports.up = knex => (
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
       .index();
+    table.uuid('author_id')
+      .notNullable()
+      .references('id')
+      .inTable('gourmets')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE');
+    table.unique(['cook_id', 'author_id']);
     table.integer('rating').notNullable();
     table.text('comment').notNullable();
+    table.timestamp('deleted_at');
     table.timestamps(true, true);
   }).then(() => {
     knex.raw('ALTER TABLE evaluations ADD CONSTRAINT rating_constraint CHECK(rating >= 1 AND rating <= 5);').then();
+    knex.raw('ALTER TABLE evaluations ADD CONSTRAINT author_constraint CHECK(cook_id != author_id);').then();
   })
 );
 

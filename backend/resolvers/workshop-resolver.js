@@ -46,13 +46,13 @@ async function getWorkshopBookings(args) {
 async function createWorkshop(args) {
   const result = await insertObject(TABLE_NAME, args);
   let wallet = {
-    "Owners": [ result.cook_id ],
+    "Owners": [result.cook_id],
     "Description": "workshop e-wallet",
     "Currency": "EUR"
   };
-  api.Wallets.create(wallet)then(function(){
+  api.Wallets.create(wallet).then(function () {
     updateWorkshop({ id: result.data.id, mango_wallet_id: wallet.Id });
-  };
+  });
   return result;
 }
 
@@ -64,8 +64,13 @@ async function updateWorkshop(args) {
     'cook_id',
     () => getWorkshop({ workshop_id: updateArgs.id }),
   );
-  if (result && result.data && result.data.confirmed == true) {
-    index.saveObject(result.data);
+  if (result && result.data) {
+    if (result.data.state == "PUBLISH") {
+      index.saveObject(result.data);
+    }
+    if (result.data.state == "CANCEL" || result.data.state == "DONE") {
+      index.deleteObject(result.data);
+    }
   }
   return result;
 }
@@ -73,26 +78,20 @@ async function updateWorkshop(args) {
 async function deleteWorkshop(args) {
   const result = await performOperation(
     args,
-    () => deleteObject(TABLE_NAME, args.id),
+    () => {
+      let workshop = getWorkshop({ workshop_id: args.id })
+      if (workshop.state == "REFUSE") {
+        deleteObject(TABLE_NAME, args.id)
+      }
+    },
     'cook_id',
     () => getWorkshop({ workshop_id: args.id }),
   );
-  if (result && result.data && result.data.confirmed == true) {
-    index.deleteObject(result.data);
-  }
   return result;
 }
 
 async function recreateWorkshop(args) {
   const result = await recreateObject(TABLE_NAME, args.id);
-  if (result && result.data && result.data.confirmed == true) {
-    index.addObject(result.data);
-  }
-  return result;
-}
-
-async function confirmWorkshop(args) {
-  const result = await updateObject(TABLE_NAME, { id: args.id, confirmed: true });
   if (result && result.data && result.data.confirmed == true) {
     index.addObject(result.data);
   }

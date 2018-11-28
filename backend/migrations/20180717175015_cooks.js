@@ -10,12 +10,17 @@ exports.up = knex => (
     table.boolean('is_pro')
       .notNullable()
       .defaultTo(false);
+    table.text('description');
+    table.json('image');
     table.string('business_name', 100);
     table.string('siren', 9);
     table.string('pro_email', 256);
     table.string('legal_first_name', 100);
     table.string('legal_last_name', 100);
     table.date('legal_birthdate');
+    table.string('pro_phone_number', 15).notNullable();
+    table.boolean('confirmed').notNullable().defaultTo(false);
+    table.timestamp('deleted_at');
     table.timestamps(true, true);
   })
 );

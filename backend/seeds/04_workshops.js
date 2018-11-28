@@ -23,7 +23,7 @@ const createWorkshop = knex => (
         description: faker.lorem.sentences(),
         date: faker.date.future(),
         cook_id: cookId,
-        kitchen_id: kitchenId,
+        kitchen_id: kitchenId
       };
 
       return knex('workshops').insert(newWorkshop);

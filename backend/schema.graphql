@@ -22,6 +22,15 @@ enum SortOrder {
   DESC
 }
 
+enum WorkshopState {
+  DRAFT
+  REFUSE
+  PUBLISH
+  CANCEL
+  CONFIRM
+  DONE
+}
+
 type PageInfo {
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
@@ -132,7 +141,8 @@ type Workshop implements Node & Timestamps {
   created_at: String!
   updated_at: String!
   deleted_at: String
-  confirmed: Boolean!
+  state: WorkshopState!
+  reason_refuse: String
   name: String!
   price: Int!
   duration: Int!

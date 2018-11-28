@@ -334,7 +334,7 @@ async function deleteObject(tableName, value) {
   try {
     const updateArgs = { deleted_at: knex.fn.now() };
 
-    if (tableName === 'cooks' || tableName === 'workshops') {
+    if (tableName === 'cooks') {
       updateArgs.confirmed = false;
     }
 

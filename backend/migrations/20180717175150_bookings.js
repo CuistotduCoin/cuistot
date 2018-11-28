@@ -19,6 +19,7 @@ exports.up = knex => (
       .onUpdate('CASCADE')
       .index();
     table.integer('amount').notNullable().defaultTo(1);
+    table.timestamp('deleted_at');
     table.unique(['gourmet_id', 'workshop_id']);
     table.timestamps(true, true);
   })

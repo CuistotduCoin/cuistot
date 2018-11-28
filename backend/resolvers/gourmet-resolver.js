@@ -21,7 +21,7 @@ var api = new mangopay({
 async function getGourmet(args) {
   const result = await findFirstWhere(TABLE_NAME, args.gourmet_id, args.is_admin);
   if (result && result.data) {
-    api.Wallet.get(data.mango_wallet_id).then(function(data){
+    api.Wallet.get(data.mango_wallet_id).then(function (data) {
       let balance = {
         "amount": data.Amount,
         "currency": data.Currency
@@ -60,16 +60,16 @@ async function createGourmet(args) {
       "CountryOfResidence": result.data.country,
       "Email": result.data.email
     };
-    api.Users.create(user).then(function(){
+    api.Users.create(user).then(function () {
       updateGourmet({ id: result.data.id, mango_user_id: user.Id });
       let wallet = {
-        "Owners": [ user.Id ],
+        "Owners": [user.Id],
         "Description": "gourmet e-wallet",
         "Currency": "EUR"
       };
-      api.Wallets.create(wallet)then(function(){
+      api.Wallets.create(wallet).then(function () {
         updateGourmet({ id: result.data.id, mango_wallet: wallet.Id });
-      };
+      });
     });
 
   }
