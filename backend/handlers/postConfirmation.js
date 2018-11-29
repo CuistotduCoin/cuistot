@@ -39,8 +39,8 @@ export const handler = (event, context, callback) => {
         } else {
           const publishParams = {
             Message: JSON.stringify({
-              from: 'stephane@cuistotducoin.com', // replace by real email
-              to: 'stephane@cuistotducoin.com', // replace by real email
+              from: 'romain@cuistotducoin.com', // replace by real email
+              to: 'romain@cuistotducoin.com', // replace by real email
               subject: 'Cuistot du coin te souhaite la bienvenue',
               template: 'welcome',
               context: { name: args.first_name },

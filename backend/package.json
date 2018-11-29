@@ -26,7 +26,7 @@
   "dependencies": {
     "algoliasearch": "^3.30.0",
     "async": "^2.6.1",
-    "aws-sdk": "^2.362.0",
+    "aws-sdk": "^2.366.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.3",
     "gm": "^1.23.1",
@@ -36,7 +36,7 @@
     "mjml-utils": "^2.2.1",
     "node-fetch": "^2.3.0",
     "nodemailer": "^4.7.0",
-    "pg": "^7.6.1"
+    "pg": "^7.7.1"
   },
   "devDependencies": {
     "aws-param-env": "^1.2.0",
@@ -53,7 +53,7 @@
     "faker": "^4.1.0",
     "imports-loader": "^0.8.0",
     "jsonfile": "^5.0.0",
-    "serverless-appsync-plugin": "^1.0.8",
+    "serverless-appsync-plugin": "^1.0.9",
     "serverless-stage-manager": "^1.0.5",
     "serverless-webpack": "^5.2.0",
     "uuid": "^3.3.2",
