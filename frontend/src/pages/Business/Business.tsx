@@ -309,8 +309,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
         >
           <Grid item={true} xs={12}>
             <Typography variant={"body1"}>
-              Ils ont participez à nos ateliers, déjeunez aux cotés de nos
-              Cuistots, pour renforcez les liens de leurs salariés, récompensez
+              Ils ont participé à nos ateliers, déjeuné aux cotés de nos
+              Cuistots, pour renforcer les liens de leurs salariés, récompenser
               la réussite d'un projet ou encore pour acceuillir leurs
               partenaires ou clients.
             </Typography>
