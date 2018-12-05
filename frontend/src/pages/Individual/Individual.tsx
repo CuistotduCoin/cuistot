@@ -80,37 +80,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       }
     ];
 
-    const workshopsQuimper = [
-      {
-        availableSeat: 6,
-        date: "samedi 8 décembre, 9h30-13h30",
-        duration: 4,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/mickael-buche-3-chocolats.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/generique.jpg",
-        name: "Bûche 3 chocolats",
-        nameCook: "Mickael",
-        price: 50,
-        spot: "Ixina , Quimper",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/YHpjAM"
-      }
-    ];
-
     const workshops = [
-      {
-        availableSeat: 6,
-        date: "samedi 8 décembre, 9h-13h",
-        duration: 4,
-        image: "https://static.cuistotducoin.com/img/workshops/ahmed-noel.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
-        name: "Repas de Noël ",
-        nameCook: "Ahmed",
-        price: 50,
-        spot: "Schmidt, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/hGXtRg"
-      },
       {
         availableSeat: 6,
         date: "samedi 15 décembre, 12h-14h",
@@ -169,6 +139,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
+        date: "samedi 22 décembre, 10h-12h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
+        name: "Sushis, makis, temaris",
+        nameCook: "Takako",
+        price: 25,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/ignf0F"
+      },
+      {
+        availableSeat: 6,
         date: "vendredi 28 décembre, 15h-17h",
         duration: 2,
         image: "https://static.cuistotducoin.com/img/workshops/anne-barre.jpg",
@@ -190,9 +174,50 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         name: "Atelier brassage",
         nameCook: "Kevin",
         price: 60,
-        spot: "Brest, The Corner",
+        spot: "The Corner, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/SYDOzE"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 19 janvier, 10h-13h",
+        duration: 3,
+        image: "https://static.cuistotducoin.com/img/workshops/karim-tiep.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/karim.jpg",
+        name: "Tiep bou guinar",
+        nameCook: "Karim",
+        price: 30,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/MF6lYM"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 19 janvier, 10h-12h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-cheesecake-pomme.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Cheesecake caramel",
+        nameCook: "Audrey",
+        price: 40,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/bzR8yN"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 26 janvier, 10h-12h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-galette-des-rois.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Atelier enfant : Galette des rois",
+        nameCook: "Audrey",
+        price: 30,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/cAq2Mg"
       }
     ];
 
@@ -210,20 +235,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/qgukpu"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
-        name: "Sushis, makis et temaris",
-        nameCook: "Takako",
-        price: 40,
-        spot: "Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/ywYxcY"
       },
       {
         availableSeat: 6,
@@ -296,19 +307,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           valueProposition="Participez à des ateliers de cuisine authentiques et en toute convivialité !"
           description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
         />
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom={true}
-          className={classes.typography}
-        >
-          Nos prochains ateliers collectifs à Quimper
-        </Typography>
-        <Typography variant="body1" align="center">
-          Ateliers de cuisine collectif chez nos lieux partenaires
-        </Typography>
-        <WorkshopCardList workshops={workshopsQuimper} />
         <Typography
           variant="title"
           align="center"
