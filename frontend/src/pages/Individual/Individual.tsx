@@ -146,7 +146,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
         name: "Sushis, makis, temaris",
         nameCook: "Takako",
-        price: 25,
+        price: 40,
         spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/ignf0F"
