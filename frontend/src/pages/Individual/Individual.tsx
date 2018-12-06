@@ -139,7 +139,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
-        date: "samedi 22 décembre, 10h-12h",
+        date: "samedi 22 décembre, 10h-12h30",
         duration: 2,
         image:
           "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
