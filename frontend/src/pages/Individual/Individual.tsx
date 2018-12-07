@@ -138,7 +138,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/SNn9Pu"
       },
       {
-        availableSeat: 6,
+        availableSeat: 0,
         date: "samedi 22 décembre, 10h-12h30",
         duration: 2,
         image:
@@ -148,7 +148,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Takako",
         price: 40,
         spot: "Cuisinella, Brest",
-        totalSeat: 6,
+        totalSeat: 8,
         typeform: "https://cuistotducoin.typeform.com/to/ignf0F"
       },
       {
@@ -221,79 +221,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       }
     ];
 
-    const workshopsPending = [
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/shyam-indien-generique.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/shyam.jpg",
-        name: "Découverte de la cuisine indienne",
-        nameCook: "Shyam",
-        price: 35,
-        spot: "Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/qgukpu"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ahmed-inspiration-africaine.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
-        name: "Inspiration Africaine",
-        nameCook: "Ahmed",
-        price: 35,
-        spot: "Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/qieHUn"
-      },
-      {
-        availableSeat: 5,
-        date: "à venir",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/philippe-degustation-the.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/philippe.jpg",
-        name: "Dégustation de thés",
-        nameCook: "Philippe",
-        price: 25,
-        spot: "Palais des Thés, Brest",
-        totalSeat: 5,
-        typeform: "https://cuistotducoin.typeform.com/to/HHelGm"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/ahmed-cacao-cru.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
-        name: "Cacao cru",
-        nameCook: "Ahmed",
-        price: 25,
-        spot: "Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/EWUT4t"
-      },
-      {
-        availableSeat: 6,
-        date: "à venir",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-pate-a-sucre.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Cake Design : Pâte à sucres",
-        nameCook: "Audrey",
-        price: 45,
-        spot: "Audrey, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/X06uWu"
-      }
-    ];
-
     return (
       <>
         <Head
@@ -320,19 +247,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
           Ateliers de cuisine collectif chez nos lieux partenaires
         </Typography>
         <WorkshopCardList workshops={workshops} />
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom={true}
-          className={classes.typography}
-        >
-          Nos ateliers à venir
-        </Typography>
-        <Typography variant="body1" align="center">
-          Soyez prévenu des prochaines dates d'ateliers !
-        </Typography>
-        <WorkshopCardList workshops={workshopsPending} />
         <Typography
           variant="title"
           align="center"
