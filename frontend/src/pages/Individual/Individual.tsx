@@ -165,7 +165,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/hropRg"
       },
       {
-        availableSeat: 6,
+        availableSeat: 0,
         date: "samedi 12 janvier, 9h-14h",
         duration: 5,
         image:

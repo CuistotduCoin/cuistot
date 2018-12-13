@@ -106,13 +106,13 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
       );
     }
 
-    let price;
-    if (this.props.price === 0) {
-      price = "gratuit";
-    } else if (this.props.availableSeat < 1) {
-      price = `${this.props.price} € | complet`;
+    let tag;
+    if (this.props.availableSeat < 1) {
+      tag = "complet";
+    } else if (this.props.price === 0) {
+      tag = "gratuit";
     } else {
-      price = `${this.props.price} €`;
+      tag = `${this.props.price} €`;
     }
 
     function container(props, children) {
@@ -132,7 +132,7 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
       <Card className={classes.card}>
         <CardHeader
           className={classes.cardHeaderUp}
-          avatar={<Chip label={price} />}
+          avatar={<Chip label={tag} />}
           classes={{ avatar: classes.chip }}
         />
         <CardMedia
