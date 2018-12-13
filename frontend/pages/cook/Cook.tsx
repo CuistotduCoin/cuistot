@@ -156,7 +156,7 @@ export class Cook extends React.Component<ICookProps, {}> {
                       imageKey={get(cook, 'gourmet.image.key')}
                       identityId={cook.gourmet.identity_id}
                     />
-                    <Typography variant="display2" className={classes.name}>
+                    <Typography variant="h3" className={classes.name}>
                       {cookName}
                     </Typography>
                   </div>
@@ -165,7 +165,7 @@ export class Cook extends React.Component<ICookProps, {}> {
                   <Grid item container md={7} spacing={40} direction="column">
                     <Grid item>
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography variant="title" color="textSecondary" className={classes.paperTitle}>
+                        <Typography variant="h6" color="textSecondary" className={classes.paperTitle}>
                           {`A propos de ${cook.gourmet.first_name}`}
                         </Typography>
                         {cook.is_pro && (
@@ -174,13 +174,13 @@ export class Cook extends React.Component<ICookProps, {}> {
                           </Tooltip>
                         )}
                       </div>
-                      <Typography variant="body2">
+                      <Typography variant="body1">
                         {cook.description ? cook.description : `Hello :) je n'ai pas encore eu le temps de remplir cette partie mais ca arrive vite.`}
                       </Typography>
                     </Grid>
                     {!!workshops.length && (
                       <Grid item>
-                        <Typography variant="title" color="textSecondary" className={classes.paperTitle}>
+                        <Typography variant="h6" color="textSecondary" className={classes.paperTitle}>
                           Les ateliers du moment
                         </Typography>
                         <div>
@@ -199,7 +199,7 @@ export class Cook extends React.Component<ICookProps, {}> {
                     {!!evaluations.length && (
                       <Grid item>
                         <Paper elevation={1} className={classes.paper}>
-                          <Typography variant="title" color="textSecondary" className={classes.paperTitle}>
+                          <Typography variant="h6" color="textSecondary" className={classes.paperTitle}>
                             Les avis de nos Gourmets
                           </Typography>
                           <div>

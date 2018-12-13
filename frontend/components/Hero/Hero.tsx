@@ -75,7 +75,7 @@ export class Hero extends React.Component<IHeroProps, {}> {
           <Grid container direction="column">
             <Grid item>
               <Typography
-                variant="headline"
+                variant="h5"
                 align="center"
                 component="h1"
                 color="inherit"
@@ -84,7 +84,7 @@ export class Hero extends React.Component<IHeroProps, {}> {
               </Typography>
               {this.props.description && (
                 <Typography
-                  variant="subheading"
+                  variant="subtitle1"
                   align="center"
                   component="p"
                   color="inherit"

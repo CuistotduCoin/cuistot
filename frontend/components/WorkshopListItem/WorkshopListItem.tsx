@@ -45,7 +45,7 @@ const styles = (theme: Theme) => ({
   },
   workshopImage: {
     width: '180px',
-    height: '120px'  
+    height: '120px'
   }
 });
 
@@ -64,9 +64,9 @@ const WorkshopListItem: React.SFC<IWorkshopListItemProps> = ({ classes, workshop
     <div className={classes.column}>
       <CardContent className={cx(classes.column, classes.content)}>
         <div className={classes.header}>
-          <Typography variant="title">{workshop.name}</Typography>
+          <Typography variant="h6">{workshop.name}</Typography>
         </div>
-        {workshop.date && <Typography variant="subheading">{format(workshop.date, "[Le] DD MMMM [à] HH[h]mm")}</Typography>}
+        {workshop.date && <Typography variant="subtitle1">{format(workshop.date, "[Le] DD MMMM [à] HH[h]mm")}</Typography>}
         <Typography variant="caption">{workshop.kitchen.name}</Typography>
       </CardContent>
     </div>

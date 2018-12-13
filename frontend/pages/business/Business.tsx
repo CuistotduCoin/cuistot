@@ -222,7 +222,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           </Grid>
           <Grid item sm={6} xs={12}>
             <Typography
-              variant="title"
+              variant="h6"
               align="center"
               component="h2"
               gutterBottom
@@ -245,7 +245,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
         >
           <Grid item sm={6} xs={12}>
             <Typography
-              variant="title"
+              variant="h6"
               align="center"
               component="h2"
               gutterBottom
@@ -270,7 +270,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           </Grid>
         </Grid>
         <Typography
-          variant="title"
+          variant="h6"
           align="center"
           component="h2"
           gutterBottom
@@ -313,7 +313,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           ))}
         </Grid>
         <Typography
-          variant="title"
+          variant="h6"
           align="center"
           component="h2"
           gutterBottom
@@ -333,7 +333,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant="subheading">A votre écoute</Typography>
+              <Typography variant="subtitle1">A votre écoute</Typography>
               <Typography variant="body1">
                 Faîtes-nous part de vos besoins et de vos envies.
               </Typography>
@@ -346,7 +346,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant="subheading">
+              <Typography variant="subtitle1">
                 Une diversité de saveurs
               </Typography>
               <Typography variant="body1">
@@ -362,7 +362,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
               alignItems="flex-start"
               direction="column"
             >
-              <Typography variant="subheading">
+              <Typography variant="subtitle1">
                 On s’occupe de tout
               </Typography>
               <Typography variant="body1">
@@ -373,7 +373,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           </Grid>
         </Grid>
         <Typography
-          variant="title"
+          variant="h6"
           align="center"
           component="h2"
           gutterBottom
@@ -391,7 +391,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           </Typography>
         </Grid>
         <Typography
-          variant="title"
+          variant="h6"
           align="center"
           component="p"
           gutterBottom
@@ -430,7 +430,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           ))}
         </Grid>
         <Typography
-          variant="title"
+          variant="h6"
           align="center"
           component="p"
           gutterBottom
@@ -466,7 +466,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
           </Slider>
         </div>
         <Typography
-          variant="title"
+          variant="h6"
           align="center"
           component="p"
           gutterBottom

@@ -189,7 +189,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
     };
 
     return (
-      <Query query={GetWorkshop}  variables={{ workshop_id: workshopId }}>
+      <Query query={GetWorkshop} variables={{ workshop_id: workshopId }}>
         {({ loading, error, data }) => {
           if (loading) return <Loading />;
           // catch resource not found here
@@ -213,7 +213,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                       <div key={image.key}>
                         <S3Image
                           component="img"
-                          alt={`Photo ${i+1} de l'atelier ${workshop.name}`}
+                          alt={`Photo ${i + 1} de l'atelier ${workshop.name}`}
                           path={`workshops/${workshop.id}`}
                           imageKey={image.key}
                           identityId={workshop.cook.gourmet.identity_id}
@@ -228,7 +228,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                 <Cover imageURL={this.props.mainPhoto} />
               </div>
               <Grid
-                container     
+                container
                 justify="space-around"
                 alignItems="center"
                 className={classes.grid}
@@ -261,18 +261,18 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                           )}
                         </Grid>
                       )}
-                      <Typography variant="title" component="p" gutterBottom>
+                      <Typography variant="h6" component="p" gutterBottom>
                         Recontrez {cookName}
                       </Typography>
                       <Typography
-                        variant="headline"
+                        variant="h5"
                         component="h2"
                         gutterBottom
                       >
                         {workshop.name}
                       </Typography>
                       <Typography
-                        variant="subheading"
+                        variant="subtitle1"
                         component="p"
                         gutterBottom
                       >
@@ -343,7 +343,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                       <div>
                         <Grid item className={classes.itemGrid}>
                           <Typography
-                            variant="headline"
+                            variant="h5"
                             component="h2"
                             gutterBottom
                           >
@@ -360,7 +360,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                         </Grid>
                         <Grid item className={classes.itemGrid}>
                           <Typography
-                            variant="headline"
+                            variant="h5"
                             component="h2"
                             gutterBottom
                           >
@@ -374,7 +374,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                             {workshop.images.slice(0, Math.min(workshop.images.length, 3)).map((image, i) => {
                               const imageProps = {
                                 component: "img",
-                                alt: `Photo ${i+1} de l'atelier ${workshop.name}`,
+                                alt: `Photo ${i + 1} de l'atelier ${workshop.name}`,
                                 path: `workshops/${workshop.id}`,
                                 imageKey: image.key,
                                 identityId: workshop.cook.gourmet.identity_id,
@@ -389,26 +389,26 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                                       onClick={this.handleModalOpen}
                                     />
                                   ) : (
-                                    <div
-                                      className={classes.tileContainer}
-                                      onClick={this.handleModalOpen}
-                                    >
-                                      <S3Image
-                                        {...imageProps}
-                                        className={cx(classes.workshopImage, classes.img)}
-                                      />
-                                      <div className={classes.tile}>
-                                        <Typography
-                                          variant="body1"
-                                          component="p"
-                                          align="center"
-                                          color="inherit"
-                                        >
-                                          Voir plus de photos
+                                      <div
+                                        className={classes.tileContainer}
+                                        onClick={this.handleModalOpen}
+                                      >
+                                        <S3Image
+                                          {...imageProps}
+                                          className={cx(classes.workshopImage, classes.img)}
+                                        />
+                                        <div className={classes.tile}>
+                                          <Typography
+                                            variant="body1"
+                                            component="p"
+                                            align="center"
+                                            color="inherit"
+                                          >
+                                            Voir plus de photos
                                         </Typography>
+                                        </div>
                                       </div>
-                                    </div>
-                                  )}
+                                    )}
                                 </Grid>
                               );
                             })}
@@ -421,7 +421,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                       <div>
                         <Grid item className={classes.itemGrid}>
                           <Typography
-                            variant="headline"
+                            variant="h5"
                             component="h2"
                             gutterBottom
                           >
@@ -443,7 +443,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                       <div>
                         <Grid item className={classes.itemGrid}>
                           <Typography
-                            variant="headline"
+                            variant="h5"
                             component="h2"
                             gutterBottom
                           >
@@ -482,7 +482,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                       <div>
                         <Grid item className={classes.itemGrid}>
                           <Typography
-                            variant="headline"
+                            variant="h5"
                             component="h2"
                             gutterBottom
                           >
@@ -549,7 +549,7 @@ class Workshop extends React.Component<IWorkshopProps, IWorkshopState> {
                             />
                           </Grid>
                         </Grid>
-                      </Grid>                                    
+                      </Grid>
                       <Grid item className={classes.itemGrid}>
                         <Grid container>
                           <Typography

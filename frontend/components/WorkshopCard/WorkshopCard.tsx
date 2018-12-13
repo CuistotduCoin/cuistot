@@ -154,12 +154,12 @@ export class WorkshopCard extends React.Component<IWorkshopCardProps, {}> {
                 <Chip label="Atelier collectif" className={classes.chip} />
               </Grid>
               <Grid item className={classes.bottomContentCardItem}>
-                <Typography align="center" variant="title">
+                <Typography align="center" variant="h6">
                   {this.props.name}
                 </Typography>
               </Grid>
               <Grid item className={classes.bottomContentCardItem}>
-                <Typography variant="subheading">{this.props.date}</Typography>
+                <Typography variant="subtitle1">{this.props.date}</Typography>
               </Grid>
             </Grid>
             <Divider />

@@ -23,7 +23,7 @@ import Loading from "../../components/Loading";
 import S3Image from "../../components/S3Image";
 import WorkshopForm from "../../components/WorkshopForm";
 import { withRedirect } from "../../decorators";
-import { DeleteWorkshop, GetWorkshop, UpdateWorkshop  } from "../../queries";
+import { DeleteWorkshop, GetWorkshop, UpdateWorkshop } from "../../queries";
 import { format } from "../../shared/date-utils";
 import { sanitizeFilename } from "../../shared/util";
 
@@ -197,7 +197,7 @@ class WorkshopEditForm extends React.Component<IWorkshopEditFormProps> {
               <Card className={classes.card}>
                 <CardContent className={classes.imagesCard}>
                   {workshop.images.length === 0 &&
-                    <Typography variant="body2">Pas encore de photos pour cet atelier</Typography>
+                    <Typography variant="body1">Pas encore de photos pour cet atelier</Typography>
                   }
                   {workshop.images.length > 0 &&
                     <GridList className={classes.gridList} cols={2.5}>
@@ -309,7 +309,7 @@ class WorkshopEditForm extends React.Component<IWorkshopEditFormProps> {
       max_gourmet: gourmetRange.max,
       date,
     };
-  
+
     const updateWorkshopError = (result) => {
       openSnackbar("Échec de la mise à jour de l'atelier", "error");
       setStatus({ success: false });

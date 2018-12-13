@@ -91,7 +91,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
       kitchenId,
     } = values;
 
-    const workshop = {    
+    const workshop = {
       name,
       description,
       price,
@@ -142,7 +142,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
             if (loading) return <Loading />;
             // catch resource not found here
             if (error) return `Error: ${error}`;
-            
+
             const cook = data.getCook.cook;
 
             if (!cook.confirmed) {
@@ -168,7 +168,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                   })}
                 >
                   <Typography
-                    variant="headline"
+                    variant="h5"
                     align="center"
                     component="h1"
                     color="inherit"
@@ -183,7 +183,7 @@ class WorkshopNew extends React.Component<IWorkshopNewProps> {
                   })}
                 >
                   <Typography
-                    variant="headline"
+                    variant="h5"
                     align="center"
                     component="h1"
                     color="inherit"

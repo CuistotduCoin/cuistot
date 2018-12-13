@@ -32,7 +32,7 @@ export class CommentBlock extends React.Component<ICommentBlock, {}> {
             <Grid container spacing={8} direction="column">
               <Grid item container justify="space-between" alignItems="center">
                 <Grid item>
-                  <Typography variant="subheading" component="span">
+                  <Typography variant="subtitle1" component="span">
                     {name}
                   </Typography>
                 </Grid>

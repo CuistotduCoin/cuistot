@@ -2,17 +2,19 @@ import { FormControl } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
-import { FastField, Form, Formik, FormikProps } from "formik";
+import { Field, Form, Formik, FormikProps } from "formik";
 import { TextField } from "formik-material-ui";
 import React from "react";
 import Card from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 import * as Yup from "yup";
 import { fromString } from "../../shared/util";
-// import { formatCardNumber, formatExpirationDate } from "./payment";
-// import PaymentField from "./PaymentField";
 
-const styles = (theme: Theme) => ({});
+const styles = (theme: Theme) => ({
+  form: {
+    paddingBottom: 24
+  }
+});
 
 interface IPaymentCardFormProps {
   classes?: any;
@@ -41,7 +43,7 @@ type CardFieldStr = "number" | "name" | "expiry" | "cvc";
 export class PaymentCardForm extends React.Component<
   IPaymentCardFormProps,
   IPaymentCardFormState
-> {
+  > {
   public state: IPaymentCardFormState = {
     focused: CardField.NUMBER
   };
@@ -60,7 +62,6 @@ export class PaymentCardForm extends React.Component<
   });
 
   public handleInputFocus = (event: React.FormEvent<HTMLInputElement>) => {
-    console.log("fdssf");
     const val: string = event.currentTarget.name;
     const field = fromString(CardField, val);
     this.setState({ focused: field });
@@ -87,11 +88,10 @@ export class PaymentCardForm extends React.Component<
     const paymentCardFormComponent = (
       props: FormikProps<IPaymentCardFormValues>
     ) => (
-      <Form autoComplete="off">
-        <FormControl>
-          <Grid container justify="space-around" spacing={16}>
-            <Grid item xs={12}>
-              <Grid container>
+        <Form autoComplete="off" className={classes.form}>
+          <FormControl>
+            <Grid container justify="space-around" spacing={16}>
+              <Grid item xs={12}>
                 <Card
                   cvc={props.values.cvc || ""}
                   expiry={props.values.expiry || ""}
@@ -100,84 +100,73 @@ export class PaymentCardForm extends React.Component<
                   focused={this.state.focused.toString() as CardFieldStr}
                 />
               </Grid>
-            </Grid>
-            <Grid item xs={12}>
-              <Divider />
-            </Grid>
-            <Grid item xs={8}>
-              <Grid container>
-                <FastField
-                  type="text"
-                  component={TextField}
-                  id="number"
-                  label="Numéro de carte"
-                  name="number"
-                  placeholder="Votre numero de carte"
-                  className={classes.textField}
-                  margin="normal"
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  value={props.values.number}
-                />
+              <Grid item xs={12}>
+                <Divider />
+              </Grid>
+              <Grid container justify="space-around">
+                <Grid item xs={4}>
+                  <Field
+                    type="text"
+                    component={TextField}
+                    id="number"
+                    label="Numéro de carte"
+                    name="number"
+                    placeholder="Votre numero de carte"
+                    margin="normal"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.number}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <Field
+                    type="text"
+                    component={TextField}
+                    id="expiry"
+                    label="Expiration"
+                    name="expiry"
+                    placeholder="MM/AA"
+                    margin="normal"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.expiry}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container justify="space-around">
+                <Grid item xs={4}>
+                  <Field
+                    type="text"
+                    component={TextField}
+                    id="name"
+                    label="Nom du porteur"
+                    name="name"
+                    placeholder="Votre nom"
+                    margin="normal"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.name}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <Field
+                    type="text"
+                    component={TextField}
+                    id="cvc"
+                    label="CVC"
+                    name="cvc"
+                    placeholder="CVC"
+                    margin="normal"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.cvc}
+                  />
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item xs={4}>
-            <Grid container>
-              <FastField
-                type="text"
-                component={TextField}
-                id="expiry"
-                label="Expiration"
-                name="expiry"
-                placeholder="MM/AA"
-                className={classes.textField}
-                margin="normal"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.expiry}
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={8}>
-            <Grid container>
-              <FastField
-                type="text"
-                component={TextField}
-                id="name"
-                label="Nom du porteur"
-                name="name"
-                placeholder="Votre nom"
-                className={classes.textField}
-                margin="normal"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.name}
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={4}>
-            <Grid container>
-              <FastField
-                type="text"
-                component={TextField}
-                id="cvc"
-                label="CVC"
-                name="cvc"
-                placeholder="CVC"
-                className={classes.textField}
-                margin="normal"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.cvc}
-              />
-            </Grid>
-          </Grid>
-          <div>{JSON.stringify(props, null, 2)}></div>
-          <div>{JSON.stringify(this.state, null, 2)}></div>
-        </FormControl>
-      </Form>
-    );
+          </FormControl>
+        </Form >
+      );
 
     return (
       <Formik

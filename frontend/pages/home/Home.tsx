@@ -186,7 +186,7 @@ export class Home extends React.Component<IHomeProps, {}> {
       <Layout
         valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
         description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
-      >  
+      >
         <Grid container alignItems="center" className={classes.gridTile}>
           <Grid item xs={12} sm={6}>
             <Grid container className={classes.tileEntreprise}>
@@ -201,7 +201,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                     <div className={classes.tile}>
                       <Grid container direction="column">
                         <Typography
-                          variant="headline"
+                          variant="h5"
                           align="center"
                           component="h2"
                           className={classes.tileTitle}
@@ -209,7 +209,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                           Vous êtes une entreprise
                         </Typography>
                         <Typography
-                          variant="body2"
+                          variant="body1"
                           align="center"
                           component="p"
                           className={classes.tileSubtitle}
@@ -237,7 +237,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                     <div className={classes.tile}>
                       <Grid container direction="column">
                         <Typography
-                          variant="headline"
+                          variant="h5"
                           align="center"
                           component="h2"
                           className={classes.tileTitle}
@@ -245,7 +245,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                           Vous êtes un particulier
                         </Typography>
                         <Typography
-                          variant="body2"
+                          variant="body1"
                           align="center"
                           component="p"
                           className={classes.tileSubtitle}
@@ -262,7 +262,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           </Grid>
         </Grid>
         <Typography
-          variant="headline"
+          variant="h5"
           align="center"
           component="h2"
           gutterBottom
@@ -276,7 +276,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           spacing={16}
           className={classes.grid}
         >
-        <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Grid
               container
               justify="space-between"
@@ -284,7 +284,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               direction="column"
             >
               <Typography
-                variant="title"
+                variant="h6"
                 component="h3"
                 gutterBottom
               >
@@ -305,7 +305,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               direction="column"
             >
               <Typography
-                variant="title"
+                variant="h6"
                 component="h3"
                 gutterBottom
               >
@@ -325,7 +325,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               direction="column"
             >
               <Typography
-                variant="title"
+                variant="h6"
                 component="h3"
                 gutterBottom
               >
@@ -339,7 +339,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           </Grid>
         </Grid>
         <Typography
-          variant="title"
+          variant="h6"
           align="center"
           component="h2"
           gutterBottom

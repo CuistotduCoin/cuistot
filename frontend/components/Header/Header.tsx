@@ -84,7 +84,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
           <Link href="/login" passHref>
             <Button
               className={classes.accountButton}
-              variant="raised"
+              variant="contained"
               color="primary"
               onScroll={this.handleScroll}
             >
@@ -97,7 +97,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
           <Link href="/signup" passHref>
             <Button
               className={classes.accountButton}
-              variant="raised"
+              variant="contained"
               color="primary"
               onScroll={this.handleScroll}
             >
@@ -115,7 +115,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
       >
         <Toolbar>
           <Grid container justify="flex-start" alignItems="center">
-          <Logo className={classes.logo} />
+            <Logo className={classes.logo} />
             {!hideCompanyIndividual && (
               <Hidden smDown>
                 <Link href="/business" passHref>

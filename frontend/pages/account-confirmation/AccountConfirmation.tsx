@@ -17,7 +17,7 @@ const styles = (theme: Theme) => ({
 const AccountConfirmation: React.SFC<{ classes: any }> = ({ classes }) => (
   <div className={classes.container}>
     <Logo height={100} width={100} className={classes.logo} />
-    <Typography align="center" variant="display1">
+    <Typography align="center" variant="h4">
       Vous avez dû recevoir un code de sécurité
     </Typography>
     <AccountConfirmationForm />

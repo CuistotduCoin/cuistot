@@ -55,7 +55,7 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
           spacing={16}
         >
           <Typography
-            variant="title"
+            variant="h6"
             align="center"
             component="h2"
             gutterBottom
@@ -76,7 +76,7 @@ export class Subscription extends React.Component<ISubscriptionProps, {}> {
             son CAP Pâtisserie.
           </Typography>
           <Typography
-            variant="title"
+            variant="h6"
             align="center"
             component="h2"
             gutterBottom

@@ -27,6 +27,7 @@ interface IPaymentProps {
   nameCook: string;
   date: string;
   price: number;
+  numberGourmet: number;
 }
 
 interface IPaymentState {
@@ -67,14 +68,14 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
         return (
           <Grid container className={classes.grid}>
             <Grid item xs={8}>
-              <Typography variant="title" component="p" gutterBottom>
+              <Typography variant="h6" component="p" gutterBottom>
                 Recontrez {this.props.nameCook}
               </Typography>
-              <Typography variant="headline" component="h2" gutterBottom>
+              <Typography variant="h5" component="h2" gutterBottom>
                 {this.props.name}
               </Typography>
               <Typography
-                variant="subheading"
+                variant="subtitle1"
                 component="p"
                 gutterBottom
               >
@@ -88,72 +89,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                 Continuer
               </Button>
             </Grid>
-            <Grid item xs={4}>
-              <Paper elevation={1} className={classes.infoReservartion}>
-                <Grid container>
-                  <Grid item xs={8}>
-                    <Typography
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      {this.props.price}€ x 2 Gourmets
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Typography
-                      align="right"
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      100€
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Typography
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      frais de service
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Typography
-                      align="right"
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      20€
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Divider />
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Typography
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      Total
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Typography
-                      align="right"
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      120€
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
+            {this.getSider(classes)}
           </Grid>
         );
       case 1:
@@ -169,72 +105,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
                 Confirmer et payer
               </Button>
             </Grid>
-            <Grid item xs={4}>
-              <Paper elevation={1} className={classes.infoReservartion}>
-                <Grid container>
-                  <Grid item xs={8}>
-                    <Typography
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      {this.props.price}€ x 2 Gourmets
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Typography
-                      align="right"
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      100€
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Typography
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      frais de service
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Typography
-                      align="right"
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      20€
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Divider />
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Typography
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      Total
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Typography
-                      align="right"
-                      variant="subheading"
-                      component="p"
-                      gutterBottom
-                    >
-                      120€
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
+            {this.getSider(classes)}
           </Grid>
         );
 
@@ -245,7 +116,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
 
   public render() {
     const { classes } = this.props;
-    const steps = ["Récapitulatif", "Paiement", "Infos"];
+    const steps = ["Récapitulatif", "Information de Paiement", "Infos"];
 
     return (
       <Layout headerProps={{ static: true, hideCompanyIndividual: true }}>
@@ -260,7 +131,7 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
             <Divider />
           </Grid>
           <Grid item>
-            <Typography variant="title">
+            <Typography variant="h6">
               Paiement - {steps[this.state.activeStep]}
             </Typography>
           </Grid>
@@ -284,6 +155,77 @@ export class Payment extends React.Component<IPaymentProps, IPaymentState> {
         {this.state.activeStep <= steps.length &&
           this.getStepContent(this.state.activeStep)}
       </Layout>
+    );
+  }
+
+  private getSider(classes) {
+    return (
+      <Grid item xs={4}>
+        <Paper elevation={1} className={classes.infoReservartion}>
+          <Grid container>
+            <Grid item xs={8}>
+              <Typography
+                variant="subtitle1"
+                component="p"
+                gutterBottom
+              >
+                {this.props.price}€ x {this.props.numberGourmet} Gourmet{this.props.numberGourmet > 0 && "s"}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography
+                align="right"
+                variant="subtitle1"
+                component="p"
+                gutterBottom
+              >
+                {this.props.price}€
+            </Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography
+                variant="subtitle1"
+                component="p"
+                gutterBottom
+              >
+                frais de service
+            </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography
+                align="right"
+                variant="subtitle1"
+                component="p"
+                gutterBottom
+              >
+                {this.props.price * 0.2}€
+            </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Divider />
+            </Grid>
+            <Grid item xs={8}>
+              <Typography
+                variant="subtitle1"
+                component="p"
+                gutterBottom
+              >
+                Total
+            </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography
+                align="right"
+                variant="subtitle1"
+                component="p"
+                gutterBottom
+              >
+                {this.props.price * 1.2}€
+            </Typography>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Grid>
     );
   }
 }
