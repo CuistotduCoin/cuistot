@@ -90,7 +90,7 @@ export class Search extends React.Component<ISearchProps, ISearchState> {
     super(props);
 
     this.state = {
-      mapOpen: false,
+      mapOpen: true,
       selectedHit: null
     };
 

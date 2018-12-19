@@ -1,5 +1,5 @@
 exports.up = knex => (
-  knex.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";').createTable('bookings', (table) => {
+  knex.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";').createTable('bookings_workshop', (table) => {
     table.uuid('id')
       .defaultTo(knex.raw('uuid_generate_v4()'))
       .primary()
@@ -25,4 +25,4 @@ exports.up = knex => (
   })
 );
 
-exports.down = knex => knex.schema.dropTable('bookings');
+exports.down = knex => knex.schema.dropTable('bookings_workshop');
