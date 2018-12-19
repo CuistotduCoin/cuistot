@@ -82,62 +82,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     const workshops = [
       {
-        availableSeat: 6,
-        date: "samedi 15 décembre, 12h-14h",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/anne-bien-etre.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
-        name: "Déjeuner bien-être",
-        nameCook: "Anne",
-        price: 35,
-        spot: "Le Pop Up du Père Noël Brestoa",
-        totalSeat: 5,
-        typeform: "https://cuistotducoin.typeform.com/to/PPzMhJ"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 15 décembre, 14h-16h",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-maison-pain-epices.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Atelier enfant : Maison en pain d'épices",
-        nameCook: "Audrey",
-        price: 35,
-        spot: "Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/r7wTMZ"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 15 décembre, 14h-16h",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/nadine-apéro.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
-        name: "Apéro Festif autour du blé noir",
-        nameCook: "Nadine",
-        price: 30,
-        spot: "Schmidt, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/c6Rg7h"
-      },
-      {
-        availableSeat: 6,
-        date: "mardi 18 décembre, 16h-18h",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
-        name: "Initiation au tournage de crêpes de froment",
-        nameCook: "Nadine",
-        price: 25,
-        spot: "Schmidt, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/SNn9Pu"
-      },
-      {
         availableSeat: 0,
         date: "samedi 22 décembre, 10h-12h30",
         duration: 2,
@@ -177,6 +121,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "The Corner, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/SYDOzE"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 12 janvier, 10h-12h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
+        name: "Sushis, makis, temaris",
+        nameCook: "Takako",
+        price: 40,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/E6cumB"
       },
       {
         availableSeat: 6,
@@ -232,6 +190,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Schmidt, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/cAq2Mg"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 9 février, 10h-13h",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/christian-kouign-amann.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
+        name: "Kouign Amann",
+        nameCook: "Fabien",
+        price: 50,
+        spot: "Schmidt, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/oFW5Ul"
       }
     ];
 
