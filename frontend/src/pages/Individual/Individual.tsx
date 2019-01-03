@@ -83,33 +83,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const workshops = [
       {
         availableSeat: 0,
-        date: "samedi 22 décembre, 10h-12h30",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/takako-sushis.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
-        name: "Sushis, makis, temaris",
-        nameCook: "Takako",
-        price: 40,
-        spot: "Cuisinella, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/ignf0F"
-      },
-      {
-        availableSeat: 6,
-        date: "vendredi 28 décembre, 15h-17h",
-        duration: 2,
-        image: "https://static.cuistotducoin.com/img/workshops/anne-barre.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
-        name: "Atelier enfant : Que la force soit avec toi !",
-        nameCook: "Anne",
-        price: 25,
-        spot: "Refuge Royal, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/hropRg"
-      },
-      {
-        availableSeat: 0,
         date: "samedi 12 janvier, 9h-14h",
         duration: 5,
         image:
