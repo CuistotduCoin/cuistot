@@ -379,39 +379,39 @@ export class Home extends React.Component<IHomeProps, {}> {
         >
           Vous voulez en voir plus ?
         </Typography>
-        <NoSsr>
-          <Grid
-            container={true}
-            justify="space-around"
-            spacing={16}
-            className={classes.gridWithoutPadding}
-          >
-            <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
-              <InstagramEmbed
-                url="https://instagr.am/p/Bo1RaKUle_4/"
-                hideCaption={true}
-                containerTagName="div"
-                maxWidth={320}
-              />
-            </Grid>
-            <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
-              <InstagramEmbed
-                url="https://instagr.am/p/Blk5LAND9Xf/"
-                hideCaption={true}
-                containerTagName="div"
-                maxWidth={320}
-              />
-            </Grid>
-            <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
-              <InstagramEmbed
-                url="https://instagr.am/p/Bo9DdGYlUEl/"
-                hideCaption={true}
-                containerTagName="div"
-                maxWidth={320}
-              />
-            </Grid>
+        <Grid
+          container={true}
+          justify="space-around"
+          spacing={16}
+          className={classes.gridWithoutPadding}
+        >
+          <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
+            <InstagramEmbed
+              url="https://instagr.am/p/Bo1RaKUle_4/"
+              hideCaption={true}
+              containerTagName="div"
+              maxWidth={320}
+            />
           </Grid>
-        </NoSsr>
+          <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
+            <InstagramEmbed
+              url="https://instagr.am/p/Blk5LAND9Xf/"
+              hideCaption={true}
+              containerTagName="div"
+              maxWidth={320}
+              injectScript={false}
+            />
+          </Grid>
+          <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
+            <InstagramEmbed
+              url="https://instagr.am/p/Bo9DdGYlUEl/"
+              hideCaption={true}
+              containerTagName="div"
+              maxWidth={320}
+              injectScript={false}
+            />
+          </Grid>
+        </Grid>
         <Footer />
       </>
     );
