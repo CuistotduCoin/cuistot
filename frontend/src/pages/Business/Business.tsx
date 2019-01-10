@@ -173,6 +173,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
                 variant="contained"
                 color="secondary"
                 href="https://landbot.io/u/H-117244-32JN5PQL01AGBAXB/index.html"
+                target="_blank"
               >
                 Obtenir un devis
               </Button>

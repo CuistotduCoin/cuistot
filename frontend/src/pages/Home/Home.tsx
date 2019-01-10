@@ -1,5 +1,6 @@
 import { Avatar } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import NoSsr from "@material-ui/core/NoSsr";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Footer from "components/Footer";
@@ -252,12 +253,12 @@ export class Home extends React.Component<IHomeProps, {}> {
             <Typography variant={"title"} component="h3" gutterBottom={true}>
               Des ateliers et des buffets
             </Typography>
-            <Typography variant={"body1"} paragraph={true}>
+            <Typography variant={"body1"} paragraph={true} align="justify">
               Pour vos événements privés ou professionnels, nous vous régalerons
               avec des ateliers de cuisine conviviaux ou encore des buffets
               cocktails délicieux !
             </Typography>
-            <Typography variant={"body1"} paragraph={true}>
+            <Typography variant={"body1"} paragraph={true} align="justify">
               Parce que le voyage commence d’abord dans l’assiette, découvrez
               une cuisine qui invite à l’évasion et percez les secrets des
               recettes de nos Cuistots passionnés.
@@ -378,37 +379,39 @@ export class Home extends React.Component<IHomeProps, {}> {
         >
           Vous voulez en voir plus ?
         </Typography>
-        <Grid
-          container={true}
-          justify="space-around"
-          spacing={16}
-          className={classes.gridWithoutPadding}
-        >
-          <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
-            <InstagramEmbed
-              url="https://instagr.am/p/Bo1RaKUle_4/"
-              hideCaption={true}
-              containerTagName="div"
-              maxWidth={320}
-            />
+        <NoSsr>
+          <Grid
+            container={true}
+            justify="space-around"
+            spacing={16}
+            className={classes.gridWithoutPadding}
+          >
+            <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
+              <InstagramEmbed
+                url="https://instagr.am/p/Bo1RaKUle_4/"
+                hideCaption={true}
+                containerTagName="div"
+                maxWidth={320}
+              />
+            </Grid>
+            <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
+              <InstagramEmbed
+                url="https://instagr.am/p/Blk5LAND9Xf/"
+                hideCaption={true}
+                containerTagName="div"
+                maxWidth={320}
+              />
+            </Grid>
+            <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
+              <InstagramEmbed
+                url="https://instagr.am/p/Bo9DdGYlUEl/"
+                hideCaption={true}
+                containerTagName="div"
+                maxWidth={320}
+              />
+            </Grid>
           </Grid>
-          <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
-            <InstagramEmbed
-              url="https://instagr.am/p/Blk5LAND9Xf/"
-              hideCaption={true}
-              containerTagName="div"
-              maxWidth={320}
-            />
-          </Grid>
-          <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
-            <InstagramEmbed
-              url="https://instagr.am/p/Bo9DdGYlUEl/"
-              hideCaption={true}
-              containerTagName="div"
-              maxWidth={320}
-            />
-          </Grid>
-        </Grid>
+        </NoSsr>
         <Footer />
       </>
     );
