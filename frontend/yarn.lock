@@ -7610,9 +7610,9 @@ node-releases@^1.0.0-alpha.12:
   dependencies:
     semver "^5.3.0"
 
-node@^10.11.0:
-  version "10.11.0"
-  resolved "https://registry.yarnpkg.com/node/-/node-10.11.0.tgz#2f6b2392c9bf9f7dc100a0115885bd053957c4bf"
+node@^11.6.0:
+  version "11.6.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-11.6.0.tgz#febc07664c69ccd197b79d26570bc2d7b3bbaa63"
   dependencies:
     node-bin-setup "^1.0.0"
 
@@ -8621,6 +8621,14 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
+query-string@^5.1.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-5.1.1.tgz#a78c012b71c17e05f2e3fa2319dd330682efb3cb"
+  dependencies:
+    decode-uri-component "^0.2.0"
+    object-assign "^4.1.0"
+    strict-uri-encode "^1.0.0"
+
 querystring-es3@^0.2.0, querystring-es3@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -8957,6 +8965,12 @@ react-inspector@^2.3.0:
   dependencies:
     babel-runtime "^6.26.0"
     is-dom "^1.0.9"
+
+react-instagram-embed@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/react-instagram-embed/-/react-instagram-embed-1.4.1.tgz#57032ff965cf8806549c2f1d3bb713635b48e407"
+  dependencies:
+    query-string "^5.1.0"
 
 react-instantsearch-core@^5.3.1:
   version "5.3.1"

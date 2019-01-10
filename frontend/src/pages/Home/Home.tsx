@@ -1,3 +1,4 @@
+import { Avatar } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -6,11 +7,16 @@ import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import React from "react";
+import InstagramEmbed from "react-instagram-embed";
 import { Link } from "react-router-dom";
-import Slider from "react-slick";
 import metaInfo from "shared/metaInfo";
 
 const styles = (theme: Theme) => ({
+  avatar: {
+    height: 80,
+    margin: 8,
+    width: 80
+  },
   block: {
     height: "100%",
     overflow: "hidden",
@@ -24,7 +30,14 @@ const styles = (theme: Theme) => ({
   gridTile: {
     margin: "0px auto"
   },
+  gridWithoutPadding: {
+    margin: "0px auto",
+    maxWidth: 1080
+  },
   image: {
+    padding: 16
+  },
+  imageTile: {
     opacity: "0.5",
     position: "relative",
     top: "50%",
@@ -121,67 +134,6 @@ export class Home extends React.Component<IHomeProps, {}> {
       slidesToShow: 4
     };
 
-    const partners = [
-      {
-        image: "https://static.cuistotducoin.com/img/home/partners/amaiur.jpg",
-        name: "amaiur"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/arthur-bonnet.jpg",
-        name: "Arthur Bonnet"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/c-chocolat.jpg",
-        name: "C chocolat"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/couleurs-cuisines.jpg",
-        name: "Couleurs Cuisines"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/cuisinella.jpg",
-        name: "cuisinella"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/palais-des-thes.jpg",
-        name: "Palais des thes"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/roi-de-bretagne.jpg",
-        name: "Roi de Bretagne"
-      },
-      {
-        image: "https://static.cuistotducoin.com/img/home/partners/schmidt.jpg",
-        name: "Schmidt"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/soif-de-vins.jpg",
-        name: "Soif de vins"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/the-corner.jpg",
-        name: "The corner"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/tot-ou-tard.jpg",
-        name: "Tot ou tard"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/tuk-tuk-bazar.jpg",
-        name: "Tuk Tuk Bazar"
-      }
-    ];
-
     return (
       <>
         <Head
@@ -193,14 +145,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
           videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
-          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
-          /*searchForm={
-            <SearchForm
-              apiKey={runtimeConfig.ALGOLIASEARCH_PLACES_KEY}
-              appId={runtimeConfig.ALGOLIASEARCH_PLACES_APP_ID}
-              history={this.props.history}
-            />
-          }*/
+          description="Ateliers de Cuisine, Buffets cocktail authentiques et conviviaux"
         />
         <Grid container={true} alignItems="center" className={classes.gridTile}>
           <Grid item={true} xs={12} sm={6}>
@@ -209,7 +154,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                 <img
                   src="https://static.cuistotducoin.com/img/home/business.jpg"
                   alt={"Entreprise"}
-                  className={classes.image}
+                  className={classes.imageTile}
                 />
                 <Link to="/business" className={classes.link}>
                   <div className={classes.tile}>
@@ -243,7 +188,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                 <img
                   src="https://static.cuistotducoin.com/img/home/individual.jpg"
                   alt={"Particulier"}
-                  className={classes.image}
+                  className={classes.imageTile}
                 />
                 <Link to="/individual" className={classes.link}>
                   <div className={classes.tile}>
@@ -279,7 +224,7 @@ export class Home extends React.Component<IHomeProps, {}> {
           gutterBottom={true}
           className={classes.typography}
         >
-          Ateliers, dégustations ou repas, retrouvez nos ingrédients clés :
+          Cuistot du Coin, le renouveau du traiteur événementiel à Brest
         </Typography>
         <Grid
           container={true}
@@ -287,93 +232,183 @@ export class Home extends React.Component<IHomeProps, {}> {
           spacing={16}
           className={classes.grid}
         >
-          <Grid item={true} xs={12} sm={4}>
-            <Grid
-              container={true}
-              justify="space-between"
-              alignItems="flex-start"
-              direction="column"
-            >
-              <Typography variant={"title"} component="h3" gutterBottom={true}>
-                Authenticité et Convivialité
-              </Typography>
-              <Typography variant={"body1"}>
-                Parce que le voyage commence d’abord dans l’assiette, découvrez
-                une cuisine qui invite à l’évasion et percez les secrets des
-                recettes de nos Cuistots passionnés.
-              </Typography>
-            </Grid>
+          <Grid container={true} xs={12} sm={7} justify="center">
+            <img
+              src="https://static.cuistotducoin.com/img/home/buffet.jpg"
+              alt="buffet"
+              height={270}
+              width={480}
+              className={classes.image}
+            />
           </Grid>
-          <Grid item={true} xs={12} sm={4}>
-            <Grid
-              container={true}
-              justify="space-between"
-              alignItems="flex-start"
-              direction="column"
-            >
-              <Typography variant={"title"} component="h3" gutterBottom={true}>
-                Partage
-              </Typography>
-              <Typography variant={"body1"}>
-                Au-delà de la cuisine, plongez dans les univers de nos Cuistots
-                et découvrez de nouveaux horizons.
-              </Typography>
-            </Grid>
+          <Grid
+            xs={12}
+            sm={5}
+            container={true}
+            justify="center"
+            alignItems="center"
+            direction="column"
+          >
+            <Typography variant={"title"} component="h3" gutterBottom={true}>
+              Des ateliers et des buffets
+            </Typography>
+            <Typography variant={"body1"} paragraph={true}>
+              Pour vos événements privés ou professionnels, nous vous régalerons
+              avec des ateliers de cuisine conviviaux ou encore des buffets
+              cocktails délicieux !
+            </Typography>
+            <Typography variant={"body1"} paragraph={true}>
+              Parce que le voyage commence d’abord dans l’assiette, découvrez
+              une cuisine qui invite à l’évasion et percez les secrets des
+              recettes de nos Cuistots passionnés.
+            </Typography>
           </Grid>
-          <Grid item={true} xs={12} sm={4}>
-            <Grid
-              container={true}
-              justify="space-between"
-              alignItems="flex-start"
-              direction="column"
-            >
-              <Typography variant={"title"} component="h3" gutterBottom={true}>
-                Diversité
-              </Typography>
-              <Typography variant={"body1"}>
-                Divers formats et univers culinaires sont proposés chez Cuistot
-                du Coin. De quoi satisfaire vos papilles !
-              </Typography>
-            </Grid>
+          <Grid
+            xs={12}
+            sm={5}
+            container={true}
+            justify="center"
+            alignItems="center"
+            direction="column"
+          >
+            <Typography variant={"title"} component="h3" gutterBottom={true}>
+              Nos Cuistots
+            </Typography>
+            <Typography variant={"body1"} paragraph={true} align="justify">
+              Nous ne travaillons exclusivement qu'avec des traiteurs
+              indépendants qu'on appelle nos cuistots ! Nos cuistots assurent
+              des prestations authentiques et conviviales, à partir de produits
+              frais et fait main.
+            </Typography>
+            <Typography variant={"body1"} paragraph={true} align="justify">
+              Cela vous permet d'explorer une diversité d'univers culinaires
+              pour toujours surprendre et satisfaire vos papilles !
+            </Typography>
           </Grid>
-        </Grid>
-        <Typography
-          variant="title"
-          align="center"
-          component="h2"
-          gutterBottom={true}
-        >
-          Nos partenaires
-        </Typography>
-        <Grid
-          container={true}
-          justify="space-around"
-          spacing={16}
-          className={classes.grid}
-        >
-          <Grid item={true} xs={12}>
-            <Typography variant={"body1"}>
-              Le talent culinaire est partout et Cuistot du Coin souhaite le
-              révéler. Nous nous sommes entourés d’artisans et de commerçants
-              passionnés pour vous offrir des expériences culinaires sur-mesure.
+          <Grid container={true} xs={12} sm={7} justify="center">
+            <img
+              src="https://static.cuistotducoin.com/img/home/atelier-produits-frais.jpg"
+              alt="Ateliers autour de produits frais"
+              height={270}
+              width={480}
+              className={classes.image}
+            />
+          </Grid>
+          <Grid container={true} xs={12} sm={7} justify="center">
+            <img
+              src="https://static.cuistotducoin.com/img/home/communauté.jpg"
+              alt="Notre communauté de cuistots"
+              height={270}
+              width={480}
+              className={classes.image}
+            />
+          </Grid>
+          <Grid
+            xs={12}
+            sm={5}
+            container={true}
+            justify="center"
+            alignItems="center"
+            direction="column"
+          >
+            <Typography variant={"title"} component="h3" gutterBottom={true}>
+              Une communauté
+            </Typography>
+            <Typography variant={"body1"} paragraph={true} align="justify">
+              Tous nos partenaires (métiers de bouche, lieux atypiques, artisans
+              et de commerçants passionnés) collaboreront autour de votre
+              événement pour le rentre unique.
+            </Typography>
+            <Typography variant={"body1"} paragraph={true} align="justify">
+              Notre technologie et notre équipe à votre service pour vous
+              accompagner avant, pendant et après chaque prestation.
+            </Typography>
+          </Grid>
+          <Typography
+            variant="headline"
+            align="center"
+            component="h2"
+            gutterBottom={true}
+            className={classes.typography}
+          >
+            Ils nous font confiance
+          </Typography>
+          <Grid
+            container={true}
+            alignItems="center"
+            className={classes.gridTile}
+          >
+            <img
+              alt="Séverine Gey, Crédit Mutuel Arkea"
+              src="https://static.cuistotducoin.com/img/business/participants/arkea.jpg"
+              height={80}
+              width={80}
+            />
+            <Typography variant="subheading" paragraph={true}>
+              Séverine Gey, responsable du comité d'entreprise du Crédit Mutuel
+              Arkea
+            </Typography>
+            <Typography variant="body1" paragraph={true} align="justify">
+              L'équipe a apprécié toutes les prestations de Cuistot du coin. Le
+              buffet : original et très bon et l'atelier : ambiance détendue où
+              chacun a trouvé sa place. Le lieu où se sent vite très bien. Merci
+              pour cette respiration.
+            </Typography>
+            <Avatar
+              alt="Lucile Landoin"
+              src="https://static.cuistotducoin.com/img/home/lucile.jpg"
+              className={classes.avatar}
+            />
+            <Typography variant="subheading" paragraph={true}>
+              Lucile Landoin, gourmet de l'atelier végétal : makis et rolls
+            </Typography>
+            <Typography variant="body1" paragraph={true}>
+              Cuistot du coin a trouvé le concept parfait pour passer un bon
+              moment en cuisinant ! Convivial et super pratique pour avoir des
+              conseils de cuisine, je le recommande vivement
             </Typography>
           </Grid>
         </Grid>
-
-        <div className={classes.slider}>
-          <Slider {...sliderSettings}>
-            {partners.map(partner => (
-              <div key={partner.name}>
-                <img
-                  src={partner.image}
-                  alt={partner.name}
-                  className={classes.sliderImage}
-                  key={partner.name}
-                />
-              </div>
-            ))}
-          </Slider>
-        </div>
+        <Typography
+          variant="headline"
+          align="center"
+          component="h2"
+          gutterBottom={true}
+          className={classes.typography}
+        >
+          Vous voulez en voir plus ?
+        </Typography>
+        <Grid
+          container={true}
+          justify="space-around"
+          spacing={16}
+          className={classes.gridWithoutPadding}
+        >
+          <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
+            <InstagramEmbed
+              url="https://instagr.am/p/Bo1RaKUle_4/"
+              hideCaption={true}
+              containerTagName="div"
+              maxWidth={320}
+            />
+          </Grid>
+          <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
+            <InstagramEmbed
+              url="https://instagr.am/p/Blk5LAND9Xf/"
+              hideCaption={true}
+              containerTagName="div"
+              maxWidth={320}
+            />
+          </Grid>
+          <Grid item={true} sm={12} md={6} lg={4} justify="space-around">
+            <InstagramEmbed
+              url="https://instagr.am/p/Bo9DdGYlUEl/"
+              hideCaption={true}
+              containerTagName="div"
+              maxWidth={320}
+            />
+          </Grid>
+        </Grid>
         <Footer />
       </>
     );

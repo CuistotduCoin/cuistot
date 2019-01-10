@@ -96,7 +96,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/SYDOzE"
       },
       {
-        availableSeat: 6,
+        availableSeat: 0,
         date: "samedi 12 janvier, 10h-12h30",
         duration: 2,
         image:
@@ -108,6 +108,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/E6cumB"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 19 janvier, 9h30-14h",
+        duration: 5,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/michel-decouverte-ayurvedique.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/michel.jpg",
+        name: "Atelier ayurvédique",
+        nameCook: "Michel",
+        price: 40,
+        spot: "Michel, Plougastel-Daoulas",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/xfOQxn"
       },
       {
         availableSeat: 6,
@@ -163,6 +177,34 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Schmidt, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/cAq2Mg"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 2 février, 10h-13h",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/hayet-couscous.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/hayet.jpg",
+        name: "Atelier Maghrébin - Couscous",
+        nameCook: "Hayet",
+        price: 35,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/uRSySz"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 2 février, 10h30-12h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/anne-enfant-crumble.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
+        name: "Atelier Enfant - Crumble",
+        nameCook: "Anne",
+        price: 25,
+        spot: "Comme les grands, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/pNCmsw"
       },
       {
         availableSeat: 6,

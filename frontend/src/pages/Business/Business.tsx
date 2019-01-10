@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -13,8 +14,6 @@ import Head from "components/Head";
 import Header from "components/Header";
 import Hero from "components/Hero";
 import React from "react";
-// @ts-ignore
-import HubspotForm from "react-hubspot-form";
 import Slider from "react-slick";
 import metaInfo from "shared/metaInfo";
 
@@ -109,20 +108,13 @@ export class Business extends React.Component<IBusinessProps, {}> {
         image:
           "https://static.cuistotducoin.com/img/business/atelier-afterwork.jpg",
         title: "Atelier de cuisine",
-        url: "https://cuistotducoin.typeform.com/to/XkgNMt"
+        url: "https://landbot.io/u/H-117244-32JN5PQL01AGBAXB/index.html"
       },
       {
-        description: "Une solution clé en main pour un dejeunez rapide",
+        description: "Une solution clé en main pour un dejeuner ou diner",
         image: "https://static.cuistotducoin.com/img/business/buffet.jpg",
         title: "Buffet",
-        url: "https://cuistotducoin.typeform.com/to/hakg4D"
-      },
-      {
-        description: "Récompensez vos équipes autour d'un repas d'exception !",
-        image:
-          "https://static.cuistotducoin.com/img/business/repas-prestige.jpg",
-        title: "Repas",
-        url: "https://cuistotducoin.typeform.com/to/OMwjPe"
+        url: "https://landbot.io/u/H-117244-32JN5PQL01AGBAXB/index.html"
       }
     ];
 
@@ -169,8 +161,24 @@ export class Business extends React.Component<IBusinessProps, {}> {
           imageURL="https://static.cuistotducoin.com/img/home/landing.jpg"
           videoURL="https://static.cuistotducoin.com/video/landing-video.mp4"
           valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
-          description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
-        />
+          description="Ateliers de Cuisine, Buffet cocktail authentiques et conviviaux"
+        >
+          <Grid
+            container={true}
+            justify="space-around"
+            className={classes.grid}
+          >
+            <Grid item={true}>
+              <Button
+                variant="contained"
+                color="secondary"
+                href="https://landbot.io/u/H-117244-32JN5PQL01AGBAXB/index.html"
+              >
+                Obtenir un devis
+              </Button>
+            </Grid>
+          </Grid>
+        </Hero>
         <Typography
           variant="title"
           align="center"
@@ -195,7 +203,7 @@ export class Business extends React.Component<IBusinessProps, {}> {
             >
               <Grid container={true} direction="row">
                 <Group />
-                <Typography variant={"title"}>Team building</Typography>
+                <Typography variant={"title"}>Cohésion</Typography>
               </Grid>
               <Typography variant={"body1"}>
                 Découvrez nos buffets et ateliers fédérateurs pour soutenir
@@ -234,8 +242,9 @@ export class Business extends React.Component<IBusinessProps, {}> {
                 <Typography variant={"title"}>Clés en mains</Typography>
               </Grid>
               <Typography variant={"body1"}>
-                Repas et ateliers sont organisés de A à Z par nos soins. Enfilez
-                le tablier ou passez à table: il n’y a plus qu’à déguster !
+                Ateliers et buffets cocktail sont organisés de A à Z par nos
+                soins. Enfilez le tablier ou passez à table: il n’y a plus qu’à
+                déguster !
               </Typography>
             </Grid>
           </Grid>
@@ -258,6 +267,15 @@ export class Business extends React.Component<IBusinessProps, {}> {
             d’un repas savoureux
           </Typography>
         </Grid>
+        <Typography
+          variant="title"
+          align="center"
+          component="p"
+          gutterBottom={true}
+        >
+          Réservez votre billet et embarquez en équipe pour un savoureux voyage
+          culinaire !
+        </Typography>
         <Grid
           container={true}
           justify="space-around"
@@ -329,27 +347,6 @@ export class Business extends React.Component<IBusinessProps, {}> {
             ))}
           </Slider>
         </div>
-        <Typography
-          variant="title"
-          align="center"
-          component="p"
-          gutterBottom={true}
-        >
-          Réservez votre billet et embarquez en équipe pour un savoureux voyage
-          culinaire !
-        </Typography>
-        <Grid
-          container={true}
-          justify="space-around"
-          alignItems="center"
-          spacing={16}
-          className={classes.grid}
-        >
-          <HubspotForm
-            portalId="3826127"
-            formId="2db2fd4a-3e67-4396-a725-e8320947201e"
-          />
-        </Grid>
         <Footer />
       </>
     );

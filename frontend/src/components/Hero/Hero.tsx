@@ -20,11 +20,6 @@ const styles = () => ({
     background: "rgba(0, 0, 0, 0.5)",
     display: "flex"
   },
-  gridSearchForm: {
-    margin: "0px auto",
-    maxWidth: 500,
-    padding: 24
-  },
   home: {
     color: "#fff",
     overflow: "hidden",
@@ -50,7 +45,7 @@ interface IHeroProps {
   imageURL: string;
   valueProposition: string;
   description: string;
-  searchForm: any;
+  children: any;
 }
 
 export class Hero extends React.Component<IHeroProps, {}> {
@@ -92,11 +87,7 @@ export class Hero extends React.Component<IHeroProps, {}> {
                   {this.props.description}
                 </Typography>
               )}
-              <Grid container={true}>
-                <Grid item={true} className={classes.gridSearchForm}>
-                  {this.props.searchForm}
-                </Grid>
-              </Grid>
+              {this.props.children}
             </Grid>
           </Grid>
         </div>

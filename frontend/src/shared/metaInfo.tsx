@@ -2,7 +2,7 @@ export default {
   metaInfo: {
     business: {
       description:
-        "Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux... Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !",
+        "Ateliers de Cuisine, Dégustations, Buffet Cocktail authentiques et conviviaux... Concoctez avec nous une expérience culinaire gourmande pour vos salariés !",
       href: "https://www.cuistotducoin.com/business",
       title:
         "Ateliers de cuisine en entreprise : Partager un moment convivial et authentique avec votre équipe"
@@ -18,7 +18,8 @@ export default {
       description:
         "Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots d'ailleurs.",
       href: "https://www.cuistotducoin.com",
-      title: "Atelier de cuisine pour particuliers et entreprises"
+      title:
+        "Atelier de cuisine, Buffets, Cocktails pour particuliers et entreprises"
     },
     howitworks: {
       description:
@@ -28,7 +29,7 @@ export default {
     },
     individual: {
       description:
-        "Ateliers de cuisine collectif, privatisé, ou encore repas à domicile... Offez-vous un moment culinaire authentique et convivial !",
+        "Ateliers de cuisine collectif, privatisé, ou encore cuistot à domicile... Offez-vous un moment culinaire authentique et convivial !",
       href: "https://www.cuistotducoin.com/individual",
       title:
         "Ateliers de cuisine pour les particuliers : participez à des ateliers de cuisine authentiques et en toute convivialité !"
