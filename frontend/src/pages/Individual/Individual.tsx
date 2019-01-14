@@ -125,19 +125,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
-        date: "samedi 19 janvier, 10h-13h",
-        duration: 3,
-        image: "https://static.cuistotducoin.com/img/workshops/karim-tiep.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/karim.jpg",
-        name: "Tiep bou guinar",
-        nameCook: "Karim",
-        price: 30,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/MF6lYM"
-      },
-      {
-        availableSeat: 6,
         date: "samedi 19 janvier, 10h-12h30",
         duration: 2,
         image:
@@ -163,6 +150,19 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Refuge Royal, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/pObS1Q"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 26 janvier, 10h-13h",
+        duration: 3,
+        image: "https://static.cuistotducoin.com/img/workshops/karim-tiep.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/karim.jpg",
+        name: "Tiep bou guinar",
+        nameCook: "Karim",
+        price: 30,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/MF6lYM"
       },
       {
         availableSeat: 6,
@@ -201,7 +201,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
         name: "Atelier Enfant - Crumble",
         nameCook: "Anne",
-        price: 25,
+        price: 30,
         spot: "Comme les grands, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/pNCmsw"
