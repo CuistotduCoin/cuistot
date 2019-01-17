@@ -137,6 +137,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/MF6lYM"
       },
       {
+        availableSeat: 8,
+        date: "samedi 26 janvier, 9h-14h",
+        duration: 5,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/kevin-brassage.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/kevin.jpg",
+        name: "Brassage de bière",
+        nameCook: "Kevin",
+        price: 65,
+        spot: "The Corner, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/uWPnEu"
+      },
+      {
         availableSeat: 6,
         date: "samedi 26 janvier, 10h-12h30",
         duration: 2,
@@ -191,6 +205,62 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Schmidt, Brest",
         totalSeat: 8,
         typeform: "https://cuistotducoin.typeform.com/to/oFW5Ul"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 9 février, 14h-16h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
+        name: "Initiation au tournage de crêpes ",
+        nameCook: "Nadine",
+        price: 25,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/oeV7MK"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 9 février, 14h-16h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/audrey-st-valentin.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
+        name: "Enfants: Biscuits de St Valentin",
+        nameCook: "Audrey",
+        price: 30,
+        spot: "Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/R41sw0"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 16 février, 10h-12h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-ble-noir.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
+        name: "Initiation au tournage de galette",
+        nameCook: "Nadine",
+        price: 30,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/Jg3DEa"
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 2 mars, 9h-14h",
+        duration: 5,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/kevin-brassage.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/kevin.jpg",
+        name: "Brassage de bière",
+        nameCook: "Kevin",
+        price: 65,
+        spot: "The Corner, Brest",
+        totalSeat: 8,
+        typeform: "https://cuistotducoin.typeform.com/to/WUlucN"
       }
     ];
 
