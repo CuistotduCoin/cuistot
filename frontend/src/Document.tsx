@@ -155,9 +155,10 @@ export default class Document extends React.Component<IDocumentProps, {}> {
           />
           <script
             dangerouslySetInnerHTML={{
-              __html: `(function(a,l,b,c,r,s){_nQc=c,r=a.createElement(l),s=a.getElementsByTagName(l)[0];r.async=1;r.src=l.src=("https:"==a.location.protocol?"https://":"http://")+b;s.parentNode.insertBefore(r,s);})(document,"script","serve.albacross.com/track.js","89196477");`
+              __html: `window.ltwAsyncInit = function(){init_multiplegl('https://gl.hostcg.com/',[['https://gl.hostcg.com/','2346','svolxbjcwm']]);};`
             }}
           />
+          <script src="https://gl.hostcg.com/js/genlead.js" defer={true} />
           <script
             dangerouslySetInnerHTML={{
               __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="9be7ee4d-531c-4885-90c7-2a190c06a0cc";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`
