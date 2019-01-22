@@ -180,6 +180,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
+        date: "samedi 9 février, 10h-13h",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/takako-repas.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
+        name: "Repas japonais",
+        nameCook: "Takako",
+        price: 50,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/cfZFIZ"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 9 février, 14h-16h",
         duration: 2,
         image:
@@ -219,6 +233,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Schmidt, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/Jg3DEa"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 16 février, 14h-16h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ahmed-cacao-cru.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ahmed.jpg",
+        name: "Autour du cacao",
+        nameCook: "Ahmed",
+        price: 35,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/ElJajU"
       },
       {
         availableSeat: 8,
