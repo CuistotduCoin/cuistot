@@ -12,7 +12,7 @@ const handle = app.getRequestHandler();
 const route = pathMatch();
 const matches = [
   { route: route("/"), page: "/home" },
-  { route: route("/workshops/:id/edit"), page: "/workshop-edit"},
+  { route: route("/workshops/:id/edit"), page: "/workshop-edit" },
   { route: route("/workshops/new"), page: "/workshop-new" },
   { route: route("/workshops/:id"), page: "/workshop" },
 ];

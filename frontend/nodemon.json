@@ -3,6 +3,6 @@
     "server/**/*.ts"
   ],
   "execMap": {
-    "ts": "ts-node --project tsconfig.server.json --typeCheck"
+    "ts": "ts-node --project tsconfig.server.json"
   }
 }
