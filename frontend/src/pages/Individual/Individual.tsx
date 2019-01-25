@@ -249,6 +249,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/ElJajU"
       },
       {
+        availableSeat: 6,
+        date: "jeudi 21 février, 20h30-22h30",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/anne-enfant-crumble.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
+        name: "Atelier bien-être - Crumble de potimarron",
+        nameCook: "Anne",
+        price: 35,
+        spot: "Refuge Royal, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/EVpB7o"
+      },
+      {
         availableSeat: 8,
         date: "samedi 2 mars, 9h-14h",
         duration: 5,
@@ -261,7 +275,34 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "The Corner, Brest",
         totalSeat: 8,
         typeform: "https://cuistotducoin.typeform.com/to/WUlucN"
-      }
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 9 mars, 10h-13h",
+        duration: 3,
+        image: "https://static.cuistotducoin.com/img/workshops/karim-mafe.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/karim.jpg",
+        name: "Cuisine Africaine - Mafé",
+        nameCook: "Karim",
+        price: 35,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/jRQFcs"
+      },
+      {
+        availableSeat: 8,
+        date: "samedi 6 avril, 10h-13h",
+        duration: 3,
+        image: "https://static.cuistotducoin.com/img/workshops/karim-tiep.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/karim.jpg",
+        name: "Cuisine Africaine - Tiep",
+        nameCook: "Karim",
+        price: 35,
+        spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/jRQFcs"
+      },
+
     ];
 
     return (
