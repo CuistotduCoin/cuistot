@@ -274,8 +274,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/jRQFcs"
-      },
-
+      }
     ];
 
     return (
