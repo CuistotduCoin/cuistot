@@ -1,4 +1,4 @@
-import * as content from "!raw-loader!content/invite.md";
+import * as content from "!raw-loader!content/invite-business.md";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 // @ts-ignore
