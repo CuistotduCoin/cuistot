@@ -1,3 +1,4 @@
+import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -8,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import HubspotForm from "react-hubspot-form";
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import Layout from "../../components/Layout";
 
@@ -51,7 +52,7 @@ const styles = (theme: Theme) => ({
   },
   slider: {
     margin: "0px auto",
-    maxWidth: 1080,
+    maxWidth: 950,
     paddingBottom: 75,
     width: "calc(100% - 120px)"
   },
@@ -93,77 +94,17 @@ export class Business extends React.Component<IBusinessProps, {}> {
 
     const typeActivity = [
       {
-        description:
-          "Atelier de deux heures suivi d'une dégustation des produits préparés",
+        description: "Atelier suivi d'une dégustation ou d'un repas",
         image:
           "https://static.cuistotducoin.com/img/business/atelier-afterwork.jpg",
-        title: "Atelier Afterwork",
-        url: "https://cuistotducoin.typeform.com/to/XkgNMt"
+        title: "Atelier de cuisine",
+        url: "https://landbot.io/u/H-117244-32JN5PQL01AGBAXB/index.html"
       },
       {
-        description: "Atelier de trois heures suivi d'un repas convivial",
-        image:
-          "https://static.cuistotducoin.com/img/business/atelier-et-repas.jpg",
-        title: "Atelier suivi d’un repas",
-        url: "https://cuistotducoin.typeform.com/to/e0PmFx"
-      },
-      {
-        description: "Atelier découverte et dégustation",
-        image: "https://static.cuistotducoin.com/img/business/degustation.jpg",
-        title: "Atelier dégustation",
-        url: "https://cuistotducoin.typeform.com/to/qrhUFk"
-      },
-      {
-        description: "Une solution clé en main pour un dejeunez rapide",
+        description: "Une solution clé en main pour un dejeuner ou diner",
         image: "https://static.cuistotducoin.com/img/business/buffet.jpg",
-        title: "Buffet des gourmets",
-        url: "https://cuistotducoin.typeform.com/to/hakg4D"
-      },
-      {
-        description: "Récompensez vos équipes autour d'un repas d'exception !",
-        image:
-          "https://static.cuistotducoin.com/img/business/repas-prestige.jpg",
-        title: "Repas prestige",
-        url: "https://cuistotducoin.typeform.com/to/OMwjPe"
-      },
-      {
-        description:
-          "Notre cuistot est aux fourneaux et vous prépare des mets du monde à se partager en équipe.",
-        image:
-          "https://static.cuistotducoin.com/img/business/repas-pratique.jpg",
-        title: "Repas authentique",
-        url: "https://cuistotducoin.typeform.com/to/XkgNMt"
-      }
-    ];
-
-    const typeWorld = [
-      {
-        description:
-          "Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots d'ailleurs.",
-        image:
-          "https://static.cuistotducoin.com/img/business/cuisine-du-monde.jpg",
-        title: "Cuisine du monde"
-      },
-      {
-        description:
-          "Initiez-vous aux principes de la cuisine végétarienne, vegan ou encore ayurvédique, où l’équilibre et les saveurs sont au cœur de l’assiette.",
-        image:
-          "https://static.cuistotducoin.com/img/business/cuisine-bien-etre.jpg",
-        title: "Cuisine Bien-être"
-      },
-      {
-        description:
-          "Attachés à votre territoire et aux produits locaux et de saison, plongez au cœur d’une cuisine bretonne qui éveillera votre curiosité.",
-        image:
-          "https://static.cuistotducoin.com/img/business/cuisine-terroir.jpg",
-        title: "Cuisine Terroir"
-      },
-      {
-        description:
-          "Percez les secrets de nos artisans pâtissiers et boulangers au travers de recettes créatives et gourmandes.",
-        image:
-          "https://static.cuistotducoin.com/img/business/boulangerie-et-patisserie.jpg",
-        title: "Boulangerie & Pâtisserie"
+        title: "Buffet",
+        url: "https://landbot.io/u/H-117244-32JN5PQL01AGBAXB/index.html"
       }
     ];
 
@@ -201,8 +142,8 @@ export class Business extends React.Component<IBusinessProps, {}> {
     ];
     return (
       <Layout
-        valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
-        description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
+        valueProposition="Apportez de la saveur à vos événements d’entreprise"
+        description="Journées d’équipe, temps-forts en entreprise, activités collaboratives, buffets savoureux"
       >
         <Grid
           container
@@ -227,13 +168,14 @@ export class Business extends React.Component<IBusinessProps, {}> {
               component="h2"
               gutterBottom
             >
-              Organisez avec nous des ateliers culinaires pour vos équipes
+              Vous êtes un Comité d’Entreprise
             </Typography>
             <Typography variant="body1" align="center">
-              Enfilez le tablier et partagez des moments privilégiés et
-              fédérateurs en équipe aux côtés de nos Cuistots passionnés aux
-              univers culinaires diversifiés
+              Nous construisons à vos côtés un programme d’ateliers de cuisine privatisés dans nos lieux partenaires pour vos salariés. Les ateliers proposés sont accessibles à tous, amateurs ou passionnés avertis. Nos formats d’ateliers et la diversité des univers culinaires de nos cuistots permettront de satisfaire le plus grand nombre, tout en garantissant des moments conviviaux.
             </Typography>
+            <Grid container alignItems="center" justify="center">
+              <Button variant="outlined" color="primary">En savoir plus</Button>
+            </Grid>
           </Grid>
         </Grid>
         <Grid
@@ -250,14 +192,80 @@ export class Business extends React.Component<IBusinessProps, {}> {
               component="h2"
               gutterBottom
             >
-              Passez à table, régalez-vous ! Nos Cuistots s’occupent de tout !
+              Vous souhaitez organiser un atelier
             </Typography>
             <Typography variant="body1" align="center">
-              Découverte de saveurs et partage s’invitent au cœur de vos repas
-              concoctés par nos Cuistots. Partez à leur rencontre et
-              laissez-vous porter le temps d’un voyage gustatif autour de leurs
-              plats «fait-maison».
+              A la recherche d’une activité fédératrice, propice à la cohésion d’équipe et au partage ? Enfilez le tablier avec vos collaborateurs et rejoignez nos cuistots passionnés aux fourneaux. Nos ateliers laissent place à la collaboration et encouragent l’esprit d’équipe et la créativité. Chaque atelier se termine par la dégustation des préparations autour d’un buffet convivial, voir d’un repas.
             </Typography>
+            <Grid container alignItems="center" justify="center">
+              <Button variant="outlined" color="primary">En savoir plus</Button>
+            </Grid>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Grid container justify="center">
+              <img
+                className={classes.image}
+                alt="Atelier Cuistot du Coin"
+                src="https://static.cuistotducoin.com/img/business/passez-a-table.jpg"
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          justify="space-around"
+          alignItems="center"
+          className={classes.grid}
+          spacing={16}
+        >
+          <Grid item sm={6} xs={12}>
+            <Grid container justify="center">
+              <img
+                className={classes.image}
+                alt="Atelier Cuistot du Coin"
+                src="https://static.cuistotducoin.com/img/business/organisez.jpg"
+              />
+            </Grid>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Typography
+              variant="h6"
+              align="center"
+              component="h2"
+              gutterBottom
+            >
+              Vous souhaitez organiser un buffet
+            </Typography>
+            <Typography variant="body1" align="center">
+              A l’issue d’une réunion d’équipe, lors d’un séminaire, à l’occasion d’une rencontre entre collaborateurs, vous recherchez une formule de repas qui allie originalité, simplicité et convivialité. Nos buffets sont une invitation au voyage : découvrez des saveurs d’ici et d’ailleurs au travers de recettes authentiques.
+            </Typography>
+            <Grid container alignItems="center" justify="center">
+              <Button variant="outlined" color="primary">En savoir plus</Button>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          justify="space-around"
+          alignItems="center"
+          className={classes.grid}
+          spacing={16}
+        >
+          <Grid item sm={6} xs={12}>
+            <Typography
+              variant="h6"
+              align="center"
+              component="h2"
+              gutterBottom
+            >
+              Vous souhaitez organiser une journée de travail conviviale
+            </Typography>
+            <Typography variant="body1" align="center">
+              ...
+            </Typography>
+            <Grid container alignItems="center" justify="center">
+              <Button variant="outlined" color="primary">En Savoir plus</Button>
+            </Grid>
           </Grid>
           <Grid item sm={6} xs={12}>
             <Grid container justify="center">
@@ -398,37 +406,6 @@ export class Business extends React.Component<IBusinessProps, {}> {
         >
           A vous de choisir votre destination !
         </Typography>
-        <Grid
-          container
-          justify="space-around"
-          alignItems="center"
-          spacing={16}
-          className={classes.grid}
-        >
-          {typeWorld.map((world, index) => (
-            <Grid key={index} item xs={12} sm={6} md={3} lg>
-              <Grid container justify="center">
-                <Card className={classes.cardtypeWorld}>
-                  <CardMedia
-                    className={classes.media}
-                    image={world.image}
-                    title={world.title}
-                  />
-                  <CardHeader
-                    className={classes.cardHeader}
-                    title={world.title}
-                    classes={{
-                      title: classes.title
-                    }}
-                  />
-                  <CardContent className={classes.cardLongContent}>
-                    <Typography component="p">{world.description}</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-          ))}
-        </Grid>
         <Typography
           variant="h6"
           align="center"

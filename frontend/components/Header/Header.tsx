@@ -1,9 +1,9 @@
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
 import React from "react";
 import AccountDropdown from "../../components/AccountDropdown";
@@ -23,7 +23,10 @@ const styles = (theme: Theme) => ({
     color: "white"
   },
   logo: {
-    marginRight: 3 * theme.spacing.unit
+    marginRight: theme.spacing.unit
+  },
+  logoText: {
+    marginRight: theme.spacing.unit
   }
 });
 
@@ -50,7 +53,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
     this.handleScroll = this.handleScroll.bind(this);
   }
 
-  public handleScroll = (evt: any) => {
+  public handleScroll = () => {
     if (window.scrollY > 0) {
       this.setState({ up: false });
     } else {
@@ -70,8 +73,7 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
     const {
       classes,
       hideSignUpLogin,
-      isLoggedIn,
-      hideCompanyIndividual
+      isLoggedIn
     } = this.props;
 
     let rightElement;
@@ -115,21 +117,19 @@ export class Header extends React.Component<IHeaderProps, IHeaderState> {
       >
         <Toolbar>
           <Grid container justify="flex-start" alignItems="center">
-            <Logo className={classes.logo} />
-            {!hideCompanyIndividual && (
-              <Hidden smDown>
-                <Link href="/business" passHref>
-                  <Button className={classes.button} color="primary">
-                    Entreprise
-                  </Button>
-                </Link>
-                <Link href="/individual" passHref>
-                  <Button className={classes.button} color="primary">
-                    Particulier
-                  </Button>
-                </Link>
-              </Hidden>
-            )}
+            <Link href="/">
+              <a>
+                <Grid container justify="flex-start" alignItems="center">
+                  <Logo className={classes.logo} />
+                  <Typography className={classes.logoText}
+                    variant="subtitle1"
+                    component="div"
+                  >
+                    Cuistot du Coin
+                  </Typography>
+                </Grid>
+              </a>
+            </Link>
           </Grid>
           {rightElement && (
             <Grid container justify="flex-end">

@@ -1,3 +1,4 @@
+import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -7,9 +8,10 @@ import React from "react";
 import { graphql } from "react-apollo";
 import Slider from "react-slick";
 import { compose } from "recompose";
-// import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import Layout from "../../components/Layout";
+import StarRating from "../../components/StarRating";
 import { withData } from "../../decorators";
 import { GetWorkshops } from "../../queries";
 
@@ -18,6 +20,9 @@ const styles = (theme: Theme) => ({
     height: "100%",
     overflow: "hidden",
     position: "relative"
+  },
+  cell: {
+    cursor: "grab"
   },
   grid: {
     margin: "0px auto",
@@ -28,21 +33,17 @@ const styles = (theme: Theme) => ({
     margin: "0px auto"
   },
   image: {
-    opacity: "0.5",
-    position: "relative",
-    top: "50%",
-    transform: "translateY(-50%)",
+    height: "100%",
+    maxWidth: 320,
     width: "100%"
   },
   slider: {
     margin: "0px auto",
-    maxWidth: 950,
     paddingBottom: 75,
-    width: "calc(100% - 120px)"
+    width: "calc(100% - 120px)",
   },
   sliderImage: {
     height: 100,
-    margin: "0px auto",
     width: 100
   },
   tile: {
@@ -101,166 +102,82 @@ export class Home extends React.Component<IHomeProps, {}> {
   public render() {
     const { classes } = this.props;
     const sliderSettings = {
-      autoplay: true,
+      dots: true,
       infinite: true,
       responsive: [
         {
           breakpoint: 960,
           settings: {
-            slidesToShow: 3
+            slidesToShow: 2
           }
         },
         {
           breakpoint: 600,
           settings: {
-            slidesToShow: 2
+            slidesToShow: 1
           }
         }
       ],
-      slidesToScroll: 1,
-      slidesToShow: 4
+      slidesToScroll: 3,
+      slidesToShow: 3
     };
 
-    const partners = [
+    const participants = [
       {
-        image: "https://static.cuistotducoin.com/img/home/partners/amaiur.jpg",
-        name: "amaiur"
-      },
-      {
+        context: "banquet",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
         image:
-          "https://static.cuistotducoin.com/img/home/partners/arthur-bonnet.jpg",
-        name: "Arthur Bonnet"
+          "https://static.cuistotducoin.com/img/business/participants/arkea.jpg",
+        name: "Arkea",
+        rating: 5
       },
       {
+        context: "test",
+        comment: "Lorem ipsum dolor sit amet",
         image:
-          "https://static.cuistotducoin.com/img/home/partners/c-chocolat.jpg",
-        name: "C chocolat"
+          "https://static.cuistotducoin.com/img/business/participants/brest-metropole.jpg",
+        name: "Brest metropole et ville",
+        rating: 5
       },
       {
+        context: "test 3",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
         image:
-          "https://static.cuistotducoin.com/img/home/partners/couleurs-cuisines.jpg",
-        name: "Couleurs Cuisines"
+          "https://static.cuistotducoin.com/img/business/participants/cadiou.jpg",
+        name: "Cadiou",
+        rating: 5
       },
       {
+        context: "test 4",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
         image:
-          "https://static.cuistotducoin.com/img/home/partners/cuisinella.jpg",
-        name: "cuisinella"
+          "https://static.cuistotducoin.com/img/business/participants/fortuneo.jpg",
+        name: "Fortuneo",
+        rating: 5
       },
       {
+        context: "test 5",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
         image:
-          "https://static.cuistotducoin.com/img/home/partners/palais-des-thes.jpg",
-        name: "Palais des thes"
+          "https://static.cuistotducoin.com/img/business/participants/gl-events.jpg",
+        name: "Gl events",
+        rating: 5
       },
       {
+        context: "test 6 test 7",
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini",
         image:
-          "https://static.cuistotducoin.com/img/home/partners/roi-de-bretagne.jpg",
-        name: "Roi de Bretagne"
-      },
-      {
-        image: "https://static.cuistotducoin.com/img/home/partners/schmidt.jpg",
-        name: "Schmidt"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/soif-de-vins.jpg",
-        name: "Soif de vins"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/the-corner.jpg",
-        name: "The corner"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/tot-ou-tard.jpg",
-        name: "Tot ou tard"
-      },
-      {
-        image:
-          "https://static.cuistotducoin.com/img/home/partners/tuk-tuk-bazar.jpg",
-        name: "Tuk Tuk Bazar"
+          "https://static.cuistotducoin.com/img/business/participants/hippocampe.jpg",
+        name: "Agence Hippocampe",
+        rating: 5
       }
     ];
 
     return (
       <Layout
         valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
-        description="Ateliers de Cuisine, Dégustations, Repas authentiques et conviviaux"
+        description="Votre organisateur d’événements, ateliers de cuisine et buffets authentiques et conviviaux"
       >
-        <Grid container alignItems="center" className={classes.gridTile}>
-          <Grid item xs={12} sm={6}>
-            <Grid container className={classes.tileEntreprise}>
-              <div className={classes.block}>
-                <img
-                  src="https://static.cuistotducoin.com/img/home/business.jpg"
-                  alt="Entreprise"
-                  className={classes.image}
-                />
-                <Link href="/business">
-                  <a>
-                    <div className={classes.tile}>
-                      <Grid container direction="column">
-                        <Typography
-                          variant="h5"
-                          align="center"
-                          component="h2"
-                          className={classes.tileTitle}
-                        >
-                          Vous êtes une entreprise
-                        </Typography>
-                        <Typography
-                          variant="body1"
-                          align="center"
-                          component="p"
-                          className={classes.tileSubtitle}
-                        >
-                          Concoctez avec nous une expérience culinaire
-                          authentique et gourmande pour vos salariés !
-                        </Typography>
-                      </Grid>
-                    </div>
-                  </a>
-                </Link>
-              </div>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Grid container className={classes.tileParticulier}>
-              <div className={classes.block}>
-                <img
-                  src="https://static.cuistotducoin.com/img/home/individual.jpg"
-                  alt="Particulier"
-                  className={classes.image}
-                />
-                <Link href="/individual">
-                  <a>
-                    <div className={classes.tile}>
-                      <Grid container direction="column">
-                        <Typography
-                          variant="h5"
-                          align="center"
-                          component="h2"
-                          className={classes.tileTitle}
-                        >
-                          Vous êtes un particulier
-                        </Typography>
-                        <Typography
-                          variant="body1"
-                          align="center"
-                          component="p"
-                          className={classes.tileSubtitle}
-                        >
-                          Participez à des ateliers de cuisine authentiques et
-                          en toute convivialité !
-                        </Typography>
-                      </Grid>
-                    </div>
-                  </a>
-                </Link>
-              </div>
-            </Grid>
-          </Grid>
-        </Grid>
         <Typography
           variant="h5"
           align="center"
@@ -288,12 +205,10 @@ export class Home extends React.Component<IHomeProps, {}> {
                 component="h3"
                 gutterBottom
               >
-                Authenticité et Convivialité
+                Un service sur mesure
               </Typography>
               <Typography variant="body1">
-                Parce que le voyage commence d’abord dans l’assiette,
-                découvrez une cuisine qui invite à l’évasion et percez les
-                secrets des recettes de nos Cuistots passionnés.
+                De l’organisation d’un atelier, du repas, à la journée au complet, nous concoctons avec vous une expérience culinaire unique et savoureuse.
               </Typography>
             </Grid>
           </Grid>
@@ -309,11 +224,10 @@ export class Home extends React.Component<IHomeProps, {}> {
                 component="h3"
                 gutterBottom
               >
-                Partage
+                Les meilleurs cuistots
               </Typography>
               <Typography variant="body1">
-                Au-delà de la cuisine, plongez dans les univers de nos
-                Cuistots et découvrez de nouveaux horizons.
+                Nous offrons une diversité d’univers culinaires authentiques aux côtés des meilleurs traiteurs indépendants, artisans et commerçants locaux.
               </Typography>
             </Grid>
           </Grid>
@@ -329,54 +243,130 @@ export class Home extends React.Component<IHomeProps, {}> {
                 component="h3"
                 gutterBottom
               >
-                Diversité
+                Des lieux adaptés
               </Typography>
               <Typography variant="body1">
-                Divers formats et univers culinaires sont proposés chez
-                Cuistot du Coin. De quoi satisfaire vos papilles !
+                Nous dénichons des lieux atypiques et chaleureux adaptés à vos événements. Itinérants, nous intervenons aussi dans vos entreprises ou à votre domicile.
               </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        <Grid
+          container
+          justify="space-around"
+          alignItems="center"
+          className={classes.grid}
+          spacing={16}
+        >
+          <Grid item sm={6} xs={12}>
+            <Grid container justify="center">
+              <img
+                className={classes.image}
+                alt="Atelier Cuistot du Coin"
+                src="https://static.cuistotducoin.com/img/business/organisez.jpg"
+              />
+            </Grid>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Typography
+              variant="h6"
+              align="center"
+              component="h2"
+              gutterBottom
+            >
+              Vous êtes une entreprise
+            </Typography>
+            <Typography variant="body1" align="center">
+              Réunissez vos collaborateurs et partagez des moments conviviaux le temps d’un repas ou à l’occasion d’une journée de travail, rythmée par un atelier de cuisine inspirant et privilégiant la cohésion d’équipe. Nous organisons de A à Z vos événements.
+            </Typography>
+            <Grid container alignItems="center" justify="center">
+              <Link href="/business" passHref>
+                <Button variant="outlined" color="primary">En savoir plus</Button>
+              </Link>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          justify="space-around"
+          alignItems="center"
+          className={classes.grid}
+          spacing={16}
+        >
+          <Grid item sm={6} xs={12}>
+            <Typography
+              variant="h6"
+              align="center"
+              component="h2"
+              gutterBottom
+            >
+              Vous êtes un particulier
+            </Typography>
+            <Typography variant="body1" align="center">
+              Petits et grands, amateurs ou passionnés avertis, participez à un atelier de cuisine pour percer les secrets de recettes authentiques. Cuisine du monde, bien-être, terroir, boulangerie, pâtisserie : il y en a pour tous les goûts. Organisez avec vos proches un atelier à domicile. Réunissez-vous autour d’un buffet authentiques en toutes occasions.
+            </Typography>
+            <Grid container alignItems="center" justify="center">
+              <Link href="/individual" passHref>
+                <Button variant="outlined" color="primary">En savoir plus</Button>
+              </Link>
+            </Grid>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Grid container justify="center">
+              <img
+                className={classes.image}
+                alt="Atelier Cuistot du Coin"
+                src="https://static.cuistotducoin.com/img/business/passez-a-table.jpg"
+              />
             </Grid>
           </Grid>
         </Grid>
         <Typography
-          variant="h6"
+          variant="h5"
           align="center"
           component="h2"
           gutterBottom
+          className={classes.typography}
         >
-          Nos partenaires
+          Ils nous font confiance :
         </Typography>
-        <Grid
-          container
-          justify="space-around"
-          spacing={16}
-          className={classes.grid}
-        >
-          <Grid item xs={12}>
-            <Typography variant="body1">
-              Le talent culinaire est partout et Cuistot du Coin souhaite le
-              révéler. Nous nous sommes entourés d’artisans et de
-              commerçants passionnés pour vous offrir des expériences
-              culinaires sur-mesure.
-            </Typography>
-          </Grid>
-        </Grid>
-
         <div className={classes.slider}>
           <Slider {...sliderSettings}>
-            {partners.map(partner => (
-              <div key={partner.name}>
+            {participants.map((participant, index) => (
+              <Grid key={index} className={classes.cell}>
+                <Typography variant="subtitle1">{participant.name}</Typography>
+                <Typography variant="subtitle2">{participant.context}</Typography>
                 <img
-                  src={partner.image}
-                  alt={partner.name}
+                  src={participant.image}
+                  alt={participant.name}
                   className={classes.sliderImage}
-                  key={partner.name}
                 />
-              </div>
+                <Typography variant="body1">{participant.comment}</Typography>
+                <StarRating rating={participant.rating} />
+              </Grid>
             ))}
           </Slider>
         </div>
-      </Layout>
+        <Typography
+          variant="h5"
+          align="center"
+          component="h2"
+          gutterBottom
+          className={classes.typography}
+        >
+          Suivez notre aventure !
+        </Typography>
+        <Typography
+          variant="body1"
+          align="center"
+          component="h2"
+          gutterBottom
+          className={classes.typography}
+        >
+          Recevez notre actu et ne manquez pas nos prochains événements
+        </Typography>
+      </Layout >
     );
   }
 }
