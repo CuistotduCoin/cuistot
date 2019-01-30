@@ -273,7 +273,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         price: 35,
         spot: "Cuisinella, Brest",
         totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/jRQFcs"
+        typeform: "https://cuistotducoin.typeform.com/to/Q3Mz5I"
       }
     ];
 
