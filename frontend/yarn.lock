@@ -7966,7 +7966,7 @@ prop-types-exact@1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@15.6.2, prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@15.6.2, prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@~15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -8362,6 +8362,13 @@ react-modal@^3.6.1:
     prop-types "^15.5.10"
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
+
+react-photo-gallery@^6.3.1:
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/react-photo-gallery/-/react-photo-gallery-6.3.1.tgz#f7159a002648c484046c338fc216916cc016ea12"
+  dependencies:
+    prop-types "~15.6.2"
+    resize-observer-polyfill "^1.5.0"
 
 react-scroll@^1.7.10:
   version "1.7.10"

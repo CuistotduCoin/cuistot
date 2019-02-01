@@ -16,6 +16,11 @@ import { withData } from "../../decorators";
 import { GetWorkshops } from "../../queries";
 
 const styles = (theme: Theme) => ({
+  '@global': {
+    ".slick-prev:before, .slick-next:before": {
+      color: "black"
+    }
+  },
   block: {
     height: "100%",
     overflow: "hidden",
