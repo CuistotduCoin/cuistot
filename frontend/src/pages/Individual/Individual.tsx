@@ -212,7 +212,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         date: "samedi 23 février, 14h-16h",
         duration: 2,
         image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-cupcakes-enfants.jpg",
+          "https://static.cuistotducoin.com/img/workshops/audrey-cupcake.jpg",
         imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
         name: "Enfants : Cupcake",
         nameCook: "Audrey",
