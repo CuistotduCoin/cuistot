@@ -6,7 +6,7 @@ import { Subscribe } from "unstated";
 import * as Yup from "yup";
 import { AppContainer } from "../../components/App";
 import CookForm from "../../components/CookForm";
-import Loading from "../../components/Loading";
+
 import { CreateCook } from "../../queries";
 import { phoneNumberValidation, sirenValidation } from "../../shared/validations";
 

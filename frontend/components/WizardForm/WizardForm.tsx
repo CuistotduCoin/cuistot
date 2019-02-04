@@ -91,7 +91,7 @@ class WizardForm extends React.Component<IWizardFormProps, IWizardFormState> {
     }
 
     return buttons;
-  }; 
+  };
 
   public render() {
     const { children, initialValues, progressBarProps, className, classes } = this.props;

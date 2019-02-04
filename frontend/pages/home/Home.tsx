@@ -6,11 +6,13 @@ import get from "lodash.get";
 import Link from "next/link";
 import React from "react";
 import { graphql } from "react-apollo";
+import MailchimpSubscribe from "react-mailchimp-subscribe"
 import Slider from "react-slick";
 import { compose } from "recompose";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import Layout from "../../components/Layout";
+import MailchimpForm from "../../components/MailchimpForm";
 import StarRating from "../../components/StarRating";
 import { withData } from "../../decorators";
 import { GetWorkshops } from "../../queries";
@@ -33,9 +35,6 @@ const styles = (theme: Theme) => ({
     margin: "0px auto",
     maxWidth: 1080,
     padding: 24
-  },
-  gridTile: {
-    margin: "0px auto"
   },
   image: {
     height: "100%",
@@ -62,37 +61,6 @@ const styles = (theme: Theme) => ({
     textAlign: "center",
     top: 0
   },
-  tileEntreprise: {
-    "&:hover": {
-      opacity: 0.9
-    },
-    "&:hover $tileSubtitle": {
-      opacity: 1
-    },
-    backgroundColor: "#e84a4c",
-    height: 180
-  },
-  tileParticulier: {
-    "&:hover": {
-      opacity: 0.9
-    },
-    "&:hover $tileSubtitle": {
-      opacity: 1
-    },
-    backgroundColor: "#47b8b2",
-    height: 180
-  },
-  tileSubtitle: {
-    color: "#fff",
-    opacity: 0,
-    textAlign: "center",
-    transition: "opacity 0.35s, transform 0.35s"
-  },
-  tileTitle: {
-    color: "#fff",
-    fontSize: 20,
-    textAlign: "center"
-  },
   typography: {
     marginTop: 15
   }
@@ -105,6 +73,8 @@ interface IHomeProps {
 
 export class Home extends React.Component<IHomeProps, {}> {
   public render() {
+    const urlMailChimp =
+      "https://cuistotducoin.us12.list-manage.com/subscribe/post?u=892dbf9576b5acc9068d06a13&id=5e528d7fa8";
     const { classes } = this.props;
     const sliderSettings = {
       dots: true,
@@ -212,7 +182,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               >
                 Un service sur mesure
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body1" align="justify">
                 De l’organisation d’un atelier, du repas, à la journée au complet, nous concoctons avec vous une expérience culinaire unique et savoureuse.
               </Typography>
             </Grid>
@@ -231,7 +201,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               >
                 Les meilleurs cuistots
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body1" align="justify">
                 Nous offrons une diversité d’univers culinaires authentiques aux côtés des meilleurs traiteurs indépendants, artisans et commerçants locaux.
               </Typography>
             </Grid>
@@ -250,7 +220,7 @@ export class Home extends React.Component<IHomeProps, {}> {
               >
                 Des lieux adaptés
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body1" align="justify">
                 Nous dénichons des lieux atypiques et chaleureux adaptés à vos événements. Itinérants, nous intervenons aussi dans vos entreprises ou à votre domicile.
               </Typography>
             </Grid>
@@ -282,7 +252,7 @@ export class Home extends React.Component<IHomeProps, {}> {
             >
               Vous êtes une entreprise
             </Typography>
-            <Typography variant="body1" align="center">
+            <Typography variant="body1" align="justify">
               Réunissez vos collaborateurs et partagez des moments conviviaux le temps d’un repas ou à l’occasion d’une journée de travail, rythmée par un atelier de cuisine inspirant et privilégiant la cohésion d’équipe. Nous organisons de A à Z vos événements.
             </Typography>
             <Grid container alignItems="center" justify="center">
@@ -308,7 +278,7 @@ export class Home extends React.Component<IHomeProps, {}> {
             >
               Vous êtes un particulier
             </Typography>
-            <Typography variant="body1" align="center">
+            <Typography variant="body1" align="justify">
               Petits et grands, amateurs ou passionnés avertis, participez à un atelier de cuisine pour percer les secrets de recettes authentiques. Cuisine du monde, bien-être, terroir, boulangerie, pâtisserie : il y en a pour tous les goûts. Organisez avec vos proches un atelier à domicile. Réunissez-vous autour d’un buffet authentiques en toutes occasions.
             </Typography>
             <Grid container alignItems="center" justify="center">
@@ -371,6 +341,26 @@ export class Home extends React.Component<IHomeProps, {}> {
         >
           Recevez notre actu et ne manquez pas nos prochains événements
         </Typography>
+        <Grid
+          container
+          justify="space-around"
+          alignItems="center"
+          className={classes.grid}
+          spacing={16}
+        >
+          <Grid item sm={6} xs={12}>
+            <MailchimpSubscribe
+              url={urlMailChimp}
+              render={({ subscribe, status, message }) => (
+                <MailchimpForm
+                  status={status}
+                  message={message}
+                  onValidated={formData => subscribe(formData)}
+                />
+              )}
+            />
+          </Grid>
+        </Grid>
       </Layout >
     );
   }
