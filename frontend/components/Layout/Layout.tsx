@@ -1,15 +1,9 @@
 import { withStyles } from "@material-ui/core/styles";
 import cx from 'classnames';
-import dynamic from 'next/dynamic'
 import React from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
-
-// tslint:disable-next-line:variable-name
-const SearchForm = dynamic(() => import('../../components/SearchForm'), {
-  ssr: false
-})
 
 const styles = () => ({
   container: {
@@ -24,6 +18,7 @@ const styles = () => ({
 
 interface ILayoutProps {
   classes: any;
+  component: any;
   valueProposition?: string;
   description?: string;
   children: any;
@@ -37,7 +32,7 @@ export class Layout extends React.Component<ILayoutProps, {}> {
   };
 
   public render() {
-    const { classes, valueProposition, description, children, headerProps, className } = this.props;
+    const { classes, component, valueProposition, description, children, headerProps, className } = this.props;
 
     return (
       <div className={cx(classes.container, className)}>
@@ -50,7 +45,7 @@ export class Layout extends React.Component<ILayoutProps, {}> {
               valueProposition={valueProposition}
               description={description}
             >
-              <SearchForm />
+              {component}
             </Hero>
           )}
           {children}

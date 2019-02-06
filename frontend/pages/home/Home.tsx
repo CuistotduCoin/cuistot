@@ -150,8 +150,8 @@ export class Home extends React.Component<IHomeProps, {}> {
 
     return (
       <Layout
-        valueProposition="Faîtes voyager vos papilles et ouvrez-vous à de nouvelles cultures par le biais de la cuisine aux côtés de nos Cuistots"
-        description="Votre organisateur d’événements, ateliers de cuisine et buffets authentiques et conviviaux"
+        valueProposition="Cuistot du Coin, le renouveau du traiteur événementiel"
+        description="Buffet cocktail, ateliers de cuisine, journée de séminaire... Pour que tous vos événements vous ressemble !"
       >
         <Typography
           variant="h5"
@@ -160,7 +160,15 @@ export class Home extends React.Component<IHomeProps, {}> {
           gutterBottom
           className={classes.typography}
         >
-          Ateliers, dégustations ou repas, retrouvez nos ingrédients clés :
+          Un traiteur authentique et convivial
+        </Typography>
+        <Typography
+          variant="body1"
+          align="center"
+          gutterBottom
+          className={classes.typography}
+        >
+          Ras le bol des traiteurs traditionnels ? Avec nos cuistots, nous développons une nouvelle approche du métier de traiteur et imaginons des prestations qui vous ressemblent.
         </Typography>
         <Grid
           container

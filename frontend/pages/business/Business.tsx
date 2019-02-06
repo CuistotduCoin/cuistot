@@ -71,42 +71,25 @@ export class Business extends React.Component<IBusinessProps, {}> {
       <Layout
         valueProposition="Apportez de la saveur à vos événements d’entreprise"
         description="Journées d’équipe, temps-forts en entreprise, activités collaboratives, buffets savoureux"
+        component={
+          <Grid
+            container={true}
+            justify="space-around"
+            className={classes.grid}
+          >
+            <Grid item={true}>
+              <Button
+                variant="contained"
+                color="secondary"
+                href="https://landbot.io/u/H-117244-32JN5PQL01AGBAXB/index.html"
+                target="_blank"
+              >
+                Obtenir un devis
+              </Button>
+            </Grid>
+          </Grid>
+        }
       >
-        <Grid
-          container
-          justify="space-around"
-          alignItems="center"
-          className={classes.grid}
-          spacing={16}
-        >
-          <Grid item sm={6} xs={12}>
-            <Grid container justify="center">
-              <img
-                className={classes.image}
-                alt="Atelier Cuistot du Coin"
-                src="https://static.cuistotducoin.com/img/business/organisez.jpg"
-              />
-            </Grid>
-          </Grid>
-          <Grid item sm={6} xs={12}>
-            <Typography
-              variant="h6"
-              align="center"
-              component="h2"
-              gutterBottom
-            >
-              Vous êtes un Comité d’Entreprise
-            </Typography>
-            <Typography variant="body1" align="justify">
-              Nous construisons à vos côtés un programme d’ateliers de cuisine privatisés dans nos lieux partenaires pour vos salariés. Les ateliers proposés sont accessibles à tous, amateurs ou passionnés avertis. Nos formats d’ateliers et la diversité des univers culinaires de nos cuistots permettront de satisfaire le plus grand nombre, tout en garantissant des moments conviviaux.
-            </Typography>
-            <Grid container alignItems="center" justify="center">
-              <Link href="/works-council" passHref>
-                <Button variant="outlined" color="primary">En savoir plus</Button>
-              </Link>
-            </Grid>
-          </Grid>
-        </Grid>
         <Grid
           container
           justify="space-around"
@@ -209,6 +192,41 @@ export class Business extends React.Component<IBusinessProps, {}> {
                 alt="Atelier Cuistot du Coin"
                 src="https://static.cuistotducoin.com/img/business/passez-a-table.jpg"
               />
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            justify="space-around"
+            alignItems="center"
+            className={classes.grid}
+            spacing={16}
+          >
+            <Grid item sm={6} xs={12}>
+              <Grid container justify="center">
+                <img
+                  className={classes.image}
+                  alt="Atelier Cuistot du Coin"
+                  src="https://static.cuistotducoin.com/img/business/organisez.jpg"
+                />
+              </Grid>
+            </Grid>
+            <Grid item sm={6} xs={12}>
+              <Typography
+                variant="h6"
+                align="center"
+                component="h2"
+                gutterBottom
+              >
+                Vous êtes un Comité d’Entreprise
+            </Typography>
+              <Typography variant="body1" align="justify">
+                Nous construisons à vos côtés un programme d’ateliers de cuisine privatisés dans nos lieux partenaires pour vos salariés. Les ateliers proposés sont accessibles à tous, amateurs ou passionnés avertis. Nos formats d’ateliers et la diversité des univers culinaires de nos cuistots permettront de satisfaire le plus grand nombre, tout en garantissant des moments conviviaux.
+            </Typography>
+              <Grid container alignItems="center" justify="center">
+                <Link href="/works-council" passHref>
+                  <Button variant="outlined" color="primary">En savoir plus</Button>
+                </Link>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

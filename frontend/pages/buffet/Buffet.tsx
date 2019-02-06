@@ -33,6 +33,9 @@ const styles = (theme: Theme) => ({
   sliderImage: {
     height: 100,
     width: 100
+  },
+  stepper: {
+    backgroundColor: "#fafafa"
   }
 });
 
@@ -40,19 +43,9 @@ interface IBuffetProps {
   classes?: any;
 }
 
-interface IBuffetState {
-  activeStep: number;
-}
-
-export class Buffet extends React.Component<IBuffetProps, IBuffetState> {
-  public state: IBuffetState = {
-    activeStep: 0
-  }
-
+export class Buffet extends React.Component<IBuffetProps, {}> {
   public render() {
     const { classes } = this.props;
-    const steps = this.getSteps();
-    const { activeStep } = this.state;
     const sliderSettings = {
       dots: true,
       infinite: true,
@@ -102,20 +95,29 @@ export class Buffet extends React.Component<IBuffetProps, IBuffetState> {
     ];
 
     return (
-      <Layout valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !">
-        <Typography
-          variant="h5"
-          align="center"
-          component="h2"
-          gutterBottom
-          className={classes.typography}
-        >
-          Buffet
-        </Typography>
+      <Layout valueProposition="Concoctez avec nous une expérience culinaire authentique et gourmande pour vos salariés !"
+        component={
+          <Grid
+            container={true}
+            justify="space-around"
+            className={classes.grid}
+          >
+            <Grid item={true}>
+              <Button
+                variant="contained"
+                color="secondary"
+                href="https://landbot.io/u/H-117244-32JN5PQL01AGBAXB/index.html"
+                target="_blank"
+              >
+                Obtenir un devis
+            </Button>
+            </Grid>
+          </Grid>
+        }>
         <Grid
           container
           justify="space-around"
-          alignItems="center"
+          alignItems="flex-start"
           spacing={16}
           className={classes.grid}
         >
@@ -193,30 +195,29 @@ export class Buffet extends React.Component<IBuffetProps, IBuffetState> {
           spacing={16}
           className={classes.grid}
         >
-          <Stepper activeStep={activeStep} orientation="vertical">
-            {steps.map((label, index) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-                <StepContent>
-                  <Typography>{this.getStepContent(index)}</Typography>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={this.handleBack}
-                    className={classes.button}
-                  >
-                    Précédent
-                    </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={this.handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Fini !' : 'Suivant'}
-                  </Button>
-                </StepContent>
-              </Step>
-            ))}
+          <Stepper orientation="vertical" className={classes.stepper}>
+            <Step active={true}>
+              <StepLabel>Faîtes-nous part de vos souhaits</StepLabel>
+              <StepContent>
+                <Typography>Indiquez-nous la date, l’heure et le nombre de collaborateurs que vous souhaitez réunir autour d’un repas convivial.
+                Précisez-nous le contexte de ce buffet et le budget alloué à cette prestation.</Typography>
+              </StepContent>
+            </Step>
+            <Step active={true}>
+              <StepLabel>Plutôt cuisine du monde ou cuisine terroir ?</StepLabel>
+              <StepContent>
+                <Typography>Indiquez-nous les saveurs qui vous inspirent ou laissez-nous vous faire la surprise !</Typography>
+              </StepContent>
+            </Step>
+            <Step active={true}>
+              <StepLabel>Vous êtes tranquille, on s'occupe de tout</StepLabel>
+              <StepContent>
+                <Typography>Dès réception de votre demande, nous construisons une proposition sur mesure pour répondre à vos attentes et selon la disponibilité de nos cuistots.
+                Si besoin, nous dénichons un lieu chaleureux pour vous réunir le temps du repas.
+                Le jour J, nous assurons la livraison et si besoin la mise en place et le service.
+                Nous veillons à privilégier des mets qui se dégustent facilement autour d’un buffet convivial pour limiter les déchets et le gaspillage.</Typography>
+              </StepContent>
+            </Step>
           </Stepper>
         </Grid>
         <Typography
@@ -247,45 +248,6 @@ export class Buffet extends React.Component<IBuffetProps, IBuffetState> {
         </div>
       </Layout >
     );
-  }
-
-  public getStepContent(step) {
-    switch (step) {
-      case 0:
-        return `Indiquez-nous la date, l’heure et le nombre de collaborateurs que vous souhaitez réunir autour d’un repas convivial.
-                Précisez-nous le contexte de ce buffet et le budget alloué à cette prestation.`;
-      case 1:
-        return 'Indiquez-nous les saveurs qui vous inspirent ou laissez-nous vous faire la surprise !';
-      case 2:
-        return `Dès réception de votre demande, nous construisons une proposition sur mesure pour répondre à vos attentes et selon la disponibilité de nos cuistots.
-                Si besoin, nous dénichons un lieu chaleureux pour vous réunir le temps du repas.
-                Le jour J, nous assurons la livraison et si besoin la mise en place et le service.
-                Nous veillons à privilégier des mets qui se dégustent facilement autour d’un buffet convivial pour limiter les déchets et le gaspillage.`;
-      default:
-        return "Perdu dans l'espace";
-    }
-  }
-
-  public getSteps() {
-    return ['Faîtes-nous part de vos souhaits', 'Plutôt cuisine du monde ou cuisine terroir ?', "Vous êtes tranquille, on s'occupe de tout"];
-  }
-
-  public handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1
-    }));
-  }
-
-  public handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1
-    }));
-  }
-
-  public handleReset = () => {
-    this.setState({
-      activeStep: 0
-    });
   }
 }
 
