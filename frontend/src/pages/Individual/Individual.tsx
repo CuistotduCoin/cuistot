@@ -237,6 +237,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
+        date: "samedi 2 mars, 10h-13h",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/vanessa-poulet-confit-nasie.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/vanessa.jpg",
+        name: "Poulet confit et Nasie",
+        nameCook: "Vanessa",
+        price: 35,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/HeaVQo"
+      },
+      {
+        availableSeat: 6,
         date: "samedi 2 mars, 14h-15h30",
         duration: 2,
         image:
@@ -277,6 +291,34 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/hlXofN"
       },
       {
+        availableSeat: 6,
+        date: "samedi 9 mars, 14h-16h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
+        name: "Initiation au tournage de crêpes",
+        nameCook: "Nadine",
+        price: 25,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/GZxQiN"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 29 mars, 17h-20h",
+        duration: 3,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/luis-pizza-tiramisu.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/luis.jpg",
+        name: "Atelier approfondissement à la cuisine italienne",
+        nameCook: "Luis",
+        price: 50,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/O2QlLL"
+      },
+      {
         availableSeat: 8,
         date: "samedi 6 avril, 10h-13h",
         duration: 3,
@@ -288,6 +330,34 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/Q3Mz5I"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 6 avril, 14h-16h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
+        name: "Initiation au tournage de crêpes",
+        nameCook: "Nadine",
+        price: 25,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/DRfUsS"
+      },
+      {
+        availableSeat: 6,
+        date: "samedi 13 avril, 10h-12h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-ble-noir.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
+        name: "Initiation au tournage de galettes + Repas",
+        nameCook: "Nadine",
+        price: 30,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/cR7RRd"
       }
     ];
 
