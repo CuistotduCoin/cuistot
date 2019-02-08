@@ -292,7 +292,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
       },
       {
         availableSeat: 6,
-        date: "samedi 29 mars, 17h-20h",
+        date: "samedi 29 mars, 17h30-20h",
         duration: 3,
         image:
           "https://static.cuistotducoin.com/img/workshops/luis-pizza-tiramisu.jpg",
