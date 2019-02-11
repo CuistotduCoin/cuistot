@@ -83,62 +83,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
     const workshops = [
       {
         availableSeat: 6,
-        date: "samedi 9 février, 10h-13h",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/christian-kouign-amann.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/fabien.jpg",
-        name: "Kouign Amann",
-        nameCook: "Fabien",
-        price: 50,
-        spot: "Schmidt, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/oFW5Ul"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 9 février, 10h-13h",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/takako-repas.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
-        name: "Repas asiatique",
-        nameCook: "Takako",
-        price: 50,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/cfZFIZ"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 9 février, 14h-16h",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/nadine-crepes-froment.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/nadine.jpg",
-        name: "Initiation au tournage de crêpes ",
-        nameCook: "Nadine",
-        price: 25,
-        spot: "Schmidt, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/oeV7MK"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 9 février, 14h-16h",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-st-valentin.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Enfants: Biscuits de St Valentin",
-        nameCook: "Audrey",
-        price: 30,
-        spot: "Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/R41sw0"
-      },
-      {
-        availableSeat: 6,
         date: "samedi 16 février, 10h-12h30",
         duration: 2,
         image:
@@ -194,6 +138,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/NClEYN"
       },
       {
+        availableSeat: 6,
+        date: "samedi 23 février, 15h-16h45",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/anne-brownies.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/anne.jpg",
+        name: "Enfants : Brownies surprise",
+        nameCook: "Audrey",
+        price: 30,
+        spot: "Refuge Royal, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/cEGZNP"
+      },
+      {
         availableSeat: 8,
         date: "samedi 2 mars, 9h-14h",
         duration: 5,
@@ -232,6 +190,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         nameCook: "Audrey",
         price: 30,
         spot: "Cuisinella, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/Vei2lJ"
+      },
+      {
+        availableSeat: 6,
+        date: "jeudi 7 mars, 18h-20h",
+        duration: 2,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/takako-atelier-japonais.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/takako.jpg",
+        name: "Inédit : Atelier Japonais et dégustation de fromages et sakés",
+        nameCook: "Takako",
+        price: 55,
+        spot: "Schmidt, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/Vei2lJ"
       },
