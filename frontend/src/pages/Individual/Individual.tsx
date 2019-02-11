@@ -205,7 +205,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         price: 55,
         spot: "Schmidt, Brest",
         totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/Vei2lJ"
+        typeform: "https://cuistotducoin.typeform.com/to/BQBcPg"
       },
       {
         availableSeat: 8,
