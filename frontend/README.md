@@ -13,9 +13,9 @@
  
  ## TECHNOLOGIES:
    ### Libraries & Packages
-    * Uses _TypeScript_ for types with Javascript
-    * Uses _MaterialUI_ for Generic Components
-    * Uses _Formik_ for form validation
-    * Uses _Next_ for universal server-rendereding
-    * Uses _Apollo_, _aws-amplify_, _aws-appsync_ for providing API calls directly to components.
+    * Uses TypeScript for types with Javascript
+    * Uses MaterialUI for Generic Components
+    * Uses Formik for form validation
+    * Uses Next for universal server-rendereding
+    * Uses Apollo, aws-amplify, aws-appsync for providing API calls directly to components.
     * Uses Algolia for search
