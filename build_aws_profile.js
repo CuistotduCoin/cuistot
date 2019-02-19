@@ -27,6 +27,8 @@ aws_access_key_id = ${process.env.AWS_MASTER_ACCESS_KEY_ID}
 aws_secret_access_key = ${process.env.AWS_MASTER_SECRET_ACCESS_KEY}
 `;
 
+console.log(process.env.AWS_MASTER_ACCESS_KEY_ID, process.env.AWS_MASTER_SECRET_ACCESS_KEY);
+
 fs.writeFile(`${process.env.AWS_CONFIG_PATH}/credentials`, content, (err) => {
   if (err) throw err;
   console.log('aws credentials saved...');
