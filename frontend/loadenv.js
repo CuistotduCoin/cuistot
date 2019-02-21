@@ -19,6 +19,8 @@ ALGOLIASEARCH_PLACES_APP_ID=${process.env['algolia-places-app-id']}
 ALGOLIASEARCH_PLACES_KEY=${process.env['algolia-places-key']}
 `;
 
+console.log(content);
+
 fs.writeFile('.env', content, (err) => {
     if (err) { throw err };
 });
