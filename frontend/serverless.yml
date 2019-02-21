@@ -26,12 +26,12 @@ provider:
   runtime: nodejs8.10
   stage: ${opt:stage,'development'}
   region: eu-west-1
-  deploymentBucket: ${ssm:/cuistot/front/deployment-bucket~true}-${opt:stage,'development'}
+  deploymentBucket: front-ssr-production
   endpointType: regional
   environment:
     AWS_DOMAIN: ${ssm:/cuistot/front/domain~true}
     AWS_REGION_IRELAND: eu-west-1
-    AWS_DEPLOYMENT_BUCKET: ${ssm:/cuistot/front/deployment-bucket~true}-${opt:stage,'development'}
+    AWS_DEPLOYMENT_BUCKET: front-ssr-production
     AWS_USERPOOL_ID: ${ssm:/cuistot/userpool-id~true}
     AWS_IDENTITY_POOL_ID: ${ssm:/cuistot/identity-pool-id~true}
     AWS_STORE_BUCKET: ${ssm:/cuistot/store-bucket~true}
