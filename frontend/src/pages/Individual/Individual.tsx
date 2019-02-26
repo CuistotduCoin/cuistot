@@ -202,7 +202,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         name: "Atelier approfondissement à la cuisine italienne",
         nameCook: "Luis",
         price: 50,
-        spot: "Schmidt, Brest",
+        spot: "Cuisinella, Brest",
         totalSeat: 6,
         typeform: "https://cuistotducoin.typeform.com/to/O2QlLL"
       },
