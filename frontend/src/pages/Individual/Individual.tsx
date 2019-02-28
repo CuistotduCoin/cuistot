@@ -207,6 +207,20 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/O2QlLL"
       },
       {
+        availableSeat: 6,
+        date: "samedi 30 mars, 9h30-13h",
+        duration: 4,
+        image:
+          "https://static.cuistotducoin.com/img/workshops/ronan-pizza-tiramisu.jpg",
+        imageCook: "https://static.cuistotducoin.com/img/cooks/ronan.jpg",
+        name: "Revisite de la tarte au chocolat",
+        nameCook: "Ronan",
+        price: 50,
+        spot: "Schmidt, Brest",
+        totalSeat: 6,
+        typeform: "https://cuistotducoin.typeform.com/to/xkQuu1"
+      },
+      {
         availableSeat: 8,
         date: "samedi 6 avril, 10h-13h",
         duration: 3,
