@@ -193,7 +193,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/ypvH53"
       },
       {
-        availableSeat: 6,
+        availableSeat: 1,
         date: "vendredi 29 mars, 17h30-20h",
         duration: 3,
         image:
