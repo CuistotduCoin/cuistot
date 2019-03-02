@@ -82,48 +82,6 @@ export class Individual extends React.Component<IIndividualProps, {}> {
 
     const workshops = [
       {
-        availableSeat: 8,
-        date: "samedi 2 mars, 9h-14h",
-        duration: 5,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/kevin-brassage.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/kevin.jpg",
-        name: "Brassage de bière",
-        nameCook: "Kevin",
-        price: 65,
-        spot: "The Corner, Brest",
-        totalSeat: 8,
-        typeform: "https://cuistotducoin.typeform.com/to/WUlucN"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 2 mars, 10h-13h",
-        duration: 3,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/vanessa-poulet-confit-nasie.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/vanessa.jpg",
-        name: "Poulet confit et Nasie",
-        nameCook: "Vanessa",
-        price: 35,
-        spot: "Schmidt, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/HeaVQo"
-      },
-      {
-        availableSeat: 6,
-        date: "samedi 2 mars, 14h-15h30",
-        duration: 2,
-        image:
-          "https://static.cuistotducoin.com/img/workshops/audrey-chouquettes.jpg",
-        imageCook: "https://static.cuistotducoin.com/img/cooks/audrey.jpg",
-        name: "Enfants : Chouquettes",
-        nameCook: "Audrey",
-        price: 30,
-        spot: "Cuisinella, Brest",
-        totalSeat: 6,
-        typeform: "https://cuistotducoin.typeform.com/to/Vei2lJ"
-      },
-      {
         availableSeat: 6,
         date: "jeudi 7 mars, 18h-20h",
         duration: 2,
@@ -193,7 +151,7 @@ export class Individual extends React.Component<IIndividualProps, {}> {
         typeform: "https://cuistotducoin.typeform.com/to/ypvH53"
       },
       {
-        availableSeat: 1,
+        availableSeat: 0,
         date: "vendredi 29 mars, 17h30-20h",
         duration: 3,
         image:
