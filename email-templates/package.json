@@ -1,13 +1,17 @@
 {
-	"name": "MJML",
-	"version": "1.0.0",
-	"description": "Creation d'email responsive avec MJML",
-	"main": "index.js",
-	"license": "MIT",
-	"dependencies": {
-		"mjml": "^4.0.5"
-	},
-	"scripts": {
-		"build": "mjml *.mjml"
-	}
+  "name": "MJML",
+  "version": "1.0.0",
+  "description": "Creation d'email responsive avec MJML",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "mjml": "^4.0.5",
+    "snyk": "^1.189.0"
+  },
+  "scripts": {
+    "build": "mjml *.mjml",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
