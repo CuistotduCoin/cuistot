@@ -1,0 +1,20 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - react-instantsearch-dom > lodash:
+        patched: '2019-07-05T06:39:05.494Z'
+    - react-instantsearch-dom-maps > lodash:
+        patched: '2019-07-05T06:39:05.494Z'
+    - yup > lodash:
+        patched: '2019-07-05T06:39:05.494Z'
+    - react-instantsearch-dom > algoliasearch-helper > lodash:
+        patched: '2019-07-05T06:39:05.494Z'
+    - react-instantsearch-dom > react-instantsearch-core > lodash:
+        patched: '2019-07-05T06:39:05.494Z'
+    - react-hubspot-form > styled-jsx > babel-types > lodash:
+        patched: '2019-07-05T06:39:05.494Z'
+    - react-instantsearch-dom > react-instantsearch-core > algoliasearch-helper > lodash:
+        patched: '2019-07-05T06:39:05.494Z'
