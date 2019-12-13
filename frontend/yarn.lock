@@ -831,13 +831,10 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@jaredpalmer/after@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@jaredpalmer/after/-/after-1.3.1.tgz#c7f91988a0ba3caced10483bc3642f733a4f6ddf"
-  dependencies:
-    react-helmet "^5.2.0"
-    react-router-dom "^4.2.2"
-    serialize-javascript "^1.5.0"
+"@jaredpalmer/after@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@jaredpalmer/after/-/after-1.4.0.tgz#a5b96fc45e0b117e02b55aaf72fd3ea2fd837bbb"
+  integrity sha512-w8d++YXRzinSdvf6wPkXZvttOZQ0b5DAb1APycc2D6/lSGLtZclz0dW6FvDkQq1yESceAO6onAWyyow3qiASZg==
 
 "@material-ui/core@^3.0.3":
   version "3.1.2"
@@ -9037,7 +9034,7 @@ react-onclickoutside@^6.5.0:
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.7.1.tgz#6a5b5b8b4eae6b776259712c89c8a2b36b17be93"
 
-react-router-dom@^4.2.2, react-router-dom@^4.3.1:
+react-router-dom@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.3.1.tgz#4c2619fc24c4fa87c9fd18f4fb4a43fe63fbd5c6"
   dependencies:
@@ -9706,9 +9703,14 @@ send@0.16.2:
     range-parser "~1.2.0"
     statuses "~1.4.0"
 
-serialize-javascript@^1.4.0, serialize-javascript@^1.5.0:
+serialize-javascript@^1.4.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-1.5.0.tgz#1aa336162c88a890ddad5384baebc93a655161fe"
+
+serialize-javascript@^2.1.1:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-2.1.2.tgz#ecec53b0e0317bdc95ef76ab7074b7384785fa61"
+  integrity sha512-rs9OggEUF0V4jUSecXazOYsLfu7OGK2qIn3c7IPBiffz32XniEp/TX9Xmc9LQfK2nQ2QKHvZ2oygKUGU0lG4jQ==
 
 serve-favicon@^2.5.0:
   version "2.5.0"
